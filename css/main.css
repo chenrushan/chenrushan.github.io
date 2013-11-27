@@ -20,10 +20,9 @@ body {
   font-size: small;
   text-align: center;
 
-  /* the following config centers the post and give it a border */
+  width: 600px;
+  padding: 0px 20px 10px 20px;
   border: 1px solid LightGrey;
-  width: 50%;
-  margin: 3% 25% 5% 25%;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -65,7 +64,6 @@ a:visited { color: #a0a; }
 .site {
   font-size: 115%;
   text-align: justify;
-  width: 42em;
   margin: 3em auto 2em;
   line-height: 1.5em;
 }
