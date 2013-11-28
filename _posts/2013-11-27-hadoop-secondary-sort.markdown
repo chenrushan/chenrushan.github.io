@@ -11,9 +11,9 @@ title: Hadoop 二次排序 (secondary sort)
 
 这里面共涉及 3 个类 (类名我随便写的，因为最后要在 JobConf 中注册，所以名字无所谓)：
 
-* Partitioner: 这个类用于在 partition 的过程中决定一个 `(K, V)` 去哪个 reducer
-* KeyComparator: 这个类用于在 sort 的过程中比较两个 K 的大小
-* GroupingComparator: 这个类用于在 group 的过程中比较两个 K 的大小
+* *Partitioner* : 这个类用于在 partition 的过程中决定一个 `(K, V)` 去哪个 reducer
+* *KeyComparator* : 这个类用于在 sort 的过程中比较两个 K 的大小
+* *GroupingComparator* : 这个类用于在 group 的过程中比较两个 K 的大小
 
 为了实现二次排序，需要自己定义一个 composite key，composite key 包含 natrual key 和一个附加 key，natrual key 就是你正常写 mapper 时输出的那个 key，附加 key 是为了实现二次排序自己加上去的。partition 的时候根据 natrual key partition，sort 的时候根据 composite key sort，group 的时候又根据 natrual key group。这样就实现了 secondary sort。比如你给希望排在前面的 value 一个 0 的附加 key，排在后面的 value 一个 1 的附加 key，这样在 sort 的过程就会得到你希望的 value 顺序。
 
