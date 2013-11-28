@@ -16,7 +16,7 @@ html {
 
 body {
     background-color: #fff;
-    font: 13.34px Helvetica, Arial, sans-serif;
+    font: 15px verdana, Helvetica, Arial, sans-serif;
     text-align: center;
 
     width: 700px;
@@ -181,7 +181,7 @@ a:visited { color: #B00040; }
 .post code {
     border: 1px solid #ddd;
     border-radius: 5px;
-    font-family: monaco;
+    font: 13.34px monaco;
     background-color: rgb(244, 244, 244);
 }
 
