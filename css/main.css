@@ -35,11 +35,9 @@ p {
 
 h1 {
     font-size: 1.5em;
-    color: #1e94d1;
+    color: #666;
     margin-bottom: 1em;
-    border-bottom-style: solid;
-    border-bottom-width: 2px;
-    border-color: #1e94d1;
+    border-bottom: 2px solid #1e94d1;
 }
 
 h2 {
@@ -53,11 +51,12 @@ h3 {
     border-bottom-width: 2px;
     border-color: #1e94d1;
     margin-bottom: 1em;
+    margin-top: 1.3em;
 }
 
-a         { color: #00b4cc; }
+a         { color: #555; }
 a:hover   { color: #1e94d1; }
-a:visited { color: #B00040; }
+a:visited { color: #777; }
 
 /*****************************************************************************/
 /*
@@ -67,15 +66,14 @@ a:visited { color: #B00040; }
 .posts {
     margin-bottom: 2em;
     font-size: 120%;
+    line-height: 250%;
+    margin: 0 0 1em 0em;
+    list-style-type: none;
 }
 
 .posts a {
     text-decoration: none;
-}
-
-#home ul {
-    line-height: 200%;
-    margin: 0 0 1em 1em;
+    border-bottom: 1px #1e94d1 dashed;
 }
 
 .posts span {
@@ -102,7 +100,7 @@ a:visited { color: #B00040; }
 }
 
 .title {
-  margin-bottom: 2em;
+  margin-bottom: 1em;
   padding-bottom: .5em;
 }
 
@@ -142,7 +140,8 @@ a:visited { color: #B00040; }
 }
 
 .footer .contact a {
-  color: #8085C1;
+  color: #666;
+  text-decoration: none;
 }
 
 .footer .rss {
