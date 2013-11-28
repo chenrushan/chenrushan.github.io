@@ -69,26 +69,22 @@ a:visited { color: #777; }
 }
 
 .cats .catname {
+    display: block;
     font-size: 110%;
     font-weight: bold;
-    color: #3366FF;
-}
-
-.cats li:before {
-    content: "• ";
     color: #666;
+    border: 1px solid #1e94d1;
+    border-left: 5px solid #1e94d1;
+    padding: 0 .3em;
+    margin-bottom: 1em;
 }
 
 .posts {
     margin-bottom: 2em;
     font-size: 120%;
     line-height: 250%;
-    margin: 0 0 1em 0.8em;
+    margin: 0 0 1em 1em;
     list-style-type: none;
-}
-
-.posts li:before {
-    content: "";
 }
 
 .posts a {
@@ -120,7 +116,7 @@ a:visited { color: #777; }
 }
 
 .title {
-  margin-bottom: 1em;
+  margin-bottom: 1.5em;
   padding-bottom: .5em;
 }
 
