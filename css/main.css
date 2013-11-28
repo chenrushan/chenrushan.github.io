@@ -163,14 +163,21 @@ a:visited { color: #a0a; }
     border-width: 1px;
     border-color: #ccc;
     border-style: dashed;
+    border-radius: 5px;
     background-color: rgb(244, 244, 244);
     line-height: 1.3em;
 }
 
 .post code {
     border: 1px solid #ddd;
+    border-radius: 5px;
     font-family: monaco;
     padding: 0em .2em .2em .2em;
+    background-color: rgb(244, 244, 244);
+}
+
+p code {
+    font-size: 85%;
 }
 
 .post pre code {
