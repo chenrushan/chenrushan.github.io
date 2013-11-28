@@ -73,9 +73,9 @@ The meaning of each field is:
 * **Iface**: the network interface
 
 * **Flags**
-  - U means the route is up.
-  - G means that specified gateway should be used for this route
-  - H means it is a HOST route and that allows us to see the host to which we are connected to
+  - `U` means the route is up.
+  - `G` means that specified gateway should be used for this route
+  - `H` means it is a HOST route and that allows us to see the host to which we are connected to
 
 The first line of the above route table contains a destination of default (shown as 0.0.0.0), which means everything not alreay classified. In this case, everything not destined for 69.90.184.209, 192.168.1.100, 192.168.1.0/255.255.255.0 will be sent to 192.168.1.1 -- which is the forwarding gateway -- and the route to the internet. NOTE that only one default route is allowed at any given time, replacing the default route can be done by first deleting the current one and then adding a new one.
 
