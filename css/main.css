@@ -40,6 +40,9 @@ h1 {
     font-size: 1.5em;
     color: #1e94d1;
     margin-bottom: 1em;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    border-color: #1e94d1;
 }
 
 h2 {
@@ -68,10 +71,6 @@ a:visited { color: #a0a; }
   margin-bottom: 2em;
 }
 
-.posts li {
-  line-height: 1.75em;
-}
-
 .posts span {
   color: #aaa;
   font-family: Monaco, "Courier New", monospace;
@@ -97,7 +96,6 @@ a:visited { color: #a0a; }
 }
 
 .title {
-  display: inline-block;
   margin-bottom: 2em;
 }
 
@@ -160,10 +158,6 @@ a:visited { color: #a0a; }
   border: 1px solid #ddd;
   background-color: #eef;
   padding: 0 .4em;
-}
-
-.post ul, .post ol {
-  margin-left: 1.35em;
 }
 
 .post code {
