@@ -4,9 +4,55 @@ title: Notebook
 ---
 
 <div id="home">
-  <ul class="posts">
-    {% for post in site.posts %}
-      <li><a href="{{ post.url }}">{{ post.title }}</a></li>
-    {% endfor %}
+  <ul class="cats">
+    <!--
+    <li><span class="catname">Jekyll</span>
+      <ul class="posts">
+        {% for post in site.categories.jekyll %}
+          <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </li>
+
+    <li><span class="catname">Machine Learning</span>
+      <ul class="posts">
+        {% for post in site.categories.ML %}
+          <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </li>
+
+    <li><span class="catname">Data Structure</span>
+      <ul class="posts">
+        {% for post in site.categories.DS %}
+          <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </li>
+
+    <li><span class="catname">Algorithm</span>
+      <ul class="posts">
+        {% for post in site.categories.algo %}
+          <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </li>
+
+    <li><span class="catname">Arch Linux</span>
+      <ul class="posts">
+        {% for post in site.categories.arch %}
+          <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </li>
+    -->
+
+    <li><span class="catname">Miscellaneous</span>
+      <ul class="posts">
+        {% for post in site.categories.misc %}
+          <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </li>
   </ul>
 </div>

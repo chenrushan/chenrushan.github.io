@@ -63,12 +63,32 @@ a:visited { color: #777; }
 /* Home
 /*
 /*****************************************************************************/
+.cats {
+    margin: 0 0 1em 0em;
+    list-style-type: none;
+}
+
+.cats .catname {
+    font-size: 110%;
+    font-weight: bold;
+    color: #3366FF;
+}
+
+.cats li:before {
+    content: "• ";
+    color: #666;
+}
+
 .posts {
     margin-bottom: 2em;
     font-size: 120%;
     line-height: 250%;
-    margin: 0 0 1em 0em;
+    margin: 0 0 1em 0.8em;
     list-style-type: none;
+}
+
+.posts li:before {
+    content: "";
 }
 
 .posts a {
