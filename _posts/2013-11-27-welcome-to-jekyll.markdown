@@ -13,6 +13,8 @@ Jekyll also offers powerful support for code snippets:
 
 ### showing code
 
+A ruby code snippet:
+
 {% highlight ruby %}
 def print_hi(name)
   puts "Hi, #{name}"
@@ -20,6 +22,20 @@ end
 print_hi('Tom')
 #=> prints 'Hi, Tom' to STDOUT.
 {% endhighlight %}
+
+Here comes a C code snippet:
+
+{% highlight c %}
+int main(int argc, char **argv)
+{
+    printf("hello, world\n");
+    return 0;
+}
+{% endhighlight %}
+
+### Non-sense section
+
+This is a non-sense section you can skip over.
 
 ### Conclusion
 
