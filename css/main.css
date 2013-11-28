@@ -34,6 +34,7 @@ body {
 
 p {
     margin-bottom: 1em;
+    font-size: 115%;
 }
 
 h1 {
@@ -46,11 +47,11 @@ h1 {
 }
 
 h2 {
-    font-size: 1.3em;
+    font-size: 1.4em;
 }
 
 h3 {
-    font-size: 1.2em;
+    font-size: 1.3em;
     border-bottom-style: solid;
     border-bottom-width: 2px;
     border-color: #1e94d1;
@@ -84,7 +85,6 @@ a:visited { color: #a0a; }
 /*****************************************************************************/
 
 .site {
-  font-size: 115%;
   text-align: justify;
   margin: 3em auto 2em;
   line-height: 1.5em;
@@ -154,20 +154,27 @@ a:visited { color: #a0a; }
 /*****************************************************************************/
 
 /* standard */
+
+/* for block code */
 .post pre {
-  border: 1px solid #ddd;
-  background-color: #eef;
-  padding: 0 .4em;
+    padding: 0.5em;
+    margin-bottom: 1em;
+    font-family: monaco;
+    border-width: 1px;
+    border-color: #ccc;
+    border-style: dashed;
+    background-color: rgb(244, 244, 244);
+    line-height: 1.3em;
 }
 
 .post code {
-  border: 1px solid #ddd;
-  background-color: #eef;
-  padding: 0 .2em;
+    border: 1px solid #ddd;
+    font-family: monaco;
+    padding: 0em .2em .2em .2em;
 }
 
 .post pre code {
-  border: none;
+    border: none;
 }
 
 /* terminal */
