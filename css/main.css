@@ -54,7 +54,7 @@ h3 {
     margin-top: 1.3em;
 }
 
-a         { color: #555; }
+a         { color: #666; }
 a:hover   { color: #1e94d1; }
 a:visited { color: #777; }
 
@@ -176,7 +176,13 @@ a:visited { color: #777; }
 /*
 /*****************************************************************************/
 
-/* standard */
+.post {
+    color: #37373b;
+}
+
+.post h1,h2,h3,h4,h5,h6 {
+    color: #111;
+}
 
 /* for block code */
 .post pre {
