@@ -26,10 +26,10 @@ title: Hadoop 二次排序 (secondary sort)
 
 下面定义了一个包含 String, String 的 CompositeKey。这个 CompositeKey 实现 WritableComparable 接口，该接口定义了 3 个函数：
 
-{% highlight java %}
-public void readFields(DataInput in) throws IOException {}
-public void write(DataOutput out) throws IOException {}
-public int compareTo(CompositeKey o) {}
+{% highlight c %}
+ public void readFields(DataInput in) throws IOException {}
+ public void write(DataOutput out) throws IOException {}
+ public int compareTo(CompositeKey o) {}
 {% endhighlight %}
 
 类实现如下：
@@ -104,7 +104,7 @@ public class StringCompositeKey implements WritableComparable<StringCompositeKey
         public int getPartition(StringCompositeKey key, V val,
                                 int numPartitions)
         {
-            return key.getK1().hashCode() % numPartitions;
+            return (key.getK1().hashCode() & Integer.MAX_VALUE) % numPartitions;
         }
     }
 
