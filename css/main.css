@@ -170,12 +170,12 @@ a:visited { color: #a0a; }
     border: 1px solid #ddd;
     border-radius: 5px;
     font-family: monaco;
-    padding: 0em .2em .2em .2em;
     background-color: rgb(244, 244, 244);
 }
 
 .post p code {
     font-size: 85%;
+    padding: 0em .2em .2em .2em;
 }
 
 .post pre code {
