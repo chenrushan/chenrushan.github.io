@@ -5,10 +5,13 @@ date:   2013-11-27 13:21:17
 categories: jekyll update
 ---
 
+### Introduction
 You'll find this post in your `_posts` directory - edit this post and re-build (or run with the `-w` switch) to see your changes!
 To add new posts, simply add a file in the `_posts` directory that follows the convention: YYYY-MM-DD-name-of-post.ext.
 
 Jekyll also offers powerful support for code snippets:
+
+### showing code
 
 {% highlight ruby %}
 def print_hi(name)
@@ -17,6 +20,8 @@ end
 print_hi('Tom')
 #=> prints 'Hi, Tom' to STDOUT.
 {% endhighlight %}
+
+### Conclusion
 
 Check out the [Jekyll docs][jekyll] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll's GitHub repo][jekyll-gh].
 
