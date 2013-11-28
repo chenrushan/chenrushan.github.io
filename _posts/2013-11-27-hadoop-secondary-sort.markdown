@@ -134,7 +134,7 @@ public class StringCompositeKey implements WritableComparable<StringCompositeKey
         public int compare(WritableComparable w1, WritableComparable w2) {
             StringCompositeKey ck1 = (StringCompositeKey)w1;
             StringCompositeKey ck2 = (StringCompositeKey)w2;
-            return ck1.getK1().compareTo(ck2.getK2());
+            return ck1.getK1().compareTo(ck2.getK1());
         }
     }
 }
