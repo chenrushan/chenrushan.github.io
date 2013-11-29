@@ -34,3 +34,13 @@ categories: ml
 
 <object data="/resource/pca/argmax.svg" type="image/svg+xml" class="svgcenter"></object>
 
+令 <object data="/resource/pca/Lv.svg" type="image/svg+xml"></object>，则有：
+
+<object data="/resource/pca/Lv2.svg" type="image/svg+xml" class="svgcenter"></object>
+
+上面的倒数第二个式子告诉我们，能最大化 v<sup>T</sup>Σv 的 v 必是 Σ 的特征向量，最后一个式子告诉我们这个最大值是 Σ 最大的那个特征值，同时 v 是这个特征值对应的特征向量。
+
+如果要将数据降至多维，可以参考如下我从 [math stackexchange](http://math.stackexchange.com/questions/23596/why-is-the-eigenvector-of-a-covariance-matrix-equal-to-a-principal-component) copy 来的答案：
+
+> If you want to retain more than one dimension of your data set, in principle what you can do is first find the largest principal component, call it u1, then subtract that out from all the data points to get a “flattened” data set that has no variance along u1. Find the principal component of this flattened data set, call it u2. If you stopped here, u1 and u2 would be a basis of the two-dimensional subspace which retains the most variance of the original data; or, you can repeat the process and get as many dimensions as you want. As it turns out, all the vectors u1, u2, … you get from this process are just the eigenvectors of Σ in decreasing order of eigenvalue. That’s why these are the principal components of the data set.
+
