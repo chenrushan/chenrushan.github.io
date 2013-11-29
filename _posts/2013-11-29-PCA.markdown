@@ -44,3 +44,29 @@ categories: ml
 
 > If you want to retain more than one dimension of your data set, in principle what you can do is first find the largest principal component, call it u1, then subtract that out from all the data points to get a “flattened” data set that has no variance along u1. Find the principal component of this flattened data set, call it u2. If you stopped here, u1 and u2 would be a basis of the two-dimensional subspace which retains the most variance of the original data; or, you can repeat the process and get as many dimensions as you want. As it turns out, all the vectors u1, u2, … you get from this process are just the eigenvectors of Σ in decreasing order of eigenvalue. That’s why these are the principal components of the data set.
 
+不过在实际中，直接选取最大的 m 个 eigenvalue 对应的 eigenvector 即是。在得到 m 个 eigenvector 后，假设为 V = {V<sub>1</sub>, V<sub>2</sub>, …, V<sub>m</sub>}，原始数据的 data point x (nx1 vector) project 到这 m 个向量上就得到了新的 mx1 的向量 {V<sub>1</sub><sup>T</sup>x, V<sub>2</sub><sup>T</sup>x, …, V<sub>n</sub><sup>T</sup>x} 简写为 V<sup>T</sup>x。
+
+### 协方差矩阵构建
+
+理论上，协方差矩阵 <object data="/resource/pca/cov.svg" type="image/svg+xml"></object>，拆开即：
+
+<object data="/resource/pca/cov2.svg" type="image/svg+xml" class="svgcenter"></object>
+
+但实际中，我们无法得到任一特征 X<sub>i</sub> 的真实分布，也就无法计算每个特征的真实期望和方差以及两两特征之间的协方差，因此，我们就用经验(协)方差来代替，即：
+
+<object data="/resource/pca/expcov.svg" type="image/svg+xml" class="svgcenter"></object>
+
+其中 m 为训练样本个数，X<sub>ki</sub> 表示第 k 个样本的第 i 维特征 <object data="/resource/pca/xi.svg" type="image/svg+xml"></object>，
+
+### P.S. Covariance
+
+covariance 表示两个随机变量 co-vary 的程度，表针的是他们的线性相关性，且只有它的 sign 是有意义的，正的 covariance 表示两个变量正相关，负的表示负相关， 0 表示不相关。它的 magnitude 与相关程度的强弱无直接关系，能表示相关程度强弱的是 correlation。
+
+任意两个随机变量的 covariance 等于 E((X-E(X))(Y-E(Y)))。
+
+对于包含 n 个特征的输入数据，任意两维特征之间的 covariance 就构成了 covariance matrix。
+
+### P.S. Sample Variance & Empirical Variance
+
+Sample variance is unbiased estimator of variance, while empirical variance isn’t, search google for proof.
+
