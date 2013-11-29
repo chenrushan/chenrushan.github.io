@@ -33,6 +33,10 @@ p {
     /* font-size: 115%; */
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-family: verdana, Helvetica, Arial, sans-serif;
+}
+
 h1 {
     font-size: 1.5em;
     color: #666;
@@ -89,6 +93,7 @@ a:visited { color: #777; }
 
 .posts a {
     text-decoration: none;
+    font-family: verdana, Helvetica, Arial, sans-serif;
     border-bottom: 1px #1e94d1 dashed;
 }
 
@@ -237,3 +242,7 @@ a:visited { color: #777; }
     line-height: 120%;
 }
 
+.post ol {
+    margin: 0 0 1em 1.5em;
+    line-height: 120%;
+}
