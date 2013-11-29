@@ -56,7 +56,7 @@ categories: ml
 
 <object data="/resource/pca/expcov.svg" type="image/svg+xml" class="blkcenter"></object>
 
-其中 m 为训练样本个数，X<sub>ki</sub> 表示第 k 个样本的第 i 维特征 <object data="/resource/pca/xi.svg" type="image/svg+xml"></object>，
+其中 m 为训练样本个数，X<sub>ki</sub> 表示第 k 个样本的第 i 维特征 <object data="/resource/pca/xi.svg" type="image/svg+xml"></object>。
 
 ### P.S. Covariance
 
