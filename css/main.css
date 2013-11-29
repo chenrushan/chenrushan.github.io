@@ -247,3 +247,10 @@ a:visited { color: #777; }
     margin: 0 0 1em 1.5em;
     line-height: 120%;
 }
+
+.post .svgcenter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
