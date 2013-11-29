@@ -14,7 +14,7 @@ categories: ml
 
 假设原始输入中每个 data point 都是一个 n 维向量 {x<sub>1</sub>, x<sub>2</sub>, …, x<sub>n</sub>}，PCA 实现如下操作。
 
-{x<sub>1</sub>, x<sub>2</sub>, …, x<sub>n</sub>} &rarr; {y<sub>1</sub>, y<sub>2</sub>, …, y<sub>m</sub>} (m < n)
+<p class="pcenter">{x<sub>1</sub>, x<sub>2</sub>, …, x<sub>n</sub>} &rarr; {y<sub>1</sub>, y<sub>2</sub>, …, y<sub>m</sub>} (m < n)</p>
 
 其中 x 向量和 y 向量可能不在同一空间，其实大多数时候不在一个空间 (所谓的不同的空间其实质就是不同的 basis)。
 
@@ -26,17 +26,17 @@ categories: ml
 
 假设原始输入记为随机向量 X = {X<sub>1</sub>, X<sub>2</sub>, …, X<sub>n</sub>}，其中每一维特征都是一个随机变量，project 后变为 Y (由于只剩一维，所以 Y 是个随机变量，不是随机向量)，则 Y = v<sup>T</sup>X。那 project 后的数据的 variance 表示为
 
-<object data="/resource/pca/varY.svg" type="image/svg+xml" class="svgcenter"></object>
+<object data="/resource/pca/varY.svg" type="image/svg+xml" class="blkcenter"></object>
 
 其中 Σ 为原始输入各维度特征的协方差矩阵。其中 E(v<sup>T</sup>X) = v<sup>T</sup>E(X) 是根据期望的基本性质得到的，即 E(X + Y) = E(X) + E(Y) 和 E(aX) = aE(X)。
 
 那如何最大化 v<sup>T</sup>Σv 呢？首先注意到如果将 v 的 magnitude 无限放大，那这个表达式的值想多大都可以，最大化也就变得没有意义了，因此我们要限制 v 的 magnitude，在 v 的 magnitude 为某一固定值时，寻找能最大化这一表达式的 v 的方向，这里就令这个 magnitude 为 1，那这一最大化问题可以表示为：
 
-<object data="/resource/pca/argmax.svg" type="image/svg+xml" class="svgcenter"></object>
+<object data="/resource/pca/argmax.svg" type="image/svg+xml" class="blkcenter"></object>
 
 令 <object data="/resource/pca/Lv.svg" type="image/svg+xml"></object>，则有：
 
-<object data="/resource/pca/Lv2.svg" type="image/svg+xml" class="svgcenter"></object>
+<object data="/resource/pca/Lv2.svg" type="image/svg+xml" class="blkcenter"></object>
 
 上面的倒数第二个式子告诉我们，能最大化 v<sup>T</sup>Σv 的 v 必是 Σ 的特征向量，最后一个式子告诉我们这个最大值是 Σ 最大的那个特征值，同时 v 是这个特征值对应的特征向量。
 
@@ -50,11 +50,11 @@ categories: ml
 
 理论上，协方差矩阵 <object data="/resource/pca/cov.svg" type="image/svg+xml"></object>，拆开即：
 
-<object data="/resource/pca/cov2.svg" type="image/svg+xml" class="svgcenter"></object>
+<object data="/resource/pca/cov2.svg" type="image/svg+xml" class="blkcenter"></object>
 
 但实际中，我们无法得到任一特征 X<sub>i</sub> 的真实分布，也就无法计算每个特征的真实期望和方差以及两两特征之间的协方差，因此，我们就用经验(协)方差来代替，即：
 
-<object data="/resource/pca/expcov.svg" type="image/svg+xml" class="svgcenter"></object>
+<object data="/resource/pca/expcov.svg" type="image/svg+xml" class="blkcenter"></object>
 
 其中 m 为训练样本个数，X<sub>ki</sub> 表示第 k 个样本的第 i 维特征 <object data="/resource/pca/xi.svg" type="image/svg+xml"></object>，
 
