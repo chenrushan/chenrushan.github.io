@@ -85,10 +85,8 @@ categories: ds
         if (rank[i] != rank[j]) {
             return rank[i] < rank[j];
         }
-        /* check if there's [l:2l] part of these 2 suffixes */
-        if (i + l >= T) {
-            return 0;
-        }
-        /* compare [l:2l] */
-        return rank[i + l] < rank[j + l];
+        /* compare [l:2l] part */
+        int ri = i + l < T ? rank[i + l] : -1;
+        int rj = j + l < T ? rank[j + l] : -1;
+        return ri < rj;
     }
