@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Hadoop 二次排序 (secondary sort)
-categories: misc
+categories: prog
 ---
 
 ### 二次排序原理
