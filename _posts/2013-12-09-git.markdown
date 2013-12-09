@@ -1,13 +1,25 @@
 ---
 layout: post
 title: Git 简介及常见使用样例
-categories: progxx
+categories: prog
 tags: git, svn
 ---
 
 ### Git Branching
 
 了解一个 VCS(Version Control System) 很重要的一个方面就是了解它的 branch 机制，我画了一张图，从中可以对 git 的 branch 机制有一个初步的感觉。
+
+<a href="/resource/git-branching.jpg"><img src="/resource/git-branching.jpg" alt="git branching" style="width:600px; height:800px;" class="blkcenter"/></a>
+
+这个图的最后给出了两种 merge：
+
+* `fast-forward`
+  
+  对应第一个 merge，这种 merge 不创建新的 commit，只是将 master 的指针直接移到了 b1 指向的那个 commit object。
+
+* `three-way merge`
+
+  对应第二个 merge，这种 merge 创建了新的 commit，同时将这 commit 的 parent 指针当前 master 和 b1 指向的那两个 object。
 
 git branch 是一个非常轻量的 object，可以理解为就是一个指针，这个指针的内容是 SHA1sum，指向某一个 commit。在 git 里改动 branch 指向非常简单，就是将它 set 到另一个 SHA1sum 即可：
 
