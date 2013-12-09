@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Git 简介及常见使用样例
-categories: prog
+categories: progxx
 tags: git, svn
 ---
 
