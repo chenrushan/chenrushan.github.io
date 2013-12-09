@@ -9,9 +9,15 @@ tags: git, svn
 
 了解一个 VCS(Version Control System) 很重要的一个方面就是了解它的 branch 机制，我画了一张图，从中可以对 git 的 branch 机制有一个初步的感觉。
 
-git branch 是一个非常轻量的 object，可以理解为就是一个指针，这个指针的内容是 SHA1sum，指向某一个 commit。在 git 里改动 branch 指向非常简单，就是将它 set 到另一个 SHA1sum 即可，`git reset --hard <SHA1sum of some commit>`。
+git branch 是一个非常轻量的 object，可以理解为就是一个指针，这个指针的内容是 SHA1sum，指向某一个 commit。在 git 里改动 branch 指向非常简单，就是将它 set 到另一个 SHA1sum 即可：
+
+    git reset --hard <SHA1sum of some commit>
+
+这个命令将当前 branch reset 到你指定的那个 commit。
 
 ### Git Command Reference
+
+以下列出我遇到的一些 git 需求。
 
 * 添加一个 remote repository
 
@@ -49,6 +55,7 @@ git branch 是一个非常轻量的 object，可以理解为就是一个指针�
         * [new branch]      b1         -> origin/b1
 
   第一行的意思是 remote server 的 master branch 已经从 9af15df 前进到 ace0aa3 了 (fast-forward)
+
   第二行的意思是 remote server 创建了一个新的叫 b1 的 branch 
 
   运行 `git pull` 要注意这么一种情况，如果你当前 local branch 是 b1，然后你 `git pull origin b2`，这个命令会将 remote branch b2 上的更新 merge 到你 local 的 b1，
@@ -121,13 +128,13 @@ git branch 是一个非常轻量的 object，可以理解为就是一个指针�
 
 ### Git VS Svn
 
-1. svn 中为了生成一个 branch，你需要 copy 整个 repository，而 git 只不过是赋一个 SHA1sum 即可。
+* svn 中为了生成一个 branch，你需要 copy 整个 repository，而 git 只不过是赋一个 SHA1sum 即可。
 
-2. git 在 commit 前需要现 add 你想提交的修改，svn commit 直接提交当前目录下所有的修改。显然 git 的方式更灵活，很多时候我都希望我修改的文件能分批次 commit。
+* git 在 commit 前需要现 add 你想提交的修改，svn commit 直接提交当前目录下所有的修改。显然 git 的方式更灵活，很多时候我都希望我修改的文件能分批次 commit。
 
-3. git commit 是提交到 local repository，svn commit 则直接提交到 remote repository。git 需要在 commit 之后再 push 一下才能提交到 remote repository。这样做实现了分布式的代码管理，你不需要网络依然可以提交，push 会把你在本地做的所有 commit 完完整整得 push 到 remote repository，所以你的 local repository 和 remote repository 是完全平等的，完全一样的。svn 则不然，所有的代码管理都在 server 端。
+* git commit 是提交到 local repository，svn commit 则直接提交到 remote repository。git 需要在 commit 之后再 push 一下才能提交到 remote repository。这样做实现了分布式的代码管理，你不需要网络依然可以提交，push 会把你在本地做的所有 commit 完完整整得 push 到 remote repository，所以你的 local repository 和 remote repository 是完全平等的，完全一样的。svn 则不然，所有的代码管理都在 server 端。
 
-4. svn 会在你的每个子目录下创建一个 .svn 文件夹，这个很讨厌。但 git 不会，它只在 root dir 创建一个 .git 文件夹。
+* svn 会在你的每个子目录下创建一个 .svn 文件夹，这个很讨厌。但 git 不会，它只在 root dir 创建一个 .git 文件夹。
 
 
 ### Git 杂谈
