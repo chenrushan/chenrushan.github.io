@@ -126,6 +126,10 @@ git branch 是一个非常轻量的 object，可以理解为就是一个指针�
 
   But when you omit one, it assumes both names are the same.
 
+* Unstage an added file
+
+        git reset HEAD path/to/file
+
 ### Git VS Svn
 
 * svn 中为了生成一个 branch，你需要 copy 整个 repository，而 git 只不过是赋一个 SHA1sum 即可。
