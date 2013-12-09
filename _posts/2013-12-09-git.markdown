@@ -1,0 +1,140 @@
+---
+layout: post
+title: Git 简介及常见使用样例
+categories: prog
+tags: git, svn
+---
+
+### Git Branching
+
+了解一个 VCS(Version Control System) 很重要的一个方面就是了解它的 branch 机制，我画了一张图，从中可以对 git 的 branch 机制有一个初步的感觉。
+
+git branch 是一个非常轻量的 object，可以理解为就是一个指针，这个指针的内容是 SHA1sum，指向某一个 commit。在 git 里改动 branch 指向非常简单，就是将它 set 到另一个 SHA1sum 即可，`git reset --hard <SHA1sum of some commit>`。
+
+### Git Command Reference
+
+* 添加一个 remote repository
+
+        git remote add [name] [url]
+
+  这个命令没什么特别的，运行完后 name 就变成了 url 的一个 alias，就好比 c 语言中的 `#define name url`
+
+* 创建一个跟踪 remote branch 的 local branch
+
+        git checkout -b foo origin/foo
+
+  运行完这个命令后，你就可以通过 foo 这个 local branch 去对 remote server 上的 foo branch 做修改了。这里的 `-b` 选项会把你的当前 branch 直接转到 foo。
+
+  另外，你可以不用 foo 这个名字，比如 `git checkout -b bar origin/foo`。
+
+* 如果出现 merge conflict，则编辑 conflict 的文件，然后安正常流程 add, commit 即可。
+
+* merge remote change (假设要 merge 到 master)
+
+  有两种方式:
+
+        git fetch origin && git merge origin/master
+
+  或者：
+
+        git pull origin master
+
+  实际上 `git pull` 就等价于上面两个命令。
+
+  `git fetch` 只会把 remote server 做的修改下下来，但不会 merge 到你的 local branch 中。
+
+  `git fetch` 会输出 orgin 改动的信息，如：
+
+          9af15df..ace0aa3  master     -> origin/master
+        * [new branch]      b1         -> origin/b1
+
+  第一行的意思是 remote server 的 master branch 已经从 9af15df 前进到 ace0aa3 了 (fast-forward)
+  第二行的意思是 remote server 创建了一个新的叫 b1 的 branch 
+
+  运行 `git pull` 要注意这么一种情况，如果你当前 local branch 是 b1，然后你 `git pull origin b2`，这个命令会将 remote branch b2 上的更新 merge 到你 local 的 b1，
+  并且会完成 commit，这有时候不是你想要的。
+
+  所以我觉得比较好的运行 pull 的方法还是将 local branch 对应到 remote branch，然后你想 pull 的时候，就 checkout 到你想更新的 branch，运行 `git pull`，
+  这样保证不会 merge 错 branch。`git push` 也是同理。
+
+* git clone 会自动设置 origin 到 remote server，并且会 set local master -> origin/master，但 origin 的其他 branch 不会自动对应到某个 local branch.
+
+* 查看 local branch 和 remote branch 的对应关系
+
+        git branch -vv
+
+* 查看 origin 对应的 remote server 的相关信息
+
+        git remote show origin
+
+* revert a file
+
+        git checkout -- file
+
+* 查看 remote branch 和 local branch 是否不同
+
+        git diff --stat origin/master
+
+* rename branch
+
+        git branch -m old_name new_name
+
+
+* Discard changes
+    
+        git clean -df
+        git checkout .
+
+  第一个命令清除所有 untracked file。`-d` 选项用于清除目录。注意这个命令只在运行这个命令的目录及其子目录生效，所以如果要删除一个 project 里所有的 untracked file，要到根目录。
+
+  第二个命令清除所有 unstaged 的改动。
+
+* Change last commit
+
+        git commit --amend
+
+  这个命令干了这么一件事：取出你当前的 staging area 和前一个 commit 的 staging area 合并，然后去掉前一个 commit，然后 commit
+
+  如果你当前的 staging area 为空，那 git commit --amend 所能做的事就是改变你的 commit message。
+
+* Change the author and email of last commit
+
+        git commit --amend --author="username <email>"
+
+* Create a remote branch from local. (from [stackoverflow](http://stackoverflow.com/questions/1519006/git-how-to-create-remote-branch))
+
+  First, you create your branch locally
+
+        git checkout -b your_branch
+
+  The remote branch is automatically created when you push it to the remote server. So when you feel for it, you can just do
+
+        git push <remote-name> <branch-name>
+
+  Your colleagues would then just pull that branch, and it's automatically created locally.
+
+  Note however that formally, the format is:
+
+        git push <remote-name> <local-branch-name>:<remote-branch-name>
+
+  But when you omit one, it assumes both names are the same.
+
+### Git VS Svn
+
+1. svn 中为了生成一个 branch，你需要 copy 整个 repository，而 git 只不过是赋一个 SHA1sum 即可。
+
+2. git 在 commit 前需要现 add 你想提交的修改，svn commit 直接提交当前目录下所有的修改。显然 git 的方式更灵活，很多时候我都希望我修改的文件能分批次 commit。
+
+3. git commit 是提交到 local repository，svn commit 则直接提交到 remote repository。git 需要在 commit 之后再 push 一下才能提交到 remote repository。这样做实现了分布式的代码管理，你不需要网络依然可以提交，push 会把你在本地做的所有 commit 完完整整得 push 到 remote repository，所以你的 local repository 和 remote repository 是完全平等的，完全一样的。svn 则不然，所有的代码管理都在 server 端。
+
+4. svn 会在你的每个子目录下创建一个 .svn 文件夹，这个很讨厌。但 git 不会，它只在 root dir 创建一个 .git 文件夹。
+
+
+### Git 杂谈
+
+* a git branch can usually be defined as "line of development", but more precisely, it's directed acyclic graph of development. (from [git-fetch-and-merge](http://longair.net/blog/2009/04/16/git-fetch-and-merge/))
+
+  确实，说成 DAG 确实要更准确些，一个 three-way merge 就会得到一个 non-linear branch.
+
+* Remember that the commit records the snapshot you set up in your staging area. Anything you didn’t stage is still sitting there modified; you can do another commit to add it to your history. Every time you perform a commit, you’re recording a snapshot of your project that you can revert to or compare to later. (from [git-basics](http://git-scm.com/book/en/Git-Basics-Recording-Changes-to-the-Repository))
+
