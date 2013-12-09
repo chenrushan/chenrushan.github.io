@@ -2,6 +2,7 @@
 layout: post
 title: Arch Linux PPTP Vpn Connection
 categories: arch
+tags: arch, linux, pptp
 ---
 
 Config pptp exactly as [arch linux wiki](https://wiki.archlinux.org/index.php/PPTP_VPN_client_setup_with_pptpclient) says except for the routing part.
