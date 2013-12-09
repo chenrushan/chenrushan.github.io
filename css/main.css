@@ -218,11 +218,6 @@ a:visited { color: #777; }
     padding: 0em .2em .2em .2em;
 }
 
-.post li code {
-    /* font-size: 85%; */
-    padding: 0em .2em .2em .2em;
-}
-
 .post pre code {
     border: none;
 }
