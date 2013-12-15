@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 基于 Prefix Double 及 Counting Sort 构建 Suffix Array
+title: 基于 Prefix Doubling 及 Counting Sort 构建 Suffix Array
 categories: ds
 tags: suffix array, prefix doubling, counting sort, radix sort
 ---
