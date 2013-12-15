@@ -44,7 +44,7 @@ tags: suffix array, prefix doubling, counting sort, radix sort
 
    <object data="/resource/SA/first_iter.svg" type="image/svg+xml"></object>
 
-2. 在第 2, 3 个元素上做 counting sort，并 update S 数组。
+2. 在第 2, 3 个元素上做 counting sort，并 update S 数组。这步迭代完事后，S 中就包含了后 4 个元素的序 (相比于第 1 步迭代的一个更大的局部)。
 
    <object data="/resource/SA/second_iter.svg" type="image/svg+xml"></object>
 
@@ -52,8 +52,16 @@ tags: suffix array, prefix doubling, counting sort, radix sort
 
         for (r = 0; r < N; r++)
             S2[--count[I[S[r]]]] = S[r]
+        S = S2
 
    这里的 I[i] 不是完整的 I[i]，而是局部，如：I[0] = 67。
 
    如果按照标准的做法，你会发现 896706 和 306785 的序是反着的，**所以前一轮得到的 S 数组的作用就是在当前迭代中将相同的局部元素区分开**。
+
+3. 重复与第 2 步相同的迭代，得到对应 6 个元素的 S，也就是最终的序 S = (1, 4, 5, 2, 3, 0)。
+
+这个例子中，count 数组的大小只要 100 即可，每轮迭代耗时 O(N + 100) = O(N)，如果序列长度为 L，则总时间为 O(LN)。你也可以每轮迭代在 1 个元素上做 counting sort，也可以 3 个都可以。
+
+上述例子从权重低的局部开始迭代到权重高的局部，对于一般的 counting sort 并没有这个要求，下面的 suffix array 的构建就不是这么迭代的。但有一点是相同的，那就是**为了得到一个更大的局部的序，需要权重高的那个局部的 count 信息和权重低的那个局部的 S 数组**，这对于所有的 counting sort 都一样。
+
 
