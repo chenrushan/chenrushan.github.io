@@ -39,7 +39,7 @@ tags: suffix array, prefix doubling, counting sort, radix sort
 
 1. 在最后 2 个元素做 counting sort，并将局部排序结果存于 S 中。
 
-   <object data="/resource/SA/first_count.svg" type="image/svg+xml"></object>
-   
-   <object data="/resource/SA/first_S.svg" type="image/svg+xml"></object>
+   <object data="/resource/SA/first_inter.svg" type="image/svg+xml"></object>
+
+2. 在第 2, 3 个元素上做 counting sort，并 update S 数组。
 
