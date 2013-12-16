@@ -142,6 +142,15 @@ git branch 是一个非常轻量的 object，可以理解为就是一个指针�
 
         git reset HEAD path/to/file
 
+* 从一个 branch 拷文件到另一个 branch
+
+  假设你要将一个叫 foo 的文件从 test branch 拷到 master：
+
+        git checkout master
+        git checkout test -- path/to/foo
+
+  这个 path/to/foo 要注意，假设你的 project root directory 是 ~/project/ 然后你要拷的文件是 test branch 的 ~/project/bar/foo，而你在 master branch 的 ~/project/zee/ 下，那拷贝的命令是 `git checkout test -- ../bar/foo`。
+
 ### Git VS Svn
 
 * svn 中为了生成一个 branch，你需要 copy 整个 repository，而 git 只不过是赋一个 SHA1sum 即可。
