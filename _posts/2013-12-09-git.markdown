@@ -9,7 +9,7 @@ tags: git, svn
 
 了解一个 VCS(Version Control System) 很重要的一个方面就是了解它的 branch 机制，我画了一张图，从中可以对 git 的 branch 机制有一个初步的感觉。
 
-<object data="/resource/git_branching.svg" type="image/svg+xml" class="blkcenter"></object>
+<object data="/resource/git/git_branching.svg" type="image/svg+xml" class="blkcenter"></object>
 
 这个图的最后给出了两种 merge：
 
