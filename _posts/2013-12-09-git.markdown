@@ -11,8 +11,6 @@ tags: git, svn
 
 <object data="/resource/git_branching.svg" type="image/svg+xml" class="blkcenter"></object>
 
-<a href="/resource/git-branching.jpg"><img src="/resource/git-branching.jpg" alt="git branching" style="width:600px; height:800px;" class="blkcenter"/></a>
-
 这个图的最后给出了两种 merge：
 
 * `fast-forward`
