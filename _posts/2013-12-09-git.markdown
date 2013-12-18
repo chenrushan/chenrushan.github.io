@@ -151,6 +151,23 @@ git branch 是一个非常轻量的 object，可以理解为就是一个指针�
 
   这个 path/to/foo 要注意，假设你的 project root directory 是 ~/project/ 然后你要拷的文件是 test branch 的 ~/project/bar/foo，而你在 master branch 的 ~/project/zee/ 下，那拷贝的命令是 `git checkout test -- ../bar/foo`。
 
+* 在 master 上做了一堆 commit，发现这些修改还是在一个 branch 上做更合适，这时候应该这么做：
+
+  * 先创建一个 branch 指向当前 master 顶端
+
+            git branch foo
+
+  * 运行 `git log` 找到你觉得 master 应该指向的那个 commit 的 SHA1sum，然后 reset
+        
+            git reset --hard <SHA1sum>
+
+  这就完成了你在 local repository 的操作，为了同步 remote repository，还需要
+
+        git push origin foo:foo
+        git push -f origin master
+
+  注意最后一个命令需要 `-f`，不然 remote 不会接受。
+
 ### Git VS Svn
 
 * svn 中为了生成一个 branch，你需要 copy 整个 repository，而 git 只不过是赋一个 SHA1sum 即可。
