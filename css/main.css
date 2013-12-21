@@ -263,7 +263,7 @@ a:visited { color: #777; }
 }
 
 .post ul {
-    margin: 0 0 1em 1em;
+    margin: 0 0 1em 1.4em;
     line-height: 120%;
 }
 
@@ -272,7 +272,7 @@ a:visited { color: #777; }
 }
 
 .post ol {
-    margin: 0 0 1em 1.5em;
+    margin: 0 0 1em 1.9em;
     line-height: 120%;
 }
 

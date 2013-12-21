@@ -27,7 +27,7 @@ tags: suffix array, prefix doubling, counting sort, radix sort
 
 <object data="/resource/SA/science_SA.svg" type="image/svg+xml" class="blkcenter"></object>
 
-Suffix array 的构建方法有很多，最快的貌似是线性的，这篇笔记给出基于 prefix doubling 及 counting sort 的构建方法并不是最快的，之所以搞这个算法，原因主要是，一来它很有意思 (恩，很有意思)，二来在实现它的过程感觉受益匪浅，主要收获包括：
+Suffix array 的构建方法有很多，最快的貌似是线性的，这篇笔记给出基于 prefix doubling 及 counting sort 的构建方法并不是最快的，之所以搞这个算法，原因主要是，一来**它很有意思**，二来在实现它的过程感觉受益匪浅，主要收获包括：
 
 * 任何时候都要明确一个数组的索引的含义，及数组中包含的元素的含义。这无论对你写代码还是理解别人代码都非常重要，尤其是当：
 
