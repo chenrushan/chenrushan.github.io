@@ -5,7 +5,42 @@ categories: ds
 tags: suffix array, prefix doubling, counting sort, radix sort
 ---
 
-### Counting Sort
+### Introduction
+
+这篇笔记分 4 小节：
+
+1. 开始简要介绍一下 suffix array。
+
+2. 然后介绍 suffix array 的一个特性，即 prefix doubling。
+
+3. 之后介绍 counting sort，这是我对一些特定的 counting sort (如 radix sort) 共性的一些总结。
+
+4. 最后给出基于 prefix doubling 和 counting sort 的 suffix array 构建过程。
+
+### 1. Suffix Array
+
+给定一个 string，它的 suffix 就是从 string 的某一位置开始到结尾的一个 substring。如，对于 "science"，"ence" 就是其中一个 suffix，其所有的 suffix 包括：
+
+> science, cience, ience, ence, nce, ce, e
+
+对 suffix 集合排个序就得到了 suffix array，由于每个 suffix 的结尾都是相同的，所以只需要一个开始位置即可表示一个 suffix。如 "ence" 可以用 3 表示，因此 suffix array 可以表示为一个整形数组，上面的 suffix 集合对应的 suffix array 是 (5, 1, 6, 3, 2, 4, 0)。
+
+<object data="/resource/SA/science_SA.svg" type="image/svg+xml" class="blkcenter"></object>
+
+Suffix array 的构建方法有很多，最快的貌似是线性的，这篇笔记给出基于 prefix doubling 及 counting sort 的构建方法并不是最快的，之所以搞这个算法，原因主要是，一来它很有意思 (恩，很有意思)，二来在实现它的过程感觉受益匪浅，主要收获包括：
+
+* 任何时候都要明确一个数组的索引的含义，及数组中包含的元素的含义。这无论对你写代码还是理解别人代码都非常重要，尤其是当：
+
+  * 遇到嵌套数组时，如：`arr3[arr2[arr1[i]]]`
+  * 当程序中使用多个数组时
+  * 在处理与数组有关的循环时
+
+* 数组的索引不要一味得以 i, j 命名，当数组多的时候你就乱了。如果索引表示 rank 就用 r 表示，如果表示 length 就用 l，总之不要一味用 i, j。
+
+### 2. Prefix Doubling
+
+
+### 3. Counting Sort
 
 * Input
 
