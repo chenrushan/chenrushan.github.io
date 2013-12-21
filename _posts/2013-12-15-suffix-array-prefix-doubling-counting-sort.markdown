@@ -9,7 +9,7 @@ tags: suffix array, prefix doubling, counting sort, radix sort
 
 这篇笔记分 4 小节：
 
-1. 开始简要介绍一下 suffix array。
+1. 开始简要介绍一下 suffix array，并定义一些后面用到的变量。
 
 2. 然后介绍 suffix array 的一个特性，即 prefix doubling。
 
@@ -37,7 +37,65 @@ Suffix array 的构建方法有很多，最快的貌似是线性的，这篇笔�
 
 * 数组的索引不要一味得以 i, j 命名，当数组多的时候你就乱了。如果索引表示 rank 就用 r 表示，如果表示 length 就用 l，总之不要一味用 i, j。
 
+#### 变量定义
+
+为了后续描述方便，这里定义一些变量。以下的例子都可以参考下面这个图。
+
+<object data="/resource/SA/SA_variable_example.svg" type="image/svg+xml" class="blkcenter"></object>
+
+* `str`
+
+    表示要构建 suffix array 的 string。
+
+    - `str[i:j]`
+
+        表示从 i (inclusive) 到 j (exclusive) 的 substring。
+        
+        如：str = "science", str[1:3] = "ci"。
+
+* `S`
+
+    S = (str[0:n], str[1:n], ..., str[n-1:n]) 表示 str 的 suffix 序列。
+    
+    如：S = (science, cience, ience, ence, nce, ce, e), S[1] = "cience"。
+
+    + <span class="code">S<sub>i:j</sub></span>
+
+        S<sub>i:j</sub> = (S[0][i:j], S[1][i:j], ..., S[n-1][i:j]) 表示所有 suffix 的 [i:j] 子串序列
+
+        str[i:j] = str[i:len(str)] if j > len(str)
+
+        str[i:j] = NULL (空串) if i >= len(str)
+
+        如：S<sub>2:4</sub> = (ie, en, nc, ce, e, NULL, NULL)
+
+    + <span class="code">S<sub>l</sub></span>
+  
+        S<sub>l</sub> = S<sub>0:l</sub>，就是个缩写。
+
+        如：S<sub>2</sub> = (sc, ci, ie, en, nc, ce, e)
+
+* `SA`
+
+    表示 suffix array，SA[r] 存储 S 的索引值，指向第 r 小的 suffix。
+
+    如：SA = (5, 1, 6, 3, 2, 4, 0)，SA[3] = 3 (表示第 2 小的后缀是 ence)
+
+    + <span class="code">SA<sub>i:j</sub></span>
+
+        表示 S<sub>i:j</sub> 对应的 suffix array
+
+        如：SA<sub>2:4</sub> = (5, 6, 3, 4, 1, 0, 2)
+
+    + <span class="code">SA<sub>l</sub></span>
+
+        SA<sub>l</sub> = SA<sub>0:l</sub> 就是个缩写。
+
+        如：SA<sub>2</sub> = (5, 1, 6, 3, 2, 4, 0)
+        
+
 ### 2. Prefix Doubling
+
 
 
 ### 3. Counting Sort
@@ -48,7 +106,7 @@ Suffix array 的构建方法有很多，最快的貌似是线性的，这篇笔�
 
 * Output
 
-  数组 S。S 中存 I 的序，S[r] = i 表示排在第 r 位的数为 I[i]。
+  数组 S (和前面的 suffix array 中一个变量定义重了，不过二者没有联系)。S 中存 I 的序，S[r] = i 表示排在第 r 位的数为 I[i]。
 
 例如，I = (234, 7890, 12, 5678)，则 S = (2, 0, 3, 1)
 
