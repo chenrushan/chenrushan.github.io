@@ -251,6 +251,10 @@ a:visited { color: #777; }
     border: none;
 }
 
+.post blockquote code {
+    border: none;
+}
+
 /* terminal */
 .post pre.terminal {
   border: 1px solid #000;
