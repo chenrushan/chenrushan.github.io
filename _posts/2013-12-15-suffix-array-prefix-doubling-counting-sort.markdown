@@ -11,7 +11,7 @@ tags: suffix array, prefix doubling, counting sort, radix sort
 
 1. 开始简要介绍一下 suffix array，并定义一些后面用到的变量。
 
-2. 然后介绍 suffix array 的一个特性，即 prefix doubling。
+2. 然后介绍 suffix array 的一个特性，这一特性是 prefix doubling 算法的基础。
 
 3. 之后介绍 counting sort，这是我对一些特定的 counting sort (如 radix sort) 共性的一些总结。
 
@@ -96,7 +96,19 @@ Suffix array 的构建方法有很多，最快的貌似是线性的，这篇笔�
 
 ### 2. Prefix Doubling
 
+观察 suffix array，很容易发现这么一个特点：`S[i]` 去掉第一个字符就成了 `S[i+1]`，去掉两个字符就成了 `S[i+2]`，去掉 n 个字符就成了 `S[i+n]`。
 
+<object data="/resource/SA/prefix_equal.svg" type="image/svg+xml" class="blkcenter"></object>
+
+因此，对于任意一个`l`都有`S[i][n:n+l] = S[i+n][0:l]`。而`S[i][n:n+l]`即为<span class="code">S<sub>n:n+l</sub>[i]</span>，`S[i+n][0:l]`即为<span class="code">S<sub>l</sub>[i+n]</span>，当`n=l`时，就有：
+
+<blockquote>
+<code>
+S<sub>l</sub>[i+l] = S<sub>l:2l</sub>[i] 或者 S<sub>l</sub>[i] = S<sub>l:2l</sub>[i-l]
+</code>
+</blockquote>
+
+这个性质就是 prefix doubling 算法的基础。
 
 ### 3. Counting Sort
 
