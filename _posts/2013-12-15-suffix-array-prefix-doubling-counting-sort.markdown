@@ -93,6 +93,13 @@ Suffix array 的构建方法有很多，最快的貌似是线性的，这篇笔�
 
         如：SA<sub>2</sub> = (5, 1, 6, 3, 2, 4, 0)
         
+* `R`
+    
+    表示 rank 数组，R[i] 存储 S[i] 的 rank 信息。
+
+    如：R = (6, 1, 4, 3, 5, 0, 2)，注意到 SA[R[i]] = i
+
+    同 SA 类似，也有<span class="code">R<sub>i:j</sub></span>和<span class="code">R<sub>l</sub></span>。
 
 ### 2. Prefix Doubling
 
@@ -153,7 +160,7 @@ S<sub>l</sub>[i+l] = S<sub>l:2l</sub>[i] 或者 S<sub>l</sub>[i] = S<sub>l:2l</s
 
    <object data="/resource/SA/second_iter.svg" type="image/svg+xml"></object>
 
-   注意这个步骤的 counting sort 不同于上面的伪代码，区别在最后一个 for 循环，不能再简单得从第 0 个序列循环到第 N - 1 个，而是需要借助第一步中得到 S，代码如下：
+   注意这个步骤的 counting sort 不同于上面的伪代码，区别在最后一个 for 循环，不能再简单得从第 0 个序列循环到第 N - 1 个，而是需要借助第一步中得到 S，代码如下 (其中`S2`是一个临时数组，用于暂时存放当前排序结果)：
 
         for (r = 0; r < N; r++)
             S2[--count[I[S[r]]]] = S[r]
@@ -165,8 +172,10 @@ S<sub>l</sub>[i+l] = S<sub>l:2l</sub>[i] 或者 S<sub>l</sub>[i] = S<sub>l:2l</s
 
 3. 重复与第 2 步相同的迭代，得到对应 6 个元素的 S，也就是最终的序 S = (1, 4, 5, 2, 3, 0)。
 
-这个例子中，count 数组的大小只要 100 即可，每轮迭代耗时 O(N + 100) = O(N)，如果序列长度为 L，则总时间为 O(LN)。你也可以每轮迭代在 1 个元素上做 counting sort，也可以 3 个都可以。
+这个例子中，count 数组的大小只要 100 即可，每轮迭代耗时 O(N + 100) = O(N)，如果序列长度为 L，则总时间为 O(LN)。你也可以每轮迭代在 1 个元素上做 counting sort，也可以 3 个，都可以。
 
-上述例子从权重低的局部开始迭代到权重高的局部，对于一般的 counting sort 并没有这个要求，下面的 suffix array 的构建就不是这么迭代的。但有一点是相同的，那就是**为了得到一个更大的局部的序，需要权重高的那个局部的 count 信息和权重低的那个局部的 S 数组**，这对于所有的 counting sort 都一样。
+上述例子从权重低的局部开始迭代到权重高的局部，对于一般的 counting sort 并没有这个限制，下面的 suffix array 的构建就不是这么迭代的。但有一点是相同的，那就是**为了得到一个更大的局部的序，需要权重高的那个局部的 count 信息和权重低的那个局部的 S 数组**，这对于所有的 counting sort 都一样。
+
+### 4. Suffix Array Construction
 
 
