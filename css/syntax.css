@@ -1,11 +1,11 @@
 /* .highlight .hll { background-color: #27272b } */
 /* .highlight  { background: #27272b; } */
-.highlight .c { color: #27272b; } /* Comment */
-.highlight .n { color: #27272b; } /* Comment */
+.highlight .c { color: #2dc42d; } /* Comment */
+.highlight .n { color: #27272b; }
 .highlight .err { border: 1px solid #27272b } /* Error */
 .highlight .k { color: #27272b; } /* Keyword */
 .highlight .o { color: #27272b } /* Operator */
-.highlight .cm { color: #27272b; } /* Comment.Multiline */
+.highlight .cm { color: #2dc42d; } /* Comment.Multiline */
 .highlight .cp { color: #27272b } /* Comment.Preproc */
 .highlight .c1 { color: #27272b; } /* Comment.Single */
 .highlight .cs { color: #27272b; } /* Comment.Special */
