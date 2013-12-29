@@ -16,7 +16,7 @@ html {
 
 body {
     background-color: #fff;
-    font: 15px Arial, verdana, Helvetica, sans-serif;
+    font: 14px verdana, Arial, Helvetica, sans-serif;
     text-align: center;
 
     width: 700px;
@@ -30,7 +30,6 @@ body {
 
 p {
     margin-bottom: 1em;
-    /* font-size: 115%; */
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -51,11 +50,14 @@ h2 {
 
 h3 {
     font-size: 1.3em;
-    border-bottom-style: solid;
-    border-bottom-width: 2px;
-    border-color: #1e94d1;
-    margin-bottom: 1em;
-    margin-top: 1.3em;
+    border-bottom: 2px solid #1e94d1;
+    margin: 1.3em 0 1em 0;
+}
+
+h4 {
+    font-size: 1.1em;
+    border-bottom: 1px solid #1e94d1;
+    margin: 1em 0 1em 0;
 }
 
 a         { color: #666; }
@@ -192,10 +194,9 @@ a:visited { color: #777; }
 }
 
 /* for block code */
-.post pre {
+.post pre, blockquote {
     padding: 0.5em;
     margin-bottom: 1em;
-    font-family: monaco;
     border-width: 1px;
     border-color: #ccc;
     border-style: dashed;
@@ -206,6 +207,10 @@ a:visited { color: #777; }
     overflow: auto; 
 }
 
+.post pre {
+    font-family: monaco;
+}
+
 .post code {
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -213,13 +218,43 @@ a:visited { color: #777; }
     background-color: rgb(244, 244, 244);
 }
 
+.post blockquote p {
+    margin-bottom: 0;
+}
+
+/* used as <span class="code">xxx</span>, it provides the same
+ * style as the <code>xxx</code>. Just in case you have html
+ * tag with xxx, like S<sub>i</sub>, for which <code> can't
+ * give expected result
+ */
+.post .code {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font: 13.34px monaco;
+    background-color: rgb(244, 244, 244);
+    padding: 0em .2em .2em .2em;
+}
+
+.post .code sub, sup {
+    font-size: 10.5px;
+}
+
 .post p code {
-    /* font-size: 85%; */
+    padding: 0em .2em .2em .2em;
+}
+
+.post li code {
     padding: 0em .2em .2em .2em;
 }
 
 .post pre code {
     border: none;
+}
+
+.post blockquote code {
+    border: none;
+    font: 14px Lucida, DejaVu Sans Mono, Arial, verdana, Helvetica, sans-serif;
+    line-height: 1.5em;
 }
 
 /* terminal */
@@ -234,13 +269,21 @@ a:visited { color: #777; }
 }
 
 .post ul {
-    margin: 0 0 1em 1em;
+    margin: 0 0 1em 1.4em;
     line-height: 120%;
 }
 
+.post ul p {
+    margin-bottom: 0.6em; 
+}
+
 .post ol {
-    margin: 0 0 1em 1.5em;
+    margin: 0 0 1em 1.9em;
     line-height: 120%;
+}
+
+.post ol p {
+    margin-bottom: 0.6em; 
 }
 
 .post .blkcenter {
@@ -251,22 +294,5 @@ a:visited { color: #777; }
 
 .post .pcenter {
     text-align: center;
-}
-
-.post blockquote {
-    padding: 0.5em;
-    margin-bottom: 1em;
-    border-width: 1px;
-    border-color: #ccc;
-    border-style: dashed;
-    border-radius: 5px;
-    background-color: rgb(244, 244, 244);
-    line-height: 1.3em;
-    max-height: 500px;
-    overflow: auto; 
-}
-
-.post blockquote p {
-    margin-bottom: 0;
 }
 
