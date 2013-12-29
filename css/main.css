@@ -253,6 +253,8 @@ a:visited { color: #777; }
 
 .post blockquote code {
     border: none;
+    font: 14px Lucida, DejaVu Sans Mono, Arial, verdana, Helvetica, sans-serif;
+    line-height: 1.5em;
 }
 
 /* terminal */
