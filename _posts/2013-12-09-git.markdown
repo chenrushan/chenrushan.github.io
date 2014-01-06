@@ -168,6 +168,50 @@ git branch 是一个非常轻量的 object，可以理解为就是一个指针�
 
   注意最后一个命令需要 `-f`，不然 remote 不会接受。
 
+### Git Multiple Accounts
+
+这里配置针对这么一个场景，我的机子目前配置的是 github 的帐号，但我现在有一个公司的项目，在公司的 git server 上，这样我就要配置我的机子来支持同时存在多个服务器的 account。
+
+我用 ssh 访问公司 git server，并且不用密码。具体配置流程如下：
+
+1. 在本地生成针对公司 git server 的 ssh key pair
+        
+        ssh-keygen -t rsa -f /path/to/key -C "add some comment"
+
+    这里 /path/... 如果不指定，默认是保存到 ~/.ssh/id_rsa，对于不同的 account 这个文件肯定要是不一样的。
+
+2. 将 /path/to/key.pub 提交到 git server 上
+
+3. 在 ~/.ssh/config 文件中登记你的 private key，格式如下：
+
+        Host git.server.address
+            IdentityFile /path/to/key
+
+    其中 Host 和 IdentityFile 是关键字，git.server.address 替换为你的 git server，如 github.com。
+
+    不同的 git server 对应不同的配置项，git 每次访问 server 会根据这个文件找到相应服务器的 key。
+
+4. 创建 git repo
+
+        mkdir repo
+        cd repo
+        git init
+        vim README
+        git add README
+        git commit -m 'add README'
+
+5. 配置当前 repo 对应到公司的 user name 和 email
+
+        git config user.name "name"
+        git config user.email "email"
+
+6. 然后就可以添加 remote branch 并提交了
+
+        git add remote origin <company server repo address>
+        git push origin branch:branch
+
+注意，`git config --global` 配置的是你的全局的用户名和邮箱，是默认 account，针对每个具体的 repo，可以配置自己的用户名和邮箱，配置完可以从 repo/.git/config 文件中看出。
+
 ### Git VS Svn
 
 * svn 中为了生成一个 branch，你需要 copy 整个 repository，而 git 只不过是赋一个 SHA1sum 即可。
