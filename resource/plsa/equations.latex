@@ -1,0 +1,3 @@
+plsa_likelihood.svg: $\sum_{d}\sum_{w}n(w, d)log P(w, d|\theta)$
+p_wd_1.svg: $P(w, d|\theta)=\sum_{z}P(d)P(z|d)P(w|z)$
+p_wd_2.svg: $P(w, d|\theta)=\sum_{z}P(z)P(d|z)P(w|z)$
