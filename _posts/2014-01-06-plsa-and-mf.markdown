@@ -36,6 +36,11 @@ PLSA 实现如下矩阵分解：
 * U 为对角阵，对角线上每个元素表示 P(z)
 * R 中每个元素表示 P(w|z)
 
-上面提到 PLSA 优化一个 likelihood function，进一步深入研究这个 likelihood，其实它等价于一个 KL divergence。
+假设输入包含 n 个 doc，m 个 word，同时指定 topic 个数为 r，则上述 4 个矩阵的维度分别为：D: n x m, L: m x r, U: r x r, R: r x n。
 
+上面提到 PLSA 优化一个 likelihood function，进一步深入研究这个 likelihood，其实它等价于 KL divergence。
+
+<object data="/resource/plsa/kl_diver.svg" type="image/svg+xml" class="blkcenter"></object>
+
+其中最后一个式子去掉负号就表示是 P(w, d) 的经验分布和我们训练得到的分布的 KL divergence，所以针对 PLSA，最大化 likelihood 就等价于去最小化与经验分布间的 KL divergence，所以 PLSA 实际上就是要去拟合经验分布。
 
