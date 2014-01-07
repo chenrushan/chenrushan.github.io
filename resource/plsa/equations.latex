@@ -1,0 +1,8 @@
+plsa_likelihood.svg: $\sum_{d}\sum_{w}n(w, d)log P(w, d|\theta)$
+p_wd_1.svg: $P(w, d|\theta)=\sum_{z}P(d)P(z|d)P(w|z)$
+p_wd_2.svg: $P(w, d|\theta)=\sum_{z}P(z)P(d|z)P(w|z)$
+kl_diver.svg: $\sum_{d}\sum_{w}n(w, d)log P(w, d|\theta) \\ = -\sum_{d}\sum_{w}n(w, d)log \frac{1}{P(w, d|\theta)} \\ \sim -\sum_{d}\sum_{w}P(w, d)log \frac{1}{P(w, d|\theta)} \\ \sim -\sum_{d}\sum_{w}P(w, d)log \frac{P(w, d)}{P(w, d|\theta)}$
+EM_estep.svg: $P(z|w,d)=\frac{P(z)P(d|z)P(w|z)}{\sum_{z}P(z)P(d|z)P(w|z)}$
+EM_mstep_Pz.svg: $P(z)=\frac{\sum_{d}\sum_{w}n(w,d)P(z|w,d)}{\sum_{d}\sum_{w}n(d,w)}$
+EM_mstep_Pwz.svg: $P(w|z)=\frac{\sum_{d}n(w,d)P(z|w,d)}{\sum_{w}\sum_{d}n(w,d)P(z|w,d)}$
+EM_mstep_Pdz.svg: $P(d|z)=\frac{\sum_{w}n(w,d)P(z|w,d)}{\sum_{d}\sum_{w}n(w,d)P(z|w,d)}$
