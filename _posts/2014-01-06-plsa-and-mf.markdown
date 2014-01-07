@@ -7,23 +7,23 @@ tags: plsa, matrix factorization, kl divergence
 
 PLSA 的优化目标是如下 likelihood function：
 
-<object data="/resource/plsa/plsa_likelihood.svg" type="image/svg+xml" class="blkcenter"></object>
+$$\sum\_{d}\sum\_{w}n(w, d)log P(w, d|\theta)$$
 
-其中 n(w, d) 表示 w 和 d 共现的频次，P(w, d|&theta;) 表示 w 和 d 的联合概率，&theta; 即为我们要训练得到的参数，根据 P(w, d|&theta;) 的不同分解方法，&theta; 会不一样。
+其中 \\(n(w, d)\\) 表示 w 和 d 共现的频次，\\(P(w, d|\theta)\\) 表示 w 和 d 的联合概率，&theta; 即为我们要训练得到的参数，根据 \\(P(w, d|\theta)\\) 的不同分解方法，&theta; 会不一样。
 
-P(w, d|&theta;) 有两种分解方法：
+\\(P(w, d|\theta)\\) 有两种分解方法：
 
-<object data="/resource/plsa/p_wd_1.svg" type="image/svg+xml" class="blkcenter"></object>
+$$P(w, d|\theta)=\sum\_{z}P(d)P(z|d)P(w|z)$$
 
 或者
 
-<object data="/resource/plsa/p_wd_2.svg" type="image/svg+xml" class="blkcenter"></object>
+$$P(w, d|\theta)=\sum\_{z}P(z)P(d|z)P(w|z)$$
 
 其中：
 
-* 第一种方法对应 d &rarr; z &rarr; w 的生成过程，比较易于理解，&theta; 包含 3 类参数：P(d), P(z|d), P(w|z)。
+* 第一种方法对应 \\(d \rightarrow z \rightarrow w\\) 的生成过程，比较易于理解，\\(\theta\\) 包含 3 类参数：\\(P(d), P(z|d), P(w|z)\\)。
 
-* 第二种方法对应的 &theta; 包含 P(z), P(d|z), P(w|z)，这种分解不那么容易从直观上理解，但它更实用，因为有了 P(z), P(d|z), P(w|z)，我们可以推导出 P(z|d), P(z|w) 等任何你需要的信息 (通过 bayesian equation 做变换即可)，这是第一种分解方法所不能实现的。更有意思的是，这种分解方法对应了一个 matrix factorization 的过程。
+* 第二种方法对应的 &theta; 包含 \\(P(z), P(d|z), P(w|z)\\)，这种分解不那么容易从直观上理解，但它更实用，因为有了 \\(P(z), P(d|z), P(w|z)\\)，我们可以推导出 \\(P(z|d), P(z|w)\\) 等任何你需要的信息 (通过 bayesian equation 做变换即可)，这是第一种分解方法所不能实现的。更有意思的是，这种分解方法对应了一个 matrix factorization 的过程。
 
 PLSA 实现如下矩阵分解：
 
@@ -40,7 +40,10 @@ PLSA 实现如下矩阵分解：
 
 上面提到 PLSA 优化一个 likelihood function，进一步深入研究这个 likelihood，其实它等价于 KL divergence。
 
-<object data="/resource/plsa/kl_diver.svg" type="image/svg+xml" class="blkcenter"></object>
+$$\sum\_{d}\sum\_{w}n(w, d)log P(w, d|\theta)$$
+$$= -\sum\_{d}\sum\_{w}n(w, d)log \frac{1}{P(w, d|\theta)}$$
+$$\sim -\sum\_{d}\sum\_{w}P(w, d)log \frac{1}{P(w, d|\theta)}$$
+$$\sim -\sum\_{d}\sum\_{w}P(w, d)log \frac{P(w, d)}{P(w, d|\theta)}$$
 
 其中最后一个式子去掉负号就表示 P(w, d) 的经验分布和我们训练得到的分布的 KL divergence，所以针对 PLSA，最大化 likelihood 就等价于去最小化与经验分布间的 KL divergence，所以 PLSA 实际上就是要去拟合经验分布。
 
@@ -48,11 +51,10 @@ PLSA 实现如下矩阵分解：
 
 * E-step:
 
-    <object data="/resource/plsa/EM_estep.svg" type="image/svg+xml" class="blkcenter"></object>
+    $$P(z|w,d)=\frac{P(z)P(d|z)P(w|z)}{\sum\_{z}P(z)P(d|z)P(w|z)}$$
 
 * M-step:
 
-    <object data="/resource/plsa/EM_mstep_Pz.svg" type="image/svg+xml" class="blkcenter"></object>
-    <object data="/resource/plsa/EM_mstep_Pwz.svg" type="image/svg+xml" class="blkcenter"></object>
-    <object data="/resource/plsa/EM_mstep_Pdz.svg" type="image/svg+xml" class="blkcenter"></object>
-
+    $$P(z)=\frac{\sum\_{d}\sum\_{w}n(w,d)P(z|w,d)}{\sum\_{d}\sum\_{w}n(d,w)}$$
+    $$P(w|z)=\frac{\sum\_{d}n(w,d)P(z|w,d)}{\sum\_{w}\sum\_{d}n(w,d)P(z|w,d)}$$
+    $$P(d|z)=\frac{\sum\_{w}n(w,d)P(z|w,d)}{\sum\_{d}\sum\_{w}n(w,d)P(z|w,d)}$$
