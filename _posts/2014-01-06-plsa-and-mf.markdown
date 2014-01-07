@@ -42,5 +42,17 @@ PLSA 实现如下矩阵分解：
 
 <object data="/resource/plsa/kl_diver.svg" type="image/svg+xml" class="blkcenter"></object>
 
-其中最后一个式子去掉负号就表示是 P(w, d) 的经验分布和我们训练得到的分布的 KL divergence，所以针对 PLSA，最大化 likelihood 就等价于去最小化与经验分布间的 KL divergence，所以 PLSA 实际上就是要去拟合经验分布。
+其中最后一个式子去掉负号就表示 P(w, d) 的经验分布和我们训练得到的分布的 KL divergence，所以针对 PLSA，最大化 likelihood 就等价于去最小化与经验分布间的 KL divergence，所以 PLSA 实际上就是要去拟合经验分布。
+
+根据第二种分解得到的 EM 迭代是这样的：
+
+* E-step:
+
+    <object data="/resource/plsa/EM_estep.svg" type="image/svg+xml" class="blkcenter"></object>
+
+* M-step:
+
+    <object data="/resource/plsa/EM_mstep_Pz.svg" type="image/svg+xml" class="blkcenter"></object>
+    <object data="/resource/plsa/EM_mstep_Pwz.svg" type="image/svg+xml" class="blkcenter"></object>
+    <object data="/resource/plsa/EM_mstep_Pdz.svg" type="image/svg+xml" class="blkcenter"></object>
 
