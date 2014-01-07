@@ -12,59 +12,84 @@ categories: ml
 
 ### 基本原理
 
-假设原始输入中每个 data point 都是一个 n 维向量 {x<sub>1</sub>, x<sub>2</sub>, …, x<sub>n</sub>}，PCA 实现如下操作。
+假设原始输入中每个 data point 都是一个 $n$ 维向量 $\\left\\{x\_1, x\_2, …, x\_n\\right\\}$，PCA 实现如下操作。
 
-<p class="pcenter">{x<sub>1</sub>, x<sub>2</sub>, …, x<sub>n</sub>} &rarr; {y<sub>1</sub>, y<sub>2</sub>, …, y<sub>m</sub>} (m < n)</p>
+$$\\left\\{x\_1, x\_2, ..., x\_n\\right\\} \\rightarrow \\left\\{y\_1, y\_2, ..., y\_m\\right\\} \\; (m < n)$$
 
-其中 x 向量和 y 向量可能不在同一空间，其实大多数时候不在一个空间 (所谓的不同的空间其实质就是不同的 basis)。
+其中 $x$ 向量和 $y$ 向量可能不在同一空间，其实大多数时候不在一个空间 (所谓的不同的空间其实质就是不同的 basis)。
 
-那这一过程如何实现。最简单粗暴的降维方式就是直接将输入数据的第 m+1 维到第 n 维去掉，这样就将数据从 n 维降到 m 维，但这样的方式显然不具有普适性，很可能最重要的特征就在第 m+1 维到第 n 维。因此我们需要一种能度量降维合理性的指标 (也就是常说的 loss function)。PCA 用的指标就是数据的 variance 最大化，通俗的理解就是保持数据中尽可能多的信息量不丢失。
+那这一过程如何实现。最简单粗暴的降维方式就是直接将输入数据的第 $m+1$ 维到第 $n$ 维去掉，这样就将数据从 $n$ 维降到 $m$ 维，但这样的方式显然不具有普适性，很可能最重要的特征就在第 $m+1$ 维到第 $n$ 维。因此我们需要一种能度量降维合理性的指标 (也就是常说的 loss function)。PCA 用的指标就是数据的 variance 最大化，通俗的理解就是保持数据中尽可能多的信息量不丢失。
 
 下面讨论将数据维数降至仅剩 1 维的情况，剩多维的情况类似。
 
-将数据降至一维其实等价于选择某一向量，以下将这一向量记为 v，然后将所有的 data point 都 project 到 v 上，这样问题就变成如何选择 v 使得 project 到其上的数据的 variance 最大。我们可以先从一个通俗的角度考虑这个问题，如果我将数据 project 到 v 后所有数据都被 project 到一个点上，比如所有原始数据都在一条直线上，v 是与该直线垂直的向量，那信息的丢失就大了。显然 project 上去后点越散保持下了的信息量也就越大。也就是说 project 后的数据的 variance 越大越好。
+将数据降至一维其实等价于选择某一向量，以下将这一向量记为 $v$，然后将所有的 data point 都 project 到 $v$ 上，这样问题就变成如何选择 $v$ 使得 project 到其上的数据的 variance 最大。我们可以先从一个通俗的角度考虑这个问题，如果我将数据 project 到 $v$ 后所有数据都被 project 到一个点上，比如所有原始数据都在一条直线上，$v$ 是与该直线垂直的向量，那信息的丢失就大了。显然 project 上去后点越散保持下了的信息量也就越大。也就是说 project 后的数据的 variance 越大越好。
 
-假设原始输入记为随机向量 X = {X<sub>1</sub>, X<sub>2</sub>, …, X<sub>n</sub>}，其中每一维特征都是一个随机变量，project 后变为 Y (由于只剩一维，所以 Y 是个随机变量，不是随机向量)，则 Y = v<sup>T</sup>X。那 project 后的数据的 variance 表示为
+假设原始输入记为随机向量 $X = \\left\\{X\_1, X\_2, ..., X\_n\\right\\}$，其中每一维特征都是一个随机变量，project 后变为 $Y$ (由于只剩一维，所以 $Y$ 是个随机变量，不是随机向量)，则 $Y = v^{T}X$。那 project 后的数据的 variance 表示为
 
-<object data="/resource/pca/varY.svg" type="image/svg+xml" class="blkcenter"></object>
+$$
+\\begin{align}
+Var(Y) & = Var(v^{T}X) \\\\
+& = E((v^{T}X)(v^{T}X)^{T}) - E(v^{T}X)E((v^{T}X)^{T}) \\\\
+& = v^{T}E(XX^{T})v - v^{T}E(X)E(X^{T})v \\\\
+& = v^{T}(E(XX^{T}) - E(X)E(X^T))v \\\\
+& = v^{T}\\sum v \\\\
+\\end{align}
+$$
 
-其中 Σ 为原始输入各维度特征的协方差矩阵。其中 E(v<sup>T</sup>X) = v<sup>T</sup>E(X) 是根据期望的基本性质得到的，即 E(X + Y) = E(X) + E(Y) 和 E(aX) = aE(X)。
+其中 $\\sum$ 为原始输入各维度特征的协方差矩阵。其中 $E(v^{T}X) = v^{T}E(X)$ 是根据期望的基本性质得到的，即 $E(X + Y) = E(X) + E(Y)$ 和 $E(aX) = aE(X)$。
 
-那如何最大化 v<sup>T</sup>Σv 呢？首先注意到如果将 v 的 magnitude 无限放大，那这个表达式的值想多大都可以，最大化也就变得没有意义了，因此我们要限制 v 的 magnitude，在 v 的 magnitude 为某一固定值时，寻找能最大化这一表达式的 v 的方向，这里就令这个 magnitude 为 1，那这一最大化问题可以表示为：
+那如何最大化 $v^{T}\\sum v$ 呢？首先注意到如果将 $v$ 的 magnitude 无限放大，那这个表达式的值想多大都可以，最大化也就变得没有意义了，因此我们要限制 $v$ 的 magnitude，在 $v$ 的 magnitude 为某一固定值时，寻找能最大化这一表达式的 $v$ 的方向，这里就令这个 magnitude 为 1，那这一最大化问题可以表示为：
 
-<object data="/resource/pca/argmax.svg" type="image/svg+xml" class="blkcenter"></object>
+$$\\underset{\\left\\Vert v \\right\\Vert = 1}{argmax}\\;\\; v^T\\sum v$$
 
-令 <object data="/resource/pca/Lv.svg" type="image/svg+xml"></object>，则有：
+令 $L(v)=v^T \\sum v - \\lambda(\\left\\Vert v \\right\\Vert - 1)$，则有：
 
-<object data="/resource/pca/Lv2.svg" type="image/svg+xml" class="blkcenter"></object>
+$$
+\\begin{align}
+& L(v)=v^T \\sum v - \\lambda(\\left\\Vert v \\right\\Vert - 1) \\\\
+& \\Rightarrow L(v)=v^T \\sum v - \\lambda(v^Tv - 1) \\\\
+& \\Rightarrow \\frac{\\partial L(v)}{\\partial v} = 2\\sum v - 2\\lambda v = 0 \\\\
+& \\Rightarrow \\sum v = \\lambda v \\\\
+& \\Rightarrow v^T\\sum v = v^T\\lambda v = v
+\\end{align}
+$$
 
-上面的倒数第二个式子告诉我们，能最大化 v<sup>T</sup>Σv 的 v 必是 Σ 的特征向量，最后一个式子告诉我们这个最大值是 Σ 最大的那个特征值，同时 v 是这个特征值对应的特征向量。
+上面的倒数第二个式子告诉我们，能最大化 $v^T \\sum v$ 的 $v$ 必是 $\\sum$ 的特征向量，最后一个式子告诉我们这个最大值是 $\\sum$ 最大的那个特征值，同时 $v$ 是这个特征值对应的特征向量。
 
 如果要将数据降至多维，可以参考如下我从 [math stackexchange](http://math.stackexchange.com/questions/23596/why-is-the-eigenvector-of-a-covariance-matrix-equal-to-a-principal-component) copy 来的答案：
 
 > If you want to retain more than one dimension of your data set, in principle what you can do is first find the largest principal component, call it u1, then subtract that out from all the data points to get a “flattened” data set that has no variance along u1. Find the principal component of this flattened data set, call it u2. If you stopped here, u1 and u2 would be a basis of the two-dimensional subspace which retains the most variance of the original data; or, you can repeat the process and get as many dimensions as you want. As it turns out, all the vectors u1, u2, … you get from this process are just the eigenvectors of Σ in decreasing order of eigenvalue. That’s why these are the principal components of the data set.
 
-不过在实际中，直接选取最大的 m 个 eigenvalue 对应的 eigenvector 即是。在得到 m 个 eigenvector 后，假设为 V = {V<sub>1</sub>, V<sub>2</sub>, …, V<sub>m</sub>}，原始数据的 data point x (nx1 vector) project 到这 m 个向量上就得到了新的 mx1 的向量 {V<sub>1</sub><sup>T</sup>x, V<sub>2</sub><sup>T</sup>x, …, V<sub>n</sub><sup>T</sup>x} 简写为 V<sup>T</sup>x。
+不过在实际中，直接选取最大的 $m$ 个 eigenvalue 对应的 eigenvector 即是。在得到 $m$ 个 eigenvector 后，假设为 $V = \\left\\{V\_1, V\_2, ..., V\_m\\right\\}$，原始数据的 data point $x$ ($n\times 1$ vector) project 到这 $m$ 个向量上就得到了新的 $m\times 1$ 的向量 $\\left\\{V\_1^T x, V\_2^T x, …, V\_n^T x\\right\\}$ 简写为 $V^T x$。
 
 ### 协方差矩阵构建
 
-理论上，协方差矩阵 <object data="/resource/pca/cov.svg" type="image/svg+xml"></object>，拆开即：
+理论上，协方差矩阵 $\\sum = E[(X-E(X))(X-E(X))^T]$，拆开即：
 
-<object data="/resource/pca/cov2.svg" type="image/svg+xml" class="blkcenter"></object>
+$$
+\\sum =
+\\begin{pmatrix}
+E[(X\_1-E(X\_1))(X\_1-E(X\_1))] & \\cdots & E[(X\_1-E(X\_1))(X\_n-E(X\_n))] \\\\
+E[(X\_2-E(X\_2))(X\_1-E(X\_1))] & \\cdots & E[(X\_2-E(X\_2))(X\_n-E(X\_n))] \\\\
+\\vdots & \\ddots & \\vdots \\\\
+E[(X\_n-E(X\_n))(X\_1-E(X\_1))] & \\cdots & E[(X\_n-E(X\_n))(X\_n-E(X\_n))]
+\\end{pmatrix}
+$$
 
-但实际中，我们无法得到任一特征 X<sub>i</sub> 的真实分布，也就无法计算每个特征的真实期望和方差以及两两特征之间的协方差，因此，我们就用经验(协)方差来代替，即：
+但实际中，我们无法得到任一特征 $X\_i$ 的真实分布，也就无法计算每个特征的真实期望和方差以及两两特征之间的协方差，因此，我们就用经验(协)方差来代替，即：
 
-<object data="/resource/pca/expcov.svg" type="image/svg+xml" class="blkcenter"></object>
+$${\\textstyle \\sum\_{ii}}=\\frac{1}{m}\\sum\_{k=1}^{m}(X\_{ki}-\\bar{X\_i})^2$$
+$${\\textstyle \\sum\_{ij}}=\\frac{1}{m}\\sum\_{k=1}^{m}(X\_{ki}-\\bar{X\_i})(X\_{kj}-\\bar{X\_j})$$
 
-其中 m 为训练样本个数，X<sub>ki</sub> 表示第 k 个样本的第 i 维特征 <object data="/resource/pca/xi.svg" type="image/svg+xml"></object>。
+其中 $m$ 为训练样本个数，$X\_{ki}$ 表示第 $k$ 个样本的第 $i$ 维特征 $\\bar{X\_i}=\\frac{1}{m}\\sum\_{k=1}^{m}X\_{ki}$。
 
 ### P.S. Covariance
 
 covariance 表示两个随机变量 co-vary 的程度，表针的是他们的线性相关性，且只有它的 sign 是有意义的，正的 covariance 表示两个变量正相关，负的表示负相关， 0 表示不相关。它的 magnitude 与相关程度的强弱无直接关系，能表示相关程度强弱的是 correlation。
 
-任意两个随机变量的 covariance 等于 E((X-E(X))(Y-E(Y)))。
+任意两个随机变量的 covariance 等于 $E((X-E(X))(Y-E(Y)))$。
 
-对于包含 n 个特征的输入数据，任意两维特征之间的 covariance 就构成了 covariance matrix。
+对于包含 $n$ 个特征的输入数据，任意两维特征之间的 covariance 就构成了 covariance matrix。
 
 ### P.S. Sample Variance & Empirical Variance
 
