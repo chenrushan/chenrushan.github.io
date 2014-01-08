@@ -54,6 +54,8 @@ $$\sim -\sum\_{d}\sum\_{w}P(w, d)log \frac{P(w, d)}{P(w, d|\theta)}$$
 
 其中最后一个式子去掉负号就表示经验分布 $P(w, d)$ 和我们训练得到的分布 $P(w, d|\theta)$ 的 KL divergence，所以针对 PLSA，最大化 likelihood 就等价于最小化与经验分布间的 KL divergence，所以 PLSA 实际上是要去拟合经验分布。
 
+如果从矩阵分解的角度看，PLSA 就是一个以最小化两个矩阵间 KL divergence 为目标的矩阵分解，以 $D$ 表示存放 $P(w, d)$ 的矩阵，即 $min\\; KL(D\parallel \overline{D})$。
+
 根据第二种分解得到的 EM 迭代是这样的：
 
 * E-step:
