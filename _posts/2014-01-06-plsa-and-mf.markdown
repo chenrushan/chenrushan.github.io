@@ -1,6 +1,6 @@
 ---
 layout: post
-title: PLSA 和 Matrix Factorization 的关系
+title: PLSA 与 Matrix Factorization
 categories: ml
 tags: plsa, matrix factorization, kl divergence
 ---
@@ -25,7 +25,7 @@ $$P(w, d|\theta)=\sum\_{z}P(z)P(d|z)P(w|z)$$
 
 * 第一种方法对应 $d \rightarrow z \rightarrow w$ 的生成过程，比较易于理解，$\theta$ 包含 3 类参数：$P(d), P(z|d), P(w|z)$。
 
-* 第二种方法对应的 $\theta$ 包含 $P(z), P(d|z), P(w|z)$，这种分解不那么容易从直观上理解，但它更实用，因为有了 $P(z), P(d|z), P(w|z)$，我们可以推导出 $P(z|d), P(z|w)$ 等任何你需要的信息 (通过 bayesian equation 做变换即可)，这是第一种分解方法所不能实现的。有意思的是，这种分解方法与 matrix factorization 相对应。下面就讲讲其中的对应关系。
+* 第二种方法对应的 $\theta$ 包含 $P(z), P(d|z), P(w|z)$，这种分解不那么容易从直观上理解，但有意思的是，这种分解方法与 matrix factorization 相对应。
 
 ### PLSA 与 Matrix Factorization
 
@@ -54,8 +54,9 @@ $$\sim -\sum\_{d}\sum\_{w}P(w, d)log \frac{P(w, d)}{P(w, d|\theta)}$$
 
 其中最后一个式子去掉负号就表示经验分布 $P(w, d)$ 和我们训练得到的分布 $P(w, d|\theta)$ 的 KL divergence，所以针对 PLSA，最大化 likelihood 就等价于最小化与经验分布间的 KL divergence，所以 PLSA 实际上是要去拟合经验分布。
 
-如果从矩阵分解的角度看，PLSA 就是一个以最小化两个矩阵间 KL divergence 为目标的矩阵分解，以 $D$ 表示存放 $P(w, d)$ 的矩阵，即 $min\\; KL(D\parallel \overline{D})$。
+如果从矩阵分解的角度看，**PLSA 就是一个以最小化两个矩阵间 KL divergence 为目标的矩阵分解**，以 $D$ 表示存放 $P(w, d)$ 的矩阵，即 $min\\; KL(D\parallel \overline{D})$。其与 SVD 这样的矩阵分解算法区别就在于 loss function 的不同，SVD 对应的 loss function 是 $min\\; \left\Vert D-\overline{D} \right\Vert\_{F}^{2}$，即两个矩阵差值的 frobenius norm。
 
+<!--
 根据第二种分解得到的 EM 迭代是这样的：
 
 * E-step:
@@ -67,3 +68,5 @@ $$\sim -\sum\_{d}\sum\_{w}P(w, d)log \frac{P(w, d)}{P(w, d|\theta)}$$
     $$P(z)=\frac{\sum\_{d}\sum\_{w}n(w,d)P(z|w,d)}{\sum\_{d}\sum\_{w}n(d,w)}$$
     $$P(w|z)=\frac{\sum\_{d}n(w,d)P(z|w,d)}{\sum\_{w}\sum\_{d}n(w,d)P(z|w,d)}$$
     $$P(d|z)=\frac{\sum\_{w}n(w,d)P(z|w,d)}{\sum\_{d}\sum\_{w}n(w,d)P(z|w,d)}$$
+-->
+
