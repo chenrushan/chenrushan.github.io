@@ -28,11 +28,11 @@ $$\\left\\{x\_1, x\_2, ..., x\_n\\right\\} \\rightarrow \\left\\{y\_1, y\_2, ...
 
 $$
 \\begin{align}
-Var(Y) & = Var(v^{T}X) \\\\
-& = E((v^{T}X)(v^{T}X)^{T}) - E(v^{T}X)E((v^{T}X)^{T}) \\\\
-& = v^{T}E(XX^{T})v - v^{T}E(X)E(X^{T})v \\\\
-& = v^{T}(E(XX^{T}) - E(X)E(X^T))v \\\\
-& = v^{T}\\sum v \\\\
+& Var(Y) = Var(v^{T}X) \\\\
+= & E((v^{T}X)(v^{T}X)^{T}) - E(v^{T}X)E((v^{T}X)^{T}) \\\\
+= & v^{T}E(XX^{T})v - v^{T}E(X)E(X^{T})v \\\\
+= & v^{T}(E(XX^{T}) - E(X)E(X^T))v \\\\
+= & v^{T}\\sum v \\\\
 \\end{align}
 $$
 
@@ -47,10 +47,10 @@ $$\\underset{\\left\\Vert v \\right\\Vert = 1}{argmax}\\;\\; v^T\\sum v$$
 $$
 \\begin{align}
 & L(v)=v^T \\sum v - \\lambda(\\left\\Vert v \\right\\Vert - 1) \\\\
-& \\Rightarrow L(v)=v^T \\sum v - \\lambda(v^Tv - 1) \\\\
-& \\Rightarrow \\frac{\\partial L(v)}{\\partial v} = 2\\sum v - 2\\lambda v = 0 \\\\
-& \\Rightarrow \\sum v = \\lambda v \\\\
-& \\Rightarrow v^T\\sum v = v^T\\lambda v = v
+\\Rightarrow & L(v)=v^T \\sum v - \\lambda(v^Tv - 1) \\\\
+\\Rightarrow & \\frac{\\partial L(v)}{\\partial v} = 2\\sum v - 2\\lambda v = 0 \\\\
+\\Rightarrow & \\sum v = \\lambda v \\\\
+\\Rightarrow & v^T\\sum v = v^T\\lambda v = v
 \\end{align}
 $$
 
