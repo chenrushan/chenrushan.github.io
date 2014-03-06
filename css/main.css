@@ -193,6 +193,10 @@ a:visited { color: #777; }
     padding-bottom: .1em;
 }
 
+.post h4 {
+    color: #363;
+}
+
 /* for block code */
 .post pre, blockquote {
     padding: 0.5em;
