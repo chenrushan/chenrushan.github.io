@@ -1,0 +1,89 @@
+---
+layout: post
+title: 各种 Entropy
+categories: ml
+tags: pattern recognition, machine learning, entropy, cross entropy, KL Divergence
+---
+
+这篇笔记中列出常见的 3 种 entropy。
+
+#### Entropy
+  
+  $$
+  H(x) = -\sum\_{i=1}^{n} p(x\_i)\log p(x\_i)
+  $$
+
+  Entropy 越大，表示信息量越大。
+
+  关于为什么 Entropy 的公式长这样，下面我从 [mathoverflow](http://mathoverflow.net/questions/146463/what-is-entropy-really) 拷来一个很好的解释：
+
+  <blockquote>
+  <p>Here is a simple story one can tell about the entropy</p>
+
+  $$H(x) = -\sum_{i=1}^{n} p(x_i)\log p(x_i)$$
+
+  <p>of a discrete probability distribution. Suppose you wanted to describe how surprised you are upon learning that some event $E$ happened. Call your surprise upon learning that $E$ happened $s(E)$, the "surprisal." Here are some plausible conditions that $s$ could satisfy:</p>
+
+  <p>1. $s(E)$ is a decreasing function of the probability $P(E)$. That is, the less likely something it is to happen, the more surprising it is that it ends up happening, and the likelihood of something happening is the only thing determining how surprising it is. For example, flipping 10 heads in a row is more surprising than flipping 5 heads in a row.</p>
+
+  <p>2. If $E1$ and $E2$ are independent, then $s(E1 \cap E2)=s(E1)+s(E2)$. That is, your surprise at learning that two independent events happened should be the sum of your surprises at learning that each individual event happened. For example, flipping 10 coins heads in a row is twice as surprising as flipping 5 coins heads in a row.</p>
+
+  <p>These conditions imply that s must be a positive scalar multiple of $−\log P(E)$.</p>
+
+  <p>Then the expected surprisal is a positive scalar multiple of the entropy. Note in particular that H is minimized if some $p(x_i)=1$, which corresponds to the same thing always happening and which is not surprising at all.</p>
+  </blockquote>
+
+  所以 Entropy 是个期望值，表示对于一个分布 $p$，平均需要多少个 bit 来 encode 一个事件。
+
+#### Cross Entropy
+
+  $$
+  H(p, q) = -\sum\_{i=1}^{n} p(x\_i)\log q(x\_i)
+  $$
+
+  有了 Entropy 的定义，Cross Entropy 就好理解多了，它表示真实分布是 $p$，但我却用分布 $q$ 来对事件进行 encode 的情况的期望值。
+
+  $$H(p, q) \geq H(p)$$
+
+  可以用下面的例子表示，是我从 [stackexchange](http://stats.stackexchange.com/questions/80967/qualitively-what-is-cross-entropy?rq=1) 拷来的：
+
+  <blockquote>
+  <p>As an example, consider alphabet of four letters (A, B, C, D), but with A and B having the same frequency and C and D not appearing at all. So the probability is $P=(1/2,1/2,0,0)$.</p>
+  
+  <p>Then if we want to encode it optimally, we encode A as 0 and B as 1, so we get one bit of encoded message per one letter. (And it is exactly Shannon entropy of our probability distribution.)</p>
+  
+  <p>But if we have the same probability $P$, but we encode it according to distribution where all letters are equally probably $Q=(1/4,1/4,1/4,1/4)$, then we get two bits per letter (for example, we encode A as 00, B as 01, C as 10 and D as 11).</p>
+  </blockquote>
+
+#### Reletive Entropy (a.k.a. KL Divergence)
+
+  $$
+  D\_{KL}(p \Vert q) = \sum\_{i=1}^{n} p(x\_i)\log \frac{p(x\_i)}{q(x\_i)}
+  $$
+
+  表示两个分布间的差异。
+
+#### Relationship between each other
+
+3 个 Entropy 间的关系可以用下面的公式表示：
+
+  $$H(p, q) = H(p) + D\_{KL}(p \Vert q)$$
+
+挺有意思的，所以 KL Divergence 就是 Entropy 和 Cross Entropy 之间的差距。
+
+从 Frequentist 的角度说，我们常说 MLE (Maximum Likelihood Estimation) 做的其实就是 Minimize KL Divergence with the **TRUE** distribution。
+
+$$
+\begin{align}
+\hat{\theta} & = \underset{\theta}{argmax} \prod\_{i=1}^{N} p(x\_i|\theta) \\\\
+ & = \underset{\theta}{argmax} \sum\_{i=1}^{N} \log p(x\_i|\theta) \\\\
+ & = \underset{\theta}{argmax} \frac{1}{N}\sum\_{i=1}^{N} \log p(x\_i|\theta) - \frac{1}{N}\sum\_{i=1}^{N} \log p(x\_i|\theta\_0) \\\\
+ & = \underset{\theta}{argmin} \frac{1}{N}\sum\_{i=1}^{N} \log \frac{p(x\_i|\theta\_0)}{p(x\_i|\theta)} \\\\
+ & \rightarrow \underset{\theta}{argmin} \int \log \frac{p(x\_i|\theta\_0)}{p(x\_i|\theta)} p(x\_i|\theta\_0) dx
+\end{align}
+$$
+
+这里的 $\theta\_0$ 表示真实分布的参数。
+
+最后一个式子是根据 Law of large number 推出来的，意思就是，我们通常用样本均值来近似期望值，当样本趋向无穷大时，这个均值就会趋向期望值。
+
