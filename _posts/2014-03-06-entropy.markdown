@@ -20,7 +20,7 @@ tags: pattern recognition, machine learning, entropy, cross entropy, KL Divergen
   <blockquote>
   <p>Here is a simple story one can tell about the entropy</p>
 
-  $$H(x) = -\sum_{i=1}^{n} p(x_i)\log p(x_i)$$
+  $$H(x) = -\sum\_{i=1}^{n} p(x\_i)\log p(x\_i)$$
 
   <p>of a discrete probability distribution. Suppose you wanted to describe how surprised you are upon learning that some event $E$ happened. Call your surprise upon learning that $E$ happened $s(E)$, the "surprisal." Here are some plausible conditions that $s$ could satisfy:</p>
 
