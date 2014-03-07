@@ -142,7 +142,7 @@ git branch 是一个非常轻量的 object，可以理解为就是一个指针�
 
         git reset HEAD path/to/file
 
-* 从一个 branch 拷文件到另一个 branch
+* Merge only some files from one branch to another
 
   假设你要将一个叫 foo 的文件从 test branch 拷到 master：
 
