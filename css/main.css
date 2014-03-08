@@ -51,7 +51,9 @@ h2 {
 h3 {
     font-size: 1.3em;
     border-bottom: 2px solid #1e94d1;
+    border-left: 6px solid #1e94d1;
     margin: 1.3em 0 1em 0;
+    padding-left: 0.3em;
 }
 
 h4 {
