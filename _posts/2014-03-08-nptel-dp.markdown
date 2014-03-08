@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Dynamic Programming [NPTEL]
+title: Dynamic Programming (NPTEL)
 categories: algo
 tag: dp, dynamic programming, knapsack, longest common subsequence, matrix multiplication
 ---
@@ -29,7 +29,9 @@ NPTEL 讲的 [Dynamic Programming](http://nptel.ac.in/video.php?subjectId=106101
 
 ### Longest Common Subsequence (LCS)
 
-问题描述：给定两个字符串 A 和 B，找出这两个字符串的最长公共子串 C。
+#### 问题描述
+
+给定两个字符串 A 和 B，找出这两个字符串的最长公共子串 C。
 
 套用上述步骤，解决过程如下。
 
@@ -66,7 +68,7 @@ LCS(A[1:M], B[1:N]):
     return longer of (cs1, cs2) 
 {% endhighlight %}
 
-其实函数的 signature 写成 `LCS(A[i:M], B[j:N])` 是更准确的，之所以写成 `LCS(A[1:M], B[1:N])` 其实是故意的，是为了体现一个思考问题的过程，这里感觉只可意会不可言传。
+其实函数的 signature 写成 `LCS(A[i:M], B[j:N])` 是更准确的，之所以写成 `LCS(A[1:M], B[1:N])` 其实是故意的，是为了传递这么一个信息，就是 **无论你从其他函数调用 LCS，还是在 LCS 内部递归调用 LCS，你都应该把 LCS 的参数看成是它自身的一个完整的整体，而不是原始 A 或者 B 的一部分**  。从物理上讲，递归调用的 LCS 的参数确实是最开始调用的 LCS 参数的一部分，但是，逻辑上，你应该把它单独看成自身的一个整体，这种对输入参数的看法对于你想象递归过程是有好处的。(看完这 3 个例子会更明白这个意思)。
 
 #### Non-recursive Process
 
@@ -81,7 +83,11 @@ LCS(A[1:M], B[1:N]):
 
 其中每次调用发生变化的有两个：A 的开始位置和 B 的开始位置。
 
-由此我们可以定义一个二维表 T，令 `T[i, j] = LCS(A[i:M], B[j:M])`。这里 i 取值范围为 [1, M+1]，j 取值范围为 [1, N+1]，其中 M+1, N+1 对应 A = null 和 B = null 的情况。
+由此我们可以定义一个二维表 T：
+
+$$T[i, j] = LCS(A[i:M], B[j:M]) \;\; i \in [1, M+1], j \in [1, N+1]$$
+
+其中 M+1, N+1 对应 A = null 和 B = null 的情况。
 
 填表操作可以用如下代码表示：
 
@@ -120,3 +126,183 @@ LCS(A[1:M], B[1:N]):
 
 到此就完成了 recursion 到 non-recursion 的转换。也就实现了用 DP 解决 LCS 的想法。视频中给出了一个性能更好的 Fill 函数，这里就不给出了。 
 
+### Knapsack
+
+#### 问题描述
+
+给定 W[1:N], V[1:N]，其中 W[i] 表示第 i 个 object 的 weight，V[i] 表示第 i 个 object 的 value。再给定 C，C 表示 knapsack 的容量限制，问题是要最大化装入 knapsack 的 object 的 value 总和。 
+
+#### 定义问题
+
+| search space | all possible object combinations, which are of size $2^N$ |
+|:--|:--|
+| objective function | maximum value of object combination, under the constrain that the weight <= C |
+
+#### Recursive Process
+
+将 S 分成两个两部分。
+
+| S[1] | combinations not containing the first object |
+|:--|:--|
+| S[2] | combinations containing the first object |
+
+Recursive process 可以表示为：
+
+{% highlight c %}
+/* @i denotes the index of first object */
+KS(W[1:N], V[1:N], N, C, i): 
+    if C <= 0 || i > N: 
+        return 0 
+     
+    /* search S1 */
+    v1 = KS(W, V, N, C, i+1) 
+     
+    /* search S2 */
+    v2 = 0 
+    if W[i] <= C: 
+        v2 = V[i] + KS(W, V, N, C-W[i], i+1) 
+     
+    return max(v1, v2) 
+{% endhighlight %}
+
+#### Non-recursive Process
+
+观察上面 recursive call 的 argument，它包含这么几个信息：
+
+1. W: weight array
+2. V: value array
+3. N: number of objects
+4. C: total capacity
+5. i: index of first object
+
+其中变化的有两个：C 和 i。
+
+由此我们可以定义一个二维表 T：
+
+$$T[c, i] = KS(W, V, N, c, i) \;\; c \in [0, C], i \in [1, N+1]$$
+
+填表操作可以用如下代码表示：
+
+{% highlight c %}
+Fill(W, V, c, i): 
+    if c <= 0 || i > N: 
+        T[c][i] = 0 
+        return 
+
+    v1 = T[c][i+1] 
+    v2 = 0 
+    if W[i] <= c: 
+        v2 = V[i] + T[c-W[i]][i+1] 
+
+    T[c][i] = max(v1, v2) 
+{% endhighlight %}
+
+同样在写上面的 Fill 函数时，我们假设某些项已经被填上。项之间的依赖关系可以由下图表示，其中曲线箭头表示依赖关系。
+
+<object data="/resource/DP/knapsack.svg" type="image/svg+xml" class="blkcenter"></object>
+
+根据项与项之间的依赖关系，我们应该按 i 从大到小，C 从小到大的顺序调用 Fill 函数。
+
+{% highlight c %}
+KS(W, V, C, N): 
+    for c = 0 to C: 
+        T[c][N+1] = 0 
+    for i = 1 to N+1: 
+        T[0][i] = 0 
+     
+    for i = N to 1: 
+        for c = 1 to C: 
+            T[c][i] = Fill(W, V, c, i) 
+{% endhighlight %}
+
+### Matrix Multiplication
+
+#### 问题描述
+
+给定 N 个 matrix，每个 matrix 的维度在 d[0:N] 数组中给出，其中第 i 个 matrix 的维度为 (d[i-1], d[i])，问题是要得到 N 个 matrix 相乘的代价最小的乘法。 
+
+#### 定义问题
+
+| search space | all possible ways of matrix multiplication |
+|:--|:--|
+| objective function | minimum multiplication cost |
+
+#### Recursive Process
+
+按最后一次乘积发生的位置来分割 search space，这样共有 N-1 个 subspace。
+
+| S[i] | subspace in which the last multiplication happens between the ith matrix and the (i+1)th one |
+|:--|:--|
+
+Recursive process 可以表示为：
+
+{% highlight c %}
+MM(d[0:N]): 
+    if N == 1: 
+        return 0 
+
+    m = INF 
+    for i = 1 to N-1: 
+        c = MM(d[0:i]) + MM(d[i:N]) + d[0]*d[i]*d[N] 
+        if c < m: 
+            m = c 
+    return m 
+{% endhighlight %}
+
+#### Non-recursive Process
+
+观察上面 recursive call 的 argument，它包含这么几个信息：
+
+1. d
+2. d 的开始位置
+3. d 的结束位置
+
+其中变化的有两个：d 的开始位置和结束位置。
+
+由此我们可以定义一个二维表 T：
+
+$$T[i, j] = MM(d[i:j]) \;\; i \in [0, N-1], j \in [1, N]$$
+
+填表操作可以用如下代码表示：
+
+{% highlight c %}
+Fill(d[0:N], i, j): 
+    if j - i == 1: 
+        T[i][j] = 0 
+
+    m = INF 
+    for k = i + 1 to j - 1: 
+        c = T[i:k] + T[k:j] + d[i]*d[k]*d[j] 
+        if c < m: 
+            m = c 
+
+    T[i][j] = m
+{% endhighlight %}
+
+T[i][j]与表中其他项得依赖关系如下图所示。
+
+<object data="/resource/DP/matrix.svg" type="image/svg+xml" class="blkcenter"></object>
+
+其中蓝色的框表示 T[i][j]，它依赖于绿色部分的项，另外注意到这个表是 half-full 的，对角线的下方是不需要的。这样调用 Fill 函数的过程如下面伪代码所示：
+
+{% highlight c %}
+MM(d[0:N]): 
+    fori = 0 to N-1: 
+        T[i][i+1] = 0 
+     
+    for i = N-2 to 0: 
+        for j = i+2 to N: 
+            Fill(d, i, j) 
+     
+    return T[0][N] 
+{% endhighlight %}
+
+### 心得
+
+1. 在第二步设计递归函数时将所有输入都作为函数参数，然后再看其中变化的是什么。 
+
+2. 把表项之间的依赖关系用图画出来，同时也可以把 Fill 调用中 i，j 的变化用图画出来，这样一切都会变得清晰起来。 
+
+3. 项之间的依赖不能是随意的，T[i, j] 依赖项的两个下标至少得有一维是只往一个方向发展的。
+
+在学会上述招数之后， 你会发现以前觉得复杂的 DP 问题原来都是这么的简单。 
