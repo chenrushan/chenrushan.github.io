@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 各种 Entropy
+title: Various Entropy
 categories: ml
 tags: pattern recognition, machine learning, entropy, cross entropy, KL Divergence
 ---

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: PCA (Principal Component Analysis)
+title: Principal Component Analysis
 categories: ml
 ---
 

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: PLSA 与 Matrix Factorization
+title: PLSA and Matrix Factorization
 categories: ml
 tags: plsa, matrix factorization, kl divergence
 ---

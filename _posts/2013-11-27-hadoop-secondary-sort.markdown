@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Hadoop 二次排序 (secondary sort)
+title: Hadoop Secondary Sort
 categories: prog
 ---
 
