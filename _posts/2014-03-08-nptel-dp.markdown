@@ -1,0 +1,122 @@
+---
+layout: post
+title: Dynamic Programming [NPTEL]
+categories: algo
+tag: dp, dynamic programming, knapsack, longest common subsequence, matrix multiplication
+---
+
+NPTEL 讲的 [Dynamic Programming](http://nptel.ac.in/video.php?subjectId=106101060) 是我听过讲的最好的，给人一种看穿本质的感觉，这篇笔记对视频所讲内容做个总结。
+
+### DP 过程
+
+视频里给出的用 DP 解决问题的过程包含以下 3 个步骤：
+
+1. 将问题描述为一个搜索问题，定义问题的 search space 和 objective function。比如对于 Longest Common Subsequence 问题，search space 就是所有的 common subsequence，objective function 是 longest。
+
+2. 给出解决这个问题的 recursive process。实现方法是将 search space 分割成若干个 subspace，然后在每个 subspace 中递归搜索，伪代码如下。
+
+        Search(S):
+          divide S into S[1], S[2], ... S[N]
+          for i in [1, N]:
+            best[i] = Search(S[i])
+          return best of best[1, N]
+
+3. 将 recursive process 转化成 non-recursive process。这是通过观察每个 recursive call 的 argument 并将每个 recursive call 转换成查表操作实现。当然在查表之前，我们得先填表，在填表的每一项时，我们都假设填这一项依赖的其他项都已经填上 (这个假设如果不成立，就没法 DP 了)。
+
+经过上述步骤就完成整个 DP 过程，最终的 non-recursive process 的 running time = O(table size * time to fill each entry)，recursive process 的 running time 通常是 exponential 的，所以 DP 让不可能变成可能。
+
+下面 3 个小节中给出 3 个具体的例子。
+
+### Longest Common Subsequence (LCS)
+
+问题描述：给定两个字符串 A 和 B，找出这两个字符串的最长公共子串 C。
+
+套用上述步骤，解决过程如下。
+
+#### 定义问题
+
+| search space | all common subsequence between A and B |
+|:--|:--|
+| objective function | longest subsequence |
+
+#### Recursive Process
+
+将 S 分成两个两部分。
+
+| S[1] | common subsequences starting with A[1] |
+|:--|:--|
+| S[2] | common subsequences not starting with A[1] |
+
+根据这种空间划分法，可以定义如下 recursive process：
+
+{% highlight c %}
+LCS(A[1:M], B[1:N]): 
+    if A == null or B == null: 
+        return null 
+     
+    /* search S1 */
+    cs1 = null 
+    k = first index of A[1] in B 
+    if k != null: 
+        cs1 = A[1] | LCS(A[2:M], B[k+1, N]) 
+     
+    /* search S2 */
+    cs2 = LCS(A[2:M], B[1:N]) 
+     
+    return longer of (cs1, cs2) 
+{% endhighlight %}
+
+其实函数的 signature 写成 `LCS(A[i:M], B[j:N])` 是更准确的，之所以写成 `LCS(A[1:M], B[1:N])` 其实是故意的，是为了体现一个思考问题的过程，这里感觉只可意会不可言传。
+
+#### Non-recursive Process
+
+观察上面 recursive call 的 argument，它包含这么几个信息：
+
+1. A
+2. B
+3. A 的开始位置
+3. A 的结束位置
+4. B 的开始位置
+4. B 的结束位置
+
+其中每次调用发生变化的有两个：A 的开始位置和 B 的开始位置。
+
+由此我们可以定义一个二维表 T，令 `T[i, j] = LCS(A[i:M], B[j:M])`。这里 i 取值范围为 [1, M+1]，j 取值范围为 [1, N+1]，其中 M+1, N+1 对应 A = null 和 B = null 的情况。
+
+填表操作可以用如下代码表示：
+
+{% highlight c %}
+Fill (i, j): 
+    if i == M + 1 or j == N + 1: 
+        return 
+
+    /* search S1 */
+    cs1 = null 
+    k = first index of A[i] in B[j:N] 
+    if k != null: 
+        cs1 = A[1] | T[i+1, k+1] 
+
+    /* search S2 */
+    cs2 = T[i+1, j] 
+
+    T[i, j] = longer of (cs1, cs2) 
+{% endhighlight %}
+
+在填 T[i, j] 时，我们假设 T[i+1, k+1], T[i+1, j] 已经填上。为了保证这个假设在整个过程中都成立，我们必须按一定的顺序调用 Fill 函数，从上面的代码可以看出 T[i, j] 依赖项的索引中第一维都大于 i，第二维都大于 j，这样我们只要按 i, j 从大到小遍历即可，如下代码所示。
+
+{% highlight c %}
+LCS(A[1:M], B[1:N]): 
+    for i in [1, M+1]: 
+        T[i][N+1] = null 
+    for j in [1, N+1]: 
+        T[M+1][j] = null 
+     
+    for i in [M, 1]: 
+        for j in [N, 1]: 
+            Fill(i, j) 
+     
+    return T[1, 1] 
+{% endhighlight %}
+
+到此就完成了 recursion 到 non-recursion 的转换。也就实现了用 DP 解决 LCS 的想法。视频中给出了一个性能更好的 Fill 函数，这里就不给出了。 
+
