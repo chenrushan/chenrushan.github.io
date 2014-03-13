@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Git and Common Use Cases
+title: Git 简介及常见使用样例
 categories: prog
 tags: git, svn
 ---
@@ -142,7 +142,7 @@ git branch 是一个非常轻量的 object，可以理解为就是一个指针�
 
         git reset HEAD path/to/file
 
-* Merge only some files from one branch to another
+* 从一个 branch 拷文件到另一个 branch
 
   假设你要将一个叫 foo 的文件从 test branch 拷到 master：
 
@@ -167,6 +167,16 @@ git branch 是一个非常轻量的 object，可以理解为就是一个指针�
         git push -f origin master
 
   注意最后一个命令需要 `-f`，不然 remote 不会接受。
+
+* 在修改 foo branch，但需要临时去一下 bar barch，又不想 commit foo branch 的东西。
+
+        git stash # on foo branch
+        git checkout bar
+        # do something on bar
+        git checkout foo
+        git stash apply
+
+  `git stash` 会暂存你当前的修改，`git stash apply` 会把暂存的修改重新 apply。
 
 ### Git Multiple Accounts
 
