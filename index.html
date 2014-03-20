@@ -39,6 +39,14 @@ title: Notebook
       </ul>
     </li>
 
+    <li><span class="catname">Machine Learning</span>
+      <ul class="posts">
+        {% for post in site.categories.ml %}
+          <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </li>
+
     <li><span class="catname">Arch Linux (Arch is the BEST !)</span>
       <ul class="posts">
         {% for post in site.categories.arch %}
