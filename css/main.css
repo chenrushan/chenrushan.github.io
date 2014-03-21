@@ -312,3 +312,9 @@ table, th, td {
     padding: 2px 5px;
     font-weight: normal;
 }
+
+hr {
+    background-color: #1e94d1;
+    height: 1px;
+    border: 0px; /* border should be set to 0px */
+}
