@@ -1,0 +1,17 @@
+---
+layout: post
+title: Expectation Maximization
+categories: ml
+tags: EM, Expectation Maximization
+---
+
+给定数据 $X$，一种常用的估计模型参数 $\theta$ 的方法是 maximum likelihood，即：
+
+$$\theta = \underset{\theta}{\arg\max} \;\; p(X|\theta)$$
+
+这里的 $X$ 是我们可见的，即 visible variable。如果给定的问题涉及到 hidden variable，ML 就需要引入新变量，即：
+
+$$\theta = \underset{\theta}{\arg\max} \;\; p(X|\theta) = \underset{\theta}{\arg\max} \;\; \int p(X, z|\theta) dz$$
+
+这里的 $z$ 对应 hidden variable。在很多情况下，引入积分后问题会变得不可求解，这也是为什么需要 EM 算法的原因。EM 尝试用迭代的方式去求解 $\theta$，从而避免掉积分操作。
+
