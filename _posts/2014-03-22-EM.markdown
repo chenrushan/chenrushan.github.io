@@ -77,6 +77,32 @@ $$
 
 #### E-step & M-step
 
+下面得到 $\underset{\theta}{\arg\max}\; \Delta(\theta|\theta\_n)$ 的具体形式。
+
+$$
+\begin{align}
+\theta\_{n+1} = & \underset{\theta}{\arg\max}\; \Delta(\theta|\theta\_n) \\\\
+= & \underset{\theta}{\arg\max}\; \sum\_z p(z|X, \theta\_n) \log \frac{p(X, z|\theta)}{p(X, z|\theta\_n)} \\\\
+= & \underset{\theta}{\arg\max}\; \sum\_z p(z|X, \theta\_n) \log p(X, z|\theta) \\\\
+= & \underset{\theta}{\arg\max}\; E\_{z|X, \theta\_n} (\log p(X, z|\theta))
+\end{align}
+$$
+
+这样也就得到了 E-step 和 M-step:
+
+<blockquote>
+<ul>
+<li>E-step</li>
+
+得到 $E\_{z|X, \theta\_n} (\log p(X, z|\theta))$
+<li>M-step</li>
+
+计算 $\underset{\theta}{\arg\max}\; E\_{z|X, \theta\_n} (\log p(X, z|\theta))$
+</ul>
+</blockquote>
+
+下面给出两个具体的例子，分别是 Hidden Markov Model (HMM) 和 Probabilistic Latent Semantic Analysis (PLSA) 的训练。
+
 ### PLSA
 
 
