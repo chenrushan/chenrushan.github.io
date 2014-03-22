@@ -27,17 +27,55 @@ $$\theta = \underset{\theta}{\arg\max} \; \log p(X|\theta)$$
 
 假设第 $n$ 轮迭代得到的参数是 $\theta\_n$，由于我们的目标是最大化 $L(\theta)$，因此我们希望下一轮迭代得到的 $\theta$ 可以进一步提升 $L(\theta)$。换句话说，在第 $n+1$ 轮迭代时，希望能找到 $\theta$ 使得 $L(\theta) > L(\theta\_n)$。
 
-首先明确一点，我们不可能通过直接优化 $L(\theta) - L(\theta\_n)$ 得到下一轮的 $\theta$，因为优化 $L(\theta) - L(\theta\_n)$ 等价于优化 $L(\theta)$ ($L(\theta\_n)$是常数，在优化中不起作用)，这个前面已经说了不好优化，好优化就不用 EM 算法了。为了得到一个更好的 $\theta$， **EM 算法的做法是先得到 $L(\theta) - L(\theta\_n)$ 的一个下界，然后去优化这个下界来得到一个更优的 $\theta$** 。
+首先明确一点，我们不可能通过直接优化 $L(\theta) - L(\theta\_n)$ 得到下一轮的 $\theta$，因为优化 $L(\theta) - L(\theta\_n)$ 等价于优化 $L(\theta)$ ($L(\theta\_n)$是常数，在优化中不起作用)，这个前面已经说了不好优化，好优化就不用 EM 算法了。为了得到一个更好的 $\theta$， **EM 算法的做法是先得到 $L(\theta) - L(\theta\_n)$ 的一个下界，然后去优化这个下界来得到一个更优的 $\theta$** (当然这个下界通常是易于优化的)。
 
 下面的推导首先给出 $L(\theta) - L(\theta\_n)$ 的下界并证明可以通过优化这个下界得到更优的 $\theta$。
 
 推导过程中用到了 concave function 的一个性质：
 
 <blockquote>
-if $f(x)$ is a concave function，$\forall \sum_i a_i = 1 \;\; f(\sum_{i}a_i x_i) \geq \sum_i a_i f(x_i)$
+If $f(x)$ is a concave function, $\forall \sum_i a_i = 1 \;\; f(\sum_{i}a_i x_i) \geq \sum_i a_i f(x_i)$
 </blockquote>
 
 特别的，如果 $f(x) = \log x$，则有 $\log \sum\_i a\_i x\_i \geq \sum\_i a\_i \log x\_i \;\; \forall \sum\_i a\_i = 1$
+
+#### 得到下界
+
+利用 concave function 的性质，可得：
+
+$$
+\begin{align}
+& L(\theta) - L(\theta\_n) \\\\
+= & \log p(X|\theta) - \log p(X|\theta\_n) \\\\
+= & \log \sum\_z p(X, z|\theta) - \log p(X|\theta\_n) \\\\
+= & \log \sum\_z p(X, z|\theta) \frac{p(z|X, \theta\_n)}{p(z|X, \theta\_n)} - \log p(X|\theta\_n) \\\\
+\geq & \sum\_z p(z|X, \theta\_n) \log \frac{p(X, z|\theta)}{p(z|X, \theta\_n)} - \log p(X|\theta\_n) \\\\
+= & \sum\_z p(z|X, \theta\_n) \log \frac{p(X, z|\theta)}{p(z|X, \theta\_n)p(X|\theta\_n)} \\\\
+= & \sum\_z p(z|X, \theta\_n) \log \frac{p(X, z|\theta)}{p(X, z|\theta\_n)} \\\\
+= & \Delta(\theta | \theta\_n)
+\end{align}
+$$
+
+这样我们就得到了 $L(\theta) - L(\theta\_n)$ 的下界 $\Delta(\theta | \theta\_n)$。推导的核心的是 **第三个等式引入了 $\frac{p(z|X, \theta\_n)}{p(z|X, \theta\_n)}$** 。
+
+#### 优化下界
+
+接下来证明通过优化下界可以得到一个更好的 $\theta$。
+
+当 $\theta = \theta\_n$ 时，我们有：
+
+$$
+\begin{align}
+& \Delta(\theta\_n | \theta\_n) \\\\
+= & \sum\_z p(z|X, \theta\_n) \log \frac{p(X, z|\theta\_n)}{p(X, z|\theta\_n)} \\\\
+= & \sum\_z p(z|X, \theta\_n) \log 1 \\\\
+= & 0
+\end{align}
+$$
+
+因此，如果 $\theta\_{n+1} = \underset{\theta}{\arg\max}\; \Delta(\theta|\theta\_n)$ 则必有 $\Delta(\theta\_{n+1}|\theta\_n) \geq 0$，也就是 $L(\theta\_{n+1}) - L(\theta\_n) \geq 0$，这样也就得到了一个更好的 $\theta$。
+
+#### E-step & M-step
 
 ### PLSA
 
