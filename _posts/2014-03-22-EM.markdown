@@ -15,3 +15,7 @@ $$\theta = \underset{\theta}{\arg\max} \;\; p(X|\theta) = \underset{\theta}{\arg
 
 这里的 $z$ 对应 hidden variable。在很多情况下，引入积分后问题会变得不可求解，这也是为什么需要 EM 算法的原因。EM 尝试用迭代的方式去求解 $\theta$，从而避免掉积分操作。
 
+### PLSA
+
+
+
