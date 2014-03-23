@@ -25,11 +25,9 @@ $$\theta = \underset{\theta}{\arg\max} \; \log p(X|\theta)$$
 
 ### EM Iteration
 
-假设第 $n$ 轮迭代得到的参数是 $\theta\_n$，由于我们的目标是最大化 $L(\theta)$，因此我们希望下一轮迭代得到的 $\theta$ 可以进一步提升 $L(\theta)$。换句话说，在第 $n+1$ 轮迭代时，希望能找到 $\theta$ 使得 $L(\theta) > L(\theta\_n)$。
+假设第 $n$ 轮迭代得到的参数是 $\theta\_n$，由于我们的目标是最大化 $L(\theta)$，因此我们希望下一轮迭代得到的 $\theta$ 可以进一步提升 $L(\theta)$。换句话说，在第 $n+1$ 轮迭代时，希望能找到 $\theta$ 使得 $L(\theta) > L(\theta\_n)$。 **EM 的做法是利用 $\theta\_n$ 得到 $L(\theta)$ 的一个下界，然后去优化这个下界得到一个更优的 $\theta$** (当然这个下界通常是易于优化的)。
 
-首先明确一点，我们不可能通过直接优化 $L(\theta) - L(\theta\_n)$ 得到下一轮的 $\theta$，因为优化 $L(\theta) - L(\theta\_n)$ 等价于优化 $L(\theta)$ ($L(\theta\_n)$是常数，在优化中不起作用)，这个前面已经说了不好优化，好优化就不用 EM 算法了。为了得到一个更好的 $\theta$， **EM 算法的做法是先得到 $L(\theta) - L(\theta\_n)$ 的一个下界，然后去优化这个下界来得到一个更优的 $\theta$** (当然这个下界通常是易于优化的)。
-
-下面的推导首先给出 $L(\theta) - L(\theta\_n)$ 的下界并证明可以通过优化这个下界得到更优的 $\theta$。
+下面的推导首先给出 $L(\theta)$ 的下界并证明可以通过优化这个下界得到更优的 $\theta$。
 
 推导过程中用到了 concave function 的一个性质：
 
@@ -41,65 +39,53 @@ If $f(x)$ is a concave function, $\forall \sum_i a_i = 1 \;\; f(\sum_{i}a_i x_i)
 
 #### 得到下界
 
-利用 concave function 的性质，可得：
+假设 $X = \\{\boldsymbol{x}\_1, \boldsymbol{x}\_2, ..., \boldsymbol{x}\_n\\}$
 
 $$
 \begin{align}
-& L(\theta) - L(\theta\_n) \\\\
-= & \log p(X|\theta) - \log p(X|\theta\_n) \\\\
-= & \log \sum\_z p(X, z|\theta) - \log p(X|\theta\_n) \\\\
-= & \log \sum\_z p(X, z|\theta) \frac{p(z|X, \theta\_n)}{p(z|X, \theta\_n)} - \log p(X|\theta\_n) \\\\
-\geq & \sum\_z p(z|X, \theta\_n) \log \frac{p(X, z|\theta)}{p(z|X, \theta\_n)} - \log p(X|\theta\_n) \\\\
-= & \sum\_z p(z|X, \theta\_n) \log \frac{p(X, z|\theta)}{p(z|X, \theta\_n)p(X|\theta\_n)} \\\\
-= & \sum\_z p(z|X, \theta\_n) \log \frac{p(X, z|\theta)}{p(X, z|\theta\_n)} \\\\
-= & \Delta(\theta | \theta\_n)
+L(\theta) = & \sum\_i \log p(\boldsymbol{x}^{(i)}|\theta) \\\\
+= & \sum\_i \log \sum\_\boldsymbol{z} p(\boldsymbol{x}^{(i)}, \boldsymbol{z}|\theta) \\\\
+= & \sum\_i \log \sum\_\boldsymbol{z} p(\boldsymbol{x}^{(i)}, \boldsymbol{z}|\theta) \frac{p(\boldsymbol{z}|\boldsymbol{x}^{(i)}, \theta\_n)}{p(\boldsymbol{z}|\boldsymbol{x}^{(i)}, \theta\_n)} \\\\
+\geq & \sum\_i \sum\_\boldsymbol{z} p(\boldsymbol{z}|\boldsymbol{x}^{(i)}, \theta\_n) \log \frac{p(\boldsymbol{x}^{(i)}, \boldsymbol{z}|\theta)}{p(\boldsymbol{z}|\boldsymbol{x}^{(i)}, \theta\_n)} \\\\
+= & l(\theta)
 \end{align}
 $$
 
-这样我们就得到了 $L(\theta) - L(\theta\_n)$ 的下界 $\Delta(\theta | \theta\_n)$。推导的核心的是 **第三个等式引入了 $\frac{p(z|X, \theta\_n)}{p(z|X, \theta\_n)}$** 。
+这样我们就得到了 $L(\theta)$ 的下界 $l(\theta)$。推导的核心的是 **第三个等式引入了 $\frac{p(\boldsymbol{z}|\boldsymbol{x}^{(i)}, \theta\_n)}{p(\boldsymbol{z}|\boldsymbol{x}^{(i)}, \theta\_n)}$** 。
 
-#### 优化下界
-
-接下来证明通过优化下界可以得到一个更好的 $\theta$。
+#### 证明优化下界提升 likelihood
 
 当 $\theta = \theta\_n$ 时，我们有：
 
 $$
 \begin{align}
-& \Delta(\theta\_n | \theta\_n) \\\\
-= & \sum\_z p(z|X, \theta\_n) \log \frac{p(X, z|\theta\_n)}{p(X, z|\theta\_n)} \\\\
-= & \sum\_z p(z|X, \theta\_n) \log 1 \\\\
-= & 0
+l(\theta\_n) = & \sum\_i \sum\_\boldsymbol{z} p(\boldsymbol{z}|\boldsymbol{x}^{(i)}, \theta\_n) \log \frac{p(\boldsymbol{x}^{(i)}, \boldsymbol{z}|\theta\_n)}{p(\boldsymbol{z}|\boldsymbol{x}^{(i)}, \theta\_n)} \\\\
+= & \sum\_i \sum\_\boldsymbol{z} p(\boldsymbol{z}|\boldsymbol{x}^{(i)}, \theta\_n) \log {p(\boldsymbol{x}^{(i)}|\theta\_n)} \\\\
+= & \sum\_i \log {p(\boldsymbol{x}^{(i)}|\theta\_n)} \\\\
+= & L(\theta\_n)
 \end{align}
 $$
 
-因此，如果 $\theta\_{n+1} = \underset{\theta}{\arg\max}\; \Delta(\theta|\theta\_n)$ 则必有 $\Delta(\theta\_{n+1}|\theta\_n) \geq 0$，也就是 $L(\theta\_{n+1}) - L(\theta\_n) \geq 0$，这样也就得到了一个更好的 $\theta$。
+因此，如果 $\theta\_{n+1} = \underset{\theta}{\arg\max}\; l(\theta)$ 则有 $L(\theta\_{n+1}) \geq l(\theta\_{n+1}) \geq l(\theta\_{n}) = L(\theta\_n)$，也就是通过优化下界我们可以得到一个 likelihood 更高的 $\theta$。
 
 #### E-step & M-step
 
-下面得到 $\underset{\theta}{\arg\max}\; \Delta(\theta|\theta\_n)$ 的具体形式。
+下面进一步精简 $\arg\max$：
 
 $$
 \begin{align}
-\theta\_{n+1} = & \underset{\theta}{\arg\max}\; \Delta(\theta|\theta\_n) \\\\
-= & \underset{\theta}{\arg\max}\; \sum\_z p(z|X, \theta\_n) \log \frac{p(X, z|\theta)}{p(X, z|\theta\_n)} \\\\
-= & \underset{\theta}{\arg\max}\; \sum\_z p(z|X, \theta\_n) \log p(X, z|\theta) \\\\
-= & \underset{\theta}{\arg\max}\; E\_{z|X, \theta\_n} (\log p(X, z|\theta))
+\theta\_{n+1} = & \underset{\theta}{\arg\max}\; l(\theta) \\\\
+= & \underset{\theta}{\arg\max}\; \sum\_i \sum\_\boldsymbol{z} p(\boldsymbol{z}|\boldsymbol{x}^{(i)}, \theta\_n) \log \frac{p(\boldsymbol{x}^{(i)}, \boldsymbol{z}|\theta)}{p(\boldsymbol{z}|\boldsymbol{x}^{(i)}, \theta\_n)} \\\\
+= & \underset{\theta}{\arg\max}\; \sum\_i \sum\_\boldsymbol{z} p(\boldsymbol{z}|\boldsymbol{x}^{(i)}, \theta\_n) \log p(\boldsymbol{x}^{(i)}, \boldsymbol{z}|\theta) \\\\
 \end{align}
 $$
 
-这样也就得到了 E-step 和 M-step:
+分母相对于 $\theta$ 是个常数，所以可以直接去掉而不影响 $\arg\max$ 的结果。
 
-<blockquote>
-<ul>
-<li>E-step</li>
+这样就可以得到 E-step 和 M-step:
 
-得到 $E\_{z|X, \theta\_n} (\log p(X, z|\theta))$
-<li>M-step</li>
-
-计算 $\underset{\theta}{\arg\max}\; E\_{z|X, \theta\_n} (\log p(X, z|\theta))$
-</ul>
-</blockquote>
+* E-step: get distribution of $\boldsymbol{z}: p(\boldsymbol{z}|\boldsymbol{x}^{(i)}, \theta\_n)$
+* M-step: get updated $\theta$: $\theta\_{n+1} = \arg\max\; l(\theta)$
 
 下面给出两个具体的例子，分别是 Hidden Markov Model (HMM) 和 Probabilistic Latent Semantic Analysis (PLSA) 的训练。
 
