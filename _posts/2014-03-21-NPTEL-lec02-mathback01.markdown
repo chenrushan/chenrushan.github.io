@@ -137,3 +137,44 @@ The dimension of the vector space $S$ is the cardinality of a basis of $S$.
 
 The dimension of $\mathbb{R}^n$ is $n$.
 
+-----------------------
+
+**Function**
+
+<blockquote>
+A function $f$ from a set $A$ to a set $B$ is a rule that assigns to each $x$ in $A$ a unique element $f(x)$ in $B$. This function can be represented by
+$$f:A\rightarrow B$$
+</blockquote>
+
+Note:
+
+* $A$: Domain of $f$
+* $\\{y \in B: \exists x[y = f(x)] \\}$: Range of f
+* Range of $f \subseteq B$
+
+-----------------------
+
+**Norm**
+
+<blockquote>
+A norm on $\mathbb{R}^n$ is real-value function $\Vert \cdot \Vert: \mathbb{R}^n \rightarrow \mathbb{R}$ which obeys
+<ul>
+<li>$\Vert \boldsymbol{x} \Vert \geq 0$ for every $\boldsymbol{x} \in \mathbb{R}^n$, and $\Vert \boldsymbol{x} \Vert = 0$ iff $\boldsymbol{x} = 0$.</li>
+<li>$\Vert \alpha \boldsymbol{x} \Vert = |\alpha|\Vert \boldsymbol{x} \Vert$ for every $\boldsymbol{x} \in \mathbb{R}^n$ and $\alpha \in \mathbb{R}$.</li>
+<li>$\Vert \boldsymbol{x} + y\Vert \leq \Vert \boldsymbol{x} \Vert + \Vert y \Vert$ for every $\boldsymbol{x} \in \mathbb{R}^n$ and $y \in \mathbb{R}^n$.</li>
+</ul>
+</blockquote>
+
+<object data="/resource/NNP/norm.svg" type="image/svg+xml" class="blkcenter"></object>
+
+Let $\boldsymbol{x} \in \mathbb{R}^n$. Some popular norms:
+
+* $L\_2$ or Euclidean norm: $\Vert \boldsymbol{x} \Vert\_2 = (\sum\_{i=1}^{n} (x\_i)^2)^{\frac{1}{2}}$
+
+  <object data="/resource/NNP/l2norm.svg" type="image/svg+xml" class="blkcenter"></object>
+
+* $L\_1$ norm: $\Vert \boldsymbol{x} \Vert\_1 = \sum\_{i=1}^{n} |x\_i|$
+
+  <object data="/resource/NNP/l1norm.svg" type="image/svg+xml" class="blkcenter"></object>
+
+* $L\_{\infty}$ norm: $\Vert \boldsymbol{x} \Vert\_{\infty} = \underset{i=1,\cdots,n}{\max} |x\_i|$

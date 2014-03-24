@@ -284,9 +284,17 @@ a:visited { color: #777; }
     margin-bottom: 0.6em; 
 }
 
+.post blockquote ul {
+    margin-bottom: 0em;
+}
+
 .post ol {
     margin: 0 0 1em 1.9em;
     line-height: 120%;
+}
+
+.post blockquote ol {
+    margin-bottom: 0em;
 }
 
 .post ol p {
