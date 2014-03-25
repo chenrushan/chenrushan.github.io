@@ -178,3 +178,56 @@ Let $\boldsymbol{x} \in \mathbb{R}^n$. Some popular norms:
   <object data="/resource/NNP/l1norm.svg" type="image/svg+xml" class="blkcenter"></object>
 
 * $L\_{\infty}$ norm: $\Vert \boldsymbol{x} \Vert\_{\infty} = \underset{i=1,\cdots,n}{\max} |x\_i|$
+
+  <object data="/resource/NNP/linfnorm.svg" type="image/svg+xml" class="blkcenter"></object>
+
+In general, $L\_p$ norm is defined as $\Vert \boldsymbol{x} \Vert\_{p} = (\sum\_{i=1}^{n} |x\_i|^p)^{\frac{1}{p}}$.
+
+<blockquote>
+If $\Vert \cdot \Vert_p$ and $\Vert \cdot \Vert_q$ are any two norms on $\mathbb{R}^n$, then there exist positive constants $\alpha$ and $\beta$ such that
+
+$$\alpha \Vert \boldsymbol{x} \Vert_p \leq \Vert \boldsymbol{x} \Vert_q \leq \beta \Vert \boldsymbol{x} \Vert_p$$
+
+for any $\boldsymbol{x} \in \mathbb{R}^n$
+</blockquote>
+
+So the convergece of an optimization algorithm does not depend on what norm its stopping criterion used.
+
+-----------------------
+
+**Inner Product**
+
+<blockquote>
+Let $\boldsymbol{x}, \boldsymbol{y} \in \mathbb{R}^n$ and $\boldsymbol{x} \neq \boldsymbol{0} \neq \boldsymbol{y}$. The inner or dot product is defined as
+
+$$\boldsymbol{x} \cdot \boldsymbol{y} \equiv \boldsymbol{x}^T \boldsymbol{y} = \sum_{i=1}^{n} x_i \cdot y_i = \Vert \boldsymbol{x} \Vert \cdot \Vert \boldsymbol{y} \Vert \cos \theta$$
+
+where $\theta$ is the angle between $\boldsymbol{x}$ and $\boldsymbol{y}$.
+</blockquote>
+
+Note:
+
+* $\boldsymbol{x}^T \boldsymbol{x} = \Vert \boldsymbol{x} \Vert ^2$
+* $\boldsymbol{x}^T \boldsymbol{y} = \boldsymbol{y}^T \boldsymbol{x}$
+* $|\boldsymbol{x} \cdot \boldsymbol{y}| \leq \Vert \boldsymbol{x}\Vert  \cdot \Vert \boldsymbol{y}\Vert$ (Cauthy-Schwartz inequality)
+
+-----------------------
+
+**Orthogonality**
+
+<blockquote>
+Let $\boldsymbol{x} \in \mathbb{R}^n$ and $\boldsymbol{y} \in \mathbb{R}^n$. $\boldsymbol{x}$ and $\boldsymbol{y}$ are said to perpendicular or orthogonal to each other if $\boldsymbol{x}^T \boldsymbol{y} = 0$.
+
+Two subspaces $S$ and $T$ of the same vector space $\mathbb{R}^n$ are orthogonal if every vector $\boldsymbol{x} \in S$ is orthogonal to every vector $\boldsymbol{y} \in T$, i.e. $\boldsymbol{x}^T \boldsymbol{y} = 0 \;\; \forall \boldsymbol{x} \in S, \boldsymbol{y} \in T$.
+</blockquote>
+
+-----------------------
+
+**Mutual Orthogonality**
+
+<blockquote>
+Vectors $\boldsymbold{x}_1, \boldsymbold{x}_2, \cdots, \boldsymbold{x}_k \in \mathbb{R}^n$ are said to be mutually orthogonal if $\boldsymbold{x}_i \cdot \\boldsymbold{x}_j = 0$ for all $i \neq j$.
+If, in addition, $\Vert \boldsymbol{x}_i \Vert = 1$ for every $i$, the set $\{ \boldsymbold{x}_1, \cdots, \boldsymbold{x}_k \in \mathbb{R}^n\}$ is said to be orthonormal.
+</blockquote>
+
+It's easy to show that if $\boldsymbold{x}\_1, \cdots, \boldsymbold{x}\_k$ are mutually orthogonal nonzero vectors, then they are linearly independent.
