@@ -51,7 +51,7 @@ L(\theta) = & \sum\_i \log p(\boldsymbol{x}^{(i)}|\theta) \\\\
 \end{align}
 $$
 
-这样我们就得到了 $L(\theta)$ 的下界 $l(\theta)$。推导的核心的是 **第三个等式引入了 $\frac{p(\boldsymbol{z}|\boldsymbol{x}^{(i)}, \theta\_n)}{p(\boldsymbol{z}|\boldsymbol{x}^{(i)}, \theta\_n)}$** 。
+这样我们就得到了 $L(\theta)$ 的下界 $l(\theta)$。推导的核心的是 **第三个等式引入了 hidden variable distribution $p(\boldsymbol{z}|\boldsymbol{x}^{(i)}, \theta\_n)$**。
 
 #### 证明优化下界提升 likelihood
 
