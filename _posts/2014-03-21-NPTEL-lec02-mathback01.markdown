@@ -226,8 +226,87 @@ Two subspaces $S$ and $T$ of the same vector space $\mathbb{R}^n$ are orthogonal
 **Mutual Orthogonality**
 
 <blockquote>
-Vectors $\boldsymbold{x}_1, \boldsymbold{x}_2, \cdots, \boldsymbold{x}_k \in \mathbb{R}^n$ are said to be mutually orthogonal if $\boldsymbold{x}_i \cdot \\boldsymbold{x}_j = 0$ for all $i \neq j$.
-If, in addition, $\Vert \boldsymbol{x}_i \Vert = 1$ for every $i$, the set $\{ \boldsymbold{x}_1, \cdots, \boldsymbold{x}_k \in \mathbb{R}^n\}$ is said to be orthonormal.
+Vectors $\boldsymbol{x}_1, \boldsymbol{x}_2, \cdots, \boldsymbol{x}_k \in \mathbb{R}^n$ are said to be mutually orthogonal if $\boldsymbol{x}_i \cdot \boldsymbol{x}_j = 0$ for all $i \neq j$.
+If, in addition, $\Vert \boldsymbol{x}_i \Vert = 1$ for every $i$, the set $\{ \boldsymbol{x}_1, \cdots, \boldsymbol{x}_k\}$ is said to be orthonormal.
 </blockquote>
 
-It's easy to show that if $\boldsymbold{x}\_1, \cdots, \boldsymbold{x}\_k$ are mutually orthogonal nonzero vectors, then they are linearly independent.
+It's easy to show that if $\boldsymbol{x}\_1, \cdots, \boldsymbol{x}\_k$ are mutually orthogonal nonzero vectors, then they are linearly independent.
+
+-----------------------
+
+**Gram-Schmidt Procedure**
+
+To produce an orthonormal basis with a given basis $\boldsymbol{x}\_1, \boldsymbol{x}\_2, \cdots, \boldsymbol{x}\_k \in \mathbb{R}^n$, we use Gram-Schmidt Procedure.
+
+Given $\boldsymbol{x}\_1, \boldsymbol{x}\_2, \boldsymbol{x}\_3 \in \mathbb{R}^3$, to produce an orthonormal basis $\boldsymbol{y}\_1, \boldsymbol{y}\_2, \boldsymbol{y}\_3$.
+
+* set $\boldsymbol{y}\_1 = \frac{\boldsymbol{x}\_1}{\Vert \boldsymbol{x}\_1 \Vert}$
+
+* remove $\boldsymbol{x}\_2$'s component in the $\boldsymbol{y}\_1$ direction
+
+  $$\boldsymbol{z}\_2 = \boldsymbol{x}\_2 - (\boldsymbol{x}\_2^T \boldsymbol{y}\_1)\boldsymbol{y}\_1$$
+
+  now $\boldsymbol{z}\_2$ is orthogonal to $\boldsymbol{x}\_1$.
+
+  set $\boldsymbol{y}\_2 = \frac{\boldsymbol{z}\_2}{\Vert \boldsymbol{z}\_2 \Vert}$
+
+* remove $\boldsymbol{x}\_3$'s component in the $\boldsymbol{y}\_1$ and $\boldsymbol{y}\_2$ direction
+
+  $$\boldsymbol{z}\_3 = \boldsymbol{x}\_3 - (\boldsymbol{x}\_3^T \boldsymbol{y}\_2)\boldsymbol{y}\_2 - (\boldsymbol{x}\_3^T \boldsymbol{y}\_1)\boldsymbol{y}\_1$$
+
+  now $\boldsymbol{z}\_3$ is orthogonal to $\boldsymbol{x}\_1$ and $\boldsymbol{x}\_2$.
+
+  set $\boldsymbol{y}\_3 = \frac{\boldsymbol{z}\_3}{\Vert \boldsymbol{z}\_3 \Vert}$
+
+It's easy to extend this procedure to $\mathbb{R}^n$.
+
+-----------------------
+
+**Matrix**
+
+* Diagonal Matrix: A square matrix $\Lambda$ such that $\Lambda\_{ij} = 0 \;\; i \neq j$.
+* Identity Matrix: A diagonal matrix $I$ such that $I\_{ii} = 1 \;\; \forall i$.
+
+-----------------------
+
+**Rank**
+
+Let $A \in \mathbb{R}^{m\times n}$.
+
+<blockquote>
+The subspace of $\mathbb{R}^m$, spanned by the column vectors of $A$ is called the column space of $A$. The subspace of $\mathbb{R}^n$, spanned by the row vectors of $A$ is called the row space of $A$.
+</blockquote>
+
+<blockquote>
+Column Rank: The dimension of the column space.<br/>
+Row Rank: The dimension of the row space.<br/>
+The column rank of a matrix equals its row rank, and its common value is called the rank of $A$.
+</blockquote>
+
+* The rank of a matrix is 0 iff it's a zero matrix.
+
+* Matrices with the smallest rank - rank one matrices
+
+  Example:
+
+  $$
+  \begin{pmatrix} 3 & 1 & -1 \\\\ -3 & -1 & 1 \\\\ 6 & 2 & -2 \\\\ \end{pmatrix} =
+  \begin{pmatrix} 1 \\\\ -1 \\\\ 2 \end{pmatrix} \begin{pmatrix} 3 & 1 & -1 \end{pmatrix} = \boldsymbol{u}\boldsymbol{v}^T
+  $$
+
+  Every matrix of rank one has the simplest form $A = \boldsymbol{u}\boldsymbol{v}^T$.
+
+-----------------------
+
+**Invertible**
+
+<blockquote>
+A square matrix $A$ is said to be invertible if there exists a matrix $B$ such that $AB = BA = I$. There's at most one such $B$ and is denoted by $A^{-1}$.
+</blockquote>
+
+* A product of invertible matrices is invertible and $(AB)^{-1} = B^{-1}A^{-1}$
+
+* If $\det(A) \neq 0$, then $A$ is invertible. ($\det(A)$ denotes the determinant of matrix $A$)
+
+* The matrix $Q$ is orthogonal if $Q^{-1} = Q^T$.
+
