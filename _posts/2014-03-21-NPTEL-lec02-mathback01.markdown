@@ -310,3 +310,32 @@ A square matrix $A$ is said to be invertible if there exists a matrix $B$ such t
 
 * The matrix $Q$ is orthogonal if $Q^{-1} = Q^T$.
 
+-----------------------
+
+**Matrix-vector Multiplication**
+
+The effect of matrix-vector multiplication (here, matrix is square matrix) is rotating and/or scaling the vector. For example, $\begin{pmatrix} 3 & 2 \\\\ 2 & 0 \end{pmatrix} \times \begin{pmatrix} 1 \\\\ 1 \end{pmatrix} = \begin{pmatrix} 5 \\\\ 2 \end{pmatrix}$
+
+Sometimes matrix-vector multiplication only scales the vector without changing the direction (changing to opposite direction is allowed), and this leads to the important concept of eigenvector and eigenvalue. For example, $\begin{pmatrix} 3 & 2 \\\\ 2 & 0 \end{pmatrix} \times \begin{pmatrix} 2 \\\\ 1 \end{pmatrix} = \begin{pmatrix} 8 \\\\ 4 \end{pmatrix} = 4 \times \begin{pmatrix} 2 \\\\ 1 \end{pmatrix}$
+
+-----------------------
+
+**Eigenvalues and Eigenvectors**
+
+<blockquote>
+Let $A \in \mathbb{R}^{n\times n}$. The eigenvalues and eigenvectors of $A$ are the real or complex scalars $\lambda$ and n-dimensional vectors $\boldsymbol{x}$ such that
+
+$$A\boldsymbol{x} = \lambda \boldsymbol{x} \;\; \boldsymbol{x} \neq \boldsymbol{0}$$
+</blockquote>
+
+* $A\boldsymbol{x} = \lambda \boldsymbol{x} \Rightarrow (A - \lambda I)\boldsymbol{x} = 0$
+
+  This implies that $A - \lambda I$ is not full-rank, so $\det(A - \lambda I) = 0$. This is called the characteristic equation of $A$. This equation is a polynomial of degree n, so it has n roots and are called the eigenvalues of $A$. All the n roots need not be real roots, some of them could be complex root.
+
+-----------------------
+
+**Symmetric Matrix**
+
+<blockquote>
+Let $A \in \mathbb{R}^{n\times n}$. The matrix $A$ is said to be symmetric if $A^T = A$.
+</blockquote>
