@@ -1,0 +1,94 @@
+---
+layout: post
+title: Expectation Maximization
+categories: ml
+tags: EM, Expectation Maximization
+---
+
+### Introduction
+
+给定数据 $X$，一种常用的估计模型参数 $\theta$ 的方法是 maximum likelihood，即：
+
+$$\theta = \underset{\theta}{\arg\max} \;\; p(X|\theta)$$
+
+这里的 $X$ 是我们可见的，即 visible variable。如果给定的问题涉及到 hidden variable，ML 就需要引入新变量，即：
+
+$$\theta = \underset{\theta}{\arg\max} \;\; p(X|\theta) = \underset{\theta}{\arg\max} \;\; \int p(X, z|\theta) dz$$
+
+其中 $z$ 对应 hidden variable。在很多情况下，引入积分后问题会变得不可求解，这也是为什么需要 EM 算法的原因。EM 尝试用迭代的方式去求解 $\theta$，从而避免掉积分操作。
+
+另外，为了计算方便，我们通常并不直接操作 $p(X|\theta)$，而是用 $\log$ 形式代替，即：
+
+$$\theta = \underset{\theta}{\arg\max} \; \log p(X|\theta)$$
+
+为了使用方便，下面记 $L(\theta) = \log p(X|\theta)$
+
+### EM Iteration
+
+假设第 $n$ 轮迭代得到的参数是 $\theta\_n$，由于我们的目标是最大化 $L(\theta)$，因此我们希望下一轮迭代得到的 $\theta$ 可以进一步提升 $L(\theta)$。换句话说，在第 $n+1$ 轮迭代时，希望能找到 $\theta$ 使得 $L(\theta) > L(\theta\_n)$。 **EM 的做法是利用 $\theta\_n$ 得到 $L(\theta)$ 的一个下界，然后去优化这个下界得到一个更优的 $\theta$** (当然这个下界通常是易于优化的)。
+
+下面的推导首先给出 $L(\theta)$ 的下界并证明可以通过优化这个下界得到更优的 $\theta$。
+
+推导过程中用到了 concave function 的一个性质：
+
+<blockquote>
+If $f(x)$ is a concave function, $\forall \sum_i a_i = 1 \;\; f(\sum_{i}a_i x_i) \geq \sum_i a_i f(x_i)$
+</blockquote>
+
+特别的，如果 $f(x) = \log x$，则有 $\log \sum\_i a\_i x\_i \geq \sum\_i a\_i \log x\_i \;\; \forall \sum\_i a\_i = 1$
+
+#### 得到下界
+
+假设 $X = \\{\boldsymbol{x}\_1, \boldsymbol{x}\_2, ..., \boldsymbol{x}\_n\\}$
+
+$$
+\begin{align}
+L(\theta) = & \sum\_i \log p(\boldsymbol{x}^{(i)}|\theta) \\\\
+= & \sum\_i \log \sum\_\boldsymbol{z} p(\boldsymbol{x}^{(i)}, \boldsymbol{z}|\theta) \\\\
+= & \sum\_i \log \sum\_\boldsymbol{z} p(\boldsymbol{x}^{(i)}, \boldsymbol{z}|\theta) \frac{p(\boldsymbol{z}|\boldsymbol{x}^{(i)}, \theta\_n)}{p(\boldsymbol{z}|\boldsymbol{x}^{(i)}, \theta\_n)} \\\\
+\geq & \sum\_i \sum\_\boldsymbol{z} p(\boldsymbol{z}|\boldsymbol{x}^{(i)}, \theta\_n) \log \frac{p(\boldsymbol{x}^{(i)}, \boldsymbol{z}|\theta)}{p(\boldsymbol{z}|\boldsymbol{x}^{(i)}, \theta\_n)} \\\\
+= & l(\theta)
+\end{align}
+$$
+
+这样我们就得到了 $L(\theta)$ 的下界 $l(\theta)$。推导的核心的是 **第三个等式引入了 hidden variable distribution $p(\boldsymbol{z}|\boldsymbol{x}^{(i)}, \theta\_n)$**。
+
+#### 证明优化下界提升 likelihood
+
+当 $\theta = \theta\_n$ 时，我们有：
+
+$$
+\begin{align}
+l(\theta\_n) = & \sum\_i \sum\_\boldsymbol{z} p(\boldsymbol{z}|\boldsymbol{x}^{(i)}, \theta\_n) \log \frac{p(\boldsymbol{x}^{(i)}, \boldsymbol{z}|\theta\_n)}{p(\boldsymbol{z}|\boldsymbol{x}^{(i)}, \theta\_n)} \\\\
+= & \sum\_i \sum\_\boldsymbol{z} p(\boldsymbol{z}|\boldsymbol{x}^{(i)}, \theta\_n) \log {p(\boldsymbol{x}^{(i)}|\theta\_n)} \\\\
+= & \sum\_i \log {p(\boldsymbol{x}^{(i)}|\theta\_n)} \\\\
+= & L(\theta\_n)
+\end{align}
+$$
+
+因此，如果 $\theta\_{n+1} = \underset{\theta}{\arg\max}\; l(\theta)$ 则有 $L(\theta\_{n+1}) \geq l(\theta\_{n+1}) \geq l(\theta\_{n}) = L(\theta\_n)$，也就是通过优化下界我们可以得到一个 likelihood 更高的 $\theta$。
+
+#### E-step & M-step
+
+下面进一步精简 $\arg\max$：
+
+$$
+\begin{align}
+\theta\_{n+1} = & \underset{\theta}{\arg\max}\; l(\theta) \\\\
+= & \underset{\theta}{\arg\max}\; \sum\_i \sum\_\boldsymbol{z} p(\boldsymbol{z}|\boldsymbol{x}^{(i)}, \theta\_n) \log \frac{p(\boldsymbol{x}^{(i)}, \boldsymbol{z}|\theta)}{p(\boldsymbol{z}|\boldsymbol{x}^{(i)}, \theta\_n)} \\\\
+= & \underset{\theta}{\arg\max}\; \sum\_i \sum\_\boldsymbol{z} p(\boldsymbol{z}|\boldsymbol{x}^{(i)}, \theta\_n) \log p(\boldsymbol{x}^{(i)}, \boldsymbol{z}|\theta) \\\\
+\end{align}
+$$
+
+分母相对于 $\theta$ 是个常数，所以可以直接去掉而不影响 $\arg\max$ 的结果。
+
+这样就可以得到 E-step 和 M-step:
+
+* E-step: get distribution of $\boldsymbol{z}: p(\boldsymbol{z}|\boldsymbol{x}^{(i)}, \theta\_n)$
+* M-step: get updated $\theta$: $\theta\_{n+1} = \arg\max\; l(\theta)$
+
+下面给出两个具体的例子，分别是 Hidden Markov Model (HMM) 和 Probabilistic Latent Semantic Analysis (PLSA) 的训练。
+
+### PLSA
+
+
