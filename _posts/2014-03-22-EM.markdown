@@ -91,4 +91,87 @@ $$
 
 ### PLSA
 
+PLSA 用于浅层语义分析，其 likelihood 可以表示为
 
+$$L(\theta) = \sum\_{d} \sum\_{w} n(w, d) \log p(d, w)$$
+
+其中 $d$ 表示文档，$w$ 表示文档中的词 (其实 $d, w$ 可以表示所有有关联的事物)，$n(w, d)$ 表示 $d, w$ 共现的次数，$p(w, d)$ 表示 $w, d$ 的联合概率。
+
+引入 $z$ 后，likelihood 表示为
+
+$$
+\begin{align}
+L(\theta) = & \sum\_{d} \sum\_{w} n(w, d) \log \sum\_{z} p(d, w, z) \\\\
+= & \sum\_{d} \sum\_{w} n(w, d) \log \sum\_{z} p(z)p(w|z)p(d|z)
+\end{align}
+$$
+
+-----------------
+
+假设 EM 第 n 轮迭代得到的参数为 $\theta\_n$，包括 $p(z), p(w|z), p(d|z)$，则有
+
+$$
+\begin{align}
+L(\theta) = & \sum\_{d} \sum\_{w} n(w, d) \log \sum\_{z} p(z)p(w|z)p(d|z) \frac{p(z|w, d, \theta\_n)}{p(z|w, d, \theta\_n)} \\\\
+\geq & \sum\_{d} \sum\_{w} n(w, d) \sum\_{z} p(z|w, d, \theta\_n) \log p(z)p(w|z)p(d|z) \frac{1}{p(z|w, d, \theta\_n)} \\\\
+= & l(\theta)
+\end{align}
+$$
+
+其中 $p(z|w, d, \theta\_n)$ 表示由 $\theta\_n$ 得到的 hidden variable distribution，在 E-step 计算。
+
+-----------------
+
+M-step 最大化 $l(\theta)$
+
+$$
+\begin{align}
+\underset{\theta}{\arg\max} \;\; l(\theta) = & \underset{\theta}{\arg\max} \sum\_{d} \sum\_{w} n(w, d) \sum\_{z} p(z|w, d, \theta\_n) \log p(z)p(w|z)p(d|z) \\\\
+s.t. & \sum\_z p(z) = 1, \; \sum\_d p(d|z) = 1, \; \sum\_w p(w|z) = 1
+\end{align}
+$$
+
+令
+
+$$
+\begin{align}
+f(x) = & \sum\_{d} \sum\_{w} n(w, d) \sum\_{z} p(z|w, d, \theta\_n) (\log p(z) + \log p(w|z) + \log p(d|z)) \\\\ & - \alpha(\sum\_z p(z) - 1) - \beta(\sum\_d p(d|z) - 1) - \gamma(\sum\_w p(w|z) - 1)
+\end{align}
+$$
+
+根据 $\frac{\partial f(x)}{\partial p(z)} = 0, \frac{\partial f(x)}{\partial p(d|z)} = 0, \frac{\partial f(x)}{\partial p(w|z)} = 0$ 计算出 $p(z), p(d|z), p(w|z)$。以下以 $p(z)$ 为例。
+
+$$
+\begin{align}
+& \frac{\partial f(x)}{\partial p(z)} = \sum\_{d} \sum\_{w} n(w, d) p(z|w, d, \theta\_n) \frac{1}{p(z)} - \lambda p(z) = 0 \\\\
+\Rightarrow & p(z) = \frac{\sum\_{d} \sum\_{w} n(w, d) p(z|w, d, \theta\_n)}{\lambda}
+\end{align}
+$$
+
+根据 $\sum\_z p(z) = 1$ 推出 $\lambda = \sum\_{z} \sum\_{d} \sum\_{w} n(w, d) p(z|w, d, \theta\_n)$，因此
+
+$$
+p(z) = \frac{\sum\_{d} \sum\_{w} n(w, d) p(z|w, d, \theta\_n)}{\sum\_{z} \sum\_{d} \sum\_{w} n(w, d) p(z|w, d, \theta\_n)}
+$$
+
+$p(d|z), p(w|z)$ 同理可得。
+
+-----------------
+
+PLSA 迭代总结如下：
+
+* E-step
+
+  $$
+  p(z|w, d, \theta\_n) = \frac{p(z)p(w|z)p(d|z)}{\sum\_z p(z)p(w|z)p(d|z)}
+  $$
+
+* M-step
+
+  $$
+  \begin{align}
+  p(z) = & \frac{\sum\_{d} \sum\_{w} n(w, d) p(z|w, d, \theta\_n)}{\sum\_{z} \sum\_{d} \sum\_{w} n(w, d) p(z|w, d, \theta\_n)} \\\\
+  p(w|z) = & \frac{\sum\_{d} n(w, d) p(z|w, d, \theta\_n)}{\sum\_{d} \sum\_{w} n(w, d) p(z|w, d, \theta\_n)} \\\\
+  p(d|z) = & \frac{\sum\_{w} n(w, d) p(z|w, d, \theta\_n)}{\sum\_{d} \sum\_{w} n(w, d) p(z|w, d, \theta\_n)}
+  \end{align}
+  $$
