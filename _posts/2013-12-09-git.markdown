@@ -222,6 +222,16 @@ git branch 是一个非常轻量的 object，可以理解为就是一个指针�
 
 注意，`git config --global` 配置的是你的全局的用户名和邮箱，是默认 account，针对每个具体的 repo，可以配置自己的用户名和邮箱，配置完可以从 repo/.git/config 文件中看出。
 
+### Git SSL Certificate Problem
+
+通过代理用 git 可能遇到这个错误：
+
+    fatal: unable to access 'https://github.com/juscodit/uva.git/': SSL certificate problem: unable to get local issuer certificate
+
+To disable ssl certificate
+
+    git config --local http.sslVerify false
+
 ### Git VS Svn
 
 * svn 中为了生成一个 branch，你需要 copy 整个 repository，而 git 只不过是赋一个 SHA1sum 即可。
