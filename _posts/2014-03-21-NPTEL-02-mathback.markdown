@@ -339,3 +339,17 @@ $$A\boldsymbol{x} = \lambda \boldsymbol{x} \;\; \boldsymbol{x} \neq \boldsymbol{
 <blockquote>
 Let $A \in \mathbb{R}^{n\times n}$. The matrix $A$ is said to be symmetric if $A^T = A$.
 </blockquote>
+
+Let $A \in \mathbb{R}^{n\times n}$ be symmetric, then
+
+* $A$ has n real eigenvalues $\lambda\_1, \lambda\_2, \cdots, \lambda\_n$
+
+* a corresponding set of eigenvectors $\{ \boldsymbol{x}\_1, \boldsymbol{x}\_2, \cdots, \boldsymbol{x}\_n\}$ can be chosen to be orthonormal
+
+* $S = ( \boldsymbol{x}\_1, \boldsymbol{x}\_2, \cdots, \boldsymbol{x}\_n )$ is an orthogonal matrix $(S^{-1} = S^T)$
+
+* $S^T A S = \begin{pmatrix} \lambda\_1 & 0 & \cdots & 0 \\\\ 0 & \lambda\_2 & \cdots & 0 \\\\ \vdots & \vdots & \ddots & \vdots \\\\ 0 & 0 & \cdots & \lambda\_n \end{pmatrix} = \Lambda$
+
+P.S.
+
+$S^T A S = \begin{pmatrix} \boldsymbol{x}\_1^T \\\\ \boldsymbol{x}\_2^T \\\\ \vdots \\\\ \boldsymbol{x}\_n^T \end{pmatrix} A \begin{pmatrix} \boldsymbol{x}\_1 \boldsymbol{x}\_2 \cdots & \boldsymbol{x}\_n \end{pmatrix} = \begin{pmatrix} \boldsymbol{x}\_1^T A \\\\ \boldsymbol{x}\_2^T A \\\\ \vdots \\\\ \boldsymbol{x}\_n^T A \end{pmatrix} \begin{pmatrix} \boldsymbol{x}\_1 \boldsymbol{x}\_2 \cdots & \boldsymbol{x}\_n \end{pmatrix} = \begin{pmatrix} \boldsymbol{x}\_1^T A \boldsymbol{x}\_1 & \boldsymbol{x}\_1^T A \boldsymbol{x}\_2 & \cdots & \boldsymbol{x}\_1^T A \boldsymbol{x}\_n \\\\ \vdots & \vdots & \ddots & \vdots \\\\ \boldsymbol{x}\_n^T A \boldsymbol{x}\_1 & \boldsymbol{x}\_n^T A \boldsymbol{x}\_2 & \cdots & \boldsymbol{x}\_n^T A \boldsymbol{x}\_n \end{pmatrix}$
