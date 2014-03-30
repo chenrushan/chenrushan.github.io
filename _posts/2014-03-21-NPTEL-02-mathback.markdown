@@ -353,3 +353,48 @@ Let $A \in \mathbb{R}^{n\times n}$ be symmetric, then
 P.S.
 
 $S^T A S = \begin{pmatrix} \boldsymbol{x}\_1^T \\\\ \boldsymbol{x}\_2^T \\\\ \vdots \\\\ \boldsymbol{x}\_n^T \end{pmatrix} A \begin{pmatrix} \boldsymbol{x}\_1 \boldsymbol{x}\_2 \cdots & \boldsymbol{x}\_n \end{pmatrix} = \begin{pmatrix} \boldsymbol{x}\_1^T A \\\\ \boldsymbol{x}\_2^T A \\\\ \vdots \\\\ \boldsymbol{x}\_n^T A \end{pmatrix} \begin{pmatrix} \boldsymbol{x}\_1 \boldsymbol{x}\_2 \cdots & \boldsymbol{x}\_n \end{pmatrix} = \begin{pmatrix} \boldsymbol{x}\_1^T A \boldsymbol{x}\_1 & \boldsymbol{x}\_1^T A \boldsymbol{x}\_2 & \cdots & \boldsymbol{x}\_1^T A \boldsymbol{x}\_n \\\\ \vdots & \vdots & \ddots & \vdots \\\\ \boldsymbol{x}\_n^T A \boldsymbol{x}\_1 & \boldsymbol{x}\_n^T A \boldsymbol{x}\_2 & \cdots & \boldsymbol{x}\_n^T A \boldsymbol{x}\_n \end{pmatrix}$
+
+-----------------------
+
+**Quadratic Form**
+
+Let $A \in \mathbb{R}^{n\times n}$ be a symmetric matrix, consider $f(x) = \boldsymbol{x}^T A \boldsymbol{x}$, a pure quadratic form. (Note that $\boldsymbol{x}^T A \boldsymbol{x} = \sum\_i \sum\_j x\_i A\_{ij} x\_j$, so all quadratic functions can be expressed as $\boldsymbol{x}^T A \boldsymbol{x}$)
+
+| $A$ is said to be | if |
+|:--|:--|
+| positive definite | $\boldsymbol{x}^T A \boldsymbol{x} \gt 0$ for every nonzero $\boldsymbol{x} \in \mathbb{R}^n$ |
+| positive semi-definite | $\boldsymbol{x}^T A \boldsymbol{x} \geq 0$ for every $\boldsymbol{x} \in \mathbb{R}^n$ |
+| negative definite | $\boldsymbol{x}^T A \boldsymbol{x} \lt 0$ for every nonzero $\boldsymbol{x} \in \mathbb{R}^n$ |
+| negative semi-definite | $\boldsymbol{x}^T A \boldsymbol{x} \leq 0$ for every $\boldsymbol{x} \in \mathbb{R}^n$ |
+| indefinite | $A$ is neither positive definite nor negative definite |
+
+<blockquote>
+$A$ is positive definite iff all its eigenvalues are positive.
+</blockquote>
+
+**Proof**
+
+* eigenvalues are positive $\Rightarrow$ $A$ is positive definite
+
+  $$
+  \begin{align}
+  \boldsymbol{x}^T A \boldsymbol{x} = & \boldsymbol{x}^T S^T \Lambda S \boldsymbol{x} \\\\
+  = & \boldsymbol{y}^T \Lambda \boldsymbol{y} \\\\
+  = & \sum\_i \lambda\_i y\_i^2
+  \end{align}
+  $$
+
+  So if $\lambda\_i \gt 0 \;\; \forall i$, $\boldsymbol{x}^T A \boldsymbol{x} \gt 0$.
+
+* $A$ is positive definite $\Rightarrow$ eigenvalues are positive
+
+  Let $\boldsymbol{x}\_i$ be eigenvector
+
+  $$
+  \begin{align}
+  & A \text{ is positive definite} \\\\
+  \Rightarrow & \boldsymbol{x}\_i^T A \boldsymbol{x}\_i \gt 0 \\\\
+  \Rightarrow & \boldsymbol{x}\_i^T \lambda\_i \boldsymbol{x}\_i \gt 0 \\\\
+  \Rightarrow & \lambda\_i \gt 0
+  \end{align}
+  $$
