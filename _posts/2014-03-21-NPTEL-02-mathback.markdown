@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Lec02 - Mathematical Background 1
+title: 02 - Mathematical Background
 categories: nnumop
 tags: NPTEL, numerical optimization
 ---
