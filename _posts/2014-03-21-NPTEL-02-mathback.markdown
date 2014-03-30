@@ -398,3 +398,7 @@ $A$ is positive definite iff all its eigenvalues are positive.
   \Rightarrow & \lambda\_i \gt 0
   \end{align}
   $$
+
+<blockquote>
+$A$ is indefinite iff it has both positive and negative eigenvalues.
+</blockquote>
