@@ -346,6 +346,16 @@ Let $A \in \mathbb{R}^{n\times n}$ be symmetric, then
 
 * a corresponding set of eigenvectors $\{ \boldsymbol{x}\_1, \boldsymbol{x}\_2, \cdots, \boldsymbol{x}\_n\}$ can be chosen to be orthonormal
 
+  * eigenvectors of different eigenvalues are orthogonal
+
+     $$
+     \begin{align}
+     & (A \boldsymbol{x}\_i)^T \boldsymbol{x}\_j = \boldsymbol{x}\_i^T A^T \boldsymbol{x}\_j = \boldsymbol{x}\_i^T A \boldsymbol{x}\_j \\\\
+     \Rightarrow & \lambda\_i \boldsymbol{x}\_i^T \boldsymbol{x}\_j = \boldsymbol{x}\_i^T \lambda\_j \boldsymbol{x}\_j = \lambda\_j \boldsymbol{x}\_i^T \boldsymbol{x}\_j \\\\
+     \Rightarrow & \boldsymbol{x}\_i^T \boldsymbol{x}\_j = 0
+     \end{align}
+     $$
+
 * $S = ( \boldsymbol{x}\_1, \boldsymbol{x}\_2, \cdots, \boldsymbol{x}\_n )$ is an orthogonal matrix $(S^{-1} = S^T)$
 
 * $S^T A S = \begin{pmatrix} \lambda\_1 & 0 & \cdots & 0 \\\\ 0 & \lambda\_2 & \cdots & 0 \\\\ \vdots & \vdots & \ddots & \vdots \\\\ 0 & 0 & \cdots & \lambda\_n \end{pmatrix} = \Lambda$
@@ -402,3 +412,7 @@ $A$ is positive definite iff all its eigenvalues are positive.
 <blockquote>
 $A$ is indefinite iff it has both positive and negative eigenvalues.
 </blockquote>
+
+-----------------------
+
+**Solution of Ax=b**
