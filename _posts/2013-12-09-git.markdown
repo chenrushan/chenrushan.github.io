@@ -168,6 +168,12 @@ git branch 是一个非常轻量的 object，可以理解为就是一个指针�
 
   注意最后一个命令需要 `-f`，不然 remote 不会接受。
 
+* 不小心把所有的修改都 commit 了，但是其实只想 commit 其中一部分，其余的修改还没完成
+
+        git reset HEAD~1
+
+  `HEAD~1` 指向 `HEAD` 的前一个 commit。这个命令将 `HEAD` 对应的 commit 删除，但所有你对文件的修改不会丢，运行 `git status` 就可以看到。如果你用 `git reset --hard` 的话，你的修改会没掉。
+
 * 在修改 foo branch，但需要临时去一下 bar barch，又不想 commit foo branch 的东西。
 
         git stash # on foo branch
