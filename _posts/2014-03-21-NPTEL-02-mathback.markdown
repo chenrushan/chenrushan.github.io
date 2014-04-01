@@ -269,6 +269,40 @@ It's easy to extend this procedure to $\mathbb{R}^n$.
 
 -----------------------
 
+**Determinant**
+
+From wikipedia:
+
+<blockquote>
+Let $A$ be $n\times n$ matrix. There are various way to define the determinant of a square matrix. Perhaps the most natrual way is expressed in terms of the columns of the matrix. If we write an $n\times n$ matrix in terms of its column vectors 
+
+$$A = [\boldsymbol{a}_1, \boldsymbol{a}_2, \cdots, \boldsymbol{a}_n]$$
+
+where $\boldsymbol{a}_i$ are vectors of size n, then the determinant of $A$ is defined so that 
+
+$$\det[\boldsymbol{a}_1, \cdots, b \boldsymbol{a}_j + c \boldsymbol{v}, \cdots, \boldsymbol{a}_n] = b \det(A) + c \det[\boldsymbol{a}_1, \cdots, \boldsymbol{v}, \cdots, \boldsymbol{a}_n]$$
+$$\det[\boldsymbol{a}_1, \cdots, \boldsymbol{a}_j, \boldsymbol{a}_{j+1}, \cdots, \boldsymbol{a}_n] = -\det[\boldsymbol{a}_1, \cdots, \boldsymbol{a}_{j+1}, \boldsymbol{a}_j, \cdots, \boldsymbol{a}_n]$$
+$$\det(I) = 1$$
+</blockquote>
+
+* if $A$ contains two identical columns, $\det(A) = 0$
+
+* $\det(AB) = \det(A)\det(B)$
+
+  **Proof**
+
+  Take $2\times 2$ matrix as example, $A = [\boldsymbol{a}\_1, \boldsymbol{a}\_2], B = [\boldsymbol{b}\_1, \boldsymbol{b}\_2]$. ($a\_{ij}$ means element at **column i, row j**, not row i column j as usual).
+
+  $$
+  \begin{align}
+  \det(AB) = & \det[\boldsymbol{a}\_1, \boldsymbol{a}\_2]\times [\boldsymbol{b}\_1, \boldsymbol{b}\_2] \\\\
+  = & \det[b\_{11}\boldsymbol{a}\_1 + b\_{12}\boldsymbol{a}\_2, b\_{21}\boldsymbol{a}\_1 + b\_{22}\boldsymbol{a}\_2] \\\\
+  = & 
+  \end{align}
+  $$
+
+-----------------------
+
 **Rank**
 
 Let $A \in \mathbb{R}^{m\times n}$.
