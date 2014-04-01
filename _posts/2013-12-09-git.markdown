@@ -168,6 +168,12 @@ git branch 是一个非常轻量的 object，可以理解为就是一个指针�
 
   注意最后一个命令需要 `-f`，不然 remote 不会接受。
 
+* 不小心把所有的修改都 commit 了，但是其实只想 commit 其中一部分，其余的修改还没完成
+
+        git reset HEAD~1
+
+  `HEAD~1` 指向 `HEAD` 的前一个 commit。这个命令将 `HEAD` 对应的 commit 删除，但所有你对文件的修改不会丢，运行 `git status` 就可以看到。如果你用 `git reset --hard` 的话，你的修改会没掉。
+
 * 在修改 foo branch，但需要临时去一下 bar barch，又不想 commit foo branch 的东西。
 
         git stash # on foo branch
@@ -221,6 +227,16 @@ git branch 是一个非常轻量的 object，可以理解为就是一个指针�
         git push origin branch:branch
 
 注意，`git config --global` 配置的是你的全局的用户名和邮箱，是默认 account，针对每个具体的 repo，可以配置自己的用户名和邮箱，配置完可以从 repo/.git/config 文件中看出。
+
+### Git SSL Certificate Problem
+
+通过代理用 git 可能遇到这个错误：
+
+    fatal: unable to access 'https://github.com/juscodit/uva.git/': SSL certificate problem: unable to get local issuer certificate
+
+To disable ssl certificate
+
+    git config --local http.sslVerify false
 
 ### Git VS Svn
 
