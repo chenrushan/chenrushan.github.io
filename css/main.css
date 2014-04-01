@@ -313,7 +313,7 @@ a:visited { color: #777; }
 
 table {
     border-collapse:collapse;
-    margin: 0.5em 0 0.5em 0;
+    margin: 0.5em 0 1.5em 0;
 }
 table, th, td {
     border: 1px solid #999;
