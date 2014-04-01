@@ -297,9 +297,20 @@ $$\det(I) = 1$$
   \begin{align}
   \det(AB) = & \det[\boldsymbol{a}\_1, \boldsymbol{a}\_2]\times [\boldsymbol{b}\_1, \boldsymbol{b}\_2] \\\\
   = & \det[b\_{11}\boldsymbol{a}\_1 + b\_{12}\boldsymbol{a}\_2, b\_{21}\boldsymbol{a}\_1 + b\_{22}\boldsymbol{a}\_2] \\\\
-  = & 
+  = & b\_{11}\det[\boldsymbol{a}\_1, b\_{21}\boldsymbol{a}\_1 + b\_{22}\boldsymbol{a}\_2] + b\_{12}\det[\boldsymbol{a}\_2, b\_{21}\boldsymbol{a}\_1 + b\_{22}\boldsymbol{a}\_2] \\\\
+  = & c\_1\det[\boldsymbol{a}\_1, \boldsymbol{a}\_1] + c\_2\det[\boldsymbol{a}\_1, \boldsymbol{a}\_2] + c\_3\det[\boldsymbol{a}\_2, \boldsymbol{a}\_1] + c\_4\det[\boldsymbol{a}\_2, \boldsymbol{a}\_2]
   \end{align}
   $$
+
+  Here, the exact form of $c\_{i}$ doesn't matter, anyway they are some function of $b\_{ij}$.
+  
+  There are 4 terms in the last formula, among them, $\det[\boldsymbol{a}\_1, \boldsymbol{a}\_1], \det[\boldsymbol{a}\_2, \boldsymbol{a}\_2]$ are equal to 0, $\det[\boldsymbol{a}\_2, \boldsymbol{a}\_1] = -\det[\boldsymbol{a}\_1, \boldsymbol{a}\_2]$, so $\det(AB)$ can be further reduced to
+
+  $$\det(AB) = c\det(A)$$
+
+  Let $A = I$, we have $\det(B) = c\det(I) = c$, so $\det(AB) = \det(A)\det(B)$.
+
+  The above reasoning can be easily extended to $n\times n$ matrix.
 
 -----------------------
 
