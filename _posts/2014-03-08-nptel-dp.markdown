@@ -306,3 +306,12 @@ MM(d[0:N]):
 3. 项之间的依赖不能是随意的，T[i, j] 依赖项的两个下标至少得有一维是只往一个方向发展的。
 
 在学会上述招数之后， 你会发现以前觉得复杂的 DP 问题原来都是这么的简单。 
+
+### UVA 做题感想
+
+* 同一个问题可以有不同的 recursive process 的设计方法，比如 uva 10131 中在寻找 Longest decreasing sequence(LDS) 时，可以有两种设计 recursion 的方法：
+
+  * 一种是给定一个 array，这个 recursion 返回这个 array 的 LDS，然后在 recursion 中按是否包含 array 的第一个元素来 divide search space
+  * 另一种是给定一个 array，recursion 返回包含这个 array 的第一个元素的情况下的 LDS，这个时候，在最外层，你还需要一次循环得到 global optimum
+
+  对于这道题第二种方法的效率要高很多，具体参考代码 [uva 10131](https://github.com/juscodit/uva/blob/master/10131_is_bigger_smarter_DP.c) 中的 `DP()` 和 `DP2()` 函数。
