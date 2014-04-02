@@ -433,7 +433,7 @@ $A$ is positive definite iff all its eigenvalues are positive.
 
   $$
   \begin{align}
-  \boldsymbol{x}^T A \boldsymbol{x} = & \boldsymbol{x}^T S^T \Lambda S \boldsymbol{x} \\\\
+  \boldsymbol{x}^T A \boldsymbol{x} = & \boldsymbol{x}^T S \Lambda S^T \boldsymbol{x} \\\\
   = & \boldsymbol{y}^T \Lambda \boldsymbol{y} \\\\
   = & \sum\_i \lambda\_i y\_i^2
   \end{align}
@@ -461,3 +461,110 @@ $A$ is indefinite iff it has both positive and negative eigenvalues.
 -----------------------
 
 **Solution of Ax=b**
+
+Let $A \in \mathbb{R}^{n\times n}$, symmetric and positive definite
+
+* Solution of $A\boldsymbol{x}=\boldsymbol{b}$ is $\boldsymbol{x}^{\*} = A^{-1} \boldsymbol{b}$
+
+  * since $A$ is symmetric and positive definite
+
+     $$\det(A) = \det(S \Lambda S^T) = \det(S)\det(\Lambda)\det(S^T) = \det(\Lambda) \gt 0$$
+
+     so $A$ is invertible
+
+  * However, the inverse operation is not numerically stable
+
+* Instead, use Cholesky decomposition $A = L L^T$
+
+  * The given system of equations is $L L^T \boldsymbol{x} = \boldsymbol{b}$
+
+  * Solve the triangular system. $L\boldsymbol{y} = \boldsymbol{b}$ using forward substitution to get $\boldsymbol{y}$.
+
+  * Solve the triangular $L^T \boldsymbol{x} = \boldsymbol{y}$ using backward substitution to get $\boldsymbol{x}^{\*}$.
+
+  Cholesky decomposition is numerically stable.
+
+-----------------------
+-----------------------
+
+**Interval**
+
+<blockquote>
+Let $a, b \in \mathbb{R}$. The closed interval $[a, b]$ denotes the set, $\{ x \in \mathbb{R}: a \leq x \leq b \}$. The set $\{ x \in \mathbb{R}: a \lt x \lt b\}$ represents the open interval $(a, b)$.
+</blockquote>
+
+-----------------------
+
+**Norm ball**
+
+<blockquote>
+Let $\boldsymbol{x}_0 \in \mathbb{R}^n$. A norm ball of radius $r > 0$ and centre $\boldsymbol{x}_0$ is given by $\{\boldsymbol{x} \in \mathbb{R}^n: \Vert \boldsymbol{x} - \boldsymbol{x}_0 \Vert\ \leq r \}$ and will be denoted by $B[\boldsymbol{x}_0, r]$.
+</blockquote>
+
+We will use $B(\boldsymbol{x}\_0, r)$ to denote $\\{\boldsymbol{x} \in \mathbb{R}^n: \Vert \boldsymbol{x} - \boldsymbol{x}\_0 \Vert\ \lt r \\}$
+
+-----------------------
+
+**Open/Close set**
+
+<blockquote>
+Let $\boldsymbol{x} \in S \subseteq \mathbb{R}^n$. $\boldsymbol{x}$ is called an interior point of $S$ if there exists $r \gt 0$ such that $B[\boldsymbol{x}, r] \subseteq S$. The set of all such points interior to $S$ is called the interior of $S$ and is denoted by $int(S)$.
+</blockquote>
+
+<blockquote>
+Let $S \subset \mathbb{R}^n$. $\boldsymbol{x} \in \mathbb{R}^n$ belongs to the closure of $S$, $cl(S)$ if for each $\varepsilon \gt 0$, $S \cap B[\boldsymbol{x}, \varepsilon] \neq \emptyset$
+</blockquote>
+
+Example:
+
+Let $S = (1, 2] \cup [3, 4)$. Then $cl(S) = [1, 2] \cup [3, 4]$ and $int(S) = (1, 2) \cup (3, 4)$.
+
+<blockquote>
+A set $S \subseteq \mathbb{R}^n$ is said to be an open set if $S = int(S)$. <br/>
+A set $S \subseteq \mathbb{R}^n$ is said to be an closed set if $S = cl(S)$.
+</blockquote>
+
+Example:
+
+* open set: $B(0, r)$, $(1, 2) \cup (3, 4)$
+* closed set: $[1, 2] \cup [3, 4]$
+
+-----------------------
+
+**Bounded and compact**
+
+<blockquote>
+The boundary of a set S is defined as $bd(S) = cl(S)\setminus int(S)$.
+</blockquote>
+
+<blockquote>
+A set $S \subset \mathbb{R}^n$ is said to be bounded if there exist $R \; (0 \lt R \lt \infty)$ and $\boldsymbol{x} \in \mathbb{R}^n$, such that $S \subset B(\boldsymbol{x}, R)$.
+</blockquote>
+
+Example:
+
+* $(1, 2] \cup [3, 100)$ is a bounded set
+* $(0, \infty)$ is not a bounded set
+
+<blockquote>
+A set $S \subset \mathbb{R}^n$ is said to be compact if it's closed and bounded.
+</blockquote>
+
+Example:
+
+* $[0, 100] \cup [1000, 10000]$ is a compact set
+
+-----------------------
+
+**Sequences**
+
+Let $S \subseteq \mathbb{R}^n$ and $\{ \boldsymbol{x}^k \}$ be a sequence of points belonging to $S$.
+
+<blockquote>
+A sequence $\{ \boldsymbol{x}^k \}$ converges to $\boldsymbol{x}^{*}$, if for any given $\varepsilon \gt 0$, there is a positive integer $K$ such that
+
+$$ \Vert \boldsymbol{x}^k - \boldsymbol{x}^* \Vert \leq \varepsilon \;\; \forall k \geq K$$
+
+We write this as $\boldsymbol{x}^k \rightarrow \boldsymbol{x}^*$ or $\lim_{k \rightarrow \infty} \boldsymbol{x}^k = \boldsymbol{x}^*$.
+</blockquote>
+
