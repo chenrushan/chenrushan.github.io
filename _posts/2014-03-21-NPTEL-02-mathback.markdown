@@ -568,3 +568,38 @@ $$ \Vert \boldsymbol{x}^k - \boldsymbol{x}^* \Vert \leq \varepsilon \;\; \forall
 We write this as $\boldsymbol{x}^k \rightarrow \boldsymbol{x}^*$ or $\lim_{k \rightarrow \infty} \boldsymbol{x}^k = \boldsymbol{x}^*$.
 </blockquote>
 
+-----------------------
+
+**Continuous Function**
+
+<blockquote>
+Let $S \subseteq \mathbb{R}^n$. A function $f: S\rightarrow \mathbb{R}$ is said to be continuous at $\bar{\boldsymbol{x}} \in S$ if for any given $\varepsilon \gt 0$ there exists a $\delta \gt 0$ such that $\boldsymbol{x} \in S$ and $\Vert \boldsymbol{x} - \bar{\boldsymbol{x}} \Vert \lt \delta$ implies that $|f(\boldsymbol{x}) - f(\bar{\boldsymbol{x}})| \lt \varepsilon$.
+</blockquote>
+
+* $f$ is said to be continuous on $A \subset \mathbb{R}^n$ if it's continuous at each point of $A$
+
+* When we say $f$ is continuous, we mean that it's continuous on its domain
+
+* $\mathcal{C}$: Class of all continuous functions
+
+Example:
+
+  <object data="/resource/NNP/fcontexp.svg" type="image/svg+xml" class="blkcenter"></object>
+
+-----------------------
+
+**Gradient**
+
+<blockquote>
+A continuous function, $f: \mathbb{R}^n \rightarrow \mathbb{R}$, is said to be continuously differentiable at $\boldsymbol{x} \in \mathbb{R}^n$, if $\frac{\partial f}{\partial x_i}(\boldsymbol{x})$ exists and is continuous, $i = 1, 2, \cdots, n$.
+</blockquote>
+
+* $\mathcal{C}^1$: Class of functions whose first partial derivatives are continuous
+
+* Assumption: $f \in \mathcal{C}^1$
+
+<blockquote>
+We define the gradient of $f$ at $\boldsymbol{x}$ to be the vector
+
+$$g(\boldsymbol{x}) = \nabla f(\boldsymbol{x}) = (\frac{\partial f(\boldsymbol{x})}{\partial x_1}, \frac{\partial f(\boldsymbol{x})}{\partial x_2}, \cdots, \frac{\partial f(\boldsymbol{x})}{\partial x_n})^T$$
+</blockquote>
