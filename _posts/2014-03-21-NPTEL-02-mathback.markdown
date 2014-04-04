@@ -603,3 +603,5 @@ We define the gradient of $f$ at $\boldsymbol{x}$ to be the vector
 
 $$g(\boldsymbol{x}) = \nabla f(\boldsymbol{x}) = (\frac{\partial f(\boldsymbol{x})}{\partial x_1}, \frac{\partial f(\boldsymbol{x})}{\partial x_2}, \cdots, \frac{\partial f(\boldsymbol{x})}{\partial x_n})^T$$
 </blockquote>
+
+  <object data="/resource/NNP/gradient.svg" type="image/svg+xml" class="blkcenter"></object>
