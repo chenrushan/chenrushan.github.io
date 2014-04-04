@@ -594,6 +594,8 @@ Example:
 A continuous function, $f: \mathbb{R}^n \rightarrow \mathbb{R}$, is said to be continuously differentiable at $\boldsymbol{x} \in \mathbb{R}^n$, if $\frac{\partial f}{\partial x_i}(\boldsymbol{x})$ exists and is continuous, $i = 1, 2, \cdots, n$.
 </blockquote>
 
+  <object data="/resource/NNP/fdiffexp.svg" type="image/svg+xml" class="blkcenter"></object>
+
 * $\mathcal{C}^1$: Class of functions whose first partial derivatives are continuous
 
 * Assumption: $f \in \mathcal{C}^1$
