@@ -168,10 +168,6 @@ PLSA 迭代总结如下：
 
 * M-step
 
-  $$
-  \begin{align}
-  p(z) = & \frac{\sum\_{d} \sum\_{w} n(w, d) p(z|w, d, \theta\_n)}{\sum\_{z} \sum\_{d} \sum\_{w} n(w, d) p(z|w, d, \theta\_n)} \\\\
-  p(w|z) = & \frac{\sum\_{d} n(w, d) p(z|w, d, \theta\_n)}{\sum\_{d} \sum\_{w} n(w, d) p(z|w, d, \theta\_n)} \\\\
-  p(d|z) = & \frac{\sum\_{w} n(w, d) p(z|w, d, \theta\_n)}{\sum\_{d} \sum\_{w} n(w, d) p(z|w, d, \theta\_n)}
-  \end{align}
-  $$
+  $$ p(z) = \frac{\sum\_{d} \sum\_{w} n(w, d) p(z|w, d, \theta\_n)}{\sum\_{z} \sum\_{d} \sum\_{w} n(w, d) p(z|w, d, \theta\_n)} $$
+  $$ p(w|z) = \frac{\sum\_{d} n(w, d) p(z|w, d, \theta\_n)}{\sum\_{d} \sum\_{w} n(w, d) p(z|w, d, \theta\_n)} $$
+  $$ p(d|z) = \frac{\sum\_{w} n(w, d) p(z|w, d, \theta\_n)}{\sum\_{d} \sum\_{w} n(w, d) p(z|w, d, \theta\_n)} $$
