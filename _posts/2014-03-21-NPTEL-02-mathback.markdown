@@ -7,6 +7,8 @@ tags: NPTEL, numerical optimization
 
 ------------------------
 
+**Set**
+
 Difference between two sets A and B: $A \setminus B = \\{x: x \in A \;\; and \;\; x \notin B\\}$
 
 ------------------------
@@ -607,3 +609,89 @@ $$g(\boldsymbol{x}) = \nabla f(\boldsymbol{x}) = (\frac{\partial f(\boldsymbol{x
 </blockquote>
 
   <object data="/resource/NNP/gradient.svg" type="image/svg+xml" class="blkcenter"></object>
+
+-----------------------
+
+**Directional Derivatives**
+
+<blockquote>
+Let $S \subset \mathbb{R}^n$ be an open set and $f: S \rightarrow \mathbb{R}$, $f$ continuously differentiable in $S$. Then, for any $\boldsymbol{x} \in S$ and any nonzero $\boldsymbol{d} \in \mathbb{R}^n$, the directional derivative of $f$ at $\boldsymbol{x}$ in the direction of $\boldsymbol{d}$, defined by
+
+$$\frac{\partial f}{\partial \boldsymbol{d}}(\boldsymbol{x}) = \lim_{\varepsilon \rightarrow 0} \frac{f(\boldsymbol{x + \varepsilon \boldsymbol{d}}) - f(\boldsymbol{x})}{\varepsilon}$$
+
+exists and equals $\nabla f(\boldsymbol{x})^T \boldsymbol{d}$.
+</blockquote>
+
+$\frac{\partial f}{\partial \boldsymbol{d}}(\boldsymbol{x}) = \lim\_{\varepsilon \rightarrow 0} \frac{f(\boldsymbol{x + \varepsilon \boldsymbol{d}}) - f(\boldsymbol{x})}{\varepsilon} = \frac{df(x+td)}{dt}\bigg|\_{t=0} = \nabla f(x+td)^T d\bigg|\_{t=0} = \nabla f(x)^T d$
+
+-----------------------
+
+**Hessian**
+
+<blockquote>
+A continuously differentiable function $f: \mathbb{R}^n \rightarrow \mathbb{R}$ is said to be twice continuously differentiable at $\boldsymbol{x} \in \mathbb{R}^n$, if $\frac{\partial^2 f}{\partial x_i \partial x_j} (\boldsymbol{x})$ exists and is continuous.
+</blockquote>
+
+* $\mathcal{C}^2$: Class of twice continuously differentiable functions
+
+<blockquote>
+Let $f \in \mathcal{C}^2$. We denote the Hessian of $f$ at $\boldsymbol{x}$ to be the matrix
+$$
+H(x) = \nabla^2 f(\boldsymbol{x}) = \begin{pmatrix}
+\frac{\partial^2 f}{\partial x_1^2} & \frac{\partial^2 f}{\partial x_1 \partial x_2} & \cdots & \frac{\partial^2 f}{\partial x_1 \partial x_n} \\\\
+\frac{\partial^2 f}{\partial x_2 \partial x_1} & \frac{\partial^2 f}{\partial x_2^2} & \cdots & \frac{\partial^2 f}{\partial x_2 \partial x_n} \\\\
+\vdots & \vdots & \ddots & \vdots \\\\
+\frac{\partial^2 f}{\partial x_n \partial x_1} & \frac{\partial^2 f}{\partial x_n \partial x_2} & \cdots & \frac{\partial^2 f}{\partial x_n^2}
+\end{pmatrix}
+$$
+</blockquote>
+
+* Hessian matrix is symmetric
+
+<blockquote>
+Let $S \subset \mathbb{R}^n$ be an open set and $f: S \rightarrow \mathbb{R}$, $f$ twice continuously differentiable in $S$. Then, for any $\boldsymbol{x} \in S$ and any nonzero $\boldsymbol{d} \in \mathbb{R}^n$, the second directional derivative of $f$ at $\boldsymbol{x}$ in the direction of $\boldsymbol{d}$ equals $\boldsymbol{d}^T \nabla^2 f(\boldsymbol{x}) \boldsymbol{d}$.
+</blockquote>
+
+-----------------------
+
+**Taylor Series**
+
+$\mathcal{C}^\infty$: Class of all functions for which the derivative of any order is continuous.
+
+Let $f: \mathbb{R} \rightarrow \mathbb{R}. f \in \mathcal{C}^\infty.$
+
+Let $x^0$ be the point about which we write the Taylor series.
+
+$$f(x) = f(x^0) + f'(x^0)(x - x^0) + \frac{1}{2} f''(x^0)(x - x^0)^2 + \cdots$$
+
+Suppose we use only $f'(x^0)$. Then $f(x)$ at $x^0$ can be approximated by
+
+$$f(x) \approx f(x^0) + f'(x^0)(x - x^0)$$
+
+Similarly, using $f'(x^0)$ and $f''(x^0)$, then the quadratic approximation of $f$ at $x^0$ is
+
+$$f(x) \approx f(x^0) + f'(x^0)(x - x^0) + \frac{1}{2} f''(x^0)(x - x^0)^2$$
+
+-----------------------
+
+**Truncated Taylor Series**
+
+* first order
+
+  Let $f: \mathbb{R}^n \rightarrow \mathbb{R}, f \in \mathcal{C}^1, \boldsymbol{x}^0 \in \mathbb{R}^n$.
+
+  Then, for every $\boldsymbol{x} \in \mathbb{R}^n$,
+
+  $$f(\boldsymbol{x}) = f(\boldsymbol{x}^0) + \nabla f(\bar{\boldsymbol{x}}) \dot (\boldsymbol{x} - \boldsymbol{x}^0)$$
+
+  where $\bar{\boldsymbol{x}}$ is some point that lies on the line segment joining $\boldsymbol{x}$ and $\boldsymbol{x}^0$: $\bar{\boldsymbol{x}}$ depends on $\boldsymbol{x}, \boldsymbol{x}^0$ and $f$.
+
+* second order
+
+  Let $f: \mathbb{R}^n \rightarrow \mathbb{R}, f \in \mathcal{C}^2, \boldsymbol{x}^0 \in \mathbb{R}^n$.
+
+  Then, for every $\boldsymbol{x} \in \mathbb{R}^n$,
+
+  $$f(\boldsymbol{x}) = f(\boldsymbol{x}^0) + \nabla f(\bar{\boldsymbol{x}}) \dot (\boldsymbol{x} - \boldsymbol{x}^0) + \frac{1}{2}(\boldsymbol{x} - \boldsymbol{x}^0)^T \nabla^2 f(\bar{\boldsymbol{x}}) (\boldsymbol{x} - \boldsymbol{x}^0)$$
+
+  where $\bar{\boldsymbol{x}}$ is some point that lies on the line segment joining $\boldsymbol{x}$ and $\boldsymbol{x}^0$: $\bar{\boldsymbol{x}}$ depends on $\boldsymbol{x}, \boldsymbol{x}^0$ and $f$.
