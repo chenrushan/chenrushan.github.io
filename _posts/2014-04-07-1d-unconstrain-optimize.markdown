@@ -23,6 +23,8 @@ $$ \min\_{x\in X} \; f(x) $$
 给定 $x^*\in X$ 如果 $f(x^*) \leq f(x) \; \forall x \in X$，则 $x^*$ 被称为 global minimum
 </blockquote>
 
+根据 Weiestrass' therom，如果 $X$ 是个 compact set，同时 $f(x)$ 是个 continuous function，那 global minimum 一定存在。
+
 但是很多时候 global minimum 很难得到，比如下面这个函数
 
 <object data="/resource/NNP/03-1d-uncon-op/function.svg" type="image/svg+xml" class="blkcenter"></object>
@@ -42,3 +44,9 @@ $$ \min\_{x\in X} \; f(x) $$
 <object data="/resource/NNP/03-1d-uncon-op/fun3.svg" type="image/svg+xml" class="blkcenter"></object>
 
 这个函数有一个 local minimum，但这个 local minimum 并不是 global minimum，因为 global minimum 并不存在。
+
+明确了问题，接下来就要看看我们怎么去得到 local minimum，为此，我们需要知道 local minimum 具有什么特点，如何从数学上更明确得定义出 local minimum。下面我们我们分别给出一个点是 local minimum 的 sufficient 和 necessary condition
+
+* necessary condition: 就是所有 local minimum 都具备的条件
+
+* sufficient condition: 就是只要点 $x$ 满足这个条件，$x$ 就一定是 local minimum
