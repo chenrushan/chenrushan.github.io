@@ -79,7 +79,7 @@ $$f(x) = f(x^\*) + f'(\bar{x})(x - x^\*) \;\; \bar{x} \in (x^\*, x)$$
 
 <object data="/resource/NNP/03-1d-uncon-op/f'(x)=0.svg" type="image/svg+xml" class="blkcenter"></object>
 
-都有 $f'(a) = 0$，但只有左边的函数在 $a$ 处是最小值。
+都有 $f'(a) = 0$，但只有左边的函数在 $a$ 处是最小值。也因此满足 $f'(x) = 0$ 的 $x$ 并不被称为 minimum point 什么的，而是被称作 stationary point 或者 saddle point。
 
 注意到，对于左边函数，我们有 $f''(a) \geq 0$，而这其实就是 $x^\*$ 为 local minimum 的第二个 necessary condition。
 
@@ -105,4 +105,46 @@ $$f(x) = f(x^\*) + f'(x^\*)(x - x^\*) + \frac{1}{2} f''(\bar{x})(x - x^\*)^2 \;\
 
 ----------
 
-但是 $f''(x^\*) \geq 0$ 同样不是 sufficient condition，比如下面这个函数 $f(x) = (x - a)^3 + b$。
+但是 $f''(x^\*) \geq 0$ 同样不是 sufficient condition，比如函数 $f(x) = (x - a)^3 + b$。
+
+<object data="/resource/NNP/03-1d-uncon-op/x^3.svg" type="image/svg+xml" class="blkcenter"></object>
+
+$f(x)$ 在 $a$ 点的 $f'(a) = 0, f''(a) = 0$ 但是 $a$ 并不是 local minimum。
+
+#### Necessary and sufficient condition
+
+<blockquote>
+令 $f(x) \in \mathcal{C}^{\infty}$，$f^{(k)}(x)$ 表示 $f(x)$ 的 k 阶导，一个点 $x^*$ 是 local minimum 当且仅当 sequence $\{ f^{(k)}(x) \}$  $(k = 1, 2, 3, \cdots)$ 中第一个非 0 $f^{(k)}(x)$ 对应的 k 是偶数且 $f^{(k)}(x) > 0$
+</blockquote>
+
+举个例子，上面的 $f(x) = (x - a)^3 + b$，$f^{(1)}(a) = 0, f^{(2)}(a) = 0, f^{(3)}(a) = 6$，这里第一个非 0 $f^{(k)}(x)$ 虽然大于 0，但出现在奇数 $k$ 位置，因此 $a$ 不是该函数的最小值。
+
+#### 求解 Local minimum
+
+根据上面的一堆 condition 我们可以得到如下求解 local minimum 的算法
+
+1. 先根据 $f'(x) = 0$ 得出所有可能的 stationary point
+
+2. 依次验证所有 stationary point 的各阶导数看是否符合 local minimum 的条件从而得到 local minimum
+
+----------
+
+考虑 $min\_{x \in \mathbb{R}} (x^2 - 1)^3$
+
+首先根据一阶导得到所有的 stationary point
+
+$$ f'(x) = 6x(x^2 - 1)^2 = 0 \Rightarrow f'(0) = f'(1) = f'(-1) = 0$$
+
+所以 stationary point 包括 $0, 1, -1$。然后分别验证这几个点的各阶导数
+
+* 对于 $0$，$f''(0) = 6 > 0$
+
+* 对于 $1$，$f''(1) = 0, f'''(1) = 48 > 0$
+
+* 对于 $-1$，$f''(-1) = 0, f'''(-1) = -48 < 0$
+
+由此可知，$0$ 是 local minimum，而 $1$ 和 $-1$ 都不是。
+
+----------
+
+上面的问题中，我们通过直接求解的方式得出了所有的 stationary point，但现实中很多函数是无法进行这样的计算的，比如 $f(x) = x^2 + e^x$，对于这个函数我们就很难直接求解 stationary point，这时我们就需要考虑数值的方法，即迭代优化的方法。
