@@ -7,7 +7,7 @@ tags: NPTEL, numerical optimization
 
 #### 1d unconstrained optimization
 
-这门课程的重点是 multi-dimensional function 的 constrained optimization，但它用到的很多技术都来自于 unconstrained optimization，而无论是 1-dimensional 还是 multi-dimensional 它们优化的思想都是想通的，因此这篇文章就介绍 optimization 中最简单的 1-dimensional(1d) unconstrained optimization。这个问题可以表示为
+这门课程的重点是 multi-dimensional function 的 constrained optimization，但它用到的很多技术都来自于 unconstrained optimization，而无论是 1-dimensional 还是 multi-dimensional 它们优化的思想都是相通的，因此这篇文章就首先介绍 optimization 中最简单的 1-dimensional(1d) unconstrained optimization。这个问题可以表示为
 
 $$ \min\_{x\in X} \; f(x) $$
 
@@ -15,7 +15,7 @@ $$ \min\_{x\in X} \; f(x) $$
 
 <object data="/resource/NNP/03-1d-uncon-op/x^2.svg" type="image/svg+xml" class="blkcenter"></object>
 
-显然能够最小化 $f(x)$ 的点是 $a$，这个点也被称作 global minimum。
+这里能够最小化 $f(x)$ 的点是 $a$，这个点也被称作 global minimum。
 
 #### Global Minimum
 
@@ -43,7 +43,7 @@ $$ \min\_{x\in X} \; f(x) $$
 
 <object data="/resource/NNP/03-1d-uncon-op/fun3.svg" type="image/svg+xml" class="blkcenter"></object>
 
-这个函数有一个 local minimum，但这个 local minimum 并不是 global minimum，因为 global minimum 并不存在。
+这个函数只有一个 local minimum，但这个 local minimum 并不是 global minimum，因为 global minimum 并不存在。
 
 明确了问题，接下来就要看看我们怎么去得到 local minimum，为此，我们需要知道 local minimum 具有什么特点，如何从数学上更明确得定义出 local minimum。下面我们我们分别给出一个点是 local minimum 的 sufficient 和 necessary condition
 
@@ -69,7 +69,7 @@ $f \in \mathcal{C}^1 \Rightarrow f' \in \mathcal{C}^0$，由于 $f'(x^\*) > 0$�
 
 $$f(x) = f(x^\*) + f'(\bar{x})(x - x^\*) \;\; \bar{x} \in (x^\*, x)$$
 
-由于 $\bar{x} \in B(x^\*, \delta)$，所以 $f'(\bar{x}) > 0$，取 $x \in (x^\* - \delta, x^\*)$，则有 $x - x^\* < 0$，这样就有 $f'(\bar{x})(x - x^\*) < 0$，也就是 $f(x) < f(x^\*) \; \forall x \in (x^\* - \delta, x^\*)$，这与 $x^\*$ 是 local minimum 相矛盾。
+如果 $x \in B(x^\*, \delta)$，则 $\bar{x} \in B(x^\*, \delta)$，则 $f'(\bar{x}) > 0$。取 $x \in (x^\* - \delta, x^\*)$，在这段区间内 $x - x^\* < 0$，这样就有 $f'(\bar{x})(x - x^\*) < 0$，也就是 $f(x) < f(x^\*) \; \forall x \in (x^\* - \delta, x^\*)$，这与 $x^\*$ 是 local minimum 相矛盾。
 
 因此如果 $x^\*$ 是 local minimum，则有 $f'(x^\*) = 0$。
 
@@ -79,9 +79,9 @@ $$f(x) = f(x^\*) + f'(\bar{x})(x - x^\*) \;\; \bar{x} \in (x^\*, x)$$
 
 <object data="/resource/NNP/03-1d-uncon-op/f'(x)=0.svg" type="image/svg+xml" class="blkcenter"></object>
 
-都有 $f'(a) = 0$，但只有左边的函数在 $a$ 处是最小值。也因此满足 $f'(x) = 0$ 的 $x$ 并不被称为 minimum point 什么的，而是被称作 stationary point 或者 saddle point。
+都有 $f'(a) = 0$，但只有左边的函数在 $a$ 处是最小值。也因此满足 $f'(x) = 0$ 的 $x$ 并不被称为 minimum point，而是被称作 stationary point 或者 saddle point。
 
-注意到，对于左边函数，我们有 $f''(a) \geq 0$，而这其实就是 $x^\*$ 为 local minimum 的第二个 necessary condition。
+注意到，对于左边函数，我们有 $f''(a) \geq 0$，而这其实是 $x^\*$ 为 local minimum 的第二个 necessary condition。
 
 #### Second order necessary condition
 
@@ -99,7 +99,7 @@ $f \in \mathcal{C}^2 \rightarrow f'' \in \mathcal{C}^0$，由于 $f''(x^\*) < 0$
 
 $$f(x) = f(x^\*) + f'(x^\*)(x - x^\*) + \frac{1}{2} f''(\bar{x})(x - x^\*)^2 \;\; \bar{x} \in (x^\*, x)$$
 
-由于 $\bar{x} \in B(x^\*, \delta)$，所以 $f''(\bar{x}) < 0$，而 $(x - x^\*)^2 \geq 0$，所以有 $f''(\bar{x})(x - x^\*)^2 \leq 0$，另外根据前面的 first order necessary condition，$f'(x^\*) = 0$，这样就有 $f(x) < f(x^\*)$，这与 $x^\*$ 是 local minimum 相矛盾。
+如果 $x \in B(x^\*, \delta)$，则 $\bar{x} \in B(x^\*, \delta)$，则 $f''(\bar{x}) < 0$，而 $(x - x^\*)^2 \geq 0$，所以有 $f''(\bar{x})(x - x^\*)^2 \leq 0$，另外根据前面的 first order necessary condition，$f'(x^\*) = 0$，这样就有 $f(x) < f(x^\*)$，这与 $x^\*$ 是 local minimum 相矛盾。
 
 因此如果 $x^\*$ 是 local minimum，则有 $f''(x^\*) \geq 0$。
 
@@ -125,7 +125,7 @@ $f(x)$ 在 $a$ 点的 $f'(a) = 0, f''(a) = 0$ 但是 $a$ 并不是 local minimum
 
 1. 先根据 $f'(x) = 0$ 得出所有可能的 stationary point
 
-2. 依次验证所有 stationary point 的各阶导数看是否符合 local minimum 的条件从而得到 local minimum
+2. 依次验证所有 stationary point 的各阶导数看是否符合 local minimum 的条件
 
 ----------
 
@@ -147,4 +147,4 @@ $$ f'(x) = 6x(x^2 - 1)^2 = 0 \Rightarrow f'(0) = f'(1) = f'(-1) = 0$$
 
 ----------
 
-上面的问题中，我们通过直接求解的方式得出了所有的 stationary point，但现实中很多函数是无法进行这样的计算的，比如 $f(x) = x^2 + e^x$，对于这个函数我们就很难直接求解 stationary point，这时我们就需要考虑数值的方法，即迭代优化的方法。
+上面的问题中，我们通过直接求解的方式得出了所有的 stationary point，但现实中很多函数无法或者很难进行这样的计算，比如 $f(x) = x^2 + e^x$，对于这个函数我们就很难直接求解 stationary point，这时我们就需要考虑使用数值方法。
