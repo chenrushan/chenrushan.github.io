@@ -34,7 +34,7 @@ $$ \min\_{x\in X} \; f(x) $$
 #### Local Minimum
 
 <blockquote>
-给定 $x^*\in X$ 如果存在 $\delta \in \mathbb{R}$，使得 $f(x^*) \leq f(x) \; \forall x \in X \cap B(x^*, \delta)$，则 $x^*$ 被称为 local minimum
+给定 $x^*\in X$ 如果存在 $\delta > 0$，使得 $f(x^*) \leq f(x) \; \forall x \in X \cap B(x^*, \delta)$，则 $x^*$ 被称为 local minimum
 </blockquote>
 
 根据这个定义，上图中的 $x\_1$ 到 $x\_5$ 都是 local minimum，其中 $x\_4$ 有点特别，其周围存在一个水平线段，在这个区域内都有 $f(x) = f(x\_4)$。
