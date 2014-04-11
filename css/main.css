@@ -327,3 +327,11 @@ hr {
     border: 0px; /* border should be set to 0px */
     margin: 1em 0 1em 0;
 }
+
+.caption {
+    margin-top: -1.5em;
+    display: block;
+    text-align: center;
+    font: 9px Lucida;
+}
+

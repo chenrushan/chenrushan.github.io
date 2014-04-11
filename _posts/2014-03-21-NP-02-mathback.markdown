@@ -2,7 +2,7 @@
 layout: post
 title: 02 - Mathematical Background
 categories: nnumop
-tags: NPTEL, numerical optimization
+tags: NPTEL, numerical optimization, mathmatical background
 ---
 
 ------------------------
