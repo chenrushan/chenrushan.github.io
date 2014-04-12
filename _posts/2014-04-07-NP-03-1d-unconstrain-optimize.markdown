@@ -173,8 +173,7 @@ Newton method 通过迭代的方式去求一个函数的 root，也就是所有�
 
 ----------
 
-Newton($f$, $\varepsilon$) <br/>
-<span class="t"></span> choose $x\_0$ <br/>
+Newton($f$, $\varepsilon$, $x\_0$) <br/>
 <span class="t"></span> $k = 0$ <br/>
 <span class="t"></span> while $|f(x\_k)| > \varepsilon$ <br/>
 <span class="t"></span><span class="t"></span> $x\_{k + 1} = x\_k - \frac{f(x\_k)}{f'(x\_k)}$ <br/>
@@ -189,8 +188,18 @@ Newton($f$, $\varepsilon$) <br/>
 
 <object data="/resource/NNP/03-1d-uncon-op/notconverge.svg" type="image/svg+xml" class="blkcenter"></object>
 
-如果你如上面一样选择 $x\_0$，Newton 迭代会使你不断远离 root $0$。通常情况下，初始点越靠近 root 收敛的机会也就越大。
+如果 $x\_0$ 选在如图所示的位置，则 Newton 迭代会使你不断远离 root $0$。通常情况下，初始点越靠近 root 收敛的机会也会越大。
 
 #### Newton Method for Optimization
 
 在求 local minimum 时，我们需要将 Newton method 应用于 $f'(x)$，而不是直接应用到 $f(x)$，因为我们要的是 $f'(x)$ 的 root，而不是 $f(x)$ 的 root。
+
+将 Newton method 应用于 $f'(x)$ 其实等价于每次迭代的时候对 $f(x)$ 在 $x\_k$ 处做一个二阶近似，即构建了一个函数 $q$
+
+$$q(x) = f(x\_k) + f'(x\_k)(x - x\_k) + \frac{1}{2} f''(x\_k)(x - x\_k)^2$$
+
+如果我们优化 $q$ 的话，即令 $q'(x\_k) = 0$ 我们得到
+
+$$ x\_{k + 1} = x\_k - \frac{f'(x\_k)}{f''(x\_k)} $$
+
+这与将 Newton method 应用于 $f'(x)$ 的迭代步骤是完全一样的。
