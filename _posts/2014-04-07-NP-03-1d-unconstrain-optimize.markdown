@@ -147,4 +147,50 @@ $$ f'(x) = 6x(x^2 - 1)^2 = 0 \Rightarrow f'(0) = f'(1) = f'(-1) = 0$$
 
 ----------
 
-上面的问题中，我们通过直接求解的方式得出了所有的 stationary point，但现实中很多函数无法或者很难进行这样的计算，比如 $f(x) = x^2 + e^x$，对于这个函数我们就很难直接求解 stationary point，这时我们就需要考虑使用数值方法。
+上面的问题中，我们通过直接求解的方式得出了所有的 stationary point，但现实中很多函数无法或者很难进行这样的计算，比如 $f(x) = x^2 + e^x$，对于这个函数我们就很难直接求解 stationary point，这时我们就需要考虑其他方法。可用的方法有多种，包括 derivative-free method，derivative-based method 等等，下面主要介绍一下 derivative-based 的 Newton method。
+
+#### Newton Method
+
+Newton method 通过迭代的方式去求一个函数的 root，也就是所有令 $f(x) = 0$ 的 $x$。通俗的说，迭代步骤是这样
+
+----------
+
+* 首先选取一个初始点 $x\_0$
+
+* 根据 $f(x)$ 在点 $(x\_0, f(x\_0))$ 的切线与 $x$ 轴的交点得到 $x\_1$，如下图左边
+
+* 再根据 $f(x)$ 在点 $(x\_1, f(x\_1))$ 的切线与 $x$ 轴的交点得到 $x\_2$，如下图右边
+
+* 如此循环，不断逼近 $f(x)$ 的 root，并最终求得这个 root
+
+----------
+
+<object data="/resource/NNP/03-1d-uncon-op/newton.svg" type="image/svg+xml" class="blkcenter"></object>
+
+从图中可以看到，根据初始点的不同，你最后得到的 root 也会不同，比如你初始点选择 $(0, 0)$，那你就会得到左边的 root。
+
+给定 $f(x)$ 上的一个点 $(x\_k, f(x\_k))$，他对应的切线可以表示为 $\frac{y - f(x\_k)}{x - x\_k} = f'(x\_k)$，该切线与 $x$ 轴的交点是 $x = x\_k - \frac{f(x\_k)}{f'(x\_k)}$，所以上面的步骤可以转换为如下算法
+
+----------
+
+Newton($f$, $\varepsilon$) <br/>
+<span class="t"></span> choose $x\_0$ <br/>
+<span class="t"></span> $k = 0$ <br/>
+<span class="t"></span> while $|f(x\_k)| > \varepsilon$ <br/>
+<span class="t"></span><span class="t"></span> $x\_{k + 1} = x\_k - \frac{f(x\_k)}{f'(x\_k)}$ <br/>
+<span class="t"></span><span class="t"></span> $k = k + 1$ <br/>
+<span class="t"></span> return $x\_k$
+
+----------
+
+其中 $\varepsilon$ 用于控制循环何时结束。
+
+要注意的是，根据初始点的不同，Newton method 不一定会收敛，比如函数 $f(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}$
+
+<object data="/resource/NNP/03-1d-uncon-op/notconverge.svg" type="image/svg+xml" class="blkcenter"></object>
+
+如果你如上面一样选择 $x\_0$，Newton 迭代会使你不断远离 root $0$。通常情况下，初始点越靠近 root 收敛的机会也就越大。
+
+#### Newton Method for Optimization
+
+在求 local minimum 时，我们需要将 Newton method 应用于 $f'(x)$，而不是直接应用到 $f(x)$，因为我们要的是 $f'(x)$ 的 root，而不是 $f(x)$ 的 root。
