@@ -73,6 +73,8 @@ categories: arch
 
      可以参考 [arch wiki](https://wiki.archlinux.org/index.php/Wireless_Setup) 确定每个字段都是什么意思。
 
+     如果遇到 `operation not possible due to rf kill`，检查一下你的无线硬件开关有没有开。
+
   3. 生成无线配置文件
 
      从显示的信息看无线是 WPA/WPA2 加密的。
