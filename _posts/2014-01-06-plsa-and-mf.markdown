@@ -21,11 +21,15 @@ $$P(w, d|\theta)=\sum\_{z}P(d)P(z|d)P(w|z)$$
 
 $$P(w, d|\theta)=\sum\_{z}P(z)P(d|z)P(w|z)$$
 
-其中：
+这两种分解方法是等价的。首先 $w$ 只与 $z$ 相关，而 $P(d)P(z|d) = P(d,z) = P(z)P(d|z)$，所以 $P(d)P(z|d)p(w|z) = P(z)P(d|z)P(w|z)$。
 
 * 第一种方法对应 $d \rightarrow z \rightarrow w$ 的生成过程，比较易于理解，$\theta$ 包含 3 类参数：$P(d), P(z|d), P(w|z)$。
 
+  <object data="/resource/plsa/dzw.svg" type="image/svg+xml" class="blkcenter"></object>
+
 * 第二种方法对应的 $\theta$ 包含 $P(z), P(d|z), P(w|z)$，这种分解不那么容易从直观上理解，但有意思的是，这种分解方法与 matrix factorization 相对应。
+
+  <object data="/resource/plsa/zdw.svg" type="image/svg+xml" class="blkcenter"></object>
 
 ### PLSA 与 Matrix Factorization
 

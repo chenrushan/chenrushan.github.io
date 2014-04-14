@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Lec01 - Introduction
+title: 01 - Introduction
 categories: nnumop
 tags: NPTEL, numerical optimization
 ---
