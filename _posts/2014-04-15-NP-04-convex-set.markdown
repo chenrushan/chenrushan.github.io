@@ -37,28 +37,42 @@ Line segment 也被记为 $LS[\boldsymbol{x}_1, \boldsymbol{x}_2]$
 给定集合 $A \in \mathbb{R}^n$，如果 $\forall \boldsymbol{x}_1, \boldsymbol{x}_2 \in A, \lambda \in \mathbb{R}$ 有 $(1 - \lambda) \boldsymbol{x}_1 + \lambda \boldsymbol{x}_2 \in A$，则 $A$ 被称为 Affine Set/Affine Space.
 </blockquote>
 
-这里给出一个推论，如果 $A$ 是 affine set，$x\_1, x\_2, x\_3 \in A$，则 $x\_1 + \lambda(x\_2 - x\_3) \in A$ (之所以给这个推论是为了下面定理的证明)。
+这里给出一个推论，如果 $A$ 是 affine set，$\boldsymbol{x}\_1, \boldsymbol{x}\_2, \boldsymbol{x}\_3 \in A$，则 $\boldsymbol{x}\_1 + \lambda(\boldsymbol{x}\_2 - \boldsymbol{x}\_3) \in A$ (之所以给这个推论是为了下面定理的证明)。
 
 * 证明
 
   $$
   \begin{align}
-  & x\_1, x\_2, x\_3 \in A \\\\
-  \Rightarrow & (1-\alpha) x\_1 + \alpha x\_2,\; (1-\beta)x\_2 + \beta x\_3 \in A \\\\
-  \Rightarrow & (1-\gamma)((1-\alpha) x\_1 + \alpha x\_2) + \gamma ((1-\beta)x\_2 + \beta x\_3) \in A \\\\
-  \equiv & (1-\gamma)(1-\alpha) x\_1 + (\alpha - \alpha \gamma + \gamma) x\_2 - \beta\gamma (x\_2 - x\_3) \in A
+  & \boldsymbol{x}\_1, \boldsymbol{x}\_2, \boldsymbol{x}\_3 \in A \\\\
+  \Rightarrow & (1-\alpha) \boldsymbol{x}\_1 + \alpha \boldsymbol{x}\_2,\; (1-\beta)\boldsymbol{x}\_2 + \beta \boldsymbol{x}\_3 \in A \\\\
+  \Rightarrow & (1-\gamma)((1-\alpha) \boldsymbol{x}\_1 + \alpha \boldsymbol{x}\_2) + \gamma ((1-\beta)\boldsymbol{x}\_2 + \beta \boldsymbol{x}\_3) \in A \\\\
+  \equiv & (1-\gamma)(1-\alpha) \boldsymbol{x}\_1 + (\alpha - \alpha \gamma + \gamma) \boldsymbol{x}\_2 - \beta\gamma (\boldsymbol{x}\_2 - \boldsymbol{x}\_3) \in A
   \end{align}
   $$
 
-  特别的，令 $(\alpha - \alpha \gamma + \gamma) = 0$，即 $\alpha = \frac{\gamma}{\gamma - 1}$，则有 $x\_1 - \beta\gamma (x\_2 - x\_3) \in A$，令 $\lambda = -\beta\gamma$，即 $x\_1 + \lambda(x\_2 - x\_3) \in A$。
+  特别的，令 $(\alpha - \alpha \gamma + \gamma) = 0$，即 $\alpha = \frac{\gamma}{\gamma - 1}$，则有 $\boldsymbol{x}\_1 - \beta\gamma (\boldsymbol{x}\_2 - \boldsymbol{x}\_3) \in A$，令 $\lambda = -\beta\gamma$，即 $\boldsymbol{x}\_1 + \lambda(\boldsymbol{x}\_2 - \boldsymbol{x}\_3) \in A$。
 
 <blockquote>
-如果 $A$ 是 affine space，$x_1, x_2, \cdots, x_n \in A$ 且 $\sum_{i=1}^n \lambda_i = 1$，则 $\sum_{i=1}^n \lambda_i x_i \in A$
+如果 $A$ 是 affine space，$\boldsymbol{x}_1, \boldsymbol{x}_2, \cdots, \boldsymbol{x}_n \in A$ 且 $\sum_{i=1}^n \lambda_i = 1$，则 $\sum_{i=1}^n \lambda_i \boldsymbol{x}_i \in A$
 </blockquote>
 
 * 证明 (Induction)
 
+  * 当 $n = 1$ 时，上面的理论显然成立
 
+  * 假设当 $n = k - 1$ 是，上述结论成立，当 $n = k$ 时有
+
+     $$
+     \begin{align}
+     \sum\_{i = 1}^{k} \lambda\_i \boldsymbol{x}\_i = & \lambda\_1 \boldsymbol{x}\_1 + \lambda\_2 \boldsymbol{x}\_2 + \cdots + (1 - \sum\_{i = 1}^{k - 1} \lambda\_i) \boldsymbol{x}\_k \;\; (\because \sum\_{i=1}^{k} \lambda\_i = 1) \\\\
+     = & (\lambda\_1 \boldsymbol{x}\_1 + \lambda\_2 \boldsymbol{x}\_2 + \cdots + \lambda\_{k-2} \boldsymbol{x}\_{k-2} + (1 - \sum\_{i = 1}^{k - 2} \lambda\_i) \boldsymbol{x}\_k) + \lambda\_{k-1}(\boldsymbol{x}\_{k-1} - \boldsymbol{x}\_{k}) \\\\
+     = & \boldsymbol{y} + \lambda\_{k-1}(\boldsymbol{x}\_{k-1} - \boldsymbol{x}\_{k}) \;\; (\boldsymbol{y} \in A) \\\\
+     \end{align}
+     $$
+
+     根据上面的推论 $\boldsymbol{y} + \lambda\_{k-1}(\boldsymbol{x}\_{k-1} - \boldsymbol{x}\_{k}) \in A$，所以对于 $n = k$ 上述结论也成立。
+
+----------
 
 注意 affine space 和 vector space 的区别 (视频里一直用 vector subspace，但我觉得用 space 就可以了，因为 vector subspace 我觉得是个相对的概念，而且 vector subspace 本身也是 vector space)，vector space 要求如果 $\boldsymbol{x}\_1, \boldsymbol{x}\_2 \in A$ 则 $\alpha \boldsymbol{x}\_1 + \beta \boldsymbol{x}\_2 \in A \;\; \forall \alpha, \beta \in \mathbb{R}$，它要求任意的 linear combination 都属于 $A$，比 affine space 更严格。所以，$\boldsymbol{0}$ 必须是 vector space 的一个元素，而对于 affine space 则没有这个要求，如下图所示
 
