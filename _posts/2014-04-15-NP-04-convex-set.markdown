@@ -82,16 +82,17 @@ Line segment 也被记为 $LS[\boldsymbol{x}_1, \boldsymbol{x}_2]$
 如果 A 为 affine space，$\boldsymbol{x}_0 \in A$，则 $\{\boldsymbol{x} - \boldsymbol{x}_0: \boldsymbol{x} \in A\}$ 为 vector space
 </blockquote>
 
-证明：
+* 证明
 
-$$
-\begin{align}
-& \boldsymbol{y}\_1, \boldsymbol{y}\_2 \in \\{\boldsymbol{x} - \boldsymbol{x}\_0: \boldsymbol{x} \in A\\} \\\\
-\Rightarrow & \boldsymbol{y}\_1 + \boldsymbol{x}\_0, \boldsymbol{y}\_2 + \boldsymbol{x}\_0 \in A \\\\
-\Rightarrow & (1 - \lambda)(\boldsymbol{y}\_1 + \boldsymbol{x}\_0) + \lambda(\boldsymbol{y}\_2 + \boldsymbol{x}\_0) \in A \;\; \forall \lambda \in \mathbb{R} \\\\
-\Rightarrow & (1 - \lambda)\boldsymbol{y}\_1 + \lambda\boldsymbol{y}\_2 + \boldsymbol{x}\_0 \in A \;\; \forall \lambda \in \mathbb{R} \\\\
-\Rightarrow & (1 - \lambda)\boldsymbol{y}\_1 + \lambda\boldsymbol{y}\_2 \in \\{\boldsymbol{x} - \boldsymbol{x}\_0: \boldsymbol{x} \in A\\} \;\; \forall \lambda \in \mathbb{R}
-\end{align}
-$$
+  令 $V = \\{\boldsymbol{x} - \boldsymbol{x}\_0: \boldsymbol{x} \in A\\}, \;\; \boldsymbol{x}\_1, \boldsymbol{x}\_2 \in A$，则 $\boldsymbol{x}\_1 - \boldsymbol{x}\_0, \boldsymbol{x}\_2 - \boldsymbol{x}\_0 \in V$
 
+  $$
+  \begin{align}
+  & \alpha(\boldsymbol{x}\_1 - \boldsymbol{x}\_0) + \beta(\boldsymbol{x}\_2 - \boldsymbol{x}\_0) \;\; (\forall \alpha, \beta \in \mathbb{R})\\\\
+  = & \alpha \boldsymbol{x}\_1 + \beta \boldsymbol{x}\_2 + (1 - \alpha - \beta) \boldsymbol{x}\_0 - \boldsymbol{x}\_0 \\\\
+  = & \boldsymbol{y} - \boldsymbol{x}\_0
+  \end{align}
+  $$
+
+  根据前面定理可知，$\boldsymbol{y} \in A$，所以 $\boldsymbol{y} - \boldsymbol{x}\_0 \in V$，因此 $V$ 是一个 vector space。
 
