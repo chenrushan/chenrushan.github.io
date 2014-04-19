@@ -617,12 +617,22 @@ $$g(\boldsymbol{x}) = \nabla f(\boldsymbol{x}) = (\frac{\partial f(\boldsymbol{x
 <blockquote>
 Let $S \subset \mathbb{R}^n$ be an open set and $f: S \rightarrow \mathbb{R}$, $f$ continuously differentiable in $S$. Then, for any $\boldsymbol{x} \in S$ and any nonzero $\boldsymbol{d} \in \mathbb{R}^n$, the directional derivative of $f$ at $\boldsymbol{x}$ in the direction of $\boldsymbol{d}$, defined by
 
-$$\frac{\partial f}{\partial \boldsymbol{d}}(\boldsymbol{x}) = \lim_{\varepsilon \rightarrow 0} \frac{f(\boldsymbol{x + \varepsilon \boldsymbol{d}}) - f(\boldsymbol{x})}{\varepsilon}$$
+$$\frac{\partial f}{\partial \boldsymbol{d}}(\boldsymbol{x}) = \lim_{\varepsilon \rightarrow 0} \frac{f(\boldsymbol{x} + \varepsilon \boldsymbol{d}) - f(\boldsymbol{x})}{\varepsilon}$$
 
 exists and equals $\nabla f(\boldsymbol{x})^T \boldsymbol{d}$.
 </blockquote>
 
-$\frac{\partial f}{\partial \boldsymbol{d}}(\boldsymbol{x}) = \lim\_{\varepsilon \rightarrow 0} \frac{f(\boldsymbol{x + \varepsilon \boldsymbol{d}}) - f(\boldsymbol{x})}{\varepsilon} = \frac{df(x+td)}{dt}\bigg|\_{t=0} = \nabla f(x+td)^T d\bigg|\_{t=0} = \nabla f(x)^T d$
+$$
+\begin{align}
+\frac{\partial f}{\partial \boldsymbol{d}}(\boldsymbol{x}) = & \lim\_{\varepsilon \rightarrow 0} \frac{f(\boldsymbol{x} + \varepsilon \boldsymbol{d}) - f(\boldsymbol{x})}{\varepsilon} \\\\
+= & \lim\_{\varepsilon \rightarrow 0} \frac{f(\boldsymbol{x} + (0 + \varepsilon) \boldsymbol{d}) - f(\boldsymbol{x} + 0 \boldsymbol{d})}{(0 + \varepsilon) - 0} \\\\
+= & \frac{df(x+t\boldsymbol{d})}{dt}\bigg|\_{t=0} \\\\
+= & \nabla f(x+t\boldsymbol{d})^T \boldsymbol{d}\bigg|\_{t=0} \\\\
+= & \nabla f(x)^T \boldsymbol{d}
+\end{align}
+$$
+
+For any unit direction $\boldsymbol{d}$, the rate of change is $\nabla f(x)^T \boldsymbol{d} = |\nabla f(x)^T||d|\cos\theta = |\nabla f(x)^T|\cos\theta$, where $\theta$ is the angle between $\boldsymbol{d}$ and $\nabla f(x)$. When $\theta = 0$ the rate of change is maximized. This is why the gradient is the direction of steepest descent/ascent.
 
 -----------------------
 
