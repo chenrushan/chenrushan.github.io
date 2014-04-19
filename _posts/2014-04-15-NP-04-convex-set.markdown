@@ -96,3 +96,32 @@ Line segment 也被记为 $LS[\boldsymbol{x}_1, \boldsymbol{x}_2]$
 
   根据前面定理可知，$\boldsymbol{y} \in A$，所以 $\boldsymbol{y} - \boldsymbol{x}\_0 \in V$，因此 $V$ 是一个 vector space。
 
+----------
+
+$A\boldsymbol{x} = \boldsymbol{b}$ 的解集属于 affine set
+
+#### Convex Set
+
+<blockquote>
+给定集合 $C \in \mathbb{R}^n$，如果 $\forall \boldsymbol{x}_1, \boldsymbol{x}_2 \in C, \lambda \in [0, 1]$ 有 $(1 - \lambda) \boldsymbol{x}_1 + \lambda \boldsymbol{x}_2 \in C$，则 $C$ 被称为 Convex Set.
+</blockquote>
+
+注意到这里的定义和 affine set 的极为相似，区别只在 $\lambda$ 的范围。对于 affine set，它要求经过 $\boldsymbol{x}\_1, \boldsymbol{x}\_2$ 的整个 line 都在集合中，而 convex set 只要求连接 $\boldsymbol{x}\_1, \boldsymbol{x}\_2$ 的 line segment 在集合中即可，所以 convex set 的要求要松很多，所有的 affine set 都同时是 convex set。
+
+Convex set 的例子包括 empty set, singleton set, $\mathbb{R}$ 等等。
+
+在 convex set 的基础上我们可以构造新的 convex set，常见操作包括
+
+* Scalar multiple $\alpha C = \\{\alpha \boldsymbol{x}: \boldsymbol{x} \in C\\}$
+
+* Sum of two sets $C = \\{\boldsymbol{x}\_1 + \boldsymbol{x}\_2: \boldsymbol{x}\_1 \in C\_1, \boldsymbol{x}\_2 \in C\_2\\}$
+
+* Intersection $C = \cap\_i C\_i$
+
+上述操作得到的 set 依然是 convex set，证明比较简单，就略过了。
+
+#### Hyperplane
+
+<blockquote>
+Hyperplane 可以被定义为 $\boldsymbol{ax}=b$，其中 $\boldsymbol{a}$ 是 hyperplane 的 normal vector
+</blockquote>
