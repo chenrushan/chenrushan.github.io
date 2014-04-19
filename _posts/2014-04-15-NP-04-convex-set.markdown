@@ -15,7 +15,7 @@ tags: NPTEL, numerical optimization
 $$(1 - \lambda) \boldsymbol{x}_1 + \lambda \boldsymbol{x}_2 \;\; \forall \lambda \in \mathbb{R} $$
 </blockquote>
 
-考虑下面这个图
+参考下面这个图
 
 <object data="/resource/NNP/04-convex/line.svg" type="image/svg+xml" class="blkcenter"></object>
 
@@ -50,7 +50,7 @@ Line segment 也被记为 $LS[\boldsymbol{x}_1, \boldsymbol{x}_2]$
   \end{align}
   $$
 
-  特别的，令 $(\alpha - \alpha \gamma + \gamma) = 0$，即 $\alpha = \frac{\gamma}{\gamma - 1}$，则有 $\boldsymbol{x}\_1 - \beta\gamma (\boldsymbol{x}\_2 - \boldsymbol{x}\_3) \in A$，令 $\lambda = -\beta\gamma$，即 $\boldsymbol{x}\_1 + \lambda(\boldsymbol{x}\_2 - \boldsymbol{x}\_3) \in A$。
+  特别的，令 $(\alpha - \alpha \gamma + \gamma) = 0$，即 $\alpha = \frac{\gamma}{\gamma - 1}$，上面最后一个式子就简化为 $\boldsymbol{x}\_1 - \beta\gamma (\boldsymbol{x}\_2 - \boldsymbol{x}\_3) \in A$，令 $\lambda = -\beta\gamma$，即 $\boldsymbol{x}\_1 + \lambda(\boldsymbol{x}\_2 - \boldsymbol{x}\_3) \in A$。
 
 <blockquote>
 如果 $A$ 是 affine space，$\boldsymbol{x}_1, \boldsymbol{x}_2, \cdots, \boldsymbol{x}_n \in A$ 且 $\sum_{i=1}^n \lambda_i = 1$，则 $\sum_{i=1}^n \lambda_i \boldsymbol{x}_i \in A$
@@ -108,6 +108,10 @@ $A\boldsymbol{x} = \boldsymbol{b}$ 的解集属于 affine set
 
 注意到这里的定义和 affine set 的极为相似，区别只在 $\lambda$ 的范围。对于 affine set，它要求经过 $\boldsymbol{x}\_1, \boldsymbol{x}\_2$ 的整个 line 都在集合中，而 convex set 只要求连接 $\boldsymbol{x}\_1, \boldsymbol{x}\_2$ 的 line segment 在集合中即可，所以 convex set 的要求要松很多，所有的 affine set 都同时是 convex set。
 
+下图左边是一个 convex set，右边不是
+
+<object data="/resource/NNP/04-convex/convex_example.svg" type="image/svg+xml" class="blkcenter"></object>
+
 Convex set 的例子包括 empty set, singleton set, $\mathbb{R}$ 等等。
 
 在 convex set 的基础上我们可以构造新的 convex set，常见操作包括
@@ -120,8 +124,20 @@ Convex set 的例子包括 empty set, singleton set, $\mathbb{R}$ 等等。
 
 上述操作得到的 set 依然是 convex set，证明比较简单，就略过了。
 
+<blockquote>
+给定集合 $S$，所有包含 $S$ 的 convex set 的交集被称为 $S$ 对应的 convex hull
+</blockquote>
+
+Convex hull 是包含 $S$ 的最小的 convex set。
+
 #### Hyperplane
 
 <blockquote>
 Hyperplane 可以被定义为 $\boldsymbol{ax}=b$，其中 $\boldsymbol{a}$ 是 hyperplane 的 normal vector
 </blockquote>
+
+* Closed positive half-space: $\boldsymbol{ax} \geq b$
+
+* Closed negative half-space: $\boldsymbol{ax} \leq b$
+
+Hyperplane 是一个 convex set，所以 $A\boldsymbol{x} = \boldsymbol{b}$ 的解集也是一个 convex set，因为 $A\boldsymbol{x} = \boldsymbol{b}$ 可以被看成是一堆 $\boldsymbol{ax} = b$ 的交集。
