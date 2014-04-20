@@ -100,6 +100,16 @@ Line segment 也被记为 $LS[\boldsymbol{x}_1, \boldsymbol{x}_2]$
 
 $A\boldsymbol{x} = \boldsymbol{b}$ 的解集属于 affine set
 
+<blockquote>
+令 $X = \{ \boldsymbol{x}_1, \boldsymbol{x}_2, \cdots, \boldsymbol{x}_k \}$，如果一个点 
+
+$$\boldsymbol{x} = \sum_{i=1}^{k} \lambda_i \boldsymbol{x}_i, \;\; \sum_{i=1}^{k} \lambda_i = 1$$
+
+则这个点被称为 affine combination of points in $X$。所有可能的 affine combination 构成的集合被称为 affine hull 
+
+$$aff(X) = \{\sum_{i=1}^{k} \lambda_i \boldsymbol{x}_i: \boldsymbol{x}_1, \cdots, \boldsymbol{x}_k \in X, \sum_{i=1}^{k} \lambda_i = 1\}$$
+</blockquote>
+
 #### Convex Set
 
 <blockquote>
@@ -133,11 +143,19 @@ Convex hull 是包含 $S$ 的最小的 convex set。
 #### Hyperplane
 
 <blockquote>
-Hyperplane 可以被定义为 $\boldsymbol{ax}=b$，其中 $\boldsymbol{a}$ 是 hyperplane 的 normal vector
+令 $\boldsymbol{a} \in \mathbb{R}^n, \boldsymbol{a} \neq 0, b \in \mathbb{R}$, 集合 $H = \{\boldsymbol{x}: \boldsymbol{a}^T \boldsymbol{x} = b\}$ 被称为 hyperplane，其中 $\boldsymbol{a}$ 被称为 normal vector
 </blockquote>
+
+另一种定义 hyperplane 的方法是，如果已知一个点 $\boldsymbol{x}\_0 \in H$，则 hyperplane 可以表示为 $\boldsymbol{a}^T (\boldsymbol{x} - \boldsymbol{x}\_0) = 0$
+
+* 如果 $\Vert \boldsymbol{a} \Vert = 1$，则 $b$ 就是原点到 $H$ 的距离
 
 * Closed positive half-space: $\boldsymbol{ax} \geq b$
 
 * Closed negative half-space: $\boldsymbol{ax} \leq b$
+
+下图给出了一个对 $f(\boldsymbol{x})$ 的 contour 的一阶近似的 hyperplane，其中 $g(\boldsymbol{x}\_0)$ 是 gradient
+
+<object data="/resource/NNP/04-convex/contour_app.svg" type="image/svg+xml" class="blkcenter"></object>
 
 Hyperplane 是一个 convex set，所以 $A\boldsymbol{x} = \boldsymbol{b}$ 的解集也是一个 convex set，因为 $A\boldsymbol{x} = \boldsymbol{b}$ 可以被看成是一堆 $\boldsymbol{ax} = b$ 的交集。
