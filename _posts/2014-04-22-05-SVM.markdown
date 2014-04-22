@@ -1,0 +1,8 @@
+---
+layout: post
+title: 05 - Support Vector Machine
+categories: hcipr
+tags: support vector machine, svm
+---
+
+### Loss Function
