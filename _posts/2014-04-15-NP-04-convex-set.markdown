@@ -150,12 +150,35 @@ Convex hull 是包含 $S$ 的最小的 convex set。
 
 * 如果 $\Vert \boldsymbol{a} \Vert = 1$，则 $b$ 就是原点到 $H$ 的距离
 
-* Closed positive half-space: $\boldsymbol{ax} \geq b$
+* Closed positive half-space: $\boldsymbol{a}^T\boldsymbol{x} \geq b$
 
-* Closed negative half-space: $\boldsymbol{ax} \leq b$
+* Closed negative half-space: $\boldsymbol{a}^T\boldsymbol{x} \leq b$
 
 下图给出了一个对 $f(\boldsymbol{x})$ 的 contour 的一阶近似的 hyperplane，其中 $g(\boldsymbol{x}\_0)$ 是 gradient
 
 <object data="/resource/NNP/04-convex/contour_app.svg" type="image/svg+xml" class="blkcenter"></object>
 
-Hyperplane 是一个 convex set，所以 $A\boldsymbol{x} = \boldsymbol{b}$ 的解集也是一个 convex set，因为 $A\boldsymbol{x} = \boldsymbol{b}$ 可以被看成是一堆 $\boldsymbol{ax} = b$ 的交集。
+Hyperplane 是一个 convex set，所以 $A\boldsymbol{x} = \boldsymbol{b}$ 的解集也是一个 convex set，因为 $A\boldsymbol{x} = \boldsymbol{b}$ 可以被看成是一堆 $\boldsymbol{a}^T\boldsymbol{x} = b$ 的交集。
+
+#### Convex Set 相关定理
+
+<blockquote>
+给定 $S \in \mathbb{R}^n$ 为 closed convex set，$\boldsymbol{y} \notin S$，则必存在 $\boldsymbol{x}_0 \in S$ 满足 $\boldsymbol{x}_0 = \arg\min_{\boldsymbol{x} \in S} \Vert \boldsymbol{y} - \boldsymbol{x} \Vert$
+</blockquote>
+
+* 证明
+
+  由于 $\Vert \boldsymbol{y} - \boldsymbol{x} \Vert$ 是 continuous function，所以如果 $S$ 是 compact set，则根据 Weiestrass' therom，$S$ 中必存在一个点 $\boldsymbol{x}\_0$ 使得 $\Vert \boldsymbol{y} - \boldsymbol{x} \Vert$ 最小。不过 $S$ 只是个 closed set，不是 bounded set，因此 Weiestrass' therom 不能直接应用。
+
+  假设 $\boldsymbol{x}\_1 \in S, \; \delta = \Vert \boldsymbol{y} - \boldsymbol{x}\_1 \Vert$，另 $C = \\{ \boldsymbol{x}: \Vert \boldsymbol{y} - \boldsymbol{x} \Vert \leq 2\delta \\}$，如下图所示
+
+  <object data="/resource/NNP/04-convex/convex_therom_1.svg" type="image/svg+xml" class="blkcenter"></object>
+
+  易知 $S \cap C$ 一个 compact set，因此在 $S\cap C$ 中必存在一个点 $\boldsymbol{x}\_0$ 满足 $\boldsymbol{x}_0 = \arg\min_{\boldsymbol{x} \in S \cap C} \Vert \boldsymbol{y} - \boldsymbol{x} \Vert$，而 $\Vert \boldsymbol{y} - \boldsymbol{x} \Vert > 2\delta \;\; \forall\boldsymbol{x} \in S \setminus C$，因此 $\boldsymbol{x}\_0$ 同样满足 $\boldsymbol{x}_0 = \arg\min_{\boldsymbol{x} \in S} \Vert \boldsymbol{y} - \boldsymbol{x} \Vert$。
+
+<blockquote>
+给定 $S \in \mathbb{R}^n$ 为 closed convex set，$\boldsymbol{y} \notin S$ <br/>
+$\boldsymbol{x}_0 = \arg\min_{\boldsymbol{x} \in S} \Vert \boldsymbol{y} - \boldsymbol{x} \Vert$ 当且仅当 $(\boldsymbol{y} - \boldsymbol{x}_0)^T(\boldsymbol{x} - \boldsymbol{x}_0) < 0 \;\; \forall \boldsymbol{x} \in S$
+</blockquote>
+
+这个定理通俗一点讲，就是如果 $\boldsymbol{x}\_0$ 是 $S$ 中与 $\boldsymbol{y}$ 距离最近的点，则所有其他 $S$ 中的点和 $\boldsymbol{x}\_0$ 的连线与 $\boldsymbol{y}$ 和 $\boldsymbol{x}\_0$ 的连线都构成钝角，如下图所示
