@@ -25,3 +25,11 @@ $$
 $$
 \therefore f(x) = c = E\_{Y|X}(Y|X=x)
 $$
+
+#### (2.26)
+
+(2.26) 下面的 $\hat{y}\_0 = x\_0^T \hat{\beta}$ 等价于 $\hat{y}\_0 = x\_0^T \beta + \sum\_{i=1}^{N} l\_i(x\_0) \varepsilon\_i$ where $l\_i(x\_0)$ is the ith element of $\boldsymbol{X}(\boldsymbol{X}^T\boldsymbol{X})^{-1}x\_0$
+
+后面那个 $\hat{y}\_0$ 用 matrix 表示就是 $\hat{y}\_0 = x\_0^T \beta + (\boldsymbol{X}(\boldsymbol{X}^T\boldsymbol{X})^{-1}x\_0)^T \varepsilon$
+
+对 $Y = X^T \beta + \varepsilon$ 应用 least square 即 $(\boldsymbol{X}\hat{\beta} - \boldsymbol{X}\beta - \varepsilon)^T(\boldsymbol{X}\hat{\beta} - \boldsymbol{X}\beta - \varepsilon)$，展开求偏导，可得 $(\hat{\beta} - \beta) = (\boldsymbol{X}^T \boldsymbol{X})^{-1} \boldsymbol{X}^T \varepsilon$，注意到 $\boldsymbol{X}^T\boldsymbol{X}$ 是 symmetric matrix，所以 $(\boldsymbol{X}^T\boldsymbol{X})^{-1} = ((\boldsymbol{X}^T\boldsymbol{X})^{-1})^T$，则有 $(\hat{\beta} - \beta) = (\boldsymbol{X}(\boldsymbol{X}^T\boldsymbol{X})^{-1})^T \varepsilon$，等式两边同时于 $x\_0$ 做内积，很容易就推出上面的式子。
