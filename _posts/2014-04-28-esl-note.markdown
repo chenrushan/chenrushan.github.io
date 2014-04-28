@@ -1,0 +1,27 @@
+---
+layout: post
+title: Note of The Element of Statistical Learning
+categories: ml
+---
+
+### 公式推导
+
+#### (2.12) -> (2.13)
+
+$$
+\begin{align}
+& E\_{Y|X}([Y-c]^2 | X=x)  \\\\
+= & E\_{Y|X}(Y^2 - 2cY + c^2 | x)  \\\\
+= & E\_{Y|X}(Y^2 | x) - E\_{Y|X}(2cY | x) + c^2  \\\\
+\end{align}
+$$
+
+$$
+\begin{align}
+\frac{\partial E\_{Y|X}([Y-c]^2 | X=x)}{\partial c} = 2c - 2E\_{Y|X}(Y|X = x) = 0
+\end{align}
+$$
+
+$$
+\therefore f(x) = c = E\_{Y|X}(Y|X=x)
+$$
