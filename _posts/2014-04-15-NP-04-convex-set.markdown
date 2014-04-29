@@ -163,22 +163,56 @@ Hyperplane 是一个 convex set，所以 $A\boldsymbol{x} = \boldsymbol{b}$ 的�
 #### Convex Set 相关定理
 
 <blockquote>
-给定 $S \in \mathbb{R}^n$ 为 closed convex set，$\boldsymbol{y} \notin S$，则必存在 $\boldsymbol{x}_0 \in S$ 满足 $\boldsymbol{x}_0 = \arg\min_{\boldsymbol{x} \in S} \Vert \boldsymbol{y} - \boldsymbol{x} \Vert$
+给定 $S \in \mathbb{R}^n$ 为 closed convex set，$\boldsymbol{y} \notin S$，则存在唯一的一个点 $\boldsymbol{x}_0 \in S$ 满足 $\boldsymbol{x}_0 = \arg\min_{\boldsymbol{x} \in S} \Vert \boldsymbol{y} - \boldsymbol{x} \Vert$
 </blockquote>
 
 * 证明
 
-  由于 $\Vert \boldsymbol{y} - \boldsymbol{x} \Vert$ 是 continuous function，所以如果 $S$ 是 compact set，则根据 Weiestrass' therom，$S$ 中必存在一个点 $\boldsymbol{x}\_0$ 使得 $\Vert \boldsymbol{y} - \boldsymbol{x} \Vert$ 最小。不过 $S$ 只是个 closed set，不是 bounded set，因此 Weiestrass' therom 不能直接应用。
+  * 首先证明存在这样的 $\boldsymbol{x}\_0$
 
-  假设 $\boldsymbol{x}\_1 \in S, \; \delta = \Vert \boldsymbol{y} - \boldsymbol{x}\_1 \Vert$，另 $C = \\{ \boldsymbol{x}: \Vert \boldsymbol{y} - \boldsymbol{x} \Vert \leq 2\delta \\}$，如下图所示
+     由于 $\Vert \boldsymbol{y} - \boldsymbol{x} \Vert$ 是 continuous function，所以如果 $S$ 是 compact set，则根据 Weiestrass' therom，$S$ 中必存在一个点 $\boldsymbol{x}\_0$ 使得 $\Vert \boldsymbol{y} - \boldsymbol{x} \Vert$ 最小。不过 $S$ 只是个 closed set，不是 bounded set，因此 Weiestrass' therom 不能直接应用。
 
-  <object data="/resource/NNP/04-convex/convex_therom_1.svg" type="image/svg+xml" class="blkcenter"></object>
+     假设 $\boldsymbol{x}\_1 \in S, \; \delta = \Vert \boldsymbol{y} - \boldsymbol{x}\_1 \Vert$，令 $C = \\{ \boldsymbol{x}: \Vert \boldsymbol{y} - \boldsymbol{x} \Vert \leq 2\delta \\}$，如下图所示
 
-  易知 $S \cap C$ 一个 compact set，因此在 $S\cap C$ 中必存在一个点 $\boldsymbol{x}\_0$ 满足 $\boldsymbol{x}_0 = \arg\min_{\boldsymbol{x} \in S \cap C} \Vert \boldsymbol{y} - \boldsymbol{x} \Vert$，而 $\Vert \boldsymbol{y} - \boldsymbol{x} \Vert > 2\delta \;\; \forall\boldsymbol{x} \in S \setminus C$，因此 $\boldsymbol{x}\_0$ 同样满足 $\boldsymbol{x}_0 = \arg\min_{\boldsymbol{x} \in S} \Vert \boldsymbol{y} - \boldsymbol{x} \Vert$。
+     <object data="/resource/NNP/04-convex/convex_therom_1.svg" type="image/svg+xml" class="blkcenter"></object>
+
+     易知 $S \cap C$ 一个 compact set，因此在 $S\cap C$ 中必存在一个点 $\boldsymbol{x}\_0$ 满足 $\boldsymbol{x}_0 = \arg\min_{\boldsymbol{x} \in S \cap C} \Vert \boldsymbol{y} - \boldsymbol{x} \Vert$，而 $\Vert \boldsymbol{y} - \boldsymbol{x} \Vert > 2\delta \;\; \forall\boldsymbol{x} \in S \setminus C$，因此 $\boldsymbol{x}\_0$ 同样满足 $\boldsymbol{x}_0 = \arg\min_{\boldsymbol{x} \in S} \Vert \boldsymbol{y} - \boldsymbol{x} \Vert$。
+
+  * 然后证明这个点唯一
+
+     假设这个点不唯一，存在另一个点 $\boldsymbol{x}\_1 \in S$ 满足条件，则有 $\Vert \boldsymbol{y} - \boldsymbol{x}\_0 \Vert = \Vert \boldsymbol{y} - \boldsymbol{x}\_1 \Vert$，而 $S$ 是个 convex set，所以 $\frac{\boldsymbol{x}\_0 + \boldsymbol{x}\_1}{2} \in S$。
+     
+     如果 $\boldsymbol{x}\_0$ 和 $\boldsymbol{x}\_1$ 不是一个点的话，根据三角不等式有 
+
+     $$2\Vert \boldsymbol{y} - \frac{\boldsymbol{x}\_0 + \boldsymbol{x}\_1}{2} \Vert < \Vert \boldsymbol{y} - \boldsymbol{x}\_0 \Vert + \Vert \boldsymbol{y} - \boldsymbol{x}\_1 \Vert = 2\Vert \boldsymbol{y} - \boldsymbol{x}\_0 \Vert$$
+
+     也就是 $\Vert \boldsymbol{y} - \frac{\boldsymbol{x}\_0 + \boldsymbol{x}\_1}{2} \Vert < \Vert \boldsymbol{y} - \boldsymbol{x}\_0 \Vert$，这与 $\boldsymbol{x}\_0$ 是最小值点矛盾，所以 $\boldsymbol{x}\_0$ 和 $\boldsymbol{x}\_1$ 必是同一个点。
+
+----------
 
 <blockquote>
 给定 $S \in \mathbb{R}^n$ 为 closed convex set，$\boldsymbol{y} \notin S$ <br/>
-$\boldsymbol{x}_0 = \arg\min_{\boldsymbol{x} \in S} \Vert \boldsymbol{y} - \boldsymbol{x} \Vert$ 当且仅当 $(\boldsymbol{y} - \boldsymbol{x}_0)^T(\boldsymbol{x} - \boldsymbol{x}_0) < 0 \;\; \forall \boldsymbol{x} \in S$
+$\boldsymbol{x}_0 = \arg\min_{\boldsymbol{x} \in S} \Vert \boldsymbol{y} - \boldsymbol{x} \Vert$ 当且仅当 $(\boldsymbol{y} - \boldsymbol{x}_0)^T(\boldsymbol{x} - \boldsymbol{x}_0) \leq 0 \;\; \forall \boldsymbol{x} \in S$
 </blockquote>
 
 这个定理通俗一点讲，就是如果 $\boldsymbol{x}\_0$ 是 $S$ 中与 $\boldsymbol{y}$ 距离最近的点，则所有其他 $S$ 中的点和 $\boldsymbol{x}\_0$ 的连线与 $\boldsymbol{y}$ 和 $\boldsymbol{x}\_0$ 的连线都构成钝角，如下图所示
+
+<object data="/resource/NNP/04-convex/convex_therom_2.svg" type="image/svg+xml" class="blkcenter"></object>
+
+* 证明
+  
+  * $\boldsymbol{x}_0 = \arg\min_{\boldsymbol{x} \in S} \Vert \boldsymbol{y} - \boldsymbol{x} \Vert \Rightarrow (\boldsymbol{y} - \boldsymbol{x}_0)^T(\boldsymbol{x} - \boldsymbol{x}_0) \leq 0 \;\; \forall \boldsymbol{x} \in S$
+
+     由于 $\boldsymbol{x}\_0$ 是最小值点，所以 $\forall \boldsymbol{x} \in S$，我们都有 $\Vert \boldsymbol{y} - \boldsymbol{x}\_0 \Vert^2 \leq \Vert \boldsymbol{y} - (\boldsymbol{x}\_0 + \lambda(\boldsymbol{x} - \boldsymbol{x}\_0))\Vert^2\;\; \lambda \in [0, 1]$，把左边式子展开有
+
+     $$
+     \begin{align}
+     \Vert \boldsymbol{y} - \boldsymbol{x}\_0 \Vert^2 & \leq \Vert \boldsymbol{y} - (\boldsymbol{x}\_0 + \lambda(\boldsymbol{x} - \boldsymbol{x}\_0))\Vert^2 \\\\
+     & = \Vert \boldsymbol{y} - \boldsymbol{x}\_0 \Vert^2 - 2 \lambda \Vert  \boldsymbol{y} - \boldsymbol{x}\_0 \Vert \Vert \boldsymbol{x} - \boldsymbol{x}\_0\Vert + \lambda^2 \Vert \boldsymbol{x} - \boldsymbol{x}\_0\Vert \\\\
+     \end{align}
+     $$
+
+     由此推出 $2 \Vert  \boldsymbol{y} - \boldsymbol{x}\_0 \Vert \Vert \boldsymbol{x} - \boldsymbol{x}\_0\Vert \leq \lambda \Vert \boldsymbol{x} - \boldsymbol{x}\_0\Vert$，不等式两边对 $\lambda$ 取极限 $\lambda \rightarrow 0^+$，有 $(\boldsymbol{y} - \boldsymbol{x}_0)^T(\boldsymbol{x} - \boldsymbol{x}_0) \leq 0$
+
+  * $(\boldsymbol{y} - \boldsymbol{x}_0)^T(\boldsymbol{x} - \boldsymbol{x}_0) \leq 0 \;\; \forall \boldsymbol{x} \in S \Rightarrow \boldsymbol{x}_0 = \arg\min_{\boldsymbol{x} \in S} \Vert \boldsymbol{y} - \boldsymbol{x} \Vert$
+
