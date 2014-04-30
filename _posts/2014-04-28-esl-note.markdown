@@ -39,3 +39,8 @@ $$
 公式 (2.25) 和 (2.27) 都是计算 MSE 的，不同的是，(2.25) 对应的模型是个 determinstic function $Y = f(X)$，而 (2.27) 对应的是 $Y = f(X) + \varepsilon, \; \varepsilon \sim N(0, \delta^2)$，所以是个 non-determinstic function。这也造成了 (2.25) 和 (2.27) 不同，对于 determinstic function，$MSE(x\_0) = E\_{\mathcal{T}}(y\_0 - \hat{y}\_0)^2$，而对于 non-determinstic function 就要外面再套一个 $E\_{y\_0 | x\_0}$ 变成 $E\_{y\_0 | x\_0}E\_{\mathcal{T}}(y\_0 - \hat{y}\_0)^2$。
 
 上面公式中 $E\_{\mathcal{T}}(y\_0 - \hat{y}\_0)^2$ 变化的是 $\hat{y}\_0$，对于不同的 $\mathcal{T}$，$\hat{y}\_0$ 是不同的，对于给定的一个 $\mathcal{T}$，$\hat{y}\_0$ 是确定的。
+
+### Good Sites
+
+1. [Understanding the Bias-Variance Tradeoff](http://scott.fortmann-roe.com/docs/BiasVariance.html)
+
