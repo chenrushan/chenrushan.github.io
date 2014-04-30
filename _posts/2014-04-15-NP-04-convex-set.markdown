@@ -216,3 +216,33 @@ $\boldsymbol{x}_0 = \arg\min_{\boldsymbol{x} \in S} \Vert \boldsymbol{y} - \bold
 
   * $(\boldsymbol{y} - \boldsymbol{x}_0)^T(\boldsymbol{x} - \boldsymbol{x}_0) \leq 0 \;\; \forall \boldsymbol{x} \in S \Rightarrow \boldsymbol{x}_0 = \arg\min_{\boldsymbol{x} \in S} \Vert \boldsymbol{y} - \boldsymbol{x} \Vert$
 
+     $$
+     \begin{align}
+     \Vert \boldsymbol{y} - \boldsymbol{x} \Vert^2 = & \Vert (\boldsymbol{y} - \boldsymbol{x}\_0) - (\boldsymbol{x} - \boldsymbol{x}\_0) \Vert^2 \\\\
+     = & \Vert \boldsymbol{y} - \boldsymbol{x}\_0 \Vert^2 - 2 \Vert \boldsymbol{y} - \boldsymbol{x}\_0 \Vert\Vert \boldsymbol{x} - \boldsymbol{x}\_0 \Vert + \Vert \boldsymbol{x} - \boldsymbol{x}\_0 \Vert^2
+     \end{align}
+     $$
+
+     所以如果 $(\boldsymbol{y} - \boldsymbol{x}_0)^T(\boldsymbol{x} - \boldsymbol{x}_0) \leq 0$ 则 $\Vert \boldsymbol{y} - \boldsymbol{x} \Vert^2 \geq \Vert \boldsymbol{y} - \boldsymbol{x}\_0 \Vert^2\;\; \forall \boldsymbol{x} \in S$
+
+#### Seperating Hyperplane
+
+<blockquote>
+给定集合 $S_1, S_2$，如果存在 hyperplane $\boldsymbol{a}^T\boldsymbol{x} = b$ 满足 $\boldsymbol{a}^T\boldsymbol{x} \geq b \; \forall x \in S_1,\;\boldsymbol{a}^T\boldsymbol{x} \leq b \; \forall x \in S_2$，则 $\boldsymbol{a}^T\boldsymbol{x} = b$ 称为 $S_1, S_2$ 的 seperating hyperplane。
+</blockquote>
+
+* 如果条件变为 $\boldsymbol{a}^T\boldsymbol{x} > b \; \forall x \in S_1,\;\boldsymbol{a}^T\boldsymbol{x} < b \; \forall x \in S_2$，则称为 strictly seperate
+
+* 如果条件变为 $\boldsymbol{a}^T\boldsymbol{x} > b + \varepsilon \; \forall x \in S_1 \; \forall \varepsilon \geq 0,\;\boldsymbol{a}^T\boldsymbol{x} \leq b \; \forall x \in S_2$，则称为 strongly seperate
+
+另外，根据上面给出的两个 convex set 定理，给定一个 closed convex set $S$ 和点 $\boldsymbol{y} \notin S$，一定存在一个 hyperplane $\boldsymbol{a}^T\boldsymbol{x} = b$ 能 seperate $\boldsymbol{y}$ 和 $S$。因为 $(\boldsymbol{y} - \boldsymbol{x}_0)^T(\boldsymbol{x} - \boldsymbol{x}_0) \leq 0 \;\; \forall \boldsymbol{x} \in S$，所以只要令 $\boldsymbol{a} = \boldsymbol{y} - \boldsymbol{x}_0, b = \boldsymbol{a}^T \boldsymbol{x}\_0$，就能使得 $\boldsymbol{a}^T\boldsymbol{x} \leq b \; \forall \boldsymbol{x} \in S$ 同时 $\boldsymbol{a}^T \boldsymbol{y} \geq b$。
+
+#### Cone
+
+<blockquote>
+给定集合 $C$，如果给定任一 $\boldsymbol{x} \in C$ 都有 $\lambda \boldsymbol{x} \in C \; \forall \lambda \in \mathbb{R}$，则 $C$ 被称为 Cone
+</blockquote>
+
+* Example. 一条直线是一个 cone，两条相交的直线也是一个 cone
+
+#### Farkas' Lemma
