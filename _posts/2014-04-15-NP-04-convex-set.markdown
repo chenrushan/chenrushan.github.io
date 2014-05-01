@@ -246,3 +246,10 @@ $\boldsymbol{x}_0 = \arg\min_{\boldsymbol{x} \in S} \Vert \boldsymbol{y} - \bold
 * Example. 一条直线是一个 cone，两条相交的直线也是一个 cone
 
 #### Farkas' Lemma
+
+<blockquote>
+令 $A \in \mathbb{R}^{m\times n}, \boldsymbol{c} \in \mathbb{R}^n$，则下面两个结论有且只有一个是成立的 <br/>
+1. $\exists \boldsymbol{x} \in \mathbb{R}^n \;\;s.t.\;\; A\boldsymbol{x} \leq \boldsymbol{0}, \boldsymbol{c}^T \boldsymbol{x} > 0$<br/>
+2. $\exists \boldsymbol{y} \in \mathbb{R}^m \;\;s.t.\;\; A^T\boldsymbol{y} = \boldsymbol{c}, \boldsymbol{y} \geq \boldsymbol{0}$
+</blockquote>
+
