@@ -163,7 +163,7 @@ A norm on $\mathbb{R}^n$ is real-value function $\Vert \cdot \Vert: \mathbb{R}^n
 <ul>
 <li>$\Vert \boldsymbol{x} \Vert \geq 0$ for every $\boldsymbol{x} \in \mathbb{R}^n$, and $\Vert \boldsymbol{x} \Vert = 0$ iff $\boldsymbol{x} = 0$.</li>
 <li>$\Vert \alpha \boldsymbol{x} \Vert = |\alpha|\Vert \boldsymbol{x} \Vert$ for every $\boldsymbol{x} \in \mathbb{R}^n$ and $\alpha \in \mathbb{R}$.</li>
-<li>$\Vert \boldsymbol{x} + y\Vert \leq \Vert \boldsymbol{x} \Vert + \Vert y \Vert$ for every $\boldsymbol{x} \in \mathbb{R}^n$ and $y \in \mathbb{R}^n$.</li>
+<li>$\Vert \boldsymbol{x} + \boldsymbol{y}\Vert \leq \Vert \boldsymbol{x} \Vert + \Vert \boldsymbol{y} \Vert$ for every $\boldsymbol{x} \in \mathbb{R}^n$ and $\boldsymbol{y} \in \mathbb{R}^n$.</li>
 </ul>
 </blockquote>
 
