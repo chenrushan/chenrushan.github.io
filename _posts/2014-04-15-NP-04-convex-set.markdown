@@ -165,7 +165,7 @@ Hyperplane 是一个 convex set，所以 $A\boldsymbol{x} = \boldsymbol{b}$ 的�
 #### Convex Set 相关定理
 
 <blockquote>
-给定 $S \in \mathbb{R}^n$ 为 closed convex set，$\boldsymbol{y} \notin S$，则存在唯一的一个点 $\boldsymbol{x}_0 \in S$ 满足 $\boldsymbol{x}_0 = \arg\min_{\boldsymbol{x} \in S} \Vert \boldsymbol{y} - \boldsymbol{x} \Vert$
+给定 $S \subset \mathbb{R}^n$ 为 closed convex set，$\boldsymbol{y} \notin S$，则存在唯一的一个点 $\boldsymbol{x}_0 \in S$ 满足 $\boldsymbol{x}_0 = \arg\min_{\boldsymbol{x} \in S} \Vert \boldsymbol{y} - \boldsymbol{x} \Vert$
 </blockquote>
 
 * 证明
@@ -182,7 +182,7 @@ Hyperplane 是一个 convex set，所以 $A\boldsymbol{x} = \boldsymbol{b}$ 的�
 
   * 然后证明这个点唯一
 
-     假设这个点不唯一，存在另一个点 $\boldsymbol{x}\_1 \in S$ 满足条件，则有 $\Vert \boldsymbol{y} - \boldsymbol{x}\_0 \Vert = \Vert \boldsymbol{y} - \boldsymbol{x}\_1 \Vert$，而 $S$ 是个 convex set，所以 $\frac{\boldsymbol{x}\_0 + \boldsymbol{x}\_1}{2} \in S$。
+     假设这个点不唯一，存在另一个点 $\boldsymbol{x}\_1 \in S$ 满足条件，即 $\Vert \boldsymbol{y} - \boldsymbol{x}\_0 \Vert = \Vert \boldsymbol{y} - \boldsymbol{x}\_1 \Vert$，因为 $S$ 是个 convex set，所以 $\frac{\boldsymbol{x}\_0 + \boldsymbol{x}\_1}{2} \in S$。
      
      如果 $\boldsymbol{x}\_0$ 和 $\boldsymbol{x}\_1$ 不是一个点的话，根据三角不等式有 
 
@@ -193,7 +193,7 @@ Hyperplane 是一个 convex set，所以 $A\boldsymbol{x} = \boldsymbol{b}$ 的�
 ----------
 
 <blockquote>
-给定 $S \in \mathbb{R}^n$ 为 closed convex set，$\boldsymbol{y} \notin S$ <br/>
+给定 $S \subset \mathbb{R}^n$ 为 closed convex set，$\boldsymbol{y} \notin S$ <br/>
 $\boldsymbol{x}_0 = \arg\min_{\boldsymbol{x} \in S} \Vert \boldsymbol{y} - \boldsymbol{x} \Vert$ 当且仅当 $(\boldsymbol{y} - \boldsymbol{x}_0)^T(\boldsymbol{x} - \boldsymbol{x}_0) \leq 0 \;\; \forall \boldsymbol{x} \in S$
 </blockquote>
 
@@ -271,7 +271,7 @@ $\boldsymbol{x}_0 = \arg\min_{\boldsymbol{x} \in S} \Vert \boldsymbol{y} - \bold
 2. $\exists \boldsymbol{y} \in \mathbb{R}^m \;\;s.t.\;\; A^T\boldsymbol{y} = \boldsymbol{c}, \boldsymbol{y} \geq \boldsymbol{0}$
 </blockquote>
 
-首先从几何的角度直观理解一下 Farkas' lemma。令 $A = \begin{pmatrix} \boldsymbol{a}\_1 \\\\ \boldsymbol{a}_2 \\\\ \boldsymbol{a}_3 \end{pmatrix}$，其中 $\boldsymbol{a}\_i$ 为行向量，考虑下面的两个图，左边图对应上面的结论 1，其中蓝色区域对应所有满足 $A\boldsymbol{x} \leq 0, \boldsymbol{c}^T\boldsymbol{x} > 0$ 的 $\boldsymbol{x}$。右边图对应结论 2，其中 $\boldsymbol{c}^T\boldsymbol{x} < 0$，但 $\boldsymbol{c}$ 可以表示为 3 个 $\boldsymbol{a}$ 向量的线性组合同时系数都大于 0。
+首先从几何的角度直观理解一下 Farkas' lemma。令 $A = \begin{pmatrix} \boldsymbol{a}\_1 \\\\ \boldsymbol{a}_2 \\\\ \boldsymbol{a}_3 \end{pmatrix}$，其中 $\boldsymbol{a}\_i$ 为行向量，考虑下面的两个图，左边图对应上面的结论 1，其中蓝色区域对应所有满足 $A\boldsymbol{x} \leq 0$ 的 $\boldsymbol{x}$。右边图对应结论 2，其中 $\boldsymbol{c}^T\boldsymbol{x} < 0$，但 $\boldsymbol{c}$ 可以表示为 3 个 $\boldsymbol{a}$ 向量的线性组合同时系数都大于 0。
 
 <object data="/resource/NNP/04-convex/farkas.svg" type="image/svg+xml" class="blkcenter"></object>
 
@@ -279,7 +279,7 @@ $\boldsymbol{x}_0 = \arg\min_{\boldsymbol{x} \in S} \Vert \boldsymbol{y} - \bold
 
   * 如果结论 2 成立，则用反证法即可很快的证明 $A\boldsymbol{x} \leq \boldsymbol{0}$ 和 $\boldsymbol{c}^T \boldsymbol{x} > 0$ 不能同时成立。
 
-  * 接下来证明如果结论 2 不成立，则结论 1 必然成立。
+  * 如果结论 2 不成立
 
      结论 2 不成立等价于存在集合 $S = \\{\boldsymbol{x}: \boldsymbol{x} = A^T\boldsymbol{y}, \boldsymbol{y} \geq 0\\}$ 且 $\boldsymbol{c} \notin S$。
      
@@ -287,7 +287,7 @@ $\boldsymbol{x}_0 = \arg\min_{\boldsymbol{x} \in S} \Vert \boldsymbol{y} - \bold
 
      因为 $\boldsymbol{0} \in S$ 所以 $b \geq 0$，所以 $\boldsymbol{a}^T\boldsymbol{c} > 0$。
 
-     $\boldsymbol{a}^T\boldsymbol{x} = \boldsymbol{a}^T A^T \boldsymbol{y} = \boldsymbol{y}^T A\boldsymbol{a} \leq b$，因为 $\boldsymbol{y} \geq 0$，所以如果 $A\boldsymbol{a} > \boldsymbol{0}$，我令 $\boldsymbol{y}$ 趋于无穷大，则 $\boldsymbol{y}^T A\boldsymbol{a} \leq b$ 这个不等式必然不能成立，因此必有 $A\boldsymbol{a} \leq 0$。
+     对于 $S$ 中的 $\boldsymbol{x}$，$b \geq \boldsymbol{a}^T\boldsymbol{x} = \boldsymbol{a}^T A^T \boldsymbol{y} = \boldsymbol{y}^T A\boldsymbol{a}$，因为 $\boldsymbol{y} \geq 0$，所以如果 $A\boldsymbol{a} > \boldsymbol{0}$，我令 $\boldsymbol{y}$ 趋于无穷大，则 $\boldsymbol{y}^T A\boldsymbol{a} \leq b$ 这个不等式必然不能成立，因此必有 $A\boldsymbol{a} \leq 0$。
 
 ----------
 
@@ -311,7 +311,7 @@ $\boldsymbol{x}_0 = \arg\min_{\boldsymbol{x} \in S} \Vert \boldsymbol{y} - \bold
 
   至此也就构造出了上述推论。
 
-### Supporting Hyperplane
+#### Supporting Hyperplane
 
 <blockquote>
 令 $S \neq \emptyset \subset \mathbb{R}^n$，$\boldsymbol{x}_0$ 为 $S$ 的 boundary point，如果存在 hyperplane $\boldsymbol{a}^T(\boldsymbol{x} - \boldsymbol{x}_0) = 0$ 使得<br/>
