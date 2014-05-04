@@ -235,13 +235,11 @@ $\boldsymbol{x}_0 = \arg\min_{\boldsymbol{x} \in S} \Vert \boldsymbol{y} - \bold
 
 * 如果条件变为 $\boldsymbol{a}^T\boldsymbol{x} > b \; \forall x \in S_1,\;\boldsymbol{a}^T\boldsymbol{x} < b \; \forall x \in S_2$，则称为 strictly seperate
 
-* 如果条件变为 $\boldsymbol{a}^T\boldsymbol{x} > b + \varepsilon \; \forall x \in S_1 \; \forall \varepsilon \geq 0,\;\boldsymbol{a}^T\boldsymbol{x} \leq b \; \forall x \in S_2$，则称为 strongly seperate
+* 如果条件变为 $\boldsymbol{a}^T\boldsymbol{x} \geq b + \varepsilon \; \forall x \in S_1 \; \forall \varepsilon > 0,\;\boldsymbol{a}^T\boldsymbol{x} \leq b \; \forall x \in S_2$，则称为 strongly seperate
 
-另外，根据上面给出的两个 convex set 定理，给定一个 closed convex set $S$ 和点 $\boldsymbol{y} \notin S$，一定存在一个 hyperplane $\boldsymbol{a}^T\boldsymbol{x} = b$ 能 seperate $\boldsymbol{y}$ 和 $S$。如下两个 hyperplane 均满足要求
+另外，根据上面给出的两个 convex set 定理，给定一个 closed convex set $S$ 和点 $\boldsymbol{y} \notin S$，一定存在一个 hyperplane $\boldsymbol{a}^T\boldsymbol{x} = b$ 能 seperate $\boldsymbol{y}$ 和 $S$。因为 $(\boldsymbol{y} - \boldsymbol{x}_0)^T(\boldsymbol{x} - \boldsymbol{x}_0) \leq 0 \;\; \forall \boldsymbol{x} \in S$，所以只要令 $\boldsymbol{a} = \boldsymbol{y} - \boldsymbol{x}_0, b = \boldsymbol{a}^T \boldsymbol{x}\_0$，就能使得 $\boldsymbol{a}^T\boldsymbol{x} \leq b \; \forall \boldsymbol{x} \in S$，而 $\boldsymbol{a}^T \boldsymbol{y} - b = (\boldsymbol{y} - \boldsymbol{x}_0)^T(\boldsymbol{y} - \boldsymbol{x}_0)$，因为 $\boldsymbol{y} \neq \boldsymbol{x}\_0$，所以 $\boldsymbol{a}^T \boldsymbol{y} > b$。
 
-* 经过 $\boldsymbol{x}\_0$ 的 hyperplane。因为 $(\boldsymbol{y} - \boldsymbol{x}_0)^T(\boldsymbol{x} - \boldsymbol{x}_0) \leq 0 \;\; \forall \boldsymbol{x} \in S$，所以只要令 $\boldsymbol{a} = \boldsymbol{y} - \boldsymbol{x}_0, b = \boldsymbol{a}^T \boldsymbol{x}\_0$，就能使得 $\boldsymbol{a}^T\boldsymbol{x} \leq b \; \forall \boldsymbol{x} \in S$，而 $\boldsymbol{a}^T \boldsymbol{y} - b = (\boldsymbol{y} - \boldsymbol{x}_0)^T(\boldsymbol{y} - \boldsymbol{x}_0)$，因为 $\boldsymbol{y} \neq \boldsymbol{x}\_0$，所以 $\boldsymbol{a}^T \boldsymbol{y} > b$。
-
-* 经过 $\boldsymbol{y}$ 的 hyperplane。易证 $(\boldsymbol{y} - \boldsymbol{x}_0)^T(\boldsymbol{x} - \boldsymbol{y}) < (\boldsymbol{y} - \boldsymbol{x}_0)^T(\boldsymbol{x} - \boldsymbol{x}_0) \leq 0$ (两边相减即可得该不等式)，所以 $\forall \boldsymbol{x} \in S$ 都有 $(\boldsymbol{y} - \boldsymbol{x}_0)^T(\boldsymbol{x} - \boldsymbol{y}) < 0$，所以这个 hyperplane 也能 seperate $S$ 和 $\boldsymbol{y}$，对应的 $\boldsymbol{a} = \boldsymbol{y} - \boldsymbol{x}_0, b = \boldsymbol{a}^T \boldsymbol{y}$。
+另外，考虑 $\boldsymbol{a} = \boldsymbol{y} - \boldsymbol{x}_0$ 且经过 $\boldsymbol{y}$ 的 hyperplane $H$，即 $(\boldsymbol{y} - \boldsymbol{x}_0)^T(\boldsymbol{x} - \boldsymbol{y})$，易证 $(\boldsymbol{y} - \boldsymbol{x}_0)^T(\boldsymbol{x} - \boldsymbol{y}) < (\boldsymbol{y} - \boldsymbol{x}_0)^T(\boldsymbol{x} - \boldsymbol{x}_0) \leq 0$ (两边相减即可得该不等式)，所以 $\forall \boldsymbol{x} \in S$ 都有 $(\boldsymbol{y} - \boldsymbol{x}_0)^T(\boldsymbol{x} - \boldsymbol{y}) < 0$，也就是 $S \subset H^-$。
 
 ----------
 
@@ -253,7 +251,7 @@ $\boldsymbol{x}_0 = \arg\min_{\boldsymbol{x} \in S} \Vert \boldsymbol{y} - \bold
 
   令 $S = S\_1 - S\_2 = \\{\boldsymbol{x}\_1 - \boldsymbol{x}\_2 : \boldsymbol{x}\_1 \in S\_1, \boldsymbol{x}\_2 \in S\_2\\}$，易知 $\boldsymbol{0} \notin S$。
 
-  根据上面的结论，可以构造一个 hyperplane $\boldsymbol{a}^T(\boldsymbol{x} - \boldsymbol{0}) = 0$ 能 seperate $S$ 和 $\boldsymbol{0}$。也就是存在 hyperplane 使得 $\boldsymbol{a}^T\boldsymbol{x}\_1 < \boldsymbol{a}^T\boldsymbol{x}\_2$。
+  根据上面的结论，可以构造一个 hyperplane $H: \boldsymbol{a}^T(\boldsymbol{x} - \boldsymbol{0}) = 0$ 使得 $S \subset H^-$。也就是存在 hyperplane 使得 $\boldsymbol{a}^T\boldsymbol{x}\_1 < \boldsymbol{a}^T\boldsymbol{x}\_2$。
   
 #### Cone
 
