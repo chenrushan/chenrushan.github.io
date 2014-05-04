@@ -237,8 +237,24 @@ $\boldsymbol{x}_0 = \arg\min_{\boldsymbol{x} \in S} \Vert \boldsymbol{y} - \bold
 
 * 如果条件变为 $\boldsymbol{a}^T\boldsymbol{x} > b + \varepsilon \; \forall x \in S_1 \; \forall \varepsilon \geq 0,\;\boldsymbol{a}^T\boldsymbol{x} \leq b \; \forall x \in S_2$，则称为 strongly seperate
 
-另外，根据上面给出的两个 convex set 定理，给定一个 closed convex set $S$ 和点 $\boldsymbol{y} \notin S$，一定存在一个 hyperplane $\boldsymbol{a}^T\boldsymbol{x} = b$ 能 seperate $\boldsymbol{y}$ 和 $S$。因为 $(\boldsymbol{y} - \boldsymbol{x}_0)^T(\boldsymbol{x} - \boldsymbol{x}_0) \leq 0 \;\; \forall \boldsymbol{x} \in S$，所以只要令 $\boldsymbol{a} = \boldsymbol{y} - \boldsymbol{x}_0, b = \boldsymbol{a}^T \boldsymbol{x}\_0$，就能使得 $\boldsymbol{a}^T\boldsymbol{x} \leq b \; \forall \boldsymbol{x} \in S$，而 $\boldsymbol{a}^T \boldsymbol{y} - b = (\boldsymbol{y} - \boldsymbol{x}_0)^T(\boldsymbol{y} - \boldsymbol{x}_0)$，因为 $\boldsymbol{y} \neq \boldsymbol{x}\_0$，所以 $\boldsymbol{a}^T \boldsymbol{y} > b$。
+另外，根据上面给出的两个 convex set 定理，给定一个 closed convex set $S$ 和点 $\boldsymbol{y} \notin S$，一定存在一个 hyperplane $\boldsymbol{a}^T\boldsymbol{x} = b$ 能 seperate $\boldsymbol{y}$ 和 $S$。如下两个 hyperplane 均满足要求
 
+* 经过 $\boldsymbol{x}\_0$ 的 hyperplane。因为 $(\boldsymbol{y} - \boldsymbol{x}_0)^T(\boldsymbol{x} - \boldsymbol{x}_0) \leq 0 \;\; \forall \boldsymbol{x} \in S$，所以只要令 $\boldsymbol{a} = \boldsymbol{y} - \boldsymbol{x}_0, b = \boldsymbol{a}^T \boldsymbol{x}\_0$，就能使得 $\boldsymbol{a}^T\boldsymbol{x} \leq b \; \forall \boldsymbol{x} \in S$，而 $\boldsymbol{a}^T \boldsymbol{y} - b = (\boldsymbol{y} - \boldsymbol{x}_0)^T(\boldsymbol{y} - \boldsymbol{x}_0)$，因为 $\boldsymbol{y} \neq \boldsymbol{x}\_0$，所以 $\boldsymbol{a}^T \boldsymbol{y} > b$。
+
+* 经过 $\boldsymbol{y}$ 的 hyperplane。易证 $(\boldsymbol{y} - \boldsymbol{x}_0)^T(\boldsymbol{x} - \boldsymbol{y}) < (\boldsymbol{y} - \boldsymbol{x}_0)^T(\boldsymbol{x} - \boldsymbol{x}_0) \leq 0$ (两边相减即可得该不等式)，所以 $\forall \boldsymbol{x} \in S$ 都有 $(\boldsymbol{y} - \boldsymbol{x}_0)^T(\boldsymbol{x} - \boldsymbol{y}) < 0$，所以这个 hyperplane 也能 seperate $S$ 和 $\boldsymbol{y}$，对应的 $\boldsymbol{a} = \boldsymbol{y} - \boldsymbol{x}_0, b = \boldsymbol{a}^T \boldsymbol{y}$。
+
+----------
+
+<blockquote>
+如果 $S_1, S_2$ 是非空且无交集的 convex set，那必然存在一个 hyperplane 能 seperate $S_1, S_2$
+</blockquote>
+
+* 证明
+
+  令 $S = S\_1 - S\_2 = \\{\boldsymbol{x}\_1 - \boldsymbol{x}\_2 : \boldsymbol{x}\_1 \in S\_1, \boldsymbol{x}\_2 \in S\_2\\}$，易知 $\boldsymbol{0} \notin S$。
+
+  根据上面的结论，可以构造一个 hyperplane $\boldsymbol{a}^T(\boldsymbol{x} - \boldsymbol{0}) = 0$ 能 seperate $S$ 和 $\boldsymbol{0}$。也就是存在 hyperplane 使得 $\boldsymbol{a}^T\boldsymbol{x}\_1 < \boldsymbol{a}^T\boldsymbol{x}\_2$。
+  
 #### Cone
 
 <blockquote>
@@ -272,3 +288,37 @@ $\boldsymbol{x}_0 = \arg\min_{\boldsymbol{x} \in S} \Vert \boldsymbol{y} - \bold
      因为 $\boldsymbol{0} \in S$ 所以 $b \geq 0$，所以 $\boldsymbol{a}^T\boldsymbol{c} > 0$。
 
      $\boldsymbol{a}^T\boldsymbol{x} = \boldsymbol{a}^T A^T \boldsymbol{y} = \boldsymbol{y}^T A\boldsymbol{a} \leq b$，因为 $\boldsymbol{y} \geq 0$，所以如果 $A\boldsymbol{a} > \boldsymbol{0}$，我令 $\boldsymbol{y}$ 趋于无穷大，则 $\boldsymbol{y}^T A\boldsymbol{a} \leq b$ 这个不等式必然不能成立，因此必有 $A\boldsymbol{a} \leq 0$。
+
+----------
+
+根据 Farkas' lemma，可以得出如下推论
+
+<blockquote>
+令 $A \in \mathbb{R}^{m\times n}$，则下面两个结论有且只有一个是成立的 <br/>
+1. $\exists \boldsymbol{x} \in \mathbb{R}^n \;\;s.t.\;\; A\boldsymbol{x} < \boldsymbol{0}$<br/>
+2. $\exists \boldsymbol{y} \in \mathbb{R}^m \;\;s.t.\;\; A^T\boldsymbol{y} = \boldsymbol{0}, \boldsymbol{y} \geq \boldsymbol{0}$
+</blockquote>
+
+乍一看感觉只要令 $\boldsymbol{c} = \boldsymbol{0}$ 就得出这个推论，其实不然，因为推论里结论 1 是 $A^T\boldsymbol{x} < 0$ 而不是 $A^T\boldsymbol{x} \leq 0$，为了证明这个推论我们需要人为构造一个 $\boldsymbol{c}$。
+
+* 证明
+
+  由于 $A\boldsymbol{x} < 0$ 所以 $A\boldsymbol{x} + z\boldsymbol{e} = (A, \boldsymbol{e})\begin{pmatrix} \boldsymbol{x} \\\\ z\end{pmatrix}\leq 0$ 其中 $z > 0, \boldsymbol{e} = (1, 1, ..., 1)^T \in \mathbb{R}^m$。
+
+  令 $\boldsymbol{c} = (0, 0, ..., 0, 1)^T \in \mathbb{R}^{n+1}$，则有 $\boldsymbol{c}^T \begin{pmatrix} \boldsymbol{x} \\\\ z\end{pmatrix} > 0$。
+
+  这样也就有了 Farkas' lemma 的结论 1，结论 2 相应的是 $(A, \boldsymbol{e})^T \boldsymbol{y} = (0, 0, ..., 0, 1)$，也就是 $A^T \boldsymbol{y} = \boldsymbol{0}, \boldsymbol{e}^T \boldsymbol{y} = 1$。
+
+  至此也就构造出了上述推论。
+
+### Supporting Hyperplane
+
+<blockquote>
+令 $S \neq \emptyset \subset \mathbb{R}^n$，$\boldsymbol{x}_0$ 为 $S$ 的 boundary point，如果存在 hyperplane $\boldsymbol{a}^T(\boldsymbol{x} - \boldsymbol{x}_0) = 0$ 使得<br/>
+1. $S \subseteq H^+$, 即 $\boldsymbol{a}^T(\boldsymbol{x} - \boldsymbol{x}_0) \geq 0 \; \forall \boldsymbol{x} \in S$ 或者 <br/>
+2. $S \subseteq H^-$, 即 $\boldsymbol{a}^T(\boldsymbol{x} - \boldsymbol{x}_0) \leq 0 \; \forall \boldsymbol{x} \in S$<br/>
+则该 hyperplane 称为 $S$ 的 supporting hyperplane
+</blockquote>
+
+* 如果 $S$ 是个 convex set，则在 $\boldsymbol{x}\_0$ 处必然存在 supporting hyperplane。
+
