@@ -40,6 +40,22 @@ $$
 
 上面公式中 $E\_{\mathcal{T}}(y\_0 - \hat{y}\_0)^2$ 变化的是 $\hat{y}\_0$，对于不同的 $\mathcal{T}$，$\hat{y}\_0$ 是不同的，对于给定的一个 $\mathcal{T}$，$\hat{y}\_0$ 是确定的。
 
+(2.25) 的推导的 trick 是 
+
+$$MSE(x\_0) = E\_{\mathcal{T}}(y\_0 - \hat{y}\_0)^2 = E\_{\mathcal{T}}((y\_0 - E\_{\mathcal{T}}[\hat{y}\_0]) + (E\_{\mathcal{T}}[\hat{y}\_0] - \hat{y}\_0))^2$$
+
+(2.27) 的 trick 要多一点，为了方便，我用 $E$ 代替 $E\_{y\_0 | x\_0}E\_{\mathcal{T}}$
+
+$$
+\begin{align}
+EPE(x\_0) = & E(y\_0 - \hat{y}\_0)^2 \\\\
+= & E((y\_0 - f(x\_0)) + (f(x\_0) - \hat{y}\_0))^2 \\\\
+= & E(y\_0 - f(x\_0))^2 + E(f(x\_0) - \hat{y}\_0))^2 + 2E((y\_0 - f(x\_0))(f(x\_0) - \hat{y}\_0))
+\end{align}
+$$
+
+因为 $f(x\_0)$ 是 determinstic 的，所以 $E(y\_0 f(x\_0)) = f(x\_0)E(y\_0) = f^2(x\_0)$，
+
 ### Good Sites
 
 1. [Understanding the Bias-Variance Tradeoff](http://scott.fortmann-roe.com/docs/BiasVariance.html)
