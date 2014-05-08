@@ -46,7 +46,21 @@ Convex programming 中每个 local minimum 都是 global minimum
 
 * 证明
 
+  假设 local minimum 为 $\boldsymbol{x}^*$，根据 local minimum 的定义我们知道
+
+  $$\boldsymbol{x}^* = \underset{\boldsymbol{x} \in C \cap B(\boldsymbol{x}^*, \delta)}{\arg\min} f(\boldsymbol{x}) $$
+
+  参考下图，其中绿色的圈表示 $C \cap B(\boldsymbol{x}^*, \delta)$
+
   <object data="/resource/NNP/05-convex-func/localisglobal.svg" type="image/svg+xml" class="blkcenter"></object>
+
+  假设 $\boldsymbol{y} \in C \cap B(\boldsymbol{x}^*, \delta)$，$\boldsymbol{z}$ 为 $LS(\boldsymbol{x}^*, \boldsymbol{y})$ 的延长线上任意一点且在 $C$ 内，则 $\boldsymbol{y}$ 可以表示为 $\lambda \boldsymbol{x} + (1 - \lambda) \boldsymbol{z} \; \lambda \in (0, 1)$，则有
+
+  $$
+  f(\boldsymbol{x}^*) \leq f(\boldsymbol{y}) = f(\lambda \boldsymbol{x}^* + (1 - \lambda) \boldsymbol{z}) \leq \lambda f(\boldsymbol{x}^*) + (1 - \lambda) f(\boldsymbol{z})
+  $$
+
+  这也就推出 $f(\boldsymbol{x}^*) \leq f(\boldsymbol{z})$
 
 ----------
 
@@ -59,3 +73,4 @@ Convex programming 的所有 global minimum 构成一个 convex set
 <object data="/resource/NNP/05-convex-func/many_global.svg" type="image/svg+xml" class="blkcenter"></object>
 
 其中最优解是连在一起的。
+
