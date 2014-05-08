@@ -74,3 +74,22 @@ Convex programming 的所有 global minimum 构成一个 convex set
 
 其中最优解是连在一起的。
 
+* 证明
+
+  假设 $\boldsymbol{x}\_1, \boldsymbol{x}\_2$ 为 local minimum
+
+  $$
+  f(\lambda \boldsymbol{x}\_1 + (1 - \lambda) \boldsymbol{x}\_2) \leq \lambda f(\boldsymbol{x}\_1) + (1 - \lambda) f(\boldsymbol{x}\_2) = f(\boldsymbol{x}\_1)
+  $$
+
+  这里不等号不能成立，所以 $\forall \lambda \in [0, 1] \; \lambda \boldsymbol{x}\_1 + (1 - \lambda) \boldsymbol{x}\_2$ 也都是 local minimum
+
+#### Epigraph
+
+给定 $f: X \rightarrow \mathbb{R}$，其对应的 epigraph 是集合 $\\{ (\boldsymbol{x}, y) : \boldsymbol{x} \in X, y \geq f(\boldsymbol{x})\\}$，参考下图，其中填充的部分就是 epigraph，当然 epigraph 是无限延伸的，这里只给出了其中的一部分而已。
+
+<object data="/resource/NNP/05-convex-func/epigraph.svg" type="image/svg+xml" class="blkcenter"></object>
+
+<blockquote>
+给定 $C \in \mathbb{R}^n$ 为 convex set，$f: C \rightarrow \mathbb{R}$ 为 convex function 当且仅当其对应的 epigraph 为 convex set
+</blockquote>

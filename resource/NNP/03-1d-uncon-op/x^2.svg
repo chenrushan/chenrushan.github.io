@@ -9,12 +9,12 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="298.04095"
-   height="222.55157"
-   id="svg5391"
-   version="1.1"
+   sodipodi:docname="epigraph.svg"
    inkscape:version="0.48.4 r9939"
-   sodipodi:docname="x^2.svg">
+   version="1.1"
+   id="svg5391"
+   height="222.55157"
+   width="298.04095">
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -22,11 +22,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.979899"
-     inkscape:cx="61.770355"
-     inkscape:cy="110.50527"
+     inkscape:zoom="1.4"
+     inkscape:cx="170.54498"
+     inkscape:cy="150.69378"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="svg5391"
      showgrid="false"
      inkscape:window-width="1440"
      inkscape:window-height="839"
@@ -76,7 +76,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
