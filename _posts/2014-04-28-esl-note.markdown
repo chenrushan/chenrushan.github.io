@@ -74,7 +74,7 @@ $$
   Var(\hat{y}\_0) = & Var(x\_0^T \beta + \boldsymbol{v}^T \boldsymbol{\varepsilon}) \\\\
   = & E((\boldsymbol{v}^T \boldsymbol{\varepsilon})^2) \\\\
   = & E((\sum\_i v\_i \varepsilon\_i)^2) \\\\
-  = & E(\sum\_i v\_i^2 \varepsilon\_i^2) (\because E(\varepsilon\_i \varepsilon\_j) = 0 \; if \; i \neq j \; \text{they are iid}) \\\\
+  = & E(\sum\_i v\_i^2 \varepsilon\_i^2) (\text{since if} \; i \neq j \; \varepsilon\_i \; \text{and} \; \varepsilon\_j \; \text{are iid, so} \; E(\varepsilon\_i \varepsilon\_j) = 0) \\\\
   = & \delta^2 E(\sum\_i v\_i^2) \\\\
   = & \delta^2 E(\boldsymbol{v}^T \boldsymbol{v}) \\\\
   = & \delta^2 E(x\_0^T(\boldsymbol{X}^T \boldsymbol{X})^{-1}x\_0)
