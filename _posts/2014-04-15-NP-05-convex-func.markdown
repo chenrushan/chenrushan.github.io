@@ -93,3 +93,13 @@ Convex programming 的所有 global minimum 构成一个 convex set
 <blockquote>
 给定 $C \in \mathbb{R}^n$ 为 convex set，$f: C \rightarrow \mathbb{R}$ 为 convex function 当且仅当其对应的 epigraph 为 convex set
 </blockquote>
+
+* 证明
+
+  * convex function $\Rightarrow$ epigraph 为 convex set
+
+     简单，略过
+
+  * epigraph 为 convex set $\Rightarrow$ convex function
+
+     利用 $(\boldsymbol{x}\_1, f(\boldsymbol{x}\_1)), (\boldsymbol{x}\_2, f(\boldsymbol{x}\_2)) \in$ epigraph 的性质即可证得
