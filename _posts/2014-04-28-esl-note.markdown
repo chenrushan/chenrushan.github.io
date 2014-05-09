@@ -28,11 +28,11 @@ $$
 
 #### (2.26)
 
-(2.26) 下面的 $\hat{y}\_0 = x\_0^T \hat{\beta}$ 等价于 $\hat{y}\_0 = x\_0^T \beta + \sum\_{i=1}^{N} l\_i(x\_0) \varepsilon\_i$ where $l\_i(x\_0)$ is the ith element of $\boldsymbol{X}(\boldsymbol{X}^T\boldsymbol{X})^{-1}x\_0$
+(2.26) 下面的 $\hat{y}\_0 = x\_0^T \hat{\beta}$ 等价于 $\hat{y}\_0 = x\_0^T \beta + \sum\_{i=1}^{N} l\_i(x\_0) \boldsymbol{\varepsilon}\_i$ where $l\_i(x\_0)$ is the ith element of $\boldsymbol{X}(\boldsymbol{X}^T\boldsymbol{X})^{-1}x\_0$
 
-后面那个 $\hat{y}\_0$ 用 matrix 表示就是 $\hat{y}\_0 = x\_0^T \beta + (\boldsymbol{X}(\boldsymbol{X}^T\boldsymbol{X})^{-1}x\_0)^T \varepsilon$
+后面那个 $\hat{y}\_0$ 用 matrix 表示就是 $\hat{y}\_0 = x\_0^T \beta + (\boldsymbol{X}(\boldsymbol{X}^T\boldsymbol{X})^{-1}x\_0)^T \boldsymbol{\varepsilon}$
 
-对 $Y = X^T \beta + \varepsilon$ 应用 least square 即 $(\boldsymbol{X}\hat{\beta} - \boldsymbol{X}\beta - \varepsilon)^T(\boldsymbol{X}\hat{\beta} - \boldsymbol{X}\beta - \varepsilon)$，展开求偏导，可得 $(\hat{\beta} - \beta) = (\boldsymbol{X}^T \boldsymbol{X})^{-1} \boldsymbol{X}^T \varepsilon$，注意到 $\boldsymbol{X}^T\boldsymbol{X}$ 是 symmetric matrix，所以 $(\boldsymbol{X}^T\boldsymbol{X})^{-1} = ((\boldsymbol{X}^T\boldsymbol{X})^{-1})^T$，则有 $(\hat{\beta} - \beta) = (\boldsymbol{X}(\boldsymbol{X}^T\boldsymbol{X})^{-1})^T \varepsilon$，等式两边同时于 $x\_0$ 做内积，很容易就推出上面的式子。
+对 $Y = X^T \beta + \varepsilon$ 应用 least square 即 $(\boldsymbol{X}\hat{\beta} - \boldsymbol{X}\beta - \boldsymbol{\varepsilon})^T(\boldsymbol{X}\hat{\beta} - \boldsymbol{X}\beta - \boldsymbol{\varepsilon})$，展开求偏导，可得 $(\hat{\beta} - \beta) = (\boldsymbol{X}^T \boldsymbol{X})^{-1} \boldsymbol{X}^T \boldsymbol{\varepsilon}$，注意到 $\boldsymbol{X}^T\boldsymbol{X}$ 是 symmetric matrix，所以 $(\boldsymbol{X}^T\boldsymbol{X})^{-1} = ((\boldsymbol{X}^T\boldsymbol{X})^{-1})^T$，则有 $(\hat{\beta} - \beta) = (\boldsymbol{X}(\boldsymbol{X}^T\boldsymbol{X})^{-1})^T \boldsymbol{\varepsilon}$，等式两边同时于 $x\_0$ 做内积，很容易就推出上面的式子。
 
 #### (2.25) and (2.27)
 
@@ -40,21 +40,49 @@ $$
 
 上面公式中 $E\_{\mathcal{T}}(y\_0 - \hat{y}\_0)^2$ 变化的是 $\hat{y}\_0$，对于不同的 $\mathcal{T}$，$\hat{y}\_0$ 是不同的，对于给定的一个 $\mathcal{T}$，$\hat{y}\_0$ 是确定的。
 
-(2.25) 的推导的 trick 是 
+* (2.25) 的推导的 trick 是 
 
-$$MSE(x\_0) = E\_{\mathcal{T}}(y\_0 - \hat{y}\_0)^2 = E\_{\mathcal{T}}((y\_0 - E\_{\mathcal{T}}[\hat{y}\_0]) + (E\_{\mathcal{T}}[\hat{y}\_0] - \hat{y}\_0))^2$$
+  $$MSE(x\_0) = E\_{\mathcal{T}}(y\_0 - \hat{y}\_0)^2 = E\_{\mathcal{T}}((y\_0 - E\_{\mathcal{T}}[\hat{y}\_0]) + (E\_{\mathcal{T}}[\hat{y}\_0] - \hat{y}\_0))^2$$
 
-(2.27) 的 trick 要多一点，为了方便，我用 $E$ 代替 $E\_{y\_0 | x\_0}E\_{\mathcal{T}}$
+* (2.27) 的 trick 要多一点，为了方便，我用 $E$ 代替 $E\_{y\_0 | x\_0}E\_{\mathcal{T}}$
 
-$$
-\begin{align}
-EPE(x\_0) = & E(y\_0 - \hat{y}\_0)^2 \\\\
-= & E((y\_0 - f(x\_0)) + (f(x\_0) - \hat{y}\_0))^2 \\\\
-= & E(y\_0 - f(x\_0))^2 + E(f(x\_0) - \hat{y}\_0))^2 + 2E((y\_0 - f(x\_0))(f(x\_0) - \hat{y}\_0))
-\end{align}
-$$
+  $$
+  \begin{align}
+  EPE(x\_0) = & E(y\_0 - \hat{y}\_0)^2 \\\\
+  = & E((y\_0 - f(x\_0)) + (f(x\_0) - \hat{y}\_0))^2 \\\\
+  = & E(y\_0 - f(x\_0))^2 + E(f(x\_0) - \hat{y}\_0))^2 + 2E((y\_0 - f(x\_0))(f(x\_0) - \hat{y}\_0))
+  \end{align}
+  $$
+  
+  因为 $f(x\_0)$ 是 determinstic 的，所以
+  
+  $$E(y\_0 f(x\_0)) = f(x\_0)E(y\_0) = f^2(x\_0)$$
+  $$E(y\_0\hat{y}\_0 - f(x\_0)\hat{y}\_0) = E(\varepsilon \hat{y}\_0) = E\_{y\_0 | x\_0}E\_{\mathcal{T}}(\varepsilon \hat{y}\_0) = E\_{y\_0 | x\_0}(\varepsilon E\_{\mathcal{T}}(\hat{y}\_0)) = E\_{y\_0 | x\_0}(\varepsilon) E\_{\mathcal{T}}(\hat{y}\_0) = 0$$
 
-因为 $f(x\_0)$ 是 determinstic 的，所以 $E(y\_0 f(x\_0)) = f(x\_0)E(y\_0) = f^2(x\_0)$，
+  所以 $EPE(x\_0) = E(y\_0 - f(x\_0))^2 + E(f(x\_0) - \hat{y}\_0))^2$，对后面一项再应用 (2.25) 推导的 trick，就得到了
+
+  $$EPE(x\_0) = \delta^2 + Var(\hat{y}\_0) + Bias^2(\hat{y}\_0)$$
+
+  根据上面一小节关于 (2.26) 中给出的 $\hat{y}\_0$ 的公式可知 $E(\hat{y}\_0) = \boldsymbol{x}\_0^T \beta$，所以 $Bias(\hat{y}\_0) = 0$。
+
+  $Var(\hat{y}\_0) = \delta^2 E(x\_0^T(\boldsymbol{X}^T \boldsymbol{X})^{-1}x\_0)$ 是这么推导的 (想了好久终于想出来，I'm a genius)
+
+  令 $\boldsymbol{v} = (\boldsymbol{X}(\boldsymbol{X}^T\boldsymbol{X})^{-1}x\_0)$
+
+  $$
+  \begin{align}
+  Var(\hat{y}\_0) = & Var(x\_0^T \beta + \boldsymbol{v}^T \boldsymbol{\varepsilon}) \\\\
+  = & E((\boldsymbol{v}^T \boldsymbol{\varepsilon})^2) \\\\
+  = & E((\sum\_i v\_i \varepsilon\_i)^2) \\\\
+  = & E(\sum\_i v\_i^2 \varepsilon\_i^2) (\because E(\varepsilon\_i \varepsilon\_j) = 0 \; if \; i \neq j \; \text{they are iid}) \\\\
+  = & \delta^2 E(\sum\_i v\_i^2) \\\\
+  = & \delta^2 E(\boldsymbol{v}^T \boldsymbol{v}) \\\\
+  = & \delta^2 E(x\_0^T(\boldsymbol{X}^T \boldsymbol{X})^{-1}x\_0)
+  \end{align}
+  $$
+
+  另外意外想到的一个公式是 $tr(\boldsymbol{v}\boldsymbol{v}^T) = \boldsymbol{v}^T\boldsymbol{v}$
+
 
 ### Good Sites
 
