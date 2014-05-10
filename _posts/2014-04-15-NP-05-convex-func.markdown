@@ -103,3 +103,12 @@ Convex programming 的所有 global minimum 构成一个 convex set
   * epigraph 为 convex set $\Rightarrow$ convex function
 
      利用 $(\boldsymbol{x}\_1, f(\boldsymbol{x}\_1)), (\boldsymbol{x}\_2, f(\boldsymbol{x}\_2)) \in$ epigraph 的性质即可证得
+
+与 epigraph 相对的一个概念是 hypograph，hypograph 是这样的集合 $\\{ (\boldsymbol{x}, y) : \boldsymbol{x} \in X, y \leq f(\boldsymbol{x})\\}$
+
+#### Level Set
+
+Level set 是这么一个集合 $C\_{\alpha} = \\{ \boldsymbol{x} \in C : f(\boldsymbol{x}) \leq \alpha, \alpha \in \mathbb{R} \\}$
+
+如果 $f(\boldsymbol{x})$ 是 convex function 则 $C\_{\alpha}$ 是一个 convex set (证明简单)，反之不成立。
+
