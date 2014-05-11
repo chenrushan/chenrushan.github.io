@@ -17,17 +17,17 @@ $$ f(\lambda \boldsymbol{x}_1 + (1 - \lambda) \boldsymbol{x}_2) \leq \lambda f(\
 
 注意 $C$ 是个 convex set，否则不能保证所有的 $\lambda \boldsymbol{x}\_1 + (1 - \lambda)\boldsymbol{x}\_2$ 都在 $C$ 内。
 
-如果条件中 $\leq$ 变成 $<$，同时 $\lambda \in (0, 1)$ 则函数 $f$ 成为 strictly convex function。
+如果条件中 $\leq$ 变成 $<$，同时 $\lambda \in (0, 1)$ 则函数 $f$ 称为 strictly convex function。
 
 Convex function 用下面的图表示最直观了
 
 <object data="/resource/NNP/05-convex-func/convex_func.svg" type="image/svg+xml" class="blkcenter"></object>
 
-Convex function 和 Concave function 是两个相对的概念，函数 $f$ 如果是 concave function，则 $-f$ 就是 convex function；如果 $f$ 如果是 strictly concave function，则 $-f$ 就是 strictly convex function。
+Convex function 和 Concave function 是两个相对的概念，$f$ 如果是 concave function，$-f$ 就是 convex function；如果 $f$ 是 strictly concave function，$-f$ 就是 strictly convex function。
 
 #### Convex Programming Problem
 
-所谓的 convex programming problem，其实就是指如下问题
+所谓的 convex programming problem，就是指如下问题
 
 $$
 \begin{align}
@@ -54,7 +54,7 @@ Convex programming 中每个 local minimum 都是 global minimum
 
   <object data="/resource/NNP/05-convex-func/localisglobal.svg" type="image/svg+xml" class="blkcenter"></object>
 
-  假设 $\boldsymbol{y} \in C \cap B(\boldsymbol{x}^*, \delta)$，$\boldsymbol{z}$ 为 $LS(\boldsymbol{x}^*, \boldsymbol{y})$ 的延长线上任意一点且在 $C$ 内，则 $\boldsymbol{y}$ 可以表示为 $\lambda \boldsymbol{x} + (1 - \lambda) \boldsymbol{z} \; \lambda \in (0, 1)$，则有
+  假设 $\boldsymbol{y} \in C \cap B(\boldsymbol{x}^*, \delta)$，$\boldsymbol{z}$ 为 $LS(\boldsymbol{x}^*, \boldsymbol{y})$ 延长线上任意一点且在 $C$ 内，则 $\boldsymbol{y}$ 可以表示为 $\lambda \boldsymbol{x} + (1 - \lambda) \boldsymbol{z} \; \lambda \in (0, 1)$，则有
 
   $$
   f(\boldsymbol{x}^*) \leq f(\boldsymbol{y}) = f(\lambda \boldsymbol{x}^* + (1 - \lambda) \boldsymbol{z}) \leq \lambda f(\boldsymbol{x}^*) + (1 - \lambda) f(\boldsymbol{z})
@@ -86,7 +86,7 @@ Convex programming 的所有 global minimum 构成一个 convex set
 
 #### Epigraph
 
-给定 $f: X \rightarrow \mathbb{R}$，其对应的 epigraph 是集合 $\\{ (\boldsymbol{x}, y) : \boldsymbol{x} \in X, y \geq f(\boldsymbol{x})\\}$，参考下图，其中填充的部分就是 epigraph，当然 epigraph 是无限延伸的，这里只给出了其中的一部分而已。
+给定 $f: X \rightarrow \mathbb{R}$，其对应的 epigraph 是集合 $\\{ (\boldsymbol{x}, y) : \boldsymbol{x} \in X, y \geq f(\boldsymbol{x})\\}$，所以 epigraph 属于 $\mathbb{R}^{n+1}$，参考下图，其中填充的部分就是 epigraph，当然 epigraph 是无限延伸的，这里只给出了其中的一部分而已。
 
 <object data="/resource/NNP/05-convex-func/epigraph.svg" type="image/svg+xml" class="blkcenter"></object>
 
