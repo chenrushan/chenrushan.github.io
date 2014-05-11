@@ -110,5 +110,5 @@ Convex programming 的所有 global minimum 构成一个 convex set
 
 Level set 是这么一个集合 $C\_{\alpha} = \\{ \boldsymbol{x} \in C : f(\boldsymbol{x}) \leq \alpha, \alpha \in \mathbb{R} \\}$
 
-如果 $f(\boldsymbol{x})$ 是 convex function 则 $C\_{\alpha}$ 是一个 convex set (证明简单)，反之不成立。
+如果 $f(\boldsymbol{x})$ 是 convex function 则 $C\_{\alpha}$ 是一个 convex set (证明简单)，反之不成立，比如对于 $f(x) = x^3$，它的 level set 就是 convex set，但是函数并不是 convex function。
 
