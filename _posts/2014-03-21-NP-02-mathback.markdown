@@ -702,6 +702,15 @@ $$f(x) \approx f(x^0) + f'(x^0)(x - x^0) + \frac{1}{2} f''(x^0)(x - x^0)^2$$
 
   Then, for every $\boldsymbol{x} \in \mathbb{R}^n$,
 
-  $$f(\boldsymbol{x}) = f(\boldsymbol{x}^0) + \nabla f(\bar{\boldsymbol{x}}) \dot (\boldsymbol{x} - \boldsymbol{x}^0) + \frac{1}{2}(\boldsymbol{x} - \boldsymbol{x}^0)^T \nabla^2 f(\bar{\boldsymbol{x}}) (\boldsymbol{x} - \boldsymbol{x}^0)$$
+  $$f(\boldsymbol{x}) = f(\boldsymbol{x}^0) + \nabla f(\boldsymbol{x}) \dot (\boldsymbol{x} - \boldsymbol{x}^0) + \frac{1}{2}(\boldsymbol{x} - \boldsymbol{x}^0)^T \nabla^2 f(\bar{\boldsymbol{x}}) (\boldsymbol{x} - \boldsymbol{x}^0)$$
 
   where $\bar{\boldsymbol{x}}$ is some point that lies on the line segment joining $\boldsymbol{x}$ and $\boldsymbol{x}^0$: $\bar{\boldsymbol{x}}$ depends on $\boldsymbol{x}, \boldsymbol{x}^0$ and $f$.
+
+  上面两个式子中最后一项被称为 Lagrange error bound。因为我们处理的都是多变量的情况，上面我们用矩阵乘法的形式表示，但是到了更高阶的近似就不好再用矩阵表示了，以 3 阶为例，展开的 taylor series 是这样的
+
+  $$
+  \begin{align}
+  f(\boldsymbol{x}) = & f(\boldsymbol{x}^0) + \sum\_{i=1}^{n} \frac{\partial f(\boldsymbol{x})}{\partial x\_i} (x\_i - x^0\_i) + \frac{1}{2!} \sum\_{i=1}^n \sum\_{j=1}^n \frac{\partial f(\boldsymbol{x})}{\partial x\_i \partial x\_j} (x\_i - x^0\_i)(x\_j - x^0\_j) + \\\\
+  & \frac{1}{3!} \sum\_{i=1}^n \sum\_{j=1}^n \sum\_{k=1}^n \frac{\partial f(\bar{\boldsymbol{x}})}{\partial x\_i \partial x\_j \partial x\_k} (x\_i - x^0\_i)(x\_j - x^0\_j)(x\_k - x^0\_k)
+  \end{align}
+  $$
