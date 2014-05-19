@@ -112,3 +112,29 @@ Level set 是这么一个集合 $C\_{\alpha} = \\{ \boldsymbol{x} \in C : f(\bol
 
 如果 $f(\boldsymbol{x})$ 是 convex function 则 $C\_{\alpha}$ 是一个 convex set (证明简单)，反之不成立，比如对于 $f(x) = x^3$，它的 level set 就是 convex set，但是函数并不是 convex function。
 
+#### Hessian Matrix
+
+<blockquote>
+假设 $C \subset \mathbb{R}^n$ 是 open convex set，函数 $f: C \rightarrow \mathbb{R}$ 二阶连续可导，则 $f$ 是 convex function 当且仅当 $f$ 对应的 Hessian matrix 是 positive semi-definite matrix
+</blockquote>
+
+* 证明
+
+  记 Hessian matrix 为 $H(\boldsymbol{x})$
+
+  * $f$ is convex function $\Rightarrow$ $H(\boldsymbol{x})$ PSD
+
+  * $H(\boldsymbol{x})$ PSD $\Rightarrow$ $f$ is convex function 
+
+     给定 $\boldsymbol{x}\_1, \boldsymbol{x}\_2 \in C$，根据 Truncated Taylor Series 有
+
+     $$f(\boldsymbol{x}\_2) = f(\boldsymbol{x}\_1) + f'(\boldsymbol{x}\_1)(\boldsymbol{x}\_2 - \boldsymbol{x}\_1) + \frac{1}{2} (\boldsymbol{x}\_2 - \boldsymbol{x}\_1)^T H(\boldsymbol{x}) (\boldsymbol{x}\_2 - \boldsymbol{x}\_1)$$
+
+     其中 $\boldsymbol{x}$ 为 $\boldsymbol{x}\_1, \boldsymbol{x}\_2$ 之间的任意一点
+
+     由于 $H(\boldsymbol{x})$ PSD，所以 $(\boldsymbol{x}\_2 - \boldsymbol{x}\_1)^T H(\boldsymbol{x}) (\boldsymbol{x}\_2 - \boldsymbol{x}\_1) \geq 0$，所以
+
+     $$f(\boldsymbol{x}\_2) \geq f(\boldsymbol{x}\_1) + f'(\boldsymbol{x}\_1)(\boldsymbol{x}\_2 - \boldsymbol{x}\_1)$$
+
+     根据前面的定理可知，$f$ 为 convex function
+
