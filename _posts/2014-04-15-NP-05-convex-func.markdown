@@ -140,7 +140,7 @@ Level set 是这么一个集合 $C\_{\alpha} = \\{ \boldsymbol{x} \in C : f(\bol
 
      <span style="background-color:#Faa;">这个证明我感觉视频里做的不太对，结合我在 google 搜索的结果我给出如下证明，不知道对不对</span>
 
-     这里得假设 $f(x)$ 3 阶连续可导，给定 $\boldsymbol{x} \in C, \lambda > 0, \boldsymbol{d} \in \mathbb{R}^n$ 为任一方向，则有
+     这里得假设 $f(x)$ 3 阶连续可导，给定 $\boldsymbol{x} \in C, \lambda \in \mathbb{R}, \boldsymbol{d} \in \mathbb{R}^n$ 为任一方向，则有
 
      $$f(\boldsymbol{x} + \lambda \boldsymbol{d}) = f(\boldsymbol{x}) + f'(\boldsymbol{x})\lambda\boldsymbol{d} + \frac{1}{2}\lambda \boldsymbol{d}^T H(\boldsymbol{x}) \lambda \boldsymbol{d} + \frac{1}{6} \sum\_i\sum\_j\sum\_k \frac{\partial f(\bar{\boldsymbol{x}})}{\partial x\_i \partial x\_j \partial x\_k}\lambda d\_i \lambda d\_j \lambda d\_j$$
 
