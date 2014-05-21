@@ -28,6 +28,8 @@ $$
 
 #### (2.26)
 
+下面我用 $\varepsilon$ 表示针对一个样本，粗体的 $\boldsymbol{\varepsilon}$ 表示针对所有样本，所以是个 nx1 的向量。
+
 (2.26) 下面的 $\hat{y}\_0 = x\_0^T \hat{\beta}$ 等价于 $\hat{y}\_0 = x\_0^T \beta + \sum\_{i=1}^{N} l\_i(x\_0) \boldsymbol{\varepsilon}\_i$ where $l\_i(x\_0)$ is the ith element of $\boldsymbol{X}(\boldsymbol{X}^T\boldsymbol{X})^{-1}x\_0$
 
 后面那个 $\hat{y}\_0$ 用 matrix 表示就是 $\hat{y}\_0 = x\_0^T \beta + (\boldsymbol{X}(\boldsymbol{X}^T\boldsymbol{X})^{-1}x\_0)^T \boldsymbol{\varepsilon}$
@@ -63,7 +65,7 @@ $$
 
   $$EPE(x\_0) = \delta^2 + Var(\hat{y}\_0) + Bias^2(\hat{y}\_0)$$
 
-  根据上面一小节关于 (2.26) 中给出的 $\hat{y}\_0$ 的公式可知 $E(\hat{y}\_0) = \boldsymbol{x}\_0^T \beta$，所以 $Bias(\hat{y}\_0) = 0$。
+  根据上面一小节关于 (2.26) 中给出的 $\hat{y}\_0$ 的公式可知 $E(\hat{y}\_0) = x\_0^T \beta$，所以 $Bias(\hat{y}\_0) = 0$。
 
   $Var(\hat{y}\_0) = \delta^2 E(x\_0^T(\boldsymbol{X}^T \boldsymbol{X})^{-1}x\_0)$ 是这么推导的 (想了好久终于想出来，I'm a genius)
 
@@ -82,6 +84,29 @@ $$
   $$
 
   另外意外想到的一个公式是 $tr(\boldsymbol{v}\boldsymbol{v}^T) = \boldsymbol{v}^T\boldsymbol{v}$
+
+#### (2.28)
+
+在推导 (2.28) 前先明确下面的公式 (只要展开即可证明)
+
+$$x^T A x = \sum\_{i}\sum\_{j} A\_{ij} x\_i x\_j$$
+$$\sum\_{i}\sum\_{j} A\_{ij} B\_{ji} = trace(AB) = trace(BA)$$
+
+根据上面两个公式也可得到 $x^T A x = tr(A (xx^T))$
+
+为了方便，下面的公式里就不用 $x\_0$ 了，直接用 $x$
+
+$$
+\begin{align}
+& E\_x (x^T Cov(X)^{-1} x) \\\\
+= & E\_x (\sum\_{i}\sum\_{j} Cov(X)^{-1}\_{ij} x\_i x\_j) \\\\
+= & \sum\_{i}\sum\_{j} Cov(X)^{-1}\_{ij} E\_x (x\_i x\_j) \\\\
+= & \sum\_{i}\sum\_{j} Cov(X)^{-1}\_{ij} Cov(x\_i, x\_j) (\because E(X) = 0) \\\\
+= & trace(Cov(X)^{-1} Cov(x)) \\\\
+= & trace(I) \\\\
+= & p
+\end{align}
+$$
 
 #### (3.4)
 
