@@ -706,7 +706,7 @@ $$f(x) \approx f(x^0) + f'(x^0)(x - x^0) + \frac{1}{2} f''(x^0)(x - x^0)^2$$
 
   where $\bar{\boldsymbol{x}}$ is some point that lies on the line segment joining $\boldsymbol{x}$ and $\boldsymbol{x}^0$: $\bar{\boldsymbol{x}}$ depends on $\boldsymbol{x}, \boldsymbol{x}^0$ and $f$.
 
-  上面两个式子中最后一项被称为 Lagrange error bound。因为我们处理的都是多变量的情况，上面我们用矩阵乘法的形式表示，但是到了更高阶的近似就不好再用矩阵表示了，以 3 阶为例，展开的 taylor series 是这样的
+  上面两个式子中最后一项被称为 Lagrange remainder。因为我们处理的都是多变量的情况，上面我们用矩阵乘法的形式表示，但是到了更高阶的近似就不好再用矩阵表示了，以 3 阶为例，展开的 taylor series 是这样的
 
   $$
   \begin{align}

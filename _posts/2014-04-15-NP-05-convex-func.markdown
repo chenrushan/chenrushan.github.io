@@ -122,8 +122,6 @@ Level set 是这么一个集合 $C\_{\alpha} = \\{ \boldsymbol{x} \in C : f(\bol
 
   记 Hessian matrix 为 $H(\boldsymbol{x})$
 
-  * $f$ is convex function $\Rightarrow$ $H(\boldsymbol{x})$ PSD
-
   * $H(\boldsymbol{x})$ PSD $\Rightarrow$ $f$ is convex function 
 
      给定 $\boldsymbol{x}\_1, \boldsymbol{x}\_2 \in C$，根据 Truncated Taylor Series 有
@@ -137,4 +135,18 @@ Level set 是这么一个集合 $C\_{\alpha} = \\{ \boldsymbol{x} \in C : f(\bol
      $$f(\boldsymbol{x}\_2) \geq f(\boldsymbol{x}\_1) + f'(\boldsymbol{x}\_1)(\boldsymbol{x}\_2 - \boldsymbol{x}\_1)$$
 
      根据前面的定理可知，$f$ 为 convex function
+
+  * $f$ is convex function $\Rightarrow$ $H(\boldsymbol{x})$ PSD
+
+     <span style="background-color:#Faa;">这个证明我感觉视频里做的不太对，结合我在 google 搜索的结果我给出如下证明，不知道对不对</span>
+
+     这里得假设 $f(x)$ 3 阶连续可导，给定 $\boldsymbol{x} \in C, \lambda > 0, \boldsymbol{d} \in \mathbb{R}^n$ 为任一方向，则有
+
+     $$f(\boldsymbol{x} + \lambda \boldsymbol{d}) = f(\boldsymbol{x}) + f'(\boldsymbol{x})\lambda\boldsymbol{d} + \frac{1}{2}\lambda \boldsymbol{d}^T H(\boldsymbol{x}) \lambda \boldsymbol{d} + \frac{1}{6} \sum\_i\sum\_j\sum\_k \frac{\partial f(\bar{\boldsymbol{x}})}{\partial x\_i \partial x\_j \partial x\_k}\lambda d\_i \lambda d\_j \lambda d\_j$$
+
+     其中 $\bar{\boldsymbol{x}}$ 在 $\boldsymbol{x}$ 和 $\boldsymbol{x} + \lambda\boldsymbol{d}$ 之间。由于 $f$ 是 convex function，根据前面定理有
+     
+     $$\frac{1}{2}\lambda \boldsymbol{d}^T H(\boldsymbol{x}) \lambda \boldsymbol{d} + \frac{1}{6} \sum\_i\sum\_j\sum\_k \frac{\partial f(\bar{\boldsymbol{x}})}{\partial x\_i \partial x\_j \partial x\_k}\lambda d\_i \lambda d\_j \lambda d\_j \geq 0$$
+
+     两边同除以 $\lambda^2$ 并对左边取极限 $\lambda \rightarrow 0$，则有 $\boldsymbol{d}^T H(\boldsymbol{x}) \boldsymbol{d} \geq 0$，也就是 $H(\boldsymbol{x})$ 是 PSD。
 
