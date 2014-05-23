@@ -112,7 +112,29 @@ Level set 是这么一个集合 $C\_{\alpha} = \\{ \boldsymbol{x} \in C : f(\bol
 
 如果 $f(\boldsymbol{x})$ 是 convex function 则 $C\_{\alpha}$ 是一个 convex set (证明简单)，反之不成立，比如对于 $f(x) = x^3$，它的 level set 就是 convex set，但是函数并不是 convex function。
 
-#### Hessian Matrix
+有了 level set 的定义，就可以进一步细化 convex programming problem 的定义，通常 convex programming problem 都有如下形式
+
+$$
+\begin{align}
+& \min \; f(\boldsymbol{x}) \\\\
+s.t. & h\_i(\boldsymbol{x}) \leq 0 \;\; i = 1 \rightarrow m \\\\
+& \boldsymbol{a}^T\_j \boldsymbol{x} + b\_j = 0 \;\; j = 1 \rightarrow l \\\\
+\end{align}
+$$
+
+其中 $f$ 和 $h\_i$ 都是 convex function。这里每个约束都是一个 level set，根据前面的性质可知，这些 level set 都是 convex set，而所有 convex set 的交集也是 convex set。
+
+#### Convexity and Gradient
+
+<blockquote>
+假设 $C \subset \mathbb{R}^n$ 是 convex set，函数 $f: C \rightarrow \mathbb{R}$ 一阶连续可导，令 $g(\boldsymbol{x}) = \nabla f(\boldsymbol{x})$，则 $f$ 是 convex function 当且仅当
+
+$$f(\boldsymbol{x}_2) \geq f(\boldsymbol{x}_1) + g(\boldsymbol{x})^T(\boldsymbol{x}_2 - \boldsymbol{x}_1)$$
+
+对于所有 $\boldsymbol{x}_1, \boldsymbol{x}_2 \in C$ 都成立。
+</blockquote>
+
+#### Convexity and Hessian Matrix
 
 <blockquote>
 假设 $C \subset \mathbb{R}^n$ 是 open convex set，函数 $f: C \rightarrow \mathbb{R}$ 二阶连续可导，则 $f$ 是 convex function 当且仅当 $f$ 对应的 Hessian matrix 是 positive semi-definite matrix
