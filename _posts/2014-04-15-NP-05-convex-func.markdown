@@ -129,10 +129,27 @@ $$
 <blockquote>
 假设 $C \subset \mathbb{R}^n$ 是 convex set，函数 $f: C \rightarrow \mathbb{R}$ 一阶连续可导，令 $g(\boldsymbol{x}) = \nabla f(\boldsymbol{x})$，则 $f$ 是 convex function 当且仅当
 
-$$f(\boldsymbol{x}_2) \geq f(\boldsymbol{x}_1) + g(\boldsymbol{x})^T(\boldsymbol{x}_2 - \boldsymbol{x}_1)$$
+$$f(\boldsymbol{x}_2) \geq f(\boldsymbol{x}_1) + g^T(\boldsymbol{x}_2)(\boldsymbol{x}_2 - \boldsymbol{x}_1)$$
 
-对于所有 $\boldsymbol{x}_1, \boldsymbol{x}_2 \in C$ 都成立。
+对于所有 $\boldsymbol{x}_1, \boldsymbol{x}_2 \in C$ 都成立。$f$ 是 strictly convex function 当且仅当不等号严格成立
 </blockquote>
+
+* 证明
+
+  * Convexity $\Rightarrow$ 不等式成立
+
+     Convexity 意味着 $f(\lambda \boldsymbol{x}\_2 + (1 - \lambda)\boldsymbol{x}\_1) \leq \lambda f(\boldsymbol{x}\_2) + (1 - \lambda)f(\boldsymbol{x}\_1) \; \lambda \in [0, 1]$，这个不等式等价于
+
+     $$
+     \begin{align}
+     & f(\boldsymbol{x}\_1 + \lambda (\boldsymbol{x}\_2 - \boldsymbol{x}\_1)) \leq f(\boldsymbol{x}\_1) + \lambda(f(\boldsymbol{x}\_2) - f(\boldsymbol{x}\_1)) \\\\
+     \Rightarrow & \frac{f(\boldsymbol{x}\_1 + \lambda (\boldsymbol{x}\_2 - \boldsymbol{x}\_1)) - f(\boldsymbol{x}\_1)}{\lambda} \leq f(\boldsymbol{x}\_2) - f(\boldsymbol{x}\_1)
+     \end{align}
+     $$
+
+     取极限 $\lambda \rightarrow 0^+$，左边就是方向导数等于 $g^T(\boldsymbol{x}\_1) (\boldsymbol{x}\_2 - \boldsymbol{x}\_1)$
+
+  * 不等式成立 $\Rightarrow$ Convexity
 
 #### Convexity and Hessian Matrix
 
