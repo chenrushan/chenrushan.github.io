@@ -129,7 +129,7 @@ $$
 <blockquote>
 假设 $C \subset \mathbb{R}^n$ 是 convex set，函数 $f: C \rightarrow \mathbb{R}$ 一阶连续可导，令 $g(\boldsymbol{x}) = \nabla f(\boldsymbol{x})$，则 $f$ 是 convex function 当且仅当
 
-$$f(\boldsymbol{x}_2) \geq f(\boldsymbol{x}_1) + g^T(\boldsymbol{x}_2)(\boldsymbol{x}_2 - \boldsymbol{x}_1)$$
+$$f(\boldsymbol{x}_2) \geq f(\boldsymbol{x}_1) + g^T(\boldsymbol{x}_1)(\boldsymbol{x}_2 - \boldsymbol{x}_1)$$
 
 对于所有 $\boldsymbol{x}_1, \boldsymbol{x}_2 \in C$ 都成立。$f$ 是 strictly convex function 当且仅当不等号严格成立
 </blockquote>
@@ -150,6 +150,30 @@ $$f(\boldsymbol{x}_2) \geq f(\boldsymbol{x}_1) + g^T(\boldsymbol{x}_2)(\boldsymb
      取极限 $\lambda \rightarrow 0^+$，左边就是方向导数等于 $g^T(\boldsymbol{x}\_1) (\boldsymbol{x}\_2 - \boldsymbol{x}\_1)$
 
   * 不等式成立 $\Rightarrow$ Convexity
+
+     令 $\boldsymbol{x} = \lambda \boldsymbol{x}\_1 + (1 - \lambda)\boldsymbol{x}\_2 \; \lambda \in [0, 1]$，不等式成立意味着
+
+     $$
+     \begin{align}
+     f(\boldsymbol{x}\_1) \geq f(\boldsymbol{x}) + g^T(\boldsymbol{x})(\boldsymbol{x}\_1 - \boldsymbol{x}) \\\\
+     f(\boldsymbol{x}\_2) \geq f(\boldsymbol{x}) + g^T(\boldsymbol{x})(\boldsymbol{x}\_2 - \boldsymbol{x})
+     \end{align}
+     $$
+
+     则有
+
+     $$
+     \begin{align}
+     & \lambda f(\boldsymbol{x}\_1) + (1 - \lambda) f(\boldsymbol{x}\_2) \\\\
+     \geq & f(\boldsymbol{x}) + \lambda g^T(\boldsymbol{x})(\boldsymbol{x}\_1 - \boldsymbol{x}) + (1 - \lambda) g^T(\boldsymbol{x})(\boldsymbol{x}\_2 - \boldsymbol{x}) \\\\
+     = & f(\boldsymbol{x}) + \lambda g^T(\boldsymbol{x})(\boldsymbol{x}\_1 - \boldsymbol{x}\_2) + g^T(\boldsymbol{x})(\boldsymbol{x}\_2 - \boldsymbol{x}) \\\\
+     = & f(\boldsymbol{x}) + g^T(\boldsymbol{x})(\lambda \boldsymbol{x}\_1 + (1 - \lambda)\boldsymbol{x}\_2 - \boldsymbol{x}) \\\\
+     \end{align}
+     $$
+
+     由于 $\boldsymbol{x} = \lambda \boldsymbol{x}\_1 + (1 - \lambda)\boldsymbol{x}\_2$，所以最后一个式子就是 $f(\lambda \boldsymbol{x}\_1 + (1 - \lambda)\boldsymbol{x}\_2)$
+
+根据这个定理，如果存在 $\boldsymbol{x}^* \in C$ 使得 $g(\boldsymbol{x}^*) = 0$，则有 $f(\boldsymbol{x}) \geq f(\boldsymbol{x}^*) \; \forall \boldsymbol{x} \in C$，也就是 $\boldsymbol{x}^*$ 就是 minimum。
 
 #### Convexity and Hessian Matrix
 
@@ -188,4 +212,48 @@ $$f(\boldsymbol{x}_2) \geq f(\boldsymbol{x}_1) + g^T(\boldsymbol{x}_2)(\boldsymb
      $$\frac{1}{2}\lambda \boldsymbol{d}^T H(\boldsymbol{x}) \lambda \boldsymbol{d} + \frac{1}{6} \sum\_i\sum\_j\sum\_k \frac{\partial f(\bar{\boldsymbol{x}})}{\partial x\_i \partial x\_j \partial x\_k}\lambda d\_i \lambda d\_j \lambda d\_j \geq 0$$
 
      两边同除以 $\lambda^2$ 并对左边取极限 $\lambda \rightarrow 0$，则有 $\boldsymbol{d}^T H(\boldsymbol{x}) \boldsymbol{d} \geq 0$，也就是 $H(\boldsymbol{x})$ 是 PSD。
+
+#### Jensen's Inequality
+
+<blockquote>
+如果 $C \subseteq \mathbb{R}^n$ 是 convex set，$f: C \rightarrow \mathbb{R}$，则 $f$ 是 convex function 当且仅当
+
+$$f(\sum_{i=1}^{k} \lambda_i \boldsymbol{x}_i) \leq \sum_{i=1}^{k} \lambda_if(\boldsymbol{x}_i)$$
+
+其中 $\boldsymbol{x}_1, ..., \boldsymbol{x}_k \in C, \; \lambda_i \geq 0, \; \sum_i \lambda_i = 1$
+</blockquote>
+
+* 证明
+
+  * 不等式成立 $\Rightarrow$ convexity
+
+     这个简单，令 $k = 2$ 就是 convex function 的定义
+
+  * Convexity $\Rightarrow$ 不等式成立 (用 Induction 的方式证明)
+
+     $k \leq 2$ 时显然成立，就是 convex function 的定义，假设对于 $k - 1$ 的情况成立，对于 $k$ 的情况
+
+     $$
+     \begin{align}
+     & f(\sum\_{i = 1}^k \lambda\_i \boldsymbol{x}\_i) \\\\
+     = & f(\sum\_{i = 1}^{k-1} \lambda\_i \boldsymbol{x}\_i + \lambda\_k \boldsymbol{x}\_k) \\\\
+     = & f((1 - \lambda\_k)\sum\_{i = 1}^{k-1} \frac{\lambda\_i}{1 - \lambda\_k} \boldsymbol{x}\_i + \lambda\_k \boldsymbol{x}\_k) \\\\
+     \leq & (1 - \lambda\_k)f(\sum\_{i = 1}^{k-1} \frac{\lambda\_i}{1 - \lambda\_k} \boldsymbol{x}\_i) + \lambda\_k f(\boldsymbol{x}\_k)
+     \end{align}
+     $$
+
+     后面的推导简单就不写了
+
+#### Operations Preserving Convexity
+
+假设 $f$ 是 convex function，则下面的操作依然能得到 convex function
+
+1. $\alpha f \;\;\; \alpha > 0$
+2. $\sum\_i \alpha\_i f\_i \;\;\; \alpha\_i > 0$
+
+#### Function Maximum 
+
+<blockquote>
+令 $C \subset \mathbb{R}^n$ 为一个 compact convex set，$f: C \rightarrow \mathbb{R}$ 为 convex function，则 $f$ 的最大值一定是出现在 C 的某一 boundary point
+</blockquote>
 
