@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 03 - Unconstrained Optimization for 1 Dimensional Function
+title: 03 - 1-Dimensional Unconstrained Optimization
 categories: nnumop
 tags: NPTEL, numerical optimization
 ---
