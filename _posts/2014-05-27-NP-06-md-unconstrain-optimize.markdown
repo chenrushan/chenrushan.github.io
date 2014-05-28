@@ -18,3 +18,27 @@ Descent direction 在 multi-dimensional optimization 中是一个非常重要的
 <blockquote>
 令 $f \in \mathcal{C}^1, \bar{\boldsymbol{x}} \in \mathbb{R}^n$，$g(\bar{\boldsymbol{x}})$ 为 $f$ 在 $\bar{\boldsymbol{x}}$ 处的 gradient，如果 $g^T(\bar{\boldsymbol{x}})d < 0$，则 $d$ 为 $f$ 在 $\bar{\boldsymbol{x}}$ 处的 descent direction
 </blockquote>
+
+* 证明
+
+  因为 $f\in \mathcal{C}^1$，所以 $g \in \mathcal{C}^0$，又因为 $g^T(\bar{\boldsymbol{x}})\boldsymbol{d} < 0$，所以必存在 $\delta$，使得 $g^T(\boldsymbol{x})\boldsymbol{d} < 0 \; \forall \boldsymbol{x} \in B(\bar{\boldsymbol{x}}, \delta)$
+  
+  令 $\alpha \in (0, \delta)$，根据 Truncated taylor series 有
+
+  $$
+  f(\bar{\boldsymbol{x}} + \alpha \boldsymbol{d}) = f(\bar{\boldsymbol{x}}) + g^T(\boldsymbol{x}) \alpha \boldsymbol{d}
+  $$
+
+  其中 $\boldsymbol{x} \in LS[\bar{\boldsymbol{x}}, \bar{\boldsymbol{x}} + \alpha\boldsymbol{d}] \in B(\bar{\boldsymbol{x}}, \delta)$，所以 $g^T(\boldsymbol{x})\boldsymbol{d} < 0$，因此 $f(\bar{\boldsymbol{x}} + \alpha \boldsymbol{d}) < f(\bar{\boldsymbol{x}})$ **证毕**
+
+#### 1st Order Necessary Condition
+
+<blockquote>
+令 $f: \mathbb{R}^n \rightarrow \mathbb{R}, f\in \mathcal{C}^1$，如果 $\boldsymbol{x}^*$ 是 local minimum，则 $g(\boldsymbol{x}^*) = 0$
+</blockquote>
+
+* 证明
+
+  假设 $\boldsymbol{x}^*$ 是 local minimum 且 $g(\boldsymbol{x}^*) \neq 0$，令 $\boldsymbol{d} = -g(\boldsymbol{x}^*)$，则 $g^T(\boldsymbol{x}^*)d < 0$，也就是 $\boldsymbol{d}$ 是 descent direction，这与 $\boldsymbol{x}^*$ 是 local minimum 的事实不符，因此 $g(\boldsymbol{x}^*) = 0$
+
+这个定理为优化算法提供了一个算法停止的条件，满足 $g(\boldsymbol{x}^*) = 0$ 的点被称为 stationary point，stationary point 有 3 种可能，分别是 local maximum, local minimum, saddle point，因此单纯 $g(\boldsymbol{x}^*) = 0$ 还是不够的。
