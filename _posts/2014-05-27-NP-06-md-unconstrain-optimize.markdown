@@ -7,7 +7,7 @@ tags: NPTEL, numerical optimization
 
 #### Descent Direction
 
-Descent direction 在 multi-dimensional optimization 中是一个非常重要的概念，很多优化算法的核心就是如何构造一个好的 descent direction。
+Descent direction 在 multi-dimensional optimization 中是一个非常重要的概念，很多优化算法的核心就是如何构造 descent direction。
 
 <blockquote>
 令 $\bar{\boldsymbol{x}} \in \mathbb{R}^n$，如果存在一个方向 $\boldsymbol{d} \in \mathbb{R}^n, \delta > 0$ 使得 $f(\bar{\boldsymbol{x}} + \alpha \boldsymbol{d}) < f(\bar{\boldsymbol{x}}) \; \forall \alpha \in (0, \delta)$，则 $\boldsymbol{d}$ 就被称为 descent direction
@@ -21,7 +21,7 @@ Descent direction 在 multi-dimensional optimization 中是一个非常重要的
 
 * 证明
 
-  因为 $f\in \mathcal{C}^1$，所以 $g \in \mathcal{C}^0$，又因为 $g^T(\bar{\boldsymbol{x}})\boldsymbol{d} < 0$，所以必存在 $\delta$，使得 $g^T(\boldsymbol{x})\boldsymbol{d} < 0 \; \forall \boldsymbol{x} \in B(\bar{\boldsymbol{x}}, \delta)$
+  因为 $f\in \mathcal{C}^1$，所以 $g \in \mathcal{C}^0$，又因为 $g^T(\bar{\boldsymbol{x}})\boldsymbol{d} < 0$，所以必存在 $\delta$，使得 $g^T(\boldsymbol{x})\boldsymbol{d} < 0 \; \forall \boldsymbol{x} \in LS(\bar{\boldsymbol{x}}, \bar{\boldsymbol{x}} + \delta \boldsymbol{d})$
   
   令 $\alpha \in (0, \delta)$，根据 Truncated taylor series 有
 
@@ -29,7 +29,7 @@ Descent direction 在 multi-dimensional optimization 中是一个非常重要的
   f(\bar{\boldsymbol{x}} + \alpha \boldsymbol{d}) = f(\bar{\boldsymbol{x}}) + g^T(\boldsymbol{x}) \alpha \boldsymbol{d}
   $$
 
-  其中 $\boldsymbol{x} \in LS[\bar{\boldsymbol{x}}, \bar{\boldsymbol{x}} + \alpha\boldsymbol{d}] \in B(\bar{\boldsymbol{x}}, \delta)$，所以 $g^T(\boldsymbol{x})\boldsymbol{d} < 0$，因此 $f(\bar{\boldsymbol{x}} + \alpha \boldsymbol{d}) < f(\bar{\boldsymbol{x}})$ **证毕**
+  其中 $\boldsymbol{x} \in LS(\bar{\boldsymbol{x}}, \bar{\boldsymbol{x}} + \alpha\boldsymbol{d})$，所以 $g^T(\boldsymbol{x})\boldsymbol{d} < 0$，因此 $f(\bar{\boldsymbol{x}} + \alpha \boldsymbol{d}) < f(\bar{\boldsymbol{x}})$ **证毕**
 
 #### 1st Order Necessary Condition
 
@@ -66,3 +66,27 @@ Descent direction 在 multi-dimensional optimization 中是一个非常重要的
 </blockquote>
 
 证明简单略去
+
+#### Iterative Optimization Algorithm
+
+上面的理论给出了 Iterative Optimization 的理论基础，一个迭代优化算法会产生一个 sequence $\\{\boldsymbol{x}^k\\}_{k \geq 0}$，这个 sequence 会最后收敛到一个 local minimum，这样的迭代算法可以用下面的框架表示
+
+----------
+Initialize $\boldsymbol{x}^0, k = 0$<br/>
+while stopping condition is not satisfied<br/>
+&nbsp;&nbsp;&nbsp;&nbsp; Find $\boldsymbol{x}^{k+1}$ such that $f(\boldsymbol{x}^{k+1}) < f(\boldsymbol{x}^k)$<br/>
+&nbsp;&nbsp;&nbsp;&nbsp; Set $k = k+1$<br/>
+end while<br/>
+output $\boldsymbol{x}^* = \boldsymbol{x}^k$<br/>
+
+----------
+
+这个迭代算法中有这个几个点需要注意
+
+* 怎么找到符合条件的 $\boldsymbol{x}^{k+1}$
+
+* Stopping condition 怎么确定
+
+* 算法是否会最终收敛，如果能收敛，收敛的速度多快
+
+* 根据初始值 $\boldsymbol{x}^0$ 的不同，算法的收敛性和收敛速度会不会受到影响
