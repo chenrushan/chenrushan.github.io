@@ -6,6 +6,8 @@ categories: ml
 
 ### 公式解析
 
+<span style="background-color:#faa">注意：遵从书里的规则，下面非粗体的变量既用于表示 scalar，也用于表示 vector</span>
+
 #### (2.12) -> (2.13)
 
 $$
@@ -114,11 +116,35 @@ $$
 
 关于 $\boldsymbol{X}^T\boldsymbol{X}$ 的正定性很容易证明，$x^T\boldsymbol{X}^T\boldsymbol{X}x = (\boldsymbol{X}x)^T (\boldsymbol{X}x) \geq 0$，所以 $\boldsymbol{X}^T\boldsymbol{X}$ 一定是 psd 的，如果 $\boldsymbol{X}$ 是 full column rank 的，那对于所有非 0 的 $x$，$\boldsymbol{X}x$ 就不可能是 0 (因为 $\boldsymbol{X}x = \sum\_{i} \boldsymbol{X}\_i x\_i$，其中 $\boldsymbol{X}\_i$ 表示第 $i$ 列)，则 $\boldsymbol{X}^T\boldsymbol{X}$ 就是 pd 的。
 
+#### (3.8)
+
+首先先对 (3.6) 做个变形
+
+$$
+\hat{\beta} = (\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T y = (\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T (\boldsymbol{X}\beta + \varepsilon) = \beta + (\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T \varepsilon
+$$
+
+基于这个的 $\hat{\beta}$ 表示，covariance matrix 可以表示为
+
+$$
+\begin{align}
+Var(\hat{\beta}) = & E((\hat{\beta} - \beta)(\hat{\beta} - \beta)^T) \\\\
+= & E((\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T \varepsilon \varepsilon^T \boldsymbol{X} ((\boldsymbol{X}^T\boldsymbol{X})^{-1})) \\\\
+= & (\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T E(\varepsilon \varepsilon^T) \boldsymbol{X} (\boldsymbol{X}^T\boldsymbol{X})^{-1} \\\\
+= & (\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T \delta^2\boldsymbol{I} \boldsymbol{X} (\boldsymbol{X}^T\boldsymbol{X})^{-1} \\\\
+= & \boldsymbol{X}^T\boldsymbol{X}^{-1}\delta^2
+\end{align}
+$$
+
+注意 $Var(\hat{\beta})$ 是一个 matrix，而不是一个 scalar，所以是等于 $E((\hat{\beta} - \beta)(\hat{\beta} - \beta)^T)$，而不是 $E((\hat{\beta} - \beta)^T(\hat{\beta} - \beta))$
+
+#### (3.8) 下面的 $\hat{\delta}^2$
+
+这个公式中 $N - p - 1$ 是 degree of freedom，根据[这篇文章](http://onlinestatbook.com/2/estimation/df.html)的介绍，the degrees of freedom for an estimate is equal to the number of values minus the number of parameters estimated en route to the estimate in question，这里估计 $\hat{\delta}^2$ 时用到了 $\hat{y}\_i$，而在估计 $\hat{y}\_i$ 时用到了$\beta$，这是个大小为 $p + 1$ 的向量，所以 $\hat{\delta}^2$ 的 DOF 是 $N - p - 1$
+
 ### Statistics Basic
 
 * What regression is all about is try to figure out why a particular variable varies (from [here](https://www.youtube.com/watch?v=aq8VU5KLmkY))，这里的 variable 指的是 dependent variable，所以知道 dependent variable 的 variance 有多少被我们的 model cover 就很有意义，所以有了像 $R^2$ 这样的指标，$R^2$ 表示 the proportion of total variance that is taken up by the model (equal to SSR/SST), the lower the SSE is, the higher the $R^2$。
-
-* [Degree of freedom](https://www.youtube.com/watch?v=4otEcA3gjLk)
 
 ### Good Sites
 
