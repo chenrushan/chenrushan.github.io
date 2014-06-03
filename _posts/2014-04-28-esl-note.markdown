@@ -156,6 +156,12 @@ $$
 
 关于为什么 $\frac{(N-p-1)\hat{\delta}^2}{\delta^2}$ 符合 $\mathcal{X}_{N-p-1}^2$ 分布可以参考 [goodness of fit](http://en.wikipedia.org/wiki/Goodness_of_fit)，regression analysis 的情况和 categorical data 的公式是不一样的。
 
+#### (3.12)
+
+<span style="background-color:#faa">下面论述的正确性有待验证</span>
+
+关于 t-distribution 和 normal distribution，这里简单说一下，如果给定 $X \sim N(\mu, \delta^2)$，我 sample N 次，得到 $X\_1, ..., X\_n$，令 $\bar{X} = \frac{1}{n}\sum\_i X\_i$，如果 $\delta$ 已知，则 $\frac{X - \bar{X}}{\delta} \sim N(0, 1)$，因为 $E(X - \bar{X}) = E(X) - E(\bar{X}) = 0$，如果用 standard error 来作为 standard deviation 的 estimate 则 $\frac{X - \bar{X}}{s} \sim t\_{N - 1}$
+
 ### Statistics Basic
 
 * What regression is all about is try to figure out why a particular variable varies (from [here](https://www.youtube.com/watch?v=aq8VU5KLmkY))，这里的 variable 指的是 dependent variable，所以知道 dependent variable 的 variance 有多少被我们的 model cover 就很有意义，所以有了像 $R^2$ 这样的指标，$R^2$ 表示 the proportion of total variance that is taken up by the model (equal to SSR/SST), the lower the SSE is, the higher the $R^2$。
