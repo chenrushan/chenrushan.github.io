@@ -160,7 +160,7 @@ $$
 
 <span style="background-color:#faa">下面论述的正确性有待验证</span>
 
-关于 t-distribution 和 normal distribution，这里简单说一下，如果给定 $X \sim N(\mu, \delta^2)$，我 sample N 次，得到 $X\_1, ..., X\_n$，令 $\bar{X} = \frac{1}{n}\sum\_i X\_i$，如果 $\delta$ 已知，则 $\frac{X - \bar{X}}{\delta} \sim N(0, 1)$，因为 $E(X - \bar{X}) = E(X) - E(\bar{X}) = 0$，如果用 standard error 来作为 standard deviation 的 estimate 则 $\frac{X - \bar{X}}{s} \sim t\_{N - 1}$
+关于 t-distribution 和 normal distribution，这里简单说一下，如果给定 $X \sim N(\mu, \delta^2)$，我 sample N 次，得到 $X\_1, ..., X\_n$，令 $\bar{X} = \frac{1}{n}\sum\_i X\_i$，如果 $\delta$ 已知，则 $\frac{X - \bar{X}}{\delta} \sim N(0, 1)$，因为 $E(X - \bar{X}) = E(X) - E(\bar{X}) = 0$，如果用 standard error 来作为 standard deviation 的 estimate 则 $\frac{X - \bar{X}}{s} \sim t\_{N - 1}$，这里的 $N-1$ 为 $s$ 的 degree of freedom。
 
 ### Statistics Basic
 
