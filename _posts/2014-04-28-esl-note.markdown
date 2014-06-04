@@ -164,6 +164,10 @@ $$
 
 假设检验就是假设某个事实成立，然后根据我实际得到的一些实验值以及这些实验值 (或者做某种变换后的得到的值) 的分布，看取到这些值可能性大不大，如果大就假设就成立，否则假设不成立。比如这里我假设 $\beta\_i$ 应该是 0，而我实际得到的值是 $\hat{\beta}\_i$，那我就根据这个实际得到的值去验证 $\beta\_i = 0$ 是否合理，为此我们基于这两个值构造了一个 z-score ($\frac{\hat{\beta}\_i - \beta\_i}{\hat{\delta}\sqrt{v\_j}} = \frac{\hat{\beta}\_i}{\hat{\delta}\sqrt{v\_j}}$)，并且知道这个 z-score 服从 t distribution，然后就看在这个 t distribution 下取这个 z-score 的可能性有多大来决定假设是否成立。同理，比如你假设一个 dice 是 fair 的，然后你扔了 N 次，统计一下每一面出现的频次，然后根据这些你实际得到的值和你期望的值构建一个 chi-square 值，然后根据 chi-square distribution，看取这个 chi-square 值的概率大不大决定你是否接受 dice 是 fair 的假设。
 
+#### (3.13)
+
+参考 http://en.wikipedia.org/wiki/F-test 和 http://en.wikipedia.org/wiki/F-distribution。
+
 ### Statistics Basis
 
 * What regression is all about is try to figure out why a particular variable varies (from [here](https://www.youtube.com/watch?v=aq8VU5KLmkY))，这里的 variable 指的是 dependent variable，所以知道 dependent variable 的 variance 有多少被我们的 model cover 就很有意义，所以有了像 $R^2$ 这样的指标，$R^2$ 表示 the proportion of total variance that is taken up by the model (equal to SSR/SST), the lower the SSE is, the higher the $R^2$。
