@@ -166,7 +166,7 @@ $$
 
 #### (3.13)
 
-参考 http://en.wikipedia.org/wiki/F-test 和 http://en.wikipedia.org/wiki/F-distribution。
+参考 http://en.wikipedia.org/wiki/F-test 和 http://en.wikipedia.org/wiki/F-distribution
 
 ### Statistics Basis
 
