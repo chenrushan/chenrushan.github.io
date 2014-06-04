@@ -17,14 +17,54 @@ tags: NPTEL, numerical optimization
 
 * $\frac{f(\boldsymbol{x}^k) - f(\boldsymbol{x}^{k+1})}{|f(\boldsymbol{x}^k)|} \leq \varepsilon$
 
-其中 $\varepsilon$ 是一个用户指定的很小的数，第一个条件就是 $g(\boldsymbol{x}^k) = 0$ 的一个近似，第二个条件表示当前轮的迭代是否能使 $f(\boldsymbol{x}^k)$ 有显著下降
+其中 $\varepsilon$ 是一个用户指定的很小的数，第一个条件就是 $g(\boldsymbol{x}^k) = 0$ 的一个近似，第二个条件表示当前轮的迭代是否能使 $f(\boldsymbol{x}^k)$ 有显著下降，如果没有，则停止迭代
 
 #### Speed of Convergence
 
 <blockquote>
 假设优化过程对应 sequence $\{\boldsymbol{x}^k\}_{k \geq 0}$，且 $\boldsymbol{x}^*$ 为 local minimum，如果下式成立
 
-$$\lim_{k\rightarrow \infty} \frac{|\boldsymbol{x}^{k+1} - \boldsymbol{x}^*|}{|\boldsymbol{x}^k - \boldsymbol{x}^*|^a} = \alpha$$
+$$\lim_{k\rightarrow \infty} \frac{\Vert \boldsymbol{x}^{k+1} - \boldsymbol{x}^*\Vert }{\Vert \boldsymbol{x}^k - \boldsymbol{x}^*\Vert^p} = \beta$$
 
-则 $a$ 表示 order of convergence，$\alpha$ 表示 convergence rate
+则 $p$ 表示 order of convergence，$\beta$ 表示 convergence rate
 </blockquote>
+
+* $p = 1, 0 < \beta < 1$ (linear convergence)
+
+  * $\beta = 0.1, \Vert \boldsymbol{x}^0 - \boldsymbol{x}^* \Vert = 0.1$
+
+     收敛过程是 $10^{-1}, 10^{-2}, 10^{-3}, 10^{-4}, ...$
+
+  * $\beta = 0.9, \Vert \boldsymbol{x}^0 - \boldsymbol{x}^* \Vert = 0.1$
+
+     收敛过程是 $10^{-1}, 0.09, 0.081, 0.0729, ...$
+
+  可以看到 $\beta$ 越小，收敛越快
+
+* $p = 2, \beta > 0$ (qudratic convergence)
+
+  * $\beta = 1, \Vert \boldsymbol{x}^0 - \boldsymbol{x}^* \Vert = 0.1$
+
+     收敛过程是 $10^{-1}, 10^{-2}, 10^{-4}, ...$
+
+  可以看出 quadratic 的收敛过程比 linear 要快得多
+
+* superlinear convergence
+
+  如果收敛过程符合如下条件
+
+  $$\lim_{k\rightarrow \infty} \frac{\Vert \boldsymbol{x}^{k+1} - \boldsymbol{x}^* \Vert}{\Vert \boldsymbol{x}^k - \boldsymbol{x}^* \Vert} = 0, \lim_{k\rightarrow \infty} \frac{\Vert \boldsymbol{x}^{k+1} - \boldsymbol{x}^* \Vert}{\Vert \boldsymbol{x}^k - \boldsymbol{x}^* \Vert^2} = \infty$$
+
+  这被称为 superlinear convergence，它的收敛速度介于 linear 和 quadratic 之间，我们后续见到的大多算法都属于 superlinear convergence
+
+Error function
+
+#### Find $\boldsymbol{x}^{k+1}$
+
+从 $\boldsymbol{x}^k$ 到 $\boldsymbol{x}^{k + 1}$ 需要明确以下两点
+
+* 确定 descent direction $d^{k}$
+* 确定 step length $\alpha^{k}$
+
+关于 descent direction 的确定会在后面的好多节中详细叙述，这里讲一下如何确定 step length。
+
