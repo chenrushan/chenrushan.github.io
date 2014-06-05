@@ -66,5 +66,14 @@ Error function
 * 确定 descent direction $d^{k}$
 * 确定 step length $\alpha^{k}$
 
-关于 descent direction 的确定会在后面的好多节中详细叙述，这里讲一下如何确定 step length。
+关于 descent direction 的确定会在后面的好多节中详细叙述，这里讲一下如何确定 step length，假设 $\boldsymbol{d}^k$ 已经确定，求解 $\alpha^k$ 的方法分为两种
 
+* Exact line search
+
+  把 $\alpha^k$ 的求解当成是另一个优化问题，即在每一步迭代过程中再求解
+
+  $$\alpha^k = \min\_{\alpha} f(\boldsymbol{x}^k + \alpha \boldsymbol{d}^k)$$
+
+* Inexact line search
+
+  Exact line search 有时会带来性能上的问题，这就需要使用近似的方法

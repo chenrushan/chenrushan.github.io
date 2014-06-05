@@ -31,6 +31,12 @@ Descent direction 在 multi-dimensional optimization 中是一个非常重要的
 
   其中 $\boldsymbol{x} \in LS(\bar{\boldsymbol{x}}, \bar{\boldsymbol{x}} + \alpha\boldsymbol{d})$，所以 $g^T(\boldsymbol{x})\boldsymbol{d} < 0$，因此 $f(\bar{\boldsymbol{x}} + \alpha \boldsymbol{d}) < f(\bar{\boldsymbol{x}})$ **证毕**
 
+这个定理通俗的说就是所有与 gradient 成钝角的方向都是下降方向，如下下图所示
+
+<object data="/resource/NNP/06-md-op/descent.svg" type="image/svg+xml" class="blkcenter"></object>
+
+注意到当 $\alpha > \hat{\alpha}$ 时，函数值反而变大。
+
 #### 1st Order Necessary Condition
 
 <blockquote>
