@@ -74,6 +74,12 @@ Error function
 
   $$\alpha^k = \min\_{\alpha} f(\boldsymbol{x}^k + \alpha \boldsymbol{d}^k)$$
 
+  由于 $\alpha$ 是个 scalar，所以这是一个一维优化问题。
+
 * Inexact line search
 
-  Exact line search 有时会带来性能上的问题，这就需要使用近似的方法
+  Exact line search 有时会带来性能上的问题，这就需要使用近似的方法，不过在使用近似的方法时需要注意以下几点
+
+  * $\alpha^k$ 不能太大，太大函数值反而上升
+  * $\alpha^k$ 不能太小，太小则函数值的变化太小，收敛也慢
+  * 函数值下降相对于 $\alpha^k$ 要比较显著，函数值下降不一定要求绝对值很大，但应该相对于 $\alpha^k$ 是显著的
