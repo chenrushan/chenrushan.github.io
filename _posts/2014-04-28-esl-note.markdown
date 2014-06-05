@@ -175,4 +175,6 @@ $$
 ### Good Sites
 
 1. [Understanding the Bias-Variance Tradeoff](http://scott.fortmann-roe.com/docs/BiasVariance.html)
+2. [Gauss–Markov theorem wiki](http://en.wikipedia.org/wiki/Gauss–Markov_theorem)
+3. [Mean squared error wiki](http://en.wikipedia.org/wiki/Mean_squared_error), mean square error for predictor and parameter
 
