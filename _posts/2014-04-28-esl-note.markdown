@@ -168,6 +168,20 @@ $$
 
 参考 http://en.wikipedia.org/wiki/F-test 和 http://en.wikipedia.org/wiki/F-distribution
 
+#### Gauss-Markov Therom
+
+Gauss-Markov Therom 总体的意思是就是 least square estimator (LSE) of $\beta$ 是 best linear unbiased estimator (BLUE)，这里需要明确一下怎么算 best estimator，什么是 linear estimator，什么是 unbiased estimator。假设 $\hat{\beta}$ 是 $\beta$ 的 estimator
+
+* linear estimator: 如果 $\hat{\beta}$ 的每个分量都可以表示为 $c^T y, \; c \in \mathbb{R}^n$，$y$ 就是所有的 responce，也就是 $\hat{\beta}\_i$ 是所有 responce 的 linear combination，则 $\hat{\beta}$ 就被称为 linear estimator。对于 LSE，$\hat{\beta} = (\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T y$，显然 LSE 是 linear estimator
+
+* unbiased estimator: 如果 $E(\hat{\beta}) = \beta$ 则 $\hat{\beta}$ 就是 unbiased estimator。对于 LSE
+
+  $$E(\hat{\beta}) = E((\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T y) = (\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T E(y) = (\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T \boldsymbol{X} \beta = \beta$$
+
+  所以 LSE 是 unbiased estimator
+
+* best estimator: 这里的 best 是用 mean square error (MSE) 来评价的
+
 ### Statistics Basis
 
 * What regression is all about is try to figure out why a particular variable varies (from [here](https://www.youtube.com/watch?v=aq8VU5KLmkY))，这里的 variable 指的是 dependent variable，所以知道 dependent variable 的 variance 有多少被我们的 model cover 就很有意义，所以有了像 $R^2$ 这样的指标，$R^2$ 表示 the proportion of total variance that is taken up by the model (equal to SSR/SST), the lower the SSE is, the higher the $R^2$。
