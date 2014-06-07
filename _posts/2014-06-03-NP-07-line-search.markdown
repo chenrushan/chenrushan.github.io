@@ -66,20 +66,63 @@ Error function
 * 确定 descent direction $d^{k}$
 * 确定 step length $\alpha^{k}$
 
-关于 descent direction 的确定会在后面的好多节中详细叙述，这里讲一下如何确定 step length，假设 $\boldsymbol{d}^k$ 已经确定，求解 $\alpha^k$ 的方法分为两种
+关于 descent direction 的确定会在后面的好多节中详细叙述，这里讲一下如何确定 step length，假设 $\boldsymbol{d}^k$ 已经确定，求解 $\alpha^k$ 的方法分为两种，分别是 Exact line search 和 Inexact line search。
 
-* Exact line search
+##### Exact line search
 
-  把 $\alpha^k$ 的求解当成是另一个优化问题，即在每一步迭代过程中再求解
+把 $\alpha^k$ 的求解当成是另一个优化问题，即在每一步迭代过程中再求解
 
-  $$\alpha^k = \min\_{\alpha} f(\boldsymbol{x}^k + \alpha \boldsymbol{d}^k)$$
+$$\alpha^k = \min\_{\alpha} f(\boldsymbol{x}^k + \alpha \boldsymbol{d}^k)$$
 
-  由于 $\alpha$ 是个 scalar，所以这是一个一维优化问题。
+由于 $\alpha$ 是个 scalar，所以这是一个一维优化问题。
 
-* Inexact line search
+##### Inexact line search
 
-  Exact line search 有时会带来性能上的问题，这就需要使用近似的方法，不过在使用近似的方法时需要注意以下几点
+Exact line search 有时会带来性能上的问题，这时就需要使用近似的方法，不过在使用近似的方法时需要注意以下几点
 
-  * $\alpha^k$ 不能太大，太大函数值反而上升
-  * $\alpha^k$ 不能太小，太小则函数值的变化太小，收敛也慢
-  * 函数值下降相对于 $\alpha^k$ 要比较显著，函数值下降不一定要求绝对值很大，但应该相对于 $\alpha^k$ 是显著的
+* $\alpha^k$ 不能太大，太大函数值反而上升
+* $\alpha^k$ 不能太小，太小则函数值的变化太小，收敛也慢
+* 函数值下降相对于 $\alpha^k$ 要比较显著，函数值下降不一定要求绝对值很大，但应该相对于 $\alpha^k$ 是显著的，换句话说，就是 rate of decrease 要比较大
+
+为了保证以上 3 点就有了 Armijo's condition, Goldstein's condition 和 Wolfe's condition
+
+假设 $f(\boldsymbol{x}^k + \alpha \boldsymbol{d}^k)$ 的函数图像是这样 (其中 $\alpha$ 是变量)
+
+<object data="/resource/NNP/07-line-search/f_alpha.svg" type="image/svg+xml" class="blkcenter"></object>
+
+图中有两条虚线
+
+* 横虚线的函数是 $y = f(\boldsymbol{x}^k)$，即 $f(\boldsymbol{x}^k + \alpha \boldsymbol{d}^k)$ 在 $\alpha  = 0$ 的取值
+* 斜虚线的函数是 $y = f(\boldsymbol{x}^k) + \alpha g^T(\boldsymbol{x}^k)\boldsymbol{d}^k$，即 $f(\boldsymbol{x}^k + \alpha \boldsymbol{d}^k)$ 在 $\alpha  = 0$ 处的切线
+
+下面分别讨论这 3 种 condition
+
+* Armijo's condition
+
+  Armijo's condition 给出下面的绿色虚线，由于其斜率介于 $0$ 和 $g^T(\boldsymbol{x}^k)\boldsymbol{d}^k$ 之间，所以可以将斜率值定义为 $c\_1 g^T(\boldsymbol{x}^k)\boldsymbol{d}^k \; c_1 \in (0, 1)$
+  
+  <object data="/resource/NNP/07-line-search/amijo.svg" type="image/svg+xml" class="blkcenter"></object>
+
+  Armijo's condition 要求 step length $\alpha^k$ 满足 $f(\boldsymbol{x}^k + \alpha^k \boldsymbol{d}^k) < f(\boldsymbol{x}^k) + c\_1 \alpha^k g^T(\boldsymbol{x}^k)\boldsymbol{d}^k$
+
+  这个条件一来保证了 $\alpha^k$ 不会太大，因为上述条件保证了函数值一定是下降的；二来保证了 rate of decrease 不会太小，因为 $\frac{f(\boldsymbol{x}^k) - f(\boldsymbol{x}^k + \alpha^k \boldsymbol{d}^k)}{\alpha^k} > c\_1 g^T(\boldsymbol{x}^k)\boldsymbol{d}^k$，其中 $g^T(\boldsymbol{x}^k)\boldsymbol{d}^k$ 为最大可能的 rate of decrease。
+
+* Goldstein's condition
+
+  Goldstein's condition 给出下面的红色虚线，由于其斜率介于 $0$ 和 $g^T(\boldsymbol{x}^k)\boldsymbol{d}^k$ 之间，所以可以将斜率值定义为 $c\_2 g^T(\boldsymbol{x}^k)\boldsymbol{d}^k \; c_2 \in (0, 1)$
+
+  <object data="/resource/NNP/07-line-search/goldstein.svg" type="image/svg+xml" class="blkcenter"></object>
+
+  Goldstein's condition 要求 step length $\alpha^k$ 满足 $f(\boldsymbol{x}^k + \alpha^k \boldsymbol{d}^k) > f(\boldsymbol{x}^k) + c\_2 \alpha^k g^T(\boldsymbol{x}^k)\boldsymbol{d}^k$，这样 $\alpha$ 就必须大于 $\hat{\alpha}$，这个条件保证了 step length 不会太小
+
+  通常 Goldstein's condition 和 Armijo's condition 一起使用，这样就同时满足了前面提出的 3 个要求，在这种情况下，$c\_2$ 的取值范围是 $(c\_1, 1)$
+
+* Wolfe's condition
+
+  Wolfe's condition 的作用和 Goldstein's condition 是一样的，都是要保证 step length 不会太小，只是用的方法不一样，Wolfe's condition 通过限制 $\alpha^k$ 处的函数斜率来保证的。如下图中给出的斜虚线，假设其斜率有 $c g^T(\boldsymbol{x}^k)\boldsymbol{d}^k \; c\in (0, 1)$
+
+  <object data="/resource/NNP/07-line-search/wolfe.svg" type="image/svg+xml" class="blkcenter"></object>
+
+  Wolfe's condition 要求 $f'(\boldsymbol{x}^k + \alpha^k \boldsymbol{d}^k) > c g^T(\boldsymbol{x}^k) \boldsymbol{d}^k$，这样符合条件的 $\alpha$ 就只能是 $(\hat{\alpha}\_1, \hat{\alpha}\_2) \cup (\hat{\alpha}\_3, +\infty)$，也就保证了 step length 不会太小
+
+  同样 Wolfe's condition 也通常和 Armijo's condition 一起使用
