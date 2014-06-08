@@ -205,6 +205,8 @@ Gauss-Markov Therom 总体的意思是就是 least square estimator (LSE) of $\b
 
   如果 $\hat{\beta}$ 是 best estimator，则 $Var(\tilde{\beta}) - Var(\hat{\beta})$ 必须是 PSD matrix，这个证明参考 [Gauss–Markov theorem wiki](http://en.wikipedia.org/wiki/Gauss–Markov_theorem)。
 
+根据 Gauss-Markov therom，LSE 得到的 $\beta$ 是最好的 linear unbiased estimator，这并等于是 best linear estimator，我们可以通过提升一点 bias 显著降低 variance，这样就可以降低 MSE，得到更好的 linear estimator。
+
 ### Statistics Basis
 
 * What regression is all about is try to figure out why a particular variable varies (from [here](https://www.youtube.com/watch?v=aq8VU5KLmkY))，这里的 variable 指的是 dependent variable，所以知道 dependent variable 的 variance 有多少被我们的 model cover 就很有意义，所以有了像 $R^2$ 这样的指标，$R^2$ 表示 the proportion of total variance that is taken up by the model (equal to SSR/SST), the lower the SSE is, the higher the $R^2$。
