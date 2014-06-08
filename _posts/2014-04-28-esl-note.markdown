@@ -172,15 +172,38 @@ $$
 
 Gauss-Markov Therom 总体的意思是就是 least square estimator (LSE) of $\beta$ 是 best linear unbiased estimator (BLUE)，这里需要明确一下怎么算 best estimator，什么是 linear estimator，什么是 unbiased estimator。假设 $\hat{\beta}$ 是 $\beta$ 的 estimator
 
-* linear estimator: 如果 $\hat{\beta}$ 的每个分量都可以表示为 $c^T y, \; c \in \mathbb{R}^n$，$y$ 就是所有的 responce，也就是 $\hat{\beta}\_i$ 是所有 responce 的 linear combination，则 $\hat{\beta}$ 就被称为 linear estimator。对于 LSE，$\hat{\beta} = (\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T y$，显然 LSE 是 linear estimator
+* **linear estimator**
 
-* unbiased estimator: 如果 $E(\hat{\beta}) = \beta$ 则 $\hat{\beta}$ 就是 unbiased estimator。对于 LSE
+  如果 $\hat{\beta}$ 的每个分量都可以表示为 $c^T y, \; c \in \mathbb{R}^n$，$y$ 就是所有的 responce，也就是 $\hat{\beta}\_i$ 是所有 responce 的 linear combination，则 $\hat{\beta}$ 就被称为 linear estimator。对于 LSE，$\hat{\beta} = (\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T y$，显然 LSE 是 linear estimator
+
+* **unbiased estimator**
+
+  如果 $E(\hat{\beta}) = \beta$ 则 $\hat{\beta}$ 就是 unbiased estimator。对于 LSE
 
   $$E(\hat{\beta}) = E((\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T y) = (\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T E(y) = (\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T \boldsymbol{X} \beta = \beta$$
 
   所以 LSE 是 unbiased estimator
 
-* best estimator: 这里的 best 是用 mean square error (MSE) 来评价的
+* **best estimator**
+
+  这里的 best 是这么评价的 (有点意思)。令 $\theta = a^T \beta$，$\hat{\theta} = a^T \hat{\beta}$ 为 $\theta$ 的 estimator，如果对于任意的 $a \in \mathbb{R}^n$，$\hat{\theta}$ 的 MSE $E((\hat{\theta} - \theta)^2)$ 都是最小的，则认为 $\hat{\beta}$ 是最好的 estimator。
+  
+  也就是说 $\hat{\beta}$ 好不好，不是直接由 $\hat{\beta}$ 的 MSE 定的，$\hat{\beta}$ 的 MSE 等于 $E(\Vert \hat{\beta} - \beta \Vert^2)$，前后两个 MSE 有什么区别呢？前一个 MSE 展开你得到 $E((\sum\_{i} a\_{i}(\hat{\beta}\_i - \beta\_i))^2)$，后一个展开得到 $E((\sum\_i (\hat{\beta}\_i - \beta\_i)^2))$，前一个是 square of sum，后一个是 sum of square。
+
+  假设 LSE estimator 是 $\hat{\beta}$，任意其他 linear unbiased estimator 是 $\tilde{\beta}$，$\tilde{\theta} = a^T \tilde{\beta}, \hat{\theta} = a^T \hat{\beta}$，因为它们都是 unbiased estimator，所以它们的 MSE 就是 variance
+
+  $$
+  \begin{align}
+  & E((\tilde{\theta} - \theta)^2) - E((\hat{\theta} - \theta)^2) \\\\
+  = & (E(\tilde{\theta}^2) - \theta^2) - (E(\hat{\theta}^2) - \theta^2) \\\\
+  = & E(\tilde{\theta}^2) - E(\hat{\theta}^2) \\\\
+  = & E(a^T \tilde{\beta} \tilde{\beta}^T a) - E(a^T \hat{\beta} \hat{\beta}^T a) \\\\
+  = & a^T (E(\tilde{\beta} \tilde{\beta}^T) - E(\hat{\beta} \hat{\beta}^T))a \\\\
+  = & a^T (Var(\tilde{\beta}) - Var(\hat{\beta})) a \\\\
+  \end{align}
+  $$
+
+  如果 $\hat{\beta}$ 是 best estimator，则 $Var(\tilde{\beta}) - Var(\hat{\beta})$ 必须是 PSD matrix，这个证明参考 [Gauss–Markov theorem wiki](http://en.wikipedia.org/wiki/Gauss–Markov_theorem)。
 
 ### Statistics Basis
 
