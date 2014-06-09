@@ -41,7 +41,7 @@ $$\lim_{k\rightarrow \infty} \frac{\Vert \boldsymbol{x}^{k+1} - \boldsymbol{x}^*
 
   可以看到 $\beta$ 越小，收敛越快
 
-* $p = 2, \beta > 0$ (qudratic convergence)
+* $p = 2, \beta > 0$ (quadratic convergence)
 
   * $\beta = 1, \Vert \boldsymbol{x}^0 - \boldsymbol{x}^* \Vert = 0.1$
 
