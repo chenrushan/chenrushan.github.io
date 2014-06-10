@@ -4,6 +4,8 @@ title: Note of The Element of Statistical Learning
 categories: ml
 ---
 
+<span style="font-size: 1.5em; background-color:#9f9">This blog is always a work in progress</span>
+
 ### 公式解析
 
 <span style="background-color:#faa">注意：遵从书里的规则，下面非粗体的变量既用于表示 scalar，也用于表示 vector</span>
