@@ -1,0 +1,219 @@
+---
+layout: post
+title: Note of The Element of Statistical Learning
+categories: ml
+---
+
+### 公式解析
+
+<span style="background-color:#faa">注意：遵从书里的规则，下面非粗体的变量既用于表示 scalar，也用于表示 vector</span>
+
+#### (2.12) -> (2.13)
+
+$$
+\begin{align}
+& E\_{Y|X}([Y-c]^2 | X=x)  \\\\
+= & E\_{Y|X}(Y^2 - 2cY + c^2 | x)  \\\\
+= & E\_{Y|X}(Y^2 | x) - E\_{Y|X}(2cY | x) + c^2  \\\\
+\end{align}
+$$
+
+$$
+\begin{align}
+\frac{\partial E\_{Y|X}([Y-c]^2 | X=x)}{\partial c} = 2c - 2E\_{Y|X}(Y|X = x) = 0
+\end{align}
+$$
+
+$$
+\therefore f(x) = c = E\_{Y|X}(Y|X=x)
+$$
+
+#### (2.26)
+
+下面我用 $\varepsilon$ 表示针对一个样本，粗体的 $\boldsymbol{\varepsilon}$ 表示针对所有样本，所以是个 nx1 的向量。
+
+(2.26) 下面的 $\hat{y}\_0 = x\_0^T \hat{\beta}$ 等价于 $\hat{y}\_0 = x\_0^T \beta + \sum\_{i=1}^{N} l\_i(x\_0) \boldsymbol{\varepsilon}\_i$ where $l\_i(x\_0)$ is the ith element of $\boldsymbol{X}(\boldsymbol{X}^T\boldsymbol{X})^{-1}x\_0$
+
+后面那个 $\hat{y}\_0$ 用 matrix 表示就是 $\hat{y}\_0 = x\_0^T \beta + (\boldsymbol{X}(\boldsymbol{X}^T\boldsymbol{X})^{-1}x\_0)^T \boldsymbol{\varepsilon}$
+
+对 $Y = X^T \beta + \varepsilon$ 应用 least square 即 $(\boldsymbol{X}\hat{\beta} - \boldsymbol{X}\beta - \boldsymbol{\varepsilon})^T(\boldsymbol{X}\hat{\beta} - \boldsymbol{X}\beta - \boldsymbol{\varepsilon})$，展开求偏导，可得 $(\hat{\beta} - \beta) = (\boldsymbol{X}^T \boldsymbol{X})^{-1} \boldsymbol{X}^T \boldsymbol{\varepsilon}$，注意到 $\boldsymbol{X}^T\boldsymbol{X}$ 是 symmetric matrix，所以 $(\boldsymbol{X}^T\boldsymbol{X})^{-1} = ((\boldsymbol{X}^T\boldsymbol{X})^{-1})^T$，则有 $(\hat{\beta} - \beta) = (\boldsymbol{X}(\boldsymbol{X}^T\boldsymbol{X})^{-1})^T \boldsymbol{\varepsilon}$，等式两边同时于 $x\_0$ 做内积，很容易就推出上面的式子。
+
+#### (2.25) and (2.27)
+
+公式 (2.25) 和 (2.27) 都是计算 MSE 的，不同的是，(2.25) 对应的模型是个 determinstic function $Y = f(X)$，而 (2.27) 对应的是 $Y = f(X) + \varepsilon, \; \varepsilon \sim N(0, \delta^2)$，所以是个 non-determinstic function。这也造成了 (2.25) 和 (2.27) 不同，对于 determinstic function，$MSE(x\_0) = E\_{\mathcal{T}}(y\_0 - \hat{y}\_0)^2$，而对于 non-determinstic function 就要外面再套一个 $E\_{y\_0 | x\_0}$ 变成 $E\_{y\_0 | x\_0}E\_{\mathcal{T}}(y\_0 - \hat{y}\_0)^2$。
+
+上面公式中 $E\_{\mathcal{T}}(y\_0 - \hat{y}\_0)^2$ 变化的是 $\hat{y}\_0$，对于不同的 $\mathcal{T}$，$\hat{y}\_0$ 是不同的，对于给定的一个 $\mathcal{T}$，$\hat{y}\_0$ 是确定的。
+
+* (2.25) 的推导的 trick 是 
+
+  $$MSE(x\_0) = E\_{\mathcal{T}}(y\_0 - \hat{y}\_0)^2 = E\_{\mathcal{T}}((y\_0 - E\_{\mathcal{T}}[\hat{y}\_0]) + (E\_{\mathcal{T}}[\hat{y}\_0] - \hat{y}\_0))^2$$
+
+* (2.27) 的 trick 要多一点，为了方便，我用 $E$ 代替 $E\_{y\_0 | x\_0}E\_{\mathcal{T}}$
+
+  $$
+  \begin{align}
+  EPE(x\_0) = & E(y\_0 - \hat{y}\_0)^2 \\\\
+  = & E((y\_0 - f(x\_0)) + (f(x\_0) - \hat{y}\_0))^2 \\\\
+  = & E(y\_0 - f(x\_0))^2 + E(f(x\_0) - \hat{y}\_0))^2 + 2E((y\_0 - f(x\_0))(f(x\_0) - \hat{y}\_0))
+  \end{align}
+  $$
+  
+  因为 $f(x\_0)$ 是 determinstic 的，所以
+  
+  $$E(y\_0 f(x\_0)) = f(x\_0)E(y\_0) = f^2(x\_0)$$
+  $$E(y\_0\hat{y}\_0 - f(x\_0)\hat{y}\_0) = E(\varepsilon \hat{y}\_0) = E\_{y\_0 | x\_0}E\_{\mathcal{T}}(\varepsilon \hat{y}\_0) = E\_{y\_0 | x\_0}(\varepsilon E\_{\mathcal{T}}(\hat{y}\_0)) = E\_{y\_0 | x\_0}(\varepsilon) E\_{\mathcal{T}}(\hat{y}\_0) = 0$$
+
+  所以 $EPE(x\_0) = E(y\_0 - f(x\_0))^2 + E(f(x\_0) - \hat{y}\_0))^2$，对后面一项再应用 (2.25) 推导的 trick，就得到了
+
+  $$EPE(x\_0) = \delta^2 + Var(\hat{y}\_0) + Bias^2(\hat{y}\_0)$$
+
+  根据上面一小节关于 (2.26) 中给出的 $\hat{y}\_0$ 的公式可知 $E(\hat{y}\_0) = x\_0^T \beta$，所以 $Bias(\hat{y}\_0) = 0$。
+
+  $Var(\hat{y}\_0) = \delta^2 E(x\_0^T(\boldsymbol{X}^T \boldsymbol{X})^{-1}x\_0)$ 是这么推导的 (想了好久终于想出来，I'm a genius)
+
+  令 $\boldsymbol{v} = (\boldsymbol{X}(\boldsymbol{X}^T\boldsymbol{X})^{-1}x\_0)$
+
+  $$
+  \begin{align}
+  Var(\hat{y}\_0) = & Var(x\_0^T \beta + \boldsymbol{v}^T \boldsymbol{\varepsilon}) \\\\
+  = & E((\boldsymbol{v}^T \boldsymbol{\varepsilon})^2) \\\\
+  = & E((\sum\_i v\_i \varepsilon\_i)^2) \\\\
+  = & E(\sum\_i v\_i^2 \varepsilon\_i^2) (\text{since if} \; i \neq j \; \varepsilon\_i \; \text{and} \; \varepsilon\_j \; \text{are iid, so} \; E(\varepsilon\_i \varepsilon\_j) = 0) \\\\
+  = & \delta^2 E(\sum\_i v\_i^2) \\\\
+  = & \delta^2 E(\boldsymbol{v}^T \boldsymbol{v}) \\\\
+  = & \delta^2 E(x\_0^T(\boldsymbol{X}^T \boldsymbol{X})^{-1}x\_0)
+  \end{align}
+  $$
+
+  另外意外想到的一个公式是 $tr(\boldsymbol{v}\boldsymbol{v}^T) = \boldsymbol{v}^T\boldsymbol{v}$
+
+#### (2.28)
+
+在推导 (2.28) 前先明确下面的公式 (只要展开即可证明)
+
+$$x^T A x = \sum\_{i}\sum\_{j} A\_{ij} x\_i x\_j$$
+$$\sum\_{i}\sum\_{j} A\_{ij} B\_{ji} = trace(AB) = trace(BA)$$
+
+根据上面两个公式也可得到 $x^T A x = tr(A (xx^T))$
+
+为了方便，下面的公式里就不用 $x\_0$ 了，直接用 $x$
+
+$$
+\begin{align}
+& E\_x (x^T Cov(X)^{-1} x) \\\\
+= & E\_x (\sum\_{i}\sum\_{j} Cov(X)^{-1}\_{ij} x\_i x\_j) \\\\
+= & \sum\_{i}\sum\_{j} Cov(X)^{-1}\_{ij} E\_x (x\_i x\_j) \\\\
+= & \sum\_{i}\sum\_{j} Cov(X)^{-1}\_{ij} Cov(x\_i, x\_j) (\because E(X) = 0) \\\\
+= & trace(Cov(X)^{-1} Cov(x)) \\\\
+= & trace(I) \\\\
+= & p
+\end{align}
+$$
+
+#### (3.4)
+
+(3.4) 中给出了 Hessian matrix，目的是为了说明 RSS 是个 strictly convex function，因为对于 strictly convex function 其对应的 hessian matrix 是 pd 的。这样通过一阶导求出的结果就是 global mininum。
+
+关于 $\boldsymbol{X}^T\boldsymbol{X}$ 的正定性很容易证明，$x^T\boldsymbol{X}^T\boldsymbol{X}x = (\boldsymbol{X}x)^T (\boldsymbol{X}x) \geq 0$，所以 $\boldsymbol{X}^T\boldsymbol{X}$ 一定是 psd 的，如果 $\boldsymbol{X}$ 是 full column rank 的，那对于所有非 0 的 $x$，$\boldsymbol{X}x$ 就不可能是 0 (因为 $\boldsymbol{X}x = \sum\_{i} \boldsymbol{X}\_i x\_i$，其中 $\boldsymbol{X}\_i$ 表示第 $i$ 列)，则 $\boldsymbol{X}^T\boldsymbol{X}$ 就是 pd 的。
+
+#### (3.8)
+
+首先先对 (3.6) 做个变形
+
+$$
+\hat{\beta} = (\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T y = (\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T (\boldsymbol{X}\beta + \varepsilon) = \beta + (\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T \varepsilon
+$$
+
+基于这个的 $\hat{\beta}$ 表示，covariance matrix 可以表示为
+
+$$
+\begin{align}
+Var(\hat{\beta}) = & E((\hat{\beta} - \beta)(\hat{\beta} - \beta)^T) \\\\
+= & E((\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T \varepsilon \varepsilon^T \boldsymbol{X} ((\boldsymbol{X}^T\boldsymbol{X})^{-1})) \\\\
+= & (\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T E(\varepsilon \varepsilon^T) \boldsymbol{X} (\boldsymbol{X}^T\boldsymbol{X})^{-1} \\\\
+= & (\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T \delta^2\boldsymbol{I} \boldsymbol{X} (\boldsymbol{X}^T\boldsymbol{X})^{-1} \\\\
+= & \boldsymbol{X}^T\boldsymbol{X}^{-1}\delta^2
+\end{align}
+$$
+
+注意 $Var(\hat{\beta})$ 是一个 matrix，而不是一个 scalar，所以是等于 $E((\hat{\beta} - \beta)(\hat{\beta} - \beta)^T)$，而不是 $E((\hat{\beta} - \beta)^T(\hat{\beta} - \beta))$
+
+#### (3.8) 下面的 $\hat{\delta}^2$
+
+这个公式中 $N - p - 1$ 是 degree of freedom，根据[这篇文章](http://onlinestatbook.com/2/estimation/df.html)的介绍，the degrees of freedom for an estimate is equal to the number of values minus the number of parameters estimated en route to the estimate in question，这里估计 $\hat{\delta}^2$ 时用到了 $\hat{y}\_i$，而在估计 $\hat{y}\_i$ 时用到了$\beta$，这是个大小为 $p + 1$ 的向量，所以 $\hat{\delta}^2$ 的 DOF 是 $N - p - 1$
+
+#### (3.10)
+
+为什么 $\hat{\beta}$ 是正态分布呢？原因是这样
+
+* 首先根据 [Mutually independent normal random variables are jointly normal](http://www.statlect.com/mcdnrm1.htm#mutual)，$y$ 是 multivariate normal random vector
+
+* 由于 $\hat{\beta} = (\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T y$，所以 $\hat{\beta}$ 可以看成是 $y$ 的一个 linear transformation (可以把 $(\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T)$ 整体看成一个 matrix)，根据[这篇文章](http://www.statlect.com/normal_distribution_linear_combinations.htm)中给出的定理，$\hat{\beta}$ 服从 multivariate normal distribution，同时
+
+  $$var(\hat{\beta}) = (\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T \delta^2 I ((\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T)^T = (\boldsymbol{X}^T\boldsymbol{X})^{-1}\delta^2$$
+
+#### (3.11)
+
+关于为什么 $\frac{(N-p-1)\hat{\delta}^2}{\delta^2}$ 符合 $\mathcal{X}_{N-p-1}^2$ 分布可以参考 [goodness of fit](http://en.wikipedia.org/wiki/Goodness_of_fit)，regression analysis 的情况和 categorical data 的公式是不一样的。
+
+#### (3.12)
+
+<span style="background-color:#faa">下面论述的正确性有待验证，貌似是错的，参考 [wiki](http://en.wikipedia.org/wiki/Standard_error_\(statistics\)) </span>
+
+关于 t-distribution 和 normal distribution，这里简单说一下，如果给定 $X \sim N(\mu, \delta^2)$，我 sample N 次，得到 $X\_1, ..., X\_n$，令 $\bar{X} = \frac{1}{n}\sum\_i X\_i$，如果 $\delta$ 已知，则 $\frac{X - \bar{X}}{\delta} \sim N(0, 1)$，因为 $E(X - \bar{X}) = E(X) - E(\bar{X}) = 0$，如果用 standard error 来作为 standard deviation 的 estimate 则 $\frac{X - \bar{X}}{s} \sim t\_{N - 1}$，这里的 $N-1$ 为 $s$ 的 degree of freedom。
+
+假设检验就是假设某个事实成立，然后根据我实际得到的一些实验值以及这些实验值 (或者做某种变换后的得到的值) 的分布，看取到这些值可能性大不大，如果大就假设就成立，否则假设不成立。比如这里我假设 $\beta\_i$ 应该是 0，而我实际得到的值是 $\hat{\beta}\_i$，那我就根据这个实际得到的值去验证 $\beta\_i = 0$ 是否合理，为此我们基于这两个值构造了一个 z-score ($\frac{\hat{\beta}\_i - \beta\_i}{\hat{\delta}\sqrt{v\_j}} = \frac{\hat{\beta}\_i}{\hat{\delta}\sqrt{v\_j}}$)，并且知道这个 z-score 服从 t distribution，然后就看在这个 t distribution 下取这个 z-score 的可能性有多大来决定假设是否成立。同理，比如你假设一个 dice 是 fair 的，然后你扔了 N 次，统计一下每一面出现的频次，然后根据这些你实际得到的值和你期望的值构建一个 chi-square 值，然后根据 chi-square distribution，看取这个 chi-square 值的概率大不大决定你是否接受 dice 是 fair 的假设。
+
+#### (3.13)
+
+参考 http://en.wikipedia.org/wiki/F-test 和 http://en.wikipedia.org/wiki/F-distribution
+
+#### Gauss-Markov Therom
+
+Gauss-Markov Therom 总体的意思是就是 least square estimator (LSE) of $\beta$ 是 best linear unbiased estimator (BLUE)，这里需要明确一下怎么算 best estimator，什么是 linear estimator，什么是 unbiased estimator。假设 $\hat{\beta}$ 是 $\beta$ 的 estimator
+
+* **linear estimator**
+
+  如果 $\hat{\beta}$ 的每个分量都可以表示为 $c^T y, \; c \in \mathbb{R}^n$，$y$ 就是所有的 responce，也就是 $\hat{\beta}\_i$ 是所有 responce 的 linear combination，则 $\hat{\beta}$ 就被称为 linear estimator。对于 LSE，$\hat{\beta} = (\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T y$，显然 LSE 是 linear estimator
+
+* **unbiased estimator**
+
+  如果 $E(\hat{\beta}) = \beta$ 则 $\hat{\beta}$ 就是 unbiased estimator。对于 LSE
+
+  $$E(\hat{\beta}) = E((\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T y) = (\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T E(y) = (\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T \boldsymbol{X} \beta = \beta$$
+
+  所以 LSE 是 unbiased estimator
+
+* **best estimator**
+
+  这里的 best 是这么评价的 (有点意思)。令 $\theta = a^T \beta$，$\hat{\theta} = a^T \hat{\beta}$ 为 $\theta$ 的 estimator，如果对于任意的 $a \in \mathbb{R}^n$，$\hat{\theta}$ 的 MSE $E((\hat{\theta} - \theta)^2)$ 都是最小的，则认为 $\hat{\beta}$ 是最好的 estimator。
+  
+  也就是说 $\hat{\beta}$ 好不好，不是直接由 $\hat{\beta}$ 的 MSE 定的，$\hat{\beta}$ 的 MSE 等于 $E(\Vert \hat{\beta} - \beta \Vert^2)$，前后两个 MSE 有什么区别呢？前一个 MSE 展开你得到 $E((\sum\_{i} a\_{i}(\hat{\beta}\_i - \beta\_i))^2)$，后一个展开得到 $E((\sum\_i (\hat{\beta}\_i - \beta\_i)^2))$，前一个是 square of sum，后一个是 sum of square。
+
+  假设 LSE estimator 是 $\hat{\beta}$，任意其他 linear unbiased estimator 是 $\tilde{\beta}$，$\tilde{\theta} = a^T \tilde{\beta}, \hat{\theta} = a^T \hat{\beta}$，因为它们都是 unbiased estimator，所以它们的 MSE 就是 variance
+
+  $$
+  \begin{align}
+  & E((\tilde{\theta} - \theta)^2) - E((\hat{\theta} - \theta)^2) \\\\
+  = & (E(\tilde{\theta}^2) - \theta^2) - (E(\hat{\theta}^2) - \theta^2) \\\\
+  = & E(\tilde{\theta}^2) - E(\hat{\theta}^2) \\\\
+  = & E(a^T \tilde{\beta} \tilde{\beta}^T a) - E(a^T \hat{\beta} \hat{\beta}^T a) \\\\
+  = & a^T (E(\tilde{\beta} \tilde{\beta}^T) - E(\hat{\beta} \hat{\beta}^T))a \\\\
+  = & a^T (Var(\tilde{\beta}) - Var(\hat{\beta})) a \\\\
+  \end{align}
+  $$
+
+  如果 $\hat{\beta}$ 是 best estimator，则 $Var(\tilde{\beta}) - Var(\hat{\beta})$ 必须是 PSD matrix，这个证明参考 [Gauss–Markov theorem wiki](http://en.wikipedia.org/wiki/Gauss–Markov_theorem)。
+
+根据 Gauss-Markov therom，LSE 得到的 $\beta$ 是最好的 linear unbiased estimator，这并等于是 best linear estimator，我们可以通过提升一点 bias 显著降低 variance，这样就可以降低 MSE，得到更好的 linear estimator。
+
+### Statistics Basis
+
+* What regression is all about is try to figure out why a particular variable varies (from [here](https://www.youtube.com/watch?v=aq8VU5KLmkY))，这里的 variable 指的是 dependent variable，所以知道 dependent variable 的 variance 有多少被我们的 model cover 就很有意义，所以有了像 $R^2$ 这样的指标，$R^2$ 表示 the proportion of total variance that is taken up by the model (equal to SSR/SST), the lower the SSE is, the higher the $R^2$。
+
+### Good Sites
+
+1. [Understanding the Bias-Variance Tradeoff](http://scott.fortmann-roe.com/docs/BiasVariance.html)
+2. [Gauss–Markov theorem wiki](http://en.wikipedia.org/wiki/Gauss–Markov_theorem)
+3. [Mean squared error wiki](http://en.wikipedia.org/wiki/Mean_squared_error), mean square error for predictor and parameter
+
