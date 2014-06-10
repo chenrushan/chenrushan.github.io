@@ -24,10 +24,12 @@ tags: NPTEL, numerical optimization
 <blockquote>
 假设优化过程对应 sequence $\{\boldsymbol{x}^k\}_{k \geq 0}$，且 $\boldsymbol{x}^*$ 为 local minimum，如果下式成立
 
-$$\lim_{k\rightarrow \infty} \frac{\Vert \boldsymbol{x}^{k+1} - \boldsymbol{x}^*\Vert }{\Vert \boldsymbol{x}^k - \boldsymbol{x}^*\Vert^p} = \beta$$
+$$\lim_{k\rightarrow \infty} \frac{\Vert \boldsymbol{x}^{k+1} - \boldsymbol{x}^*\Vert }{\Vert \boldsymbol{x}^k - \boldsymbol{x}^*\Vert^p} = \beta \;\; \beta < \infty$$
 
 则 $p$ 表示 order of convergence，$\beta$ 表示 convergence rate
 </blockquote>
+
+注意到这里的分子分母都是表示离最优点的距离，所以上面的定义是用距离的比值来表示 convergence 的快慢
 
 * $p = 1, 0 < \beta < 1$ (linear convergence)
 
@@ -55,9 +57,9 @@ $$\lim_{k\rightarrow \infty} \frac{\Vert \boldsymbol{x}^{k+1} - \boldsymbol{x}^*
 
   $$\lim_{k\rightarrow \infty} \frac{\Vert \boldsymbol{x}^{k+1} - \boldsymbol{x}^* \Vert}{\Vert \boldsymbol{x}^k - \boldsymbol{x}^* \Vert} = 0, \lim_{k\rightarrow \infty} \frac{\Vert \boldsymbol{x}^{k+1} - \boldsymbol{x}^* \Vert}{\Vert \boldsymbol{x}^k - \boldsymbol{x}^* \Vert^2} = \infty$$
 
-  这被称为 superlinear convergence，它的收敛速度介于 linear 和 quadratic 之间，我们后续见到的大多算法都属于 superlinear convergence
-
-Error function
+  这被称为 superlinear convergence，它的收敛速度介于 linear 和 quadratic 之间
+  
+由于 linear convergence 收敛得慢，而 quadratic convergence 虽然收敛快但是需要的资源太多，所以大多数算法都是属于 superlinear convergence
 
 #### Find $\boldsymbol{x}^{k+1}$
 
