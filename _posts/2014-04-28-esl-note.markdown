@@ -170,6 +170,14 @@ $$
 
 参考 http://en.wikipedia.org/wiki/F-test 和 http://en.wikipedia.org/wiki/F-distribution
 
+#### (3.44)
+
+(3.44) 下面的一段话中说加了 $\lambda \boldsymbol{I}$ 使得这个问题变得 nonsingular，原因是这样的，对于任意矩阵 $M$ (假设它的所有 eigenvalue 都是实数，复数的我也不懂，正好在我们这里 $\boldsymbol{A}^T\boldsymbol{A}$ 是 symmetric matrix，因此它的 eigenvalue 必然是实数)，假设 $\alpha$ 是它的 eigenvalue，则有 $\boldsymbol{M}x = \alpha x$，则对于 $\boldsymbol{M} + \lambda \boldsymbol{I}$ 有
+
+$$(\boldsymbol{M} + \lambda \boldsymbol{I})x = (\alpha + \lambda) x$$
+
+也就是说如果 $\alpha$ 是 $\boldsymbol{M}$ 的 eigenvalue，则 $\alpha + \lambda$ 就是 $\boldsymbol{M} + \lambda \boldsymbol{I}$ 的 eigenvalue，这样就好办了，我总可以选出 $\lambda$ 使得我对于所有的 $\alpha\_i$ 满足 $\alpha\_i + \lambda \neq 0$，比如令 $\lambda > \max\_i |\alpha\_i|$，这样也就使得问题变得 nonsingular。
+
 #### Gauss-Markov Therom
 
 Gauss-Markov Therom 总体的意思是就是 least square estimator (LSE) of $\beta$ 是 best linear unbiased estimator (BLUE)，这里需要明确一下怎么算 best estimator，什么是 linear estimator，什么是 unbiased estimator。假设 $\hat{\beta}$ 是 $\beta$ 的 estimator

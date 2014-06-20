@@ -379,6 +379,14 @@ $$A\boldsymbol{x} = \lambda \boldsymbol{x} \;\; \boldsymbol{x} \neq \boldsymbol{
 
   This implies that $A - \lambda I$ is not full-rank, so $\det(A - \lambda I) = 0$. This is called the characteristic equation of $A$. This equation is a polynomial of degree n, so it has n roots and are called the eigenvalues of $A$. All the n roots need not be real roots, some of them could be complex root.
 
+* If the eigenvalue $\lambda$ equals 0 then $A\boldsymbol{x} = 0\boldsymbol{x} = 0$. Vectors with eigenvalue 0 make up the nullspace of $A$
+
+  $A$ is singular iff $\lambda = 0$ is an eigenvalue of $A$.
+
+* $\det(A) = \prod\_{i = 1}^{n} \lambda\_i$
+
+  The matrix $A$ is invertible if and only if all the eigenvalues $\lambda\_i$ are nonzero.
+
 -----------------------
 
 **Symmetric Matrix**
