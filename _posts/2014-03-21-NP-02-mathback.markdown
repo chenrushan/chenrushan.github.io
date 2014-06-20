@@ -597,7 +597,7 @@ Let $S \subseteq \mathbb{R}^n$. A function $f: S \rightarrow \mathbb{R}^m$ is sa
 
 $$ \Vert f(\boldsymbol{x}_1) - f(\boldsymbol{x}_2) \Vert \leq L \Vert \boldsymbol{x}_1 - \boldsymbol{x}_2 \Vert \;\; \forall \boldsymbol{x}_1, \boldsymbol{x}_2 \in S$$
 
-where $L$ is a constant
+where $L$ is a positive constant
 </blockquote>
 
 所以 lipschitz continuous 给任意两点函数值的差异加了一个上限
