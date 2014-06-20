@@ -218,6 +218,7 @@ Ridge regression 是 Tikhonov regularization 的一个特例，参考
 * [Tikhonov regularization wiki](http://en.wikipedia.org/wiki/Tikhonov_regularization)
 * [INVERSE PROBLEMS FOR REGULARIZATION MATRICES](http://www.math.kent.edu/~reichel/publications/invregmat.pdf)
 * [Making a singular matrix non-singular](http://www.johndcook.com/blog/2012/06/13/matrix-condition-number/)
+* [Regularization: Ridge Regression and the LASSO](http://statweb.stanford.edu/~owen/courses/305/Rudyregularization.pdf)
 
 [Making a singular matrix non-singular](http://www.johndcook.com/blog/2012/06/13/matrix-condition-number/) 这篇文章的最后有这么几句话 "So here’s a more refined question: can you change a singular matrix into a useful non-singular matrix? Yes you can, sometimes, but the answer depends very much on the problem you’re trying to solve. This is generally known as regularization"，这个也许是 regularization 这个 term 的由来。
 
