@@ -234,8 +234,6 @@ Ridge regression 是 Tikhonov regularization 的一个特例，参考
 
 * Page 83 的第一段里提到 "we estimate $\beta\_0$ with $\bar{y} = ...$"，为什么可以这么做？
 
-* Page 83 的 (3.44) 公式，为什么加一个 $\lambda I$ 就能让一个 singular matrix 变成 nonsingular？
-
 ### Statistics Basis
 
 * What regression is all about is try to figure out why a particular variable varies (from [here](https://www.youtube.com/watch?v=aq8VU5KLmkY))，这里的 variable 指的是 dependent variable，所以知道 dependent variable 的 variance 有多少被我们的 model cover 就很有意义，所以有了像 $R^2$ 这样的指标，$R^2$ 表示 the proportion of total variance that is taken up by the model (equal to SSR/SST), the lower the SSE is, the higher the $R^2$。
