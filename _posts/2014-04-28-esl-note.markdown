@@ -209,9 +209,23 @@ Gauss-Markov Therom 总体的意思是就是 least square estimator (LSE) of $\b
 
 根据 Gauss-Markov therom，LSE 得到的 $\beta$ 是最好的 linear unbiased estimator，这并等于是 best linear estimator，我们可以通过提升一点 bias 显著降低 variance，这样就可以降低 MSE，得到更好的 linear estimator。
 
+### 知识点
+
+#### Ridge Regression
+
+Ridge regression 是 Tikhonov regularization 的一个特例，参考
+
+* [Tikhonov regularization wiki](http://en.wikipedia.org/wiki/Tikhonov_regularization)
+* [INVERSE PROBLEMS FOR REGULARIZATION MATRICES](http://www.math.kent.edu/~reichel/publications/invregmat.pdf)
+* [Making a singular matrix non-singular](http://www.johndcook.com/blog/2012/06/13/matrix-condition-number/)
+
+[Making a singular matrix non-singular](http://www.johndcook.com/blog/2012/06/13/matrix-condition-number/) 这篇文章的最后有这么几句话 "So here’s a more refined question: can you change a singular matrix into a useful non-singular matrix? Yes you can, sometimes, but the answer depends very much on the problem you’re trying to solve. This is generally known as regularization"，这个也许是 regularization 这个 term 的由来。
+
 ### Questions
 
 * Page 83 的第一段里提到 "we estimate $\beta\_0$ with $\bar{y} = ...$"，为什么可以这么做？
+
+* Page 83 的 (3.44) 公式，为什么加一个 $\lambda I$ 就能让一个 singular matrix 变成 nonsingular？
 
 ### Statistics Basis
 
