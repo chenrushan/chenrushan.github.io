@@ -61,14 +61,9 @@ $$\lim_{k\rightarrow \infty} \frac{\Vert \boldsymbol{x}^{k+1} - \boldsymbol{x}^*
   
 由于 linear convergence 收敛得慢，而 quadratic convergence 虽然收敛快但是需要的资源太多，所以大多数算法都是属于 superlinear convergence
 
-#### Find $\boldsymbol{x}^{k+1}$
+#### Step Length
 
-从 $\boldsymbol{x}^k$ 到 $\boldsymbol{x}^{k + 1}$ 需要明确以下两点
-
-* 确定 descent direction $d^{k}$
-* 确定 step length $\alpha^{k}$
-
-关于 descent direction 的确定会在后面的好多节中详细叙述，这里讲一下如何确定 step length，假设 $\boldsymbol{d}^k$ 已经确定，求解 $\alpha^k$ 的方法分为两种，分别是 Exact line search 和 Inexact line search。
+假设 $\boldsymbol{d}^k$ 已经确定，求解 step length $\alpha^k$ 的方法分为两种，分别是 Exact line search 和 Inexact line search。
 
 ##### Exact line search
 
@@ -128,3 +123,90 @@ Exact line search 有时会带来性能上的问题，这时就需要使用近�
   Wolfe's condition 要求 $f'(\boldsymbol{x}^k + \alpha^k \boldsymbol{d}^k) > c g^T(\boldsymbol{x}^k) \boldsymbol{d}^k$，这样符合条件的 $\alpha$ 就只能是 $(\hat{\alpha}\_1, \hat{\alpha}\_2) \cup (\hat{\alpha}\_3, +\infty)$，也就保证了 step length 不会太小
 
   同样 Wolfe's condition 也通常和 Armijo's condition 一起使用
+
+##### Backtrack line search
+
+Backtrack line search 虽然独立一小节出来，但它本质也是一种 inexact line search，它是 inexact line search 在具体实现上的一种 trick，它通过 Armijo condition 来保证 rate of decrease，然后以 backtract 的方式来保证 step length 不会太小，参考如下伪代码
+
+<blockquote>
+INPUT: $\hat{\alpha} \in (0, +\infty), c_1 \in (0, 1), \lambda \in (0, 1)$<br/><br/>
+
+$\alpha^k = \hat{\alpha}$ <br/>
+WHILE $f(\boldsymbol{x}^k + \alpha^k \boldsymbol{d}^k) > f(\boldsymbol{x}^k) + c_1 \alpha^k g^k \boldsymbol{d}^k$ <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;$\alpha^k = \lambda \alpha^k$<br/><br/>
+
+OUTPUT: $\alpha^k$
+</blockquote>
+
+可以看到，代码其实是非常简单的，每一轮迭代都按固定的比例缩减 step length，直到满足 Armijo condition 为止，所以等于说它找到了一个尽可能最大的满足 Armijo condition 的 step length。
+
+#### Proof of Convergence
+
+在证明前先做几个假设，令 $f^k = f(\boldsymbol{x}^k), g^k = f'(\boldsymbol{x}^k)$，假设
+
+* $f$ is bounded below，否则优化就没有结果了
+* 确定 step length 用的是 Armijo-Wolfe condition
+* $g^k$ is lipschitz continuous
+* $g^k$ 和 $\boldsymbol{d}^k$ 严格成钝角
+
+----------------
+
+* 证明
+
+  * 首先每一步迭代符合 Armijo condition 所以有
+
+     $$
+     \begin{align}
+     f^k < & f^{k-1} + c\_1 \alpha^{k-1} g^{k-1} \boldsymbol{d}^{k-1} \;\; c\_1 \in (0, 1) \\\\
+     < & f^0 + \sum\_{i=0}^{k-1} c\_1 \alpha^i g^i \boldsymbol{d}^i \\\\
+     \end{align}
+     $$
+
+     上式等价于 $ - \sum\_{i=0}^{k-1} c\_1 \alpha^i g^i \boldsymbol{d}^i < f^0 - f^k$，由于 $f$ bounded below，所以有 $f^0 - f^\infty < \infty$，因此有
+
+     $$ - \sum\_{i=0}^{\infty} c\_1 \alpha^i g^i \boldsymbol{d}^i < \infty$$
+
+     首先明确不等式左边是个正数，因为 $c\_1 > 0, \alpha\_i > 0, -g^i \boldsymbol{d}^i >= 0$，所以 sum 的每个元素都大于等于 0，而无限个这样的数相加能 $< \infty$，唯一的可能就是当 $i$ 大于某个数后，$c\_1 \alpha^i g^i \boldsymbol{d}^i = 0$
+
+  * 由于 $g^k$ lipschitz continuous，所以有
+
+     $$ \Vert g^k - g^{k-1} \Vert \leq L \Vert \boldsymbol{x}^k - \boldsymbol{x}^{k-1} \Vert  = L \alpha^{k-1} \Vert \boldsymbol{d}^{k-1} \Vert \;\; L \geq 0 $$
+
+     不等式两边同乘以 $\Vert \boldsymbol{d}^{k-1} \Vert$ 有
+
+     $$ (g^k - g^{k-1})^T \boldsymbol{d}^{k-1} \leq \Vert g^k - g^{k-1} \Vert \Vert \boldsymbol{d}^{k-1} \Vert \leq L \alpha^{k-1} {\boldsymbol{d}^{k-1}}^T \boldsymbol{d}^{k-1}$$
+
+     因此有
+
+     $$\alpha^{k-1} \geq \frac{(g^k - g^{k-1})^T \boldsymbol{d}^{k-1}}{L {\boldsymbol{d}^{k-1}}^T \boldsymbol{d}^{k-1}}$$
+
+  * 由于每一步迭代又满足 Wolfe condition，所以有
+
+     $${g^{k}}^T \boldsymbol{d}^{k-1} \geq c\_2 g^{k-1} \boldsymbol{d}^{k-1} \;\; c\_2 \in (c\_1, 1)$$
+
+     两边同减去 $g^{k-1}\boldsymbol{d}^{k-1}$ 得 $(g^k - g^{k-1})^T \boldsymbol{d}^{k-1} \geq (c\_2 - 1) g^{k-1} \boldsymbol{d}^{k-1}$
+
+     结合第二步推导得到的不等式，有
+
+     $$\alpha^{k-1} \geq \frac{(c\_2 - 1) g^{k-1} \boldsymbol{d}^{k-1}}{L {\boldsymbol{d}^{k-1}}^T \boldsymbol{d}^{k-1}}$$
+
+     不等式两边同乘以 $-c\_1 {g^{k-1}}^T \boldsymbol{d}^{k-1}$ 有
+
+     $$-c\_1 \alpha^{k-1} {g^{k-1}}^T \boldsymbol{d}^{k-1} \geq \frac{c\_1(1 - c\_2) (g^{k-1} \boldsymbol{d}^{k-1})^2}{L {\boldsymbol{d}^{k-1}}^T \boldsymbol{d}^{k-1}} = \frac{c\_1(1 - c\_2)}{L} \Vert g^{k-1} \Vert^2 \cos^2\theta$$
+
+     结合第一步得到的不等式有
+
+     $$\sum\_i \frac{c\_1(1 - c\_2)}{L} \Vert g^i \Vert^2 \cos^2\theta < \infty$$ 
+
+     其中 $\frac{c\_1(1 - c\_2)}{L} > 0, \cos^2\theta > 0$，因此 $\lim\_{i\rightarrow \infty} \Vert g^i \Vert = 0$
+
+因此在上述假设成立的情况下，算法是收敛的，当然上述假设不是必要条件了，这里只是给出一个证明的例子
+
+#### Descent Direction
+
+所有的 descent direction 都可以表示为 $\boldsymbol{d}^k = -A g^k$，因为 $\boldsymbol{d}^k$ 和 $g^k$ 是一个空间内的向量，给定一个，另一个总可以通过旋转伸缩来得到，也就是矩阵乘的方式 (不要纠结于那个负号)。
+
+之前我们提到所有满足 ${g^k}^T \boldsymbol{d}^k < 0$ 的方向都是 descent direction，把 $\boldsymbol{d}^k$ 的表示代入有 $-{g^k}^T A g^k < 0$，即要求 $A$ 是 positive definite matrix。
+
+所有的优化算法最核心的不同就在于如何构建 matrix $A$，详情请见后续章节。
+
