@@ -32,4 +32,8 @@ $$
 {\boldsymbol{g}^k}^T \boldsymbol{d}^k = \Vert \boldsymbol{g}^k \Vert \Vert \boldsymbol{d}^k \Vert \cos \theta = \Vert \boldsymbol{g}^k \Vert \cos \theta
 $$
 
-当 $\theta = 2\pi$ 时这个式子最小，也就是 $\boldsymbol{d}^k$ 和 $\boldsymbol{g}^k$ 的夹角 $2\pi$ 时上述近似函数值最小，如下图所示
+当 $\theta = \pi$ 时这个式子最小，也就是 $\boldsymbol{d}^k$ 和 $\boldsymbol{g}^k$ 的夹角 $\pi$ 时上述近似函数值最小，如下图所示
+
+<object data="/resource/NNP/08-steepest/descent.svg" type="image/svg+xml" class="blkcenter"></object>
+
+
