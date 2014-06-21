@@ -129,7 +129,7 @@ Exact line search 有时会带来性能上的问题，这时就需要使用近�
 Backtrack line search 虽然独立一小节出来，但它本质也是一种 inexact line search，它是 inexact line search 在具体实现上的一种 trick，它通过 Armijo condition 来保证 rate of decrease，然后以 backtract 的方式来保证 step length 不会太小，参考如下伪代码
 
 <blockquote>
-INPUT: $\hat{\alpha}, c_1 \in (0, 1), \lambda \in (0, 1)$<br/><br/>
+INPUT: $\hat{\alpha} \in (0, +\infty), c_1 \in (0, 1), \lambda \in (0, 1)$<br/><br/>
 
 $\alpha^k = \hat{\alpha}$ <br/>
 WHILE $f(\boldsymbol{x}^k + \alpha^k \boldsymbol{d}^k) > f(\boldsymbol{x}^k) + c_1 \alpha^k g^k \boldsymbol{d}^k$ <br/>
@@ -166,7 +166,7 @@ OUTPUT: $\alpha^k$
 
      $$ - \sum\_{i=0}^{\infty} c\_1 \alpha^i g^i \boldsymbol{d}^i < \infty$$
 
-     首先明确不等式左边是个正数，因为 $c\_1 > 0, \alpha\_i > 0, -g^i \boldsymbol{d}^i >= 0$，所以 sum 的每个元素大于等于 0，而无限个这样的数相加能 $< \infty$，唯一的可能就是当 $i$ 大于某个数后，$c\_1 \alpha^i g^i \boldsymbol{d}^i = 0$，下面进一步证明发现 $\lim\_{k\rightarrow \infty} \Vert g^k \Vert = 0$
+     首先明确不等式左边是个正数，因为 $c\_1 > 0, \alpha\_i > 0, -g^i \boldsymbol{d}^i >= 0$，所以 sum 的每个元素都大于等于 0，而无限个这样的数相加能 $< \infty$，唯一的可能就是当 $i$ 大于某个数后，$c\_1 \alpha^i g^i \boldsymbol{d}^i = 0$
 
   * 由于 $g^k$ lipschitz continuous，所以有
 
