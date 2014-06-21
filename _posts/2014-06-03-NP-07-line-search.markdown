@@ -124,6 +124,22 @@ Exact line search 有时会带来性能上的问题，这时就需要使用近�
 
   同样 Wolfe's condition 也通常和 Armijo's condition 一起使用
 
+##### Backtrack line search
+
+Backtrack line search 虽然独立一小节出来，但它本质也是一种 inexact line search，它是 inexact line search 在具体实现上的一种 trick，它通过 Armijo condition 来保证 rate of decrease，然后以 backtract 的方式来保证 step length 不会太小，参考如下伪代码
+
+<blockquote>
+INPUT: $\hat{\alpha}, c_1 \in (0, 1), \lambda \in (0, 1)$<br/><br/>
+
+$\alpha^k = \hat{\alpha}$ <br/>
+WHILE $f(\boldsymbol{x}^k + \alpha^k \boldsymbol{d}^k) > f(\boldsymbol{x}^k) + c_1 \alpha^k g^k \boldsymbol{d}^k$ <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;$\alpha^k = \lambda \alpha^k$<br/><br/>
+
+OUTPUT: $\alpha^k$
+</blockquote>
+
+可以看到，代码其实是非常简单的，每一轮迭代都按固定的比例缩减 step length，直到满足 Armijo condition 为止，所以等于说它找到了一个尽可能最大的满足 Armijo condition 的 step length。
+
 #### Proof of Convergence
 
 在证明前先做几个假设，令 $f^k = f(\boldsymbol{x}^k), g^k = f'(\boldsymbol{x}^k)$，假设
@@ -186,4 +202,11 @@ Exact line search 有时会带来性能上的问题，这时就需要使用近�
 
 因此在上述假设成立的情况下，算法是收敛的，当然上述假设不是必要条件了，这里只是给出一个证明的例子
 
+#### Descent Direction
+
+所有的 descent direction 都可以表示为 $\boldsymbol{d}^k = -A g^k$，因为 $\boldsymbol{d}^k$ 和 $g^k$ 是一个空间内的向量，给定一个，另一个总可以通过旋转伸缩来得到，也就是矩阵乘的方式 (不要纠结于那个负号)。
+
+之前我们提到所有满足 ${g^k}^T \boldsymbol{d}^k < 0$ 的方向都是 descent direction，把 $\boldsymbol{d}^k$ 的表示代入有 $-{g^k}^T A g^k < 0$，即要求 $A$ 是 positive definite matrix。
+
+所有的优化算法最核心的不同就在于如何构建 matrix $A$，详情请见后续章节。
 
