@@ -36,4 +36,4 @@ $$
 
 <object data="/resource/NNP/08-steepest/descent.svg" type="image/svg+xml" class="blkcenter"></object>
 
-
+上节中提到 $\boldsymbol{d}^k$ 都可以表示成 $-A^k \boldsymbol{g}^k$，对于 steepest descent，$A^k = I$。

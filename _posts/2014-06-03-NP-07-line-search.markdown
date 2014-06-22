@@ -204,9 +204,9 @@ OUTPUT: $\alpha^k$
 
 #### Descent Direction
 
-所有的 descent direction 都可以表示为 $\boldsymbol{d}^k = -A g^k$，因为 $\boldsymbol{d}^k$ 和 $g^k$ 是一个空间内的向量，给定一个，另一个总可以通过旋转伸缩来得到，也就是矩阵乘的方式 (不要纠结于那个负号)。
+所有的 descent direction 都可以表示为 $\boldsymbol{d}^k = -A^k g^k$，因为 $\boldsymbol{d}^k$ 和 $g^k$ 是一个空间内的向量，给定一个，另一个总可以通过旋转伸缩来得到，也就是矩阵乘的方式 (不要纠结于那个负号)。
 
-之前我们提到所有满足 ${g^k}^T \boldsymbol{d}^k < 0$ 的方向都是 descent direction，把 $\boldsymbol{d}^k$ 的表示代入有 $-{g^k}^T A g^k < 0$，即要求 $A$ 是 positive definite matrix。
+之前我们提到所有满足 ${g^k}^T \boldsymbol{d}^k < 0$ 的方向都是 descent direction，把 $\boldsymbol{d}^k$ 的表示代入有 $-{g^k}^T A^k g^k < 0$，即要求 $A^k$ 是 positive definite matrix。
 
-所有的优化算法最核心的不同就在于如何构建 matrix $A$，详情请见后续章节。
+所有的优化算法最核心的不同就在于如何构建 matrix $A^k$，详情请见后续章节。
 
