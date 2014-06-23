@@ -221,7 +221,13 @@ Gauss-Markov Therom 总体的意思是就是 least square estimator (LSE) of $\b
 
 首先注意这个公式里的 $Var(\boldsymbol{z}\_1)$ 不是个 covariance matrix，这里的向量 $\boldsymbol{z}\_1$ 表示的是一个 random variable 的 n 个取值，而不是 n 个 random variable 分别的取值，搞清楚这个非常重要。情况是这样，$\boldsymbol{X}$ 是原始空间中的样本，原始空间中每个样本有 p 个 feature，也就是 p 个 random variable，而 $\boldsymbol{X}$ 的每一列分别表示这 p 个 feature 的 n 个取值，而 $\boldsymbol{X}v\_1$ 将 p 个 feature project 到一个新的空间中，变成一个 feature，$\boldsymbol{z}\_1$ 就是 n 个样本对这个 feature 的取值，所以说它是一个 random variable 的 n 个取值。
 
-令 $\boldsymbol{X}\_i$ 表示 $\boldsymbol{X}$ 的第 i 列，由于 $\boldsymbol{X}$ 是 centered，所以 $\sum\_{j=1}^{n} \boldsymbol{X}$
+令 $\boldsymbol{X}\_i$ 表示 $\boldsymbol{X}$ 的第 i 列，由于 $\boldsymbol{X}$ 是 centered，所以 $\sum\_{j=1}^{n} \boldsymbol{X}\_{ij} = 0$，由此
+
+$$ Mean(\boldsymbol{X}v\_1) = \frac{\sum\_{i = 1}^{p} \sum\_{j = 1}^{n} \boldsymbol{X}\_{ij}v\_{1i}}{N} = 0$$
+
+所以 $\boldsymbol{X}v\_1$ 的 sample variance 就是
+
+$$\frac{(\boldsymbol{X}v\_1)^T\boldsymbol{X}v\_1}{N} = \frac{v\_1^T\boldsymbol{X}^T \boldsymbol{X}v\_1}{N} = \frac{v\_1^T {d\_1}^2 v\_1}{N} = \frac{d\_1^2}{N}$$
 
 ### 知识点
 
