@@ -217,6 +217,12 @@ Gauss-Markov Therom 总体的意思是就是 least square estimator (LSE) of $\b
 
 根据 Gauss-Markov therom，LSE 得到的 $\beta$ 是最好的 linear unbiased estimator，这并等于是 best linear estimator，我们可以通过提升一点 bias 显著降低 variance，这样就可以降低 MSE，得到更好的 linear estimator。
 
+#### (3.49)
+
+首先注意这个公式里的 $Var(\boldsymbol{z}\_1)$ 不是个 covariance matrix，这里的向量 $\boldsymbol{z}\_1$ 表示的是一个 random variable 的 n 个取值，而不是 n 个 random variable 分别的取值，搞清楚这个非常重要。情况是这样，$\boldsymbol{X}$ 是原始空间中的样本，原始空间中每个样本有 p 个 feature，也就是 p 个 random variable，而 $\boldsymbol{X}$ 的每一列分别表示这 p 个 feature 的 n 个取值，而 $\boldsymbol{X}v\_1$ 将 p 个 feature project 到一个新的空间中，变成一个 feature，$\boldsymbol{z}\_1$ 就是 n 个样本对这个 feature 的取值，所以说它是一个 random variable 的 n 个取值。
+
+令 $\boldsymbol{X}\_i$ 表示 $\boldsymbol{X}$ 的第 i 列，由于 $\boldsymbol{X}$ 是 centered，所以 $\sum\_{j=1}^{n} \boldsymbol{X}$
+
 ### 知识点
 
 #### Ridge Regression
