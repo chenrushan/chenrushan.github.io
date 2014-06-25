@@ -217,6 +217,16 @@ Gauss-Markov Therom 总体的意思是就是 least square estimator (LSE) of $\b
 
 根据 Gauss-Markov therom，LSE 得到的 $\beta$ 是最好的 linear unbiased estimator，这并等于是 best linear estimator，我们可以通过提升一点 bias 显著降低 variance，这样就可以降低 MSE，得到更好的 linear estimator。
 
+#### (3.46)
+
+$\boldsymbol{U}^T y$ 表示 $\hat{y}$ 在以 $\boldsymbol{U}$ 的列向量为 basis 的空间内的坐标，所以 $\hat{y} = \boldsymbol{U}\boldsymbol{U}^T y$。
+
+这个可以这么理解的，考虑正常的 3d space 中的坐标，比如 $v = (3, 4, 5)^T$，它实际上是等于
+
+$$3 \begin{pmatrix} 1 \\\\ 0\\\\ 0 \end{pmatrix} + 4 \begin{pmatrix} 0 \\\\ 1 \\\\ 0 \end{pmatrix} + 5 \begin{pmatrix} 0 \\\\ 0 \\\\ 1 \end{pmatrix} = \boldsymbol{I} v$$
+
+其中 $I$ 为 basis，同理 $y$ 在 $\boldsymbol{U}$ 中的坐标 $\boldsymbol{U}^T y$，其 basis 为 $\boldsymbol{U}$，所以 $\hat{y} = \boldsymbol{U}\boldsymbol{U}^T y$。
+
 #### (3.49)
 
 首先注意这个公式里的 $Var(\boldsymbol{z}\_1)$ 不是个 covariance matrix，这里的向量 $\boldsymbol{z}\_1$ 表示的是一个 random variable 的 n 个取值，而不是 n 个 random variable 分别的取值，搞清楚这个非常重要。情况是这样，$\boldsymbol{X}$ 是原始空间中的样本，原始空间中每个样本有 p 个 feature，也就是 p 个 random variable，而 $\boldsymbol{X}$ 的每一列分别表示这 p 个 feature 的 n 个取值，而 $\boldsymbol{X}v\_1$ 将 p 个 feature project 到一个新的空间中，变成一个 feature，$\boldsymbol{z}\_1$ 就是 n 个样本对这个 feature 的取值，所以说它是一个 random variable 的 n 个取值。
@@ -228,6 +238,16 @@ $$ Mean(\boldsymbol{X}v\_1) = \frac{\sum\_{i = 1}^{p} \sum\_{j = 1}^{n} \boldsym
 所以 $\boldsymbol{X}v\_1$ 的 sample variance 就是
 
 $$\frac{(\boldsymbol{X}v\_1)^T\boldsymbol{X}v\_1}{N} = \frac{v\_1^T\boldsymbol{X}^T \boldsymbol{X}v\_1}{N} = \frac{v\_1^T {d\_1}^2 v\_1}{N} = \frac{d\_1^2}{N}$$
+
+#### (3.49) 下面的公式
+
+$\boldsymbol{z}\_1 = \boldsymbol{X} v\_1 = \boldsymbol{u}\_1 d\_1$ 的推导很简单，只要把 $\boldsymbol{X}$ 对应的 SVD 分解代入即可。
+
+### 注意点
+
+* (page 85) 注意区分 principal component 和 principal component direction，principal component direction 是 $\boldsymbol{X}^T \boldsymbol{X}$ 的 eigenvector，假设为 $v$，$\boldsymbol{X}v$ 才是 principal component，如 Figure 3.9 所示。
+
+* (page 91) figure 3.12 可以看到 q 从 0.1 到 4 的过程中，contour 的图形变化从窄到越来越方。
 
 ### 知识点
 
@@ -245,6 +265,8 @@ Ridge regression 是 Tikhonov regularization 的一个特例，参考
 ### Questions
 
 * Page 83 的第一段里提到 "we estimate $\beta\_0$ with $\bar{y} = ...$"，为什么可以这么做？
+
+* Page 86 最后一段没太看懂
 
 ### Statistics Basis
 
