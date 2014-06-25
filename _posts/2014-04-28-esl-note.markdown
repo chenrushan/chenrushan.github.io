@@ -245,13 +245,15 @@ $\boldsymbol{z}\_1 = \boldsymbol{X} v\_1 = \boldsymbol{u}\_1 d\_1$ 的推导很�
 
 ### 注意点
 
-* ( **page 66** ) 注意区分 principal component 和 principal component direction，principal component direction 是 $\boldsymbol{X}^T \boldsymbol{X}$ 的 eigenvector，假设为 $v$，$\boldsymbol{X}v$ 才是 principal component，如 Figure 3.9 所示。
+* **(page 66)** 注意区分 principal component 和 principal component direction，principal component direction 是 $\boldsymbol{X}^T \boldsymbol{X}$ 的 eigenvector，假设为 $v$，$\boldsymbol{X}v$ 才是 principal component，如 Figure 3.9 所示。
 
-* ( **page 72** ) figure 3.12 可以看到 q 从 0.1 到 4 的过程中，contour 的图形变化从窄到越来越方。
+* **(page 72)** figure 3.12 可以看到 q 从 0.1 到 4 的过程中，contour 的图形变化从窄到越来越方。
 
-* ( **page 72** ) 第 3 段里提到 "for $q \leq 1$, the prior is not uniform in direction, but concentrates more mass in the coordinate directions"，这句话是这么理解的，这里的 mass 就是 probability mass，根据 L1 norm 的 contour 想象一下 L1 norm 对应的 laplace prior (即 $c \exp(-\lambda \sum\_{j = 1}^{p} |\beta\_j|)$，$c$ 是个 normalization factor，注意这里有个负号，因为 gaussian likelihood 也有个负号，两个的 log 相加做个 argmax 就变成了这里的 argmin) 的形状，沿着某一方向的 probability mass 就是沿着那个方向对 probability density 做积分，而这实际上就是沿着那个方向对 probability density 做截面得到的截面面积，显然沿着坐标轴截得的的平面 (是个三角形) 的面积是最大的，也就是说 laplace prior 更倾向于坐标轴上的点。
+* **(page 72)** 第 3 段里提到 "for $q \leq 1$, the prior is not uniform in direction, but concentrates more mass in the coordinate directions"
 
-  这也是 L1 regularization 倾向于将某些 feature weight 置为 0 的一种解释，另一种是从优化的角度解释，如 figure 3.11 所示。
+  这句话这么理解，这里的 mass 就是 probability mass，根据 L1 norm 的 contour 想象一下 L1 norm 对应的 laplace prior (即 $c \exp(-\lambda \sum\_{j = 1}^{p} |\beta\_j|)$，$c$ 是个 normalization factor，注意这里有个负号，因为 gaussian likelihood 也有个负号，两个 distribution 的 log 相加做个 argmax 就变成了这里的 argmin) 的形状，沿着某一方向的 probability mass 就是沿着那个方向对 probability density 做积分，而这实际上就是沿着那个方向对 probability density 做截面得到的截面面积，显然沿着坐标轴截得的的平面 (是个三角形) 的面积是最大的，也就是说 laplace prior 更倾向于坐标轴上的点。对于 L2 norm，显然无论你沿着那个方向做截面，其面积都是一样的，所以 L2 norm 并没有对那种 feature weight 组合有特别的偏好。
+
+  这是 L1 regularization 倾向于将某些 feature weight 置为 0 的一种解释，另一种是从优化的角度解释，如 figure 3.11 所示。
 
 ### 知识点
 
