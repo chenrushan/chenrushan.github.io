@@ -259,7 +259,11 @@ $\boldsymbol{z}\_1 = \boldsymbol{X} v\_1 = \boldsymbol{u}\_1 d\_1$ 的推导很�
 
   首先注意到，最优点一定是出现在两个 contour 相切的地方，如果不是，要么不满足 l1 约束，要么 least square 太大，一定要是相切的地方才是满足 l1 约束的最小的 least sqare error。另外，随着 l1 contour 的不断缩小，相切的点渐渐得移到了坐标轴上。
 
-* **(page 102)** 公式 (4.2) 下面有这么一句 "The decision boundary is the set of points for which the log-odds are zero"，其实这个可以直接从 $Pr(G=1|X=x) = Pr(G=2|X=x)$ 推出来，这个等式直接就推出 $\\{x|\beta\_0 + \beta^T x = 0\\}$
+* **(page 102)** 公式 (4.2) 下面有这么一句 "The decision boundary is the set of points for which the log-odds are zero"，其实这个可以直接从 $Pr(G=1|X=x) = Pr(G=2|X=x)$ 推出来，这个等式直接就推出 $\\{x|\beta\_0 + \beta^T x = 0\\}$。另外，注意到
+
+  $$Pr(G=1|X=x) = Pr(G=2|X=x) \Rightarrow \log\frac{Pr(G=1|X=x)}{Pr(G=2|X=x)} = 0$$
+
+* **(Page 109)** 这页里有个预测 $\hat{\boldsymbol{\Sigma}}$ 的公式，其中 $\sum\_{k=1}^{K}\sum\_{g\_i = k}$ 实际上就是 $\sum\_{x}$
 
 ### 知识点
 
@@ -279,6 +283,8 @@ Ridge regression 是 Tikhonov regularization 的一个特例，参考
 * Page 83 的第一段里提到 "we estimate $\beta\_0$ with $\bar{y} = ...$"，为什么可以这么做？
 
 * Page 86 最后一段没太看懂
+
+* Page 104 "It's quite straightforward to verify that ..., as long as there's an intercept in the model"
 
 ### Statistics Basis
 
