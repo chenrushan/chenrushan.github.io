@@ -261,9 +261,13 @@ $\boldsymbol{z}\_1 = \boldsymbol{X} v\_1 = \boldsymbol{u}\_1 d\_1$ 的推导很�
 
 * **(page 102)** 公式 (4.2) 下面有这么一句 "The decision boundary is the set of points for which the log-odds are zero"，其实这个可以直接从 $Pr(G=1|X=x) = Pr(G=2|X=x)$ 推出来，这个等式直接就推出 $\\{x|\beta\_0 + \beta^T x = 0\\}$。另外，注意到
 
-  $$Pr(G=1|X=x) = Pr(G=2|X=x) \Rightarrow \log\frac{Pr(G=1|X=x)}{Pr(G=2|X=x)} = 0$$
+  $$Pr(G=1|X=x) = Pr(G=2|X=x) \Leftrightarrow \log\frac{Pr(G=1|X=x)}{Pr(G=2|X=x)} = 0$$
 
-* **(Page 109)** 这页里有个预测 $\hat{\boldsymbol{\Sigma}}$ 的公式，其中 $\sum\_{k=1}^{K}\sum\_{g\_i = k}$ 实际上就是 $\sum\_{x}$
+  前面提到 "monotone transformation"，对于 logistic regression 和 LDA，这个 monotone transformation 就是 log-odd，对于其他模型可能是什么 exp-odd (我瞎说的，不知道真的有没有 exp-odd)，反正不管是什么，都是要得到 $Pr(G=1) = Pr(G=2)$。
+
+* **(Page 109)** 这页里有个预测 $\hat{\boldsymbol{\Sigma}}$ 的公式，其中 $\sum\_{k=1}^{K}\sum\_{g\_i = k}$ 实际上就是 $\sum\_{x}$，这几个预测模型参数的公式很好理解，$\hat{\pi\_k}, \hat{\mu\_k}$ 都是各自 category 中预测，而 $\hat{\boldsymbol{\Sigma}}$ 由于是所有 category 共享，所以就在整个数据上预测
+
+* **(Page 110 ~ 111)** 110 结尾到 111 开头的部分给出了 LDA 和 QDA 的参数空间大小，对于 LDA 空间大小是 $(K-1)\times(p+1)$，我一开始以为这个不对，因为单一个 $\hat{\Sigma}$ 就是一个 $p^2$ 的空间，但实际上根本不需要存这个矩阵，参考 (4.10)，这里我可以把最后两项直接算了变成一个常数，然后 $\Sigma^{-1}\mu\_k$ 也算了变成一个向量，这个向量的维度是 p，所以如果每个 category 对应的参数都存下来的话就有 $K \times (p+1)$ 个参数，不过，它这里只存了每个 category 和第 K 个 category 的 difference 信息，所以只用 $(K-1)\times(p+1)$
 
 ### 知识点
 
