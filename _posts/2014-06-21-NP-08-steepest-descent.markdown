@@ -82,3 +82,4 @@ $$
 
 #### Convergence Rate of Steepest Descent Algorithm
 
+这里以 quadratic function $f(\boldsymbol{x}) = \frac{1}{2}\boldsymbol{x}^T H \boldsymbol{x} - \boldsymbol{c}^T \boldsymbol{x}$ 为例推导 steepest descent 的 convergence rate，其中 $H$ 是 symmetric positive definite matrix。其实 quadratic function 在很多情况下会成为研究重点，不单是因为它简单，或者容易可视化，还有一个很重要的原因是，任何一个函数在接近最优点的地方的表现都和 quadratic function 相似
