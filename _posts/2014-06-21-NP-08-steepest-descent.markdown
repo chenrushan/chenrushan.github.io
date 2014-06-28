@@ -5,6 +5,8 @@ categories: nnumop
 tags: NPTEL, numerical optimization
 ---
 
+<span style="background-color:#afa">这篇文章中画了很多 contour 的图，是通过这个[脚本](../../../../resource/NNP/08-steepest/examples.py)实现的</span>
+
 #### Steepest Descent Algorithm
 
 Steepest Descent Algorithm 在每一轮迭代的过程中对函数做 affine approximation，也就是用一阶 taylor series 去近似 $f(\boldsymbol{x})$
@@ -41,3 +43,42 @@ $$
 #### Examples
 
 现在让我们通过几个例子来看看 steepest descent 在不同情况下的表现
+
+##### $f(\boldsymbol{x}) = (\boldsymbol{x}\_1 - 7)^2 + (\boldsymbol{x}\_2 - 2)^2$
+
+这个函数最优值在 (7, 2)，利用 steepest descent algorithm + exact line search，不论初始点选择在哪儿都是一步就能到最优点，如下图所示
+
+<img style="width:80%" src="/resource/NNP/08-steepest/circular.png" />
+
+##### $f(\boldsymbol{x}) = 4\boldsymbol{x}\_1^2 + \boldsymbol{x}\_2^2 -2\boldsymbol{x}\_1\boldsymbol{x}\_2$
+
+这个函数的最优值点在 (0, 0)，同样我们用 steepest descent + exact line search
+
+* 初始点为 (-1, -2)，函数的收敛过程如下图所示，以 0.001 为 gradient norm 的阈值，共迭代 27 步，实现见开头给出的脚本
+
+  <img style="width:80%" src="/resource/NNP/08-steepest/ellip2.png" />
+
+* 初始点为 (1, 0)，函数的收敛过程如下图所示，以 0.001 为 gradient norm 的阈值，共迭代 5 步
+
+  <img style="width:80%" src="/resource/NNP/08-steepest/ellip1.png" />
+
+这个例子我们可以看出初始点的不同对收敛速度是有影响的
+
+##### $f(\boldsymbol{x}) = 100(\boldsymbol{x}\_2 - \boldsymbol{x}\_1^2)^2 + (1 - \boldsymbol{x}\_1)^2$
+
+这个是著名的 Rosenbrock function，其最优值出现在 (1, 1) 点，利用 steepest descent + backtrack line search ($\hat{\alpha} = 0.5, \lambda = 0.3, c\_1 = 1\times 10^{-4}$)
+
+* 初始点为 (0.6, 0.6)，收敛过程如下图所示，以 0.001 为 gradient norm 的阈值，共迭代 2029 步
+
+  <img style="width:80%" src="/resource/NNP/08-steepest/rosen1.png" />
+
+* 初始点为 (-1.2, 1)，收敛过程如下图所示，以 0.001 为 gradient norm 的阈值，共迭代 2300 步
+
+  <img style="width:80%" src="/resource/NNP/08-steepest/rosen2.png" />
+
+对于这个例子，不管你选那个初始点，迭代的过程总是很慢
+
+上面的几个例子中，收敛的过程有快有慢，下面我们从理论的角度看看是什么导致了这种区别
+
+#### Convergence Rate of Steepest Descent Algorithm
+
