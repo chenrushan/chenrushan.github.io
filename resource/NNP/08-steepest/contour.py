@@ -65,16 +65,44 @@ def steepest_e(x0, y0):
 ### ==============================
 
 def fr(x, y):
-  return 100 * (y - x * x) * (y - x * x) + (1 - x) * (1 - x)
+  return 100.0 * (y - x * x) * (y - x * x) + (1.0 - x) * (1.0 - x)
 
 def grx(x, y):
-  return 400 * x * x * x - 400 * x * y + 2 * x - 2
+  return 400.0 * x * x * x - 400.0 * x * y + 2.0 * x - 2.0
 
 def gry(x, y):
-  return 200 * y - 200 * x * x
+  return 200.0 * y - 200.0 * x * x
 
-def alaph_r():
-  pass
+def alpha_r(x, y, dx, dy, gx, gy):
+  a = 0.5
+  r = 0.3
+  c1 = 1e-4
+  while fr(x + a * dx, y + a * dy) > fr(x, y) + c1 * a * (gx * dx + gy * dy):
+    a *= r
+  return a
+
+def steepest_r(x0, y0):
+  result = []
+  result.append([x0, y0])
+  xk, yk = x0, y0
+  gxk, gyk = grx(xk, yk), gry(xk, yk)
+
+  i = 0
+  while norm(gxk, gyk) > 0.001:
+    print "step %d [%f, %f]" % (i, xk, yk)
+    i += 1
+
+    dxk, dyk = -gxk, -gyk
+    ak = alpha_r(xk, yk, dxk, dyk, gxk, gyk)
+    xk += ak * dxk
+    yk += ak * dyk
+    gxk = grx(xk, yk)
+    gyk = gry(xk, yk)
+    result.append([xk, yk])
+   
+  print "step %d [%f, %f]" % (i, xk, yk)
+
+  return result
 
 ### ==============================
 ### circular case
@@ -139,8 +167,31 @@ y = np.arange(-0.6, 1.2, delta)
 X, Y = np.meshgrid(x, y)
 Z = 100 * (Y - X * X) * (Y - X * X) + (1 - X) * (1 - X)
 
+## for initial point (0.6, 0.6)
+
 plt.figure()
 CS = plt.contour(X, Y, Z, [15, 9, 6, 4, 2, 1, 0.1])
+
+res = steepest_r(0.6, 0.6)
+
+xp, yp = zip(*res)
+plt.plot(xp, yp, ':', lw=3)
+
+for r in res:
+  plt.plot(*r, marker='o', color='r')
+
+## for initial point (-1.2, 1)
+
+plt.figure()
+CS = plt.contour(X, Y, Z, [15, 9, 6, 4, 2, 1, 0.1])
+
+res = steepest_r(-1.2, 1)
+
+xp, yp = zip(*res)
+plt.plot(xp, yp, ':', lw=3)
+
+for r in res:
+  plt.plot(*r, marker='o', color='r')
 
 plt.show()
 
