@@ -115,10 +115,10 @@ Z = (X - 7) * (X - 7) + (Y - 2) * (Y - 2)
 
 plt.figure()
 CS = plt.contour(X, Y, Z, [12, 8, 4, 2, 1, 0.1])
-plt.plot([9, 7], [0.5, 2], ':', lw=2)
+plt.plot([9, 7], [0.5, 2], '--', lw=2)
 plt.plot([7], [2], marker='o', color='r')
 plt.plot([9], [0.5], marker='o', color='r')
-plt.savefig("circular.svg")
+plt.savefig("circular.png")
 
 ### ==============================
 ### elliptical case
@@ -137,11 +137,11 @@ CS = plt.contour(X, Y, Z, [9, 6, 4, 2, 1, 0.1])
 res = steepest_e(1, 0)
 
 xp, yp = zip(*res)
-plt.plot(xp, yp, ':', lw=3)
+plt.plot(xp, yp, '--', lw=3)
 for r in res:
   plt.plot(*r, marker='o', color='r')
 
-plt.savefig("ellip1.svg")
+plt.savefig("ellip1.png")
 
 ## for initial point (-1, -2)
 
@@ -151,12 +151,12 @@ CS = plt.contour(X, Y, Z, [9, 6, 4, 2, 1, 0.1])
 res = steepest_e(-1.0, -2.0)
 
 xp, yp = zip(*res)
-plt.plot(xp, yp, ':', lw=3)
+plt.plot(xp, yp, '--', lw=3)
 
 for r in res:
   plt.plot(*r, marker='o', color='r')
 
-plt.savefig("ellip2.svg")
+plt.savefig("ellip2.png")
 
 ### ==============================
 ### Rosenbrock function
@@ -175,10 +175,12 @@ CS = plt.contour(X, Y, Z, [15, 9, 6, 4, 2, 1, 0.1])
 res = steepest_r(0.6, 0.6)
 
 xp, yp = zip(*res)
-plt.plot(xp, yp, ':', lw=3)
+plt.plot(xp, yp, '--', lw=3)
 
 for r in res:
   plt.plot(*r, marker='o', color='r')
+
+plt.savefig("rosen1.png")
 
 ## for initial point (-1.2, 1)
 
@@ -188,10 +190,12 @@ CS = plt.contour(X, Y, Z, [15, 9, 6, 4, 2, 1, 0.1])
 res = steepest_r(-1.2, 1)
 
 xp, yp = zip(*res)
-plt.plot(xp, yp, ':', lw=3)
+plt.plot(xp, yp, ls='--', lw=3)
 
 for r in res:
   plt.plot(*r, marker='o', color='r')
 
-plt.show()
+plt.savefig("rosen2.png")
+
+# plt.show()
 
