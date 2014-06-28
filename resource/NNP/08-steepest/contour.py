@@ -1,15 +1,9 @@
 #!/usr/bin/env python2
-"""
-Illustrate simple contour plotting, contours on an image with
-a colorbar for the contours, and labelled contours.
 
-See also contour_image.py.
-"""
+# Author: juscodit@gmail.com
+
 import matplotlib
-#matplotlib.use('svg')
 import numpy as np
-import matplotlib.cm as cm
-import matplotlib.mlab as mlab
 import matplotlib.pyplot as plt
 import math
 import sys
@@ -19,12 +13,16 @@ matplotlib.rcParams['ytick.direction'] = 'out'
 
 delta = 0.025
 
-## util functions
+### ==============================
+### util functions
+### ==============================
 
 def norm(v0, v1):
   return math.sqrt(v0 * v0 + v1 * v1)
 
+### ==============================
 ## steepest descent for elliptical case
+### ==============================
 
 def fe(x, y):
   return 4.0 * x * x + y * y - 2.0 * x * y
@@ -62,7 +60,9 @@ def steepest_e(x0, y0):
 
   return result
 
-## circular case
+### ==============================
+### circular case
+### ==============================
 
 x = np.arange(3.0, 11.0, delta)
 y = np.arange(-1.0, 5.0, delta)
@@ -76,14 +76,16 @@ plt.plot([7], [2], marker='o', color='r')
 plt.plot([9], [0.5], marker='o', color='r')
 plt.savefig("circular.svg")
 
-## elliptical case
+### ==============================
+### elliptical case
+### ==============================
 
 x = np.arange(-3.0, 3.0, delta)
 y = np.arange(-3.0, 3.0, delta)
 X, Y = np.meshgrid(x, y)
 Z = 4 * X * X + Y * Y - 2 * X * Y
 
-# for initial point (1, 0)
+## for initial point (1, 0)
 
 plt.figure()
 CS = plt.contour(X, Y, Z, [9, 6, 4, 2, 1, 0.1])
@@ -97,7 +99,7 @@ for r in res:
 
 plt.savefig("ellip1.svg")
 
-# for initial point (-1, -2)
+## for initial point (-1, -2)
 
 plt.figure()
 CS = plt.contour(X, Y, Z, [9, 6, 4, 2, 1, 0.1])
@@ -111,6 +113,10 @@ for r in res:
   plt.plot(*r, marker='o', color='r')
 
 plt.savefig("ellip2.svg")
+
+### ==============================
+### Rosenbrock function
+### ==============================
 
 plt.show()
 
