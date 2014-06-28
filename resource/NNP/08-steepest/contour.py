@@ -61,6 +61,22 @@ def steepest_e(x0, y0):
   return result
 
 ### ==============================
+### steepest descent for Rosenbrock function
+### ==============================
+
+def fr(x, y):
+  return 100 * (y - x * x) * (y - x * x) + (1 - x) * (1 - x)
+
+def grx(x, y):
+  return 400 * x * x * x - 400 * x * y + 2 * x - 2
+
+def gry(x, y):
+  return 200 * y - 200 * x * x
+
+def alaph_r():
+  pass
+
+### ==============================
 ### circular case
 ### ==============================
 
@@ -117,6 +133,14 @@ plt.savefig("ellip2.svg")
 ### ==============================
 ### Rosenbrock function
 ### ==============================
+
+x = np.arange(-1.2, 1.0, delta)
+y = np.arange(-0.6, 1.2, delta)
+X, Y = np.meshgrid(x, y)
+Z = 100 * (Y - X * X) * (Y - X * X) + (1 - X) * (1 - X)
+
+plt.figure()
+CS = plt.contour(X, Y, Z, [15, 9, 6, 4, 2, 1, 0.1])
 
 plt.show()
 
