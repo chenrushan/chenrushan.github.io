@@ -88,8 +88,63 @@ $$f(x) = f(x^\*) + f'(x^\*)(x - x^\*) + \frac{1}{2}(x - x^\*)^T H(x^\*) (x - x^\
 
 其中 $x^\*$ 表示 local minimum。从公式可知 $x$ 越接近 $x^\*$，$\left\Vert x - x^\* \right\Vert ^3$ 就越小，相应的 $f(x)$ 的行为也越接近于前面的 quadratic 的部分。所以研究 quadratic function 比看起来要重要得多。
 
-由于 $H$ 是 symmetric positive definite matrix，所以我们可以直接得到这个函数的 close-form solution，只需令 gradient 等于 0 即可得
+由于 $H$ 是 symmetric positive definite matrix，所以我们可以直接得到这个函数的 close-form solution，只需令 gradient 等于 0 即 $\boldsymbol{g} = H\boldsymbol{x} - \boldsymbol{c} = 0$ 可得
 
 $$\boldsymbol{x}^* = H^{-1}\boldsymbol{c}$$
 
+为了计算 convergence rate，这里定义 Error function $E(\boldsymbol{x}^k) = \frac{1}{2}(\boldsymbol{x}^k - \boldsymbol{x}^*)^T H (\boldsymbol{x}^k - \boldsymbol{x}^*)$，并以
+
+$$\frac{E(\boldsymbol{x}^k) - E(\boldsymbol{x}^{k+1})}{E(\boldsymbol{x}^k)}$$
+
+表示 convergence rate，注意到
+
+$$
+\begin{align}
+E(\boldsymbol{x}^k) = & \frac{1}{2}(\boldsymbol{x}^k - \boldsymbol{x}^*)^T H (\boldsymbol{x}^k - \boldsymbol{x}^*) \\\\
+= & \frac{1}{2}(\boldsymbol{x}^k H \boldsymbol{x}^k - 2\boldsymbol{x}^* H \boldsymbol{x}^k + \boldsymbol{x}^* H \boldsymbol{x}^*) \\\\
+= & \frac{1}{2} \boldsymbol{x}^k H \boldsymbol{x}^k - \boldsymbol{c} \boldsymbol{x}^k + \frac{1}{2}\boldsymbol{x}^* H \boldsymbol{x}^* \\\\
+= & f(\boldsymbol{x}^k) + \frac{1}{2}\boldsymbol{x}^* H \boldsymbol{x}^*
+\end{align}
+$$
+
+其中 $\frac{1}{2} \boldsymbol{x}^* H \boldsymbol{x}^*$ 是个常量，所以 $E(\boldsymbol{x})$ 和 $f(\boldsymbol{x})$ 本质上是一样的。
+
+--------------------
+
+展开 convergence rate，对于分子分母分别有
+
+* 分子代入 $\boldsymbol{x}^{k+1} = \boldsymbol{x}^k - \alpha^k \boldsymbol{g}^k$ 有
+
+  $$
+  \begin{align}
+  E(\boldsymbol{x}^k) - E(\boldsymbol{x}^{k+1}) = & \frac{1}{2} \boldsymbol{x}^k H \boldsymbol{x}^k - \boldsymbol{c} \boldsymbol{x}^k - \frac{1}{2} \boldsymbol{x}^{k+1} H \boldsymbol{x}^{k+1} + \boldsymbol{c} \boldsymbol{x}^{k+1} \\\\
+  = & {\alpha^k ({\boldsymbol{x}^k} - {\boldsymbol{x}^*})^T H \boldsymbol{g}^k - \frac{1}{2}{\alpha^k}^2 {\boldsymbol{g}^k}^T H \boldsymbol{g}^k} \\\\
+  = & {\alpha^k (H \boldsymbol{x}^k - c)^T \boldsymbol{g}^k - \frac{1}{2}{\alpha^k}^2 {\boldsymbol{g}^k}^T H \boldsymbol{g}^k} \\\\
+  = & {\alpha^k {\boldsymbol{g}^k}^T \boldsymbol{g}^k - \frac{1}{2}{\alpha^k}^2 {\boldsymbol{g}^k}^T H \boldsymbol{g}^k} \\\\
+  \end{align}
+  $$
+
+* 对于分母，由于 $H(\boldsymbol{x}^k - \boldsymbol{x}^*) = H\boldsymbol{x}^k - c = \boldsymbol{g}^k$ 有
+
+  $$
+  \begin{align}
+  E(\boldsymbol{x}^k) = & \frac{1}{2}(\boldsymbol{x}^k - \boldsymbol{x}^*)^T H (\boldsymbol{x}^k - \boldsymbol{x}^*) \\\\
+  = & \frac{1}{2} {(H^{-1}\boldsymbol{g}^k)}^T H (H^{-1}\boldsymbol{g}^k) \\\\
+  = & \frac{1}{2} {\boldsymbol{g}^k}^T H^{-1} \boldsymbol{g}^k
+  \end{align}
+  $$
+
+这样 convergence rate 就变为
+
+$$
+\frac{2 \alpha^k {\boldsymbol{g}^k}^T \boldsymbol{g}^k - {\alpha^k}^2 {\boldsymbol{g}^k}^T H \boldsymbol{g}^k}{ {\boldsymbol{g}^k}^T H^{-1} \boldsymbol{g}^k}
+$$
+
+假设我们使用 exact line search，易推出 $\alpha^k = \frac{ {\boldsymbol{g}^k}^T\boldsymbol{g}^k}{ {\boldsymbol{g}^k}^T H \boldsymbol{g}^k}$，代入上式得
+
+$$
+\frac{E(\boldsymbol{x}^k) - E(\boldsymbol{x}^{k+1})}{E(\boldsymbol{x}^k)} = \frac{({\boldsymbol{g}^k}^T \boldsymbol{g}^k)^2}{({\boldsymbol{g}^k}^T H \boldsymbol{g}^k)({\boldsymbol{g}^k}^T H^{-1} \boldsymbol{g}^k)}
+$$
+
+--------------------
 
