@@ -148,3 +148,34 @@ $$
 
 --------------------
 
+为了给上式一个 lower bound，我们引入 Kantorovich inequality
+
+<blockquote>
+Let $H \in \mathbb{R}^{n\times n}$ be a symmetric positive definite matrix. Let $\lambda_1$ and $\lambda_n$ be respectively the smallest and largest eigenvalues of $H$. Then, for any $\boldsymbol{x} \neq 0$
+
+$$\frac{(\boldsymbol{x}^T \boldsymbol{x})^2}{(\boldsymbol{x}^T H \boldsymbol{x})(\boldsymbol{x}^T H^{-1} \boldsymbol{x})} \geq \frac{4\lambda_1 \lambda_n}{(\lambda_1 + \lambda_n)^2}$$
+</blockquote>
+
+根据 Kantorovich inequality，我们有
+
+$$ \frac{E(\boldsymbol{x}^k) - E(\boldsymbol{x}^{k+1})}{E(\boldsymbol{x}^k)} \geq \frac{4\lambda_1 \lambda_n}{(\lambda_1 + \lambda_n)^2} $$
+
+因此有
+
+$$ E(\boldsymbol{x}^{k+1}) \leq (\frac{\lambda_n - \lambda_1}{\lambda_n + \lambda_1})^2 E(\boldsymbol{x}^k)$$
+
+因此根据我们定义的 $E(\boldsymbol{x})$，steepest descent 是一个 convergence rate $\leq (\frac{\lambda_n - \lambda_1}{\lambda_n + \lambda_1})^2$ 的 linear convergence algorithm.
+
+对 convergence rate 做个简单的变形
+
+$$(\frac{\lambda_n - \lambda_1}{\lambda_n + \lambda_1})^2 = (1 - \frac{2}{\frac{\lambda\_n}{\lambda\_1} - 1})^2$$
+
+其中 $\frac{\lambda\_n}{\lambda\_1}$ 为一个 matrix 的 condition number，可以看出 condition number 越大，convergence rate 越大，算法收敛得越慢。当 $\lambda\_1 = \lambda\_n$ 时，收敛是最快的，这对应上面例子中 circular contour 的情况，condition number 越大，contour 越扁，越小 contour 越圆。
+
+#### 结论
+
+从上面的例子和理论分析中，可以得出如下结论
+
+* Steepest descent 是一个 linear convergence algorithm，并且收敛速度取决于 Hessien matrix 的 condition number，condition number 越大收敛越慢
+
+* 收敛速度确实和初始点的选择有关
