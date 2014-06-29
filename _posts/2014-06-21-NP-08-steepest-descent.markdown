@@ -82,4 +82,14 @@ $$
 
 #### Convergence Rate of Steepest Descent Algorithm
 
-这里以 quadratic function $f(\boldsymbol{x}) = \frac{1}{2}\boldsymbol{x}^T H \boldsymbol{x} - \boldsymbol{c}^T \boldsymbol{x}$ 为例推导 steepest descent 的 convergence rate，其中 $H$ 是 symmetric positive definite matrix。其实 quadratic function 在很多情况下会成为研究重点，不单是因为它简单，或者容易可视化，还有一个很重要的原因是，任何一个函数在接近最优点的地方的表现都和 quadratic function 相似
+这里以 quadratic function $f(\boldsymbol{x}) = \frac{1}{2}\boldsymbol{x}^T H \boldsymbol{x} - \boldsymbol{c}^T \boldsymbol{x}$ 为例推导 steepest descent 的 convergence rate，其中 $H$ 是 symmetric positive definite matrix。其实 quadratic function 在很多情况下会成为研究重点，不单因为它简单，或者容易可视化，还有一个很重要的原因是，任何一个函数在接近 local minimum 的地方表现都和 quadratic function 相似，原因很简单，看 $f(x)$ 的 Taylor series 就知道了
+
+$$f(x) = f(x^\*) + f'(x^\*)(x - x^\*) + \frac{1}{2}(x - x^\*)^T H(x^\*) (x - x^\*) + O(\left\Vert x - x^\* \right\Vert ^3)$$
+
+其中 $x^\*$ 表示 local minimum。从公式可知 $x$ 越接近 $x^\*$，$\left\Vert x - x^\* \right\Vert ^3$ 就越小，相应的 $f(x)$ 的行为也越接近于前面的 quadratic 的部分。所以研究 quadratic function 比看起来要重要得多。
+
+由于 $H$ 是 symmetric positive definite matrix，所以我们可以直接得到这个函数的 close-form solution，只需令 gradient 等于 0 即可得
+
+$$\boldsymbol{x}^* = H^{-1}\boldsymbol{c}$$
+
+

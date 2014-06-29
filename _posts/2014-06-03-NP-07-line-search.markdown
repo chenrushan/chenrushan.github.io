@@ -61,6 +61,14 @@ $$\lim_{k\rightarrow \infty} \frac{\Vert \boldsymbol{x}^{k+1} - \boldsymbol{x}^*
   
 由于 linear convergence 收敛得慢，而 quadratic convergence 虽然收敛快但是需要的资源太多，所以大多数算法都是属于 superlinear convergence
 
+另一种表示 convergence rate 的方法是使用 Error function $E: \mathbb{R}^n \rightarrow \mathbb{R}$，然后计算
+
+$$\lim_{k\rightarrow \infty} \frac{E(\boldsymbol{x}^{k+1}) - E(\boldsymbol{x}^*)}{(E(\boldsymbol{x}^k) - E(\boldsymbol{x}^*))^p}$$
+或者
+$$\lim_{k\rightarrow \infty} \frac{E(\boldsymbol{x}^{k}) - E(\boldsymbol{x}^{k+1})}{E(\boldsymbol{x}^k)^p}$$
+
+通常情况下，使不使用 Error function 并不影响 convergence rate，一个 linear convergence 的算法不会因为用 Error function 计算 convergence rate 而变成 quadratic convergence 算法。
+
 #### Step Length
 
 假设 $\boldsymbol{d}^k$ 已经确定，求解 step length $\alpha^k$ 的方法分为两种，分别是 Exact line search 和 Inexact line search。
