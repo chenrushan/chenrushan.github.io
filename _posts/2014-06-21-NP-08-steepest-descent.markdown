@@ -5,7 +5,9 @@ categories: nnumop
 tags: NPTEL, numerical optimization
 ---
 
-<span style="background-color:#afa">这篇文章中画了很多 contour 的图，是通过这个[脚本](../../../../resource/NNP/08-steepest/examples.py)实现的</span>
+从前面几节中我们知道，各个优化算法的主要区别是如何构造 descent direction，这一节我们看看 steepest descent 如何构造 descent direction.
+
+<span style="background-color:#afa">这一节画了很多 contour 的图，是通过这个[脚本](../../../../resource/NNP/08-steepest/examples.py)实现的</span>
 
 #### Steepest Descent Algorithm
 
@@ -13,13 +15,13 @@ Steepest Descent Algorithm 在每一轮迭代的过程中对函数做 affine app
 
 $$f(\boldsymbol{x}) \approx f(\boldsymbol{x}^k) + f'(\boldsymbol{x}^k)(\boldsymbol{x} - \boldsymbol{x}^k)$$
 
-其中 $\boldsymbol{x}^k$ 表示第 k 轮迭代得到的 $\boldsymbol{x}$，$\boldsymbol{x} - \boldsymbol{x}^k$ 实际上就是我们要找的 $\boldsymbol{d}^k$，为了方便后面用 $f^k$ 表示 $f(\boldsymbol{x}^k)$，$\boldsymbol{g}^k$ 表示 $f'(\boldsymbol{x}^k)$，这样上式就变成 $f(\boldsymbol{x}^k) + {\boldsymbol{g}^k}^T \boldsymbol{d}^k$
+然后通过优化这个近似函数得到 $\boldsymbol{x}^{k+1}$
 
-Steepest Descent 就是去找到能够最小化近似函数的 $\boldsymbol{d}^k$，即
+为了方便我们用 $f^k$ 表示 $f(\boldsymbol{x}^k)$，$\boldsymbol{g}^k$ 表示 $f'(\boldsymbol{x}^k)$，另外注意到 $\boldsymbol{x} - \boldsymbol{x}^k$ 实际上就是我们要找的 $\boldsymbol{d}^k$，这样上式就变成 $f(\boldsymbol{x}^k) + {\boldsymbol{g}^k}^T \boldsymbol{d}^k$。因此 steepest descent 要解决的优化问题就是
 
 $$ \underset{\boldsymbol{d}^k}{\arg\min} \;\; f(\boldsymbol{x}^k) + {\boldsymbol{g}^k}^T \boldsymbol{d}^k$$
 
-这里面 $f(\boldsymbol{x}^k)$ 是个 constant，可以从式子中去掉，另外，如果 $\boldsymbol{d}^k$ 不做任何限制的话，它可以是任意一个无穷小的向量，这样优化就没有意义了，所以我们限制 $\Vert \boldsymbol{d}^k \Vert = 1$，这样最小化问题就变成了
+这里 $f(\boldsymbol{x}^k)$ 是个 constant，可以从式子中去掉，另外，如果 $\boldsymbol{d}^k$ 不做任何限制的话，它可以是一个无穷小的向量，这个近似函数就变成没有 lower bound，这样优化就没有意义了，所以我们限制 $\Vert \boldsymbol{d}^k \Vert = 1$，这样最小化问题就变成了
 
 $$
 \begin{align}
@@ -82,11 +84,15 @@ $$
 
 #### Convergence Rate of Steepest Descent Algorithm
 
-这里以 quadratic function $f(\boldsymbol{x}) = \frac{1}{2}\boldsymbol{x}^T H \boldsymbol{x} - \boldsymbol{c}^T \boldsymbol{x}$ 为例推导 steepest descent 的 convergence rate，其中 $H$ 是 symmetric positive definite matrix。其实 quadratic function 在很多情况下会成为研究重点，不单因为它简单，或者容易可视化，还有一个很重要的原因是，任何一个函数在接近 local minimum 的地方表现都和 quadratic function 相似，原因很简单，看 $f(x)$ 的 Taylor series 就知道了
+这里以 quadratic function $f(\boldsymbol{x}) = \frac{1}{2}\boldsymbol{x}^T H \boldsymbol{x} - \boldsymbol{c}^T \boldsymbol{x}$ 为例推导 steepest descent 的 convergence rate，其中 $H$ 是 symmetric positive definite matrix
 
-$$f(x) = f(x^\*) + f'(x^\*)(x - x^\*) + \frac{1}{2}(x - x^\*)^T H(x^\*) (x - x^\*) + O(\left\Vert x - x^\* \right\Vert ^3)$$
+<blockquote>
+关于 quadratic function 这里多说两句，其实 quadratic function 在很多情况下会成为研究重点，不单因为它简单，或者容易可视化，还有一个很重要的原因是，任何一个函数在接近 local minimum 的地方表现都和 quadratic function 相似，原因很简单，看 $f(x)$ 的 Taylor series 就知道了
 
-其中 $x^\*$ 表示 local minimum。从公式可知 $x$ 越接近 $x^\*$，$\left\Vert x - x^\* \right\Vert ^3$ 就越小，相应的 $f(x)$ 的行为也越接近于前面的 quadratic 的部分。所以研究 quadratic function 比看起来要重要得多。
+$$f(x) = f(x^*) + f'(x^*)(x - x^*) + \frac{1}{2}(x - x^*)^T H(x^*) (x - x^*) + O(\left\Vert x - x^* \right\Vert ^3)$$
+
+其中 $x^*$ 表示 local minimum。从公式可知 $x$ 越接近 $x^*$，$\left\Vert x - x^* \right\Vert ^3$ 就越小，相应的 $f(x)$ 的行为也越接近于前面的 quadratic 的部分。所以研究 quadratic function 比看起来要重要得多。
+</blockquote>
 
 由于 $H$ 是 symmetric positive definite matrix，所以我们可以直接得到这个函数的 close-form solution，只需令 gradient 等于 0 即 $\boldsymbol{g} = H\boldsymbol{x} - \boldsymbol{c} = 0$ 可得
 
@@ -102,7 +108,7 @@ $$
 \begin{align}
 E(\boldsymbol{x}^k) = & \frac{1}{2}(\boldsymbol{x}^k - \boldsymbol{x}^*)^T H (\boldsymbol{x}^k - \boldsymbol{x}^*) \\\\
 = & \frac{1}{2}(\boldsymbol{x}^k H \boldsymbol{x}^k - 2\boldsymbol{x}^* H \boldsymbol{x}^k + \boldsymbol{x}^* H \boldsymbol{x}^*) \\\\
-= & \frac{1}{2} \boldsymbol{x}^k H \boldsymbol{x}^k - \boldsymbol{c} \boldsymbol{x}^k + \frac{1}{2}\boldsymbol{x}^* H \boldsymbol{x}^* \\\\
+= & \frac{1}{2} \boldsymbol{x}^k H \boldsymbol{x}^k - \boldsymbol{c} \boldsymbol{x}^k + \frac{1}{2}\boldsymbol{x}^* H \boldsymbol{x}^* \;\; (\because \boldsymbol{x}^* = H^{-1}\boldsymbol{c})\\\\
 = & f(\boldsymbol{x}^k) + \frac{1}{2}\boldsymbol{x}^* H \boldsymbol{x}^*
 \end{align}
 $$
@@ -160,7 +166,7 @@ $$\frac{(\boldsymbol{x}^T \boldsymbol{x})^2}{(\boldsymbol{x}^T H \boldsymbol{x})
 
 $$ \frac{E(\boldsymbol{x}^k) - E(\boldsymbol{x}^{k+1})}{E(\boldsymbol{x}^k)} \geq \frac{4\lambda_1 \lambda_n}{(\lambda_1 + \lambda_n)^2} $$
 
-因此有
+等价于
 
 $$ E(\boldsymbol{x}^{k+1}) \leq (\frac{\lambda_n - \lambda_1}{\lambda_n + \lambda_1})^2 E(\boldsymbol{x}^k)$$
 
@@ -170,7 +176,7 @@ $$ E(\boldsymbol{x}^{k+1}) \leq (\frac{\lambda_n - \lambda_1}{\lambda_n + \lambd
 
 $$(\frac{\lambda_n - \lambda_1}{\lambda_n + \lambda_1})^2 = (1 - \frac{2}{\frac{\lambda\_n}{\lambda\_1} - 1})^2$$
 
-其中 $\frac{\lambda\_n}{\lambda\_1}$ 为一个 matrix 的 condition number，可以看出 condition number 越大，convergence rate 越大，算法收敛得越慢。当 $\lambda\_1 = \lambda\_n$ 时，收敛是最快的，这对应上面例子中 circular contour 的情况，condition number 越大，contour 越扁，越小 contour 越圆。
+其中 $\frac{\lambda\_n}{\lambda\_1}$ 表示一个 matrix 的 condition number，可以看出 condition number 越大，convergence rate 越大，算法收敛得越慢。当 $\lambda\_1 = \lambda\_n$ 时，收敛是最快的，对应上面例子中 circular contour 的情况，condition number 越大，contour 越扁，越小 contour 越圆。
 
 #### 结论
 
