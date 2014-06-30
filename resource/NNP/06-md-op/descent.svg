@@ -9,12 +9,12 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="282.27112"
-   height="272.99268"
-   id="svg2"
-   version="1.1"
+   sodipodi:docname="descent.svg"
    inkscape:version="0.48.4 r9939"
-   sodipodi:docname="descent.svg">
+   version="1.1"
+   id="svg2"
+   height="272.99268"
+   width="282.27112">
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -22,11 +22,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.3942532"
-     inkscape:cx="104.06535"
-     inkscape:cy="194.86419"
+     inkscape:zoom="1.9717718"
+     inkscape:cx="144.64373"
+     inkscape:cy="134.91686"
      inkscape:document-units="px"
-     inkscape:current-layer="g3083"
+     inkscape:current-layer="svg2"
      showgrid="false"
      inkscape:window-width="1440"
      inkscape:window-height="839"
@@ -62,7 +62,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>

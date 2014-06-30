@@ -61,6 +61,14 @@ $$\lim_{k\rightarrow \infty} \frac{\Vert \boldsymbol{x}^{k+1} - \boldsymbol{x}^*
   
 由于 linear convergence 收敛得慢，而 quadratic convergence 虽然收敛快但是需要的资源太多，所以大多数算法都是属于 superlinear convergence
 
+另一种表示 convergence rate 的方法是使用 Error function $E: \mathbb{R}^n \rightarrow \mathbb{R}$，然后计算
+
+$$\lim_{k\rightarrow \infty} \frac{E(\boldsymbol{x}^{k+1}) - E(\boldsymbol{x}^*)}{(E(\boldsymbol{x}^k) - E(\boldsymbol{x}^*))^p}$$
+或者
+$$\lim_{k\rightarrow \infty} \frac{E(\boldsymbol{x}^{k}) - E(\boldsymbol{x}^{k+1})}{E(\boldsymbol{x}^k)^p}$$
+
+通常情况下，使不使用 Error function 并不影响 convergence rate，一个 linear convergence 的算法不会因为用 Error function 计算 convergence rate 而变成 quadratic convergence 算法。
+
 #### Step Length
 
 假设 $\boldsymbol{d}^k$ 已经确定，求解 step length $\alpha^k$ 的方法分为两种，分别是 Exact line search 和 Inexact line search。
@@ -204,9 +212,9 @@ OUTPUT: $\alpha^k$
 
 #### Descent Direction
 
-所有的 descent direction 都可以表示为 $\boldsymbol{d}^k = -A g^k$，因为 $\boldsymbol{d}^k$ 和 $g^k$ 是一个空间内的向量，给定一个，另一个总可以通过旋转伸缩来得到，也就是矩阵乘的方式 (不要纠结于那个负号)。
+所有的 descent direction 都可以表示为 $\boldsymbol{d}^k = -A^k g^k$，因为 $\boldsymbol{d}^k$ 和 $g^k$ 是一个空间内的向量，给定一个，另一个总可以通过旋转伸缩来得到，也就是矩阵乘的方式 (不要纠结于那个负号)。
 
-之前我们提到所有满足 ${g^k}^T \boldsymbol{d}^k < 0$ 的方向都是 descent direction，把 $\boldsymbol{d}^k$ 的表示代入有 $-{g^k}^T A g^k < 0$，即要求 $A$ 是 positive definite matrix。
+之前我们提到所有满足 ${g^k}^T \boldsymbol{d}^k < 0$ 的方向都是 descent direction，把 $\boldsymbol{d}^k$ 的表示代入有 $-{g^k}^T A^k g^k < 0$，即要求 $A^k$ 是 positive definite matrix。
 
-所有的优化算法最核心的不同就在于如何构建 matrix $A$，详情请见后续章节。
+所有的优化算法最核心的不同就在于如何构建 matrix $A^k$，详情请见后续章节。
 

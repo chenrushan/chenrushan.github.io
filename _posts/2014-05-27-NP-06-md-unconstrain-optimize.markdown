@@ -21,7 +21,9 @@ Descent direction 在 multi-dimensional optimization 中是一个非常重要的
 
 * 证明
 
-  因为 $f\in \mathcal{C}^1$，所以 $g \in \mathcal{C}^0$，又因为 $g^T(\bar{\boldsymbol{x}})\boldsymbol{d} < 0$，所以必存在 $\delta$，使得 $g^T(\boldsymbol{x})\boldsymbol{d} < 0 \; \forall \boldsymbol{x} \in LS(\bar{\boldsymbol{x}}, \bar{\boldsymbol{x}} + \delta \boldsymbol{d})$
+  因为 $f\in \mathcal{C}^1$，所以 $g \in \mathcal{C}^0$，又因为 $g^T(\bar{\boldsymbol{x}})\boldsymbol{d} < 0$，所以必存在 $\delta$，使得
+  
+  $$g^T(\boldsymbol{x})\boldsymbol{d} < 0 \; \forall \boldsymbol{x} \in LS(\bar{\boldsymbol{x}}, \bar{\boldsymbol{x}} + \delta \boldsymbol{d})$$
   
   令 $\alpha \in (0, \delta)$，根据 Truncated taylor series 有
 
@@ -57,7 +59,10 @@ Descent direction 在 multi-dimensional optimization 中是一个非常重要的
 
 * 证明
 
-  假设存在 $\boldsymbol{d}$ 使得 $\boldsymbol{d}^T H(\boldsymbol{x}^*)\boldsymbol{d} < 0$，由于 $f \in \mathcal{C}^2$，所以 $H \in \mathcal{C}$，因此存在 $\delta > 0$，使得 $\boldsymbol{d}^T H(\boldsymbol{x}^* + \alpha \boldsymbol{d})\boldsymbol{d} < 0 \; \forall \alpha \in (0, \delta)$，根据 Truncated taylor series
+  假设存在 $\boldsymbol{d}$ 使得 $\boldsymbol{d}^T H(\boldsymbol{x}^*)\boldsymbol{d} < 0$，由于 $f \in \mathcal{C}^2$，所以 $H \in \mathcal{C}$，因此存在 $\delta > 0$，使得
+  $$\boldsymbol{d}^T H(\boldsymbol{x}^* + \alpha \boldsymbol{d})\boldsymbol{d} < 0 \; \forall \alpha \in (0, \delta)$$
+  
+  根据 Truncated taylor series
 
   $$
   f(\boldsymbol{x}^* + \alpha \boldsymbol{d}) = f(\boldsymbol{x}^*) + g(\boldsymbol{x}^*)\alpha \boldsymbol{d} + \alpha \boldsymbol{d}^T H(\bar{\boldsymbol{x}}) \alpha \boldsymbol{d}
