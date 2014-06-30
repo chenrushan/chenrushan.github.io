@@ -494,6 +494,8 @@ Let $A \in \mathbb{R}^{n\times n}$, symmetric and positive definite
 
   Cholesky decomposition is numerically stable.
 
+  Every Hermitian positive-definite matrix (and thus also every real-valued symmetric positive-definite matrix) has a unique Cholesky decomposition, and $L$ is a lower triangular matrix with real and positive diagonal entries.
+
 -----------------------
 -----------------------
 
