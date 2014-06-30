@@ -11,7 +11,8 @@
 }
 
 html {
-    background-color: #343838;
+    background: #343838 url('../resource/background.jpg') no-repeat center center fixed;
+    background-size: cover;
 }
 
 body {
