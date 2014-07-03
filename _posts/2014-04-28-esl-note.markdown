@@ -71,7 +71,7 @@ $$
 
   根据上面一小节关于 (2.26) 中给出的 $\hat{y}\_0$ 的公式可知 $E(\hat{y}\_0) = x\_0^T \beta$，所以 $Bias(\hat{y}\_0) = 0$。
 
-  $Var(\hat{y}\_0) = \delta^2 E(x\_0^T(\boldsymbol{X}^T \boldsymbol{X})^{-1}x\_0)$ 是这么推导的 (想了好久终于想出来，I'm a genius)
+  $Var(\hat{y}\_0) = \delta^2 E(x\_0^T(\boldsymbol{X}^T \boldsymbol{X})^{-1}x\_0)$ 是这么推导的
 
   令 $\boldsymbol{v} = (\boldsymbol{X}(\boldsymbol{X}^T\boldsymbol{X})^{-1}x\_0)$
 
@@ -80,7 +80,7 @@ $$
   Var(\hat{y}\_0) = & Var(x\_0^T \beta + \boldsymbol{v}^T \boldsymbol{\varepsilon}) \\\\
   = & E((\boldsymbol{v}^T \boldsymbol{\varepsilon})^2) \\\\
   = & E((\sum\_i v\_i \varepsilon\_i)^2) \\\\
-  = & E(\sum\_i v\_i^2 \varepsilon\_i^2) (\text{since if} \; i \neq j \; \varepsilon\_i \; \text{and} \; \varepsilon\_j \; \text{are iid, so} \; E(\varepsilon\_i \varepsilon\_j) = 0) \\\\
+  = & E(\sum\_i v\_i^2 \varepsilon\_i^2) (\text{if} \; i \neq j \; \varepsilon\_i \; \text{and} \; \varepsilon\_j \; \text{are iid, so} \; E(\varepsilon\_i \varepsilon\_j) = 0) \\\\
   = & \delta^2 E(\sum\_i v\_i^2) \\\\
   = & \delta^2 E(\boldsymbol{v}^T \boldsymbol{v}) \\\\
   = & \delta^2 E(x\_0^T(\boldsymbol{X}^T \boldsymbol{X})^{-1}x\_0)
