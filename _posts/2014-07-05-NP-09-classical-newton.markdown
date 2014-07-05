@@ -27,4 +27,22 @@ $$ f(\boldsymbol{x}) = \frac{1}{2} \boldsymbol{x}^T H \boldsymbol{x} - \boldsymb
 
 $$ h(\boldsymbol{y}) = \frac{1}{2} \boldsymbol{y}^T \boldsymbol{y} - (L^{-1} \boldsymbol{c})^T \boldsymbol{y} $$
 
-这样我们就实现了通过空间变换得到一个 Hessian matrix 为 $I$ 的 quadratic function。
+这样我们就实现了通过空间变换得到一个 Hessian matrix 为 $I$ 的 quadratic function。在 $h(\boldsymbol{y})$ 应用 steepest descent 有
+
+$$ \boldsymbol{y}^{k+1} = \boldsymbol{y}^k - \nabla h(\boldsymbol{y}) = \boldsymbol{y}^k - (\boldsymbol{y} - L^{-1}\boldsymbol{c}) = L^{-1}\boldsymbol{c}$$
+
+所以无论你从什么初始点开始，都是一步到达 global minimum，把这个点映射回 x-space，得 
+$$\boldsymbol{x}^{k+1} = L^{-T}L^{-1} \boldsymbol{c} = H^{-1}\boldsymbol{c}$$
+
+这就是在 x-space 的最优解。
+
+----------
+
+如果我们将 y-space 的迭代步骤映射到 x-space 的话是这样
+
+$$
+\begin{align}
+& \boldsymbol{y}^{k+1} = \boldsymbol{y}^k - \nabla\_{\boldsymbol{y}^k} h(\boldsymbol{y}^k) \\\\
+\Longleftrightarrow & L^{-T}\boldsymbol{y}^{k+1} = L^{-T}\boldsymbol{y}^k - L^{-T}\nabla\_{\boldsymbol{y}^k} f(L^{-T} \boldsymbol{y}^k) \\\\
+\end{align}
+$$
