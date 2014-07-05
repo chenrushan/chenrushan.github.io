@@ -184,7 +184,7 @@ $$(\frac{\lambda_n - \lambda_1}{\lambda_n + \lambda_1})^2 = (1 - \frac{2}{\frac{
 
 * 收敛速度确实和初始点的选择有关
 
-* Steepest descent 是一个 linear convergence algorithm，并且收敛速度取决于 Hessien matrix 的 condition number，condition number 越大收敛越慢
+* Steepest descent 是一个 linear convergence algorithm，并且收敛速度取决于 Hessian matrix 的 condition number，condition number 越大收敛越慢
 
 * 对于 nonquadratic function，上面的结论也是可用的，前面已经讲过，在接近 local minimum 的地方，任何函数的表现都可以用 quadratic function 近似，因此 nonquadratic function 的 convergence rate 取决于 $H(\boldsymbol{x}^\*)$ 的 condition number，其中 $\boldsymbol{x}^\*$ 是 local minimum
 
