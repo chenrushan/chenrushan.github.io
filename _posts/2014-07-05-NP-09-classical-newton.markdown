@@ -27,9 +27,9 @@ $$ f(\boldsymbol{x}) = \frac{1}{2} \boldsymbol{x}^T H \boldsymbol{x} - \boldsymb
 
 $$ h(\boldsymbol{y}) = \frac{1}{2} \boldsymbol{y}^T \boldsymbol{y} - (L^{-1} \boldsymbol{c})^T \boldsymbol{y} $$
 
-这样我们就实现了通过空间变换得到一个 Hessian matrix 为 $I$ 的 quadratic function。在 $h(\boldsymbol{y})$ 应用 steepest descent 有
+这样我们就实现了通过空间变换得到一个 Hessian matrix 为 $I$ 的 quadratic function。在 $h(\boldsymbol{y})$ 应用 steepest descent 有 (令 $\alpha = 1$)
 
-$$ \boldsymbol{y}^{k+1} = \boldsymbol{y}^k - \nabla h(\boldsymbol{y}) = \boldsymbol{y}^k - (\boldsymbol{y} - L^{-1}\boldsymbol{c}) = L^{-1}\boldsymbol{c}$$
+$$ \boldsymbol{y}^{k+1} = \boldsymbol{y}^k - \nabla h(\boldsymbol{y}^k) = \boldsymbol{y}^k - (\boldsymbol{y}^k - L^{-1}\boldsymbol{c}) = L^{-1}\boldsymbol{c}$$
 
 所以无论你从什么初始点开始，都是一步到达 global minimum，把这个点映射回 x-space，得 
 $$\boldsymbol{x}^{k+1} = L^{-T}L^{-1} \boldsymbol{c} = H^{-1}\boldsymbol{c}$$
@@ -44,5 +44,13 @@ $$
 \begin{align}
 & \boldsymbol{y}^{k+1} = \boldsymbol{y}^k - \nabla\_{\boldsymbol{y}^k} h(\boldsymbol{y}^k) \\\\
 \Longleftrightarrow & L^{-T}\boldsymbol{y}^{k+1} = L^{-T}\boldsymbol{y}^k - L^{-T}\nabla\_{\boldsymbol{y}^k} f(L^{-T} \boldsymbol{y}^k) \\\\
+\Longleftrightarrow & \boldsymbol{x}^{k+1} = \boldsymbol{x}^k - L^{-T} L^{-1} \nabla f(\boldsymbol{x}^k) \\\\
+\Longleftrightarrow & \boldsymbol{x}^{k+1} = \boldsymbol{x}^k - H^{-1} \nabla f(\boldsymbol{x}^k) \\\\
 \end{align}
 $$
+
+这最后一步实际上就是 Classical Newton 的迭代步骤。这里说的好像 Classical Newton 是由 Steepest Descent 演化过来似的，实际上，二者的发明并没有什么联系，并且 Classical Newton 出现比 Steepest Descent 还要早得多，下面一节我们看看 Classical Newton 是基于什么思想得到的。
+
+#### Classical Newton Method
+
+
