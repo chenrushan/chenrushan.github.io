@@ -96,10 +96,10 @@ def alpha_r(p, dd):
   a, r, c1 = 1, 0.3, 1e-4
 
   g = gr(p)
-  p_1 = (p[0] + a * dd[0], p[1] + a * dd[1])
-  while fr(p_1) > fr(p) + c1 * a * np.dot(g, dd):
+  p1 = p + a * dd
+  while fr(p1) > fr(p) + c1 * a * np.dot(g, dd):
     a *= r
-    p_1 = (p[0] + a * dd[0], p[1] + a * dd[1])
+    p1 = p + a * dd
 
   return a
 
@@ -114,7 +114,7 @@ def classical_newton_r(p0):
     i += 1
     dd = ddr(pk)
     a = alpha_r(pk, dd)
-    pk = (pk[0] + a * dd[0], pk[1] + a * dd[1])
+    pk = pk + a * dd
     result.append(pk)
   
   print "step %d [%f, %f]" % (i, pk[0], pk[1])
