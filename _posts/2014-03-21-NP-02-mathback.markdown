@@ -738,3 +738,71 @@ $$f(x) \approx f(x^0) + f'(x^0)(x - x^0) + \frac{1}{2} f''(x^0)(x - x^0)^2$$
   & \frac{1}{3!} \sum\_{i=1}^n \sum\_{j=1}^n \sum\_{k=1}^n \frac{\partial f(\bar{\boldsymbol{x}})}{\partial x\_i \partial x\_j \partial x\_k} (x\_i - x^0\_i)(x\_j - x^0\_j)(x\_k - x^0\_k)
   \end{align}
   $$
+
+-----------------------
+
+**Matrix Derivate**
+
+**Notations**
+<blockquote>
+the columns of a matrix $A \in \mathbb{R}^{m\times n}$ are $a_1$ through $a_n$, while the rows are $\tilde{a}_1^T$ through $\tilde{a}_n^T$.
+</blockquote>
+
+* Derivative of $A\boldsymbol{x}$, where $A \in \mathbb{R}^{m\times n}$ and $\boldsymbol{x} \in \mathbb{R}^n$
+
+  $$
+  \nabla\_{\boldsymbol{x}}A\boldsymbol{x} =
+    \begin{pmatrix}
+      \nabla\_{\boldsymbol{x}} \tilde{a}\_1^T \boldsymbol{x} \\\\
+      \nabla\_{\boldsymbol{x}} \tilde{a}\_2^T \boldsymbol{x} \\\\
+      \vdots \\\\
+      \nabla\_{\boldsymbol{x}} \tilde{a}\_n^T \boldsymbol{x} \\\\
+    \end{pmatrix} = 
+    \begin{pmatrix}
+      \tilde{a}\_1 & \tilde{a}\_2 & \cdots & \tilde{a}\_n
+    \end{pmatrix} = A^T
+  $$
+
+* Derivative of linear transformed input to function
+
+  Consider a function $f: \mathbb{R}^n \rightarrow \mathbb{R}$. Suppose we have a matrix $A \in \mathbb{R}^{n\times m}$ and a vector $\boldsymbol{x} \in \mathbb{R}^m$. We wish to compute $\nabla\_{\boldsymbol{x}} f(A\boldsymbol{x})$.
+
+  Note that $f(A\boldsymbol{x})$ is a composition of multivariate functions, so we can apply the following chain rule to calculate derivate
+
+  <blockquote>
+  Suppose $u = f(x_1, x_2, \cdots, x_n)$ is a differentiable function of variables $x_1, x_2, \cdots, x_n$, and all functions $g_j(t_1, t_2, \cdots, t_m), j = 1, \cdots, m$ are also differentiable, then their composition $u = f(g_1, g_2, \cdots, g_n)$ as a function of $t_1, t_2, \cdots, t_m$ is also differentiable, and
+
+  $$ \frac{\partial u}{\partial t_j} = \sum_{k=1}^{n} \frac{\partial f}{\partial x_k} \frac{\partial g_k}{\partial t_j} \;\;\; j = 1, \cdots m$$
+  </blockquote>
+
+  By the chain rule, we have
+
+  $$
+  \begin{align}
+  \frac{\partial f(A\boldsymbol{x})}{\partial x\_j} = & \sum\_{k=1}^{n} \frac{\partial f(A\boldsymbol{x})}{\partial (A\boldsymbol{x})\_k} \frac{\partial (A\boldsymbol{x})\_k}{\partial x\_j} \\\\
+  = & \sum\_{k=1}^{n} \frac{\partial f(A\boldsymbol{x})}{\partial (A\boldsymbol{x})\_k} \frac{\partial \tilde{a}\_k^T \boldsymbol{x}}{\partial x\_j} \\\\
+  = & \sum\_{k=1}^{n} \frac{\partial f(A\boldsymbol{x})}{\partial (A\boldsymbol{x})\_k} a\_{kj} \\\\
+  = & a\_j^T \nabla f(A\boldsymbol{x})
+  \end{align}
+  $$
+
+  so 
+
+  $$
+  \begin{align}
+  \nabla\_{\boldsymbol{x}} f(A\boldsymbol{x}) = 
+  \begin{pmatrix}
+    \frac{\partial f(A\boldsymbol{x})}{\partial x\_1} \\\\
+    \vdots \\\\
+    \frac{\partial f(A\boldsymbol{x})}{\partial x\_n} \\\\
+  \end{pmatrix} = 
+  \begin{pmatrix}
+    a\_1^T \\\\
+    a\_2^T \\\\
+    \vdots \\\\
+    a\_n^T
+  \end{pmatrix} \nabla f(A\boldsymbol{x}) = A^T \nabla f(A \boldsymbol{x})
+  \end{align}
+  $$
+
+Reference: [berkeley.edu](http://www.eecs.berkeley.edu/~jduchi/projects/matrix_prop.pdf), [okstate.edu](https://www.math.okstate.edu/~atovstolis/lecture_notes/LN14_6.pdf)
