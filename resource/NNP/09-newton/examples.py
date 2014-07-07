@@ -74,7 +74,7 @@ def gr(p):
   x, y = p
   drx = 400.0 * pow(x, 3) - 400.0 * x * y + 2.0 * x - 2.0
   dry = 200.0 * y - 200.0 * pow(x, 2)
-  return (drx, dry)
+  return np.array([drx, dry])
 
 # hessian matrix
 def hr(p):
@@ -184,12 +184,24 @@ y = np.arange(-0.6, 1.2, delta)
 X, Y = np.meshgrid(x, y)
 Z = 100 * (Y - X * X) * (Y - X * X) + (1 - X) * (1 - X)
 
+p = (-0.5, 0)
+gp = gr(p)
+hp = hr(p)
+Zapp = fr(p) + (gp[0] * (X - p[0]) + gp[1] * (Y - p[1])) + \
+       0.5 * (hp[0, 0] * (X - p[0]) * (X - p[0]) + 
+              hp[0, 1] * (X - p[0]) * (Y - p[1]) +
+              hp[1, 0] * (Y - p[1]) * (X - p[0]) +
+              hp[1, 1] * (Y - p[1]) * (Y - p[1]))
+
 ## for initial point (0.6, 0.6)
 
 plt.figure()
-CS = plt.contour(X, Y, Z, [15, 9, 6, 4, 2, 1, 0.1])
+plt.contour(X, Y, Z, [15, 9, 6, 4, 2, 1, 0.1])
+plt.contour(X, Y, Zapp, [10, 8, 6, 4, 2, 1], colors='green', linewidths=0.7)
+plt.plot(*p, marker='o', color='r')
 
-res = classical_newton_r((0.6, 0.6))
+# res = classical_newton_r((0.6, 0.6))
+res = classical_newton_r((-0.5, 0))
 
 xp, yp = zip(*res)
 plt.plot(xp, yp, '--', lw=3)
@@ -202,7 +214,7 @@ plt.savefig("rosen1.png")
 ## for initial point (-1.2, 1)
 
 plt.figure()
-CS = plt.contour(X, Y, Z, [15, 9, 6, 4, 2, 1, 0.1])
+plt.contour(X, Y, Z, [15, 9, 6, 4, 2, 1, 0.1])
 
 res = classical_newton_r((-1.2, 1))
 
