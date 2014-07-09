@@ -53,4 +53,15 @@ $$
 
 #### Classical Newton Method
 
+Classical Newton 真正基于的思想是在每步迭代的过程中对函数做 quadratic approximation，也就是用二阶 taylor series 去近似 $f(\boldsymbol{x})$
+
+$$f(\boldsymbol{x}) \approx f(\boldsymbol{x}^k) + g^T(\boldsymbol{x}^k)(\boldsymbol{x} - \boldsymbol{x}^k) + \frac{1}{2} (\boldsymbol{x} - \boldsymbol{x}^k)^T H(\boldsymbol{x}^k) (\boldsymbol{x} - \boldsymbol{x}^k)$$
+
+然后通过优化这个近似函数去得到 $\boldsymbol{x}^{k+1}$，为了方便，后面以 $\boldsymbol{g}^k$ 表示 $g(\boldsymbol{x}^k)$，以 $H^k$ 表示 $H(\boldsymbol{x}^k)$。
+
+优化这个 quadratic approximation 并不复杂，令其导数为 0 即 $\boldsymbol{g}^k + H^k (\boldsymbol{x} - \boldsymbol{x}^k) = 0$ 可得
+
+$$\boldsymbol{x}^{k+1} = \boldsymbol{x}^k - {H^{k}}^{-1} \boldsymbol{g}^k$$
+
+之前已经说过每步迭代的 descent direction 可以表示为 $\boldsymbol{d}^k = -A^k \boldsymbol{g}^k$，对于 Classical Newton，$A^k = {H^{k}}^{-1}$，另外注意到，传统的 Classical Newton 并不设 step length，也就是 step length 统一设为 1，当然你也可以在每步做 line search。
 
