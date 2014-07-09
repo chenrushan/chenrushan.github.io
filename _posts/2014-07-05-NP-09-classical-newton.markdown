@@ -65,3 +65,6 @@ $$\boldsymbol{x}^{k+1} = \boldsymbol{x}^k - {H^{k}}^{-1} \boldsymbol{g}^k$$
 
 之前已经说过每步迭代的 descent direction 可以表示为 $\boldsymbol{d}^k = -A^k \boldsymbol{g}^k$，对于 Classical Newton，$A^k = {H^{k}}^{-1}$，另外注意到，传统的 Classical Newton 并不设 step length，也就是 step length 统一设为 1，当然你也可以在每步做 line search。
 
+下图给出 Rosenbrock function $f(\boldsymbol{x}) = 100(\boldsymbol{x}\_2 - \boldsymbol{x}\_1^2)^2 + (1 - \boldsymbol{x}\_1)^2$ 在点 $(-0.5, 0)$ 处的 quadratic approximation
+
+  <img style="width:60%" src="/resource/NNP/09-newton/rosen3.png" />

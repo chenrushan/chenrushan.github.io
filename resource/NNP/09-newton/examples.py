@@ -176,7 +176,7 @@ for r in res:
 plt.savefig("ellip2.png")
 
 ### ==============================
-### Rosenbrock function
+### quadratic approximation for Rosenbrock function at some point
 ### ==============================
 
 x = np.arange(-1.2, 1.0, delta)
@@ -193,12 +193,26 @@ Zapp = fr(p) + (gp[0] * (X - p[0]) + gp[1] * (Y - p[1])) + \
               hp[1, 0] * (Y - p[1]) * (X - p[0]) +
               hp[1, 1] * (Y - p[1]) * (Y - p[1]))
 
-## for initial point (0.6, 0.6)
-
 plt.figure()
 plt.contour(X, Y, Z, [15, 9, 6, 4, 2, 1, 0.1])
 plt.contour(X, Y, Zapp, [10, 8, 6, 4, 2, 1], colors='green', linewidths=0.7)
 plt.plot(*p, marker='o', color='r')
+
+plt.savefig("rosen3.png")
+
+### ==============================
+### Rosenbrock function
+### ==============================
+
+x = np.arange(-1.2, 1.0, delta)
+y = np.arange(-0.6, 1.2, delta)
+X, Y = np.meshgrid(x, y)
+Z = 100 * (Y - X * X) * (Y - X * X) + (1 - X) * (1 - X)
+
+## for initial point (0.6, 0.6)
+
+plt.figure()
+plt.contour(X, Y, Z, [15, 9, 6, 4, 2, 1, 0.1])
 
 # res = classical_newton_r((0.6, 0.6))
 res = classical_newton_r((-0.5, 0))
