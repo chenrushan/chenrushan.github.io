@@ -67,7 +67,7 @@ $$\boldsymbol{x}^{k+1} = \boldsymbol{x}^k - {H^{k}}^{-1} \boldsymbol{g}^k$$
 
 下图给出 Rosenbrock function $f(\boldsymbol{x}) = 100(\boldsymbol{x}\_2 - \boldsymbol{x}\_1^2)^2 + (1 - \boldsymbol{x}\_1)^2$ 在点 $(-0.5, 0)$ 处的 quadratic approximation，其中红点表示 $(-0.5, 0)$，绿色的 contour 就是 quadratic approximation 对应的 contour
 
-  <img style="width:60%" src="/resource/NNP/09-newton/rosen3.png" />
+  <img style="width:80%" src="/resource/NNP/09-newton/rosen3.png" />
 
 #### Examples
 
@@ -93,3 +93,22 @@ $$\boldsymbol{x}^{k+1} = \boldsymbol{x}^k - {H^{k}}^{-1} \boldsymbol{g}^k$$
 
 从这几例子可以看出，对比 steepest descent，Classical Newton 收敛所需的步数要少了很多。
 
+#### Classical Newton 的问题
+
+* Classical Newton 每步迭代都要 inverse $H^k$，但谁也没法保证 $H^k$ 每步都是可逆的
+
+* $H^k$ 也不一定是 positive definite matrix，这就导致 $\boldsymbol{d}^k$ 可能不是 descent direction
+
+* 根据你初始点选择的不同，Classical Newton 可能不收敛
+
+  考虑一个一维的 case $f(x) = \log(e^x + e^{-x})$
+
+  * 如果初始点是 1，则迭代收敛
+  
+  * 如果初始点是 1.1，则迭代不收敛，如下图
+
+      <img style="width:80%" src="/resource/NNP/09-newton/log.png" />
+
+      可以看到，对于这个初始点，迭代的结果是 $x$ 不断远离最优值点
+
+      下面一节将证明 Classical Newton 是一个 locally convergent algorithm，即当初始点足够靠近最优值点时，Classical Newton 是保证收敛的

@@ -151,22 +151,26 @@ def hl(x):
 
 def classical_newton_l(x0, niter):
   result = []
+  hessian = []
   xk = x0
   i = 0
   while gl(xk) != 0 and i < niter:
     result.append(xk)
+    hessian.append(hl(xk))
     xk = xk - gl(xk) / hl(xk)
     i += 1
   result.append(xk)
-  return result
+  hessian.append(hl(xk))
+  return (result, hessian)
 
 plt.figure()
 
 x = np.arange(-2, 6, .01)
 y = np.log(np.exp(x) + np.exp(-x))
 
-res = classical_newton_l(1.1, 4)
+(res, hessian) = classical_newton_l(1.1, 4)
 print res
+print hessian
 
 for r in res:
   plt.plot(r, 0, marker='o', color='r')
