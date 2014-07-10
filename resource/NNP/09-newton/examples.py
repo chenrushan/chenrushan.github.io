@@ -8,18 +8,12 @@ import matplotlib.pyplot as plt
 import math
 import sys
 from math import pow
+from math import exp
 
 matplotlib.rcParams['xtick.direction'] = 'out'
 matplotlib.rcParams['ytick.direction'] = 'out'
 
 delta = 0.025
-
-### ==============================
-### util functions
-### ==============================
-
-def norm(v0, v1):
-  return math.sqrt(v0 * v0 + v1 * v1)
 
 ### ==============================
 ### Classical Newton for Rosenbrock function
@@ -144,6 +138,57 @@ for r in res:
   plt.plot(*r, marker='o', color='r')
 
 plt.savefig("rosen2.png")
+
+### ==============================
+### Classical Newton for log(exp(x) + exp(-x))
+### ==============================
+
+def gl(x):
+  return (exp(x) - exp(-x)) / (exp(x) + exp(-x))
+
+def hl(x):
+  return 1 - pow(gl(x), 2)
+
+def classical_newton_l(x0, niter):
+  result = []
+  xk = x0
+  i = 0
+  while gl(xk) != 0 and i < niter:
+    result.append(xk)
+    xk = xk - gl(xk) / hl(xk)
+    i += 1
+  result.append(xk)
+  return result
+
+plt.figure()
+
+x = np.arange(-2, 6, .01)
+y = np.log(np.exp(x) + np.exp(-x))
+
+res = classical_newton_l(1.1, 4)
+print res
+
+for r in res:
+  plt.plot(r, 0, marker='o', color='r')
+
+tag = 'x0'
+plt.annotate(tag, xy=(res[0], 0.05), xytext=(0.5, 0.2), arrowprops=dict(arrowstyle="->"))
+
+tag = 'x1'
+plt.annotate(tag, xy=(res[1], 0.05), xytext=(res[1], 0.2))
+
+tag = 'x2'
+plt.annotate(tag, xy=(res[2], 0.05), xytext=(1.5, 0.2), arrowprops=dict(arrowstyle="->"))
+
+tag = 'x3'
+plt.annotate(tag, xy=(res[3], 0.05), xytext=(res[3], 0.2))
+
+tag = 'x4'
+plt.annotate(tag, xy=(res[4], 0.05), xytext=(res[4], 0.2))
+
+plt.plot(x, y, linewidth=2)
+
+plt.savefig("log.png")
 
 # plt.show()
 
