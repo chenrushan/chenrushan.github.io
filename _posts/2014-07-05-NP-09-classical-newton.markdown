@@ -79,4 +79,17 @@ $$\boldsymbol{x}^{k+1} = \boldsymbol{x}^k - {H^{k}}^{-1} \boldsymbol{g}^k$$
 
 ##### $f(\boldsymbol{x}) = 100(\boldsymbol{x}\_2 - \boldsymbol{x}\_1^2)^2 + (1 - \boldsymbol{x}\_1)^2$
 
-其最优值出现在 (1, 1) 点，利用 Classical Newton + backtrack line search ($\hat{\alpha} = 0.5, \lambda = 0.3, c\_1 = 1\times 10^{-4}$)
+其最优值出现在 (1, 1) 点，利用 Classical Newton + backtrack line search ($\hat{\alpha} = 1, \lambda = 0.3, c\_1 = 1\times 10^{-4}$)
+
+* 初始点为 (0.6, 0.6)，收敛过程如下图所示，以 0.001 为 gradient norm 的阈值，共迭代 10 步
+
+  <img style="width:80%" src="/resource/NNP/09-newton/rosen1.png" />
+
+* 初始点为 (-1.2, 1)，收敛过程如下图所示，以 0.001 为 gradient norm 的阈值，共迭代 21 步
+
+  <img style="width:80%" src="/resource/NNP/09-newton/rosen2.png" />
+
+----------
+
+从这几例子可以看出，对比 steepest descent，Classical Newton 收敛所需的步数要少了很多。
+

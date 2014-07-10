@@ -120,8 +120,7 @@ Z = 100 * (Y - X * X) * (Y - X * X) + (1 - X) * (1 - X)
 plt.figure()
 plt.contour(X, Y, Z, [15, 9, 6, 4, 2, 1, 0.1])
 
-# res = classical_newton_r((0.6, 0.6))
-res = classical_newton_r((-0.5, 0))
+res = classical_newton_r((0.6, 0.6))
 
 xp, yp = zip(*res)
 plt.plot(xp, yp, '--', lw=3)
