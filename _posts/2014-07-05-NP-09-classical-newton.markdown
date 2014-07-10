@@ -65,6 +65,18 @@ $$\boldsymbol{x}^{k+1} = \boldsymbol{x}^k - {H^{k}}^{-1} \boldsymbol{g}^k$$
 
 之前已经说过每步迭代的 descent direction 可以表示为 $\boldsymbol{d}^k = -A^k \boldsymbol{g}^k$，对于 Classical Newton，$A^k = {H^{k}}^{-1}$，另外注意到，传统的 Classical Newton 并不设 step length，也就是 step length 统一设为 1，当然你也可以在每步做 line search。
 
-下图给出 Rosenbrock function $f(\boldsymbol{x}) = 100(\boldsymbol{x}\_2 - \boldsymbol{x}\_1^2)^2 + (1 - \boldsymbol{x}\_1)^2$ 在点 $(-0.5, 0)$ 处的 quadratic approximation
+下图给出 Rosenbrock function $f(\boldsymbol{x}) = 100(\boldsymbol{x}\_2 - \boldsymbol{x}\_1^2)^2 + (1 - \boldsymbol{x}\_1)^2$ 在点 $(-0.5, 0)$ 处的 quadratic approximation，其中红点表示 $(-0.5, 0)$，绿色的 contour 就是 quadratic approximation 对应的 contour
 
   <img style="width:60%" src="/resource/NNP/09-newton/rosen3.png" />
+
+#### Examples
+
+还用 steepest descent 中给出的例子
+
+##### $f(\boldsymbol{x}) = (\boldsymbol{x}\_1 - 7)^2 + (\boldsymbol{x}\_2 - 2)^2$ 和 $f(\boldsymbol{x}) = 4\boldsymbol{x}\_1^2 + \boldsymbol{x}\_2^2 -2\boldsymbol{x}\_1\boldsymbol{x}\_2$
+
+对于这两个 case，无论你初始点设在哪里，Classical Newton 都是一步即可收敛
+
+##### $f(\boldsymbol{x}) = 100(\boldsymbol{x}\_2 - \boldsymbol{x}\_1^2)^2 + (1 - \boldsymbol{x}\_1)^2$
+
+其最优值出现在 (1, 1) 点，利用 Classical Newton + backtrack line search ($\hat{\alpha} = 0.5, \lambda = 0.3, c\_1 = 1\times 10^{-4}$)
