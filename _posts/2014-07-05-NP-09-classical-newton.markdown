@@ -5,6 +5,8 @@ categories: nnumop
 tags: NPTEL, numerical optimization, classical newton
 ---
 
+<span style="background-color:#afa">这一节画了很多 contour 的图，是通过这个[脚本](../../../../resource/NNP/09-newton/examples.py)实现的</span>
+
 #### 改进 Steepest Descent
 
 假设要优化的函数是 quadratic function $f(\boldsymbol{x}) = \frac{1}{2} \boldsymbol{x}^T H \boldsymbol{x} - \boldsymbol{c}^T \boldsymbol{x}$，其中 $H$ 是 symmetric positive definite matrix。
@@ -112,3 +114,11 @@ $$\boldsymbol{x}^{k+1} = \boldsymbol{x}^k - {H^{k}}^{-1} \boldsymbol{g}^k$$
       可以看到，对于这个初始点，迭代的结果是 $x$ 不断远离最优值点
 
       下面一节将证明 Classical Newton 是一个 locally convergent algorithm，即当初始点足够靠近最优值点时，Classical Newton 是保证收敛的
+
+#### Local Convergence
+
+首先先引入一个 locally convergent 的概念
+
+<blockquote>
+An iterative optimization algorithm is said to be locally convergent if for each solution $\boldsymbol{x}^*$, there exists $\delta > 0$ such that for any initial point $\boldsymbol{x}^0 \in B(\boldsymbol{x}^*, \delta)$, the algorithm produces a sequence $\{\boldsymbol{x}^k\}$ which converges to $\boldsymbol{x}^*$
+</blockquote>
