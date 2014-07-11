@@ -7,59 +7,13 @@ tags: NPTEL, numerical optimization, classical newton
 
 <span style="background-color:#afa">这一节画了很多 contour 的图，是通过这个[脚本](../../../../resource/NNP/09-newton/examples.py)实现的</span>
 
-#### 改进 Steepest Descent
-
-假设要优化的函数是 quadratic function $f(\boldsymbol{x}) = \frac{1}{2} \boldsymbol{x}^T H \boldsymbol{x} - \boldsymbol{c}^T \boldsymbol{x}$，其中 $H$ 是 symmetric positive definite matrix。
-
-在 steepest descent 那篇文章中已经提到 $H$ 的 condition number 对收敛速度的影响非常大，condition number 越小，收敛得越快，当 $H = I$ 时收敛最快。由此产生的一个优化思路是，对原始 function 做空间变换，使其在新空间中的 Hessian matrix 为 $I$，然后在新空间中做优化，再将结果映射回原始空间，这样迭代就可以一步完成。
-
-假设原始空间为 x-space，新空间为 y-space，则我们试图找到的变换是
-
-$$ f(\boldsymbol{x}) = \frac{1}{2} \boldsymbol{x}^T H \boldsymbol{x} - \boldsymbol{c}^T \boldsymbol{x} \; \Rightarrow \; h(\boldsymbol{y}) = \frac{1}{2} \boldsymbol{y}^T \boldsymbol{y} - \boldsymbol{c}\_y^T \boldsymbol{y} $$
-
-参考下图
-
-<object data="/resource/NNP/09-newton/transform.svg" type="image/svg+xml" class="blkcenter"></object>
-
-由于这里 $H$ 是 symmetric positive definite matrix，这个变换可以通过对 $H$ 做 Cholesky decomposition 实现，如下
-
-$$ f(\boldsymbol{x}) = \frac{1}{2} \boldsymbol{x}^T H \boldsymbol{x} - \boldsymbol{c}^T \boldsymbol{x} = \frac{1}{2} \boldsymbol{x}^T L L^T \boldsymbol{x} - \boldsymbol{c}^T \boldsymbol{x} = \frac{1}{2} (L^T \boldsymbol{x})^T (L^T \boldsymbol{x}) - \boldsymbol{c}^T \boldsymbol{x} $$
-
-令 $\boldsymbol{y} = L^T \boldsymbol{x}$，则有
-
-$$ h(\boldsymbol{y}) = \frac{1}{2} \boldsymbol{y}^T \boldsymbol{y} - (L^{-1} \boldsymbol{c})^T \boldsymbol{y} $$
-
-这样我们就实现了通过空间变换得到一个 Hessian matrix 为 $I$ 的 quadratic function。在 $h(\boldsymbol{y})$ 应用 steepest descent 有 (令 $\alpha = 1$)
-
-$$ \boldsymbol{y}^{k+1} = \boldsymbol{y}^k - \nabla h(\boldsymbol{y}^k) = \boldsymbol{y}^k - (\boldsymbol{y}^k - L^{-1}\boldsymbol{c}) = L^{-1}\boldsymbol{c}$$
-
-所以无论你从什么初始点开始，都是一步到达 global minimum，把这个点映射回 x-space，得 
-$$\boldsymbol{x}^{k+1} = L^{-T}L^{-1} \boldsymbol{c} = H^{-1}\boldsymbol{c}$$
-
-这就是在 x-space 的最优解。
-
-----------
-
-如果我们将 y-space 的迭代步骤映射到 x-space 的话是这样
-
-$$
-\begin{align}
-& \boldsymbol{y}^{k+1} = \boldsymbol{y}^k - \nabla\_{\boldsymbol{y}^k} h(\boldsymbol{y}^k) \\\\
-\Longleftrightarrow & L^{-T}\boldsymbol{y}^{k+1} = L^{-T}\boldsymbol{y}^k - L^{-T}\nabla\_{\boldsymbol{y}^k} f(L^{-T} \boldsymbol{y}^k) \\\\
-\Longleftrightarrow & \boldsymbol{x}^{k+1} = \boldsymbol{x}^k - L^{-T} L^{-1} \nabla f(\boldsymbol{x}^k) \\\\
-\Longleftrightarrow & \boldsymbol{x}^{k+1} = \boldsymbol{x}^k - H^{-1} \nabla f(\boldsymbol{x}^k) \\\\
-\end{align}
-$$
-
-这最后一步实际上就是 Classical Newton 的迭代步骤。这里说的好像 Classical Newton 是由 Steepest Descent 演化过来似的，实际上，二者的发明并没有什么联系，并且 Classical Newton 出现比 Steepest Descent 还要早得多，下面一节我们看看 Classical Newton 是基于什么思想得到的。
-
 #### Classical Newton Method
 
-Classical Newton 真正基于的思想是在每步迭代的过程中对函数做 quadratic approximation，也就是用二阶 taylor series 去近似 $f(\boldsymbol{x})$
+Classical Newton 基于的思想是在每步迭代的过程中对函数做 quadratic approximation，也就是用二阶 taylor series 去近似 $f(\boldsymbol{x})$
 
 $$f(\boldsymbol{x}) \approx f(\boldsymbol{x}^k) + g^T(\boldsymbol{x}^k)(\boldsymbol{x} - \boldsymbol{x}^k) + \frac{1}{2} (\boldsymbol{x} - \boldsymbol{x}^k)^T H(\boldsymbol{x}^k) (\boldsymbol{x} - \boldsymbol{x}^k)$$
 
-然后通过优化这个近似函数去得到 $\boldsymbol{x}^{k+1}$，为了方便，后面以 $\boldsymbol{g}^k$ 表示 $g(\boldsymbol{x}^k)$，以 $H^k$ 表示 $H(\boldsymbol{x}^k)$。
+然后通过优化这个近似函数得到 $\boldsymbol{x}^{k+1}$，为了方便，后面以 $\boldsymbol{g}^k$ 表示 $g(\boldsymbol{x}^k)$，以 $H^k$ 表示 $H(\boldsymbol{x}^k)$。
 
 优化这个 quadratic approximation 并不复杂，令其导数为 0 即 $\boldsymbol{g}^k + H^k (\boldsymbol{x} - \boldsymbol{x}^k) = 0$ 可得
 
@@ -97,23 +51,27 @@ $$\boldsymbol{x}^{k+1} = \boldsymbol{x}^k - {H^{k}}^{-1} \boldsymbol{g}^k$$
 
 #### Classical Newton 的问题
 
-* Classical Newton 每步迭代都要 inverse $H^k$，但谁也没法保证 $H^k$ 每步都是可逆的
+* Classical Newton 每步迭代都要 invert $H^k$，但谁也没法保证 $H^k$ 每步都是可逆的
 
 * $H^k$ 也不一定是 positive definite matrix，这就导致 $\boldsymbol{d}^k$ 可能不是 descent direction
 
-* 根据你初始点选择的不同，Classical Newton 可能不收敛
+* $H^k$ 可能接近一个 singleton matrix，这会导致它非常难于 invert
+
+* 没有做 line search，不保证 $f(\boldsymbol{x}^{k+1}) < f(\boldsymbol{x}^k)$
+
+* 对初始点敏感，根据你初始点选择的不同，Classical Newton 可能不收敛
 
   考虑一个一维的 case $f(x) = \log(e^x + e^{-x})$
 
-  * 如果初始点是 1，则迭代收敛
+  * 如果初始点是 1，迭代收敛
   
   * 如果初始点是 1.1，则迭代不收敛，如下图
 
       <img style="width:80%" src="/resource/NNP/09-newton/log.png" />
 
-      其中 x0 到 x4 表示迭代生成的序列，可以看到，以 1.1 为初始点，迭代的结果是 $x$ 不断远离最优值点
+      其中 x0 到 x4 表示迭代生成的序列，可以看到，以 1.1 为初始点，迭代结果反而不断远离最优值点
 
-      下面一节将证明 Classical Newton 是一个 locally convergent algorithm，即当初始点足够靠近最优值点时，Classical Newton 是保证收敛的
+      实际上 Classical Newton 是一个 locally convergent algorithm，即当初始点足够靠近最优值点时，Classical Newton 才是保证收敛的，下一节将给出证明。
 
 #### Local Convergence
 
@@ -152,7 +110,7 @@ An iterative optimization algorithm is said to be locally convergent if for each
   \end{align}
   $$
 
-  第二个条件必须满足，否则算法不收敛
+  第二个条件意味着 $|x^{k+1} - x^*| < |x^k - x^*|$，如果这个不等式不能成立，则无法保证算法收敛
 
   * 对于第一个条件
 
@@ -184,8 +142,8 @@ An iterative optimization algorithm is said to be locally convergent if for each
   综合上述两个条件可以得到如下结论
 
   <blockquote>
-  当 $x^0 \in (x^* - \eta, x^* + \eta) \cap (x^* - \frac{1}{\alpha}, x^* + \frac{1}{\alpha})$ 时，Classical Newton 是一个 order-two convergent algorithm
+  当 $x^0 \in (x^* - \eta, x^* + \eta) \cap (x^* - \frac{1}{\alpha}, x^* + \frac{1}{\alpha})$ 时，Classical Newton 一定收敛并且是一个 order-two convergent algorithm
   </blockquote>
 
-  虽然我们得到了在理论上可以使 Classical Newton 收敛的条件，但这个条件在实践中却是不可操作的，因为我们不知道 $x^*$，因此也就无法确定 $x^0$，这就在很大程度上限制了 Classical Newton 的实用性
+  虽然我们得到了在理论上可以使 Classical Newton 收敛的条件，但这个条件在实践中却是不可操作的，因为我们事先不知道 $x^*$，因此也就无法确定 $x^0$，这就在很大程度上限制了 Classical Newton 的实用性
 
