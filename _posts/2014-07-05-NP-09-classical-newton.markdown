@@ -55,7 +55,9 @@ $$\boldsymbol{x}^1 = \boldsymbol{x}^0 - H^{-1} (H\boldsymbol{x}^0 - \boldsymbol{
 
 #### Classical Newton 的问题
 
-* Classical Newton 每步迭代都要 invert $H^k$，但谁也没法保证 $H^k$ 每步都是可逆的，$H^k$ 可能接近一个 singleton matrix，这会导致它非常难于 invert
+* Invert matrix 是一个非常费资源的操作，需要 $O(N^3)$ 的计算和 O(N^2) 的存储
+
+* 没法保证 $H^k$ 每步都是可逆的，$H^k$ 可能接近一个 singleton matrix，这会导致它非常难于 invert
 
 * $H^k$ 也不一定是 positive definite matrix，这就导致 $\boldsymbol{d}^k$ 可能不是 descent direction
 
