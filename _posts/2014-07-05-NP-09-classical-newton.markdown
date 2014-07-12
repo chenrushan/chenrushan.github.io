@@ -25,6 +25,10 @@ $$\boldsymbol{x}^{k+1} = \boldsymbol{x}^k - {H^{k}}^{-1} \boldsymbol{g}^k$$
 
   <img style="width:80%" src="/resource/NNP/09-newton/rosen3.png" />
 
+注意到如果你的函数本身就是个 quadratic function $f(\boldsymbol{x}) = \frac{1}{2} \boldsymbol{x}^T H \boldsymbol{x} - \boldsymbol{c}^T \boldsymbol{x}$，则无论初始点选在哪儿，Classical Newton 都可以一步收敛到最优解
+
+$$\boldsymbol{x}^1 = \boldsymbol{x}^0 - H^{-1} (H\boldsymbol{x}^0 - \boldsymbol{c}) = H^{-1}\boldsymbol{c}$$
+
 #### Examples
 
 还用 steepest descent 中给出的例子
@@ -51,11 +55,9 @@ $$\boldsymbol{x}^{k+1} = \boldsymbol{x}^k - {H^{k}}^{-1} \boldsymbol{g}^k$$
 
 #### Classical Newton 的问题
 
-* Classical Newton 每步迭代都要 invert $H^k$，但谁也没法保证 $H^k$ 每步都是可逆的
+* Classical Newton 每步迭代都要 invert $H^k$，但谁也没法保证 $H^k$ 每步都是可逆的，$H^k$ 可能接近一个 singleton matrix，这会导致它非常难于 invert
 
 * $H^k$ 也不一定是 positive definite matrix，这就导致 $\boldsymbol{d}^k$ 可能不是 descent direction
-
-* $H^k$ 可能接近一个 singleton matrix，这会导致它非常难于 invert
 
 * 没有做 line search，不保证 $f(\boldsymbol{x}^{k+1}) < f(\boldsymbol{x}^k)$
 
@@ -105,7 +107,7 @@ An iterative optimization algorithm is said to be locally convergent if for each
 
   $$
   \begin{align}
-  |\frac{f'''(\bar{x}^k)}{2 f''(x^k)}| < \alpha < \infty \\\\
+  |\frac{f'''(\bar{x}^k)}{2 f''(x^k)}| \leq \alpha < \infty \\\\
   |\frac{f'''(\bar{x}^k)}{2 f''(x^k)} (x^k - x^*)| < 1
   \end{align}
   $$
@@ -139,7 +141,18 @@ An iterative optimization algorithm is said to be locally convergent if for each
 
       即如果 $x^k$ 落在这个区间内，则条件二也满足
 
-  综合上述两个条件可以得到如下结论
+  在这两个条件都满足的情况下，我们有
+
+  $$
+  \begin{align}
+  & |x^{k+1} - x^*| \leq \alpha |x^k - x^*|^2 \\\\
+  \Longleftrightarrow & \alpha |x^{k+1} - x^*| \leq (\alpha |x^0 - x^*|)^{2^k} \\\\
+  \Longleftrightarrow & |x^{k+1} - x^*| \leq \frac{1}{\alpha} (\alpha |x^0 - x^*|)^{2^k} \\\\
+  \Longleftrightarrow & \underset{k\rightarrow \infty}{\lim} |x^{k+1} - x^*| = 0 \;\; (\because \alpha |x^0 - x^*| < 1) \\\\
+  \end{align}
+  $$
+
+  由此我们得到如下结论
 
   <blockquote>
   当 $x^0 \in (x^* - \eta, x^* + \eta) \cap (x^* - \frac{1}{\alpha}, x^* + \frac{1}{\alpha})$ 时，Classical Newton 一定收敛并且是一个 order-two convergent algorithm
