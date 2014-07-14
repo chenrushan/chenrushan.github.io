@@ -13,17 +13,15 @@ $$f(\boldsymbol{x}) \approx y^k(\boldsymbol{x}) = f(\boldsymbol{x}^k) + {\boldsy
 
 利用这一近似我们就将求解 linear system 的操作转变为 matrix vector multiplication 操作，计算量大大下降
 
-Quasi Newton 是一类算法，常见的包括如下 3 种
+那如何得到一个比较好的对 $(H^k)^{-1}$ 近似的矩阵呢？Quasi Newton 对 $B^k$ 做了如下约束
 
-* Rank one correction
-* DFP algorithm (<b>D</b>avidon, <b>F</b>letcher, <b>P</b>owell)
-* BFGS algorithm (<b>B</b>royden, <b>F</b>letcher, <b>G</b>oldfarb, <b>S</b>hanno)
+----------
 
-这三种算法的共同点是
+* 要求 $B^k$ 是 symmetric matrix
 
-* 构造 $B^k$ 使用的信息包括 $B^{k-1}, \boldsymbol{x}^{k-1}, \boldsymbol{g}^{k-1}, \boldsymbol{x}^{k}, \boldsymbol{g}^{k}$
+* 要求 $B^k$ 是 positive definite matrix
 
-* 要求 $y^k(\boldsymbol{x})$ 在点 $\boldsymbol{x}^k, \boldsymbol{x}^{k-1}$ 的 gradient 必须等于 $f(\boldsymbol{x})$ 在点 $\boldsymbol{x}^k, \boldsymbol{x}^{k-1}$ 的 gradient
+* 要求 $y^k(\boldsymbol{x})$ 在点 $\boldsymbol{x}^k, \boldsymbol{x}^{k-1}$ 的 gradient 必须等于 $f(\boldsymbol{x})$ 在点 $\boldsymbol{x}^k, \boldsymbol{x}^{k-1}$ 的 gradient，这其实就是要求 $y^k(\boldsymbol{x})$ 要尽可能好的近似 $f(\boldsymbol{x})$
 
   $y^k(\boldsymbol{x})$ 的 gradient 是
 
@@ -37,9 +35,25 @@ Quasi Newton 是一类算法，常见的包括如下 3 种
 
       $$B^k \gamma^{k-1} = \delta^{k-1}$$
 
-三种算法的区别就是如何构造 $B^k$，下面分别介绍这三种算法
+----------
+
+综合上述三个约束，生成 $B^k$ 的问题可以表示成
+
+$$
+\begin{align}
+& \text{find } B^k \\\\
+\text{s.t. } & B = B^T \\\\
+& \det(\text{leading principal minors of } B) > 0 \\\\
+& B^k \gamma^{k-1} = \delta^{k-1}
+\end{align}
+$$
+ 
+$B^k$ 是一个 symmetric matrix，因此共包含 $\frac{n(n+1)}{2}$ 个变量，第二个对 leading principal minors 的约束对应 n 个不等式，最后一个约束对应 n 个等式，由于变量的个数多于等式和不等式的个数，所以上面的问题不止有一个解。根据对上述问题不同的解法，有了不同的 Quasi Newton Method，常见的包括如下 3 种
+
+* Rank one correction
+* DFP algorithm (<b>D</b>avidon, <b>F</b>letcher, <b>P</b>owell)
+* BFGS algorithm (<b>B</b>royden, <b>F</b>letcher, <b>G</b>oldfarb, <b>S</b>hanno)
 
 #### Rank One Correction
-
 
 
