@@ -35,6 +35,8 @@ $$f(\boldsymbol{x}) \approx y^k(\boldsymbol{x}) = f(\boldsymbol{x}^k) + {\boldsy
 
       $$B^k \gamma^{k-1} = \delta^{k-1}$$
 
+      这个公式又被称为 secant equation
+
 ----------
 
 综合上述三个约束，生成 $B^k$ 的问题可以表示成
@@ -54,8 +56,31 @@ $B^k$ 是一个 symmetric matrix，因此共包含 $\frac{n(n+1)}{2}$ 个变量�
 * DFP algorithm (<b>D</b>avidon, <b>F</b>letcher, <b>P</b>owell)
 * BFGS algorithm (<b>B</b>royden, <b>F</b>letcher, <b>G</b>oldfarb, <b>S</b>hanno)
 
-下面分别介绍这三种算法
+所以三种算法的核心区别就是如何得到 $B^k$，计算 descent direction 用的都是 $\boldsymbol{d}^k = -B^k \boldsymbol{g}^k$，其余部分包括 line search 什么的也都一样，下面分别介绍这三种算法
 
 #### Rank One Correction
 
+这种算法使用下面的公式求得 $B^k$
 
+$$B^k = B^{k-1} + a \boldsymbol{u}\boldsymbol{u}^T \;\; a \in \mathbb{R}, \boldsymbol{u} \in \mathbb{R}^n$$
+
+可以看到它在 $B^{k-1}$ 的基础上加了一个 rank 为 1 的 matrix，所以叫 rank one correction。这其中 $B^{k-1}$ 是已知的，我们需要确定的是 $a$ 和 $\boldsymbol{u}$。
+
+根据 secant equation
+
+$$
+\begin{align}
+& (B^{k-1} + a \boldsymbol{u}\boldsymbol{u}^T) \gamma^{k-1} = \delta^{k-1} \\\\
+\Longleftrightarrow & \; a \boldsymbol{u}\boldsymbol{u}^T \gamma^{k-1} = \delta^{k-1} - B^{k-1} \gamma^{k-1} \\\\
+\Longleftrightarrow & \; a \boldsymbol{u}^T \gamma^{k-1} \boldsymbol{u} = \delta^{k-1} - B^{k-1} \gamma^{k-1} \;\; (\because \boldsymbol{u}^T \gamma^{k-1} \in \mathbb{R}) \\\\
+\end{align}
+$$
+
+最后一个 equation 怎么解呢？Rank one correction 是这么做的，令 $a \boldsymbol{u}^T \gamma^{k-1} = 1$，则有
+
+$$
+\begin{align}
+\boldsymbol{u} = & \delta^{k-1} - B^{k-1} \gamma^{k-1} \\\\
+a = & \frac{1}{\boldsymbol{u}^T \gamma^{k-1}}
+\end{align}
+$$
