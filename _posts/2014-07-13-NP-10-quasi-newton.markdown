@@ -58,29 +58,95 @@ $B^k$ 是一个 symmetric matrix，因此共包含 $\frac{n(n+1)}{2}$ 个变量�
 
 所以三种算法的核心区别就是如何得到 $B^k$，计算 descent direction 用的都是 $\boldsymbol{d}^k = -B^k \boldsymbol{g}^k$，其余部分包括 line search 什么的也都一样，下面分别介绍这三种算法
 
+<span style="background-color: #9f9">下面的介绍中我计算的是 $B^{k+1}$ 而不是 $B^k$，其本质没有任何区别，就是为了公式看上去能干净一些，如果用的是 $B^k$，则等号左边通常是一堆的 $k-1$ 上标，看上去有点乱</span>
+
 #### Rank One Correction
 
-这种算法使用下面的公式求得 $B^k$
+这种算法使用下面的公式求得 $B^{k+1}$
 
-$$B^k = B^{k-1} + a \boldsymbol{u}\boldsymbol{u}^T \;\; a \in \mathbb{R}, \boldsymbol{u} \in \mathbb{R}^n$$
+$$B^{k+1} = B^{k} + a \boldsymbol{u}\boldsymbol{u}^T \;\; a \in \mathbb{R}, \boldsymbol{u} \in \mathbb{R}^n$$
 
-可以看到它在 $B^{k-1}$ 的基础上加了一个 rank 为 1 的 matrix，所以叫 rank one correction。这其中 $B^{k-1}$ 是已知的，我们需要确定的是 $a$ 和 $\boldsymbol{u}$。
+可以看到它在 $B^{k}$ 的基础上加了一个 rank 为 1 的 matrix，所以叫 rank one correction。这其中 $B^{k}$ 是已知的，我们需要确定的是 $a$ 和 $\boldsymbol{u}$。
 
 根据 secant equation
 
 $$
 \begin{align}
-& (B^{k-1} + a \boldsymbol{u}\boldsymbol{u}^T) \gamma^{k-1} = \delta^{k-1} \\\\
-\Longleftrightarrow & \; a \boldsymbol{u}\boldsymbol{u}^T \gamma^{k-1} = \delta^{k-1} - B^{k-1} \gamma^{k-1} \\\\
-\Longleftrightarrow & \; a \boldsymbol{u}^T \gamma^{k-1} \boldsymbol{u} = \delta^{k-1} - B^{k-1} \gamma^{k-1} \;\; (\because \boldsymbol{u}^T \gamma^{k-1} \in \mathbb{R}) \\\\
+& (B^{k} + a \boldsymbol{u}\boldsymbol{u}^T) \gamma^{k} = \delta^{k} \\\\
+\Longleftrightarrow & \; a \boldsymbol{u}\boldsymbol{u}^T \gamma^{k} = \delta^{k} - B^{k} \gamma^{k} \\\\
+\Longleftrightarrow & \; a \boldsymbol{u}^T \gamma^{k} \boldsymbol{u} = \delta^{k} - B^{k} \gamma^{k} \;\; (\because \boldsymbol{u}^T \gamma^{k} \in \mathbb{R}) \\\\
 \end{align}
 $$
 
-最后一个 equation 怎么解呢？Rank one correction 是这么做的，令 $a \boldsymbol{u}^T \gamma^{k-1} = 1$，则有
+最后一个 equation 怎么解呢？Rank one correction 是这么做的，令 $a \boldsymbol{u}^T \gamma^{k} = 1$，则有
 
 $$
 \begin{align}
-\boldsymbol{u} = & \delta^{k-1} - B^{k-1} \gamma^{k-1} \\\\
-a = & \frac{1}{\boldsymbol{u}^T \gamma^{k-1}}
+\boldsymbol{u} = & \delta^{k} - B^{k} \gamma^{k} \\\\
+a = & \frac{1}{\boldsymbol{u}^T \gamma^{k}}
 \end{align}
 $$
+
+这样计算 $B^{k+1}$ 的公式就是
+
+$$B^{k+1} = B^k + \frac{(\delta^k - B^k\gamma^k)(\delta^k - B^k\gamma^k)^T}{(\delta^k - B^k\gamma^k)^T \gamma^k}$$
+
+----------
+
+下面分析一下 rank one correction
+
+* 如果 $B^k$ 是 symmetric matrix，则 $B^{k+1}$ 一定是 symmetric matrix
+
+* $B^{k+1}$ 满足 secant equation，因为我们就是用这个 equation 求出的 $B^{k+1}$
+
+* $B^{k+1}$ 不一定 positive definite，易知如果 $B^k$ positive definite 且分母 $(\delta^k - B^k\gamma^k)^T \gamma^k > 0$，则 $B^{k+1}$ 也是 positive definite matrix (根据 positive definite 的定义即可证明)，但问题是 $(\delta^k - B^k\gamma^k)^T \gamma^k$ 没法保证 $> 0$，举个例子，考虑函数
+
+  $$f(\boldsymbol{x}) = \frac{x\_1^4}{4} + \frac{x\_2^2}{2} - x\_1 x\_2 + x\_1 - x\_2$$
+
+  给定初始点 $\boldsymbol{x}^0 = [0.59607, 0.59607]^T$，则
+
+  $$H^0 = \begin{pmatrix} 0.94913 & 0.14318 \\\\ 0.14318 & 0.59702 \end{pmatrix}$$
+
+  这里 $H^0$ positive definite，但是 $(\delta^0 - B^0\gamma^0)^T \gamma^0 = -0.03276 < 0$
+
+  $$H^1 = \begin{pmatrix} 0.94481 & 0.23324 \\\\ 0.23324 & -1.2788 \end{pmatrix}$$
+
+  可以验证 $H^1$ 并不是 positive definite matrix
+
+  (例子来源于 An Introduction to Optimization [Edwin K. P. Chong, Stanislaw H. Zak])
+
+  因此 $\boldsymbol{d}^{k+1}$ 并不能保证是 descent direction
+
+* 如果 $(\delta^k - B^k\gamma^k)^T \gamma^k$ 接近于 $0$，则实际在计算 $B^{k+1}$ 可能会遇到问题
+
+#### DFP Algorithm
+
+DFP 是一个 rank two 的算法，最早由 Davidon 在 1959 年提出，后来 Fletcher 和 Powell 在 1963 年先后做了修改，所以算法取名为 DFP。DFP 计算 $B^{k+1}$ 的公式是
+
+$$B^{k+1} = B^{k} + a \boldsymbol{u}\boldsymbol{u}^T + b \boldsymbol{v}\boldsymbol{v}^T\;\; a,b \in \mathbb{R}, \boldsymbol{u},\boldsymbol{v} \in \mathbb{R}^n$$
+
+从公式可以看到，DFP 加了两个不同的 rank 为 1 的 matrix，比 rank one correction 多了一个。这里我们需要确定的变量有 4 个，分别是 $a, b, \boldsymbol{u}, \boldsymbol{v}$。
+
+根据 secant equation
+
+$$
+\begin{align}
+& (B^{k} + a \boldsymbol{u}\boldsymbol{u}^T + b \boldsymbol{v}\boldsymbol{v}^T) \gamma^{k} = \delta^{k} \\\\
+\Longleftrightarrow & \; a \boldsymbol{u}\boldsymbol{u}^T \gamma^{k} + b \boldsymbol{v}\boldsymbol{v}^T \gamma^{k} = \delta^{k} - B^{k} \gamma^{k} \\\\
+\Longleftrightarrow & \; a \boldsymbol{u}^T \gamma^{k} \boldsymbol{u} + b \boldsymbol{v}^T \gamma^{k} \boldsymbol{v} = \delta^{k} - B^{k} \gamma^{k} \;\; (\because \boldsymbol{u}^T \gamma^{k}, \boldsymbol{v}^T \gamma^{k} \in \mathbb{R}) \\\\
+\end{align}
+$$
+
+显然最后一个 equation 还是有多解的，DFP 是这么解的，令
+
+$$
+\begin{align}
+\boldsymbol{u} = & \delta^{k} \\\\
+\boldsymbol{v} = & - B^{k} \gamma^{k} \\\\
+a \boldsymbol{u}^T \gamma^{k} = & 1 \\\\
+b \boldsymbol{v}^T \gamma^{k} = & 1
+\end{align}
+$$
+
+这样进一步可以求得 $a = \frac{1}{{\delta^k}^T \gamma^k}, b = -\frac{1}{{\gamma^k}^T B^k \gamma^k}$
+
