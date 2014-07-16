@@ -166,12 +166,12 @@ $$B^{k+1} = B^k + \frac{ \delta^k {\delta^k}^T }{ {\delta^k}^T \gamma^k} - \frac
 
   * <p style="background-color: #9f9">首先证明 $B^{k+1}$ 是 positive semi-definite</p>
 
-      给定任意 $\boldsymbol{x} \in \mathbb{R}^n \neq 0$
+      给定任意 $\boldsymbol{v} \in \mathbb{R}^n \neq 0$
 
       $$
       \begin{align}
-      \boldsymbol{x}^T B^{k+1} \boldsymbol{x} = & \boldsymbol{x}^T B^k \boldsymbol{x} + \frac{\boldsymbol{x}^T \delta^k {\delta^k}^T \boldsymbol{x}}{ {\delta^k}^T \gamma^k} - \frac{ \boldsymbol{x}^T B^k \gamma^k {\gamma^k}^T B^k \boldsymbol{x}}{ {\gamma^k}^T B^k \gamma^k} \\\\
-      = & \boldsymbol{x}^T B^k \boldsymbol{x} + \frac{(\boldsymbol{x}^T \delta^k)^2}{ {\delta^k}^T \gamma^k} - \frac{ (\boldsymbol{x}^T B^k \gamma^k)^2}{ {\gamma^k}^T B^k \gamma^k}
+      \boldsymbol{v}^T B^{k+1} \boldsymbol{v} = & \boldsymbol{v}^T B^k \boldsymbol{v} + \frac{\boldsymbol{v}^T \delta^k {\delta^k}^T \boldsymbol{v}}{ {\delta^k}^T \gamma^k} - \frac{ \boldsymbol{v}^T B^k \gamma^k {\gamma^k}^T B^k \boldsymbol{v}}{ {\gamma^k}^T B^k \gamma^k} \\\\
+      = & \boldsymbol{v}^T B^k \boldsymbol{v} + \frac{(\boldsymbol{v}^T \delta^k)^2}{ {\delta^k}^T \gamma^k} - \frac{ (\boldsymbol{v}^T B^k \gamma^k)^2}{ {\gamma^k}^T B^k \gamma^k}
       \end{align}
       $$
 
@@ -179,7 +179,7 @@ $$B^{k+1} = B^k + \frac{ \delta^k {\delta^k}^T }{ {\delta^k}^T \gamma^k} - \frac
 
       $$
       \begin{align}
-      \boldsymbol{\eta} = & {B^k}^{1/2} \boldsymbol{x} \\\\
+      \boldsymbol{\eta} = & {B^k}^{1/2} \boldsymbol{v} \\\\
       \boldsymbol{\rho} = & {B^k}^{1/2} \gamma^k
       \end{align}
       $$
@@ -188,18 +188,24 @@ $$B^{k+1} = B^k + \frac{ \delta^k {\delta^k}^T }{ {\delta^k}^T \gamma^k} - \frac
 
       $$
       \begin{align}
-      \boldsymbol{x}^T B^{k+1} \boldsymbol{x} = & \boldsymbol{\eta}^T \boldsymbol{\eta} + \frac{(\boldsymbol{x}^T \delta^k)^2}{ {\delta^k}^T \gamma^k} - \frac{(\boldsymbol{\eta}^T \boldsymbol{\rho})^2}{\boldsymbol{\rho}^T \boldsymbol{\rho}} \\\\
-      = & \frac{(\Vert \boldsymbol{\eta} \Vert \Vert \boldsymbol{\rho} \Vert)^2 - (\boldsymbol{\eta}^T \boldsymbol{\rho})^2}{\boldsymbol{\rho}^T \boldsymbol{\rho}} + \frac{(\boldsymbol{x}^T \delta^k)^2}{ {\delta^k}^T \gamma^k}
+      \boldsymbol{v}^T B^{k+1} \boldsymbol{v} = & \boldsymbol{\eta}^T \boldsymbol{\eta} + \frac{(\boldsymbol{v}^T \delta^k)^2}{ {\delta^k}^T \gamma^k} - \frac{(\boldsymbol{\eta}^T \boldsymbol{\rho})^2}{\boldsymbol{\rho}^T \boldsymbol{\rho}} \\\\
+      = & \frac{(\Vert \boldsymbol{\eta} \Vert \Vert \boldsymbol{\rho} \Vert)^2 - (\boldsymbol{\eta}^T \boldsymbol{\rho})^2}{\boldsymbol{\rho}^T \boldsymbol{\rho}} + \frac{(\boldsymbol{v}^T \delta^k)^2}{ {\delta^k}^T \gamma^k}
       \end{align}
       $$
 
       * 根据 Cauchy-Schwarz inequality $(\Vert \boldsymbol{\eta} \Vert \Vert \boldsymbol{\rho} \Vert)^2 - (\boldsymbol{\eta}^T \boldsymbol{\rho})^2 \geq 0$
       * $\boldsymbol{\rho}^T \boldsymbol{\rho} = {\gamma^k}^T B^k \gamma^k$，由于 $B^k$ 是 positive definite matrix，所以 $\boldsymbol{\rho}^T \boldsymbol{\rho} > 0$
-      * ${(\boldsymbol{x}^T \delta^k)^2} \geq 0$
+      * ${(\boldsymbol{v}^T \delta^k)^2} \geq 0$
       * ${ {\delta^k}^T \gamma^k} = -(\alpha^k B^k \boldsymbol{g}^k)^T (\boldsymbol{g}^{k+1} - \boldsymbol{g}^k)$，由于使用 exact line search，根据 $\frac{\partial f(\boldsymbol{x}^k + \alpha^k \boldsymbol{d}^k)}{\partial \alpha^k} = 0$ 易推出 ${\boldsymbol{g}^k}^T B^k \boldsymbol{g}^{k+1} = 0$，所以 ${ {\delta^k}^T \gamma^k} = \alpha^k {\boldsymbol{g}^k}^T B^k \boldsymbol{g}^k > 0$
 
-      综合上述条件 $\boldsymbol{x}^T B^{k+1} \boldsymbol{x} \geq 0$，所以 $B^{k+1}$ 是 positive semi-definite matrix
+      综合上述条件 $\boldsymbol{v}^T B^{k+1} \boldsymbol{v} \geq 0$，所以 $B^{k+1}$ 是 positive semi-definite matrix
 
    * <p style="background-color: #9f9">接下来证明 $B^{k+1}$ 是 positive definite</p>
 
-     这个主要是证明 $(\Vert \boldsymbol{\eta} \Vert \Vert \boldsymbol{\rho} \Vert)^2 - (\boldsymbol{\eta}^T \boldsymbol{\rho})^2$ 和 ${(\boldsymbol{x}^T \delta^k)^2}$ 不能同时为 0，假设二者同时为 0
+     这个主要是证明 $(\Vert \boldsymbol{\eta} \Vert \Vert \boldsymbol{\rho} \Vert)^2 - (\boldsymbol{\eta}^T \boldsymbol{\rho})^2$ 和 ${(\boldsymbol{v}^T \delta^k)^2}$ 不能同时为 0，假设二者同时为 0，则有 
+     
+     $$\boldsymbol{\eta} = \mu \boldsymbol{\rho}, \;\; \mu \in \mathbb{R}$$
+
+     这个等价于 $\boldsymbol{v} = \mu \gamma^k$，又 $\boldsymbol{v}^T \delta^k = \mu {\gamma^k}^T \delta^k = 0$，这与前面 ${\gamma^k}^T \delta^k > 0$ 的结论矛盾
+
+     所以 $(\Vert \boldsymbol{\eta} \Vert \Vert \boldsymbol{\rho} \Vert)^2 - (\boldsymbol{\eta}^T \boldsymbol{\rho})^2$ 和 ${(\boldsymbol{v}^T \delta^k)^2}$ 不能同时为 0，因此 $B^{k+1}$ 是 positive definite matrix
