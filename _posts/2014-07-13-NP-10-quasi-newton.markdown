@@ -137,7 +137,7 @@ $$
 \end{align}
 $$
 
-显然最后一个 equation 还是有多解的，DFP 是这么解的，令
+显然最后一个 equation 是有很多解的，DFP 是这么解的，令
 
 $$
 \begin{align}
@@ -153,3 +153,4 @@ $$
 因此计算 $B^{k+1}$ 的公式就是
 
 $$B^{k+1} = B^k + \frac{ \delta^k {\delta^k}^T }{ {\delta^k}^T \gamma^k} - \frac{ B^k \gamma^k {\gamma^k}^T B^k }{ {\gamma^k}^T B^k \gamma^k}$$
+
