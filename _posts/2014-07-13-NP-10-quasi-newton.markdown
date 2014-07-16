@@ -125,7 +125,7 @@ DFP 是一个 rank two 的算法，最早由 Davidon 在 1959 年提出，后来
 
 $$B^{k+1} = B^{k} + a \boldsymbol{u}\boldsymbol{u}^T + b \boldsymbol{v}\boldsymbol{v}^T\;\; a,b \in \mathbb{R}, \boldsymbol{u},\boldsymbol{v} \in \mathbb{R}^n$$
 
-从公式可以看到，DFP 加了两个不同的 rank 为 1 的 matrix，比 rank one correction 多了一个。这里我们需要确定的变量有 4 个，分别是 $a, b, \boldsymbol{u}, \boldsymbol{v}$。
+从公式可以看到，DFP 加了两个不同的 rank 为 1 的 matrix，比 rank one correction 多了一个。这里我们需要确定的变量有 4 个，分别是 $a, b, \boldsymbol{u}, \boldsymbol{v}$。另外，下面我就直接假设 $B^k$ 是 symmetric matrix。
 
 根据 secant equation
 
@@ -148,5 +148,8 @@ b \boldsymbol{v}^T \gamma^{k} = & 1
 \end{align}
 $$
 
-这样进一步可以求得 $a = \frac{1}{{\delta^k}^T \gamma^k}, b = -\frac{1}{{\gamma^k}^T B^k \gamma^k}$
+这样进一步可以求得 $a = \frac{1}{ {\delta^k}^T \gamma^k}, b = -\frac{1}{ {\gamma^k}^T B^k \gamma^k}$
 
+因此计算 $B^{k+1}$ 的公式就是
+
+$$B^{k+1} = B^k + \frac{ \delta^k {\delta^k}^T }{ {\delta^k}^T \gamma^k} - \frac{ B^k \gamma^k {\gamma^k}^T B^k }{ {\gamma^k}^T B^k \gamma^k}$$
