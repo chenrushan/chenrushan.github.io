@@ -58,7 +58,7 @@ $B^k$ 是一个 symmetric matrix，因此共包含 $\frac{n(n+1)}{2}$ 个变量�
 
 所以三种算法的核心区别就是如何得到 $B^k$，计算 descent direction 用的都是 $\boldsymbol{d}^k = -B^k \boldsymbol{g}^k$，其余部分包括 line search 什么的也都一样，下面分别介绍这三种算法
 
-<span style="background-color: #9f9">下面的介绍中我计算的是 $B^{k+1}$ 而不是 $B^k$，其本质没有任何区别，就是为了公式看上去能干净一些，如果用的是 $B^k$，则等号左边通常是一堆的 $k-1$ 上标，看上去有点乱</span>
+<p style="background-color: #9f9">下面的介绍中我计算的是 $B^{k+1}$ 而不是 $B^k$，其本质没有任何区别，就是为了公式看上去能干净一些，如果用的是 $B^k$，则等号左边通常是一堆的 $k-1$ 上标，看上去有点乱</p>
 
 #### Rank One Correction
 
@@ -154,3 +154,52 @@ $$
 
 $$B^{k+1} = B^k + \frac{ \delta^k {\delta^k}^T }{ {\delta^k}^T \gamma^k} - \frac{ B^k \gamma^k {\gamma^k}^T B^k }{ {\gamma^k}^T B^k \gamma^k}$$
 
+----------
+
+<blockquote>
+在使用 exact line search 的情况下，如果 $B^k$ 是 symmetric positive definite matrix，则 $B^{k+1}$ 也是
+</blockquote>
+
+* 证明
+
+  如果 $B^k$ 是 symmetric matrix，则 $B^{k+1}$ 显然也是，所以下面主要证明其 positive definitness
+
+  * <p style="background-color: #9f9">首先证明 $B^{k+1}$ 是 positive semi-definite</p>
+
+      给定任意 $\boldsymbol{x} \in \mathbb{R}^n \neq 0$
+
+      $$
+      \begin{align}
+      \boldsymbol{x}^T B^{k+1} \boldsymbol{x} = & \boldsymbol{x}^T B^k \boldsymbol{x} + \frac{\boldsymbol{x}^T \delta^k {\delta^k}^T \boldsymbol{x}}{ {\delta^k}^T \gamma^k} - \frac{ \boldsymbol{x}^T B^k \gamma^k {\gamma^k}^T B^k \boldsymbol{x}}{ {\gamma^k}^T B^k \gamma^k} \\\\
+      = & \boldsymbol{x}^T B^k \boldsymbol{x} + \frac{(\boldsymbol{x}^T \delta^k)^2}{ {\delta^k}^T \gamma^k} - \frac{ (\boldsymbol{x}^T B^k \gamma^k)^2}{ {\gamma^k}^T B^k \gamma^k}
+      \end{align}
+      $$
+
+      由于 $B^k$ 是 symmetric positive definite matrix，所以可以另 $B^k = {B^k}^{1/2}{B^k}^{1/2}$，定义
+
+      $$
+      \begin{align}
+      \boldsymbol{\eta} = & {B^k}^{1/2} \boldsymbol{x} \\\\
+      \boldsymbol{\rho} = & {B^k}^{1/2} \gamma^k
+      \end{align}
+      $$
+
+      则有
+
+      $$
+      \begin{align}
+      \boldsymbol{x}^T B^{k+1} \boldsymbol{x} = & \boldsymbol{\eta}^T \boldsymbol{\eta} + \frac{(\boldsymbol{x}^T \delta^k)^2}{ {\delta^k}^T \gamma^k} - \frac{(\boldsymbol{\eta}^T \boldsymbol{\rho})^2}{\boldsymbol{\rho}^T \boldsymbol{\rho}} \\\\
+      = & \frac{(\Vert \boldsymbol{\eta} \Vert \Vert \boldsymbol{\rho} \Vert)^2 - (\boldsymbol{\eta}^T \boldsymbol{\rho})^2}{\boldsymbol{\rho}^T \boldsymbol{\rho}} + \frac{(\boldsymbol{x}^T \delta^k)^2}{ {\delta^k}^T \gamma^k}
+      \end{align}
+      $$
+
+      * 根据 Cauchy-Schwarz inequality $(\Vert \boldsymbol{\eta} \Vert \Vert \boldsymbol{\rho} \Vert)^2 - (\boldsymbol{\eta}^T \boldsymbol{\rho})^2 \geq 0$
+      * $\boldsymbol{\rho}^T \boldsymbol{\rho} = {\gamma^k}^T B^k \gamma^k$，由于 $B^k$ 是 positive definite matrix，所以 $\boldsymbol{\rho}^T \boldsymbol{\rho} > 0$
+      * ${(\boldsymbol{x}^T \delta^k)^2} \geq 0$
+      * ${ {\delta^k}^T \gamma^k} = -(\alpha^k B^k \boldsymbol{g}^k)^T (\boldsymbol{g}^{k+1} - \boldsymbol{g}^k)$，由于使用 exact line search，根据 $\frac{\partial f(\boldsymbol{x}^k + \alpha^k \boldsymbol{d}^k)}{\partial \alpha^k} = 0$ 易推出 ${\boldsymbol{g}^k}^T B^k \boldsymbol{g}^{k+1} = 0$，所以 ${ {\delta^k}^T \gamma^k} = \alpha^k {\boldsymbol{g}^k}^T B^k \boldsymbol{g}^k > 0$
+
+      综合上述条件 $\boldsymbol{x}^T B^{k+1} \boldsymbol{x} \geq 0$，所以 $B^{k+1}$ 是 positive semi-definite matrix
+
+   * <p style="background-color: #9f9">接下来证明 $B^{k+1}$ 是 positive definite</p>
+
+     这个主要是证明 $(\Vert \boldsymbol{\eta} \Vert \Vert \boldsymbol{\rho} \Vert)^2 - (\boldsymbol{\eta}^T \boldsymbol{\rho})^2$ 和 ${(\boldsymbol{x}^T \delta^k)^2}$ 不能同时为 0，假设二者同时为 0
