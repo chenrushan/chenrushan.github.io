@@ -5,7 +5,7 @@ categories: nnumop
 tags: NPTEL, numerical optimization, classical newton
 ---
 
-<span style="background-color:#afa">这一节画了很多 contour 的图，是通过这个[脚本](../../../../resource/NNP/09-newton/examples.py)实现的</span>
+<p style="background-color:#afa">这一节画了很多 contour 的图，是通过这个<a href="../../../../resource/NNP/09-newton/examples.py">脚本</a>实现的</p>
 
 #### Classical Newton Method
 
@@ -116,7 +116,7 @@ An iterative optimization algorithm is said to be locally convergent if for each
 
   第二个条件意味着 $|x^{k+1} - x^*| < |x^k - x^*|$，如果这个不等式不能成立，则无法保证算法收敛
 
-  * 对于第一个条件
+  * <p style="background-color: #9f9">对于第一个条件</p>
 
       由于 $x^*$ 为 local minimum，所以 $f''(x^*) > 0$，又 $f \in \mathcal{C}^3$，所以 $f''(x^*) \in \mathcal{C}^0$，所以 
   
@@ -135,7 +135,7 @@ An iterative optimization algorithm is said to be locally convergent if for each
 
       根据上述定义，$|\frac{f'''(\bar{x}^k)}{2 f''(x^k)}| < \frac{\beta\_2}{2 \beta\_1}$，这样我们就找到了第一个条件中定义的 $\alpha = \frac{\beta\_2}{2 \beta\_1}$
 
-  * 对于第二个条件
+  * <p style="background-color: #9f9">对于第二个条件</p>
 
       根据第一个条件有 $|\frac{f'''(\bar{x}^k)}{2 f''(x^k)} (x^k - x^*)| < \alpha |x^k - x^*| < 1$，等价于
 
