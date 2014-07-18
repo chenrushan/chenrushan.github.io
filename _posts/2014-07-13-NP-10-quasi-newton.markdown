@@ -209,3 +209,11 @@ $$B^{k+1} = B^k + \frac{ \delta^k {\delta^k}^T }{ {\delta^k}^T \gamma^k} - \frac
      这个等价于 $\boldsymbol{v} = \mu \gamma^k$，又 $\boldsymbol{v}^T \delta^k = \mu {\gamma^k}^T \delta^k = 0$，这与前面 ${\gamma^k}^T \delta^k > 0$ 的结论矛盾
 
      所以 $(\Vert \boldsymbol{\eta} \Vert \Vert \boldsymbol{\rho} \Vert)^2 - (\boldsymbol{\eta}^T \boldsymbol{\rho})^2$ 和 ${(\boldsymbol{v}^T \delta^k)^2}$ 不能同时为 0，因此 $B^{k+1}$ 是 positive definite matrix
+
+#### 总结
+
+关于各种 Quasi-Newton method 的理论分析大多非常复杂，下面给出一些有用的结论
+
+* Quasi-Newton 通常是 superlinear convergent algorithm
+* BFGS (lBFGS) 是目前实践中最好用的 Quasi-Newton method，它对 line search 的精确度的要求相对不那么高
+
