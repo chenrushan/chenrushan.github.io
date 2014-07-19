@@ -240,7 +240,7 @@ Powell 在 Some global convergence properties of a variable metric algorithm for
 
 #### 总结
 
-关于各种 Quasi-Newton method 的理论分析大多非常复杂，下面给出一些有用的结论
+很多关于 Quasi-Newton method 的理论分析这篇文章中并没有给出，下面给出一些有用的结论
 
 * Quasi-Newton 通常是 superlinear convergent algorithm
 * BFGS (lBFGS) 是目前实践中最好用的 Quasi-Newton method，它对 line search 的精确度的要求相对不那么高
