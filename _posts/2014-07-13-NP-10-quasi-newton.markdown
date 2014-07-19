@@ -236,7 +236,7 @@ $$ B^{k+1} = B + (1 + \frac{\gamma^T B \gamma}{\delta^T \gamma}) \frac{\delta \d
 
 为了公式看上去简洁，对符合做了省略，其中 $B$ 就是 $B^k$，$\delta$ 就是 $\delta^k$，$\gamma$ 就是 $\gamma^k$
 
-Powell 在 Some global convergence properties of a variable metric algorithm for minimization without exact line searches 这篇文章中证明了对于 convex function，BFGS + Wolfe line search 可以达到 global convergence
+根据与 DFP 一节中给出的证明相同的证明，可以得出 $G^{k+1}$ 在 exact line search 的情况下一定是 positive definite matrix，因此 $B^{k+1}$ 也一定是 positive definite matrix。Powell 在 Some global convergence properties of a variable metric algorithm for minimization without exact line searches 这篇文章中进一步证明了对于 convex function，BFGS + Wolfe line search 可以达到 global convergence
 
 #### 总结
 
