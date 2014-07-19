@@ -230,11 +230,13 @@ Let $A$ be a nonsingular matrix. Let $\boldsymbol{u}$ and $\boldsymbol{v}$ be co
 $$ (A + \boldsymbol{u}\boldsymbol{v}^T)^{-1} = A^{-1} - \frac{(A^{-1} \boldsymbol{u})(\boldsymbol{v}^T A^{-1})}{1 + \boldsymbol{v}^T A^{-1} \boldsymbol{v}}$$
 </blockquote>
 
-连续两次应用在 $G^{k+1}$ 上应用这个公式可得
+连续两次在 $G^{k+1}$ 上应用这个公式可得
 
 $$ B^{k+1} = B + (1 + \frac{\gamma^T B \gamma}{\delta^T \gamma}) \frac{\delta \delta^T}{\delta^T \gamma} - (\frac{\delta \gamma^T B + (\delta \gamma^T B)^T}{\delta^T \gamma}) $$
 
 为了公式看上去简洁，对符合做了省略，其中 $B$ 就是 $B^k$，$\delta$ 就是 $\delta^k$，$\gamma$ 就是 $\gamma^k$
+
+Powell 在 Some global convergence properties of a variable metric algorithm for minimization without exact line searches 这篇文章中证明了对于 convex function，BFGS + Wolfe line search 可以达到 global convergence
 
 #### 总结
 
