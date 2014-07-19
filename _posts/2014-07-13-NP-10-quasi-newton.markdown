@@ -119,7 +119,7 @@ $$B^{k+1} = B^k + \frac{(\delta^k - B^k\gamma^k)(\delta^k - B^k\gamma^k)^T}{(\de
 
 * 如果 $(\delta^k - B^k\gamma^k)^T \gamma^k$ 接近于 $0$，则实际在计算 $B^{k+1}$ 可能会遇到问题
 
-#### DFP Algorithm
+#### DFP Algorithm (Rank Two Correction)
 
 DFP 是一个 rank two 的算法，最早由 Davidon 在 1959 年提出，后来 Fletcher 和 Powell 在 1963 年先后做了修改，所以算法取名为 DFP。DFP 计算 $B^{k+1}$ 的公式是
 
@@ -209,6 +209,32 @@ $$B^{k+1} = B^k + \frac{ \delta^k {\delta^k}^T }{ {\delta^k}^T \gamma^k} - \frac
      这个等价于 $\boldsymbol{v} = \mu \gamma^k$，又 $\boldsymbol{v}^T \delta^k = \mu {\gamma^k}^T \delta^k = 0$，这与前面 ${\gamma^k}^T \delta^k > 0$ 的结论矛盾
 
      所以 $(\Vert \boldsymbol{\eta} \Vert \Vert \boldsymbol{\rho} \Vert)^2 - (\boldsymbol{\eta}^T \boldsymbol{\rho})^2$ 和 ${(\boldsymbol{v}^T \delta^k)^2}$ 不能同时为 0，因此 $B^{k+1}$ 是 positive definite matrix
+
+#### BFGS Algorithm
+
+BFGS 分别由 Broyden, Fletcher, Goldfarb, Shanno 四人于 1970 年独立提出，它也用到了 rank two correction，但不是用在 $B^{k+1}$ 上，而是用在 $(B^{k+1})^{-1}$ 上，令 $G^{k+1} = (B^{k+1})^{-1}$，则有
+
+$$G^{k+1} = G^{k} + a \boldsymbol{u}\boldsymbol{u}^T + b \boldsymbol{v}\boldsymbol{v}^T\;\; a,b \in \mathbb{R}, \boldsymbol{u},\boldsymbol{v} \in \mathbb{R}^n$$
+
+由于 $B^{k+1} \gamma^{k} = \delta^{k}$，所以有 $G^{k+1} \delta^{k} = \gamma^{k}$，运用在 DFP 一节中给出的解题步骤，可得
+
+$$G^{k+1} = G^k + \frac{\gamma^k {\gamma^k}^T}{ {\gamma^k}^T \delta^k} - \frac{G^k \delta^k {\delta^k}^T G^k}{ {\delta^k}^T G^k \delta^k}$$
+
+可以看出，它和 DFP 中 $B^{k+1}$ 的迭代公式形式是完全一样的，不同的是 $\delta^k$ 和 $\gamma^k$ 的角色做了互换
+
+有了 $G^{k+1}$，$B^{k+1} = (G^{k+1})^{-1}$，这里有一个 inverse operation，由于 $G^{k+1}$ 有相对简单的形式，所以对它做 inverse 可以直接有 closed form solution，下面给出相关的 Sherman-Morrison-Woodbury formula
+
+<blockquote>
+Let $A$ be a nonsingular matrix. Let $\boldsymbol{u}$ and $\boldsymbol{v}$ be column vectors such that $1 + \boldsymbol{v}^T A^{-1} \boldsymbol{v} \neq 0$. Then $A + \boldsymbol{u}\boldsymbol{v}^T$ is nonsingular, and
+
+$$ (A + \boldsymbol{u}\boldsymbol{v}^T)^{-1} = A^{-1} - \frac{(A^{-1} \boldsymbol{u})(\boldsymbol{v}^T A^{-1})}{1 + \boldsymbol{v}^T A^{-1} \boldsymbol{v}}$$
+</blockquote>
+
+连续两次应用在 $G^{k+1}$ 上应用这个公式可得
+
+$$ B^{k+1} = B + (1 + \frac{\gamma^T B \gamma}{\delta^T \gamma}) \frac{\delta \delta^T}{\delta^T \gamma} - (\frac{\delta \gamma^T B + (\delta \gamma^T B)^T}{\delta^T \gamma}) $$
+
+为了公式看上去简洁，对符合做了省略，其中 $B$ 就是 $B^k$，$\delta$ 就是 $\delta^k$，$\gamma$ 就是 $\gamma^k$
 
 #### 总结
 
