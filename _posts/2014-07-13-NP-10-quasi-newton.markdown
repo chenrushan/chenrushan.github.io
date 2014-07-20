@@ -267,7 +267,7 @@ B^{k} = & {V^{k-1}}^T B^{k-1} V^{k-1} + \rho^{k-1} {\delta^{k-1} {\delta^{k-1}}^
 = & {V^{k-1}}^T {V^{k-2}}^T B^{k-2} V^{k-2} V^{k-1} + \rho^{k-2} {V^{k-1}}^T \delta^{k-2} {\delta^{k-2}}^T V^{k-1} + \rho^{k-1} {\delta^{k-1} {\delta^{k-1}}^T} \\\\
 = & \cdots \\\\
 = & ({V^{k-1}}^T \cdots {V^{k-m}}^T) B^{k-m} ({V^{k-m}} \cdots V^{k-1}) + \\\\
-  & \rho^{k-m} ({V^{k-1}}^T \cdots {V^{k-m-1}}^T) \delta^{k-m} {\delta^{k-m}}^T (V^{k-m-1} \cdots V^{k-1}) + \\\\
+  & \rho^{k-m} ({V^{k-1}}^T \cdots {V^{k-m+1}}^T) \delta^{k-m} {\delta^{k-m}}^T (V^{k-m+1} \cdots V^{k-1}) + \\\\
   & \cdots \;+ \\\\
   & \rho^{k-1} {\delta^{k-1} {\delta^{k-1}}^T}
 \end{align}
@@ -278,8 +278,8 @@ $$
 $$
 \begin{align}
 B^{k}\boldsymbol{g}^k = & ({V^{k-1}}^T \cdots {V^{k-m}}^T) B\_0^k ({V^{k-m}} \cdots V^{k-1})\boldsymbol{g}^k + \\\\
-  & \rho^{k-m} ({V^{k-1}}^T \cdots {V^{k-m-1}}^T) \delta^{k-m} {\delta^{k-m}}^T (V^{k-m-1} \cdots V^{k-1}) \boldsymbol{g}^k + \\\\
-  & \rho^{k-m-1} ({V^{k-1}}^T \cdots {V^{k-m-2}}^T) \delta^{k-m-1} {\delta^{k-m-1}}^T (V^{k-m-2} \cdots V^{k-1}) \boldsymbol{g}^k + \\\\
+  & \rho^{k-m} ({V^{k-1}}^T \cdots {V^{k-m+1}}^T) \delta^{k-m} {\delta^{k-m}}^T (V^{k-m+1} \cdots V^{k-1}) \boldsymbol{g}^k + \\\\
+  & \rho^{k-m+1} ({V^{k-1}}^T \cdots {V^{k-m+2}}^T) \delta^{k-m+1} {\delta^{k-m+1}}^T (V^{k-m+2} \cdots V^{k-1}) \boldsymbol{g}^k + \\\\
   & \cdots \;+ \\\\
   & \rho^{k-1} {\delta^{k-1} {\delta^{k-1}}^T}\boldsymbol{g}^k
 \end{align}
@@ -308,8 +308,8 @@ $$
 $$
 \begin{align}
 B^{k}\boldsymbol{g}^k = & ({V^{k-1}}^T \cdots {V^{k-m}}^T) B\_0^k \eta\_m + \\\\
-  & ({V^{k-1}}^T \cdots {V^{k-m-1}}^T) \delta^{k-m} \xi\_m + \\\\
-  & ({V^{k-1}}^T \cdots {V^{k-m-2}}^T) \delta^{k-m-1} \xi\_{m-1} + \\\\
+  & ({V^{k-1}}^T \cdots {V^{k-m+1}}^T) \delta^{k-m} \xi\_m + \\\\
+  & ({V^{k-1}}^T \cdots {V^{k-m+2}}^T) \delta^{k-m+1} \xi\_{m-1} + \\\\
   & \cdots \;+ \\\\
   & \delta^{k-1} \xi\_1
 \end{align}
