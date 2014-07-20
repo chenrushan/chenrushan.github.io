@@ -253,7 +253,7 @@ BFGS 虽然是个高效的算法，但其每步迭代要存储一个矩阵 $B^k$
 
 * lBFGS 每步迭代并不存储矩阵，而是存储前 $m$ 步迭代的 $\gamma$ 和 $\delta$
 
-* 为了完全避免掉存任何矩阵相关的信息，lBFGS 直接返回 $B^k \boldsymbol{g}^k$ 的结果，也就是直接计算 $\boldsymbol{d}^k$，这样做能让每步迭代只涉及 vector operation，如 inner product, addition 等，下面我们会看到为什么 $B^k \boldsymbol{g}^k$ 只包含 vector operation
+* 为了完全避免掉存任何矩阵相关的信息，lBFGS 直接计算 $B^k \boldsymbol{g}^k$，而不是先得到 $B^k$ 然后再和 $\boldsymbol{g}^k$ 做 matrix vector multiplication，这样做能让每步迭代只涉及 vector operation，如 inner product, addition 等，下面我们会看到为什么 $B^k \boldsymbol{g}^k$ 只包含 vector operation
 
 根据上面给出的公式
 
