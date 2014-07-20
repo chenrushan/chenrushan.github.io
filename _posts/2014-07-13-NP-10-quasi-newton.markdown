@@ -236,11 +236,39 @@ $$ B^{k+1} = B + (1 + \frac{\gamma^T B \gamma}{\delta^T \gamma}) \frac{\delta \d
 
 为了公式看上去简洁，对符合做了省略，其中 $B$ 就是 $B^k$，$\delta$ 就是 $\delta^k$，$\gamma$ 就是 $\gamma^k$
 
+这个公式可以写成更简洁的形式
+
+$$ 
+\begin{align}
+B^{k+1} = & \; {V^k}^T B^k V^k + \frac{\delta^k {\delta^k}^T}{ {\gamma^k}^T \delta^k} \\\\
+\text{where} & \;\; V^k = I - \frac{\gamma^k {\delta^k}^T}{ {\gamma^k}^T \delta^k}
+\end{align}
+$$
+
 根据与 DFP 一节中给出的证明相同的证明，可以得出 $G^{k+1}$ 在 exact line search 的情况下一定是 positive definite matrix，因此 $B^{k+1}$ 也一定是 positive definite matrix。Powell 在 Some global convergence properties of a variable metric algorithm for minimization without exact line searches 这篇文章中进一步证明了对于 convex function，BFGS + Wolfe line search 可以达到 global convergence
+
+##### limited-memory BFGS (lBFGS)
+
+BFGS 虽然是个高效的算法，但其每步迭代要存储一个矩阵 $B^k$，对于参数规模较大的函数，这个空间上的消耗显然是不可接受的，也因此有了所谓的 limited-memory BFGS，其与 BFGS 的区别主要是以下两点
+
+* lBFGS 每步迭代并不存储矩阵，而是存储前 $m$ 步迭代的 $\gamma$ 和 $\delta$
+
+* 为了完全避免掉存任何矩阵相关的信息，lBFGS 直接返回 $B^k \boldsymbol{g}^k$ 的结果，也就是直接计算 $\boldsymbol{d}^k$
+
+下面我们看看 lBFGS 具体是如何实现的
+
+根据上面给出的公式
+
+$$B^{k} = {V^{k-1}}^T B^{k-1} V^{k-1} + \frac{\delta^{k-1} {\delta^{k-1}}^T}{ {\gamma^{k-1}}^T \delta^{k-1}}$$
+
+这显然是个递归公式，展开 $m$ 步可得 (方便起见，定义 $\rho^k = \frac{1}{ {\gamma^{k}}^T \delta^{k}}$)
+
+$$
+$$
 
 #### 总结
 
-很多关于 Quasi-Newton method 的理论分析这篇文章中并没有给出，下面给出一些有用的结论
+一些关于 Quasi-Newton method 的理论分析这篇文章中并没有给出，下面给出一些有用的结论
 
 * Quasi-Newton 通常是 superlinear convergent algorithm
 * BFGS (lBFGS) 是目前实践中最好用的 Quasi-Newton method，它对 line search 的精确度的要求相对不那么高
