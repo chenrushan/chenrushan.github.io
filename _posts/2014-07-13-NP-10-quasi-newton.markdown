@@ -253,15 +253,13 @@ BFGS 虽然是个高效的算法，但其每步迭代要存储一个矩阵 $B^k$
 
 * lBFGS 每步迭代并不存储矩阵，而是存储前 $m$ 步迭代的 $\gamma$ 和 $\delta$
 
-* 为了完全避免掉存任何矩阵相关的信息，lBFGS 直接返回 $B^k \boldsymbol{g}^k$ 的结果，也就是直接计算 $\boldsymbol{d}^k$
-
-下面我们看看 lBFGS 具体是如何实现的
+* 为了完全避免掉存任何矩阵相关的信息，lBFGS 直接返回 $B^k \boldsymbol{g}^k$ 的结果，也就是直接计算 $\boldsymbol{d}^k$，这样做能让每步迭代只涉及 vector operation，如 inner product, addition 等，下面我们会看到为什么 $B^k \boldsymbol{g}^k$ 只包含 vector operation
 
 根据上面给出的公式
 
 $$B^{k} = {V^{k-1}}^T B^{k-1} V^{k-1} + \frac{\delta^{k-1} {\delta^{k-1}}^T}{ {\gamma^{k-1}}^T \delta^{k-1}}$$
 
-这显然是个递归公式，展开 $m$ 步可得 (方便起见，定义 $\rho^k = \frac{1}{ {\gamma^{k}}^T \delta^{k}}, \rho^k \in \mathbb{R}$)
+这是个递归公式，展开 $m$ 步可得 (方便起见，定义 $\rho^k = \frac{1}{ {\gamma^{k}}^T \delta^{k}}, \rho^k \in \mathbb{R}$)
 
 $$
 \begin{align}
@@ -272,6 +270,48 @@ B^{k} = & {V^{k-1}}^T B^{k-1} V^{k-1} + \rho^{k-1} {\delta^{k-1} {\delta^{k-1}}^
   & \rho^{k-m} ({V^{k-1}}^T \cdots {V^{k-m-1}}^T) \delta^{k-m} {\delta^{k-m}}^T (V^{k-m-1} \cdots V^{k-1}) + \\\\
   & \cdots \;+ \\\\
   & \rho^{k-1} {\delta^{k-1} {\delta^{k-1}}^T}
+\end{align}
+$$
+
+最后一个式子中除了 $B^{k-m}$ 以外，其余的所有变量都能以 $\gamma$ 和 $\delta$ 表示。为了让 $B^k$ 能完全由前 $m$ 步的 $\gamma$ 和 $\delta$ 计算出来，lBFGS 在每一步迭代中都选择一个矩阵去替换 $B^{k-m}$，这个矩阵每步都可以是不同的，但通常都是形式相对简单的矩阵，比如 diagonal matrix。令第 k 步选择的矩阵为 $B\_0^k$，这样每步迭代中 lBFGS 计算
+
+$$
+\begin{align}
+B^{k}\boldsymbol{g}^k = & ({V^{k-1}}^T \cdots {V^{k-m}}^T) B\_0^k ({V^{k-m}} \cdots V^{k-1})\boldsymbol{g}^k + \\\\
+  & \rho^{k-m} ({V^{k-1}}^T \cdots {V^{k-m-1}}^T) \delta^{k-m} {\delta^{k-m}}^T (V^{k-m-1} \cdots V^{k-1}) \boldsymbol{g}^k + \\\\
+  & \rho^{k-m-1} ({V^{k-1}}^T \cdots {V^{k-m-2}}^T) \delta^{k-m-1} {\delta^{k-m-1}}^T (V^{k-m-2} \cdots V^{k-1}) \boldsymbol{g}^k + \\\\
+  & \cdots \;+ \\\\
+  & \rho^{k-1} {\delta^{k-1} {\delta^{k-1}}^T}\boldsymbol{g}^k
+\end{align}
+$$
+
+下面我们看看怎么实现这个公式使得它可以完全由 vector operation 来完成，首先定义几个变量
+
+$$
+\begin{align}
+\eta\_i = & (V^{k-i} V^{k-i+1} \cdots V^{k-1}) \boldsymbol{g}^k \; \in \mathbb{R}^n\\\\
+\xi\_i = & \rho^{k-i} {\delta^{k-i}}^T (V^{k-i+1} \cdots V^{k-1}) \boldsymbol{g}^k \; \in \mathbb{R} \\\\
+\end{align}
+$$
+
+由此可得
+
+$$
+\begin{align}
+\xi\_i = & \rho^{k-i} {\delta^{k-i}}^T \eta\_{i-1} \\\\
+\eta\_i = & V^{k-i} \eta\_{i-1} = (I - \rho^{k-i} \gamma^{k-i} {\delta^{k-i}}^T) \eta\_{i-1} = \eta\_{i-1} - \xi\_{i} \gamma^{k-i}
+\end{align}
+$$
+
+可以看出 $\xi\_i$ 和 $\eta\_i$ 的计算都只涉及 vector operation，有了这两个变量 $B^k\boldsymbol{g}^k$ 就可以表示为
+
+$$
+\begin{align}
+B^{k}\boldsymbol{g}^k = & ({V^{k-1}}^T \cdots {V^{k-m}}^T) B\_0^k \eta\_m + \\\\
+  & ({V^{k-1}}^T \cdots {V^{k-m-1}}^T) \delta^{k-m} \xi\_m + \\\\
+  & ({V^{k-1}}^T \cdots {V^{k-m-2}}^T) \delta^{k-m-1} \xi\_{m-1} + \\\\
+  & \cdots \;+ \\\\
+  & \delta^{k-1} \xi\_1
 \end{align}
 $$
 
