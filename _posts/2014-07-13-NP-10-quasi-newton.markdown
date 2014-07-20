@@ -261,9 +261,18 @@ BFGS 虽然是个高效的算法，但其每步迭代要存储一个矩阵 $B^k$
 
 $$B^{k} = {V^{k-1}}^T B^{k-1} V^{k-1} + \frac{\delta^{k-1} {\delta^{k-1}}^T}{ {\gamma^{k-1}}^T \delta^{k-1}}$$
 
-这显然是个递归公式，展开 $m$ 步可得 (方便起见，定义 $\rho^k = \frac{1}{ {\gamma^{k}}^T \delta^{k}}$)
+这显然是个递归公式，展开 $m$ 步可得 (方便起见，定义 $\rho^k = \frac{1}{ {\gamma^{k}}^T \delta^{k}}, \rho^k \in \mathbb{R}$)
 
 $$
+\begin{align}
+B^{k} = & {V^{k-1}}^T B^{k-1} V^{k-1} + \rho^{k-1} {\delta^{k-1} {\delta^{k-1}}^T} \\\\
+= & {V^{k-1}}^T {V^{k-2}}^T B^{k-2} V^{k-2} V^{k-1} + \rho^{k-2} {V^{k-1}}^T \delta^{k-2} {\delta^{k-2}}^T V^{k-1} + \rho^{k-1} {\delta^{k-1} {\delta^{k-1}}^T} \\\\
+= & \cdots \\\\
+= & ({V^{k-1}}^T \cdots {V^{k-m}}^T) B^{k-m} ({V^{k-m}} \cdots V^{k-1}) + \\\\
+  & \rho^{k-m} ({V^{k-1}}^T \cdots {V^{k-m-1}}^T) \delta^{k-m} {\delta^{k-m}}^T (V^{k-m-1} \cdots V^{k-1}) + \\\\
+  & \cdots \;+ \\\\
+  & \rho^{k-1} {\delta^{k-1} {\delta^{k-1}}^T}
+\end{align}
 $$
 
 #### 总结
