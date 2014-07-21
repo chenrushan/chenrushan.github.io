@@ -327,9 +327,23 @@ $$
 
 $$ \zeta\_i = \left\\{ \begin{array}{ll} B\_0^k\eta\_m & i = m + 1 \\\\ {V^{k-i}}^T \zeta\_{i+1} + \delta^{k-i} \xi\_i & i \in [1, m] \end{array} \right.$$
 
-可以看出 $\zeta\_1$ 就是我们要的 $B^k \boldsymbol{g}^k$，具体分析一下这个分段函数
+$\zeta\_i \in \mathbb{R}^n$，可以看出 $\zeta\_1$ 就是我们要的 $B^k \boldsymbol{g}^k$，具体分析一下这个分段函数
 
 * $i = m + 1$ 部分涉及一个 matrix vector multiplication，但由于通常 $B\_0^k$ 是形式较为简单的 matrix，比如 diagonal matrix，所以 $B\_0^k \boldsymbol{g}^k$ 的计算量比较小，对于 diagonal matrix，这里计算量为 $O(n)$
+
+* 对于 $i \in [1, m]$ 部分，展开可得
+
+  $$
+  \begin{align}
+  \zeta\_i = & {V^{k-i}}^T \zeta\_{i+1} + \delta^{k-i} \xi\_i \\\\
+  = & (I - \rho^{k-i}\delta^{k-i} {\gamma^{k-i}}^T) \zeta\_{i+1} + \delta^{k-i} \xi\_i \\\\
+  = & \zeta\_{i+1} - \delta^{k-i} (\xi\_i - \rho^{k-i}({\gamma^{k-i}}^T\zeta\_{i+1})) \\\\
+  \end{align}
+  $$
+
+  这里面涉及的 vector operation 包括 inner product, subtraction 等
+
+根据前面定义的 $\eta, \xi, \zeta$ 可以得出如下计算 $B^k \boldsymbol{g}^k$ 的伪代码
 
 #### 总结
 
