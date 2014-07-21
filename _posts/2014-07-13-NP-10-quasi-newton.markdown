@@ -353,6 +353,19 @@ $$
 
 根据前面定义的 $\eta, \xi, \zeta$ 可以得出如下计算 $B^k \boldsymbol{g}^k$ 的伪代码
 
+<blockquote class="code">
+$\eta_0 = \boldsymbol{g}^k$<br/>
+for $i$ from $1$ to $m$<br/>
+&nbsp;&nbsp; $\xi_i = \rho^{k-i} {\delta^{k-i}}^T \eta_{i-1}$<br/>
+&nbsp;&nbsp; $\eta_i = \eta_{i-1} - \xi_{i} \gamma^{k-i}$<br/>
+<br/>
+$\zeta_{m+1} = B_0^k\eta_m$<br/>
+for $i$ from $m$ to $1$<br/>
+&nbsp;&nbsp; $\zeta_{i} = \zeta_{i+1} - \delta^{k-i} (\xi_i - \rho^{k-i}({\gamma^{k-i}}^T\zeta_{i+1}))$<br/>
+<br/>
+output $\zeta_1$
+</blockquote>
+
 #### 总结
 
 一些关于 Quasi-Newton method 的理论分析这篇文章中并没有给出，下面给出一些有用的结论
