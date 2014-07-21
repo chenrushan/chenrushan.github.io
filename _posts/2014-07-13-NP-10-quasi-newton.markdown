@@ -368,6 +368,8 @@ output $\zeta_1$
 
 这是一个 $O(mn)$ 的算法。lBFGS 每轮迭代都运行上述代码得到 descent direction，并且如果 $k > m$ 还需要 update 保存 $\gamma, \delta$ 的队列，去掉最后一个，加入最新的一个，然后继续下一轮迭代，直至算法收敛
 
+关于 $B\_0^k$ 选择
+
 #### 总结
 
 一些关于 Quasi-Newton method 的理论分析这篇文章中并没有给出，下面给出一些有用的结论
