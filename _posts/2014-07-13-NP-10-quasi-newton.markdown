@@ -315,6 +315,22 @@ B^{k}\boldsymbol{g}^k = & ({V^{k-1}}^T \cdots {V^{k-m}}^T) B\_0^k \eta\_m + \\\\
 \end{align}
 $$
 
+这个公式可以看成是一个递归公式，举个例子，假设 $m = 3$，则有
+
+$$
+\begin{align}
+B^{k}\boldsymbol{g}^k = & {V^{k-1}}^T ({V^{k-2}}^T ({V^{k-3}}^T B\_0^k \eta\_3 + \delta^{k-3} \xi\_3) + \delta^{k-2} \xi\_2) + \delta^{k-1} \xi\_1
+\end{align}
+$$
+
+根据这个观察定义如下变量
+
+$$ \zeta\_i = \left\\{ \begin{array}{ll} B\_0^k\eta\_m & i = m + 1 \\\\ {V^{k-i}}^T \zeta\_{i+1} + \delta^{k-i} \xi\_i & i \in [1, m] \end{array} \right.$$
+
+可以看出 $\zeta\_1$ 就是我们要的 $B^k \boldsymbol{g}^k$，具体分析一下这个分段函数
+
+* $i = m + 1$ 部分涉及一个 matrix vector multiplication，但由于通常 $B\_0^k$ 是形式较为简单的 matrix，比如 diagonal matrix，所以 $B\_0^k \boldsymbol{g}^k$ 的计算量比较小，对于 diagonal matrix，这里计算量为 $O(n)$
+
 #### 总结
 
 一些关于 Quasi-Newton method 的理论分析这篇文章中并没有给出，下面给出一些有用的结论
