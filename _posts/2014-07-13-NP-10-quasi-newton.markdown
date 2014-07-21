@@ -285,63 +285,71 @@ B^{k}\boldsymbol{g}^k = & ({V^{k-1}}^T \cdots {V^{k-m}}^T) B\_0^k ({V^{k-m}} \cd
 \end{align}
 $$
 
-下面我们看看怎么实现这个公式使得它可以完全由 vector operation 来完成，首先定义几个变量
+----------
 
-$$
-\begin{align}
-\eta\_i = & (V^{k-i} V^{k-i+1} \cdots V^{k-1}) \boldsymbol{g}^k \; \in \mathbb{R}^n\\\\
-\xi\_i = & \rho^{k-i} {\delta^{k-i}}^T (V^{k-i+1} \cdots V^{k-1}) \boldsymbol{g}^k \; \in \mathbb{R} \\\\
-\end{align}
-$$
+下面我们看看怎么实现这个公式使得它可以(几乎)完全由 vector operation 来完成
 
-由此可得
-
-$$
-\begin{align}
-\xi\_i = & \rho^{k-i} {\delta^{k-i}}^T \eta\_{i-1} \\\\
-\eta\_i = & V^{k-i} \eta\_{i-1} = (I - \rho^{k-i} \gamma^{k-i} {\delta^{k-i}}^T) \eta\_{i-1} = \eta\_{i-1} - \xi\_{i} \gamma^{k-i}
-\end{align}
-$$
-
-可以看出 $\xi\_i$ 和 $\eta\_i$ 的计算都只涉及 vector operation，有了这两个变量 $B^k\boldsymbol{g}^k$ 就可以表示为
-
-$$
-\begin{align}
-B^{k}\boldsymbol{g}^k = & ({V^{k-1}}^T \cdots {V^{k-m}}^T) B\_0^k \eta\_m + \\\\
-  & ({V^{k-1}}^T \cdots {V^{k-m+1}}^T) \delta^{k-m} \xi\_m + \\\\
-  & ({V^{k-1}}^T \cdots {V^{k-m+2}}^T) \delta^{k-m+1} \xi\_{m-1} + \\\\
-  & \cdots \;+ \\\\
-  & \delta^{k-1} \xi\_1
-\end{align}
-$$
-
-这个公式可以看成是一个递归公式，举个例子，假设 $m = 3$，则有
-
-$$
-\begin{align}
-B^{k}\boldsymbol{g}^k = & {V^{k-1}}^T ({V^{k-2}}^T ({V^{k-3}}^T B\_0^k \eta\_3 + \delta^{k-3} \xi\_3) + \delta^{k-2} \xi\_2) + \delta^{k-1} \xi\_1
-\end{align}
-$$
-
-根据这个观察定义如下变量
-
-$$ \zeta\_i = \left\\{ \begin{array}{ll} B\_0^k\eta\_m & i = m + 1 \\\\ {V^{k-i}}^T \zeta\_{i+1} + \delta^{k-i} \xi\_i & i \in [1, m] \end{array} \right.$$
-
-$\zeta\_i \in \mathbb{R}^n$，可以看出 $\zeta\_1$ 就是我们要的 $B^k \boldsymbol{g}^k$，具体分析一下这个分段函数
-
-* $i = m + 1$ 部分涉及一个 matrix vector multiplication，但由于通常 $B\_0^k$ 是形式较为简单的 matrix，比如 diagonal matrix，所以 $B\_0^k \boldsymbol{g}^k$ 的计算量比较小，对于 diagonal matrix，这里计算量为 $O(n)$
-
-* 对于 $i \in [1, m]$ 部分，展开可得
+* 首先定义两个变量
 
   $$
   \begin{align}
-  \zeta\_i = & {V^{k-i}}^T \zeta\_{i+1} + \delta^{k-i} \xi\_i \\\\
-  = & (I - \rho^{k-i}\delta^{k-i} {\gamma^{k-i}}^T) \zeta\_{i+1} + \delta^{k-i} \xi\_i \\\\
-  = & \zeta\_{i+1} - \delta^{k-i} (\xi\_i - \rho^{k-i}({\gamma^{k-i}}^T\zeta\_{i+1})) \\\\
+  \eta\_i = & (V^{k-i} V^{k-i+1} \cdots V^{k-1}) \boldsymbol{g}^k \; \in \mathbb{R}^n\\\\
+  \xi\_i = & \rho^{k-i} {\delta^{k-i}}^T (V^{k-i+1} \cdots V^{k-1}) \boldsymbol{g}^k \; \in \mathbb{R} \\\\
   \end{align}
   $$
+  
+  由此可得
+  
+  $$
+  \begin{align}
+  \xi\_i = & \rho^{k-i} {\delta^{k-i}}^T \eta\_{i-1} \\\\
+  \eta\_i = & V^{k-i} \eta\_{i-1} = (I - \rho^{k-i} \gamma^{k-i} {\delta^{k-i}}^T) \eta\_{i-1} = \eta\_{i-1} - \xi\_{i} \gamma^{k-i}
+  \end{align}
+  $$
+  
+  可以看出 $\xi\_i$ 和 $\eta\_i$ 的计算都只涉及 vector operation
+  
+* 有了上面两个变量 $B^k\boldsymbol{g}^k$ 可以表示为
 
-  这里面涉及的 vector operation 包括 inner product, subtraction 等
+  $$
+  \begin{align}
+  B^{k}\boldsymbol{g}^k = & ({V^{k-1}}^T \cdots {V^{k-m}}^T) B\_0^k \eta\_m + \\\\
+    & ({V^{k-1}}^T \cdots {V^{k-m+1}}^T) \delta^{k-m} \xi\_m + \\\\
+    & ({V^{k-1}}^T \cdots {V^{k-m+2}}^T) \delta^{k-m+1} \xi\_{m-1} + \\\\
+    & \cdots \;+ \\\\
+    & \delta^{k-1} \xi\_1
+  \end{align}
+  $$
+  
+  这个公式可以看成是一个递归公式，举个例子，假设 $m = 3$，则有
+  
+  $$
+  \begin{align}
+  B^{k}\boldsymbol{g}^k = & {V^{k-1}}^T ({V^{k-2}}^T ({V^{k-3}}^T B\_0^k \eta\_3 + \delta^{k-3} \xi\_3) + \delta^{k-2} \xi\_2) + \delta^{k-1} \xi\_1
+  \end{align}
+  $$
+  
+  根据这个观察定义如下变量
+  
+  $$ \zeta\_i = \left\\{ \begin{array}{ll} B\_0^k\eta\_m & i = m + 1 \\\\ {V^{k-i}}^T \zeta\_{i+1} + \delta^{k-i} \xi\_i & i \in [1, m] \end{array} \right.$$
+  
+  $\zeta\_i \in \mathbb{R}^n$，可以看出 $\zeta\_1$ 就是我们要的 $B^k \boldsymbol{g}^k$，具体分析一下这个分段函数
+  
+  * $i = m + 1$ 部分涉及一个 matrix vector multiplication，但由于通常 $B\_0^k$ 是形式较为简单的 matrix，比如 diagonal matrix，所以 $B\_0^k \boldsymbol{g}^k$ 的计算量比较小，对于 diagonal matrix，这里计算量为 $O(n)$
+  
+  * 对于 $i \in [1, m]$ 部分，展开可得
+  
+      $$
+      \begin{align}
+      \zeta\_i = & {V^{k-i}}^T \zeta\_{i+1} + \delta^{k-i} \xi\_i \\\\
+      = & (I - \rho^{k-i}\delta^{k-i} {\gamma^{k-i}}^T) \zeta\_{i+1} + \delta^{k-i} \xi\_i \\\\
+      = & \zeta\_{i+1} - \delta^{k-i} (\xi\_i - \rho^{k-i}({\gamma^{k-i}}^T\zeta\_{i+1})) \\\\
+      \end{align}
+      $$
+  
+      这里面涉及的 vector operation 包括 inner product, subtraction 等
+
+----------
 
 根据前面定义的 $\eta, \xi, \zeta$ 可以得出如下计算 $B^k \boldsymbol{g}^k$ 的伪代码
 
