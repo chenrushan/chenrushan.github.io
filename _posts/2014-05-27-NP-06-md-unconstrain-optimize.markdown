@@ -85,8 +85,8 @@ Descent direction 在 multi-dimensional optimization 中是一个非常重要的
 <blockquote class="code">
 Initialize $\boldsymbol{x}^0, k = 0$<br/>
 while stopping condition is not satisfied<br/>
-&nbsp;&nbsp;&nbsp;&nbsp; Find $\boldsymbol{x}^{k+1}$ such that $f(\boldsymbol{x}^{k+1}) < f(\boldsymbol{x}^k)$<br/>
-&nbsp;&nbsp;&nbsp;&nbsp; Set $k = k+1$<br/>
+&nbsp;&nbsp; Find $\boldsymbol{x}^{k+1}$ such that $f(\boldsymbol{x}^{k+1}) < f(\boldsymbol{x}^k)$<br/>
+&nbsp;&nbsp; Set $k = k+1$<br/>
 end while<br/>
 output $\boldsymbol{x}^* = \boldsymbol{x}^k$<br/>
 </blockquote>
