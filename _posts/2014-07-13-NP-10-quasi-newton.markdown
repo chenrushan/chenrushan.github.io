@@ -7,11 +7,11 @@ tags: NPTEL, numerical optimization, quasi newton
 
 #### Quasi Newton Method
 
-前一篇文章中提到了 Classical Newton 的诸多问题，针对这些问题有了 Quasi Newton Method，其基本思想是在每步迭代得到 descent direction 的时候并不计算 $\boldsymbol{d}^k = -(H^k)^{-1} \boldsymbol{g}^k$，而是计算 $\boldsymbol{d}^k = -B^k \boldsymbol{g}^k$，也就是在每步迭代时找到一个矩阵 $B^k$ 去近似 $(H^k)^{-1}$，这样迭代的近似函数就变为
+前一篇文章中提到了 Classical Newton 的诸多问题，针对这些问题有了 Quasi Newton Method，其基本思想是在每步迭代计算 descent direction 时不用公式 $\boldsymbol{d}^k = -(H^k)^{-1} \boldsymbol{g}^k$，而是用 $\boldsymbol{d}^k = -B^k \boldsymbol{g}^k$，也就是找到一个矩阵 $B^k$ 去近似 $(H^k)^{-1}$，相当于在 $\boldsymbol{x}^k$ 处选择下面的近似函数
 
 $$f(\boldsymbol{x}) \approx y^k(\boldsymbol{x}) = f(\boldsymbol{x}^k) + {\boldsymbol{g}^k}^T(\boldsymbol{x} - \boldsymbol{x}^k) + \frac{1}{2} (\boldsymbol{x} - \boldsymbol{x}^k)^T (B^k)^{-1} (\boldsymbol{x} - \boldsymbol{x}^k)$$
 
-利用这一近似我们就将求解 linear system 的操作转变为 matrix vector multiplication 操作，计算量大大下降
+利用这一近似我们就将求解 linear system ($H^k \boldsymbol{d}^k = -\boldsymbol{g}^k$) 的操作转变为 matrix vector multiplication ($-B^k \boldsymbol{g}^k$) 操作，计算量从 $O(N^3)$ 降到了 $O(N^2)$
 
 那如何得到一个比较好的对 $(H^k)^{-1}$ 近似的矩阵呢？Quasi Newton 对 $B^k$ 做了如下约束
 
@@ -31,7 +31,7 @@ $$f(\boldsymbol{x}) \approx y^k(\boldsymbol{x}) = f(\boldsymbol{x}^k) + {\boldsy
 
   * 对于点 $\boldsymbol{x}^{k-1}$，该要求等价于 $\boldsymbol{g}^{k-1} = \boldsymbol{g}^k + (B^k)^{-1} (\boldsymbol{x}^{k-1} - \boldsymbol{x}^k)$
 
-      定义 $\gamma^{k-1} = \boldsymbol{g}^k - \boldsymbol{g}^{k-1}, \delta^{k-1} = \boldsymbol{x}^k - \boldsymbol{x}^{k-1}$，则该条件等价于
+      令 $\gamma^{k-1} = \boldsymbol{g}^k - \boldsymbol{g}^{k-1}, \delta^{k-1} = \boldsymbol{x}^k - \boldsymbol{x}^{k-1}$，则该条件等价于
 
       $$B^k \gamma^{k-1} = \delta^{k-1}$$
 
@@ -56,7 +56,7 @@ $B^k$ 是一个 symmetric matrix，因此共包含 $\frac{n(n+1)}{2}$ 个变量�
 * DFP algorithm (<b>D</b>avidon, <b>F</b>letcher, <b>P</b>owell)
 * BFGS algorithm (<b>B</b>royden, <b>F</b>letcher, <b>G</b>oldfarb, <b>S</b>hanno)
 
-所以三种算法的核心区别就是如何得到 $B^k$，计算 descent direction 用的都是 $\boldsymbol{d}^k = -B^k \boldsymbol{g}^k$，其余部分包括 line search 什么的也都一样，下面分别介绍这三种算法
+三种算法的核心区别就是如何得到 $B^k$，计算 descent direction 用的都是 $\boldsymbol{d}^k = -B^k \boldsymbol{g}^k$，其余部分包括 line search 什么的也都一样，下面分别介绍这三种算法
 
 <p style="background-color: #9f9">下面的介绍中我计算的是 $B^{k+1}$ 而不是 $B^k$，其本质没有任何区别，就是为了公式看上去能干净一些，如果用的是 $B^k$，则等号左边通常是一堆的 $k-1$ 上标，看上去有点乱</p>
 
