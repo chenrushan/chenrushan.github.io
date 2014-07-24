@@ -102,7 +102,7 @@ Exact line search 有时会带来性能上的问题，这时就需要使用近�
 
 下面分别讨论这 3 种 condition
 
-* Armijo's condition
+* <p style="background-color: #9f9">Armijo's condition</p>
 
   Armijo's condition 给出下面的绿色虚线，由于其斜率介于 $0$ 和 $g^T(\boldsymbol{x}^k)\boldsymbol{d}^k$ 之间，所以可以将斜率值定义为 $c\_1 g^T(\boldsymbol{x}^k)\boldsymbol{d}^k \; c_1 \in (0, 1)$
   
@@ -112,7 +112,7 @@ Exact line search 有时会带来性能上的问题，这时就需要使用近�
 
   这个条件一来保证了 $\alpha^k$ 不会太大，因为上述条件保证了函数值一定是下降的；二来保证了 rate of decrease 不会太小，因为 $\frac{f(\boldsymbol{x}^k) - f(\boldsymbol{x}^k + \alpha^k \boldsymbol{d}^k)}{\alpha^k} > c\_1 g^T(\boldsymbol{x}^k)\boldsymbol{d}^k$，其中 $g^T(\boldsymbol{x}^k)\boldsymbol{d}^k$ 为最大可能的 rate of decrease。
 
-* Goldstein's condition
+* <p style="background-color: #9f9">Goldstein's condition</p>
 
   Goldstein's condition 给出下面的红色虚线，由于其斜率介于 $0$ 和 $g^T(\boldsymbol{x}^k)\boldsymbol{d}^k$ 之间，所以可以将斜率值定义为 $c\_2 g^T(\boldsymbol{x}^k)\boldsymbol{d}^k \; c_2 \in (0, 1)$
 
@@ -122,7 +122,7 @@ Exact line search 有时会带来性能上的问题，这时就需要使用近�
 
   通常 Goldstein's condition 和 Armijo's condition 一起使用，这样就同时满足了前面提出的 3 个要求，在这种情况下，$c\_2$ 的取值范围是 $(c\_1, 1)$
 
-* Wolfe's condition
+* <p style="background-color: #9f9">Wolfe's condition</p>
 
   Wolfe's condition 的作用和 Goldstein's condition 是一样的，都是要保证 step length 不会太小，只是用的方法不一样，Wolfe's condition 通过限制 $\alpha^k$ 处的函数斜率来保证的。如下图中给出的斜虚线，假设其斜率有 $c g^T(\boldsymbol{x}^k)\boldsymbol{d}^k \; c\in (0, 1)$
 
@@ -161,7 +161,7 @@ OUTPUT: $\alpha^k$
 
 * 证明
 
-  * 首先每一步迭代符合 Armijo condition 所以有
+  * <p style="background-color: #9f9">首先每一步迭代符合 Armijo condition 所以有</p>
 
      $$
      \begin{align}
@@ -176,7 +176,7 @@ OUTPUT: $\alpha^k$
 
      首先明确不等式左边是个正数，因为 $c\_1 > 0, \alpha\_i > 0, -g^i \boldsymbol{d}^i >= 0$，所以 sum 的每个元素都大于等于 0，而无限个这样的数相加能 $< \infty$，唯一的可能就是当 $i$ 大于某个数后，$c\_1 \alpha^i g^i \boldsymbol{d}^i = 0$
 
-  * 由于 $g^k$ lipschitz continuous，所以有
+  * <p style="background-color: #9f9">由于 $g^k$ lipschitz continuous，所以有</p>
 
      $$ \Vert g^k - g^{k-1} \Vert \leq L \Vert \boldsymbol{x}^k - \boldsymbol{x}^{k-1} \Vert  = L \alpha^{k-1} \Vert \boldsymbol{d}^{k-1} \Vert \;\; L \geq 0 $$
 
@@ -188,7 +188,7 @@ OUTPUT: $\alpha^k$
 
      $$\alpha^{k-1} \geq \frac{(g^k - g^{k-1})^T \boldsymbol{d}^{k-1}}{L {\boldsymbol{d}^{k-1}}^T \boldsymbol{d}^{k-1}}$$
 
-  * 由于每一步迭代又满足 Wolfe condition，所以有
+  * <p style="background-color: #9f9">由于每一步迭代又满足 Wolfe condition，所以有</p>
 
      $${g^{k}}^T \boldsymbol{d}^{k-1} \geq c\_2 g^{k-1} \boldsymbol{d}^{k-1} \;\; c\_2 \in (c\_1, 1)$$
 

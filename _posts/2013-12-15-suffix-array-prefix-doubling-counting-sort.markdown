@@ -109,10 +109,8 @@ Suffix array 的构建方法有很多，最快的貌似是线性的，这篇笔�
 
 因此，对于任意一个 l 都有 S[i][n:n+l] = S[i+n][0:l] 。而 S[i][n:n+l] 即为 S<sub>n:n+l</sub>[i]， S[i+n][0:l] 即为 S<sub>l</sub>[i+n]，当 n=l 时，就有：
 
-<blockquote>
-<code>
+<blockquote class="code">
 S<sub>l</sub>[i+l] = S<sub>l:2l</sub>[i] 或者 S<sub>l</sub>[i] = S<sub>l:2l</sub>[i-l]
-</code>
 </blockquote>
 
 这个性质就是 prefix doubling 算法的基础。
@@ -188,28 +186,24 @@ S<sub>l</sub>[i+l] = S<sub>l:2l</sub>[i] 或者 S<sub>l</sub>[i] = S<sub>l:2l</s
 
 结合前面提到的 suffix 集合 S 的性质，S<sub>l:2l</sub> 中的非空元素全部都出现在 S<sub>l</sub> 中，那如果我得到了 S<sub>l</sub> 的序，即 SA<sub>l</sub>，那我就可以想办法从 SA<sub>l</sub> 推导出 SA<sub>l:2l</sub>，结合 count<sub>l</sub> (count<sub>l</sub> 的定义与 SA<sub>l</sub> 类似) 就可以推出 SA<sub>2l</sub>，所以 suffix array 构建的迭代过程就是这样：
 
-<blockquote>
-<code>
+<blockquote class="code">
 初始化 SA<sub>1</sub>, count<sub>1</sub><br/>
 for (l = 1; l < len(str); l = 2 * l):<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;SA<sub>l</sub> &rarr; SA<sub>l:2l</sub><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;SA<sub>l:2l</sub> 结合 count<sub>l</sub> &rarr; SA<sub>2l</sub><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;得到 count<sub>2l</sub><br/>
-</code>
+&nbsp;&nbsp;SA<sub>l</sub> &rarr; SA<sub>l:2l</sub><br/>
+&nbsp;&nbsp;SA<sub>l:2l</sub> 结合 count<sub>l</sub> &rarr; SA<sub>2l</sub><br/>
+&nbsp;&nbsp;得到 count<sub>2l</sub><br/>
 </blockquote>
 
 注意到这里的 count 不同于上一节例子中 count 每次都在一个固定大小的局部上做，这里每次 count 的局部大小都翻一翻。假设 str 只包含 ascii 字符且长度为 100，那是不是 count 的大小就要是 26<sup>100</sup> 呢？其实不用，可以借助 rank 数组 R，在变量定义小节中提到，相同的元素对应相同的 rank，不同的元素对应不同的 rank，因此 rank 可以当成每个元素的唯一 ID，count 就在 R 上做。这样迭代就变成：
 
-<blockquote>
-<code>
+<blockquote class="code">
 初始化 SA<sub>1</sub>, count<sub>1</sub>, R<sub>1</sub><br/>
 for (l = 1; l < len(str); l = 2 * l):<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;SA<sub>l</sub> &rarr; SA<sub>l:2l</sub><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;SA<sub>l:2l</sub> 结合 count<sub>l</sub> &rarr; SA<sub>2l</sub><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;R<sub>l</sub> &rarr; R<sub>l:2l</sub><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;R<sub>l</sub> 结合 R<sub>l:2l</sub> &rarr; R<sub>2l</sub><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;在 R<sub>2l</sub> 的基础上得到 count<sub>2l</sub><br/>
-</code>
+&nbsp;&nbsp;SA<sub>l</sub> &rarr; SA<sub>l:2l</sub><br/>
+&nbsp;&nbsp;SA<sub>l:2l</sub> 结合 count<sub>l</sub> &rarr; SA<sub>2l</sub><br/>
+&nbsp;&nbsp;R<sub>l</sub> &rarr; R<sub>l:2l</sub><br/>
+&nbsp;&nbsp;R<sub>l</sub> 结合 R<sub>l:2l</sub> &rarr; R<sub>2l</sub><br/>
+&nbsp;&nbsp;在 R<sub>2l</sub> 的基础上得到 count<sub>2l</sub><br/>
 </blockquote>
 
 对应的 C 代码如下所示，这里空间的使用并不是最优的，有些数组可以合并使用，但这样会使逻辑不清晰，不利于这里说明。

@@ -7,7 +7,7 @@ tags: NPTEL, numerical optimization
 
 从前面几节中我们知道，各个优化算法的主要区别是如何构造 descent direction，这一节我们看看 steepest descent 如何构造 descent direction.
 
-<span style="background-color:#afa">这一节画了很多 contour 的图，是通过这个[脚本](../../../../resource/NNP/08-steepest/examples.py)实现的</span>
+<p style="background-color:#afa">这一节画了很多 contour 的图，是通过这个<a href="../../../../resource/NNP/08-steepest/examples.py">脚本</a></p>
 
 #### Steepest Descent Algorithm
 

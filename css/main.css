@@ -265,9 +265,17 @@ a:visited { color: #777; }
     padding: 0;
 }
 
-.post blockquote code {
-    border: none;
-    font: 14px Lucida, DejaVu Sans Mono, Arial, verdana, Helvetica, sans-serif;
+.post blockquote.code {
+    padding: 0.5em;
+    margin-bottom: 1em;
+    border-width: 1px;
+    border-color: #ccc;
+    border-style: dashed;
+    border-radius: 5px;
+    background-color: rgb(240, 240, 240);
+    max-height: 500px;
+    overflow: auto; 
+    font: 13.34px monaco, DejaVu Sans Mono, Arial, verdana, Helvetica, sans-serif;
     line-height: 1.5em;
 }
 
