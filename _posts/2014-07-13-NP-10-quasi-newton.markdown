@@ -19,7 +19,7 @@ $$f(\boldsymbol{x}) \approx y^k(\boldsymbol{x}) = f(\boldsymbol{x}^k) + {\boldsy
 
 * 要求 $B^k$ 是 symmetric matrix
 
-* 要求 $B^k$ 是 positive definite matrix，这样保证每步迭代方向都是下降的
+* 要求 $B^k$ 是 positive definite matrix，保证每步迭代方向都是下降的
 
 * 要求 $y^k(\boldsymbol{x})$ 在点 $\boldsymbol{x}^k, \boldsymbol{x}^{k-1}$ 的 gradient 必须等于 $f(\boldsymbol{x})$ 在点 $\boldsymbol{x}^k, \boldsymbol{x}^{k-1}$ 的 gradient，这其实就是要求 $y^k(\boldsymbol{x})$ 要尽可能好得近似 $f(\boldsymbol{x})$
 
@@ -222,7 +222,7 @@ $$G^{k+1} = G^k + \frac{\gamma^k {\gamma^k}^T}{ {\gamma^k}^T \delta^k} - \frac{G
 
 可以看出，它和 DFP 中 $B^{k+1}$ 的迭代公式形式是完全一样的，不同的是 $\delta^k$ 和 $\gamma^k$ 的角色做了互换
 
-有了 $G^{k+1}$，$B^{k+1} = (G^{k+1})^{-1}$，这里有一个 inverse operation，由于 $G^{k+1}$ 有相对简单的形式，所以对它做 inverse 可以直接有 closed form solution，下面给出相关的 Sherman-Morrison-Woodbury formula
+有了 $G^{k+1}$，$B^{k+1} = (G^{k+1})^{-1}$，这里有一个 inverse operation，由于 $G^{k+1}$ 有相对简单的形式，所以对它做 inverse 直接有 closed form solution，下面给出相关的 Sherman-Morrison-Woodbury formula
 
 <blockquote>
 Let $A$ be a nonsingular matrix. Let $\boldsymbol{u}$ and $\boldsymbol{v}$ be column vectors such that $1 + \boldsymbol{v}^T A^{-1} \boldsymbol{v} \neq 0$. Then $A + \boldsymbol{u}\boldsymbol{v}^T$ is nonsingular, and
@@ -273,7 +273,7 @@ B^{k} = & {V^{k-1}}^T B^{k-1} V^{k-1} + \rho^{k-1} {\delta^{k-1} {\delta^{k-1}}^
 \end{align}
 $$
 
-最后一个式子中除了 $B^{k-m}$ 以外，其余的所有变量都能以 $\gamma$ 和 $\delta$ 表示。为了让 $B^k$ 能完全由前 $m$ 步的 $\gamma$ 和 $\delta$ 计算出来，lBFGS 在每一步迭代中都选择一个矩阵去替换 $B^{k-m}$，这个矩阵每步都可以是不同的，但通常都是形式相对简单的矩阵，比如 diagonal matrix。令第 k 步选择的矩阵为 $B\_0^k$，这样每步迭代中 lBFGS 计算
+最后一个式子中除了 $B^{k-m}$ 以外，其余的所有变量都能以 $\gamma$ 和 $\delta$ 表示。为了让 $B^k$ 能完全由前 $m$ 步的 $\gamma$ 和 $\delta$ 计算出来，lBFGS 在每一步迭代都选择一个矩阵去替换 $B^{k-m}$，这个矩阵每步都可以是不同的，但通常都是形式相对简单的矩阵，比如 diagonal matrix。令第 k 步选择的矩阵为 $B\_0^k$，这样每步迭代中 lBFGS 计算
 
 $$
 \begin{align}
@@ -293,12 +293,12 @@ $$
 
   $$
   \begin{align}
-  \eta\_i = & (V^{k-i} V^{k-i+1} \cdots V^{k-1}) \boldsymbol{g}^k \; \in \mathbb{R}^n\\\\
-  \xi\_i = & \rho^{k-i} {\delta^{k-i}}^T (V^{k-i+1} \cdots V^{k-1}) \boldsymbol{g}^k \; \in \mathbb{R} \\\\
+  \eta\_i = & (V^{k-i} V^{k-i+1} \cdots V^{k-1}) \boldsymbol{g}^k\\\\
+  \xi\_i = & \rho^{k-i} {\delta^{k-i}}^T (V^{k-i+1} \cdots V^{k-1}) \boldsymbol{g}^k \\\\
   \end{align}
   $$
   
-  由此可得
+  其中 $\eta\_i \in \mathbb{R}^n, \xi\_i \in \mathbb{R}$ 由此可得
   
   $$
   \begin{align}
@@ -321,7 +321,7 @@ $$
   \end{align}
   $$
   
-  这个公式可以看成是一个递归公式，举个例子，假设 $m = 3$，则有
+  这个公式可以进一步以递归的形式表示，举个例子，假设 $m = 3$，则有
   
   $$
   \begin{align}
@@ -343,7 +343,7 @@ $$
       \begin{align}
       \zeta\_i = & {V^{k-i}}^T \zeta\_{i+1} + \delta^{k-i} \xi\_i \\\\
       = & (I - \rho^{k-i}\delta^{k-i} {\gamma^{k-i}}^T) \zeta\_{i+1} + \delta^{k-i} \xi\_i \\\\
-      = & \zeta\_{i+1} - \delta^{k-i} (\xi\_i - \rho^{k-i}({\gamma^{k-i}}^T\zeta\_{i+1})) \\\\
+      = & \zeta\_{i+1} + \delta^{k-i} (\xi\_i - \rho^{k-i}({\gamma^{k-i}}^T\zeta\_{i+1})) \\\\
       \end{align}
       $$
   
@@ -361,7 +361,7 @@ for $i$ from $1$ to $m$<br/>
 <br/>
 $\zeta_{m+1} = B_0^k\eta_m$<br/>
 for $i$ from $m$ to $1$<br/>
-&nbsp;&nbsp; $\zeta_{i} = \zeta_{i+1} - \delta^{k-i} (\xi_i - \rho^{k-i}({\gamma^{k-i}}^T\zeta_{i+1}))$<br/>
+&nbsp;&nbsp; $\zeta_{i} = \zeta_{i+1} + \delta^{k-i} (\xi_i - \rho^{k-i}({\gamma^{k-i}}^T\zeta_{i+1}))$<br/>
 <br/>
 output $\zeta_1$
 </blockquote>
