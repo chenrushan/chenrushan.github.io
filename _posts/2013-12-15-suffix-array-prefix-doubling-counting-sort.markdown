@@ -121,11 +121,11 @@ S<sub>l</sub>[i+l] = S<sub>l:2l</sub>[i] 或者 S<sub>l</sub>[i] = S<sub>l:2l</s
 
 * Input
 
-  数组 I。为方便起见，后续均以整数输入为例。
+    数组 I。为方便起见，后续均以整数输入为例。
 
 * Output
 
-  数组 K。K 中存 I 的序，K[r] = i 表示排在第 r 位的数为 I[i]。
+    数组 K。K 中存 I 的序，K[r] = i 表示排在第 r 位的数为 I[i]。
 
 例如，I = (234, 7890, 12, 5678)，则 K = (2, 0, 3, 1)
 
@@ -154,21 +154,21 @@ S<sub>l</sub>[i+l] = S<sub>l:2l</sub>[i] 或者 S<sub>l</sub>[i] = S<sub>l:2l</s
 
 1. 在最后 2 个元素做 counting sort，并将局部排序结果存于 K 中。
 
-   <object data="/resource/SA/first_iter.svg" type="image/svg+xml"></object>
+    <object data="/resource/SA/first_iter.svg" type="image/svg+xml"></object>
 
 2. 在第 2, 3 个元素上做 counting sort，并 update K 数组。这步迭代完事后，K 中就包含了后 4 个元素的序 (相比于第 1 步迭代的一个更大的局部)。
 
-   <object data="/resource/SA/second_iter.svg" type="image/svg+xml"></object>
+    <object data="/resource/SA/second_iter.svg" type="image/svg+xml"></object>
 
-   注意这个步骤的 counting sort 不同于上面的伪代码，区别在最后一个 for 循环，不能再简单得从第 0 个序列循环到第 N - 1 个，而是需要借助第一步中得到 K，代码如下 (其中`K2`是一个临时数组，用于暂时存放当前排序结果)：
+    注意这个步骤的 counting sort 不同于上面的伪代码，区别在最后一个 for 循环，不能再简单得从第 0 个序列循环到第 N - 1 个，而是需要借助第一步中得到 K，代码如下 (其中`K2`是一个临时数组，用于暂时存放当前排序结果)：
 
         for (r = 0; r < N; r++)
             K2[--count[I[K[r]]]] = K[r]
         K = K2
 
-   这里的 I[i] 不是完整的 I[i]，而是局部，如：I[0] = 67。
+    这里的 I[i] 不是完整的 I[i]，而是局部，如：I[0] = 67。
 
-   如果按照标准的做法，你会发现 896706 和 306785 的序是反着的，**所以前一轮得到的 K 数组的作用就是在当前迭代中将相同的局部元素区分开**。
+    如果按照标准的做法，你会发现 896706 和 306785 的序是反着的，**所以前一轮得到的 K 数组的作用就是在当前迭代中将相同的局部元素区分开**。
 
 3. 重复与第 2 步相同的迭代，得到对应 6 个元素的 K，也就是最终的序 K = (1, 4, 5, 2, 3, 0)。
 
