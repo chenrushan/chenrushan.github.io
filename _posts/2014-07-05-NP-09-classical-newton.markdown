@@ -43,11 +43,11 @@ $$\boldsymbol{x}^1 = \boldsymbol{x}^0 - H^{-1} (H\boldsymbol{x}^0 - \boldsymbol{
 
 * 初始点为 (0.6, 0.6)，收敛过程如下图所示，以 0.001 为 gradient norm 的阈值，共迭代 10 步
 
-  <img style="width:80%" src="/resource/NNP/09-newton/rosen1.png" />
+    <img style="width:80%" src="/resource/NNP/09-newton/rosen1.png" />
 
 * 初始点为 (-1.2, 1)，收敛过程如下图所示，以 0.001 为 gradient norm 的阈值，共迭代 21 步
 
-  <img style="width:80%" src="/resource/NNP/09-newton/rosen2.png" />
+    <img style="width:80%" src="/resource/NNP/09-newton/rosen2.png" />
 
 ----------
 
@@ -65,17 +65,17 @@ $$\boldsymbol{x}^1 = \boldsymbol{x}^0 - H^{-1} (H\boldsymbol{x}^0 - \boldsymbol{
 
 * 对初始点敏感，根据你初始点选择的不同，Classical Newton 可能不收敛
 
-  考虑一个一维的 case $f(x) = \log(e^x + e^{-x})$
+    考虑一个一维的 case $f(x) = \log(e^x + e^{-x})$
 
-  * 如果初始点是 1，迭代收敛
-  
-  * 如果初始点是 1.1，则迭代不收敛，如下图
+    * 如果初始点是 1，迭代收敛
+    
+    * 如果初始点是 1.1，则迭代不收敛，如下图
 
-      <img style="width:80%" src="/resource/NNP/09-newton/log.png" />
+        <img style="width:80%" src="/resource/NNP/09-newton/log.png" />
 
-      其中 x0 到 x4 表示迭代生成的序列，可以看到，以 1.1 为初始点，迭代结果反而不断远离最优值点
+        其中 x0 到 x4 表示迭代生成的序列，可以看到，以 1.1 为初始点，迭代结果反而不断远离最优值点
 
-      实际上 Classical Newton 是一个 locally convergent algorithm，即当初始点足够靠近最优值点时，Classical Newton 才是保证收敛的，下一节将给出证明。
+        实际上 Classical Newton 是一个 locally convergent algorithm，即当初始点足够靠近最优值点时，Classical Newton 才是保证收敛的，下一节将给出证明。
 
 #### Local Convergence
 
@@ -89,76 +89,76 @@ An iterative optimization algorithm is said to be locally convergent if for each
 
 * 证明
 
-  假设 $f \in \mathcal{C}^3$，令 local minimum 为 $x^*$，则有
+    假设 $f \in \mathcal{C}^3$，令 local minimum 为 $x^*$，则有
 
-  $$ x^{k+1} - x^* = x^k - x^* - \frac{f'(x^k)}{f''(x^k)} = \frac{(x^k - x^*)f''(x^k) - f'(x^k)}{f''(x^k)} $$
+    $$ x^{k+1} - x^* = x^k - x^* - \frac{f'(x^k)}{f''(x^k)} = \frac{(x^k - x^*)f''(x^k) - f'(x^k)}{f''(x^k)} $$
 
-  对 $f'(x^*)$ 在点 $x^k$ 展开 truncated taylor series
+    对 $f'(x^*)$ 在点 $x^k$ 展开 truncated taylor series
 
-  $$ f'(x^*) =  f'(x^k) + (x^* - x^k)f''(x^k) + \frac{1}{2}f'''(\bar{x}^k)(x^* - x^k)^2$$
+    $$ f'(x^*) =  f'(x^k) + (x^* - x^k)f''(x^k) + \frac{1}{2}f'''(\bar{x}^k)(x^* - x^k)^2$$
 
-  其中 $\bar{x}^k \in LS(x^k, x^*)$，由于 $x^*$ 是 local minimum，所以 $f'(x^*) = 0$，由此可得
+    其中 $\bar{x}^k \in LS(x^k, x^*)$，由于 $x^*$ 是 local minimum，所以 $f'(x^*) = 0$，由此可得
 
-  $$ x^{k+1} - x^* = \frac{f'''(\bar{x}^k)}{2 f''(x^k)}(x^k - x^*)^2$$
+    $$ x^{k+1} - x^* = \frac{f'''(\bar{x}^k)}{2 f''(x^k)}(x^k - x^*)^2$$
 
-  等价于
+    等价于
 
-  $$ |x^{k+1} - x^*| = |\frac{f'''(\bar{x}^k)}{2 f''(x^k)}| (x^k - x^*)^2$$
+    $$ |x^{k+1} - x^*| = |\frac{f'''(\bar{x}^k)}{2 f''(x^k)}| (x^k - x^*)^2$$
 
-  如果能满足下面两个条件，则 Classical Newton 就是一个 order-two convergent algorithm
+    如果能满足下面两个条件，则 Classical Newton 就是一个 order-two convergent algorithm
 
-  $$
-  \begin{align}
-  |\frac{f'''(\bar{x}^k)}{2 f''(x^k)}| \leq \alpha < \infty \\\\
-  |\frac{f'''(\bar{x}^k)}{2 f''(x^k)} (x^k - x^*)| < 1
-  \end{align}
-  $$
+    $$
+    \begin{align}
+    |\frac{f'''(\bar{x}^k)}{2 f''(x^k)}| \leq \alpha < \infty \\\\
+    |\frac{f'''(\bar{x}^k)}{2 f''(x^k)} (x^k - x^*)| < 1
+    \end{align}
+    $$
 
-  第二个条件意味着 $|x^{k+1} - x^*| < |x^k - x^*|$，如果这个不等式不能成立，则无法保证算法收敛
+    第二个条件意味着 $|x^{k+1} - x^*| < |x^k - x^*|$，如果这个不等式不能成立，则无法保证算法收敛
 
-  * <p style="background-color: #9f9">对于第一个条件</p>
+    * <p style="background-color: #9f9">对于第一个条件</p>
 
-      由于 $x^*$ 为 local minimum，所以 $f''(x^*) > 0$，又 $f \in \mathcal{C}^3$，所以 $f''(x^*) \in \mathcal{C}^0$，所以 
-  
-      $$\exists \eta > 0, \forall x \in (x^* - \eta, x^* + \eta) \;\; f''(x) > 0$$
+        由于 $x^*$ 为 local minimum，所以 $f''(x^*) > 0$，又 $f \in \mathcal{C}^3$，所以 $f''(x^*) \in \mathcal{C}^0$，所以 
+    
+        $$\exists \eta > 0, \forall x \in (x^* - \eta, x^* + \eta) \;\; f''(x) > 0$$
 
-      令 $x^k \in (x^* - \eta, x^* + \eta)$，同时定义
-      
-      $$
-      \begin{align}
-      \beta\_1 = & \min\_{x \in (x^* - \eta, x^* + \eta)} f''(x) \\\\
-      \beta\_2 = & \max\_{x \in (x^* - \eta, x^* + \eta)}|f'''(x)|
-      \end{align}
-      $$
-      
-      (<span style="background-color:#faa">注意</span>虽然 $f''(x) > 0$，但其实不用这么强的要求，只要能保证 $f''(x) \neq 0$ 就行了，因为它处在分母的位置，然后定义 $\beta\_1 = \min\_{x \in (x^* - \eta, x^* + \eta)} |f''(x)|$)
+        令 $x^k \in (x^* - \eta, x^* + \eta)$，同时定义
+        
+        $$
+        \begin{align}
+        \beta\_1 = & \min\_{x \in (x^* - \eta, x^* + \eta)} f''(x) \\\\
+        \beta\_2 = & \max\_{x \in (x^* - \eta, x^* + \eta)}|f'''(x)|
+        \end{align}
+        $$
+        
+        (<span style="background-color:#faa">注意</span>虽然 $f''(x) > 0$，但其实不用这么强的要求，只要能保证 $f''(x) \neq 0$ 就行了，因为它处在分母的位置，然后定义 $\beta\_1 = \min\_{x \in (x^* - \eta, x^* + \eta)} |f''(x)|$)
 
-      根据上述定义，$|\frac{f'''(\bar{x}^k)}{2 f''(x^k)}| < \frac{\beta\_2}{2 \beta\_1}$，这样我们就找到了第一个条件中定义的 $\alpha = \frac{\beta\_2}{2 \beta\_1}$
+        根据上述定义，$|\frac{f'''(\bar{x}^k)}{2 f''(x^k)}| < \frac{\beta\_2}{2 \beta\_1}$，这样我们就找到了第一个条件中定义的 $\alpha = \frac{\beta\_2}{2 \beta\_1}$
 
-  * <p style="background-color: #9f9">对于第二个条件</p>
+    * <p style="background-color: #9f9">对于第二个条件</p>
 
-      根据第一个条件有 $|\frac{f'''(\bar{x}^k)}{2 f''(x^k)} (x^k - x^*)| < \alpha |x^k - x^*| < 1$，等价于
+        根据第一个条件有 $|\frac{f'''(\bar{x}^k)}{2 f''(x^k)} (x^k - x^*)| < \alpha |x^k - x^*| < 1$，等价于
 
-      $$ x^k \in (x^* - \frac{1}{\alpha}, x^* + \frac{1}{\alpha}) $$
+        $$ x^k \in (x^* - \frac{1}{\alpha}, x^* + \frac{1}{\alpha}) $$
 
-      即如果 $x^k$ 落在这个区间内，则条件二也满足
+        即如果 $x^k$ 落在这个区间内，则条件二也满足
 
-  在这两个条件都满足的情况下，我们有
+    在这两个条件都满足的情况下，我们有
 
-  $$
-  \begin{align}
-  & |x^{k+1} - x^*| \leq \alpha |x^k - x^*|^2 \\\\
-  \Longleftrightarrow & \alpha |x^{k+1} - x^*| \leq (\alpha |x^0 - x^*|)^{2^k} \\\\
-  \Longleftrightarrow & |x^{k+1} - x^*| \leq \frac{1}{\alpha} (\alpha |x^0 - x^*|)^{2^k} \\\\
-  \Longleftrightarrow & \underset{k\rightarrow \infty}{\lim} |x^{k+1} - x^*| = 0 \;\; (\because \alpha |x^0 - x^*| < 1) \\\\
-  \end{align}
-  $$
+    $$
+    \begin{align}
+    & |x^{k+1} - x^*| \leq \alpha |x^k - x^*|^2 \\\\
+    \Longleftrightarrow & \alpha |x^{k+1} - x^*| \leq (\alpha |x^0 - x^*|)^{2^k} \\\\
+    \Longleftrightarrow & |x^{k+1} - x^*| \leq \frac{1}{\alpha} (\alpha |x^0 - x^*|)^{2^k} \\\\
+    \Longleftrightarrow & \underset{k\rightarrow \infty}{\lim} |x^{k+1} - x^*| = 0 \;\; (\because \alpha |x^0 - x^*| < 1) \\\\
+    \end{align}
+    $$
 
-  由此我们得到如下结论
+    由此我们得到如下结论
 
-  <blockquote>
-  当 $x^0 \in (x^* - \eta, x^* + \eta) \cap (x^* - \frac{1}{\alpha}, x^* + \frac{1}{\alpha})$ 时，Classical Newton 一定收敛并且是一个 order-two convergent algorithm
-  </blockquote>
+    <blockquote>
+    当 $x^0 \in (x^* - \eta, x^* + \eta) \cap (x^* - \frac{1}{\alpha}, x^* + \frac{1}{\alpha})$ 时，Classical Newton 一定收敛并且是一个 order-two convergent algorithm
+    </blockquote>
 
-  虽然我们得到了在理论上可以使 Classical Newton 收敛的条件，但这个条件在实践中却是不可操作的，因为我们事先不知道 $x^*$，因此也就无法确定 $x^0$，这就在很大程度上限制了 Classical Newton 的实用性
+    虽然我们得到了在理论上可以使 Classical Newton 收敛的条件，但这个条件在实践中却是不可操作的，因为我们事先不知道 $x^*$，因此也就无法确定 $x^0$，这就在很大程度上限制了 Classical Newton 的实用性
 
