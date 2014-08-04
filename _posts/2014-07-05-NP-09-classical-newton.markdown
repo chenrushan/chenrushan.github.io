@@ -82,7 +82,7 @@ $$\boldsymbol{x}^1 = \boldsymbol{x}^0 - H^{-1} (H\boldsymbol{x}^0 - \boldsymbol{
 首先先引入 locally convergent 的概念
 
 <blockquote>
-An iterative optimization algorithm is said to be locally convergent if for each solution $\boldsymbol{x}^\*$, there exists $\delta > 0$ such that for any initial point $\boldsymbol{x}^0 \in B(\boldsymbol{x}^\*, \delta)$, the algorithm produces a sequence $\{\boldsymbol{x}^k\}$ which converges to $\boldsymbol{x}^\*$
+An iterative optimization algorithm is said to be locally convergent if for each solution $\boldsymbol{x}^*$, there exists $\delta > 0$ such that for any initial point $\boldsymbol{x}^0 \in B(\boldsymbol{x}^*, \delta)$, the algorithm produces a sequence $\{\boldsymbol{x}^k\}$ which converges to $\boldsymbol{x}^*$
 </blockquote>
 
 下面证明 Classical Newton algorithm 是 locally convergent algorithm，证明过程考虑 $x \in \mathbb{R}^1$ 的 case 即 $f: \mathbb{R} \rightarrow \mathbb{R}$，对于这个函数 Classical Newton 的迭代步骤是 $x^{k+1} = x^k - \frac{f'(x^k)}{f''(x^k)}$
