@@ -173,15 +173,15 @@ Let $\boldsymbol{x} \in \mathbb{R}^n$. Some popular norms:
 
 * $L\_2$ or Euclidean norm: $\Vert \boldsymbol{x} \Vert\_2 = (\sum\_{i=1}^{n} (x\_i)^2)^{\frac{1}{2}}$
 
-  <object data="/resource/NNP/l2norm.svg" type="image/svg+xml" class="blkcenter"></object>
+    <object data="/resource/NNP/l2norm.svg" type="image/svg+xml" class="blkcenter"></object>
 
 * $L\_1$ norm: $\Vert \boldsymbol{x} \Vert\_1 = \sum\_{i=1}^{n} |x\_i|$
 
-  <object data="/resource/NNP/l1norm.svg" type="image/svg+xml" class="blkcenter"></object>
+    <object data="/resource/NNP/l1norm.svg" type="image/svg+xml" class="blkcenter"></object>
 
 * $L\_{\infty}$ norm: $\Vert \boldsymbol{x} \Vert\_{\infty} = \underset{i=1,\cdots,n}{\max} |x\_i|$
 
-  <object data="/resource/NNP/linfnorm.svg" type="image/svg+xml" class="blkcenter"></object>
+    <object data="/resource/NNP/linfnorm.svg" type="image/svg+xml" class="blkcenter"></object>
 
 In general, $L\_p$ norm is defined as $\Vert \boldsymbol{x} \Vert\_{p} = (\sum\_{i=1}^{n} |x\_i|^p)^{\frac{1}{p}}$.
 
@@ -246,19 +246,19 @@ Given $\boldsymbol{x}\_1, \boldsymbol{x}\_2, \boldsymbol{x}\_3 \in \mathbb{R}^3$
 
 * remove $\boldsymbol{x}\_2$'s component in the $\boldsymbol{y}\_1$ direction
 
-  $$\boldsymbol{z}\_2 = \boldsymbol{x}\_2 - (\boldsymbol{x}\_2^T \boldsymbol{y}\_1)\boldsymbol{y}\_1$$
+    $$\boldsymbol{z}\_2 = \boldsymbol{x}\_2 - (\boldsymbol{x}\_2^T \boldsymbol{y}\_1)\boldsymbol{y}\_1$$
 
-  now $\boldsymbol{z}\_2$ is orthogonal to $\boldsymbol{x}\_1$.
+    now $\boldsymbol{z}\_2$ is orthogonal to $\boldsymbol{x}\_1$.
 
-  set $\boldsymbol{y}\_2 = \frac{\boldsymbol{z}\_2}{\Vert \boldsymbol{z}\_2 \Vert}$
+    set $\boldsymbol{y}\_2 = \frac{\boldsymbol{z}\_2}{\Vert \boldsymbol{z}\_2 \Vert}$
 
 * remove $\boldsymbol{x}\_3$'s component in the $\boldsymbol{y}\_1$ and $\boldsymbol{y}\_2$ direction
 
-  $$\boldsymbol{z}\_3 = \boldsymbol{x}\_3 - (\boldsymbol{x}\_3^T \boldsymbol{y}\_2)\boldsymbol{y}\_2 - (\boldsymbol{x}\_3^T \boldsymbol{y}\_1)\boldsymbol{y}\_1$$
+    $$\boldsymbol{z}\_3 = \boldsymbol{x}\_3 - (\boldsymbol{x}\_3^T \boldsymbol{y}\_2)\boldsymbol{y}\_2 - (\boldsymbol{x}\_3^T \boldsymbol{y}\_1)\boldsymbol{y}\_1$$
 
-  now $\boldsymbol{z}\_3$ is orthogonal to $\boldsymbol{x}\_1$ and $\boldsymbol{x}\_2$.
+    now $\boldsymbol{z}\_3$ is orthogonal to $\boldsymbol{x}\_1$ and $\boldsymbol{x}\_2$.
 
-  set $\boldsymbol{y}\_3 = \frac{\boldsymbol{z}\_3}{\Vert \boldsymbol{z}\_3 \Vert}$
+    set $\boldsymbol{y}\_3 = \frac{\boldsymbol{z}\_3}{\Vert \boldsymbol{z}\_3 \Vert}$
 
 It's easy to extend this procedure to $\mathbb{R}^n$.
 
@@ -291,28 +291,28 @@ $$\det(I) = 1$$
 
 * $\det(AB) = \det(A)\det(B)$
 
-  **Proof**
+    **Proof**
 
-  Take $2\times 2$ matrix as example, $A = [\boldsymbol{a}\_1, \boldsymbol{a}\_2], B = [\boldsymbol{b}\_1, \boldsymbol{b}\_2]$. ($a\_{ij}$ means element at **column i, row j**, not row i column j as usual).
+    Take $2\times 2$ matrix as example, $A = [\boldsymbol{a}\_1, \boldsymbol{a}\_2], B = [\boldsymbol{b}\_1, \boldsymbol{b}\_2]$. ($a\_{ij}$ means element at **column i, row j**, not row i column j as usual).
 
-  $$
-  \begin{align}
-  \det(AB) = & \det[\boldsymbol{a}\_1, \boldsymbol{a}\_2]\times [\boldsymbol{b}\_1, \boldsymbol{b}\_2] \\\\
-  = & \det[b\_{11}\boldsymbol{a}\_1 + b\_{12}\boldsymbol{a}\_2, b\_{21}\boldsymbol{a}\_1 + b\_{22}\boldsymbol{a}\_2] \\\\
-  = & b\_{11}\det[\boldsymbol{a}\_1, b\_{21}\boldsymbol{a}\_1 + b\_{22}\boldsymbol{a}\_2] + b\_{12}\det[\boldsymbol{a}\_2, b\_{21}\boldsymbol{a}\_1 + b\_{22}\boldsymbol{a}\_2] \\\\
-  = & c\_1\det[\boldsymbol{a}\_1, \boldsymbol{a}\_1] + c\_2\det[\boldsymbol{a}\_1, \boldsymbol{a}\_2] + c\_3\det[\boldsymbol{a}\_2, \boldsymbol{a}\_1] + c\_4\det[\boldsymbol{a}\_2, \boldsymbol{a}\_2]
-  \end{align}
-  $$
+    $$
+    \begin{align}
+    \det(AB) = & \det[\boldsymbol{a}\_1, \boldsymbol{a}\_2]\times [\boldsymbol{b}\_1, \boldsymbol{b}\_2] \\\\
+    = & \det[b\_{11}\boldsymbol{a}\_1 + b\_{12}\boldsymbol{a}\_2, b\_{21}\boldsymbol{a}\_1 + b\_{22}\boldsymbol{a}\_2] \\\\
+    = & b\_{11}\det[\boldsymbol{a}\_1, b\_{21}\boldsymbol{a}\_1 + b\_{22}\boldsymbol{a}\_2] + b\_{12}\det[\boldsymbol{a}\_2, b\_{21}\boldsymbol{a}\_1 + b\_{22}\boldsymbol{a}\_2] \\\\
+    = & c\_1\det[\boldsymbol{a}\_1, \boldsymbol{a}\_1] + c\_2\det[\boldsymbol{a}\_1, \boldsymbol{a}\_2] + c\_3\det[\boldsymbol{a}\_2, \boldsymbol{a}\_1] + c\_4\det[\boldsymbol{a}\_2, \boldsymbol{a}\_2]
+    \end{align}
+    $$
 
-  Here, the exact form of $c\_{i}$ doesn't matter, anyway they are some function of $b\_{ij}$.
-  
-  There are 4 terms in the last formula, among them, $\det[\boldsymbol{a}\_1, \boldsymbol{a}\_1], \det[\boldsymbol{a}\_2, \boldsymbol{a}\_2]$ are equal to 0, $\det[\boldsymbol{a}\_2, \boldsymbol{a}\_1] = -\det[\boldsymbol{a}\_1, \boldsymbol{a}\_2]$, so $\det(AB)$ can be further reduced to
+    Here, the exact form of $c\_{i}$ doesn't matter, anyway they are some function of $b\_{ij}$.
+    
+    There are 4 terms in the last formula, among them, $\det[\boldsymbol{a}\_1, \boldsymbol{a}\_1], \det[\boldsymbol{a}\_2, \boldsymbol{a}\_2]$ are equal to 0, $\det[\boldsymbol{a}\_2, \boldsymbol{a}\_1] = -\det[\boldsymbol{a}\_1, \boldsymbol{a}\_2]$, so $\det(AB)$ can be further reduced to
 
-  $$\det(AB) = c\det(A)$$
+    $$\det(AB) = c\det(A)$$
 
-  Let $A = I$, we have $\det(B) = c\det(I) = c$, so $\det(AB) = \det(A)\det(B)$.
+    Let $A = I$, we have $\det(B) = c\det(I) = c$, so $\det(AB) = \det(A)\det(B)$.
 
-  The above reasoning can be easily extended to $n\times n$ matrix.
+    The above reasoning can be easily extended to $n\times n$ matrix.
 
 -----------------------
 
@@ -334,14 +334,14 @@ The column rank of a matrix equals its row rank, and its common value is called 
 
 * Matrices with the smallest rank - rank one matrices
 
-  Example:
+    Example:
 
-  $$
-  \begin{pmatrix} 3 & 1 & -1 \\\\ -3 & -1 & 1 \\\\ 6 & 2 & -2 \\\\ \end{pmatrix} =
-  \begin{pmatrix} 1 \\\\ -1 \\\\ 2 \end{pmatrix} \begin{pmatrix} 3 & 1 & -1 \end{pmatrix} = \boldsymbol{u}\boldsymbol{v}^T
-  $$
+    $$
+    \begin{pmatrix} 3 & 1 & -1 \\\\ -3 & -1 & 1 \\\\ 6 & 2 & -2 \\\\ \end{pmatrix} =
+    \begin{pmatrix} 1 \\\\ -1 \\\\ 2 \end{pmatrix} \begin{pmatrix} 3 & 1 & -1 \end{pmatrix} = \boldsymbol{u}\boldsymbol{v}^T
+    $$
 
-  Every matrix of rank one has the simplest form $A = \boldsymbol{u}\boldsymbol{v}^T$.
+    Every matrix of rank one has the simplest form $A = \boldsymbol{u}\boldsymbol{v}^T$.
 
 -----------------------
 
@@ -377,15 +377,15 @@ $$A\boldsymbol{x} = \lambda \boldsymbol{x} \;\; \boldsymbol{x} \neq \boldsymbol{
 
 * $A\boldsymbol{x} = \lambda \boldsymbol{x} \Rightarrow (A - \lambda I)\boldsymbol{x} = 0$
 
-  This implies that $A - \lambda I$ is not full-rank, so $\det(A - \lambda I) = 0$. This is called the characteristic equation of $A$. This equation is a polynomial of degree n, so it has n roots and are called the eigenvalues of $A$. All the n roots need not be real roots, some of them could be complex root.
+    This implies that $A - \lambda I$ is not full-rank, so $\det(A - \lambda I) = 0$. This is called the characteristic equation of $A$. This equation is a polynomial of degree n, so it has n roots and are called the eigenvalues of $A$. All the n roots need not be real roots, some of them could be complex root.
 
 * If the eigenvalue $\lambda$ equals 0 then $A\boldsymbol{x} = 0\boldsymbol{x} = 0$. Vectors with eigenvalue 0 make up the nullspace of $A$
 
-  $A$ is singular iff $\lambda = 0$ is an eigenvalue of $A$.
+    $A$ is singular iff $\lambda = 0$ is an eigenvalue of $A$.
 
 * $\det(A) = \prod\_{i = 1}^{n} \lambda\_i$
 
-  The matrix $A$ is invertible if and only if all the eigenvalues $\lambda\_i$ are nonzero.
+    The matrix $A$ is invertible if and only if all the eigenvalues $\lambda\_i$ are nonzero.
 
 -----------------------
 
@@ -401,15 +401,15 @@ Let $A \in \mathbb{R}^{n\times n}$ be symmetric, then
 
 * a corresponding set of eigenvectors $\{ \boldsymbol{x}\_1, \boldsymbol{x}\_2, \cdots, \boldsymbol{x}\_n\}$ can be chosen to be orthonormal
 
-  * eigenvectors of different eigenvalues are orthogonal
+    * eigenvectors of different eigenvalues are orthogonal
 
-     $$
-     \begin{align}
-     & (A \boldsymbol{x}\_i)^T \boldsymbol{x}\_j = \boldsymbol{x}\_i^T A^T \boldsymbol{x}\_j = \boldsymbol{x}\_i^T A \boldsymbol{x}\_j \\\\
-     \Rightarrow & \lambda\_i \boldsymbol{x}\_i^T \boldsymbol{x}\_j = \boldsymbol{x}\_i^T \lambda\_j \boldsymbol{x}\_j = \lambda\_j \boldsymbol{x}\_i^T \boldsymbol{x}\_j \\\\
-     \Rightarrow & \boldsymbol{x}\_i^T \boldsymbol{x}\_j = 0
-     \end{align}
-     $$
+        $$
+        \begin{align}
+        & (A \boldsymbol{x}\_i)^T \boldsymbol{x}\_j = \boldsymbol{x}\_i^T A^T \boldsymbol{x}\_j = \boldsymbol{x}\_i^T A \boldsymbol{x}\_j \\\\
+        \Rightarrow & \lambda\_i \boldsymbol{x}\_i^T \boldsymbol{x}\_j = \boldsymbol{x}\_i^T \lambda\_j \boldsymbol{x}\_j = \lambda\_j \boldsymbol{x}\_i^T \boldsymbol{x}\_j \\\\
+        \Rightarrow & \boldsymbol{x}\_i^T \boldsymbol{x}\_j = 0
+        \end{align}
+        $$
 
 * $S = ( \boldsymbol{x}\_1, \boldsymbol{x}\_2, \cdots, \boldsymbol{x}\_n )$ is an orthogonal matrix $(S^{-1} = S^T)$
 
@@ -441,28 +441,28 @@ $A$ is positive definite iff all its eigenvalues are positive.
 
 * eigenvalues are positive $\Rightarrow$ $A$ is positive definite
 
-  $$
-  \begin{align}
-  \boldsymbol{x}^T A \boldsymbol{x} = & \boldsymbol{x}^T S \Lambda S^T \boldsymbol{x} \\\\
-  = & \boldsymbol{y}^T \Lambda \boldsymbol{y} \\\\
-  = & \sum\_i \lambda\_i y\_i^2
-  \end{align}
-  $$
+    $$
+    \begin{align}
+    \boldsymbol{x}^T A \boldsymbol{x} = & \boldsymbol{x}^T S \Lambda S^T \boldsymbol{x} \\\\
+    = & \boldsymbol{y}^T \Lambda \boldsymbol{y} \\\\
+    = & \sum\_i \lambda\_i y\_i^2
+    \end{align}
+    $$
 
-  So if $\lambda\_i \gt 0 \;\; \forall i$, $\boldsymbol{x}^T A \boldsymbol{x} \gt 0$.
+    So if $\lambda\_i \gt 0 \;\; \forall i$, $\boldsymbol{x}^T A \boldsymbol{x} \gt 0$.
 
 * $A$ is positive definite $\Rightarrow$ eigenvalues are positive
 
-  Let $\boldsymbol{x}\_i$ be eigenvector
+    Let $\boldsymbol{x}\_i$ be eigenvector
 
-  $$
-  \begin{align}
-  & A \text{ is positive definite} \\\\
-  \Rightarrow & \boldsymbol{x}\_i^T A \boldsymbol{x}\_i \gt 0 \\\\
-  \Rightarrow & \boldsymbol{x}\_i^T \lambda\_i \boldsymbol{x}\_i \gt 0 \\\\
-  \Rightarrow & \lambda\_i \gt 0
-  \end{align}
-  $$
+    $$
+    \begin{align}
+    & A \text{ is positive definite} \\\\
+    \Rightarrow & \boldsymbol{x}\_i^T A \boldsymbol{x}\_i \gt 0 \\\\
+    \Rightarrow & \boldsymbol{x}\_i^T \lambda\_i \boldsymbol{x}\_i \gt 0 \\\\
+    \Rightarrow & \lambda\_i \gt 0
+    \end{align}
+    $$
 
 <blockquote>
 $A$ is indefinite iff it has both positive and negative eigenvalues.
@@ -489,25 +489,25 @@ Let $A \in \mathbb{R}^{n\times n}$, symmetric and positive definite
 
 * Solution of $A\boldsymbol{x}=\boldsymbol{b}$ is $\boldsymbol{x}^{\*} = A^{-1} \boldsymbol{b}$
 
-  * since $A$ is symmetric and positive definite
+    * since $A$ is symmetric and positive definite
 
-     $$\det(A) = \det(S \Lambda S^T) = \det(S)\det(\Lambda)\det(S^T) = \det(\Lambda) \gt 0$$
+        $$\det(A) = \det(S \Lambda S^T) = \det(S)\det(\Lambda)\det(S^T) = \det(\Lambda) \gt 0$$
 
-     so $A$ is invertible
+        so $A$ is invertible
 
-  * However, the inverse operation is not numerically stable
+    * However, the inverse operation is not numerically stable
 
 * Instead, use Cholesky decomposition $A = L L^T$
 
-  * The given system of equations is $L L^T \boldsymbol{x} = \boldsymbol{b}$
+    * The given system of equations is $L L^T \boldsymbol{x} = \boldsymbol{b}$
 
-  * Solve the triangular system. $L\boldsymbol{y} = \boldsymbol{b}$ using forward substitution to get $\boldsymbol{y}$.
+    * Solve the triangular system. $L\boldsymbol{y} = \boldsymbol{b}$ using forward substitution to get $\boldsymbol{y}$.
 
-  * Solve the triangular $L^T \boldsymbol{x} = \boldsymbol{y}$ using backward substitution to get $\boldsymbol{x}^{\*}$.
+    * Solve the triangular $L^T \boldsymbol{x} = \boldsymbol{y}$ using backward substitution to get $\boldsymbol{x}^{\*}$.
 
-  Cholesky decomposition is numerically stable.
+    Cholesky decomposition is numerically stable.
 
-  Every Hermitian positive-definite matrix (and thus also every real-valued symmetric positive-definite matrix) has a unique Cholesky decomposition, and $L$ is a lower triangular matrix with real and positive diagonal entries.
+    Every Hermitian positive-definite matrix (and thus also every real-valued symmetric positive-definite matrix) has a unique Cholesky decomposition, and $L$ is a lower triangular matrix with real and positive diagonal entries.
 
 -----------------------
 -----------------------
@@ -725,32 +725,32 @@ $$f(x) \approx f(x^0) + f'(x^0)(x - x^0) + \frac{1}{2} f''(x^0)(x - x^0)^2$$
 
 * first order
 
-  Let $f: \mathbb{R}^n \rightarrow \mathbb{R}, f \in \mathcal{C}^1, \boldsymbol{x}^0 \in \mathbb{R}^n$.
+    Let $f: \mathbb{R}^n \rightarrow \mathbb{R}, f \in \mathcal{C}^1, \boldsymbol{x}^0 \in \mathbb{R}^n$.
 
-  Then, for every $\boldsymbol{x} \in \mathbb{R}^n$,
+    Then, for every $\boldsymbol{x} \in \mathbb{R}^n$,
 
-  $$f(\boldsymbol{x}) = f(\boldsymbol{x}^0) + \nabla f(\bar{\boldsymbol{x}}) \dot (\boldsymbol{x} - \boldsymbol{x}^0)$$
+    $$f(\boldsymbol{x}) = f(\boldsymbol{x}^0) + \nabla f(\bar{\boldsymbol{x}}) \dot (\boldsymbol{x} - \boldsymbol{x}^0)$$
 
-  where $\bar{\boldsymbol{x}}$ is some point that lies on the line segment joining $\boldsymbol{x}$ and $\boldsymbol{x}^0$: $\bar{\boldsymbol{x}}$ depends on $\boldsymbol{x}, \boldsymbol{x}^0$ and $f$.
+    where $\bar{\boldsymbol{x}}$ is some point that lies on the line segment joining $\boldsymbol{x}$ and $\boldsymbol{x}^0$: $\bar{\boldsymbol{x}}$ depends on $\boldsymbol{x}, \boldsymbol{x}^0$ and $f$.
 
 * second order
 
-  Let $f: \mathbb{R}^n \rightarrow \mathbb{R}, f \in \mathcal{C}^2, \boldsymbol{x}^0 \in \mathbb{R}^n$.
+    Let $f: \mathbb{R}^n \rightarrow \mathbb{R}, f \in \mathcal{C}^2, \boldsymbol{x}^0 \in \mathbb{R}^n$.
 
-  Then, for every $\boldsymbol{x} \in \mathbb{R}^n$,
+    Then, for every $\boldsymbol{x} \in \mathbb{R}^n$,
 
-  $$f(\boldsymbol{x}) = f(\boldsymbol{x}^0) + \nabla f(\boldsymbol{x}) \dot (\boldsymbol{x} - \boldsymbol{x}^0) + \frac{1}{2}(\boldsymbol{x} - \boldsymbol{x}^0)^T \nabla^2 f(\bar{\boldsymbol{x}}) (\boldsymbol{x} - \boldsymbol{x}^0)$$
+    $$f(\boldsymbol{x}) = f(\boldsymbol{x}^0) + \nabla f(\boldsymbol{x}) \dot (\boldsymbol{x} - \boldsymbol{x}^0) + \frac{1}{2}(\boldsymbol{x} - \boldsymbol{x}^0)^T \nabla^2 f(\bar{\boldsymbol{x}}) (\boldsymbol{x} - \boldsymbol{x}^0)$$
 
-  where $\bar{\boldsymbol{x}}$ is some point that lies on the line segment joining $\boldsymbol{x}$ and $\boldsymbol{x}^0$: $\bar{\boldsymbol{x}}$ depends on $\boldsymbol{x}, \boldsymbol{x}^0$ and $f$.
+    where $\bar{\boldsymbol{x}}$ is some point that lies on the line segment joining $\boldsymbol{x}$ and $\boldsymbol{x}^0$: $\bar{\boldsymbol{x}}$ depends on $\boldsymbol{x}, \boldsymbol{x}^0$ and $f$.
 
-  上面两个式子中最后一项被称为 Lagrange remainder。因为我们处理的都是多变量的情况，上面我们用矩阵乘法的形式表示，但是到了更高阶的近似就不好再用矩阵表示了，以 3 阶为例，展开的 taylor series 是这样的
+    上面两个式子中最后一项被称为 Lagrange remainder。因为我们处理的都是多变量的情况，上面我们用矩阵乘法的形式表示，但是到了更高阶的近似就不好再用矩阵表示了，以 3 阶为例，展开的 taylor series 是这样的
 
-  $$
-  \begin{align}
-  f(\boldsymbol{x}) = & f(\boldsymbol{x}^0) + \sum\_{i=1}^{n} \frac{\partial f(\boldsymbol{x})}{\partial x\_i} (x\_i - x^0\_i) + \frac{1}{2!} \sum\_{i=1}^n \sum\_{j=1}^n \frac{\partial f(\boldsymbol{x})}{\partial x\_i \partial x\_j} (x\_i - x^0\_i)(x\_j - x^0\_j) + \\\\
-  & \frac{1}{3!} \sum\_{i=1}^n \sum\_{j=1}^n \sum\_{k=1}^n \frac{\partial f(\bar{\boldsymbol{x}})}{\partial x\_i \partial x\_j \partial x\_k} (x\_i - x^0\_i)(x\_j - x^0\_j)(x\_k - x^0\_k)
-  \end{align}
-  $$
+    $$
+    \begin{align}
+    f(\boldsymbol{x}) = & f(\boldsymbol{x}^0) + \sum\_{i=1}^{n} \frac{\partial f(\boldsymbol{x})}{\partial x\_i} (x\_i - x^0\_i) + \frac{1}{2!} \sum\_{i=1}^n \sum\_{j=1}^n \frac{\partial f(\boldsymbol{x})}{\partial x\_i \partial x\_j} (x\_i - x^0\_i)(x\_j - x^0\_j) + \\\\
+    & \frac{1}{3!} \sum\_{i=1}^n \sum\_{j=1}^n \sum\_{k=1}^n \frac{\partial f(\bar{\boldsymbol{x}})}{\partial x\_i \partial x\_j \partial x\_k} (x\_i - x^0\_i)(x\_j - x^0\_j)(x\_k - x^0\_k)
+    \end{align}
+    $$
 
 -----------------------
 
@@ -763,59 +763,59 @@ the columns of a matrix $A \in \mathbb{R}^{m\times n}$ are $a_1$ through $a_n$, 
 
 * Derivative of $A\boldsymbol{x}$, where $A \in \mathbb{R}^{m\times n}$ and $\boldsymbol{x} \in \mathbb{R}^n$
 
-  $$
-  \nabla\_{\boldsymbol{x}}A\boldsymbol{x} =
-    \begin{pmatrix}
-      \nabla\_{\boldsymbol{x}} \tilde{a}\_1^T \boldsymbol{x} \\\\
-      \nabla\_{\boldsymbol{x}} \tilde{a}\_2^T \boldsymbol{x} \\\\
-      \vdots \\\\
-      \nabla\_{\boldsymbol{x}} \tilde{a}\_n^T \boldsymbol{x} \\\\
-    \end{pmatrix} = 
-    \begin{pmatrix}
-      \tilde{a}\_1 & \tilde{a}\_2 & \cdots & \tilde{a}\_n
-    \end{pmatrix} = A^T
-  $$
+    $$
+    \nabla\_{\boldsymbol{x}}A\boldsymbol{x} =
+      \begin{pmatrix}
+        \nabla\_{\boldsymbol{x}} \tilde{a}\_1^T \boldsymbol{x} \\\\
+        \nabla\_{\boldsymbol{x}} \tilde{a}\_2^T \boldsymbol{x} \\\\
+        \vdots \\\\
+        \nabla\_{\boldsymbol{x}} \tilde{a}\_n^T \boldsymbol{x} \\\\
+      \end{pmatrix} = 
+      \begin{pmatrix}
+        \tilde{a}\_1 & \tilde{a}\_2 & \cdots & \tilde{a}\_n
+      \end{pmatrix} = A^T
+    $$
 
 * Derivative of linear transformed input to function
 
-  Consider a function $f: \mathbb{R}^n \rightarrow \mathbb{R}$. Suppose we have a matrix $A \in \mathbb{R}^{n\times m}$ and a vector $\boldsymbol{x} \in \mathbb{R}^m$. We wish to compute $\nabla\_{\boldsymbol{x}} f(A\boldsymbol{x})$.
+    Consider a function $f: \mathbb{R}^n \rightarrow \mathbb{R}$. Suppose we have a matrix $A \in \mathbb{R}^{n\times m}$ and a vector $\boldsymbol{x} \in \mathbb{R}^m$. We wish to compute $\nabla\_{\boldsymbol{x}} f(A\boldsymbol{x})$.
 
-  Note that $f(A\boldsymbol{x})$ is a composition of multivariate functions, so we can apply the following chain rule to calculate derivate
+    Note that $f(A\boldsymbol{x})$ is a composition of multivariate functions, so we can apply the following chain rule to calculate derivate
 
-  <blockquote>
-  Suppose $u = f(x_1, x_2, \cdots, x_n)$ is a differentiable function of variables $x_1, x_2, \cdots, x_n$, and all functions $g_j(t_1, t_2, \cdots, t_m), j = 1, \cdots, m$ are also differentiable, then their composition $u = f(g_1, g_2, \cdots, g_n)$ as a function of $t_1, t_2, \cdots, t_m$ is also differentiable, and
+    <blockquote>
+    Suppose $u = f(x_1, x_2, \cdots, x_n)$ is a differentiable function of variables $x_1, x_2, \cdots, x_n$, and all functions $g_j(t_1, t_2, \cdots, t_m), j = 1, \cdots, m$ are also differentiable, then their composition $u = f(g_1, g_2, \cdots, g_n)$ as a function of $t_1, t_2, \cdots, t_m$ is also differentiable, and
 
-  $$ \frac{\partial u}{\partial t_j} = \sum_{k=1}^{n} \frac{\partial f}{\partial x_k} \frac{\partial g_k}{\partial t_j} \;\;\; j = 1, \cdots m$$
-  </blockquote>
+    $$ \frac{\partial u}{\partial t_j} = \sum_{k=1}^{n} \frac{\partial f}{\partial x_k} \frac{\partial g_k}{\partial t_j} \;\;\; j = 1, \cdots m$$
+    </blockquote>
 
-  By the chain rule, we have
+    By the chain rule, we have
 
-  $$
-  \begin{align}
-  \frac{\partial f(A\boldsymbol{x})}{\partial x\_j} = & \sum\_{k=1}^{n} \frac{\partial f(A\boldsymbol{x})}{\partial (A\boldsymbol{x})\_k} \frac{\partial (A\boldsymbol{x})\_k}{\partial x\_j} \\\\
-  = & \sum\_{k=1}^{n} \frac{\partial f(A\boldsymbol{x})}{\partial (A\boldsymbol{x})\_k} \frac{\partial \tilde{a}\_k^T \boldsymbol{x}}{\partial x\_j} \\\\
-  = & \sum\_{k=1}^{n} \frac{\partial f(A\boldsymbol{x})}{\partial (A\boldsymbol{x})\_k} a\_{kj} \\\\
-  = & a\_j^T \nabla f(A\boldsymbol{x})
-  \end{align}
-  $$
+    $$
+    \begin{align}
+    \frac{\partial f(A\boldsymbol{x})}{\partial x\_j} = & \sum\_{k=1}^{n} \frac{\partial f(A\boldsymbol{x})}{\partial (A\boldsymbol{x})\_k} \frac{\partial (A\boldsymbol{x})\_k}{\partial x\_j} \\\\
+    = & \sum\_{k=1}^{n} \frac{\partial f(A\boldsymbol{x})}{\partial (A\boldsymbol{x})\_k} \frac{\partial \tilde{a}\_k^T \boldsymbol{x}}{\partial x\_j} \\\\
+    = & \sum\_{k=1}^{n} \frac{\partial f(A\boldsymbol{x})}{\partial (A\boldsymbol{x})\_k} a\_{kj} \\\\
+    = & a\_j^T \nabla f(A\boldsymbol{x})
+    \end{align}
+    $$
 
-  so 
+    so 
 
-  $$
-  \begin{align}
-  \nabla\_{\boldsymbol{x}} f(A\boldsymbol{x}) = 
-  \begin{pmatrix}
-    \frac{\partial f(A\boldsymbol{x})}{\partial x\_1} \\\\
-    \vdots \\\\
-    \frac{\partial f(A\boldsymbol{x})}{\partial x\_n} \\\\
-  \end{pmatrix} = 
-  \begin{pmatrix}
-    a\_1^T \\\\
-    a\_2^T \\\\
-    \vdots \\\\
-    a\_n^T
-  \end{pmatrix} \nabla f(A\boldsymbol{x}) = A^T \nabla f(A \boldsymbol{x})
-  \end{align}
-  $$
+    $$
+    \begin{align}
+    \nabla\_{\boldsymbol{x}} f(A\boldsymbol{x}) = 
+    \begin{pmatrix}
+      \frac{\partial f(A\boldsymbol{x})}{\partial x\_1} \\\\
+      \vdots \\\\
+      \frac{\partial f(A\boldsymbol{x})}{\partial x\_n} \\\\
+    \end{pmatrix} = 
+    \begin{pmatrix}
+      a\_1^T \\\\
+      a\_2^T \\\\
+      \vdots \\\\
+      a\_n^T
+    \end{pmatrix} \nabla f(A\boldsymbol{x}) = A^T \nabla f(A \boldsymbol{x})
+    \end{align}
+    $$
 
 Reference: [berkeley.edu](http://www.eecs.berkeley.edu/~jduchi/projects/matrix_prop.pdf), [okstate.edu](https://www.math.okstate.edu/~atovstolis/lecture_notes/LN14_6.pdf)
