@@ -116,10 +116,10 @@ Method of Multipliers 的迭代包含如下两个部分
 
 ----------
 
-可以看到 Method of Multipliers 直接使用 $\rho$ 作为 step length，这么做的好处可以从 KKT condition 看出。假设 $(x^*, y^*)$ 为问题最优解，根据 KKT condition，$(x^*, y^*)$ 必须满足如下条件
+可以看到 Method of Multipliers 直接使用 $\rho$ 作为 step length，这么做的好处可以从 KKT condition 看出。假设 $(x^\*, y^\*)$ 为问题最优解，根据 KKT condition，$(x^\*, y^\*)$ 必须满足如下条件
 
-* $\frac{\partial L(x, y^*)}{\partial x} \vert\_{x = x^*} = \nabla f(x^*) + A^T y^* = 0$ (assume $f(x)$ is differentiable)
-* $Ax^* - b = 0$
+* $\frac{\partial L(x, y^\*)}{\partial x} \vert\_{x = x^\*} = \nabla f(x^\*) + A^T y^\* = 0$ (assume $f(x)$ is differentiable)
+* $Ax^\* - b = 0$
 
 对于 Method of Multipliers，$x^{k+1} = \underset{x}{\arg\min} L\_{\rho}(x, y^{k})$ (因为我们假设 $f(x)$ differentiable，所以 $\in$ 变成了 $=$)，也就是 $\nabla\_x L\_{\rho}(x^{k+1}, y^{k}) = 0$，展开有
 
