@@ -200,7 +200,7 @@ $$B^{k+1} = B^k + \frac{ \delta^k {\delta^k}^T }{ {\delta^k}^T \gamma^k} - \frac
 
         综合上述条件 $\boldsymbol{v}^T B^{k+1} \boldsymbol{v} \geq 0$，所以 $B^{k+1}$ 是 positive semi-definite matrix
 
-     * <p style="background-color: #9f9">接下来证明 $B^{k+1}$ 是 positive definite</p>
+    * <p style="background-color: #9f9">接下来证明 $B^{k+1}$ 是 positive definite</p>
 
         这个主要是证明 $(\Vert \boldsymbol{\eta} \Vert \Vert \boldsymbol{\rho} \Vert)^2 - (\boldsymbol{\eta}^T \boldsymbol{\rho})^2$ 和 ${(\boldsymbol{v}^T \delta^k)^2}$ 不能同时为 0，假设二者同时为 0，则有 
         
