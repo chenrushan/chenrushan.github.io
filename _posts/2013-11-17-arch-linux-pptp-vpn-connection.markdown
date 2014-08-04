@@ -31,7 +31,7 @@ As arch wiki says, you just run `ip route add default dev ppp0` to route all tra
 
 * run `ip route` to check if there's already a default route. Each line of the `ip route` output can be used directly as argument to `ip route add`.
 
-  For me, the output is:
+    For me, the output is:
 
         default via 192.168.1.1 dev wlp2s0  metric 302
         69.90.184.209 via 192.168.1.1 dev wlp2s0  src 192.168.1.100
@@ -39,7 +39,7 @@ As arch wiki says, you just run `ip route add default dev ppp0` to route all tra
         192.168.1.0/24 dev wlp2s0  proto kernel  scope link  src 192.168.1.100  metric 302
         192.168.1.100 via 127.0.0.1 dev lo  metric 302
 
-  So there's a default route.
+    So there's a default route.
 
 * Keep a note of the current default route, and delete it with the following command.
 
@@ -74,9 +74,9 @@ The meaning of each field is:
 * **Iface**: the network interface
 
 * **Flags**
-  - `U` means the route is up.
-  - `G` means that specified gateway should be used for this route
-  - `H` means it is a HOST route and that allows us to see the host to which we are connected to
+    - `U` means the route is up.
+    - `G` means that specified gateway should be used for this route
+    - `H` means it is a HOST route and that allows us to see the host to which we are connected to
 
 The first line of the above route table contains a destination of default (shown as 0.0.0.0), which means everything not alreay classified. In this case, everything not destined for 69.90.184.209, 192.168.1.100, 192.168.1.0/255.255.255.0 will be sent to 192.168.1.1 -- which is the forwarding gateway -- and the route to the internet. NOTE that only one default route is allowed at any given time, replacing the default route can be done by first deleting the current one and then adding a new one.
 
