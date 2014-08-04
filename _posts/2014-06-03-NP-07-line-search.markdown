@@ -33,39 +33,39 @@ $$\lim_{k\rightarrow \infty} \frac{\Vert \boldsymbol{x}^{k+1} - \boldsymbol{x}^*
 
 * $p = 1, 0 < \beta < 1$ (linear convergence)
 
-  * $\beta = 0.1, \Vert \boldsymbol{x}^0 - \boldsymbol{x}^* \Vert = 0.1$
+    * $\beta = 0.1, \Vert \boldsymbol{x}^0 - \boldsymbol{x}^\* \Vert = 0.1$
 
-     收敛过程是 $10^{-1}, 10^{-2}, 10^{-3}, 10^{-4}, ...$
+        收敛过程是 $10^{-1}, 10^{-2}, 10^{-3}, 10^{-4}, ...$
 
-  * $\beta = 0.9, \Vert \boldsymbol{x}^0 - \boldsymbol{x}^* \Vert = 0.1$
+    * $\beta = 0.9, \Vert \boldsymbol{x}^0 - \boldsymbol{x}^\* \Vert = 0.1$
 
-     收敛过程是 $10^{-1}, 0.09, 0.081, 0.0729, ...$
+        收敛过程是 $10^{-1}, 0.09, 0.081, 0.0729, ...$
 
-  可以看到 $\beta$ 越小，收敛越快
+    可以看到 $\beta$ 越小，收敛越快
 
 * $p = 2, \beta > 0$ (quadratic convergence)
 
-  * $\beta = 1, \Vert \boldsymbol{x}^0 - \boldsymbol{x}^* \Vert = 0.1$
+    * $\beta = 1, \Vert \boldsymbol{x}^0 - \boldsymbol{x}^\* \Vert = 0.1$
 
-     收敛过程是 $10^{-1}, 10^{-2}, 10^{-4}, ...$
+        收敛过程是 $10^{-1}, 10^{-2}, 10^{-4}, ...$
 
-  可以看出 quadratic 的收敛过程比 linear 要快得多
+    可以看出 quadratic 的收敛过程比 linear 要快得多
 
 * superlinear convergence
 
-  如果收敛过程符合如下条件
+    如果收敛过程符合如下条件
 
-  $$\lim_{k\rightarrow \infty} \frac{\Vert \boldsymbol{x}^{k+1} - \boldsymbol{x}^* \Vert}{\Vert \boldsymbol{x}^k - \boldsymbol{x}^* \Vert} = 0, \lim_{k\rightarrow \infty} \frac{\Vert \boldsymbol{x}^{k+1} - \boldsymbol{x}^* \Vert}{\Vert \boldsymbol{x}^k - \boldsymbol{x}^* \Vert^2} = \infty$$
+    $$\lim\_{k\rightarrow \infty} \frac{\Vert \boldsymbol{x}^{k+1} - \boldsymbol{x}^\* \Vert}{\Vert \boldsymbol{x}^k - \boldsymbol{x}^\* \Vert} = 0, \lim\_{k\rightarrow \infty} \frac{\Vert \boldsymbol{x}^{k+1} - \boldsymbol{x}^\* \Vert}{\Vert \boldsymbol{x}^k - \boldsymbol{x}^\* \Vert^2} = \infty$$
 
-  这被称为 superlinear convergence，它的收敛速度介于 linear 和 quadratic 之间
+    这被称为 superlinear convergence，它的收敛速度介于 linear 和 quadratic 之间
   
 由于 linear convergence 收敛得慢，而 quadratic convergence 虽然收敛快但是需要的资源太多，所以大多数算法都是属于 superlinear convergence
 
 另一种表示 convergence rate 的方法是使用 Error function $E: \mathbb{R}^n \rightarrow \mathbb{R}$，然后计算
 
-$$\lim_{k\rightarrow \infty} \frac{E(\boldsymbol{x}^{k+1}) - E(\boldsymbol{x}^*)}{(E(\boldsymbol{x}^k) - E(\boldsymbol{x}^*))^p}$$
+$$\lim\_{k\rightarrow \infty} \frac{E(\boldsymbol{x}^{k+1}) - E(\boldsymbol{x}^\*)}{(E(\boldsymbol{x}^k) - E(\boldsymbol{x}^\*))^p}$$
 或者
-$$\lim_{k\rightarrow \infty} \frac{E(\boldsymbol{x}^{k}) - E(\boldsymbol{x}^{k+1})}{E(\boldsymbol{x}^k)^p}$$
+$$\lim\_{k\rightarrow \infty} \frac{E(\boldsymbol{x}^{k}) - E(\boldsymbol{x}^{k+1})}{E(\boldsymbol{x}^k)^p}$$
 
 通常情况下，使不使用 Error function 并不影响 convergence rate，一个 linear convergence 的算法不会因为用 Error function 计算 convergence rate 而变成 quadratic convergence 算法。
 
@@ -104,43 +104,43 @@ Exact line search 有时会带来性能上的问题，这时就需要使用近�
 
 * <p style="background-color: #9f9">Armijo's condition</p>
 
-  Armijo's condition 给出下面的绿色虚线，由于其斜率介于 $0$ 和 $g^T(\boldsymbol{x}^k)\boldsymbol{d}^k$ 之间，所以可以将斜率值定义为 $c\_1 g^T(\boldsymbol{x}^k)\boldsymbol{d}^k \; c_1 \in (0, 1)$
-  
-  <object data="/resource/NNP/07-line-search/amijo.svg" type="image/svg+xml" class="blkcenter"></object>
+    Armijo's condition 给出下面的绿色虚线，由于其斜率介于 $0$ 和 $g^T(\boldsymbol{x}^k)\boldsymbol{d}^k$ 之间，所以可以将斜率值定义为 $c\_1 g^T(\boldsymbol{x}^k)\boldsymbol{d}^k \; c\_1 \in (0, 1)$
+    
+    <object data="/resource/NNP/07-line-search/amijo.svg" type="image/svg+xml" class="blkcenter"></object>
 
-  Armijo's condition 要求 step length $\alpha^k$ 满足 $f(\boldsymbol{x}^k + \alpha^k \boldsymbol{d}^k) < f(\boldsymbol{x}^k) + c\_1 \alpha^k g^T(\boldsymbol{x}^k)\boldsymbol{d}^k$
+    Armijo's condition 要求 step length $\alpha^k$ 满足 $f(\boldsymbol{x}^k + \alpha^k \boldsymbol{d}^k) < f(\boldsymbol{x}^k) + c\_1 \alpha^k g^T(\boldsymbol{x}^k)\boldsymbol{d}^k$
 
-  这个条件一来保证了 $\alpha^k$ 不会太大，因为上述条件保证了函数值一定是下降的；二来保证了 rate of decrease 不会太小，因为 $\frac{f(\boldsymbol{x}^k) - f(\boldsymbol{x}^k + \alpha^k \boldsymbol{d}^k)}{\alpha^k} > c\_1 g^T(\boldsymbol{x}^k)\boldsymbol{d}^k$，其中 $g^T(\boldsymbol{x}^k)\boldsymbol{d}^k$ 为最大可能的 rate of decrease。
+    这个条件一来保证了 $\alpha^k$ 不会太大，因为上述条件保证了函数值一定是下降的；二来保证了 rate of decrease 不会太小，因为 $\frac{f(\boldsymbol{x}^k) - f(\boldsymbol{x}^k + \alpha^k \boldsymbol{d}^k)}{\alpha^k} > c\_1 g^T(\boldsymbol{x}^k)\boldsymbol{d}^k$，其中 $g^T(\boldsymbol{x}^k)\boldsymbol{d}^k$ 为最大可能的 rate of decrease。
 
 * <p style="background-color: #9f9">Goldstein's condition</p>
 
-  Goldstein's condition 给出下面的红色虚线，由于其斜率介于 $0$ 和 $g^T(\boldsymbol{x}^k)\boldsymbol{d}^k$ 之间，所以可以将斜率值定义为 $c\_2 g^T(\boldsymbol{x}^k)\boldsymbol{d}^k \; c_2 \in (0, 1)$
+    Goldstein's condition 给出下面的红色虚线，由于其斜率介于 $0$ 和 $g^T(\boldsymbol{x}^k)\boldsymbol{d}^k$ 之间，所以可以将斜率值定义为 $c\_2 g^T(\boldsymbol{x}^k)\boldsymbol{d}^k \; c\_2 \in (0, 1)$
 
-  <object data="/resource/NNP/07-line-search/goldstein.svg" type="image/svg+xml" class="blkcenter"></object>
+    <object data="/resource/NNP/07-line-search/goldstein.svg" type="image/svg+xml" class="blkcenter"></object>
 
-  Goldstein's condition 要求 step length $\alpha^k$ 满足 $f(\boldsymbol{x}^k + \alpha^k \boldsymbol{d}^k) > f(\boldsymbol{x}^k) + c\_2 \alpha^k g^T(\boldsymbol{x}^k)\boldsymbol{d}^k$，这样 $\alpha$ 就必须大于 $\hat{\alpha}$，这个条件保证了 step length 不会太小
+    Goldstein's condition 要求 step length $\alpha^k$ 满足 $f(\boldsymbol{x}^k + \alpha^k \boldsymbol{d}^k) > f(\boldsymbol{x}^k) + c\_2 \alpha^k g^T(\boldsymbol{x}^k)\boldsymbol{d}^k$，这样 $\alpha$ 就必须大于 $\hat{\alpha}$，这个条件保证了 step length 不会太小
 
-  通常 Goldstein's condition 和 Armijo's condition 一起使用，这样就同时满足了前面提出的 3 个要求，在这种情况下，$c\_2$ 的取值范围是 $(c\_1, 1)$
+    通常 Goldstein's condition 和 Armijo's condition 一起使用，这样就同时满足了前面提出的 3 个要求，在这种情况下，$c\_2$ 的取值范围是 $(c\_1, 1)$
 
 * <p style="background-color: #9f9">Wolfe's condition</p>
 
-  Wolfe's condition 的作用和 Goldstein's condition 是一样的，都是要保证 step length 不会太小，只是用的方法不一样，Wolfe's condition 通过限制 $\alpha^k$ 处的函数斜率来保证的。如下图中给出的斜虚线，假设其斜率有 $c g^T(\boldsymbol{x}^k)\boldsymbol{d}^k \; c\in (0, 1)$
+    Wolfe's condition 的作用和 Goldstein's condition 是一样的，都是要保证 step length 不会太小，只是用的方法不一样，Wolfe's condition 通过限制 $\alpha^k$ 处的函数斜率来保证的。如下图中给出的斜虚线，假设其斜率有 $c g^T(\boldsymbol{x}^k)\boldsymbol{d}^k \; c\in (0, 1)$
 
-  <object data="/resource/NNP/07-line-search/wolfe.svg" type="image/svg+xml" class="blkcenter"></object>
+    <object data="/resource/NNP/07-line-search/wolfe.svg" type="image/svg+xml" class="blkcenter"></object>
 
-  Wolfe's condition 要求 $f'(\boldsymbol{x}^k + \alpha^k \boldsymbol{d}^k) > c g^T(\boldsymbol{x}^k) \boldsymbol{d}^k$，这样符合条件的 $\alpha$ 就只能是 $(\hat{\alpha}\_1, \hat{\alpha}\_2) \cup (\hat{\alpha}\_3, +\infty)$，也就保证了 step length 不会太小
+    Wolfe's condition 要求 $f'(\boldsymbol{x}^k + \alpha^k \boldsymbol{d}^k) > c g^T(\boldsymbol{x}^k) \boldsymbol{d}^k$，这样符合条件的 $\alpha$ 就只能是 $(\hat{\alpha}\_1, \hat{\alpha}\_2) \cup (\hat{\alpha}\_3, +\infty)$，也就保证了 step length 不会太小
 
-  同样 Wolfe's condition 也通常和 Armijo's condition 一起使用
+    同样 Wolfe's condition 也通常和 Armijo's condition 一起使用
 
 ##### Backtrack line search
 
 Backtrack line search 虽然独立一小节出来，但它本质也是一种 inexact line search，它是 inexact line search 在具体实现上的一种 trick，它通过 Armijo condition 来保证 rate of decrease，然后以 backtract 的方式来保证 step length 不会太小，参考如下伪代码
 
 <blockquote>
-INPUT: $\hat{\alpha} \in (0, +\infty), c_1 \in (0, 1), \lambda \in (0, 1)$<br/><br/>
+INPUT: $\hat{\alpha} \in (0, +\infty), c\_1 \in (0, 1), \lambda \in (0, 1)$<br/><br/>
 
 $\alpha^k = \hat{\alpha}$ <br/>
-WHILE $f(\boldsymbol{x}^k + \alpha^k \boldsymbol{d}^k) > f(\boldsymbol{x}^k) + c_1 \alpha^k g^k \boldsymbol{d}^k$ <br/>
+WHILE $f(\boldsymbol{x}^k + \alpha^k \boldsymbol{d}^k) > f(\boldsymbol{x}^k) + c\_1 \alpha^k g^k \boldsymbol{d}^k$ <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;$\alpha^k = \lambda \alpha^k$<br/><br/>
 
 OUTPUT: $\alpha^k$
@@ -161,52 +161,52 @@ OUTPUT: $\alpha^k$
 
 * 证明
 
-  * <p style="background-color: #9f9">首先每一步迭代符合 Armijo condition 所以有</p>
+    * <p style="background-color: #9f9">首先每一步迭代符合 Armijo condition 所以有</p>
 
-     $$
-     \begin{align}
-     f^k < & f^{k-1} + c\_1 \alpha^{k-1} g^{k-1} \boldsymbol{d}^{k-1} \;\; c\_1 \in (0, 1) \\\\
-     < & f^0 + \sum\_{i=0}^{k-1} c\_1 \alpha^i g^i \boldsymbol{d}^i \\\\
-     \end{align}
-     $$
+        $$
+        \begin{align}
+        f^k < & f^{k-1} + c\_1 \alpha^{k-1} g^{k-1} \boldsymbol{d}^{k-1} \;\; c\_1 \in (0, 1) \\\\
+        < & f^0 + \sum\_{i=0}^{k-1} c\_1 \alpha^i g^i \boldsymbol{d}^i \\\\
+        \end{align}
+        $$
 
-     上式等价于 $ - \sum\_{i=0}^{k-1} c\_1 \alpha^i g^i \boldsymbol{d}^i < f^0 - f^k$，由于 $f$ bounded below，所以有 $f^0 - f^\infty < \infty$，因此有
+        上式等价于 $ - \sum\_{i=0}^{k-1} c\_1 \alpha^i g^i \boldsymbol{d}^i < f^0 - f^k$，由于 $f$ bounded below，所以有 $f^0 - f^\infty < \infty$，因此有
 
-     $$ - \sum\_{i=0}^{\infty} c\_1 \alpha^i g^i \boldsymbol{d}^i < \infty$$
+        $$ - \sum\_{i=0}^{\infty} c\_1 \alpha^i g^i \boldsymbol{d}^i < \infty$$
 
-     首先明确不等式左边是个正数，因为 $c\_1 > 0, \alpha\_i > 0, -g^i \boldsymbol{d}^i >= 0$，所以 sum 的每个元素都大于等于 0，而无限个这样的数相加能 $< \infty$，唯一的可能就是当 $i$ 大于某个数后，$c\_1 \alpha^i g^i \boldsymbol{d}^i = 0$
+        首先明确不等式左边是个正数，因为 $c\_1 > 0, \alpha\_i > 0, -g^i \boldsymbol{d}^i >= 0$，所以 sum 的每个元素都大于等于 0，而无限个这样的数相加能 $< \infty$，唯一的可能就是当 $i$ 大于某个数后，$c\_1 \alpha^i g^i \boldsymbol{d}^i = 0$
 
-  * <p style="background-color: #9f9">由于 $g^k$ lipschitz continuous，所以有</p>
+    * <p style="background-color: #9f9">由于 $g^k$ lipschitz continuous，所以有</p>
 
-     $$ \Vert g^k - g^{k-1} \Vert \leq L \Vert \boldsymbol{x}^k - \boldsymbol{x}^{k-1} \Vert  = L \alpha^{k-1} \Vert \boldsymbol{d}^{k-1} \Vert \;\; L \geq 0 $$
+        $$ \Vert g^k - g^{k-1} \Vert \leq L \Vert \boldsymbol{x}^k - \boldsymbol{x}^{k-1} \Vert  = L \alpha^{k-1} \Vert \boldsymbol{d}^{k-1} \Vert \;\; L \geq 0 $$
 
-     不等式两边同乘以 $\Vert \boldsymbol{d}^{k-1} \Vert$ 有
+        不等式两边同乘以 $\Vert \boldsymbol{d}^{k-1} \Vert$ 有
 
-     $$ (g^k - g^{k-1})^T \boldsymbol{d}^{k-1} \leq \Vert g^k - g^{k-1} \Vert \Vert \boldsymbol{d}^{k-1} \Vert \leq L \alpha^{k-1} {\boldsymbol{d}^{k-1}}^T \boldsymbol{d}^{k-1}$$
+        $$ (g^k - g^{k-1})^T \boldsymbol{d}^{k-1} \leq \Vert g^k - g^{k-1} \Vert \Vert \boldsymbol{d}^{k-1} \Vert \leq L \alpha^{k-1} {\boldsymbol{d}^{k-1}}^T \boldsymbol{d}^{k-1}$$
 
-     因此有
+        因此有
 
-     $$\alpha^{k-1} \geq \frac{(g^k - g^{k-1})^T \boldsymbol{d}^{k-1}}{L {\boldsymbol{d}^{k-1}}^T \boldsymbol{d}^{k-1}}$$
+        $$\alpha^{k-1} \geq \frac{(g^k - g^{k-1})^T \boldsymbol{d}^{k-1}}{L {\boldsymbol{d}^{k-1}}^T \boldsymbol{d}^{k-1}}$$
 
-  * <p style="background-color: #9f9">由于每一步迭代又满足 Wolfe condition，所以有</p>
+    * <p style="background-color: #9f9">由于每一步迭代又满足 Wolfe condition，所以有</p>
 
-     $${g^{k}}^T \boldsymbol{d}^{k-1} \geq c\_2 g^{k-1} \boldsymbol{d}^{k-1} \;\; c\_2 \in (c\_1, 1)$$
+        $${g^{k}}^T \boldsymbol{d}^{k-1} \geq c\_2 g^{k-1} \boldsymbol{d}^{k-1} \;\; c\_2 \in (c\_1, 1)$$
 
-     两边同减去 $g^{k-1}\boldsymbol{d}^{k-1}$ 得 $(g^k - g^{k-1})^T \boldsymbol{d}^{k-1} \geq (c\_2 - 1) g^{k-1} \boldsymbol{d}^{k-1}$
+        两边同减去 $g^{k-1}\boldsymbol{d}^{k-1}$ 得 $(g^k - g^{k-1})^T \boldsymbol{d}^{k-1} \geq (c\_2 - 1) g^{k-1} \boldsymbol{d}^{k-1}$
 
-     结合第二步推导得到的不等式，有
+        结合第二步推导得到的不等式，有
 
-     $$\alpha^{k-1} \geq \frac{(c\_2 - 1) g^{k-1} \boldsymbol{d}^{k-1}}{L {\boldsymbol{d}^{k-1}}^T \boldsymbol{d}^{k-1}}$$
+        $$\alpha^{k-1} \geq \frac{(c\_2 - 1) g^{k-1} \boldsymbol{d}^{k-1}}{L {\boldsymbol{d}^{k-1}}^T \boldsymbol{d}^{k-1}}$$
 
-     不等式两边同乘以 $-c\_1 {g^{k-1}}^T \boldsymbol{d}^{k-1}$ 有
+        不等式两边同乘以 $-c\_1 {g^{k-1}}^T \boldsymbol{d}^{k-1}$ 有
 
-     $$-c\_1 \alpha^{k-1} {g^{k-1}}^T \boldsymbol{d}^{k-1} \geq \frac{c\_1(1 - c\_2) (g^{k-1} \boldsymbol{d}^{k-1})^2}{L {\boldsymbol{d}^{k-1}}^T \boldsymbol{d}^{k-1}} = \frac{c\_1(1 - c\_2)}{L} \Vert g^{k-1} \Vert^2 \cos^2\theta$$
+        $$-c\_1 \alpha^{k-1} {g^{k-1}}^T \boldsymbol{d}^{k-1} \geq \frac{c\_1(1 - c\_2) (g^{k-1} \boldsymbol{d}^{k-1})^2}{L {\boldsymbol{d}^{k-1}}^T \boldsymbol{d}^{k-1}} = \frac{c\_1(1 - c\_2)}{L} \Vert g^{k-1} \Vert^2 \cos^2\theta$$
 
-     结合第一步得到的不等式有
+        结合第一步得到的不等式有
 
-     $$\sum\_i \frac{c\_1(1 - c\_2)}{L} \Vert g^i \Vert^2 \cos^2\theta < \infty$$ 
+        $$\sum\_i \frac{c\_1(1 - c\_2)}{L} \Vert g^i \Vert^2 \cos^2\theta < \infty$$ 
 
-     其中 $\frac{c\_1(1 - c\_2)}{L} > 0, \cos^2\theta > 0$，因此 $\lim\_{i\rightarrow \infty} \Vert g^i \Vert = 0$
+        其中 $\frac{c\_1(1 - c\_2)}{L} > 0, \cos^2\theta > 0$，因此 $\lim\_{i\rightarrow \infty} \Vert g^i \Vert = 0$
 
 因此在上述假设成立的情况下，算法是收敛的，当然上述假设不是必要条件了，这里只是给出一个证明的例子
 
