@@ -23,19 +23,19 @@ $$f(\boldsymbol{x}) \approx y^k(\boldsymbol{x}) = f(\boldsymbol{x}^k) + {\boldsy
 
 * 要求 $y^k(\boldsymbol{x})$ 在点 $\boldsymbol{x}^k, \boldsymbol{x}^{k-1}$ 的 gradient 必须等于 $f(\boldsymbol{x})$ 在点 $\boldsymbol{x}^k, \boldsymbol{x}^{k-1}$ 的 gradient，这其实就是要求 $y^k(\boldsymbol{x})$ 要尽可能好得近似 $f(\boldsymbol{x})$
 
-  $y^k(\boldsymbol{x})$ 的 gradient 是
+    $y^k(\boldsymbol{x})$ 的 gradient 是
 
-  $$\nabla y^k(\boldsymbol{x}) = \boldsymbol{g}^k + (B^k)^{-1} (\boldsymbol{x} - \boldsymbol{x}^k)$$
+    $$\nabla y^k(\boldsymbol{x}) = \boldsymbol{g}^k + (B^k)^{-1} (\boldsymbol{x} - \boldsymbol{x}^k)$$
 
-  * 对于点 $\boldsymbol{x}^k$ 这个要求天然就满足，因为 $\nabla y^k(\boldsymbol{x}^k) = \boldsymbol{g}^k$
+    * 对于点 $\boldsymbol{x}^k$ 这个要求天然就满足，因为 $\nabla y^k(\boldsymbol{x}^k) = \boldsymbol{g}^k$
 
-  * 对于点 $\boldsymbol{x}^{k-1}$，该要求等价于 $\boldsymbol{g}^{k-1} = \boldsymbol{g}^k + (B^k)^{-1} (\boldsymbol{x}^{k-1} - \boldsymbol{x}^k)$
+    * 对于点 $\boldsymbol{x}^{k-1}$，该要求等价于 $\boldsymbol{g}^{k-1} = \boldsymbol{g}^k + (B^k)^{-1} (\boldsymbol{x}^{k-1} - \boldsymbol{x}^k)$
 
-      令 $\gamma^{k-1} = \boldsymbol{g}^k - \boldsymbol{g}^{k-1}, \delta^{k-1} = \boldsymbol{x}^k - \boldsymbol{x}^{k-1}$，则该条件等价于
+        令 $\gamma^{k-1} = \boldsymbol{g}^k - \boldsymbol{g}^{k-1}, \delta^{k-1} = \boldsymbol{x}^k - \boldsymbol{x}^{k-1}$，则该条件等价于
 
-      $$B^k \gamma^{k-1} = \delta^{k-1}$$
+        $$B^k \gamma^{k-1} = \delta^{k-1}$$
 
-      这个公式又被称为 secant equation
+        这个公式又被称为 secant equation
 
 ----------
 
