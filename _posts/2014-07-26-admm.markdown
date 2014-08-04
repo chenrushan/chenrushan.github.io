@@ -253,57 +253,57 @@ $$
 
 * <p class="info">对于迭代的第一部分</p>
 
-  由于这里目标函数的第一部分是可拆分的，所以 ADMM 迭代的第一部分也可以被拆分
+    由于这里目标函数的第一部分是可拆分的，所以 ADMM 迭代的第一部分也可以被拆分
 
-  $$
-  \begin{align}
-  (x\_1, \cdots, x\_N)^{k+1} \in & \arg\min \; L\_{\rho} (x\_1, \cdots, x\_N, z^k, y^k) \\\\
-  = & \arg\min \sum\_{i=1}^{N} f(x\_i) + \sum\_{i=1}^{N} {y\_i^k}^T (x\_i - z^k) + \frac{\rho}{2} \sum\_{i=1}^{N} \Vert x\_i - z^k \Vert\_2^2 \\\\
-  = & \arg\min \sum\_{i=1}^{N} (f(x\_i) + {y\_i^k}^T (x\_i - z^k) + \frac{\rho}{2} \Vert x\_i - z^k \Vert\_2^2) \\\\
-  = & \arg\min \sum\_{i=1}^{N} (f(x\_i) + \frac{\rho}{2} (2 (\frac{1}{\rho} y\_i^k)^T (x\_i - z^k) + \Vert x\_i - z^k \Vert\_2^2)) \\\\
-  = & \arg\min \sum\_{i=1}^{N} (f(x\_i) + \frac{\rho}{2} \Vert x\_i - (z^k - \frac{1}{\rho}y\_i^k) \Vert\_2^2) \;\; (\because y\_i^k \; \text{const w.r.t.} \; x)\\\\
-  \end{align}
-  $$
+    $$
+    \begin{align}
+    (x\_1, \cdots, x\_N)^{k+1} \in & \arg\min \; L\_{\rho} (x\_1, \cdots, x\_N, z^k, y^k) \\\\
+    = & \arg\min \sum\_{i=1}^{N} f(x\_i) + \sum\_{i=1}^{N} {y\_i^k}^T (x\_i - z^k) + \frac{\rho}{2} \sum\_{i=1}^{N} \Vert x\_i - z^k \Vert\_2^2 \\\\
+    = & \arg\min \sum\_{i=1}^{N} (f(x\_i) + {y\_i^k}^T (x\_i - z^k) + \frac{\rho}{2} \Vert x\_i - z^k \Vert\_2^2) \\\\
+    = & \arg\min \sum\_{i=1}^{N} (f(x\_i) + \frac{\rho}{2} (2 (\frac{1}{\rho} y\_i^k)^T (x\_i - z^k) + \Vert x\_i - z^k \Vert\_2^2)) \\\\
+    = & \arg\min \sum\_{i=1}^{N} (f(x\_i) + \frac{\rho}{2} \Vert x\_i - (z^k - \frac{1}{\rho}y\_i^k) \Vert\_2^2) \;\; (\because y\_i^k \; \text{const w.r.t.} \; x)\\\\
+    \end{align}
+    $$
 
-  因此第一部分的迭代可以分为 N 个独立的 process 完成，每个 process 计算
+    因此第一部分的迭代可以分为 N 个独立的 process 完成，每个 process 计算
 
-  $$ x\_i \in \arg\min f(x\_i) + \frac{\rho}{2} \Vert x\_i - (z^k - \frac{1}{\rho}y\_i^k) \Vert\_2^2 $$
+    $$ x\_i \in \arg\min f(x\_i) + \frac{\rho}{2} \Vert x\_i - (z^k - \frac{1}{\rho}y\_i^k) \Vert\_2^2 $$
 
 * <p class="info">对于迭代的第二部分</p>
 
-  $$
-  \begin{align}
-  z^{k+1} \in & \underset{z}{\arg\min} \; L\_{\rho} (x^{k+1}, z, y^k) \\\\
-  = & \underset{z}{\arg\min} \; g(z) + \sum\_{i=1}^{N} {y\_i^k}^T (x\_i^{k+1} - z) + \sum\_{i=1}^{N} \frac{\rho}{2} \Vert x\_i^{k+1} - z \Vert\_2^2 \\\\
-  = & \underset{z}{\arg\min} \; g(z) + \frac{\rho}{2} \sum\_{i=1}^{N} (2 (\frac{1}{\rho} y\_i^k)^T (x\_i^{k+1} - z) + \Vert x\_i^{k+1} - z \Vert\_2^2) \\\\
-  = & \underset{z}{\arg\min} \; g(z) + \frac{\rho}{2} \sum\_{i=1}^{N} \Vert z - \frac{1}{\rho} y\_i^k - x\_i^{k+1} \Vert\_2^2 \;\; (\because y\_i^k \; \text{const w.r.t.} \; z)
-  \end{align}
-  $$
+    $$
+    \begin{align}
+    z^{k+1} \in & \underset{z}{\arg\min} \; L\_{\rho} (x^{k+1}, z, y^k) \\\\
+    = & \underset{z}{\arg\min} \; g(z) + \sum\_{i=1}^{N} {y\_i^k}^T (x\_i^{k+1} - z) + \sum\_{i=1}^{N} \frac{\rho}{2} \Vert x\_i^{k+1} - z \Vert\_2^2 \\\\
+    = & \underset{z}{\arg\min} \; g(z) + \frac{\rho}{2} \sum\_{i=1}^{N} (2 (\frac{1}{\rho} y\_i^k)^T (x\_i^{k+1} - z) + \Vert x\_i^{k+1} - z \Vert\_2^2) \\\\
+    = & \underset{z}{\arg\min} \; g(z) + \frac{\rho}{2} \sum\_{i=1}^{N} \Vert z - \frac{1}{\rho} y\_i^k - x\_i^{k+1} \Vert\_2^2 \;\; (\because y\_i^k \; \text{const w.r.t.} \; z)
+    \end{align}
+    $$
 
-  这个式子可以进一步简化成一个更实用的形式，令 $c\_i = \frac{1}{\rho} y\_i^k + x\_i^{k+1}, c\_i \in \mathbb{R}^n$，我们看看怎么简化加号后面的部分
+    这个式子可以进一步简化成一个更实用的形式，令 $c\_i = \frac{1}{\rho} y\_i^k + x\_i^{k+1}, c\_i \in \mathbb{R}^n$，我们看看怎么简化加号后面的部分
 
-  $$
-  \begin{align}
-  & \underset{z}{\arg\min} \; \sum\_{i=1}^{N} \Vert z - c\_i \Vert\_2^2 \\\\
-  = & \underset{z}{\arg\min} \; \sum\_{j=1}^{n} \sum\_{i=1}^{N} (z\_j - c\_{ij})^2 \\\\
-  = & \underset{z}{\arg\min} \; \sum\_{j=1}^{n} (\sum\_{i=1}^{N} z\_j^2 - 2\sum\_{i=1}^{N} z\_j c\_{ij} + \sum\_{i=1}^{N} c\_{ij}^2) \\\\
-  = & \underset{z}{\arg\min} \; \sum\_{j=1}^{n} N (z\_j^2 - 2 z\_j \bar{c}\_j + \bar{c}\_j^2) \;\; (\bar{c}\_j = \frac{1}{N}\sum\_{i=1}^{N} c\_{ij},\;\; (N\bar{c}\_j^2 - \sum\_{i=1}^{N} c\_{ij}^2) \; \text{const w.r.t} \; z) \\\\
-  = & \underset{z}{\arg\min} \; N \sum\_{j=1}^{n} (z\_j - \bar{c}\_j)^2 \\\\
-  = & \underset{z}{\arg\min} \; N \Vert z - \bar{c} \Vert\_2^2 \;\; (\bar{c} = \frac{1}{N}\sum\_{i=1}^{N} c\_i)\\\\
-  \end{align}
-  $$
+    $$
+    \begin{align}
+    & \underset{z}{\arg\min} \; \sum\_{i=1}^{N} \Vert z - c\_i \Vert\_2^2 \\\\
+    = & \underset{z}{\arg\min} \; \sum\_{j=1}^{n} \sum\_{i=1}^{N} (z\_j - c\_{ij})^2 \\\\
+    = & \underset{z}{\arg\min} \; \sum\_{j=1}^{n} (\sum\_{i=1}^{N} z\_j^2 - 2\sum\_{i=1}^{N} z\_j c\_{ij} + \sum\_{i=1}^{N} c\_{ij}^2) \\\\
+    = & \underset{z}{\arg\min} \; \sum\_{j=1}^{n} N (z\_j^2 - 2 z\_j \bar{c}\_j + \bar{c}\_j^2) \;\; (\bar{c}\_j = \frac{1}{N}\sum\_{i=1}^{N} c\_{ij},\;\; (N\bar{c}\_j^2 - \sum\_{i=1}^{N} c\_{ij}^2) \; \text{const w.r.t} \; z) \\\\
+    = & \underset{z}{\arg\min} \; N \sum\_{j=1}^{n} (z\_j - \bar{c}\_j)^2 \\\\
+    = & \underset{z}{\arg\min} \; N \Vert z - \bar{c} \Vert\_2^2 \;\; (\bar{c} = \frac{1}{N}\sum\_{i=1}^{N} c\_i)\\\\
+    \end{align}
+    $$
 
-  结合这个结果可得
+    结合这个结果可得
 
-  $$ z^{k+1} \in \underset{z}{\arg\min} \; g(z) + \frac{N\rho}{2} \Vert z - (\frac{1}{\rho}\bar{y}^k + \bar{x}^{k+1}) \Vert\_2^2$$
+    $$ z^{k+1} \in \underset{z}{\arg\min} \; g(z) + \frac{N\rho}{2} \Vert z - (\frac{1}{\rho}\bar{y}^k + \bar{x}^{k+1}) \Vert\_2^2$$
 
-  其中 $\bar{y}^k = \frac{1}{N}\sum\_{i=1}^{N} y\_i^k, \; \bar{x}^{k+1} = \frac{1}{N}\sum\_{i=1}^{N} x\_i^{k+1}$，因此 $z^{k+1}$ 依赖与所有的 $y\_i^k$ 和 $x\_i^{k+1}$
+    其中 $\bar{y}^k = \frac{1}{N}\sum\_{i=1}^{N} y\_i^k, \; \bar{x}^{k+1} = \frac{1}{N}\sum\_{i=1}^{N} x\_i^{k+1}$，因此 $z^{k+1}$ 依赖与所有的 $y\_i^k$ 和 $x\_i^{k+1}$
 
 * <p class="info">对于迭代的第三部分</p>
 
-  这个部分也可以被拆分成 N 个 process，每个 process 计算
+    这个部分也可以被拆分成 N 个 process，每个 process 计算
 
-  $$y\_i^{k+1} = y\_i^k + \rho (x\_i^{k+1} - z^{k+1})$$
+    $$y\_i^{k+1} = y\_i^k + \rho (x\_i^{k+1} - z^{k+1})$$
 
 ----------
 
@@ -376,44 +376,44 @@ $$y \in \partial f(x) \Longleftrightarrow x \in \partial f^*(y) \Longleftrightar
 
 * Proof
 
-  * 证明 $y \in \partial f(x) \Longleftrightarrow x^T y = f(x) + f^*(y)$
+  * 证明 $y \in \partial f(x) \Longleftrightarrow x^T y = f(x) + f^\*(y)$
 
       因为 $y \in \partial f(x)$，所以 $0 \in y - \partial f(x) = \frac{\partial (y^T u - f(u))}{\partial u} \vert\_{u = x}$，因此
 
       $$ \underset{u}{\sup} y^T u - f(u) = y^T x - f(x) $$
 
-      而 $f^*(y) = \underset{u}{\sup} y^T u - f(u)$，因此 $x^T y = f(x) + f^*(y)$
+      而 $f^\*(y) = \underset{u}{\sup} y^T u - f(u)$，因此 $x^T y = f(x) + f^\*(y)$
 
-  * 证明 $y \in \partial f(x) \Longleftrightarrow x \in \partial f^*(y)$
+  * 证明 $y \in \partial f(x) \Longleftrightarrow x \in \partial f^\*(y)$
 
       如果 $y \in \partial f(x)$，则有
 
       $$
       \begin{align}
-      f^*(v) = & \underset{u}{\sup} v^T u - f(u) \\\\
+      f^\*(v) = & \underset{u}{\sup} v^T u - f(u) \\\\
       \geq & v^T x - f(x) \\\\
       = & x^T (v - y) - f(x) + y^T x \\\\
-      = & f^*(y) + x^T (v - y)
+      = & f^\*(y) + x^T (v - y)
       \end{align}
       $$
 
-      因此 $x \in \partial f^*(y)$，所以 $y \in \partial f(x) \Longrightarrow x \in \partial f^*(y)$
+      因此 $x \in \partial f^\*(y)$，所以 $y \in \partial f(x) \Longrightarrow x \in \partial f^\*(y)$
 
-      如果 $x \in \partial f^*(y)$，则有
+      如果 $x \in \partial f^\*(y)$，则有
 
       $$
       \begin{align}
-      f(v) = f^{**}(v) = & \underset{u}{\sup} v^T u - f^*(u) \\\\
-      \geq & v^T y - f^*(y) \\\\
-      = & y^T (v - x) - f^*(y) + x^T y \\\\
-      = & f^{**}(x) + y^T (v - x) \\\\
+      f(v) = f^{\*\*}(v) = & \underset{u}{\sup} v^T u - f^\*(u) \\\\
+      \geq & v^T y - f^\*(y) \\\\
+      = & y^T (v - x) - f^\*(y) + x^T y \\\\
+      = & f^{\*\*}(x) + y^T (v - x) \\\\
       = & f(x) + y^T (v - x) \\\\
       \end{align}
       $$
 
-      因此 $y \in \partial f(x)$，所以 $x \in \partial f^*(y) \Longrightarrow y \in \partial f(x)$
+      因此 $y \in \partial f(x)$，所以 $x \in \partial f^\*(y) \Longrightarrow y \in \partial f(x)$
 
-      综述 $x \in \partial f^*(y) \Longleftrightarrow y \in \partial f(x)$
+      综述 $x \in \partial f^\*(y) \Longleftrightarrow y \in \partial f(x)$
 
 <blockquote>
 $x \in \partial f^*(y) \Longleftrightarrow x \in \underset{u}{\arg\min} \; f(u) - y^T u$
@@ -421,11 +421,11 @@ $x \in \partial f^*(y) \Longleftrightarrow x \in \underset{u}{\arg\min} \; f(u) 
 
 * Proof
 
-  由于 $f^*(y) = \underset{u}{\sup} y^T u - f(u)$，令 $x \in \underset{u}{\arg\max} \; y^T u - f(u)$，易知 $f^*(y) = y^T x - f(x)$
+  由于 $f^\*(y) = \underset{u}{\sup} y^T u - f(u)$，令 $x \in \underset{u}{\arg\max} \; y^T u - f(u)$，易知 $f^\*(y) = y^T x - f(x)$
 
-  由于 $x \in \underset{u}{\arg\max} \; y^T u - f(u)$ 所以 $0 \in y - \partial f(x)$，即 $y \in \partial f(x)$，这又等价于 $x \in \partial f^*(y)$
+  由于 $x \in \underset{u}{\arg\max} \; y^T u - f(u)$ 所以 $0 \in y - \partial f(x)$，即 $y \in \partial f(x)$，这又等价于 $x \in \partial f^\*(y)$
 
-  因此 $x \in \partial f^*(y)$ 等价于 $x \in \underset{u}{\arg\max} \; y^T u - f(u)$ 等价于 $x \in \underset{u}{\arg\min} \; f(u) - y^T u$
+  因此 $x \in \partial f^\*(y)$ 等价于 $x \in \underset{u}{\arg\max} \; y^T u - f(u)$ 等价于 $x \in \underset{u}{\arg\min} \; f(u) - y^T u$
 
 <blockquote>
 The proximal operator of $\lambda \Vert x \Vert_1, \lambda > 0$ is
@@ -441,17 +441,17 @@ $\text{prox}(x)_i$ 表示 $x$ 每一维对应的 proximal operator
   
   $$\text{prox}(x)\_i = \underset{u\_i}{\arg\min} \vert u\_i \vert + \frac{1}{2\lambda} (u\_i - x\_i)^2$$
   
-  如果 $u^*$ 是解，则有
+  如果 $u^\*$ 是解，则有
   
-  $$0 \in \partial \vert u^* \vert + \frac{1}{\lambda} (u^* - x\_i)$$
+  $$0 \in \partial \vert u^\* \vert + \frac{1}{\lambda} (u^\* - x\_i)$$
   
   这个式子有 3 种可能
   
-  * 如果 $u^* > 0$，则 $\partial \vert u^* \vert = \\{1\\}$，上式变为 $0 = 1 + \frac{1}{\lambda}(u^* - x\_i)$，即 $u^* = x\_i - \lambda$，由于 $u^* > 0$，所以 $x\_i > \lambda$
+  * 如果 $u^\* > 0$，则 $\partial \vert u^\* \vert = \\{1\\}$，上式变为 $0 = 1 + \frac{1}{\lambda}(u^\* - x\_i)$，即 $u^\* = x\_i - \lambda$，由于 $u^\* > 0$，所以 $x\_i > \lambda$
 
-  * 如果 $u^* < 0$，则 $\partial \vert u^* \vert = \\{-1\\}$，上式变为 $0 = -1 + \frac{1}{\lambda}(u^* - x\_i)$，即 $u^* = x\_i + \lambda$，由于 $u^* < 0$，所以 $x\_i < -\lambda$
+  * 如果 $u^\* < 0$，则 $\partial \vert u^\* \vert = \\{-1\\}$，上式变为 $0 = -1 + \frac{1}{\lambda}(u^\* - x\_i)$，即 $u^\* = x\_i + \lambda$，由于 $u^\* < 0$，所以 $x\_i < -\lambda$
 
-  * 如果 $u^* = 0$，则 $\partial \vert u^* \vert = [-1, 1]$，上式变为 $0 \in [-1, 1] - \frac{1}{\lambda} x\_i$，等价于 $x\_i \in [-\lambda, \lambda]$
+  * 如果 $u^\* = 0$，则 $\partial \vert u^\* \vert = [-1, 1]$，上式变为 $0 \in [-1, 1] - \frac{1}{\lambda} x\_i$，等价于 $x\_i \in [-\lambda, \lambda]$
 
   综合起来，$\text{prox}(x)\_i$ 可以表示为
 
