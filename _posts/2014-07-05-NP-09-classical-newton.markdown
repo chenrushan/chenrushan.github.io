@@ -157,7 +157,7 @@ An iterative optimization algorithm is said to be locally convergent if for each
     由此我们得到如下结论
 
     <blockquote>
-    当 $x^0 \in (x^\* - \eta, x^\* + \eta) \cap (x^\* - \frac{1}{\alpha}, x^\* + \frac{1}{\alpha})$ 时，Classical Newton 一定收敛并且是一个 order-two convergent algorithm
+    当 $x^0 \in (x^* - \eta, x^* + \eta) \cap (x^* - \frac{1}{\alpha}, x^* + \frac{1}{\alpha})$ 时，Classical Newton 一定收敛并且是一个 order-two convergent algorithm
     </blockquote>
 
     虽然我们得到了在理论上可以使 Classical Newton 收敛的条件，但这个条件在实践中却是不可操作的，因为我们事先不知道 $x^\*$，因此也就无法确定 $x^0$，这就在很大程度上限制了 Classical Newton 的实用性
