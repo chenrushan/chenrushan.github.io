@@ -46,21 +46,21 @@ Convex programming 中每个 local minimum 都是 global minimum
 
 * 证明
 
-  假设 local minimum 为 $\boldsymbol{x}^*$，根据 local minimum 的定义我们知道
+    假设 local minimum 为 $\boldsymbol{x}^\*$，根据 local minimum 的定义我们知道
 
-  $$\boldsymbol{x}^* = \underset{\boldsymbol{x} \in C \cap B(\boldsymbol{x}^*, \delta)}{\arg\min} f(\boldsymbol{x}) $$
+    $$\boldsymbol{x}^\* = \underset{\boldsymbol{x} \in C \cap B(\boldsymbol{x}^\*, \delta)}{\arg\min} f(\boldsymbol{x}) $$
 
-  参考下图，其中绿色的圈表示 $C \cap B(\boldsymbol{x}^*, \delta)$
+    参考下图，其中绿色的圈表示 $C \cap B(\boldsymbol{x}^\*, \delta)$
 
-  <object data="/resource/NNP/05-convex-func/localisglobal.svg" type="image/svg+xml" class="blkcenter"></object>
+    <object data="/resource/NNP/05-convex-func/localisglobal.svg" type="image/svg+xml" class="blkcenter"></object>
 
-  假设 $\boldsymbol{y} \in C \cap B(\boldsymbol{x}^*, \delta)$，$\boldsymbol{z}$ 为 $LS(\boldsymbol{x}^*, \boldsymbol{y})$ 延长线上任意一点且在 $C$ 内，则 $\boldsymbol{y}$ 可以表示为 $\lambda \boldsymbol{x} + (1 - \lambda) \boldsymbol{z} \; \lambda \in (0, 1)$，则有
+    假设 $\boldsymbol{y} \in C \cap B(\boldsymbol{x}^\*, \delta)$，$\boldsymbol{z}$ 为 $LS(\boldsymbol{x}^\*, \boldsymbol{y})$ 延长线上任意一点且在 $C$ 内，则 $\boldsymbol{y}$ 可以表示为 $\lambda \boldsymbol{x} + (1 - \lambda) \boldsymbol{z} \; \lambda \in (0, 1)$，则有
 
-  $$
-  f(\boldsymbol{x}^*) \leq f(\boldsymbol{y}) = f(\lambda \boldsymbol{x}^* + (1 - \lambda) \boldsymbol{z}) \leq \lambda f(\boldsymbol{x}^*) + (1 - \lambda) f(\boldsymbol{z})
-  $$
+    $$
+    f(\boldsymbol{x}^\*) \leq f(\boldsymbol{y}) = f(\lambda \boldsymbol{x}^\* + (1 - \lambda) \boldsymbol{z}) \leq \lambda f(\boldsymbol{x}^\*) + (1 - \lambda) f(\boldsymbol{z})
+    $$
 
-  这也就推出 $f(\boldsymbol{x}^*) \leq f(\boldsymbol{z})$
+    这也就推出 $f(\boldsymbol{x}^\*) \leq f(\boldsymbol{z})$
 
 ----------
 
@@ -76,13 +76,13 @@ Convex programming 的所有 global minimum 构成一个 convex set
 
 * 证明
 
-  假设 $\boldsymbol{x}\_1, \boldsymbol{x}\_2$ 为 local minimum
+    假设 $\boldsymbol{x}\_1, \boldsymbol{x}\_2$ 为 local minimum
 
-  $$
-  f(\lambda \boldsymbol{x}\_1 + (1 - \lambda) \boldsymbol{x}\_2) \leq \lambda f(\boldsymbol{x}\_1) + (1 - \lambda) f(\boldsymbol{x}\_2) = f(\boldsymbol{x}\_1)
-  $$
+    $$
+    f(\lambda \boldsymbol{x}\_1 + (1 - \lambda) \boldsymbol{x}\_2) \leq \lambda f(\boldsymbol{x}\_1) + (1 - \lambda) f(\boldsymbol{x}\_2) = f(\boldsymbol{x}\_1)
+    $$
 
-  这里不等号不能成立，所以 $\forall \lambda \in [0, 1] \; \lambda \boldsymbol{x}\_1 + (1 - \lambda) \boldsymbol{x}\_2$ 也都是 local minimum
+    这里不等号不能成立，所以 $\forall \lambda \in [0, 1] \; \lambda \boldsymbol{x}\_1 + (1 - \lambda) \boldsymbol{x}\_2$ 也都是 local minimum
 
 #### Epigraph
 
@@ -96,13 +96,13 @@ Convex programming 的所有 global minimum 构成一个 convex set
 
 * 证明
 
-  * convex function $\Rightarrow$ epigraph 为 convex set
+    * convex function $\Rightarrow$ epigraph 为 convex set
 
-     简单，略过
+        简单，略过
 
-  * epigraph 为 convex set $\Rightarrow$ convex function
+    * epigraph 为 convex set $\Rightarrow$ convex function
 
-     利用 $(\boldsymbol{x}\_1, f(\boldsymbol{x}\_1)), (\boldsymbol{x}\_2, f(\boldsymbol{x}\_2)) \in$ epigraph 的性质即可证得
+        利用 $(\boldsymbol{x}\_1, f(\boldsymbol{x}\_1)), (\boldsymbol{x}\_2, f(\boldsymbol{x}\_2)) \in$ epigraph 的性质即可证得
 
 与 epigraph 相对的一个概念是 hypograph，hypograph 是这样的集合 $\\{ (\boldsymbol{x}, y) : \boldsymbol{x} \in X, y \leq f(\boldsymbol{x})\\}$
 
@@ -136,44 +136,44 @@ $$f(\boldsymbol{x}_2) \geq f(\boldsymbol{x}_1) + g^T(\boldsymbol{x}_1)(\boldsymb
 
 * 证明
 
-  * Convexity $\Rightarrow$ 不等式成立
+    * Convexity $\Rightarrow$ 不等式成立
 
-     Convexity 意味着 $f(\lambda \boldsymbol{x}\_2 + (1 - \lambda)\boldsymbol{x}\_1) \leq \lambda f(\boldsymbol{x}\_2) + (1 - \lambda)f(\boldsymbol{x}\_1) \; \lambda \in [0, 1]$，这个不等式等价于
+        Convexity 意味着 $f(\lambda \boldsymbol{x}\_2 + (1 - \lambda)\boldsymbol{x}\_1) \leq \lambda f(\boldsymbol{x}\_2) + (1 - \lambda)f(\boldsymbol{x}\_1) \; \lambda \in [0, 1]$，这个不等式等价于
 
-     $$
-     \begin{align}
-     & f(\boldsymbol{x}\_1 + \lambda (\boldsymbol{x}\_2 - \boldsymbol{x}\_1)) \leq f(\boldsymbol{x}\_1) + \lambda(f(\boldsymbol{x}\_2) - f(\boldsymbol{x}\_1)) \\\\
-     \Rightarrow & \frac{f(\boldsymbol{x}\_1 + \lambda (\boldsymbol{x}\_2 - \boldsymbol{x}\_1)) - f(\boldsymbol{x}\_1)}{\lambda} \leq f(\boldsymbol{x}\_2) - f(\boldsymbol{x}\_1)
-     \end{align}
-     $$
+        $$
+        \begin{align}
+        & f(\boldsymbol{x}\_1 + \lambda (\boldsymbol{x}\_2 - \boldsymbol{x}\_1)) \leq f(\boldsymbol{x}\_1) + \lambda(f(\boldsymbol{x}\_2) - f(\boldsymbol{x}\_1)) \\\\
+        \Rightarrow & \frac{f(\boldsymbol{x}\_1 + \lambda (\boldsymbol{x}\_2 - \boldsymbol{x}\_1)) - f(\boldsymbol{x}\_1)}{\lambda} \leq f(\boldsymbol{x}\_2) - f(\boldsymbol{x}\_1)
+        \end{align}
+        $$
 
-     取极限 $\lambda \rightarrow 0^+$，左边就是方向导数等于 $g^T(\boldsymbol{x}\_1) (\boldsymbol{x}\_2 - \boldsymbol{x}\_1)$
+        取极限 $\lambda \rightarrow 0^+$，左边就是方向导数等于 $g^T(\boldsymbol{x}\_1) (\boldsymbol{x}\_2 - \boldsymbol{x}\_1)$
 
-  * 不等式成立 $\Rightarrow$ Convexity
+    * 不等式成立 $\Rightarrow$ Convexity
 
-     令 $\boldsymbol{x} = \lambda \boldsymbol{x}\_1 + (1 - \lambda)\boldsymbol{x}\_2 \; \lambda \in [0, 1]$，不等式成立意味着
+        令 $\boldsymbol{x} = \lambda \boldsymbol{x}\_1 + (1 - \lambda)\boldsymbol{x}\_2 \; \lambda \in [0, 1]$，不等式成立意味着
 
-     $$
-     \begin{align}
-     f(\boldsymbol{x}\_1) \geq f(\boldsymbol{x}) + g^T(\boldsymbol{x})(\boldsymbol{x}\_1 - \boldsymbol{x}) \\\\
-     f(\boldsymbol{x}\_2) \geq f(\boldsymbol{x}) + g^T(\boldsymbol{x})(\boldsymbol{x}\_2 - \boldsymbol{x})
-     \end{align}
-     $$
+        $$
+        \begin{align}
+        f(\boldsymbol{x}\_1) \geq f(\boldsymbol{x}) + g^T(\boldsymbol{x})(\boldsymbol{x}\_1 - \boldsymbol{x}) \\\\
+        f(\boldsymbol{x}\_2) \geq f(\boldsymbol{x}) + g^T(\boldsymbol{x})(\boldsymbol{x}\_2 - \boldsymbol{x})
+        \end{align}
+        $$
 
-     则有
+        则有
 
-     $$
-     \begin{align}
-     & \lambda f(\boldsymbol{x}\_1) + (1 - \lambda) f(\boldsymbol{x}\_2) \\\\
-     \geq & f(\boldsymbol{x}) + \lambda g^T(\boldsymbol{x})(\boldsymbol{x}\_1 - \boldsymbol{x}) + (1 - \lambda) g^T(\boldsymbol{x})(\boldsymbol{x}\_2 - \boldsymbol{x}) \\\\
-     = & f(\boldsymbol{x}) + \lambda g^T(\boldsymbol{x})(\boldsymbol{x}\_1 - \boldsymbol{x}\_2) + g^T(\boldsymbol{x})(\boldsymbol{x}\_2 - \boldsymbol{x}) \\\\
-     = & f(\boldsymbol{x}) + g^T(\boldsymbol{x})(\lambda \boldsymbol{x}\_1 + (1 - \lambda)\boldsymbol{x}\_2 - \boldsymbol{x}) \\\\
-     \end{align}
-     $$
+        $$
+        \begin{align}
+        & \lambda f(\boldsymbol{x}\_1) + (1 - \lambda) f(\boldsymbol{x}\_2) \\\\
+        \geq & f(\boldsymbol{x}) + \lambda g^T(\boldsymbol{x})(\boldsymbol{x}\_1 - \boldsymbol{x}) + (1 - \lambda) g^T(\boldsymbol{x})(\boldsymbol{x}\_2 - \boldsymbol{x}) \\\\
+        = & f(\boldsymbol{x}) + \lambda g^T(\boldsymbol{x})(\boldsymbol{x}\_1 - \boldsymbol{x}\_2) + g^T(\boldsymbol{x})(\boldsymbol{x}\_2 - \boldsymbol{x}) \\\\
+        = & f(\boldsymbol{x}) + g^T(\boldsymbol{x})(\lambda \boldsymbol{x}\_1 + (1 - \lambda)\boldsymbol{x}\_2 - \boldsymbol{x}) \\\\
+        \end{align}
+        $$
 
-     由于 $\boldsymbol{x} = \lambda \boldsymbol{x}\_1 + (1 - \lambda)\boldsymbol{x}\_2$，所以最后一个式子就是 $f(\lambda \boldsymbol{x}\_1 + (1 - \lambda)\boldsymbol{x}\_2)$
+        由于 $\boldsymbol{x} = \lambda \boldsymbol{x}\_1 + (1 - \lambda)\boldsymbol{x}\_2$，所以最后一个式子就是 $f(\lambda \boldsymbol{x}\_1 + (1 - \lambda)\boldsymbol{x}\_2)$
 
-根据这个定理，如果存在 $\boldsymbol{x}^* \in C$ 使得 $g(\boldsymbol{x}^*) = 0$，则有 $f(\boldsymbol{x}) \geq f(\boldsymbol{x}^*) \; \forall \boldsymbol{x} \in C$，也就是 $\boldsymbol{x}^*$ 就是 minimum。
+根据这个定理，如果存在 $\boldsymbol{x}^\* \in C$ 使得 $g(\boldsymbol{x}^\*) = 0$，则有 $f(\boldsymbol{x}) \geq f(\boldsymbol{x}^\*) \; \forall \boldsymbol{x} \in C$，也就是 $\boldsymbol{x}^\*$ 就是 minimum。
 
 #### Convexity and Hessian Matrix
 
@@ -183,35 +183,35 @@ $$f(\boldsymbol{x}_2) \geq f(\boldsymbol{x}_1) + g^T(\boldsymbol{x}_1)(\boldsymb
 
 * 证明
 
-  记 Hessian matrix 为 $H(\boldsymbol{x})$
+    记 Hessian matrix 为 $H(\boldsymbol{x})$
 
-  * $H(\boldsymbol{x})$ PSD $\Rightarrow$ $f$ is convex function 
+    * $H(\boldsymbol{x})$ PSD $\Rightarrow$ $f$ is convex function 
 
-     给定 $\boldsymbol{x}\_1, \boldsymbol{x}\_2 \in C$，根据 Truncated Taylor Series 有
+        给定 $\boldsymbol{x}\_1, \boldsymbol{x}\_2 \in C$，根据 Truncated Taylor Series 有
 
-     $$f(\boldsymbol{x}\_2) = f(\boldsymbol{x}\_1) + f'(\boldsymbol{x}\_1)(\boldsymbol{x}\_2 - \boldsymbol{x}\_1) + \frac{1}{2} (\boldsymbol{x}\_2 - \boldsymbol{x}\_1)^T H(\boldsymbol{x}) (\boldsymbol{x}\_2 - \boldsymbol{x}\_1)$$
+        $$f(\boldsymbol{x}\_2) = f(\boldsymbol{x}\_1) + f'(\boldsymbol{x}\_1)(\boldsymbol{x}\_2 - \boldsymbol{x}\_1) + \frac{1}{2} (\boldsymbol{x}\_2 - \boldsymbol{x}\_1)^T H(\boldsymbol{x}) (\boldsymbol{x}\_2 - \boldsymbol{x}\_1)$$
 
-     其中 $\boldsymbol{x}$ 为 $\boldsymbol{x}\_1, \boldsymbol{x}\_2$ 之间的任意一点
+        其中 $\boldsymbol{x}$ 为 $\boldsymbol{x}\_1, \boldsymbol{x}\_2$ 之间的任意一点
 
-     由于 $H(\boldsymbol{x})$ PSD，所以 $(\boldsymbol{x}\_2 - \boldsymbol{x}\_1)^T H(\boldsymbol{x}) (\boldsymbol{x}\_2 - \boldsymbol{x}\_1) \geq 0$，所以
+        由于 $H(\boldsymbol{x})$ PSD，所以 $(\boldsymbol{x}\_2 - \boldsymbol{x}\_1)^T H(\boldsymbol{x}) (\boldsymbol{x}\_2 - \boldsymbol{x}\_1) \geq 0$，所以
 
-     $$f(\boldsymbol{x}\_2) \geq f(\boldsymbol{x}\_1) + f'(\boldsymbol{x}\_1)(\boldsymbol{x}\_2 - \boldsymbol{x}\_1)$$
+        $$f(\boldsymbol{x}\_2) \geq f(\boldsymbol{x}\_1) + f'(\boldsymbol{x}\_1)(\boldsymbol{x}\_2 - \boldsymbol{x}\_1)$$
 
-     根据前面的定理可知，$f$ 为 convex function
+        根据前面的定理可知，$f$ 为 convex function
 
-  * $f$ is convex function $\Rightarrow$ $H(\boldsymbol{x})$ PSD
+    * $f$ is convex function $\Rightarrow$ $H(\boldsymbol{x})$ PSD
 
-     <span style="background-color:#Faa;">这个证明我感觉视频里做的不太对，结合我在 google 搜索的结果我给出如下证明，不知道对不对</span>
+        <span style="background-color:#Faa;">这个证明我感觉视频里做的不太对，结合我在 google 搜索的结果我给出如下证明，不知道对不对</span>
 
-     这里得假设 $f(x)$ 3 阶连续可导，给定 $\boldsymbol{x} \in C, \lambda \in \mathbb{R}, \boldsymbol{d} \in \mathbb{R}^n$ 为任一方向，则有
+        这里得假设 $f(x)$ 3 阶连续可导，给定 $\boldsymbol{x} \in C, \lambda \in \mathbb{R}, \boldsymbol{d} \in \mathbb{R}^n$ 为任一方向，则有
 
-     $$f(\boldsymbol{x} + \lambda \boldsymbol{d}) = f(\boldsymbol{x}) + f'(\boldsymbol{x})\lambda\boldsymbol{d} + \frac{1}{2}\lambda \boldsymbol{d}^T H(\boldsymbol{x}) \lambda \boldsymbol{d} + \frac{1}{6} \sum\_i\sum\_j\sum\_k \frac{\partial f(\bar{\boldsymbol{x}})}{\partial x\_i \partial x\_j \partial x\_k}\lambda d\_i \lambda d\_j \lambda d\_j$$
+        $$f(\boldsymbol{x} + \lambda \boldsymbol{d}) = f(\boldsymbol{x}) + f'(\boldsymbol{x})\lambda\boldsymbol{d} + \frac{1}{2}\lambda \boldsymbol{d}^T H(\boldsymbol{x}) \lambda \boldsymbol{d} + \frac{1}{6} \sum\_i\sum\_j\sum\_k \frac{\partial f(\bar{\boldsymbol{x}})}{\partial x\_i \partial x\_j \partial x\_k}\lambda d\_i \lambda d\_j \lambda d\_j$$
 
-     其中 $\bar{\boldsymbol{x}}$ 在 $\boldsymbol{x}$ 和 $\boldsymbol{x} + \lambda\boldsymbol{d}$ 之间。由于 $f$ 是 convex function，根据前面定理有
-     
-     $$\frac{1}{2}\lambda \boldsymbol{d}^T H(\boldsymbol{x}) \lambda \boldsymbol{d} + \frac{1}{6} \sum\_i\sum\_j\sum\_k \frac{\partial f(\bar{\boldsymbol{x}})}{\partial x\_i \partial x\_j \partial x\_k}\lambda d\_i \lambda d\_j \lambda d\_j \geq 0$$
+        其中 $\bar{\boldsymbol{x}}$ 在 $\boldsymbol{x}$ 和 $\boldsymbol{x} + \lambda\boldsymbol{d}$ 之间。由于 $f$ 是 convex function，根据前面定理有
+        
+        $$\frac{1}{2}\lambda \boldsymbol{d}^T H(\boldsymbol{x}) \lambda \boldsymbol{d} + \frac{1}{6} \sum\_i\sum\_j\sum\_k \frac{\partial f(\bar{\boldsymbol{x}})}{\partial x\_i \partial x\_j \partial x\_k}\lambda d\_i \lambda d\_j \lambda d\_j \geq 0$$
 
-     两边同除以 $\lambda^2$ 并对左边取极限 $\lambda \rightarrow 0$，则有 $\boldsymbol{d}^T H(\boldsymbol{x}) \boldsymbol{d} \geq 0$，也就是 $H(\boldsymbol{x})$ 是 PSD。
+        两边同除以 $\lambda^2$ 并对左边取极限 $\lambda \rightarrow 0$，则有 $\boldsymbol{d}^T H(\boldsymbol{x}) \boldsymbol{d} \geq 0$，也就是 $H(\boldsymbol{x})$ 是 PSD。
 
 #### Jensen's Inequality
 
@@ -225,24 +225,24 @@ $$f(\sum_{i=1}^{k} \lambda_i \boldsymbol{x}_i) \leq \sum_{i=1}^{k} \lambda_if(\b
 
 * 证明
 
-  * 不等式成立 $\Rightarrow$ convexity
+    * 不等式成立 $\Rightarrow$ convexity
 
-     这个简单，令 $k = 2$ 就是 convex function 的定义
+        这个简单，令 $k = 2$ 就是 convex function 的定义
 
-  * Convexity $\Rightarrow$ 不等式成立 (用 Induction 的方式证明)
+    * Convexity $\Rightarrow$ 不等式成立 (用 Induction 的方式证明)
 
-     $k \leq 2$ 时显然成立，就是 convex function 的定义，假设对于 $k - 1$ 的情况成立，对于 $k$ 的情况
+        $k \leq 2$ 时显然成立，就是 convex function 的定义，假设对于 $k - 1$ 的情况成立，对于 $k$ 的情况
 
-     $$
-     \begin{align}
-     & f(\sum\_{i = 1}^k \lambda\_i \boldsymbol{x}\_i) \\\\
-     = & f(\sum\_{i = 1}^{k-1} \lambda\_i \boldsymbol{x}\_i + \lambda\_k \boldsymbol{x}\_k) \\\\
-     = & f((1 - \lambda\_k)\sum\_{i = 1}^{k-1} \frac{\lambda\_i}{1 - \lambda\_k} \boldsymbol{x}\_i + \lambda\_k \boldsymbol{x}\_k) \\\\
-     \leq & (1 - \lambda\_k)f(\sum\_{i = 1}^{k-1} \frac{\lambda\_i}{1 - \lambda\_k} \boldsymbol{x}\_i) + \lambda\_k f(\boldsymbol{x}\_k)
-     \end{align}
-     $$
+        $$
+        \begin{align}
+        & f(\sum\_{i = 1}^k \lambda\_i \boldsymbol{x}\_i) \\\\
+        = & f(\sum\_{i = 1}^{k-1} \lambda\_i \boldsymbol{x}\_i + \lambda\_k \boldsymbol{x}\_k) \\\\
+        = & f((1 - \lambda\_k)\sum\_{i = 1}^{k-1} \frac{\lambda\_i}{1 - \lambda\_k} \boldsymbol{x}\_i + \lambda\_k \boldsymbol{x}\_k) \\\\
+        \leq & (1 - \lambda\_k)f(\sum\_{i = 1}^{k-1} \frac{\lambda\_i}{1 - \lambda\_k} \boldsymbol{x}\_i) + \lambda\_k f(\boldsymbol{x}\_k)
+        \end{align}
+        $$
 
-     后面的推导简单就不写了
+        后面的推导简单就不写了
 
 #### Operations Preserving Convexity
 
