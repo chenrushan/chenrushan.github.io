@@ -101,21 +101,21 @@ $$B^{k+1} = B^k + \frac{(\delta^k - B^k\gamma^k)(\delta^k - B^k\gamma^k)^T}{(\de
 
 * $B^{k+1}$ 不一定 positive definite，易知如果 $B^k$ positive definite 且分母 $(\delta^k - B^k\gamma^k)^T \gamma^k > 0$，则 $B^{k+1}$ 也是 positive definite matrix (根据 positive definite 的定义即可证明)，但问题是 $(\delta^k - B^k\gamma^k)^T \gamma^k$ 没法保证 $> 0$，举个例子，考虑函数
 
-  $$f(\boldsymbol{x}) = \frac{x\_1^4}{4} + \frac{x\_2^2}{2} - x\_1 x\_2 + x\_1 - x\_2$$
+    $$f(\boldsymbol{x}) = \frac{x\_1^4}{4} + \frac{x\_2^2}{2} - x\_1 x\_2 + x\_1 - x\_2$$
 
-  给定初始点 $\boldsymbol{x}^0 = [0.59607, 0.59607]^T$，则
+    给定初始点 $\boldsymbol{x}^0 = [0.59607, 0.59607]^T$，则
 
-  $$H^0 = \begin{pmatrix} 0.94913 & 0.14318 \\\\ 0.14318 & 0.59702 \end{pmatrix}$$
+    $$H^0 = \begin{pmatrix} 0.94913 & 0.14318 \\\\ 0.14318 & 0.59702 \end{pmatrix}$$
 
-  这里 $H^0$ positive definite，但是 $(\delta^0 - B^0\gamma^0)^T \gamma^0 = -0.03276 < 0$
+    这里 $H^0$ positive definite，但是 $(\delta^0 - B^0\gamma^0)^T \gamma^0 = -0.03276 < 0$
 
-  $$H^1 = \begin{pmatrix} 0.94481 & 0.23324 \\\\ 0.23324 & -1.2788 \end{pmatrix}$$
+    $$H^1 = \begin{pmatrix} 0.94481 & 0.23324 \\\\ 0.23324 & -1.2788 \end{pmatrix}$$
 
-  可以验证 $H^1$ 并不是 positive definite matrix
+    可以验证 $H^1$ 并不是 positive definite matrix
 
-  (例子来源于 An Introduction to Optimization [Edwin K. P. Chong, Stanislaw H. Zak])
+    (例子来源于 An Introduction to Optimization [Edwin K. P. Chong, Stanislaw H. Zak])
 
-  因此 $\boldsymbol{d}^{k+1}$ 并不能保证是 descent direction
+    因此 $\boldsymbol{d}^{k+1}$ 并不能保证是 descent direction
 
 * 如果 $(\delta^k - B^k\gamma^k)^T \gamma^k$ 接近于 $0$，则实际在计算 $B^{k+1}$ 可能会遇到问题
 
@@ -162,53 +162,53 @@ $$B^{k+1} = B^k + \frac{ \delta^k {\delta^k}^T }{ {\delta^k}^T \gamma^k} - \frac
 
 * 证明
 
-  如果 $B^k$ 是 symmetric matrix，则 $B^{k+1}$ 显然也是，所以下面主要证明其 positive definitness
+    如果 $B^k$ 是 symmetric matrix，则 $B^{k+1}$ 显然也是，所以下面主要证明其 positive definitness
 
-  * <p style="background-color: #9f9">首先证明 $B^{k+1}$ 是 positive semi-definite</p>
+    * <p style="background-color: #9f9">首先证明 $B^{k+1}$ 是 positive semi-definite</p>
 
-      给定任意 $\boldsymbol{v} \in \mathbb{R}^n \neq 0$
+        给定任意 $\boldsymbol{v} \in \mathbb{R}^n \neq 0$
 
-      $$
-      \begin{align}
-      \boldsymbol{v}^T B^{k+1} \boldsymbol{v} = & \boldsymbol{v}^T B^k \boldsymbol{v} + \frac{\boldsymbol{v}^T \delta^k {\delta^k}^T \boldsymbol{v}}{ {\delta^k}^T \gamma^k} - \frac{ \boldsymbol{v}^T B^k \gamma^k {\gamma^k}^T B^k \boldsymbol{v}}{ {\gamma^k}^T B^k \gamma^k} \\\\
-      = & \boldsymbol{v}^T B^k \boldsymbol{v} + \frac{(\boldsymbol{v}^T \delta^k)^2}{ {\delta^k}^T \gamma^k} - \frac{ (\boldsymbol{v}^T B^k \gamma^k)^2}{ {\gamma^k}^T B^k \gamma^k}
-      \end{align}
-      $$
+        $$
+        \begin{align}
+        \boldsymbol{v}^T B^{k+1} \boldsymbol{v} = & \boldsymbol{v}^T B^k \boldsymbol{v} + \frac{\boldsymbol{v}^T \delta^k {\delta^k}^T \boldsymbol{v}}{ {\delta^k}^T \gamma^k} - \frac{ \boldsymbol{v}^T B^k \gamma^k {\gamma^k}^T B^k \boldsymbol{v}}{ {\gamma^k}^T B^k \gamma^k} \\\\
+        = & \boldsymbol{v}^T B^k \boldsymbol{v} + \frac{(\boldsymbol{v}^T \delta^k)^2}{ {\delta^k}^T \gamma^k} - \frac{ (\boldsymbol{v}^T B^k \gamma^k)^2}{ {\gamma^k}^T B^k \gamma^k}
+        \end{align}
+        $$
 
-      由于 $B^k$ 是 symmetric positive definite matrix，所以可以另 $B^k = {B^k}^{1/2}{B^k}^{1/2}$，定义
+        由于 $B^k$ 是 symmetric positive definite matrix，所以可以另 $B^k = {B^k}^{1/2}{B^k}^{1/2}$，定义
 
-      $$
-      \begin{align}
-      \boldsymbol{\eta} = & {B^k}^{1/2} \boldsymbol{v} \\\\
-      \boldsymbol{\rho} = & {B^k}^{1/2} \gamma^k
-      \end{align}
-      $$
+        $$
+        \begin{align}
+        \boldsymbol{\eta} = & {B^k}^{1/2} \boldsymbol{v} \\\\
+        \boldsymbol{\rho} = & {B^k}^{1/2} \gamma^k
+        \end{align}
+        $$
 
-      则有
+        则有
 
-      $$
-      \begin{align}
-      \boldsymbol{v}^T B^{k+1} \boldsymbol{v} = & \boldsymbol{\eta}^T \boldsymbol{\eta} + \frac{(\boldsymbol{v}^T \delta^k)^2}{ {\delta^k}^T \gamma^k} - \frac{(\boldsymbol{\eta}^T \boldsymbol{\rho})^2}{\boldsymbol{\rho}^T \boldsymbol{\rho}} \\\\
-      = & \frac{(\Vert \boldsymbol{\eta} \Vert \Vert \boldsymbol{\rho} \Vert)^2 - (\boldsymbol{\eta}^T \boldsymbol{\rho})^2}{\boldsymbol{\rho}^T \boldsymbol{\rho}} + \frac{(\boldsymbol{v}^T \delta^k)^2}{ {\delta^k}^T \gamma^k}
-      \end{align}
-      $$
+        $$
+        \begin{align}
+        \boldsymbol{v}^T B^{k+1} \boldsymbol{v} = & \boldsymbol{\eta}^T \boldsymbol{\eta} + \frac{(\boldsymbol{v}^T \delta^k)^2}{ {\delta^k}^T \gamma^k} - \frac{(\boldsymbol{\eta}^T \boldsymbol{\rho})^2}{\boldsymbol{\rho}^T \boldsymbol{\rho}} \\\\
+        = & \frac{(\Vert \boldsymbol{\eta} \Vert \Vert \boldsymbol{\rho} \Vert)^2 - (\boldsymbol{\eta}^T \boldsymbol{\rho})^2}{\boldsymbol{\rho}^T \boldsymbol{\rho}} + \frac{(\boldsymbol{v}^T \delta^k)^2}{ {\delta^k}^T \gamma^k}
+        \end{align}
+        $$
 
-      * 根据 Cauchy-Schwarz inequality $(\Vert \boldsymbol{\eta} \Vert \Vert \boldsymbol{\rho} \Vert)^2 - (\boldsymbol{\eta}^T \boldsymbol{\rho})^2 \geq 0$
-      * $\boldsymbol{\rho}^T \boldsymbol{\rho} = {\gamma^k}^T B^k \gamma^k$，由于 $B^k$ 是 positive definite matrix，所以 $\boldsymbol{\rho}^T \boldsymbol{\rho} > 0$
-      * ${(\boldsymbol{v}^T \delta^k)^2} \geq 0$
-      * ${ {\delta^k}^T \gamma^k} = -(\alpha^k B^k \boldsymbol{g}^k)^T (\boldsymbol{g}^{k+1} - \boldsymbol{g}^k)$，由于使用 exact line search，根据 $\frac{\partial f(\boldsymbol{x}^k + \alpha^k \boldsymbol{d}^k)}{\partial \alpha^k} = 0$ 易推出 ${\boldsymbol{g}^k}^T B^k \boldsymbol{g}^{k+1} = 0$，所以 ${ {\delta^k}^T \gamma^k} = \alpha^k {\boldsymbol{g}^k}^T B^k \boldsymbol{g}^k > 0$
+        * 根据 Cauchy-Schwarz inequality $(\Vert \boldsymbol{\eta} \Vert \Vert \boldsymbol{\rho} \Vert)^2 - (\boldsymbol{\eta}^T \boldsymbol{\rho})^2 \geq 0$
+        * $\boldsymbol{\rho}^T \boldsymbol{\rho} = {\gamma^k}^T B^k \gamma^k$，由于 $B^k$ 是 positive definite matrix，所以 $\boldsymbol{\rho}^T \boldsymbol{\rho} > 0$
+        * ${(\boldsymbol{v}^T \delta^k)^2} \geq 0$
+        * ${ {\delta^k}^T \gamma^k} = -(\alpha^k B^k \boldsymbol{g}^k)^T (\boldsymbol{g}^{k+1} - \boldsymbol{g}^k)$，由于使用 exact line search，根据 $\frac{\partial f(\boldsymbol{x}^k + \alpha^k \boldsymbol{d}^k)}{\partial \alpha^k} = 0$ 易推出 ${\boldsymbol{g}^k}^T B^k \boldsymbol{g}^{k+1} = 0$，所以 ${ {\delta^k}^T \gamma^k} = \alpha^k {\boldsymbol{g}^k}^T B^k \boldsymbol{g}^k > 0$
 
-      综合上述条件 $\boldsymbol{v}^T B^{k+1} \boldsymbol{v} \geq 0$，所以 $B^{k+1}$ 是 positive semi-definite matrix
+        综合上述条件 $\boldsymbol{v}^T B^{k+1} \boldsymbol{v} \geq 0$，所以 $B^{k+1}$ 是 positive semi-definite matrix
 
-   * <p style="background-color: #9f9">接下来证明 $B^{k+1}$ 是 positive definite</p>
+     * <p style="background-color: #9f9">接下来证明 $B^{k+1}$ 是 positive definite</p>
 
-     这个主要是证明 $(\Vert \boldsymbol{\eta} \Vert \Vert \boldsymbol{\rho} \Vert)^2 - (\boldsymbol{\eta}^T \boldsymbol{\rho})^2$ 和 ${(\boldsymbol{v}^T \delta^k)^2}$ 不能同时为 0，假设二者同时为 0，则有 
-     
-     $$\boldsymbol{\eta} = \mu \boldsymbol{\rho}, \;\; \mu \in \mathbb{R}$$
+        这个主要是证明 $(\Vert \boldsymbol{\eta} \Vert \Vert \boldsymbol{\rho} \Vert)^2 - (\boldsymbol{\eta}^T \boldsymbol{\rho})^2$ 和 ${(\boldsymbol{v}^T \delta^k)^2}$ 不能同时为 0，假设二者同时为 0，则有 
+        
+        $$\boldsymbol{\eta} = \mu \boldsymbol{\rho}, \;\; \mu \in \mathbb{R}$$
 
-     这个等价于 $\boldsymbol{v} = \mu \gamma^k$，又 $\boldsymbol{v}^T \delta^k = \mu {\gamma^k}^T \delta^k = 0$，这与前面 ${\gamma^k}^T \delta^k > 0$ 的结论矛盾
+        这个等价于 $\boldsymbol{v} = \mu \gamma^k$，又 $\boldsymbol{v}^T \delta^k = \mu {\gamma^k}^T \delta^k = 0$，这与前面 ${\gamma^k}^T \delta^k > 0$ 的结论矛盾
 
-     所以 $(\Vert \boldsymbol{\eta} \Vert \Vert \boldsymbol{\rho} \Vert)^2 - (\boldsymbol{\eta}^T \boldsymbol{\rho})^2$ 和 ${(\boldsymbol{v}^T \delta^k)^2}$ 不能同时为 0，因此 $B^{k+1}$ 是 positive definite matrix
+        所以 $(\Vert \boldsymbol{\eta} \Vert \Vert \boldsymbol{\rho} \Vert)^2 - (\boldsymbol{\eta}^T \boldsymbol{\rho})^2$ 和 ${(\boldsymbol{v}^T \delta^k)^2}$ 不能同时为 0，因此 $B^{k+1}$ 是 positive definite matrix
 
 #### BFGS Algorithm
 
@@ -291,63 +291,63 @@ $$
 
 * 首先定义两个变量
 
-  $$
-  \begin{align}
-  \eta\_i = & (V^{k-i} V^{k-i+1} \cdots V^{k-1}) \boldsymbol{g}^k\\\\
-  \xi\_i = & \rho^{k-i} {\delta^{k-i}}^T (V^{k-i+1} \cdots V^{k-1}) \boldsymbol{g}^k \\\\
-  \end{align}
-  $$
-  
-  其中 $\eta\_i \in \mathbb{R}^n, \xi\_i \in \mathbb{R}$ 由此可得
-  
-  $$
-  \begin{align}
-  \xi\_i = & \rho^{k-i} {\delta^{k-i}}^T \eta\_{i-1} \\\\
-  \eta\_i = & V^{k-i} \eta\_{i-1} = (I - \rho^{k-i} \gamma^{k-i} {\delta^{k-i}}^T) \eta\_{i-1} = \eta\_{i-1} - \xi\_{i} \gamma^{k-i}
-  \end{align}
-  $$
-  
-  可以看出 $\xi\_i$ 和 $\eta\_i$ 的计算都只涉及 vector operation
+    $$
+    \begin{align}
+    \eta\_i = & (V^{k-i} V^{k-i+1} \cdots V^{k-1}) \boldsymbol{g}^k\\\\
+    \xi\_i = & \rho^{k-i} {\delta^{k-i}}^T (V^{k-i+1} \cdots V^{k-1}) \boldsymbol{g}^k \\\\
+    \end{align}
+    $$
+    
+    其中 $\eta\_i \in \mathbb{R}^n, \xi\_i \in \mathbb{R}$ 由此可得
+    
+    $$
+    \begin{align}
+    \xi\_i = & \rho^{k-i} {\delta^{k-i}}^T \eta\_{i-1} \\\\
+    \eta\_i = & V^{k-i} \eta\_{i-1} = (I - \rho^{k-i} \gamma^{k-i} {\delta^{k-i}}^T) \eta\_{i-1} = \eta\_{i-1} - \xi\_{i} \gamma^{k-i}
+    \end{align}
+    $$
+    
+    可以看出 $\xi\_i$ 和 $\eta\_i$ 的计算都只涉及 vector operation
   
 * 有了上面两个变量 $B^k\boldsymbol{g}^k$ 可以表示为
 
-  $$
-  \begin{align}
-  B^{k}\boldsymbol{g}^k = & ({V^{k-1}}^T \cdots {V^{k-m}}^T) B\_0^k \eta\_m + \\\\
-    & ({V^{k-1}}^T \cdots {V^{k-m+1}}^T) \delta^{k-m} \xi\_m + \\\\
-    & ({V^{k-1}}^T \cdots {V^{k-m+2}}^T) \delta^{k-m+1} \xi\_{m-1} + \\\\
-    & \cdots \;+ \\\\
-    & \delta^{k-1} \xi\_1
-  \end{align}
-  $$
-  
-  这个公式可以进一步以递归的形式表示，举个例子，假设 $m = 3$，则有
-  
-  $$
-  \begin{align}
-  B^{k}\boldsymbol{g}^k = & {V^{k-1}}^T ({V^{k-2}}^T ({V^{k-3}}^T B\_0^k \eta\_3 + \delta^{k-3} \xi\_3) + \delta^{k-2} \xi\_2) + \delta^{k-1} \xi\_1
-  \end{align}
-  $$
-  
-  根据这个观察定义如下变量
-  
-  $$ \zeta\_i = \left\\{ \begin{array}{ll} B\_0^k\eta\_m & i = m + 1 \\\\ {V^{k-i}}^T \zeta\_{i+1} + \delta^{k-i} \xi\_i & i \in [1, m] \end{array} \right.$$
-  
-  $\zeta\_i \in \mathbb{R}^n$，可以看出 $\zeta\_1$ 就是我们要的 $B^k \boldsymbol{g}^k$，具体分析一下这个分段函数
-  
-  * $i = m + 1$ 部分涉及一个 matrix vector multiplication，但由于通常 $B\_0^k$ 是形式较为简单的 matrix，比如 diagonal matrix，所以 $B\_0^k \boldsymbol{g}^k$ 的计算量比较小，对于 diagonal matrix，这里计算量为 $O(n)$
-  
-  * 对于 $i \in [1, m]$ 部分，展开可得
-  
-      $$
-      \begin{align}
-      \zeta\_i = & {V^{k-i}}^T \zeta\_{i+1} + \delta^{k-i} \xi\_i \\\\
-      = & (I - \rho^{k-i}\delta^{k-i} {\gamma^{k-i}}^T) \zeta\_{i+1} + \delta^{k-i} \xi\_i \\\\
-      = & \zeta\_{i+1} + \delta^{k-i} (\xi\_i - \rho^{k-i}({\gamma^{k-i}}^T\zeta\_{i+1})) \\\\
-      \end{align}
-      $$
-  
-      这里面涉及的 vector operation 包括 inner product, subtraction 等
+    $$
+    \begin{align}
+    B^{k}\boldsymbol{g}^k = & ({V^{k-1}}^T \cdots {V^{k-m}}^T) B\_0^k \eta\_m + \\\\
+      & ({V^{k-1}}^T \cdots {V^{k-m+1}}^T) \delta^{k-m} \xi\_m + \\\\
+      & ({V^{k-1}}^T \cdots {V^{k-m+2}}^T) \delta^{k-m+1} \xi\_{m-1} + \\\\
+      & \cdots \;+ \\\\
+      & \delta^{k-1} \xi\_1
+    \end{align}
+    $$
+    
+    这个公式可以进一步以递归的形式表示，举个例子，假设 $m = 3$，则有
+    
+    $$
+    \begin{align}
+    B^{k}\boldsymbol{g}^k = & {V^{k-1}}^T ({V^{k-2}}^T ({V^{k-3}}^T B\_0^k \eta\_3 + \delta^{k-3} \xi\_3) + \delta^{k-2} \xi\_2) + \delta^{k-1} \xi\_1
+    \end{align}
+    $$
+    
+    根据这个观察定义如下变量
+    
+    $$ \zeta\_i = \left\\{ \begin{array}{ll} B\_0^k\eta\_m & i = m + 1 \\\\ {V^{k-i}}^T \zeta\_{i+1} + \delta^{k-i} \xi\_i & i \in [1, m] \end{array} \right.$$
+    
+    $\zeta\_i \in \mathbb{R}^n$，可以看出 $\zeta\_1$ 就是我们要的 $B^k \boldsymbol{g}^k$，具体分析一下这个分段函数
+    
+    * $i = m + 1$ 部分涉及一个 matrix vector multiplication，但由于通常 $B\_0^k$ 是形式较为简单的 matrix，比如 diagonal matrix，所以 $B\_0^k \boldsymbol{g}^k$ 的计算量比较小，对于 diagonal matrix，这里计算量为 $O(n)$
+    
+    * 对于 $i \in [1, m]$ 部分，展开可得
+    
+        $$
+        \begin{align}
+        \zeta\_i = & {V^{k-i}}^T \zeta\_{i+1} + \delta^{k-i} \xi\_i \\\\
+        = & (I - \rho^{k-i}\delta^{k-i} {\gamma^{k-i}}^T) \zeta\_{i+1} + \delta^{k-i} \xi\_i \\\\
+        = & \zeta\_{i+1} + \delta^{k-i} (\xi\_i - \rho^{k-i}({\gamma^{k-i}}^T\zeta\_{i+1})) \\\\
+        \end{align}
+        $$
+    
+        这里面涉及的 vector operation 包括 inner product, subtraction 等
 
 ----------
 
