@@ -15,7 +15,7 @@ tags: arch, linux, gphoto2, iphone, photo
 
         gphoto2 --port=usb -R -L
 
-   根据这个命令的输出找到你要的文件对应的 id。
+    根据这个命令的输出找到你要的文件对应的 id。
 
 3. 假设你要的照片 id 是 123 到 126 以及 200 到 205，那运行下面命令拷入这些照片：
 
