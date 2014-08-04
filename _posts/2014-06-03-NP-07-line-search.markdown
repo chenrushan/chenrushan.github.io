@@ -137,10 +137,10 @@ Exact line search 有时会带来性能上的问题，这时就需要使用近�
 Backtrack line search 虽然独立一小节出来，但它本质也是一种 inexact line search，它是 inexact line search 在具体实现上的一种 trick，它通过 Armijo condition 来保证 rate of decrease，然后以 backtract 的方式来保证 step length 不会太小，参考如下伪代码
 
 <blockquote>
-INPUT: $\hat{\alpha} \in (0, +\infty), c\_1 \in (0, 1), \lambda \in (0, 1)$<br/><br/>
+INPUT: $\hat{\alpha} \in (0, +\infty), c_1 \in (0, 1), \lambda \in (0, 1)$<br/><br/>
 
 $\alpha^k = \hat{\alpha}$ <br/>
-WHILE $f(\boldsymbol{x}^k + \alpha^k \boldsymbol{d}^k) > f(\boldsymbol{x}^k) + c\_1 \alpha^k g^k \boldsymbol{d}^k$ <br/>
+WHILE $f(\boldsymbol{x}^k + \alpha^k \boldsymbol{d}^k) > f(\boldsymbol{x}^k) + c_1 \alpha^k g^k \boldsymbol{d}^k$ <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;$\alpha^k = \lambda \alpha^k$<br/><br/>
 
 OUTPUT: $\alpha^k$
