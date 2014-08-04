@@ -758,7 +758,7 @@ $$f(x) \approx f(x^0) + f'(x^0)(x - x^0) + \frac{1}{2} f''(x^0)(x - x^0)^2$$
 
 **Notations**
 <blockquote>
-the columns of a matrix $A \in \mathbb{R}^{m\times n}$ are $a_1$ through $a_n$, while the rows are $\tilde{a}_1^T$ through $\tilde{a}_n^T$.
+the columns of a matrix $A \in \mathbb{R}^{m\times n}$ are $a_1$ through $a_n$, while the rows are ${\tilde{a}_1}^T$ through $\tilde{a}_n^T$.
 </blockquote>
 
 * Derivative of $A\boldsymbol{x}$, where $A \in \mathbb{R}^{m\times n}$ and $\boldsymbol{x} \in \mathbb{R}^n$
