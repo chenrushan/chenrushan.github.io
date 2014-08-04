@@ -48,46 +48,46 @@ $$
 
 * (2.25) 的推导的 trick 是 
 
-  $$MSE(x\_0) = E\_{\mathcal{T}}(y\_0 - \hat{y}\_0)^2 = E\_{\mathcal{T}}((y\_0 - E\_{\mathcal{T}}[\hat{y}\_0]) + (E\_{\mathcal{T}}[\hat{y}\_0] - \hat{y}\_0))^2$$
+    $$MSE(x\_0) = E\_{\mathcal{T}}(y\_0 - \hat{y}\_0)^2 = E\_{\mathcal{T}}((y\_0 - E\_{\mathcal{T}}[\hat{y}\_0]) + (E\_{\mathcal{T}}[\hat{y}\_0] - \hat{y}\_0))^2$$
 
 * (2.27) 的 trick 要多一点，为了方便，我用 $E$ 代替 $E\_{y\_0 | x\_0}E\_{\mathcal{T}}$
 
-  $$
-  \begin{align}
-  EPE(x\_0) = & E(y\_0 - \hat{y}\_0)^2 \\\\
-  = & E((y\_0 - f(x\_0)) + (f(x\_0) - \hat{y}\_0))^2 \\\\
-  = & E(y\_0 - f(x\_0))^2 + E(f(x\_0) - \hat{y}\_0))^2 + 2E((y\_0 - f(x\_0))(f(x\_0) - \hat{y}\_0))
-  \end{align}
-  $$
-  
-  因为 $f(x\_0)$ 是 determinstic 的，所以
-  
-  $$E(y\_0 f(x\_0)) = f(x\_0)E(y\_0) = f^2(x\_0)$$
-  $$E(y\_0\hat{y}\_0 - f(x\_0)\hat{y}\_0) = E(\varepsilon \hat{y}\_0) = E\_{y\_0 | x\_0}E\_{\mathcal{T}}(\varepsilon \hat{y}\_0) = E\_{y\_0 | x\_0}(\varepsilon E\_{\mathcal{T}}(\hat{y}\_0)) = E\_{y\_0 | x\_0}(\varepsilon) E\_{\mathcal{T}}(\hat{y}\_0) = 0$$
+    $$
+    \begin{align}
+    EPE(x\_0) = & E(y\_0 - \hat{y}\_0)^2 \\\\
+    = & E((y\_0 - f(x\_0)) + (f(x\_0) - \hat{y}\_0))^2 \\\\
+    = & E(y\_0 - f(x\_0))^2 + E(f(x\_0) - \hat{y}\_0))^2 + 2E((y\_0 - f(x\_0))(f(x\_0) - \hat{y}\_0))
+    \end{align}
+    $$
+    
+    因为 $f(x\_0)$ 是 determinstic 的，所以
+    
+    $$E(y\_0 f(x\_0)) = f(x\_0)E(y\_0) = f^2(x\_0)$$
+    $$E(y\_0\hat{y}\_0 - f(x\_0)\hat{y}\_0) = E(\varepsilon \hat{y}\_0) = E\_{y\_0 | x\_0}E\_{\mathcal{T}}(\varepsilon \hat{y}\_0) = E\_{y\_0 | x\_0}(\varepsilon E\_{\mathcal{T}}(\hat{y}\_0)) = E\_{y\_0 | x\_0}(\varepsilon) E\_{\mathcal{T}}(\hat{y}\_0) = 0$$
 
-  所以 $EPE(x\_0) = E(y\_0 - f(x\_0))^2 + E(f(x\_0) - \hat{y}\_0))^2$，对后面一项再应用 (2.25) 推导的 trick，就得到了
+    所以 $EPE(x\_0) = E(y\_0 - f(x\_0))^2 + E(f(x\_0) - \hat{y}\_0))^2$，对后面一项再应用 (2.25) 推导的 trick，就得到了
 
-  $$EPE(x\_0) = \delta^2 + Var(\hat{y}\_0) + Bias^2(\hat{y}\_0)$$
+    $$EPE(x\_0) = \delta^2 + Var(\hat{y}\_0) + Bias^2(\hat{y}\_0)$$
 
-  根据上面一小节关于 (2.26) 中给出的 $\hat{y}\_0$ 的公式可知 $E(\hat{y}\_0) = x\_0^T \beta$，所以 $Bias(\hat{y}\_0) = 0$。
+    根据上面一小节关于 (2.26) 中给出的 $\hat{y}\_0$ 的公式可知 $E(\hat{y}\_0) = x\_0^T \beta$，所以 $Bias(\hat{y}\_0) = 0$。
 
-  $Var(\hat{y}\_0) = \delta^2 E(x\_0^T(\boldsymbol{X}^T \boldsymbol{X})^{-1}x\_0)$ 是这么推导的
+    $Var(\hat{y}\_0) = \delta^2 E(x\_0^T(\boldsymbol{X}^T \boldsymbol{X})^{-1}x\_0)$ 是这么推导的
 
-  令 $\boldsymbol{v} = (\boldsymbol{X}(\boldsymbol{X}^T\boldsymbol{X})^{-1}x\_0)$
+    令 $\boldsymbol{v} = (\boldsymbol{X}(\boldsymbol{X}^T\boldsymbol{X})^{-1}x\_0)$
 
-  $$
-  \begin{align}
-  Var(\hat{y}\_0) = & Var(x\_0^T \beta + \boldsymbol{v}^T \boldsymbol{\varepsilon}) \\\\
-  = & E((\boldsymbol{v}^T \boldsymbol{\varepsilon})^2) \\\\
-  = & E((\sum\_i v\_i \varepsilon\_i)^2) \\\\
-  = & E(\sum\_i v\_i^2 \varepsilon\_i^2) (\text{if} \; i \neq j \; \varepsilon\_i \; \text{and} \; \varepsilon\_j \; \text{are iid, so} \; E(\varepsilon\_i \varepsilon\_j) = 0) \\\\
-  = & \delta^2 E(\sum\_i v\_i^2) \\\\
-  = & \delta^2 E(\boldsymbol{v}^T \boldsymbol{v}) \\\\
-  = & \delta^2 E(x\_0^T(\boldsymbol{X}^T \boldsymbol{X})^{-1}x\_0)
-  \end{align}
-  $$
+    $$
+    \begin{align}
+    Var(\hat{y}\_0) = & Var(x\_0^T \beta + \boldsymbol{v}^T \boldsymbol{\varepsilon}) \\\\
+    = & E((\boldsymbol{v}^T \boldsymbol{\varepsilon})^2) \\\\
+    = & E((\sum\_i v\_i \varepsilon\_i)^2) \\\\
+    = & E(\sum\_i v\_i^2 \varepsilon\_i^2) (\text{if} \; i \neq j \; \varepsilon\_i \; \text{and} \; \varepsilon\_j \; \text{are iid, so} \; E(\varepsilon\_i \varepsilon\_j) = 0) \\\\
+    = & \delta^2 E(\sum\_i v\_i^2) \\\\
+    = & \delta^2 E(\boldsymbol{v}^T \boldsymbol{v}) \\\\
+    = & \delta^2 E(x\_0^T(\boldsymbol{X}^T \boldsymbol{X})^{-1}x\_0)
+    \end{align}
+    $$
 
-  另外意外想到的一个公式是 $tr(\boldsymbol{v}\boldsymbol{v}^T) = \boldsymbol{v}^T\boldsymbol{v}$
+    另外意外想到的一个公式是 $tr(\boldsymbol{v}\boldsymbol{v}^T) = \boldsymbol{v}^T\boldsymbol{v}$
 
 #### (2.28)
 
@@ -152,11 +152,11 @@ $$
 
 * 由于 $\hat{\beta} = (\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T y$，所以 $\hat{\beta}$ 可以看成是 $y$ 的一个 linear transformation (可以把 $(\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T)$ 整体看成一个 matrix)，根据[这篇文章](http://www.statlect.com/normal_distribution_linear_combinations.htm)中给出的定理，$\hat{\beta}$ 服从 multivariate normal distribution，同时
 
-  $$var(\hat{\beta}) = (\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T \delta^2 I ((\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T)^T = (\boldsymbol{X}^T\boldsymbol{X})^{-1}\delta^2$$
+    $$var(\hat{\beta}) = (\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T \delta^2 I ((\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T)^T = (\boldsymbol{X}^T\boldsymbol{X})^{-1}\delta^2$$
 
 #### (3.11)
 
-关于为什么 $\frac{(N-p-1)\hat{\delta}^2}{\delta^2}$ 符合 $\mathcal{X}_{N-p-1}^2$ 分布可以参考 [goodness of fit](http://en.wikipedia.org/wiki/Goodness_of_fit)，regression analysis 的情况和 categorical data 的公式是不一样的。
+关于为什么 $\frac{(N-p-1)\hat{\delta}^2}{\delta^2}$ 符合 $\mathcal{X}\_{N-p-1}^2$ 分布可以参考 [goodness of fit](http://en.wikipedia.org/wiki/Goodness_of_fit)，regression analysis 的情况和 categorical data 的公式是不一样的。
 
 #### (3.12)
 
@@ -184,36 +184,36 @@ Gauss-Markov Therom 总体的意思是就是 least square estimator (LSE) of $\b
 
 * **linear estimator**
 
-  如果 $\hat{\beta}$ 的每个分量都可以表示为 $c^T y, \; c \in \mathbb{R}^n$，$y$ 就是所有的 responce，也就是 $\hat{\beta}\_i$ 是所有 responce 的 linear combination，则 $\hat{\beta}$ 就被称为 linear estimator。对于 LSE，$\hat{\beta} = (\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T y$，显然 LSE 是 linear estimator
+    如果 $\hat{\beta}$ 的每个分量都可以表示为 $c^T y, \; c \in \mathbb{R}^n$，$y$ 就是所有的 responce，也就是 $\hat{\beta}\_i$ 是所有 responce 的 linear combination，则 $\hat{\beta}$ 就被称为 linear estimator。对于 LSE，$\hat{\beta} = (\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T y$，显然 LSE 是 linear estimator
 
 * **unbiased estimator**
 
-  如果 $E(\hat{\beta}) = \beta$ 则 $\hat{\beta}$ 就是 unbiased estimator。对于 LSE
+    如果 $E(\hat{\beta}) = \beta$ 则 $\hat{\beta}$ 就是 unbiased estimator。对于 LSE
 
-  $$E(\hat{\beta}) = E((\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T y) = (\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T E(y) = (\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T \boldsymbol{X} \beta = \beta$$
+    $$E(\hat{\beta}) = E((\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T y) = (\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T E(y) = (\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T \boldsymbol{X} \beta = \beta$$
 
-  所以 LSE 是 unbiased estimator
+    所以 LSE 是 unbiased estimator
 
 * **best estimator**
 
-  这里的 best 是这么评价的 (有点意思)。令 $\theta = a^T \beta$，$\hat{\theta} = a^T \hat{\beta}$ 为 $\theta$ 的 estimator，如果对于任意的 $a \in \mathbb{R}^n$，$\hat{\theta}$ 的 MSE $E((\hat{\theta} - \theta)^2)$ 都是最小的，则认为 $\hat{\beta}$ 是最好的 estimator。
-  
-  也就是说 $\hat{\beta}$ 好不好，不是直接由 $\hat{\beta}$ 的 MSE 定的，$\hat{\beta}$ 的 MSE 等于 $E(\Vert \hat{\beta} - \beta \Vert^2)$，前后两个 MSE 有什么区别呢？前一个 MSE 展开你得到 $E((\sum\_{i} a\_{i}(\hat{\beta}\_i - \beta\_i))^2)$，后一个展开得到 $E((\sum\_i (\hat{\beta}\_i - \beta\_i)^2))$，前一个是 square of sum，后一个是 sum of square。
+    这里的 best 是这么评价的 (有点意思)。令 $\theta = a^T \beta$，$\hat{\theta} = a^T \hat{\beta}$ 为 $\theta$ 的 estimator，如果对于任意的 $a \in \mathbb{R}^n$，$\hat{\theta}$ 的 MSE $E((\hat{\theta} - \theta)^2)$ 都是最小的，则认为 $\hat{\beta}$ 是最好的 estimator。
+    
+    也就是说 $\hat{\beta}$ 好不好，不是直接由 $\hat{\beta}$ 的 MSE 定的，$\hat{\beta}$ 的 MSE 等于 $E(\Vert \hat{\beta} - \beta \Vert^2)$，前后两个 MSE 有什么区别呢？前一个 MSE 展开你得到 $E((\sum\_{i} a\_{i}(\hat{\beta}\_i - \beta\_i))^2)$，后一个展开得到 $E((\sum\_i (\hat{\beta}\_i - \beta\_i)^2))$，前一个是 square of sum，后一个是 sum of square。
 
-  假设 LSE estimator 是 $\hat{\beta}$，任意其他 linear unbiased estimator 是 $\tilde{\beta}$，$\tilde{\theta} = a^T \tilde{\beta}, \hat{\theta} = a^T \hat{\beta}$，因为它们都是 unbiased estimator，所以它们的 MSE 就是 variance
+    假设 LSE estimator 是 $\hat{\beta}$，任意其他 linear unbiased estimator 是 $\tilde{\beta}$，$\tilde{\theta} = a^T \tilde{\beta}, \hat{\theta} = a^T \hat{\beta}$，因为它们都是 unbiased estimator，所以它们的 MSE 就是 variance
 
-  $$
-  \begin{align}
-  & E((\tilde{\theta} - \theta)^2) - E((\hat{\theta} - \theta)^2) \\\\
-  = & (E(\tilde{\theta}^2) - \theta^2) - (E(\hat{\theta}^2) - \theta^2) \\\\
-  = & E(\tilde{\theta}^2) - E(\hat{\theta}^2) \\\\
-  = & E(a^T \tilde{\beta} \tilde{\beta}^T a) - E(a^T \hat{\beta} \hat{\beta}^T a) \\\\
-  = & a^T (E(\tilde{\beta} \tilde{\beta}^T) - E(\hat{\beta} \hat{\beta}^T))a \\\\
-  = & a^T (Var(\tilde{\beta}) - Var(\hat{\beta})) a \\\\
-  \end{align}
-  $$
+    $$
+    \begin{align}
+    & E((\tilde{\theta} - \theta)^2) - E((\hat{\theta} - \theta)^2) \\\\
+    = & (E(\tilde{\theta}^2) - \theta^2) - (E(\hat{\theta}^2) - \theta^2) \\\\
+    = & E(\tilde{\theta}^2) - E(\hat{\theta}^2) \\\\
+    = & E(a^T \tilde{\beta} \tilde{\beta}^T a) - E(a^T \hat{\beta} \hat{\beta}^T a) \\\\
+    = & a^T (E(\tilde{\beta} \tilde{\beta}^T) - E(\hat{\beta} \hat{\beta}^T))a \\\\
+    = & a^T (Var(\tilde{\beta}) - Var(\hat{\beta})) a \\\\
+    \end{align}
+    $$
 
-  如果 $\hat{\beta}$ 是 best estimator，则 $Var(\tilde{\beta}) - Var(\hat{\beta})$ 必须是 PSD matrix，这个证明参考 [Gauss–Markov theorem wiki](http://en.wikipedia.org/wiki/Gauss–Markov_theorem)。
+    如果 $\hat{\beta}$ 是 best estimator，则 $Var(\tilde{\beta}) - Var(\hat{\beta})$ 必须是 PSD matrix，这个证明参考 [Gauss–Markov theorem wiki](http://en.wikipedia.org/wiki/Gauss–Markov_theorem)。
 
 根据 Gauss-Markov therom，LSE 得到的 $\beta$ 是最好的 linear unbiased estimator，这并等于是 best linear estimator，我们可以通过提升一点 bias 显著降低 variance，这样就可以降低 MSE，得到更好的 linear estimator。
 
@@ -251,19 +251,19 @@ $\boldsymbol{z}\_1 = \boldsymbol{X} v\_1 = \boldsymbol{u}\_1 d\_1$ 的推导很�
 
 * **(page 72)** 第 3 段里提到 "for $q \leq 1$, the prior is not uniform in direction, but concentrates more mass in the coordinate directions"
 
-  这句话这么理解，这里的 mass 就是 probability mass，根据 L1 norm 的 contour 想象一下 L1 norm 对应的 laplace prior (即 $c \exp(-\lambda \sum\_{j = 1}^{p} |\beta\_j|)$，$c$ 是个 normalization factor，注意这里有个负号，因为 gaussian likelihood 也有个负号，两个 distribution 的 log 相加做个 argmax 就变成了这里的 argmin) 的形状 (应该是个金字塔形)，沿着某一方向的 probability mass 就是沿着那个方向对 probability density 做积分，而这实际上就是沿着那个方向对 probability density 做截面得到的截面面积，显然沿着坐标轴截得的的平面 (是个三角形) 的面积是最大的，也就是说 laplace prior 更倾向于坐标轴上的点。对于 L2 norm，显然无论你沿着那个方向做截面，其面积都是一样的，所以 L2 norm 并没有对那种 feature weight 组合有特别的偏好。
+    这句话这么理解，这里的 mass 就是 probability mass，根据 L1 norm 的 contour 想象一下 L1 norm 对应的 laplace prior (即 $c \exp(-\lambda \sum\_{j = 1}^{p} |\beta\_j|)$，$c$ 是个 normalization factor，注意这里有个负号，因为 gaussian likelihood 也有个负号，两个 distribution 的 log 相加做个 argmax 就变成了这里的 argmin) 的形状 (应该是个金字塔形)，沿着某一方向的 probability mass 就是沿着那个方向对 probability density 做积分，而这实际上就是沿着那个方向对 probability density 做截面得到的截面面积，显然沿着坐标轴截得的的平面 (是个三角形) 的面积是最大的，也就是说 laplace prior 更倾向于坐标轴上的点。对于 L2 norm，显然无论你沿着那个方向做截面，其面积都是一样的，所以 L2 norm 并没有对那种 feature weight 组合有特别的偏好。
 
-  这是 L1 regularization 倾向于将某些 feature weight 置为 0 的一种解释，另一种是从优化的角度解释，如下图所示。
+    这是 L1 regularization 倾向于将某些 feature weight 置为 0 的一种解释，另一种是从优化的角度解释，如下图所示。
 
-  <object data="/resource/ESL/l1reg.svg" type="image/svg+xml" class="blkcenter"></object>
+    <object data="/resource/ESL/l1reg.svg" type="image/svg+xml" class="blkcenter"></object>
 
-  首先注意到，最优点一定是出现在两个 contour 相切的地方，如果不是，要么不满足 l1 约束，要么 least square 太大，一定要是相切的地方才是满足 l1 约束的最小的 least sqare error。另外，随着 l1 contour 的不断缩小，相切的点渐渐得移到了坐标轴上。
+    首先注意到，最优点一定是出现在两个 contour 相切的地方，如果不是，要么不满足 l1 约束，要么 least square 太大，一定要是相切的地方才是满足 l1 约束的最小的 least sqare error。另外，随着 l1 contour 的不断缩小，相切的点渐渐得移到了坐标轴上。
 
 * **(page 102)** 公式 (4.2) 下面有这么一句 "The decision boundary is the set of points for which the log-odds are zero"，其实这个可以直接从 $Pr(G=1|X=x) = Pr(G=2|X=x)$ 推出来，这个等式直接就推出 $\\{x|\beta\_0 + \beta^T x = 0\\}$。另外，注意到
 
-  $$Pr(G=1|X=x) = Pr(G=2|X=x) \Leftrightarrow \log\frac{Pr(G=1|X=x)}{Pr(G=2|X=x)} = 0$$
+    $$Pr(G=1|X=x) = Pr(G=2|X=x) \Leftrightarrow \log\frac{Pr(G=1|X=x)}{Pr(G=2|X=x)} = 0$$
 
-  前面提到 "monotone transformation"，对于 logistic regression 和 LDA，这个 monotone transformation 就是 log-odd，对于其他模型可能是什么 exp-odd (我瞎说的，不知道真的有没有 exp-odd)，反正不管是什么，都是要得到 $Pr(G=1) = Pr(G=2)$。
+    前面提到 "monotone transformation"，对于 logistic regression 和 LDA，这个 monotone transformation 就是 log-odd，对于其他模型可能是什么 exp-odd (我瞎说的，不知道真的有没有 exp-odd)，反正不管是什么，都是要得到 $Pr(G=1) = Pr(G=2)$。
 
 * **(Page 109)** 这页里有个预测 $\hat{\boldsymbol{\Sigma}}$ 的公式，其中 $\sum\_{k=1}^{K}\sum\_{g\_i = k}$ 实际上就是 $\sum\_{x}$，这几个预测模型参数的公式很好理解，$\hat{\pi\_k}, \hat{\mu\_k}$ 都是各自 category 中预测，而 $\hat{\boldsymbol{\Sigma}}$ 由于是所有 category 共享，所以就在整个数据上预测
 
