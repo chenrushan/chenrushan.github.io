@@ -58,11 +58,11 @@ $$
 
 * 初始点为 (-1, -2)，函数的收敛过程如下图所示，以 0.001 为 gradient norm 的阈值，共迭代 27 步，实现见开头给出的脚本
 
-  <img style="width:80%" src="/resource/NNP/08-steepest/ellip2.png" />
+    <img style="width:80%" src="/resource/NNP/08-steepest/ellip2.png" />
 
 * 初始点为 (1, 0)，函数的收敛过程如下图所示，以 0.001 为 gradient norm 的阈值，共迭代 5 步
 
-  <img style="width:80%" src="/resource/NNP/08-steepest/ellip1.png" />
+    <img style="width:80%" src="/resource/NNP/08-steepest/ellip1.png" />
 
 这个例子我们可以看出初始点的不同对收敛速度是有影响的
 
@@ -72,11 +72,11 @@ $$
 
 * 初始点为 (0.6, 0.6)，收敛过程如下图所示，以 0.001 为 gradient norm 的阈值，共迭代 2029 步
 
-  <img style="width:80%" src="/resource/NNP/08-steepest/rosen1.png" />
+    <img style="width:80%" src="/resource/NNP/08-steepest/rosen1.png" />
 
 * 初始点为 (-1.2, 1)，收敛过程如下图所示，以 0.001 为 gradient norm 的阈值，共迭代 2300 步
 
-  <img style="width:80%" src="/resource/NNP/08-steepest/rosen2.png" />
+    <img style="width:80%" src="/resource/NNP/08-steepest/rosen2.png" />
 
 对于这个例子，不管你选那个初始点，迭代的过程总是很慢
 
@@ -96,9 +96,9 @@ $$f(x) = f(x^*) + f'(x^*)(x - x^*) + \frac{1}{2}(x - x^*)^T H(x^*) (x - x^*) + O
 
 由于 $H$ 是 symmetric positive definite matrix，所以我们可以直接得到这个函数的 close-form solution，只需令 gradient 等于 0 即 $\boldsymbol{g} = H\boldsymbol{x} - \boldsymbol{c} = 0$ 可得
 
-$$\boldsymbol{x}^* = H^{-1}\boldsymbol{c}$$
+$$\boldsymbol{x}^\* = H^{-1}\boldsymbol{c}$$
 
-为了计算 convergence rate，这里定义 Error function $E(\boldsymbol{x}^k) = \frac{1}{2}(\boldsymbol{x}^k - \boldsymbol{x}^*)^T H (\boldsymbol{x}^k - \boldsymbol{x}^*)$，并以
+为了计算 convergence rate，这里定义 Error function $E(\boldsymbol{x}^k) = \frac{1}{2}(\boldsymbol{x}^k - \boldsymbol{x}^\*)^T H (\boldsymbol{x}^k - \boldsymbol{x}^\*)$，并以
 
 $$\frac{E(\boldsymbol{x}^k) - E(\boldsymbol{x}^{k+1})}{E(\boldsymbol{x}^k)}$$
 
@@ -106,14 +106,14 @@ $$\frac{E(\boldsymbol{x}^k) - E(\boldsymbol{x}^{k+1})}{E(\boldsymbol{x}^k)}$$
 
 $$
 \begin{align}
-E(\boldsymbol{x}^k) = & \frac{1}{2}(\boldsymbol{x}^k - \boldsymbol{x}^*)^T H (\boldsymbol{x}^k - \boldsymbol{x}^*) \\\\
-= & \frac{1}{2}(\boldsymbol{x}^k H \boldsymbol{x}^k - 2\boldsymbol{x}^* H \boldsymbol{x}^k + \boldsymbol{x}^* H \boldsymbol{x}^*) \\\\
-= & \frac{1}{2} \boldsymbol{x}^k H \boldsymbol{x}^k - \boldsymbol{c} \boldsymbol{x}^k + \frac{1}{2}\boldsymbol{x}^* H \boldsymbol{x}^* \;\; (\because \boldsymbol{x}^* = H^{-1}\boldsymbol{c})\\\\
-= & f(\boldsymbol{x}^k) + \frac{1}{2}\boldsymbol{x}^* H \boldsymbol{x}^*
+E(\boldsymbol{x}^k) = & \frac{1}{2}(\boldsymbol{x}^k - \boldsymbol{x}^\*)^T H (\boldsymbol{x}^k - \boldsymbol{x}^\*) \\\\
+= & \frac{1}{2}(\boldsymbol{x}^k H \boldsymbol{x}^k - 2\boldsymbol{x}^\* H \boldsymbol{x}^k + \boldsymbol{x}^\* H \boldsymbol{x}^\*) \\\\
+= & \frac{1}{2} \boldsymbol{x}^k H \boldsymbol{x}^k - \boldsymbol{c} \boldsymbol{x}^k + \frac{1}{2}\boldsymbol{x}^\* H \boldsymbol{x}^\* \;\; (\because \boldsymbol{x}^\* = H^{-1}\boldsymbol{c})\\\\
+= & f(\boldsymbol{x}^k) + \frac{1}{2}\boldsymbol{x}^\* H \boldsymbol{x}^\*
 \end{align}
 $$
 
-其中 $\frac{1}{2} \boldsymbol{x}^* H \boldsymbol{x}^*$ 是个常量，所以 $E(\boldsymbol{x})$ 和 $f(\boldsymbol{x})$ 本质上是一样的。
+其中 $\frac{1}{2} \boldsymbol{x}^\* H \boldsymbol{x}^\*$ 是个常量，所以 $E(\boldsymbol{x})$ 和 $f(\boldsymbol{x})$ 本质上是一样的。
 
 --------------------
 
@@ -121,24 +121,24 @@ $$
 
 * 分子代入 $\boldsymbol{x}^{k+1} = \boldsymbol{x}^k - \alpha^k \boldsymbol{g}^k$ 有
 
-  $$
-  \begin{align}
-  E(\boldsymbol{x}^k) - E(\boldsymbol{x}^{k+1}) = & \frac{1}{2} \boldsymbol{x}^k H \boldsymbol{x}^k - \boldsymbol{c} \boldsymbol{x}^k - \frac{1}{2} \boldsymbol{x}^{k+1} H \boldsymbol{x}^{k+1} + \boldsymbol{c} \boldsymbol{x}^{k+1} \\\\
-  = & {\alpha^k ({\boldsymbol{x}^k} - {\boldsymbol{x}^*})^T H \boldsymbol{g}^k - \frac{1}{2}{\alpha^k}^2 {\boldsymbol{g}^k}^T H \boldsymbol{g}^k} \\\\
-  = & {\alpha^k (H \boldsymbol{x}^k - c)^T \boldsymbol{g}^k - \frac{1}{2}{\alpha^k}^2 {\boldsymbol{g}^k}^T H \boldsymbol{g}^k} \\\\
-  = & {\alpha^k {\boldsymbol{g}^k}^T \boldsymbol{g}^k - \frac{1}{2}{\alpha^k}^2 {\boldsymbol{g}^k}^T H \boldsymbol{g}^k} \\\\
-  \end{align}
-  $$
+    $$
+    \begin{align}
+    E(\boldsymbol{x}^k) - E(\boldsymbol{x}^{k+1}) = & \frac{1}{2} \boldsymbol{x}^k H \boldsymbol{x}^k - \boldsymbol{c} \boldsymbol{x}^k - \frac{1}{2} \boldsymbol{x}^{k+1} H \boldsymbol{x}^{k+1} + \boldsymbol{c} \boldsymbol{x}^{k+1} \\\\
+    = & {\alpha^k ({\boldsymbol{x}^k} - {\boldsymbol{x}^\*})^T H \boldsymbol{g}^k - \frac{1}{2}{\alpha^k}^2 {\boldsymbol{g}^k}^T H \boldsymbol{g}^k} \\\\
+    = & {\alpha^k (H \boldsymbol{x}^k - c)^T \boldsymbol{g}^k - \frac{1}{2}{\alpha^k}^2 {\boldsymbol{g}^k}^T H \boldsymbol{g}^k} \\\\
+    = & {\alpha^k {\boldsymbol{g}^k}^T \boldsymbol{g}^k - \frac{1}{2}{\alpha^k}^2 {\boldsymbol{g}^k}^T H \boldsymbol{g}^k} \\\\
+    \end{align}
+    $$
 
-* 对于分母，由于 $H(\boldsymbol{x}^k - \boldsymbol{x}^*) = H\boldsymbol{x}^k - c = \boldsymbol{g}^k$ 有
+* 对于分母，由于 $H(\boldsymbol{x}^k - \boldsymbol{x}^\*) = H\boldsymbol{x}^k - c = \boldsymbol{g}^k$ 有
 
-  $$
-  \begin{align}
-  E(\boldsymbol{x}^k) = & \frac{1}{2}(\boldsymbol{x}^k - \boldsymbol{x}^*)^T H (\boldsymbol{x}^k - \boldsymbol{x}^*) \\\\
-  = & \frac{1}{2} {(H^{-1}\boldsymbol{g}^k)}^T H (H^{-1}\boldsymbol{g}^k) \\\\
-  = & \frac{1}{2} {\boldsymbol{g}^k}^T H^{-1} \boldsymbol{g}^k
-  \end{align}
-  $$
+    $$
+    \begin{align}
+    E(\boldsymbol{x}^k) = & \frac{1}{2}(\boldsymbol{x}^k - \boldsymbol{x}^\*)^T H (\boldsymbol{x}^k - \boldsymbol{x}^\*) \\\\
+    = & \frac{1}{2} {(H^{-1}\boldsymbol{g}^k)}^T H (H^{-1}\boldsymbol{g}^k) \\\\
+    = & \frac{1}{2} {\boldsymbol{g}^k}^T H^{-1} \boldsymbol{g}^k
+    \end{align}
+    $$
 
 这样 convergence rate 就变为
 
