@@ -167,42 +167,42 @@ ADMM 较 Method of Multipliers 不同的地方就是它将上述第一部分进�
 
 ##### Optimality Condition
 
-根据 KKT condition，如果 $(x^*, z^*, y^*)$ 为问题最优解，则有
+根据 KKT condition，如果 $(x^\*, z^\*, y^\*)$ 为问题最优解，则有
 
-* $0 \in \frac{\partial L(x, z, y^*)}{\partial x} \vert\_{x = x^*} = \partial f(x^*) + A^T y^*$
-* $0 \in \frac{\partial L(x, z, y^*)}{\partial z} \vert\_{z = z^*} = \partial g(z^*) + B^T y^*$
-* $Ax^* + B z^* - c = 0$
+* $0 \in \frac{\partial L(x, z, y^\*)}{\partial x} \vert\_{x = x^\*} = \partial f(x^\*) + A^T y^\*$
+* $0 \in \frac{\partial L(x, z, y^\*)}{\partial z} \vert\_{z = z^\*} = \partial g(z^\*) + B^T y^\*$
+* $Ax^\* + B z^\* - c = 0$
 
 ----------
 
 * 由于 $z^{k+1} \in \underset{z}{\arg\min} L\_{\rho}(x^{k+1}, z, y^{k})$，所以
 
-  $$
-  \begin{align}
-  0 \in & \frac{\partial L\_{\rho}(x^{k+1}, z, y^{k})}{\partial z} \vert\_{z=z^{k+1}} \\\\
-  = & \partial g(z^{k+1}) + B^T (y^k + \rho (Ax^{k+1} + Bz^{k+1} -c)) \\\\
-  = & \partial g(z^{k+1}) + B^T y^{k+1}
-  \end{align}
-  $$
+    $$
+    \begin{align}
+    0 \in & \frac{\partial L\_{\rho}(x^{k+1}, z, y^{k})}{\partial z} \vert\_{z=z^{k+1}} \\\\
+    = & \partial g(z^{k+1}) + B^T (y^k + \rho (Ax^{k+1} + Bz^{k+1} -c)) \\\\
+    = & \partial g(z^{k+1}) + B^T y^{k+1}
+    \end{align}
+    $$
   
-  也就是说上面的第二个条件在每一轮迭代结束后都是满足的
+    也就是说上面的第二个条件在每一轮迭代结束后都是满足的
 
 * 由于 $x^{k+1} \in \underset{x}{\arg\min} L\_{\rho}(x, z^{k}, y^{k})$，所以
 
-  $$
-  \begin{align}
-  0 \in & \frac{\partial L\_{\rho}(x, z^{k}, y^{k})}{\partial x} \vert\_{x = x^{k+1}} \\\\
-  = & \partial f(x^{k+1}) + A^T (y^k + \rho(Ax^{k+1} + Bz^{k} - c)) \\\\
-  = & \partial f(x^{k+1}) + A^T (y^k + \rho(Ax^{k+1} + Bz^{k+1} - c) - \rho B(z^{k+1} - z^k)) \\\\
-  = & \partial f(x^{k+1}) + A^T y^{k+1} - \rho A^T B(z^{k+1} - z^k) \\\\
-  \end{align}
-  $$
+    $$
+    \begin{align}
+    0 \in & \frac{\partial L\_{\rho}(x, z^{k}, y^{k})}{\partial x} \vert\_{x = x^{k+1}} \\\\
+    = & \partial f(x^{k+1}) + A^T (y^k + \rho(Ax^{k+1} + Bz^{k} - c)) \\\\
+    = & \partial f(x^{k+1}) + A^T (y^k + \rho(Ax^{k+1} + Bz^{k+1} - c) - \rho B(z^{k+1} - z^k)) \\\\
+    = & \partial f(x^{k+1}) + A^T y^{k+1} - \rho A^T B(z^{k+1} - z^k) \\\\
+    \end{align}
+    $$
 
-  上式等价于
+    上式等价于
 
-  $$\rho A^T B(z^{k+1} - z^k) \in \partial f(x^{k+1}) + A^T y^{k+1}$$
-  
-  定义 $s^{k+1} = \rho A^T B(z^{k+1} - z^k)$，$s^{k+1}$ 被成为 dual residual，后面的 convergence proof 可以证明 $s^{k+1} \rightarrow 0 \; \text{as} \; k \rightarrow \infty$，这就意味着 $0 \in \partial f(x^{k}) + A^T y^{k} \;\; k \rightarrow \infty$ 也就是 $k \rightarrow \infty$ 则第一个条件也会满足
+    $$\rho A^T B(z^{k+1} - z^k) \in \partial f(x^{k+1}) + A^T y^{k+1}$$
+    
+    定义 $s^{k+1} = \rho A^T B(z^{k+1} - z^k)$，$s^{k+1}$ 被成为 dual residual，后面的 convergence proof 可以证明 $s^{k+1} \rightarrow 0 \; \text{as} \; k \rightarrow \infty$，这就意味着 $0 \in \partial f(x^{k}) + A^T y^{k} \;\; k \rightarrow \infty$ 也就是 $k \rightarrow \infty$ 则第一个条件也会满足
 
 * 另 $r^{k+1} = A x^{k+1} + B z^{k+1} - c$，$r^{k+1}$ 被成为 primal residual，下面的 convergence proof 可以证明 $r^{k+1} \rightarrow 0 \; \text{as} \; k \rightarrow \infty$，也就是 $k \rightarrow \infty$，最后一个条件也会满足
 
@@ -218,11 +218,11 @@ $$ \Vert r^k \Vert\_2 \leq \epsilon^{prime} \; \text{and} \; \Vert s^k \Vert\_2 
 
 * $f$ 是 closed proper convex function, 这也就意味着 $f$ 的 subdifferential 是有定义的
 
-* $L\_0(x, z, y)$ 存在 saddle point, 也就是说 $(x^*, z^*, y^*)$ 满足
+* $L\_0(x, z, y)$ 存在 saddle point, 也就是说 $(x^\*, z^\*, y^\*)$ 满足
 
-  $$L\_0(x^*, z^*, y) \leq L\_0(x^*, z^*, y^*) \leq L\_0(x, z, y^*)$$
+    $$L\_0(x^\*, z^\*, y) \leq L\_0(x^\*, z^\*, y^\*) \leq L\_0(x, z, y^\*)$$
 
-  这也就意味着 primal problem 和 dual problem 的最优值相同，求解 dual problem 不会带来 duality gap
+    这也就意味着 primal problem 和 dual problem 的最优值相同，求解 dual problem 不会带来 duality gap
 
 具体证明过程参考 appendix of [admm_distr_stats](https://web.stanford.edu/~boyd/papers/pdf/admm_distr_stats.pdf)
 
