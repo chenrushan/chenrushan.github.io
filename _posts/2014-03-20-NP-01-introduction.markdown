@@ -20,12 +20,12 @@ tags: NPTEL, numerical optimization
 * Typical steps for solving mathematical optimization problem
 
   * Problem formulation (which is an art, time would be saved if problem is formulated properly)
-    * define $f(x)$, $S$
+      * define $f(x)$, $S$
   * Checking the existence of a solution
   * Solving the optimization problem, if a solution exists
-    * Graphical method (suitable for functions of 1 or 2 variables)
-    * Analytical method
-    * Numerical method (iterative algorithm)
+      * Graphical method (suitable for functions of 1 or 2 variables)
+      * Analytical method
+      * Numerical method (iterative algorithm)
   * Solution analysis
   * Algorithm analysis
 
