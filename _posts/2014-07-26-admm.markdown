@@ -378,42 +378,42 @@ $$y \in \partial f(x) \Longleftrightarrow x \in \partial f^*(y) \Longleftrightar
 
   * 证明 $y \in \partial f(x) \Longleftrightarrow x^T y = f(x) + f^\*(y)$
 
-      因为 $y \in \partial f(x)$，所以 $0 \in y - \partial f(x) = \frac{\partial (y^T u - f(u))}{\partial u} \vert\_{u = x}$，因此
+        因为 $y \in \partial f(x)$，所以 $0 \in y - \partial f(x) = \frac{\partial (y^T u - f(u))}{\partial u} \vert\_{u = x}$，因此
 
-      $$ \underset{u}{\sup} y^T u - f(u) = y^T x - f(x) $$
+        $$ \underset{u}{\sup} y^T u - f(u) = y^T x - f(x) $$
 
-      而 $f^\*(y) = \underset{u}{\sup} y^T u - f(u)$，因此 $x^T y = f(x) + f^\*(y)$
+        而 $f^\*(y) = \underset{u}{\sup} y^T u - f(u)$，因此 $x^T y = f(x) + f^\*(y)$
 
   * 证明 $y \in \partial f(x) \Longleftrightarrow x \in \partial f^\*(y)$
 
-      如果 $y \in \partial f(x)$，则有
+        如果 $y \in \partial f(x)$，则有
 
-      $$
-      \begin{align}
-      f^\*(v) = & \underset{u}{\sup} v^T u - f(u) \\\\
-      \geq & v^T x - f(x) \\\\
-      = & x^T (v - y) - f(x) + y^T x \\\\
-      = & f^\*(y) + x^T (v - y)
-      \end{align}
-      $$
+        $$
+        \begin{align}
+        f^\*(v) = & \underset{u}{\sup} v^T u - f(u) \\\\
+        \geq & v^T x - f(x) \\\\
+        = & x^T (v - y) - f(x) + y^T x \\\\
+        = & f^\*(y) + x^T (v - y)
+        \end{align}
+        $$
 
-      因此 $x \in \partial f^\*(y)$，所以 $y \in \partial f(x) \Longrightarrow x \in \partial f^\*(y)$
+        因此 $x \in \partial f^\*(y)$，所以 $y \in \partial f(x) \Longrightarrow x \in \partial f^\*(y)$
 
-      如果 $x \in \partial f^\*(y)$，则有
+        如果 $x \in \partial f^\*(y)$，则有
 
-      $$
-      \begin{align}
-      f(v) = f^{\*\*}(v) = & \underset{u}{\sup} v^T u - f^\*(u) \\\\
-      \geq & v^T y - f^\*(y) \\\\
-      = & y^T (v - x) - f^\*(y) + x^T y \\\\
-      = & f^{\*\*}(x) + y^T (v - x) \\\\
-      = & f(x) + y^T (v - x) \\\\
-      \end{align}
-      $$
+        $$
+        \begin{align}
+        f(v) = f^{\*\*}(v) = & \underset{u}{\sup} v^T u - f^\*(u) \\\\
+        \geq & v^T y - f^\*(y) \\\\
+        = & y^T (v - x) - f^\*(y) + x^T y \\\\
+        = & f^{\*\*}(x) + y^T (v - x) \\\\
+        = & f(x) + y^T (v - x) \\\\
+        \end{align}
+        $$
 
-      因此 $y \in \partial f(x)$，所以 $x \in \partial f^\*(y) \Longrightarrow y \in \partial f(x)$
+        因此 $y \in \partial f(x)$，所以 $x \in \partial f^\*(y) \Longrightarrow y \in \partial f(x)$
 
-      综述 $x \in \partial f^\*(y) \Longleftrightarrow y \in \partial f(x)$
+        综述 $x \in \partial f^\*(y) \Longleftrightarrow y \in \partial f(x)$
 
 <blockquote>
 $x \in \partial f^*(y) \Longleftrightarrow x \in \underset{u}{\arg\min} \; f(u) - y^T u$
