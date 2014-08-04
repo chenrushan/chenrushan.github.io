@@ -1,0 +1,458 @@
+---
+layout: post
+title: ADMM (Alternating Direction Method of Multipliers)
+categories: ml
+tags: admm
+---
+
+ADMM 适合解决 equality constrained convex programming problem，其问题的标准形式可以被表示为
+
+$$
+\begin{align}
+\underset{x, z}{\min} & \; f(x) + g(z) \\\\
+s.t. & \; Ax + Bz = c
+\end{align}
+$$
+
+其中 $x \in \mathbb{R}^n, z \in \mathbb{R}^m, A \in \mathbb{R}^{p\times n}, B \in \mathbb{R}^{p\times m}, c \in \mathbb{R}^p$
+
+ADMM 的基本思想是将问题转化为 dual problem 来解决，由于 primal problem 是 equality constrained，所以 dual problem 就是 unconstrained optimization problem，dual problem 可以表示为
+
+$$ \underset{y}{\max} \; h(y) $$
+
+其中 $h(y) = \underset{x, z}{\min} L(x, z, y), \;\; L(x, z, y) = f(x) + g(z) + y^T (Ax + Bz - c)$，$L(x, z, y)$ 就是 lagrangian function，$h(y)$ 即 dual function
+
+下面几节将详细介绍 ADMM 算法，首先介绍与 ADMM 密切相关的一些算法，包括 Dual Ascent, Method of Multipliers，然后介绍 ADMM，之后介绍 ADMM 的一个常见应用场景，最后给出其在 sparse logistic regression 中的应用
+
+#### Dual Ascent
+
+假设 primal problem 是
+
+$$
+\begin{align}
+\min & \; f(x) \\\\
+s.t. & \; Ax = b
+\end{align}
+$$
+
+其中 $x \in \mathbb{R}^n, A \in \mathbb{R}^{m\times n}$，同时 $f: \mathbb{R}^n \rightarrow \mathbb{R}$ 是 convex function
+
+将其转换为 dual problem，其对应的 Lagrangian 是
+
+$$ L(x, y) = f(x) + y^T (Ax - b) $$
+
+令 $g(y) = \underset{x}{\inf} L(x, y)$，则有
+
+$$
+\begin{align}
+g(y) = & \underset{x}{\inf} f(x) + y^T (Ax - b) \\\\
+= & (-\underset{x}{\sup} (-(A^T y)^T x - f(x))) - y^T b \\\\
+= & -f^*(-A^T y) - y^T b
+\end{align}
+$$
+
+因此 dual problem 是
+
+$$ \underset{y}{\max} \; -f^*(-A^T y) - y^T b $$
+
+由于这是个 maximize 的问题，所以可以用 gradient ascent 来解决，为此需要求得
+
+$$
+\begin{align}
+\frac{\partial g(y)}{\partial y} = A\partial f^*(-A^T y) - b
+\end{align}
+$$
+
+如果 $x \in \partial f^*(-A^T y)$，则 $x \in \underset{u}{\arg\min} \; f(u) + y^T A u = \underset{u}{\arg\min} L(u, y)$, 由此可知 dual ascent 每步迭代可以分为如下两个部分
+
+* $x^{k+1} \in \underset{x}{\arg\min} L(x, y^{k})$
+* $y^{k+1} = y^{k} + \alpha^k (A x^{k+1} - b)$, $\alpha^k$ is the step length
+
+##### Dual Decomposition
+
+如果 primal function $f(x)$ 是一个可拆分的函数，即
+
+$$f(x) = \sum\_{i=1}^{N} f\_i(x\_i)$$
+
+其中 $x = (x\_1, \cdots, x\_N), x\_i \in \mathbb{R}^{n\_i}, \sum\_{i=1}^{N} n\_i = n$，则 dual ascent 迭代的第一部分又可以进一步被分解为 N 个独立的子问题，具体做法如下
+
+将 $A$ 相应地拆分成 $A = (A\_1, \cdots, A\_N), A\_i \in \mathbb{R}^{m\times n\_i}$，则有
+
+$$
+\begin{align}
+L(x, y^k) = & f(x) + {y^k}^T (Ax - b) \\\\
+= & \sum\_i^{N} f\_i(x\_i) + {y^k}^T A\_i x\_i - \frac{1}{N} {y^k}^T b \\\\
+\end{align}
+$$
+
+这样 $\underset{x}{\arg\min} L(x, y^k)$ 就可以被拆分成 N 个独立的子问题，由此 dual ascent 的迭代就变为
+
+* $x\_i^{k+1} \in \underset{x\_i}{\arg\min} \; L\_i(x\_i, y^k) \;\; i = 1, \cdots, N$
+* $y^{k+1} = y^k + \alpha^k (\sum\_i^N A\_i x\_i^{k+1} - b)$, $\alpha^k$ is the step length
+
+第一部分可以由 N 个 process 同时执行，这样每步迭代就涉及一个 broadcast 和一个 gather 操作，在执行第二部分前先 gather 所有 N 个 process 的结果，然后更新 $y$，然后再将新的 $y$ broadcast 到 N 个 process
+
+#### Method of Multipliers
+
+Method of Multipliers 与 Dual Ascent 基本一样，不同的是在迭代的第一部分优化的是一个 augmented lagrangian function，即
+
+$$L\_{\rho} (x, y) = f(x) + y^T (Ax - b) + \frac{\rho}{2} \Vert Ax - b \Vert^2\_2$$
+
+它比标准的 lagrangian function 多了一项 $\frac{\rho}{2} \Vert Ax - b \Vert^2\_2$，这么一个改动等价于在如下 primal problem 上应用 dual ascent
+
+$$
+\begin{align}
+\min & \; f(x) + \frac{\rho}{2} \Vert Ax - b \Vert^2\_2 \\\\
+s.t. & \; Ax = b
+\end{align}
+$$
+
+这个 primal problem 显然与 Dual Ascent 一节中给出的问题有相同的最优解，因为在最优解处 $x$ 满足 $Ax = b$，所以 $\frac{\rho}{2} \Vert Ax - b \Vert^2\_2 = 0$，也就是说多出来的一项对最优解没有任何影响，但多出来的这么一项却给优化问题带来了更好的 convergence property
+
+Method of Multipliers 的迭代包含如下两个部分
+
+* $x^{k+1} \in \underset{x}{\arg\min} L\_{\rho}(x, y^{k})$
+* $y^{k+1} = y^{k} + \rho (A x^{k+1} - b)$, use $\rho$ as the step length
+
+----------
+
+可以看到 Method of Multipliers 直接使用 $\rho$ 作为 step length，这么做的好处可以从 KKT condition 看出。假设 $(x^*, y^*)$ 为问题最优解，根据 KKT condition，$(x^*, y^*)$ 必须满足如下条件
+
+* $\frac{\partial L(x, y^*)}{\partial x} \vert\_{x = x^*} = \nabla f(x^*) + A^T y^* = 0$ (assume $f(x)$ is differentiable)
+* $Ax^* - b = 0$
+
+对于 Method of Multipliers，$x^{k+1} = \underset{x}{\arg\min} L\_{\rho}(x, y^{k})$ (因为我们假设 $f(x)$ differentiable，所以 $\in$ 变成了 $=$)，也就是 $\nabla\_x L\_{\rho}(x^{k+1}, y^{k}) = 0$，展开有
+
+$$
+\begin{align}
+0 = & \nabla\_x L\_{\rho}(x^{k+1}, y^{k}) \\\\
+= & \nabla f(x^{k+1}) + A^T (y^k + \rho (A x^{k+1} - b)) \\\\
+= & \nabla f(x^{k+1}) + A^T y^{k+1}
+\end{align}
+$$
+
+所以可以看出，Method of Multipliers 每步迭代后 $(x^{k+1}, y^{k+1})$ 都满足上述 KKT condition 中的第一个，这就是使用 $\rho$ 作为 step length 带来的好处
+
+----------
+
+注意 Method of Multipliers 虽然相对于 Dual Ascent 有更好的 convergence property，但它不一定能做 dual decomposition，因为即便 $f(x)$ 是可拆分的，$\frac{\rho}{2} \Vert Ax - b \Vert^2\_2$ 很可能是不能拆分的，只有在某些特定的条件下比如 $A = I$ 的情况，它才是可拆分的
+
+#### ADMM (Alternating Direction Method of Multipliers)
+
+ADMM 在 Method of Multipliers 基础上做了点修改。考虑如下问题
+
+$$
+\begin{align}
+\underset{x, y}{\min} & \; f(x) + g(z) \\\\
+s.t. & \; Ax + Bz = c
+\end{align}
+$$
+
+其中 $x \in \mathbb{R}^n, z \in \mathbb{R}^m, A \in \mathbb{R}^{p\times n}, B \in \mathbb{R}^{p\times m}, c \in \mathbb{R}^p$
+
+如果以 Method of Multipliers 来解决这个问题，则每步迭代是这样
+
+* $(x^{k+1}, z^{k+1}) \in \underset{x, z}{\arg\min} L\_{\rho}(x, z, y^{k})$
+* $y^{k+1} = y^{k} + \rho (A x^{k+1} + B z^{k+1} - c)$
+
+其中 $L\_{\rho}(x, z, y) = f(x) + g(z) + y^T (Ax + Bz - c) + \frac{\rho}{2} \Vert Ax + Bz - c \Vert^2\_2$
+
+ADMM 较 Method of Multipliers 不同的地方就是它将上述第一部分进一步拆分成两个部分来做，如下
+
+* $x^{k+1} \in \underset{x}{\arg\min} L\_{\rho}(x, z^{k}, y^{k})$
+* $z^{k+1} \in \underset{z}{\arg\min} L\_{\rho}(x^{k+1}, z, y^{k})$
+* $y^{k+1} = y^{k} + \rho (A x^{k+1} + B z^{k+1} - c)$
+
+这种一步拆成两步使得 $x^{k+1}, z^{k+1}$ 的计算在更多的时候可以被拆分成独立的 process 来解决，由于先算 $x$ 再算 $z$，所以有了 alternating direction 一说
+
+##### Optimality Condition
+
+根据 KKT condition，如果 $(x^*, z^*, y^*)$ 为问题最优解，则有
+
+* $0 \in \frac{\partial L(x, z, y^*)}{\partial x} \vert\_{x = x^*} = \partial f(x^*) + A^T y^*$
+* $0 \in \frac{\partial L(x, z, y^*)}{\partial z} \vert\_{z = z^*} = \partial g(z^*) + B^T y^*$
+* $Ax^* + B z^* - c = 0$
+
+----------
+
+* 由于 $z^{k+1} \in \underset{z}{\arg\min} L\_{\rho}(x^{k+1}, z, y^{k})$，所以
+
+  $$
+  \begin{align}
+  0 \in & \frac{\partial L\_{\rho}(x^{k+1}, z, y^{k})}{\partial z} \vert\_{z=z^{k+1}} \\\\
+  = & \partial g(z^{k+1}) + B^T (y^k + \rho (Ax^{k+1} + Bz^{k+1} -c)) \\\\
+  = & \partial g(z^{k+1}) + B^T y^{k+1}
+  \end{align}
+  $$
+  
+  也就是说上面的第二个条件在每一轮迭代结束后都是满足的
+
+* 由于 $x^{k+1} \in \underset{x}{\arg\min} L\_{\rho}(x, z^{k}, y^{k})$，所以
+
+  $$
+  \begin{align}
+  0 \in & \frac{\partial L\_{\rho}(x, z^{k}, y^{k})}{\partial x} \vert\_{x = x^{k+1}} \\\\
+  = & \partial f(x^{k+1}) + A^T (y^k + \rho(Ax^{k+1} + Bz^{k} - c)) \\\\
+  = & \partial f(x^{k+1}) + A^T (y^k + \rho(Ax^{k+1} + Bz^{k+1} - c) - \rho B(z^{k+1} - z^k)) \\\\
+  = & \partial f(x^{k+1}) + A^T y^{k+1} - \rho A^T B(z^{k+1} - z^k) \\\\
+  \end{align}
+  $$
+
+  上式等价于
+
+  $$\rho A^T B(z^{k+1} - z^k) \in \partial f(x^{k+1}) + A^T y^{k+1}$$
+  
+  定义 $s^{k+1} = \rho A^T B(z^{k+1} - z^k)$，$s^{k+1}$ 被成为 dual residual，后面的 convergence proof 可以证明 $s^{k+1} \rightarrow 0 \; \text{as} \; k \rightarrow \infty$，这就意味着 $0 \in \partial f(x^{k}) + A^T y^{k} \;\; k \rightarrow \infty$ 也就是 $k \rightarrow \infty$ 则第一个条件也会满足
+
+* 另 $r^{k+1} = A x^{k+1} + B z^{k+1} - c$，$r^{k+1}$ 被成为 primal residual，下面的 convergence proof 可以证明 $r^{k+1} \rightarrow 0 \; \text{as} \; k \rightarrow \infty$，也就是 $k \rightarrow \infty$，最后一个条件也会满足
+
+##### Stopping Criteria
+
+根据上面对 Optimality Condition 的讨论可知，但 $s^k$ 和 $r^k$ 趋于 0 时，迭代达到最优解，因此可以如下条件作为 stopping criteria
+
+$$ \Vert r^k \Vert\_2 \leq \epsilon^{prime} \; \text{and} \; \Vert s^k \Vert\_2 \leq \epsilon^{dual} $$
+
+##### Convergence Proof
+
+证明做两个假设
+
+* $f$ 是 closed proper convex function, 这也就意味着 $f$ 的 subdifferential 是有定义的
+
+* $L\_0(x, z, y)$ 存在 saddle point, 也就是说 $(x^*, z^*, y^*)$ 满足
+
+  $$L\_0(x^*, z^*, y) \leq L\_0(x^*, z^*, y^*) \leq L\_0(x, z, y^*)$$
+
+  这也就意味着 primal problem 和 dual problem 的最优值相同，求解 dual problem 不会带来 duality gap
+
+具体证明过程参考 appendix of [admm_distr_stats](https://web.stanford.edu/~boyd/papers/pdf/admm_distr_stats.pdf)
+
+#### Global Consensus Problem
+
+考虑实践中经常遇到的如下优化形式
+
+$$
+\min \sum\_{i=1}^{N} f(x) + g(x)
+$$
+
+其中 $x \in \mathbb{R}^n, f: \mathbb{R}^n\rightarrow \mathbb{R}, g: \mathbb{R}^n \rightarrow \mathbb{R}$，$f$ 和 $g$ 都是 convex function，N 表示数据集样本或分片个数
+
+这个问题可以转化为一个 equality constrained convex programming problem，如下
+
+$$
+\begin{align}
+\min & \; \sum\_{i=1}^{N} f(x\_i) + g(z) \\\\
+s.t. & \; x\_i - z = 0
+\end{align}
+$$
+
+由于所有的 $x\_i$ 都必须等于共同的一个变量 $z$，因此这个问题也被称为 global consensus problem
+
+----------
+
+下面我们看看如何得到 global consensus problem 对应的 ADMM 迭代
+
+* <p class="info">对于迭代的第一部分</p>
+
+  由于这里目标函数的第一部分是可拆分的，所以 ADMM 迭代的第一部分也可以被拆分
+
+  $$
+  \begin{align}
+  (x\_1, \cdots, x\_N)^{k+1} \in & \arg\min \; L\_{\rho} (x\_1, \cdots, x\_N, z^k, y^k) \\\\
+  = & \arg\min \sum\_{i=1}^{N} f(x\_i) + \sum\_{i=1}^{N} {y\_i^k}^T (x\_i - z^k) + \frac{\rho}{2} \sum\_{i=1}^{N} \Vert x\_i - z^k \Vert\_2^2 \\\\
+  = & \arg\min \sum\_{i=1}^{N} (f(x\_i) + {y\_i^k}^T (x\_i - z^k) + \frac{\rho}{2} \Vert x\_i - z^k \Vert\_2^2) \\\\
+  = & \arg\min \sum\_{i=1}^{N} (f(x\_i) + \frac{\rho}{2} (2 (\frac{1}{\rho} y\_i^k)^T (x\_i - z^k) + \Vert x\_i - z^k \Vert\_2^2)) \\\\
+  = & \arg\min \sum\_{i=1}^{N} (f(x\_i) + \frac{\rho}{2} \Vert x\_i - (z^k - \frac{1}{\rho}y\_i^k) \Vert\_2^2) \;\; (\because y\_i^k \; \text{const w.r.t.} \; x)\\\\
+  \end{align}
+  $$
+
+  因此第一部分的迭代可以分为 N 个独立的 process 完成，每个 process 计算
+
+  $$ x\_i \in \arg\min f(x\_i) + \frac{\rho}{2} \Vert x\_i - (z^k - \frac{1}{\rho}y\_i^k) \Vert\_2^2 $$
+
+* <p class="info">对于迭代的第二部分</p>
+
+  $$
+  \begin{align}
+  z^{k+1} \in & \underset{z}{\arg\min} \; L\_{\rho} (x^{k+1}, z, y^k) \\\\
+  = & \underset{z}{\arg\min} \; g(z) + \sum\_{i=1}^{N} {y\_i^k}^T (x\_i^{k+1} - z) + \sum\_{i=1}^{N} \frac{\rho}{2} \Vert x\_i^{k+1} - z \Vert\_2^2 \\\\
+  = & \underset{z}{\arg\min} \; g(z) + \frac{\rho}{2} \sum\_{i=1}^{N} (2 (\frac{1}{\rho} y\_i^k)^T (x\_i^{k+1} - z) + \Vert x\_i^{k+1} - z \Vert\_2^2) \\\\
+  = & \underset{z}{\arg\min} \; g(z) + \frac{\rho}{2} \sum\_{i=1}^{N} \Vert z - \frac{1}{\rho} y\_i^k - x\_i^{k+1} \Vert\_2^2 \;\; (\because y\_i^k \; \text{const w.r.t.} \; z)
+  \end{align}
+  $$
+
+  这个式子可以进一步简化成一个更实用的形式，令 $c\_i = \frac{1}{\rho} y\_i^k + x\_i^{k+1}, c\_i \in \mathbb{R}^n$，我们看看怎么简化加号后面的部分
+
+  $$
+  \begin{align}
+  & \underset{z}{\arg\min} \; \sum\_{i=1}^{N} \Vert z - c\_i \Vert\_2^2 \\\\
+  = & \underset{z}{\arg\min} \; \sum\_{j=1}^{n} \sum\_{i=1}^{N} (z\_j - c\_{ij})^2 \\\\
+  = & \underset{z}{\arg\min} \; \sum\_{j=1}^{n} (\sum\_{i=1}^{N} z\_j^2 - 2\sum\_{i=1}^{N} z\_j c\_{ij} + \sum\_{i=1}^{N} c\_{ij}^2) \\\\
+  = & \underset{z}{\arg\min} \; \sum\_{j=1}^{n} N (z\_j^2 - 2 z\_j \bar{c}\_j + \bar{c}\_j^2) \;\; (\bar{c}\_j = \frac{1}{N}\sum\_{i=1}^{N} c\_{ij},\;\; (N\bar{c}\_j^2 - \sum\_{i=1}^{N} c\_{ij}^2) \; \text{const w.r.t} \; z) \\\\
+  = & \underset{z}{\arg\min} \; N \sum\_{j=1}^{n} (z\_j - \bar{c}\_j)^2 \\\\
+  = & \underset{z}{\arg\min} \; N \Vert z - \bar{c} \Vert\_2^2 \;\; (\bar{c} = \frac{1}{N}\sum\_{i=1}^{N} c\_i)\\\\
+  \end{align}
+  $$
+
+  结合这个结果可得
+
+  $$ z^{k+1} \in \underset{z}{\arg\min} \; g(z) + \frac{N\rho}{2} \Vert z - (\frac{1}{\rho}\bar{y}^k + \bar{x}^{k+1}) \Vert\_2^2$$
+
+  其中 $\bar{y}^k = \frac{1}{N}\sum\_{i=1}^{N} y\_i^k, \; \bar{x}^{k+1} = \frac{1}{N}\sum\_{i=1}^{N} x\_i^{k+1}$，因此 $z^{k+1}$ 依赖与所有的 $y\_i^k$ 和 $x\_i^{k+1}$
+
+* <p class="info">对于迭代的第三部分</p>
+
+  这个部分也可以被拆分成 N 个 process，每个 process 计算
+
+  $$y\_i^{k+1} = y\_i^k + \rho (x\_i^{k+1} - z^{k+1})$$
+
+----------
+
+综合上面的论述，global consensus problem 对应的 ADMM 迭代可以表示为
+
+* $x\_i \in \arg\min f(x\_i) + \frac{\rho}{2} \Vert x\_i - (z^k - \frac{1}{\rho}y\_i^k) \Vert\_2^2 \;\; \forall i = 1, \cdots, N$
+
+* $z^{k+1} \in \underset{z}{\arg\min} \; g(z) + \frac{N\rho}{2} \Vert z - (\frac{1}{\rho}\bar{y}^k + \bar{x}^{k+1}) \Vert\_2^2, \;\;\;\; (\bar{y}^k = \frac{1}{N}\sum\_{i=1}^{N} y\_i^k, \; \bar{x}^{k+1} = \frac{1}{N}\sum\_{i=1}^{N} x\_i^{k+1})$
+
+* $y\_i^{k+1} = y\_i^k + \rho (x\_i^{k+1} - z^{k+1})\;\; \forall i = 1, \cdots, N$
+
+其中第二步计算实际上应用了 $g$ 对应的 proximal operator，可以表示为 
+
+$$z^{k+1} \in \text{prox}\_{(1/N\rho)g} (\frac{1}{\rho}\bar{y}^k + \bar{x}^{k+1})$$
+
+#### Sparse Logistic Regression
+
+下面我们看看 ADMM 在 Sparse Logistic Regression (下面简称 SLR) 优化中的应用，SLR 的 loss function 可以表示为
+
+$$ \min \sum\_{i=1}^m \log(1 + \exp(-b\_i(a\_i^T w + v))) + \lambda \Vert w \Vert\_1$$
+
+其中 $m$ 表示训练样本个数，$b\_i \in \\{-1, 1\\}$ 为样本类别，$a\_i \in \mathbb{R}^n$ 为样本对应的 feature vector，$w \in \mathbb{R}^n$ 为 feature weight，$v \in \mathbb{R}$。将其转化为等式约束问题，如下
+
+$$
+\begin{align*}
+\min & \; \sum\_{i=1}^N l\_i(w\_i, v\_i) + \lambda \Vert w \Vert\_1 \\\\
+s.t. & \; w\_i = w, v\_i = v
+\end{align*}
+$$
+
+其中 $l\_i(w\_i, v\_i) = \sum\_{j=1}^{m\_i} \log(1 + \exp(-b\_j(a\_j^T w\_i + v\_i)))$，$\sum\_{i=1}^{N} m\_i = m$，$N$ 表示数据的 partition 数，$(w\_i, v\_i)$ 可以理解为每个 partition 对应的 local model，$l\_i(w\_i, v\_i)$ 为每个 partition 对应的 loss
+
+定义 $\mu\_i \in \mathbb{R}^n, \eta\_i \in \mathbb{R}$ 为 $w\_i$ 和 $v\_i$ 对应的 lagrange multiplier，则 LSR 对应的 ADMM 迭代可以表示为
+
+* $(w\_i^{k+1}, v\_i^{k+1}) = \underset{w\_i, v\_i}{\arg\min} \; l\_i(w\_i, v\_i) + \frac{\rho}{2}(\Vert w\_i - (w^k - \frac{1}{\rho} \mu\_i^k) \Vert\_2^2 + (v\_i - (v^k - \frac{1}{\rho} \eta\_i))^2)$
+
+* $w^{k+1} = S\_{\lambda/N\rho} (\frac{1}{\rho} \bar{\mu}^k + \bar{w}^{k+1})$ <br/>
+  $v^{k+1} = \frac{1}{\rho} \bar{\eta}^k + \bar{v}^{k+1}$
+
+* $\mu\_i^{k+1} = \mu\_i^k + \rho(w\_i^{k+1} - w^{k+1})$ <br/>
+  $\eta\_i^{k+1} = \eta\_i^k + \rho(v\_i^{k+1} - v^{k+1})$
+
+其中第一部分可以用任意一个经典的优化算法解决，如 L-BFGS, gradient descent 等
+
+训练流程可以用下面的流程图表示
+
+<object data="/resource/prox/consensus.svg" type="image/svg+xml" class="blkcenter"></object>
+
+首先数据被分成 N 份，然后分别独立训练得到 N 份 model，之后做 consensus 计算，包括迭代中的后面两部分
+
+#### 几个有用的概念和定理
+
+<blockquote>
+A convex function is proper if its effective domain is nonempty and it never attains $-\infty$. Effective domain is defined by $\text{dom} f = \{ x \in X : f(x) < +\infty\}$ for function $f: X \rightarrow \mathbb{R} \cup \{\pm \infty\}$
+</blockquote>
+
+<blockquote>
+A convex function is closed if its epigraph is a closed set
+</blockquote>
+
+<blockquote>
+If $f$ is closed and convex, then $f^{**}(x) = f(x)$
+</blockquote>
+
+<blockquote>
+If $f$ is closed and convex, then
+
+$$y \in \partial f(x) \Longleftrightarrow x \in \partial f^*(y) \Longleftrightarrow x^T y = f(x) + f^*(y)$$
+</blockquote>
+
+* Proof
+
+  * 证明 $y \in \partial f(x) \Longleftrightarrow x^T y = f(x) + f^*(y)$
+
+      因为 $y \in \partial f(x)$，所以 $0 \in y - \partial f(x) = \frac{\partial (y^T u - f(u))}{\partial u} \vert\_{u = x}$，因此
+
+      $$ \underset{u}{\sup} y^T u - f(u) = y^T x - f(x) $$
+
+      而 $f^*(y) = \underset{u}{\sup} y^T u - f(u)$，因此 $x^T y = f(x) + f^*(y)$
+
+  * 证明 $y \in \partial f(x) \Longleftrightarrow x \in \partial f^*(y)$
+
+      如果 $y \in \partial f(x)$，则有
+
+      $$
+      \begin{align}
+      f^*(v) = & \underset{u}{\sup} v^T u - f(u) \\\\
+      \geq & v^T x - f(x) \\\\
+      = & x^T (v - y) - f(x) + y^T x \\\\
+      = & f^*(y) + x^T (v - y)
+      \end{align}
+      $$
+
+      因此 $x \in \partial f^*(y)$，所以 $y \in \partial f(x) \Longrightarrow x \in \partial f^*(y)$
+
+      如果 $x \in \partial f^*(y)$，则有
+
+      $$
+      \begin{align}
+      f(v) = f^{**}(v) = & \underset{u}{\sup} v^T u - f^*(u) \\\\
+      \geq & v^T y - f^*(y) \\\\
+      = & y^T (v - x) - f^*(y) + x^T y \\\\
+      = & f^{**}(x) + y^T (v - x) \\\\
+      = & f(x) + y^T (v - x) \\\\
+      \end{align}
+      $$
+
+      因此 $y \in \partial f(x)$，所以 $x \in \partial f^*(y) \Longrightarrow y \in \partial f(x)$
+
+      综述 $x \in \partial f^*(y) \Longleftrightarrow y \in \partial f(x)$
+
+<blockquote>
+$x \in \partial f^*(y) \Longleftrightarrow x \in \underset{u}{\arg\min} \; f(u) - y^T u$
+</blockquote>
+
+* Proof
+
+  由于 $f^*(y) = \underset{u}{\sup} y^T u - f(u)$，令 $x \in \underset{u}{\arg\max} \; y^T u - f(u)$，易知 $f^*(y) = y^T x - f(x)$
+
+  由于 $x \in \underset{u}{\arg\max} \; y^T u - f(u)$ 所以 $0 \in y - \partial f(x)$，即 $y \in \partial f(x)$，这又等价于 $x \in \partial f^*(y)$
+
+  因此 $x \in \partial f^*(y)$ 等价于 $x \in \underset{u}{\arg\max} \; y^T u - f(u)$ 等价于 $x \in \underset{u}{\arg\min} \; f(u) - y^T u$
+
+<blockquote>
+The proximal operator of $\lambda \Vert x \Vert_1, \lambda > 0$ is
+
+$$ \text{prox}(x)_i = \left \{ \begin{array}{ll} x_i - \lambda & x_i > \lambda \\ 0 & x_i \in [-\lambda, \lambda] \\ x_i + \lambda & x_i < -\lambda \end{array} \right.$$
+
+$\text{prox}(x)_i$ 表示 $x$ 每一维对应的 proximal operator
+</blockquote>
+
+* 推导
+
+  由于 $\Vert u \Vert\_1 + \frac{1}{2\lambda} \Vert u - x \Vert\_2^2$ 可以拆成独立的项，所以对它的优化可以独立得每维解决，考虑
+  
+  $$\text{prox}(x)\_i = \underset{u\_i}{\arg\min} \vert u\_i \vert + \frac{1}{2\lambda} (u\_i - x\_i)^2$$
+  
+  如果 $u^*$ 是解，则有
+  
+  $$0 \in \partial \vert u^* \vert + \frac{1}{\lambda} (u^* - x\_i)$$
+  
+  这个式子有 3 种可能
+  
+  * 如果 $u^* > 0$，则 $\partial \vert u^* \vert = \\{1\\}$，上式变为 $0 = 1 + \frac{1}{\lambda}(u^* - x\_i)$，即 $u^* = x\_i - \lambda$，由于 $u^* > 0$，所以 $x\_i > \lambda$
+
+  * 如果 $u^* < 0$，则 $\partial \vert u^* \vert = \\{-1\\}$，上式变为 $0 = -1 + \frac{1}{\lambda}(u^* - x\_i)$，即 $u^* = x\_i + \lambda$，由于 $u^* < 0$，所以 $x\_i < -\lambda$
+
+  * 如果 $u^* = 0$，则 $\partial \vert u^* \vert = [-1, 1]$，上式变为 $0 \in [-1, 1] - \frac{1}{\lambda} x\_i$，等价于 $x\_i \in [-\lambda, \lambda]$
+
+  综合起来，$\text{prox}(x)\_i$ 可以表示为
+
+  $$ \text{prox}(x)\_i = \left \\{ \begin{array}{ll} x\_i - \lambda & x\_i > \lambda \\\\ 0 & x\_i \in [-\lambda, \lambda] \\\\ x\_i + \lambda & x\_i < -\lambda \end{array} \right.$$
