@@ -164,15 +164,15 @@ PLSA 迭代总结如下：
 
 * E-step
 
-  $$
-  p(z|w, d, \theta\_n) = \frac{p(z)p(w|z)p(d|z)}{\sum\_z p(z)p(w|z)p(d|z)}
-  $$
+    $$
+    p(z|w, d, \theta\_n) = \frac{p(z)p(w|z)p(d|z)}{\sum\_z p(z)p(w|z)p(d|z)}
+    $$
 
 * M-step
 
-  $$ p(z) = \frac{\sum\_{d} \sum\_{w} n(w, d) p(z|w, d, \theta\_n)}{\sum\_{z} \sum\_{d} \sum\_{w} n(w, d) p(z|w, d, \theta\_n)} $$
-  $$ p(w|z) = \frac{\sum\_{d} n(w, d) p(z|w, d, \theta\_n)}{\sum\_{d} \sum\_{w} n(w, d) p(z|w, d, \theta\_n)} $$
-  $$ p(d|z) = \frac{\sum\_{w} n(w, d) p(z|w, d, \theta\_n)}{\sum\_{d} \sum\_{w} n(w, d) p(z|w, d, \theta\_n)} $$
+    $$ p(z) = \frac{\sum\_{d} \sum\_{w} n(w, d) p(z|w, d, \theta\_n)}{\sum\_{z} \sum\_{d} \sum\_{w} n(w, d) p(z|w, d, \theta\_n)} $$
+    $$ p(w|z) = \frac{\sum\_{d} n(w, d) p(z|w, d, \theta\_n)}{\sum\_{d} \sum\_{w} n(w, d) p(z|w, d, \theta\_n)} $$
+    $$ p(d|z) = \frac{\sum\_{w} n(w, d) p(z|w, d, \theta\_n)}{\sum\_{d} \sum\_{w} n(w, d) p(z|w, d, \theta\_n)} $$
 
 ### HMM
 
@@ -254,12 +254,12 @@ HMM 迭代总结如下：
 
 * E-step
 
-  $$\text{calculate} \;\; P(S\_t = k|O\_i, \theta\_n) \;\; \text{and} \;\; P(S\_t = k, S\_{t+1} = l|O\_i, \theta\_n) \;\; \forall \; t, i, k, l$$
+    $$\text{calculate} \;\; P(S\_t = k|O\_i, \theta\_n) \;\; \text{and} \;\; P(S\_t = k, S\_{t+1} = l|O\_i, \theta\_n) \;\; \forall \; t, i, k, l$$
 
 * M-step
 
-  $$\pi\_k = \frac{\sum\_{i=1}^n P(S\_1 = k|O\_i, \theta\_n)}{n}$$
-  $$a\_{kl} = \frac{\sum\_{i=1}^n\sum\_{t=1}^{l-1} P(S\_t = k, S\_{t+1} = l|O\_i, \theta\_n)}{\sum\_{i=1}^n\sum\_{t=1}^{l-1} P(S\_t = k|O\_i, \theta\_n)}$$
-  $$b\_k(u) = \frac{\sum\_{i=1}^n\sum\_{t=1}^{l} P(S\_t = k|O\_i, \theta\_n) I(O\_{it} = u)}{\sum\_{i=1}^n\sum\_{t=1}^{l} P(S\_t = k|O\_i, \theta\_n)}$$
+    $$\pi\_k = \frac{\sum\_{i=1}^n P(S\_1 = k|O\_i, \theta\_n)}{n}$$
+    $$a\_{kl} = \frac{\sum\_{i=1}^n\sum\_{t=1}^{l-1} P(S\_t = k, S\_{t+1} = l|O\_i, \theta\_n)}{\sum\_{i=1}^n\sum\_{t=1}^{l-1} P(S\_t = k|O\_i, \theta\_n)}$$
+    $$b\_k(u) = \frac{\sum\_{i=1}^n\sum\_{t=1}^{l} P(S\_t = k|O\_i, \theta\_n) I(O\_{it} = u)}{\sum\_{i=1}^n\sum\_{t=1}^{l} P(S\_t = k|O\_i, \theta\_n)}$$
 
 这里没有给出计算 $P(S\_t = k|O\_i, \theta\_n)$ 和 $P(S\_t = k, S\_{t+1} = l|O\_i, \theta\_n)$ 的具体细节。
