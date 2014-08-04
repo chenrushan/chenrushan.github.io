@@ -421,11 +421,11 @@ $x \in \partial f^*(y) \Longleftrightarrow x \in \underset{u}{\arg\min} \; f(u) 
 
 * Proof
 
-  由于 $f^\*(y) = \underset{u}{\sup} y^T u - f(u)$，令 $x \in \underset{u}{\arg\max} \; y^T u - f(u)$，易知 $f^\*(y) = y^T x - f(x)$
+    由于 $f^\*(y) = \underset{u}{\sup} y^T u - f(u)$，令 $x \in \underset{u}{\arg\max} \; y^T u - f(u)$，易知 $f^\*(y) = y^T x - f(x)$
 
-  由于 $x \in \underset{u}{\arg\max} \; y^T u - f(u)$ 所以 $0 \in y - \partial f(x)$，即 $y \in \partial f(x)$，这又等价于 $x \in \partial f^\*(y)$
+    由于 $x \in \underset{u}{\arg\max} \; y^T u - f(u)$ 所以 $0 \in y - \partial f(x)$，即 $y \in \partial f(x)$，这又等价于 $x \in \partial f^\*(y)$
 
-  因此 $x \in \partial f^\*(y)$ 等价于 $x \in \underset{u}{\arg\max} \; y^T u - f(u)$ 等价于 $x \in \underset{u}{\arg\min} \; f(u) - y^T u$
+    因此 $x \in \partial f^\*(y)$ 等价于 $x \in \underset{u}{\arg\max} \; y^T u - f(u)$ 等价于 $x \in \underset{u}{\arg\min} \; f(u) - y^T u$
 
 <blockquote>
 The proximal operator of $\lambda \Vert x \Vert_1, \lambda > 0$ is
@@ -437,22 +437,22 @@ $\text{prox}(x)_i$ 表示 $x$ 每一维对应的 proximal operator
 
 * 推导
 
-  由于 $\Vert u \Vert\_1 + \frac{1}{2\lambda} \Vert u - x \Vert\_2^2$ 可以拆成独立的项，所以对它的优化可以独立得每维解决，考虑
-  
-  $$\text{prox}(x)\_i = \underset{u\_i}{\arg\min} \vert u\_i \vert + \frac{1}{2\lambda} (u\_i - x\_i)^2$$
-  
-  如果 $u^\*$ 是解，则有
-  
-  $$0 \in \partial \vert u^\* \vert + \frac{1}{\lambda} (u^\* - x\_i)$$
-  
-  这个式子有 3 种可能
-  
-  * 如果 $u^\* > 0$，则 $\partial \vert u^\* \vert = \\{1\\}$，上式变为 $0 = 1 + \frac{1}{\lambda}(u^\* - x\_i)$，即 $u^\* = x\_i - \lambda$，由于 $u^\* > 0$，所以 $x\_i > \lambda$
+    由于 $\Vert u \Vert\_1 + \frac{1}{2\lambda} \Vert u - x \Vert\_2^2$ 可以拆成独立的项，所以对它的优化可以独立得每维解决，考虑
+    
+    $$\text{prox}(x)\_i = \underset{u\_i}{\arg\min} \vert u\_i \vert + \frac{1}{2\lambda} (u\_i - x\_i)^2$$
+    
+    如果 $u^\*$ 是解，则有
+    
+    $$0 \in \partial \vert u^\* \vert + \frac{1}{\lambda} (u^\* - x\_i)$$
+    
+    这个式子有 3 种可能
+    
+    * 如果 $u^\* > 0$，则 $\partial \vert u^\* \vert = \\{1\\}$，上式变为 $0 = 1 + \frac{1}{\lambda}(u^\* - x\_i)$，即 $u^\* = x\_i - \lambda$，由于 $u^\* > 0$，所以 $x\_i > \lambda$
 
-  * 如果 $u^\* < 0$，则 $\partial \vert u^\* \vert = \\{-1\\}$，上式变为 $0 = -1 + \frac{1}{\lambda}(u^\* - x\_i)$，即 $u^\* = x\_i + \lambda$，由于 $u^\* < 0$，所以 $x\_i < -\lambda$
+    * 如果 $u^\* < 0$，则 $\partial \vert u^\* \vert = \\{-1\\}$，上式变为 $0 = -1 + \frac{1}{\lambda}(u^\* - x\_i)$，即 $u^\* = x\_i + \lambda$，由于 $u^\* < 0$，所以 $x\_i < -\lambda$
 
-  * 如果 $u^\* = 0$，则 $\partial \vert u^\* \vert = [-1, 1]$，上式变为 $0 \in [-1, 1] - \frac{1}{\lambda} x\_i$，等价于 $x\_i \in [-\lambda, \lambda]$
+    * 如果 $u^\* = 0$，则 $\partial \vert u^\* \vert = [-1, 1]$，上式变为 $0 \in [-1, 1] - \frac{1}{\lambda} x\_i$，等价于 $x\_i \in [-\lambda, \lambda]$
 
-  综合起来，$\text{prox}(x)\_i$ 可以表示为
+    综合起来，$\text{prox}(x)\_i$ 可以表示为
 
-  $$ \text{prox}(x)\_i = \left \\{ \begin{array}{ll} x\_i - \lambda & x\_i > \lambda \\\\ 0 & x\_i \in [-\lambda, \lambda] \\\\ x\_i + \lambda & x\_i < -\lambda \end{array} \right.$$
+    $$ \text{prox}(x)\_i = \left \\{ \begin{array}{ll} x\_i - \lambda & x\_i > \lambda \\\\ 0 & x\_i \in [-\lambda, \lambda] \\\\ x\_i + \lambda & x\_i < -\lambda \end{array} \right.$$
