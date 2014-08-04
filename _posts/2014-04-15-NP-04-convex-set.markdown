@@ -178,7 +178,7 @@ Hyperplane 是一个 convex set，所以 $A\boldsymbol{x} = \boldsymbol{b}$ 的�
 
         <object data="/resource/NNP/04-convex/convex_therom_1.svg" type="image/svg+xml" class="blkcenter"></object>
 
-        易知 $S \cap C$ 一个 compact set，因此在 $S\cap C$ 中必存在一个点 $\boldsymbol{x}\_0$ 满足 $\boldsymbol{x}_0 = \arg\min_{\boldsymbol{x} \in S \cap C} \Vert \boldsymbol{y} - \boldsymbol{x} \Vert$，而 $\Vert \boldsymbol{y} - \boldsymbol{x} \Vert > 2\delta \;\; \forall\boldsymbol{x} \in S \setminus C$，因此 $\boldsymbol{x}\_0$ 同样满足 $\boldsymbol{x}_0 = \arg\min_{\boldsymbol{x} \in S} \Vert \boldsymbol{y} - \boldsymbol{x} \Vert$。
+        易知 $S \cap C$ 一个 compact set，因此在 $S\cap C$ 中必存在一个点 $\boldsymbol{x}\_0$ 满足 $\boldsymbol{x}\_0 = \arg\min\_{\boldsymbol{x} \in S \cap C} \Vert \boldsymbol{y} - \boldsymbol{x} \Vert$，而 $\Vert \boldsymbol{y} - \boldsymbol{x} \Vert > 2\delta \;\; \forall\boldsymbol{x} \in S \setminus C$，因此 $\boldsymbol{x}\_0$ 同样满足 $\boldsymbol{x}\_0 = \arg\min\_{\boldsymbol{x} \in S} \Vert \boldsymbol{y} - \boldsymbol{x} \Vert$。
 
     * 然后证明这个点唯一
 
@@ -214,7 +214,7 @@ $\boldsymbol{x}_0 = \arg\min_{\boldsymbol{x} \in S} \Vert \boldsymbol{y} - \bold
         \end{align}
         $$
 
-        由此推出 $2 \Vert  \boldsymbol{y} - \boldsymbol{x}\_0 \Vert \Vert \boldsymbol{x} - \boldsymbol{x}\_0\Vert \leq \lambda \Vert \boldsymbol{x} - \boldsymbol{x}\_0\Vert$，不等式两边对 $\lambda$ 取极限 $\lambda \rightarrow 0^+$，有 $(\boldsymbol{y} - \boldsymbol{x}_0)^T(\boldsymbol{x} - \boldsymbol{x}_0) \leq 0$
+        由此推出 $2 \Vert  \boldsymbol{y} - \boldsymbol{x}\_0 \Vert \Vert \boldsymbol{x} - \boldsymbol{x}\_0\Vert \leq \lambda \Vert \boldsymbol{x} - \boldsymbol{x}\_0\Vert$，不等式两边对 $\lambda$ 取极限 $\lambda \rightarrow 0^+$，有 $(\boldsymbol{y} - \boldsymbol{x}\_0)^T(\boldsymbol{x} - \boldsymbol{x}\_0) \leq 0$
 
     * $(\boldsymbol{y} - \boldsymbol{x}\_0)^T(\boldsymbol{x} - \boldsymbol{x}\_0) \leq 0 \;\; \forall \boldsymbol{x} \in S \Rightarrow \boldsymbol{x}\_0 = \arg\min\_{\boldsymbol{x} \in S} \Vert \boldsymbol{y} - \boldsymbol{x} \Vert$
 
@@ -225,7 +225,7 @@ $\boldsymbol{x}_0 = \arg\min_{\boldsymbol{x} \in S} \Vert \boldsymbol{y} - \bold
         \end{align}
         $$
 
-        所以如果 $(\boldsymbol{y} - \boldsymbol{x}_0)^T(\boldsymbol{x} - \boldsymbol{x}_0) \leq 0$ 则 $\Vert \boldsymbol{y} - \boldsymbol{x} \Vert^2 \geq \Vert \boldsymbol{y} - \boldsymbol{x}\_0 \Vert^2\;\; \forall \boldsymbol{x} \in S$
+        所以如果 $(\boldsymbol{y} - \boldsymbol{x}\_0)^T(\boldsymbol{x} - \boldsymbol{x}\_0) \leq 0$ 则 $\Vert \boldsymbol{y} - \boldsymbol{x} \Vert^2 \geq \Vert \boldsymbol{y} - \boldsymbol{x}\_0 \Vert^2\;\; \forall \boldsymbol{x} \in S$
 
 #### Seperating Hyperplane
 
