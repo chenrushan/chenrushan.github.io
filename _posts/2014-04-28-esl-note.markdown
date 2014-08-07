@@ -245,6 +245,10 @@ $\boldsymbol{z}\_1 = \boldsymbol{X} v\_1 = \boldsymbol{u}\_1 d\_1$ 的推导很�
 
 ### 注意点
 
+* **(page 15)** To get an idea of why, note that if the neighborhoods were nonoverlapping, there would be N/k neighborhoods and we would fit one parameter (a mean) in each neighborhood.
+
+    也就是说 KNN 在用的时候是这么用的，给你一个样本，然后去算离那个 neighborhood 的 mean 比较近，那就将这个样本分到那个 neighborhood 中，所以如果定义 k 个 neighborhood，就需要 N/k 个参数
+
 * **(page 66)** 注意区分 principal component 和 principal component direction，principal component direction 是 $\boldsymbol{X}^T \boldsymbol{X}$ 的 eigenvector，假设为 $v$，$\boldsymbol{X}v$ 才是 principal component，如 Figure 3.9 所示。
 
 * **(page 72)** figure 3.12 可以看到 q 从 0.1 到 4 的过程中，contour 的图形变化从窄到越来越方。
