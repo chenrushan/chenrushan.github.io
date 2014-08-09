@@ -1,0 +1,153 @@
+---
+layout: post
+title: Support Vector Machine
+categories: ml
+tags: support vector machine, svm
+---
+
+SVM 是个线性分类模型 (即便使用了 kernel，它本质也是个高维空间的线性模型)
+
+#### Loss Function
+
+SVM 使用的 loss function 是 hinge loss，hinge loss 的好处包括
+
+* Convex. Convex function 易于优化
+
+* Robust. 所谓的 robust 指这个 loss function 不易受 outlier 点的影响
+
+* Sparse. 这里的 sparse，指的是最终产出的模型是 sparse 的，sparse 还分两种情况
+
+    * Primal domain. 指的是特征空间，即最后的模型中不是所有的特征都是有用的
+    * Dual domain. 指的是样本空间，即不是所有的样本都是有用的
+
+    由于 hinge loss 对于分类面 margin 以外的样本 loss 均为 0，所以它可以带来 dual domain 的 sparsity
+
+#### Loss Funtion 的进化
+
+* 首先 SVM 用的是 hinge loss，hinge function 是 $\max(0, m - x)$，其中 $m$ 表示 margin，所以 SVM 的 objective 可以表示为
+
+    $$\underset{w,v}{\arg\min} \sum\_{i=1}^{n} \max(0, m - y\_i (w^T x\_i + v))$$
+
+    其中 $n$ 表示样本个数，$y\_i$ 表示第 i 个样本的 target $\in \\{-1, 1\\}$，$x\_i$ 表示第 i 个样本的 feature vector，$w$ 表示 feature weight，如果 $\Vert w \Vert^2\_2 = 1$，则 $v$ 表示原点到分类面的距离
+
+* 注意这么一个现象，假设样本是线性可分的，对于任意的 $m$，我都可以通过不断放大 $\Vert w \Vert\_2^2$ 使得上面的 loss function 的最小值为 0，因此 $m$ 就变得没有意义，为了避免这种情况，我们给一个限制，令 $\Vert w \Vert\_2^2 = 1$，这样 objective 就变为
+
+    $$
+    \underset{w,v}{\arg\min} \sum\_{i=1}^{n} \max(0, m - y\_i (w^T x\_i + v)) \\\\
+    s.t. \Vert w \Vert\_2^2 = 1
+    $$
+
+    也就是我们只在乎 $w$ 的方向，而不是它的长度
+
+* 定义一个变量 $\xi\_i = \max(0, m - y\_i (w^T x\_i + v))$，$\xi\_i$ 被称为 slack variable
+
+    由于 $\xi\_i = \max(0, m - y\_i (w^T x\_i + v))$，所以
+
+    $$
+    \begin{align}
+    \xi\_i \geq & 0 \\\\
+    \xi\_i \geq & m - y\_i (w^T x\_i + v)
+    \end{align}
+    $$
+
+    这样 objective 又进一步变为
+
+    $$
+    \begin{align}
+    \underset{w,v,\xi}{\arg\min} & \; \sum\_{i=1}^{n} \xi\_i \\\\
+    s.t. & \; \xi\_i \geq 0 \\\\
+    & \; y\_i (w^T x\_i + v) \geq m - \xi\_i \\\\
+    & \; \Vert w \Vert\_2^2 = 1
+    \end{align}
+    $$
+
+* 由于 $\Vert w \Vert\_2^2 = 1$ 不是一个 convex set，为了问题是一个 convex programming problem，我们对这个限制做一点放松，变为 $\Vert w \Vert\_2^2 \leq 1$，这样问题变为
+
+    $$
+    \begin{align}
+    \underset{w,v,\xi}{\arg\min} & \; \sum\_{i=1}^{n} \xi\_i \\\\
+    s.t. & \; \xi\_i \geq 0 \\\\
+    & \; y\_i (w^T x\_i + v) \geq m - \xi\_i \\\\
+    & \; \Vert w \Vert\_2^2 \leq 1
+    \end{align}
+    $$
+
+* 进一步我们令 $\xi\_i^{new} = \frac{\xi\_i^{old}}{m}, w^{new} = \frac{w^{old}}{m}, v^{new} = \frac{v^{old}}{m}$，则问题变为
+
+    $$
+    \begin{align}
+    \underset{w,v,\xi}{\arg\min} & \; \sum\_{i=1}^{n} \xi\_i \\\\
+    s.t. & \; \xi\_i \geq 0 \\\\
+    & \; y\_i (w^T x\_i + v) \geq 1 - \xi\_i \\\\
+    & \; \Vert w \Vert\_2^2 \leq \frac{1}{m}
+    \end{align}
+    $$
+
+* 这个 objective 只考虑了 empirical loss，为了防止 overfit，我们需要在上述 objective 的基础上加点约束。有人证明了 margin 越大，模型越 general，因此扩大 margin 可以防止模型 overfit
+
+    看看上面的 objective，我们可以发现与 margin 相关的就一项，那就是 $\Vert w \Vert\_2^2 \leq \frac{1}{m}$，也就是扩大 margin 的结果是 $\Vert w \Vert\_2^2$ 变小，那其实我们可以直接将 $\underset{w, v}{\arg\min} \Vert w \Vert\_2^2$ 加到 objective 中，如下
+
+    $$
+    \begin{align}
+    \underset{w,v,\xi}{\arg\min} & \; \frac{1}{2}\Vert w \Vert^2\_2 + C \sum\_{i=1}^{n} \xi\_i \\\\
+    s.t. & \; \xi\_i \geq 0 \\\\
+    & \; y\_i (w^T x\_i + v) \geq 1 - \xi\_i
+    \end{align}
+    $$
+
+    这里的 $C$ 用于调节 empirical loss 和 model complexity 之间的权重，$\frac{1}{2}$ 是为了计算方便，另外由于在 objective 中加入了 $\Vert w \Vert\_2^2$，因此也就不需要
+    $ \Vert w \Vert^2\_2 \leq \frac{1}{m} $ 这个约束了
+
+#### Dual Problem
+
+通常上述优化问题会被转化为 dual problem 来解决，定义 lagrangian function
+
+$$L(w, v, \xi, \alpha, \beta) = \frac{1}{2} \Vert w \Vert^2\_2 + C \sum\_{i=1}^{n} \xi\_i - \sum\_{i=1}^n \alpha\_i \xi\_i - \sum\_{i=1}^n \beta\_i (y\_i (w^T x\_i + v) - 1 + \xi\_i)$$
+
+其中 $\alpha\_i \geq 0, \beta\_i \geq 0$。Dual problem 可以被表示为
+
+$$\underset{\alpha, \beta}{\arg\max} \\{\underset{w, v, \xi}{\min} L(w, v, \xi, \alpha, \beta)\\}$$
+
+其中 $\underset{w, v, \xi}{\min} L(w, v, \xi, \alpha, \beta)$ 为 dual function，首先我们先求解一下这个 dual function，分别对 $w, v, \xi$ 求 partial derivative
+
+$$
+\begin{align}
+\frac{\partial L}{\partial w} = & w - \sum\_{i=1}^n \beta\_i y\_i x\_i = 0 \\\\
+\frac{\partial L}{\partial v} = & -\sum\_{i=1}^n \beta\_i y\_i = 0 \\\\
+\frac{\partial L}{\partial \xi} = & \alpha + \beta - C = 0
+\end{align}
+$$
+
+最后一个式子其实包含了 $n$ 个等式，即 $\alpha\_i + \beta\_i = C, \;\; \forall i = 1, \cdots, n$，将这里得到的变量间的关系带入 lagrangian function 有 (目测一下，就可以发现很多项都可以消掉)
+
+$$
+\begin{align}
+\underset{w, v, \xi}{\min} L(w, v, \xi, \alpha, \beta) = & -\frac{1}{2} (\sum\_{i=1}^n \beta\_i y\_i x\_i)^T (\sum\_{j=1}^n \beta\_j y\_j x\_j) + \sum\_{i=1}^n \beta\_i \\\\
+= & -\frac{1}{2} \sum\_{i=1}^n \sum\_{j=1}^n \beta\_i \beta\_j y\_i y\_j x\_i^T x\_j + \sum\_{i=1}^n \beta\_i \\\\
+= & -\frac{1}{2} \beta^T Y K Y \beta + \beta^T \boldsymbol{1}
+\end{align}
+$$
+
+最后一个式子中 $Y$ 是 diagonal matrix 且 $Y\_{ii} = y\_i$，$K$ 表示 kernel matrix，$K\_{ij} = x\_i^T x\_j$，$\boldsymbol{1}$ 表示元素全为 1 的 vector。这里已经不包含 $\alpha$，由于 $\alpha\_i + \beta\_i = C, \alpha\_i \geq 0, \beta\_i \geq 0$，所以 $0 \leq \beta\_i \leq C$，同时 $\sum\_{i=1}^n \beta\_i y\_i = 0$，因此最后我们得到如下 dual problem
+
+$$
+\begin{align}
+\underset{\beta}{\arg\min} & \; \frac{1}{2} \beta^T Y K Y \beta - \beta^T \boldsymbol{1} \\\\
+s.t. & \; 0 \leq \beta\_i \leq C \\\\
+& \; \sum\_{i=1}^n \beta\_i y\_i = 0
+\end{align}
+$$
+
+有了这样的问题形式，我们就可以应用所谓哦 kernel trick，即用其他的函数计算 $K\_{ij}$，比如非常常用的 RBF kernel
+
+$$K\_{ij} = \exp(-\frac{\Vert x\_i - x\_j \Vert\_2^2}{2 \delta^2})$$
+
+Kernel function 本质上是更高维空间的内积，同样用于度量两两样本之间的相似性
+
+##### Support Vector
+
+前面我们推导出 $w = \sum\_{i=1}^n \beta\_i y\_i x\_i$，所谓的 support vector 指的是对应于 $\beta\_i \neq 0$ 的那些 $x\_i$，那哪些 $x\_i$ 对应的 $\beta\_i$ 不等于 0 呢？根据 KKT condition，问题的最优解必然满足
+
+$$\beta\_i (y\_i (w^T x\_i + v) - 1 + \xi\_i) = 0$$
+
+因此对于 $(y\_i (w^T x\_i + v) - 1 + \xi\_i) \neq 0$ 的 $x\_i$ 其对应的 $\beta\_i$ 必然等于 0，这些样本实际上就是处于 margin 之外的那些样本，而在 margin 内或者处于分类面错误一侧的 $x\_i$ 其 $\beta\_i \neq 0$，他们就是 support vector
