@@ -21,4 +21,23 @@ $$ L(w) = -\sum\_{i=1}^m (y\_i \log h\_w(x\_i) + (1 - y\_i) \log (1 - h\_w(x\_i)
 
 #### Convexity Proof
 
+Sigmoid function 的导数有一个很好的形式，如果令 $g(z) = \frac{1}{1 + \exp(-z)}$，则其导数为
 
+$$\frac{\partial g(z)}{\partial z} = g(z)(1 - g(z))$$
+
+根据这个式子，我们可以求得 $L(w)$ 相对于每一维的偏导数
+
+$$
+\begin{align}
+\frac{\partial L(w)}{\partial w\_j} = & -\sum\_{i=1}^m (y\_i(1 - h\_w(x\_i)) x\_{ij} - (1 - y\_i) h\_w(x\_i) x\_{ij}) \\\\
+= & \sum\_{i=1}^m (h\_w(x\_i) - y\_i) x\_{ij}
+\end{align}
+$$
+
+再求二阶偏导有
+
+$$
+\begin{align}
+\frac{\partial L(w)}{\partial w\_j \partial w\_k} = &
+\end{align}
+$$
