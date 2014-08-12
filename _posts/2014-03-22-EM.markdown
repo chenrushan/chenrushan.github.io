@@ -145,12 +145,12 @@ $$
 
 $$
 \begin{align}
-& \frac{\partial f(x)}{\partial p(z)} = \sum\_{d} \sum\_{w} n(w, d) p(z|w, d, \theta\_n) \frac{1}{p(z)} - \lambda p(z) = 0 \\\\
-\Rightarrow & p(z) = \frac{\sum\_{d} \sum\_{w} n(w, d) p(z|w, d, \theta\_n)}{\lambda}
+& \frac{\partial f(x)}{\partial p(z)} = \sum\_{d} \sum\_{w} n(w, d) p(z|w, d, \theta\_n) \frac{1}{p(z)} - \alpha = 0 \\\\
+\Rightarrow & p(z) = \frac{\sum\_{d} \sum\_{w} n(w, d) p(z|w, d, \theta\_n)}{\alpha}
 \end{align}
 $$
 
-根据 $\sum\_z p(z) = 1$ 推出 $\lambda = \sum\_{z} \sum\_{d} \sum\_{w} n(w, d) p(z|w, d, \theta\_n)$，因此
+根据 $\sum\_z p(z) = 1$ 推出 $\alpha = \sum\_{z} \sum\_{d} \sum\_{w} n(w, d) p(z|w, d, \theta\_n)$，因此
 
 $$
 p(z) = \frac{\sum\_{d} \sum\_{w} n(w, d) p(z|w, d, \theta\_n)}{\sum\_{z} \sum\_{d} \sum\_{w} n(w, d) p(z|w, d, \theta\_n)}
