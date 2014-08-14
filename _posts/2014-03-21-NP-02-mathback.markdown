@@ -669,7 +669,7 @@ $$
 \end{align}
 $$
 
-For any unit direction $\boldsymbol{d}$, the rate of change is $\nabla f(x)^T \boldsymbol{d} = |\nabla f(x)^T||d|\cos\theta = |\nabla f(x)^T|\cos\theta$, where $\theta$ is the angle between $\boldsymbol{d}$ and $\nabla f(x)$. When $\theta = 0$ the rate of change is maximized. This is why the gradient is the direction of steepest descent/ascent.
+For any unit direction $\boldsymbol{d}$, the rate of change is $\nabla f(x)^T \boldsymbol{d} = \Vert \nabla f(x)\Vert \Vert d \Vert \cos\theta = \Vert \nabla f(x) \Vert \cos\theta$, where $\theta$ is the angle between $\boldsymbol{d}$ and $\nabla f(x)$. When $\theta = 0$ the rate of change is maximized. This is why the gradient is the direction of steepest descent/ascent.
 
 -----------------------
 
