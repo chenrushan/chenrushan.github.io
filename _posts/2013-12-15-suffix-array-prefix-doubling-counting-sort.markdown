@@ -162,7 +162,7 @@ S<sub>l</sub>[i+l] = S<sub>l:2l</sub>[i] 或者 S<sub>l</sub>[i] = S<sub>l:2l</s
 
     注意这个步骤的 counting sort 不同于上面的伪代码，区别在最后一个 for 循环，不能再简单得从第 0 个序列循环到第 N - 1 个，而是需要借助第一步中得到 K，代码如下 (其中`K2`是一个临时数组，用于暂时存放当前排序结果)：
 
-        for (r = 0; r < N; r++)
+        for (r = N - 1; r >= 0; --r)
             K2[--count[I[K[r]]]] = K[r]
         K = K2
 
