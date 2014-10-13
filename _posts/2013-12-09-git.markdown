@@ -184,6 +184,14 @@ git branch 是一个非常轻量的 object，可以理解为就是一个指针�
 
     `git stash` 会暂存你当前的修改，`git stash apply` 会把暂存的修改重新 apply。
 
+* Git cache password
+
+    如果你不想每次 `git push` 的时候都输入用户名密码
+
+        git config --global credential.helper 'cache --timeout=3600'
+
+    其中 `3600` 表示以秒为单位的时间
+
 ### Git Multiple Accounts
 
 这里配置针对这么一个场景，我的机子目前配置的是 github 的帐号，但我现在有一个公司的项目，在公司的 git server 上，这样我就要配置我的机子来支持同时存在多个服务器的 account。
