@@ -134,7 +134,7 @@ Rosenbrock function 在接近 local minimum 的地方有个很深的 valley，�
 
 <img src="/resource/o2o1/rosenb.gif" />
 
-函数的 surface 上的 valley 就是 curvature 变化比较剧烈的地方。对比 [steepest descent](/nnumop/2014/06/21/NP-08-steepest-descent.html) 和 [classical newton](/nnumop/2014/07/05/NP-09-classical-newton.html) 中关于 Rosenbrock 的例子，可以发现 steepest descent 在 valley 处花费了很大力气才最后走到 local minimum，而 Newton method 由于考虑了 curvature 信息要快非常多
+函数的 surface 上的 valley 就是 curvature 比较大的地方。对比 [steepest descent](/nnumop/2014/06/21/NP-08-steepest-descent.html) 和 [classical newton](/nnumop/2014/07/05/NP-09-classical-newton.html) 中关于 Rosenbrock 的例子，可以发现 steepest descent 在 valley 处花费了很大力气才最后走到 local minimum，而 Newton method 由于考虑了 curvature 信息要快非常多
 
 #### Conclusion
 
