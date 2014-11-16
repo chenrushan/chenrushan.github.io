@@ -10,27 +10,27 @@ categories: ml
 
 $$ \nabla\_i f(\boldsymbol{x}) = \lim\_{\varepsilon \rightarrow 0} \frac{f(x\_1, \cdots, x\_i + \varepsilon, \cdots, x\_n) - f(x\_1, \cdots, x\_i, \cdots, x\_n)}{\varepsilon} $$
 
-这个值表示 gradient 的第 i 个分量，值越大，表示函数值相对于 $x\_i$ 变化得越快。当 $\varepsilon$ 足够小时，上面的公式可以直接近似为 (说白了，就是一阶 taylor series)
+表示 gradient 的第 i 个分量，$\nabla\_i f(\boldsymbol{x})$ 越大，函数值相对于 $x\_i$ 变化越快。当 $\varepsilon$ 足够小时，上面的公式可以直接近似为 (说白了，就是一阶 taylor series)
 
 $$ \nabla\_i f(\boldsymbol{x}) \approx \frac{f(x\_1, \cdots, x\_i + \varepsilon, \cdots, x\_n) - f(x\_1, \cdots, x\_i, \cdots, x\_n)}{\varepsilon} $$
 
-假设 $\varepsilon = 0.1$ 算足够小，如果 $\nabla\_i f(\boldsymbol{x}) = 10$，那沿着 $x\_i$ 方向走 $0.1$，函数值就差不多是下降 $1$，这里的 $0.1$ 也就是我们通常所说的 step length
+假设 $\varepsilon = 0.1$ 算足够小，如果 $\nabla\_i f(\boldsymbol{x}) = 10$，那沿着 $x\_i$ 方向走 $0.1$，函数值就差不多是下降 $1$，这里的 $\varepsilon$ 就是我们通常所说的 step length
 
-那怎样判断给定一个 $\varepsilon$ 算不算足够小呢？对于不同的点 $\boldsymbol{x}$，这个 **足够小** 的标准通常是不同的，对于 non-convex function 尤其如此。这也就是 curvature 发挥作用的地方
+那怎样判断给定一个 $\varepsilon$ 算不算足够小呢？对于不同的点 $\boldsymbol{x}$，这个 **足够小** 的标准通常是不同的，对于 non-convex function 尤其如此。而这也是 curvature 发挥作用的地方
 
 Curvature 就是以我们常说的 Hessian matrix 表示，以 $\boldsymbol{H}$ 表示 Hessian matrix，$H\_{ij} = \frac{\partial f}{\partial x\_i \partial x\_j}$，即 $f$ 在 $x\_i$ 维的 gradient 随着 $x\_j$ 的变化率，$H\_{ij}$ 越大，这个变化就越剧烈。考虑 $H\_{ii}$，$H\_{ii}$ 表示 $\nabla\_i f(\boldsymbol{x})$ 随 $x\_i$ 的变化快慢
 
-* 如果 $H\_{ii}$ 很大，也就意味着 $x\_i$ 稍微变化一点，gradient 的变化就会很大，这样的话，$\varepsilon$ 就必须很小，因为稍微走大一点点，在 $\boldsymbol{x}$ 处计算的 gradient 方向马上就失效了，函数值是上升还是下降就不好说了，因此，如果 $H\_{ii}$ 很大，沿着 $x\_i$ 方向就必须走得很谨慎，否则会带来优化过程的震荡
+* 如果 $H\_{ii}$ 很大，$x\_i$ 稍微变化一点，$\nabla\_i f(\boldsymbol{x})$ 就会变化很大，这样的话，$\varepsilon$ 就必须很小，因为稍微走大一点点，在 $\boldsymbol{x}$ 处计算的 gradient 方向马上就失效了，函数值是上升还是下降就不好说了，因此，如果 $H\_{ii}$ 很大，沿着 $x\_i$ 方向就必须走得很谨慎，否则会带来优化过程的震荡
 
-    $H\_{ii}$ 很大在 function surface 上的表现就是在 $\boldsymbol{x}$ 附近有 valley，参考下面给出的 Rosenbrock Function
+    $H\_{ii}$ 很大在 function surface 上的表现就是沿 $x\_i$ 方向有 valley，参考下面给出的 Rosenbrock Function
 
 * 如果 $H\_{ii}$ 很小，也就意味着 $\nabla\_i f(\boldsymbol{x})$ 对 $x\_i$ 的变化不那么敏感，这样我就可以放心大胆得迈大步前进，不用担心 gradient 方向会很快失效，这样既加速了优化过程，又保证了函数值有足够的下降
 
-    $H\_{ii}$ 很小在 function surface 上的表现就是在 $\boldsymbol{x}$ 附近特别平，极端的例子，你可以考虑平面
+    $H\_{ii}$ 很小在 function surface 上的表现就是沿着 $x\_i$ 方向特别平，极端的例子，你可以考虑平面
 
-这就是 curvature 信息对于优化的重要性，它决定了每一步优化的 step length (并且是每一维度的 step length) 到底多大比较合适
+这里以 $H\_{ii}$ 为例讨论了 curvature 信息对于优化的重要性，它决定了每一步优化的 step length (并且是每一维度的 step length) 到底多大比较合适
 
-下面我们通过几个例子看看 curvature 信息对优化过程的影响
+下面我们通过几个具体的例子看看 curvature 信息对优化过程的影响
 
 #### Example 1 (one dimensional function)
 
@@ -75,13 +75,13 @@ $$\begin{pmatrix} 2 & 0 \\\\ 0 & 100 \end{pmatrix}$$
 
 从这个 Hessian matrix 我们可以知道
 
-* 这个函数在所有点的 curvature 是 constant，其实对于所有的 quadratic function 都是这样的
+* 这个函数在所有点的 curvature 是 constant，其实对于所有的 quadratic function 这个结论都成立
 
 * $H\_{11} \neq H\_{22}$，因此 $f$ 在 $x\_1$ 和 $x\_2$ 处 gradient 随自身的变化率是不相同的
 
 * $H\_{12} = H\_{21} = 0$，因此 $x\_1$ 的变化不会带来 $\frac{\partial f}{\partial x\_2}$ 的变化，同样 $x\_2$ 的变化也不会带来 $\frac{\partial f}{\partial x\_1}$ 的变化
 
-下面我们分别看看 Steepest Descent 和 Newton Method 应用于这个优化的结果
+下面我们分别看看 Steepest Descent 和 Newton Method 应用于这个函数的优化过程
 
 * Steepest Descent
 
@@ -91,7 +91,7 @@ $$\begin{pmatrix} 2 & 0 \\\\ 0 & 100 \end{pmatrix}$$
 
     <img style="width:90%" src="/resource/o2o1/newton.png" />
 
-从上面的两个图可以看出，同样是从 $(-2.5, 0.1)$ 开始迭代，Steepest Descent 的迭代过程与 Classical Newton 相比要振荡得多，究其根源，就是由于 Steepest Descent 在每步选择下降方向时完全忽略 curvature 信息，导致选择的下降方向都不太正确，而 Newton Method 则利用 curvature matrix 对下降方向进行修正。针对这个例子，每步迭代为
+从上面的两个图可以看出，同样是从 $(-2.5, 0.1)$ 开始迭代，Steepest Descent 的迭代过程与 Classical Newton 相比要振荡得多，究其根源，就是由于 Steepest Descent 在每步选择下降方向时完全忽略 curvature 信息，而 Newton Method 则利用 curvature matrix 对下降方向进行修正。针对这个例子有
 
 $$
 \boldsymbol{x}^{k+1} = \boldsymbol{x}^k - \boldsymbol{H}^{-1} \boldsymbol{g^k} = \boldsymbol{x}^k - \begin{pmatrix} \frac{1}{2} & 0 \\\\ 0 & \frac{1}{100} \end{pmatrix} \boldsymbol{g^k}
@@ -148,8 +148,13 @@ Rosenbrock function 在接近 local minimum 的地方有个很深的 valley，�
 
 #### Conclusion
 
-* 优化过程需要把 curvature 考虑进去才能有更好的收敛性能
+综上所述，优化过程需要把 curvature 考虑进去才能有更好的收敛性能
 
-* 单纯只考虑 gradient 会使算法在有 valley 的地方表现得很震荡，而在比较平的地方又走得很慢
+现实中，通常由于计算资源的限制，我们不能使用完整的 curvature 信息。为此，优化专家们发明了各种各样的方法去做近似，比如
 
-现实中，通常由于计算资源的限制 $H$ 不是一个可以直接利用的信息，为此，优化专家们发明了各种各样的方法去近似 $H$，比如 BFGS，deep learning SGD 方法中用到的 momentum 其实也是一种对 curvature 信息的简单近似
+* BFGS (L-BFGS)，一种十分常用的优化算法
+
+* Gradient Descent 中用到的 momentum 也可以看作一种对 curvature 信息的简单近似，因为它将历史上 gradient 的变化考虑了进去
+
+* Hessian-free for deep learning
+
