@@ -53,11 +53,15 @@ $$ f(x) = 10 x^2 $$
 
 $$ x^{k+1} = x^k - \frac{f'(x^k)}{f''(x^k)}$$
 
-我们很容易发现，无论从哪里开始迭代我们都可以一步到达最优点，相比 Steepest Descent 的迭代步骤 (其中 $\alpha$ 表示 line search 得到的 step length)
+我们很容易发现，无论从哪里开始迭代我们都可以一步到达最优点
+
+----------
+
+相比 Steepest Descent 的迭代步骤 (其中 $\alpha$ 表示 line search 得到的 step length)
 
 $$ x^{k+1} = x^k - \alpha f'(x^k)$$
 
-可以发现 Newton Method 利用 $f''(x^k)$ 对 gradient 做了修正，这个 $f''(x^k)$ 表示 $f$ 在 $x^k$ 处的 curvature
+Newton Method 实际上就是将 $\alpha$ 设置成了 $\frac{1}{f''(x^k)}$。另外，容易发现，当 $\alpha \gt \frac{2}{f''(x^k)}$ 时，迭代是发散的，$\alpha = \frac{2}{f''(x^k)}$ 时，迭代就一直左右震荡，所以，要想收敛，必须有 $\alpha \lt \frac{2}{f''(x^k)}$
 
 #### Example 2 (Quadratic Programming)
 
@@ -113,7 +117,7 @@ $$ \boldsymbol{x}^{k+1} = \boldsymbol{x}^k - \boldsymbol{A}^{-1} \boldsymbol{g}^
 
 $$\boldsymbol{A} = \boldsymbol{Q\Lambda Q}^{-1}$$
 
-其中 $\boldsymbol{Q}$ 的每一列表示 $\boldsymbol{A}$ 的一个 eigenvector，由于 $\boldsymbol{A}$ 是 curvature matrix，所以 $\boldsymbol{Q}$ 的每一列又被称为 curvature axis，如下图所示
+其中 $\boldsymbol{Q}$ 的每一列表示 $\boldsymbol{A}$ 的一个 eigenvector，由于 $\boldsymbol{A}$ 是 curvature matrix，所以 $\boldsymbol{Q}$ 的每一列又被称为 curvature axis，如下图所示，其中长的那个 axis 对应 eigenvalue 最大的 eigenvector，该 eigenvector 被称为 principal eigenvector，也是 curvature 最大的方向
 
 <img src="/resource/o2o1/axis.png" />
 
@@ -127,6 +131,12 @@ $$
 $$
 
 $\boldsymbol{Q}$ 的列向量构成 eigenspace，对于原空间中的任何一个变量 $\boldsymbol{v}$，$\boldsymbol{Q}^{-1}\boldsymbol{v}$ 表示 $\boldsymbol{v}$ 在 eigenspace 中的新坐标，因此如果把 Newton Method 的迭代映射到 eigenspace 中理解，它的效果就跟上个例子中的迭代一样，其实对于上一个例子，$\boldsymbol{Q} = \boldsymbol{I}$，eigenspace 和原空间是同一个空间
+
+----------
+
+结合 Example 1 中对 1d function 的 step length 的讨论，我们也可以得出对于 quadratic programming step length 的限制
+
+以 $\lambda\_{max}$ 表示最大的 eigenvalue，则 step length 一定不能超过 $\frac{2}{\lambda\_{max}}$，否则迭代在 principal eigenvector 方向是发散的，从而整个迭代就不能收敛。当 step length $= \frac{1}{\lambda\_{max}}$ 时，迭代在 principal eigenvector 方向收敛是最快的，但可能造成其他方向上收敛较慢
 
 #### Example 4 (Rosenbrock Function)
 

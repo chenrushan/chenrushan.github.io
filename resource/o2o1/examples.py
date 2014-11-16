@@ -99,7 +99,7 @@ Z = X ** 2 + 50 * Y ** 2
 # plot figure for classicl newton
 fig = plt.figure()
 plt.contour(X, Y, Z, [13, 9, 6, 4, 2, 1, 0.1])
-plt.annotate("", xytext=nres[0], xy=nres[1], arrowprops=dict(arrowstyle='->', linewidth=3, color="red"))
+plt.annotate("", xytext=nres[0], xy=nres[1], arrowprops=dict(arrowstyle='->', linewidth=2, color="red"))
 for r in nres:
   plt.plot(*r, marker='o', color='g')
 
@@ -234,8 +234,8 @@ print w, v[0], v[1]
 
 plt.figure(figsize=(4, 4))
 plt.contour(X, Y, Z, [13, 9, 6, 4, 2, 1, 0.1])
-plt.annotate("", xytext=(0, 0), xy=(v[0, 1], v[1, 1]), arrowprops=dict(arrowstyle="->", color="red", linewidth=2))
-plt.annotate("", xytext=(0, 0), xy=(v[0, 0], v[1, 0]), arrowprops=dict(arrowstyle="->", color="red", linewidth=2))
+plt.annotate("", xytext=(0, 0), xy=(v[0, 1], v[1, 1]), arrowprops=dict(arrowstyle="->", color="red", linewidth=1))
+plt.annotate("", xytext=(0, 0), xy=(2 * v[0, 0], 2 * v[1, 0]), arrowprops=dict(arrowstyle="->", color="red", linewidth=1))
 plt.plot(0, 0, marker='o', color='r')
 plt.text(-2.5, 2.2, "$f(x) = 4x_1^2 + 2x_2^2 - 4x_1 x_2$", fontsize=13)
 plt.text(0.7, 0.9, "curvature axis", color="red", fontsize=10)
