@@ -28,7 +28,7 @@ Curvature 就是以我们常说的 Hessian matrix 表示，以 $\boldsymbol{H}$ 
 
     $H\_{ii}$ 很小在 function surface 上的表现就是在 $\boldsymbol{x}$ 附近特别平，极端的例子，你可以考虑平面
 
-这就是 curvature 信息对于优化的重要性，它在决定了每一步优化的 step length 到底多大比较合适
+这就是 curvature 信息对于优化的重要性，它决定了每一步优化的 step length (并且是每一维度的 step length) 到底多大比较合适
 
 下面我们通过几个例子看看 curvature 信息对优化过程的影响
 
