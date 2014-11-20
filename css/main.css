@@ -265,7 +265,7 @@ a:visited { color: #777; }
     padding: 0;
 }
 
-.post blockquote.code {
+.post blockquote .blkcode {
     padding: 0.5em;
     margin-bottom: 1em;
     border-width: 1px;

@@ -353,7 +353,7 @@ $$
 
 根据前面定义的 $\eta, \xi, \zeta$ 可以得出如下计算 $B^k \boldsymbol{g}^k$ 的伪代码
 
-<blockquote class="code">
+<blockquote class="blkcode">
 $\eta_0 = \boldsymbol{g}^k$<br/>
 for $i$ from $1$ to $m$<br/>
 &nbsp;&nbsp; $\xi_i = \rho^{k-i} {\delta^{k-i}}^T \eta_{i-1}$<br/>

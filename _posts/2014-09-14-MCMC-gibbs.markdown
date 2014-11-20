@@ -147,7 +147,7 @@ $$ \pi(x\_i)P\_{ij} = \pi(x\_j)P\_{ji} $$
 
 假设我们现在有了一个收敛到 target distribution 的 Markov Chain，做 sampling 的过程是这样，以 $S^{(t)}$ 表示第 t 步得到的样本，$S^{(t)} \in \\{x\_1, x\_2, \cdots, x\_n\\}$
 
-<blockquote class="code">
+<blockquote class="blkcode">
 Sample $S^{(1)}$ according to $u^{(1)}$<br/>
 Sample $S^{(2)}$ according to $P(\cdot | S^{(1)})$<br/>
 ... ...<br/>
@@ -209,7 +209,7 @@ Gibbs Sampling 这么定义 Markov Chain
 
 实际使用的时候，通常不定义分布 $q(i)$，而是按照一个固定的顺序去选择每次 update 的 node，比如每次都从 $X\_1$ 按顺序 update 到 $X\_N$，sample 一个样本包含 N 次状态转换，比如我们要 sample k 个样本，可以这么做
 
-<blockquote class="code">
+<blockquote class="blkcode">
 initialize $\boldsymbol{x}^{(0)}$<br/>
 
 for t = 0 to k-1:<br/>
