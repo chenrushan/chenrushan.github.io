@@ -38,26 +38,40 @@
     </head>
     <body>
 
-        <div class="site">
-          <h2>{{ page.title }}</h2>
-          <p class="meta">{{ page.date | date_to_string }} <a class="extra" href="/">home</a></p>
+    <div class="site">
+        <h2>{{ page.title }}</h2>
+        <p class="meta">{{ page.date | date_to_string }} <a class="extra" href="/">Home</a> <a href="{{ page.url }}#disqus_thread">Comments</a></p>
 
-          <div class="post">
-          {{ content }}
-          </div>
+        <div class="post">
+            {{ content }}
+        </div>
 
-          <div class="footer">
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'juscooodit'; // required: replace example with your forum shortname
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
+        <div class="footer">
             <div>
-            # Passion, purpose, and mastery comes from consistent effort.
+                # Passion, purpose, and mastery comes from consistent effort.
             </div>
 
             <div class="contact">
-              <p>
+                <p>
                 # Email: juscodit@gmail.com
-              </p>
+                </p>
             </div>
-          </div>
         </div>
 
+    </div>
     </body>
 </html>
