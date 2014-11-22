@@ -5,9 +5,11 @@ categories: nnumop
 tags: NPTEL, numerical optimization, classical newton
 ---
 
-<p style="background-color:#afa">这一节画了很多 contour 的图，是通过这个<a href="../../../../resource/NNP/09-newton/examples.py">脚本</a>实现的</p>
+<blockquote>
+这一节画了很多 contour 的图，是通过这个<a href="../../../../resource/NNP/09-newton/examples.py">脚本</a>实现的
+</blockquote>
 
-#### Classical Newton Method
+### Classical Newton Method
 
 Classical Newton 基于的思想是在每步迭代的过程中对函数做 quadratic approximation，也就是用二阶 taylor series 去近似 $f(\boldsymbol{x})$
 
@@ -29,15 +31,15 @@ $$\boldsymbol{x}^{k+1} = \boldsymbol{x}^k - {H^{k}}^{-1} \boldsymbol{g}^k$$
 
 $$\boldsymbol{x}^1 = \boldsymbol{x}^0 - H^{-1} (H\boldsymbol{x}^0 - \boldsymbol{c}) = H^{-1}\boldsymbol{c}$$
 
-#### Examples
+### Examples
 
 还用 steepest descent 中给出的例子
 
-##### $f(\boldsymbol{x}) = (\boldsymbol{x}\_1 - 7)^2 + (\boldsymbol{x}\_2 - 2)^2$ 和 $f(\boldsymbol{x}) = 4\boldsymbol{x}\_1^2 + \boldsymbol{x}\_2^2 -2\boldsymbol{x}\_1\boldsymbol{x}\_2$
+#### $f(\boldsymbol{x}) = (\boldsymbol{x}\_1 - 7)^2 + (\boldsymbol{x}\_2 - 2)^2$ 和 $f(\boldsymbol{x}) = 4\boldsymbol{x}\_1^2 + \boldsymbol{x}\_2^2 -2\boldsymbol{x}\_1\boldsymbol{x}\_2$
 
 对于这两个 case，无论你初始点设在哪里，Classical Newton 都是一步即可收敛
 
-##### $f(\boldsymbol{x}) = 100(\boldsymbol{x}\_2 - \boldsymbol{x}\_1^2)^2 + (1 - \boldsymbol{x}\_1)^2$
+#### $f(\boldsymbol{x}) = 100(\boldsymbol{x}\_2 - \boldsymbol{x}\_1^2)^2 + (1 - \boldsymbol{x}\_1)^2$
 
 其最优值出现在 (1, 1) 点，利用 Classical Newton + backtrack line search ($\hat{\alpha} = 1, \lambda = 0.3, c\_1 = 1\times 10^{-4}$)
 
@@ -53,7 +55,7 @@ $$\boldsymbol{x}^1 = \boldsymbol{x}^0 - H^{-1} (H\boldsymbol{x}^0 - \boldsymbol{
 
 从这几例子可以看出，对比 steepest descent，Classical Newton 收敛所需的步数要少了很多。
 
-#### Classical Newton 的问题
+### Classical Newton 的问题
 
 * 计算 $\boldsymbol{d}^k = -{H^k}^{-1} \boldsymbol{g}^k$ 是一个非常费资源的操作，由于 invert matrix 是一个 numerically unstable 的操作，所以通常转化为对 linear system $H^k \boldsymbol{d}^k = -\boldsymbol{g}^k$ 的求解，但这一求解还是需要需要 $O(N^3)$ 的计算和 $O(N^2)$ 的存储，所以依然是个非常费资源的操作
 
@@ -77,7 +79,7 @@ $$\boldsymbol{x}^1 = \boldsymbol{x}^0 - H^{-1} (H\boldsymbol{x}^0 - \boldsymbol{
 
         实际上 Classical Newton 是一个 locally convergent algorithm，即当初始点足够靠近最优值点时，Classical Newton 才是保证收敛的，下一节将给出证明。
 
-#### Local Convergence
+### Local Convergence
 
 首先先引入 locally convergent 的概念
 
