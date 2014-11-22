@@ -7,7 +7,7 @@ tags: support vector machine, svm
 
 SVM 是个线性分类模型 (即便使用了 kernel，它本质也是个高维空间的线性模型)
 
-#### Loss Function
+### Loss Function
 
 SVM 使用的 loss function 是 hinge loss，hinge loss 的好处包括
 
@@ -22,7 +22,7 @@ SVM 使用的 loss function 是 hinge loss，hinge loss 的好处包括
 
     由于 hinge loss 对于 margin 以外的样本 loss 均为 0，所以它可以带来 dual domain 的 sparsity
 
-#### Loss Funtion 的进化
+### Loss Funtion 的进化
 
 这一节我们看一下我们通常看见的 SVM 的 loss function 的形式是怎么一步一步演化得到的
 
@@ -98,7 +98,7 @@ SVM 使用的 loss function 是 hinge loss，hinge loss 的好处包括
     这里的 $C$ 用于调节 empirical loss 和 model overfit 程度之间的权重，$\frac{1}{2}$ 是为了计算方便，另外由于在 objective 中加入了 $\Vert w \Vert\_2^2$，因此也就不需要
     $ \Vert w \Vert^2\_2 \leq \frac{1}{m} $ 这个约束了
 
-#### Dual Problem
+### Dual Problem
 
 通常上述优化问题会被转化为 dual problem 来解决，定义 lagrangian function
 
@@ -144,7 +144,7 @@ $$K\_{ij} = \exp(-\frac{\Vert x\_i - x\_j \Vert\_2^2}{2 \delta^2})$$
 
 Kernel function 本质上是更高维空间的内积，同样用于度量两两样本之间的相似性
 
-##### Support Vector
+#### Support Vector
 
 前面我们推导出 $w = \sum\_{i=1}^n \beta\_i y\_i x\_i$，所谓的 support vector 指的是对应于 $\beta\_i \neq 0$ 的那些 $x\_i$，那哪些 $x\_i$ 对应的 $\beta\_i$ 不等于 0 呢？根据 KKT condition，问题的最优解必然满足
 
