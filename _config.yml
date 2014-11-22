@@ -11,7 +11,7 @@ relative_permalinks: true
 # Setup
 title:            "Notebook for Things I've Learned and Done"
 tagline:          
-description:      
+description:      "Passion, purpose, and mastery comes from consistent effort."
 url:              
 baseurl:          /
 caturl:           /categories/
