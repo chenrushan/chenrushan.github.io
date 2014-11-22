@@ -1,5 +1,29 @@
-name: Notebook for things I've learned and done
-markdown: redcarpet
+# Dependencies
+markdown:         redcarpet
 redcarpet:
   extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "tables", "with_toc_data"]
-pygments: true
+highlighter:      pygments
+
+# Permalinks
+permalink:        pretty
+relative_permalinks: true
+
+# Setup
+title:            "Notebook for Things I've Learned and Done"
+tagline:          
+description:      
+url:              
+baseurl:          /
+caturl:           /categories/
+
+author:
+  name:           'Rushan Chen'
+  url:            
+
+paginate:         2
+
+# Custom vars
+version:          2.1.0
+
+github:
+  repo:           https://github.com/poole/hyde

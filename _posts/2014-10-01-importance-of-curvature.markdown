@@ -4,7 +4,7 @@ title: The Importance of Curvature (a.k.a Hessian) in Numerical Optimization
 categories: ml
 ---
 
-#### Why Curvature Is Important
+### Why Curvature Is Important
 
 我们知道，gradient 表示函数值变化的快慢，对于函数 $f(\boldsymbol{x}), \boldsymbol{x} \in \mathbb{R}^n$
 
@@ -32,7 +32,7 @@ Curvature 就是以我们常说的 Hessian matrix 表示，以 $\boldsymbol{H}$ 
 
 下面我们通过几个具体的例子看看 curvature 信息对优化过程的影响
 
-#### Example 1 (one dimensional function)
+### Example 1 (one dimensional function)
 
 首先看两个简单的一维函数
 
@@ -43,11 +43,11 @@ $$ f(x) = 10 x^2 $$
 
 * $f(x) = x^2$
 
-    <img style="width:80%" src="/resource/o2o1/steepest_x2.png" />
+    <img style="width:70%" src="/resource/o2o1/steepest_x2.png" />
 
 * $f(x) = 10 x^2$
 
-    <img style="width:80%" src="/resource/o2o1/steepest_10x2.png" />
+    <img style="width:70%" src="/resource/o2o1/steepest_10x2.png" />
 
 可以看到两个优化的过程都比较曲折，而其中 $f(x) = 10x^2$ 的优化过程更是左右振荡，而如果用 Newton Method 的话，根据其迭代公式
 
@@ -63,7 +63,7 @@ $$ x^{k+1} = x^k - \alpha f'(x^k)$$
 
 Newton Method 实际上就是将 $\alpha$ 设置成了 $\frac{1}{f''(x^k)}$。另外，容易发现，当 $\alpha \gt \frac{2}{f''(x^k)}$ 时，迭代是发散的，$\alpha = \frac{2}{f''(x^k)}$ 时，迭代就一直左右震荡，所以，要想收敛，必须有 $\alpha \lt \frac{2}{f''(x^k)}$
 
-#### Example 2 (Quadratic Programming)
+### Example 2 (Quadratic Programming)
 
 假设要优化的函数为
 
@@ -81,15 +81,15 @@ $$\begin{pmatrix} 2 & 0 \\\\ 0 & 100 \end{pmatrix}$$
 
 * $H\_{12} = H\_{21} = 0$，因此 $x\_1$ 的变化不会带来 $\frac{\partial f}{\partial x\_2}$ 的变化，同样 $x\_2$ 的变化也不会带来 $\frac{\partial f}{\partial x\_1}$ 的变化
 
-下面我们分别看看 Steepest Descent 和 Newton Method 应用于这个函数的优化过程
+下面我们分别看看 Steepest Descent 和 Newton Method 应用于这个函数的结果
 
 * Steepest Descent
 
-    <img style="width:90%" src="/resource/o2o1/steepest.png" />
+    <img style="width:80%" src="/resource/o2o1/steepest.png" />
 
 * Newton Method
 
-    <img style="width:90%" src="/resource/o2o1/newton.png" />
+    <img style="width:80%" src="/resource/o2o1/newton.png" />
 
 从上面的两个图可以看出，同样是从 $(-2.5, 0.1)$ 开始迭代，Steepest Descent 的迭代过程与 Classical Newton 相比要振荡得多，究其根源，就是由于 Steepest Descent 在每步选择下降方向时完全忽略 curvature 信息，而 Newton Method 则利用 curvature matrix 对下降方向进行修正。针对这个例子有
 
@@ -99,7 +99,7 @@ $$
 
 其中 $\boldsymbol{g}^k$ 表示 $f$ 在 $\boldsymbol{x}^k$ 处的 gradient。这么修正相当于根据 $f$ 相对于 $x\_1, x\_2$ 的不同的 curvature 给 $x\_1, x\_2$ 不同的 step length
 
-#### Example 3 (Quadratic Programming)
+### Example 3 (Quadratic Programming)
 
 上面的例子中，$x\_1, x\_2$ 的变化只影响 $f$ 相对于自身的 gradient，相互之间没有影响，下面我们看看更一般的例子，假设优化的函数为
 
@@ -138,7 +138,7 @@ $\boldsymbol{Q}$ 的列向量构成 eigenspace，对于原空间中的任何一�
 
 以 $\lambda\_{max}$ 表示最大的 eigenvalue，则 step length 一定不能超过 $\frac{2}{\lambda\_{max}}$，否则迭代在 principal eigenvector 方向是发散的，从而整个迭代就不能收敛。当 step length $= \frac{1}{\lambda\_{max}}$ 时，迭代在 principal eigenvector 方向收敛是最快的，但可能造成其他方向上收敛较慢
 
-#### Example 4 (Rosenbrock Function)
+### Example 4 (Rosenbrock Function)
 
 Rosenbrock function 在接近 local minimum 的地方有个很深的 valley，如下图所示 (image from [here](http://www2.imm.dtu.dk/courses/02610/Rosenb.gif))
 
@@ -146,7 +146,7 @@ Rosenbrock function 在接近 local minimum 的地方有个很深的 valley，�
 
 函数的 surface 上的 valley 就是 curvature 比较大的地方。对比 [steepest descent](/nnumop/2014/06/21/NP-08-steepest-descent.html) 和 [classical newton](/nnumop/2014/07/05/NP-09-classical-newton.html) 中关于 Rosenbrock 的例子，可以发现 steepest descent 在 valley 处花费了很大力气才最后走到 local minimum，而 Newton method 由于考虑了 curvature 信息要快非常多
 
-#### Conclusion
+### Conclusion
 
 综上所述，优化过程需要把 curvature 考虑进去才能有更好的收敛性能
 

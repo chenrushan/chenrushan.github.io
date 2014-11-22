@@ -7,17 +7,17 @@ tags: EM, Expectation Maximization
 
 ### Introduction
 
-给定数据 $X$，一种常用的估计模型参数 $\theta$ 的方法是 maximum likelihood，即：
+给定数据 $X$，一种常用的估计模型参数 $\theta$ 的方法是 maximum likelihood：
 
 $$\theta = \underset{\theta}{\arg\max} \;\; p(X|\theta)$$
 
-这里的 $X$ 是我们可见的，即 visible variable。如果给定的问题涉及到 hidden variable，ML 就需要引入新变量，即：
+这里的 $X$ 是我们可见的，即 visible variable。如果给定的问题涉及到 hidden variable，ML 就需要引入新变量：
 
 $$\theta = \underset{\theta}{\arg\max} \;\; p(X|\theta) = \underset{\theta}{\arg\max} \;\; \int p(X, z|\theta) dz$$
 
 其中 $z$ 对应 hidden variable。在很多情况下，引入积分后问题会变得不可求解，这也是为什么需要 EM 算法的原因。EM 尝试用迭代的方式去求解 $\theta$，从而避免掉积分操作。
 
-另外，为了计算方便，我们通常并不直接操作 $p(X|\theta)$，而是用 $\log$ 形式代替，即：
+另外，为了计算方便，我们通常并不直接操作 $p(X|\theta)$，而是用 $\log$ 形式代替：
 
 $$\theta = \underset{\theta}{\arg\max} \; \log p(X|\theta)$$
 
@@ -141,7 +141,7 @@ f(x) = & \sum\_{d} \sum\_{w} n(w, d) \sum\_{z} p(z|w, d, \theta\_n) (\log p(z) +
 \end{align}
 $$
 
-根据 $\frac{\partial f(x)}{\partial p(z)} = 0, \frac{\partial f(x)}{\partial p(d|z)} = 0, \frac{\partial f(x)}{\partial p(w|z)} = 0$ 计算出 $p(z), p(d|z), p(w|z)$。以下以 $p(z)$ 为例。
+根据 $\frac{\partial f(x)}{\partial p(z)} = 0, \frac{\partial f(x)}{\partial p(d|z)} = 0, \frac{\partial f(x)}{\partial p(w|z)} = 0$ 计算出 $p(z), p(d|z), p(w|z)$。以 $p(z)$ 为例
 
 $$
 \begin{align}
@@ -187,9 +187,7 @@ $$L(\theta) = \sum\_{i=1}^n \log P(O\_i|\theta) = \sum\_{i=1}^n \log \sum\_{S} P
 其中 $\theta$ 包含 3 个部分：
 
 * $\pi\_k$: 表示第一个状态为 $k$ 的概率 $\pi\_k = P(S\_1 = k)$
-
 * $a\_{kl}$: 表示从状态 $k$ 转移到状态 $l$ 的概率 $a\_{kl} = P(S\_{t+1} = l|S\_{t} = k)$
-
 * $b\_k(u)$: 表示状态 $k$ 发射出观测 $u$ 的概率 $b\_k(u) = P(O\_t = u | S\_t = k)$ 
 
 这样一个观测序列和一个状态序列的联合概率就可以表示成 (假设序列长度为 $l$)
@@ -229,7 +227,7 @@ f(x) = & \sum\_{i=1}^n \sum\_{S} P(S|O\_i, \theta\_n) \log \pi\_{S\_1} \prod\_{t
 \end{align}
 $$
 
-根据 $\frac{\partial f(x)}{\partial \pi\_k} = 0, \frac{\partial f(x)}{\partial a\_{kl}} = 0, \frac{\partial f(x)}{\partial b\_k(u)} = 0$ 计算出 $\pi\_k, a\_{kl}, b\_k(u)$。以下以 $\pi\_k$ 为例。
+根据 $\frac{\partial f(x)}{\partial \pi\_k} = 0, \frac{\partial f(x)}{\partial a\_{kl}} = 0, \frac{\partial f(x)}{\partial b\_k(u)} = 0$ 计算出 $\pi\_k, a\_{kl}, b\_k(u)$。以 $\pi\_k$ 为例
 
 $$
 \begin{align}

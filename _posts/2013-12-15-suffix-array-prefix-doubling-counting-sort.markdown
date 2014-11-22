@@ -10,11 +10,8 @@ tags: suffix array, prefix doubling, counting sort, radix sort
 这篇笔记分 4 小节：
 
 1. 开始简要介绍一下 suffix array，并定义一些后面用到的变量。
-
 2. 然后介绍 suffix array 的一个特性，这一特性是 prefix doubling 算法的基础。
-
 3. 之后介绍 counting sort，这是我对一些特定的 counting sort (如 radix sort) 共性的一些总结。
-
 4. 最后给出基于 prefix doubling 和 counting sort 的 suffix array 构建过程。
 
 ### 1. Suffix Array

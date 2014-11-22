@@ -24,7 +24,7 @@ $$ \underset{y}{\max} \; h(y) $$
 
 下面几节将详细介绍 ADMM 算法，首先介绍与 ADMM 密切相关的一些算法，包括 Dual Ascent, Method of Multipliers，然后介绍 ADMM，之后介绍 ADMM 的一个常见应用场景，最后给出其在 sparse logistic regression 中的应用
 
-#### Dual Ascent
+### Dual Ascent
 
 假设 primal problem 是
 
@@ -55,7 +55,7 @@ $$
 
 $$ \underset{y}{\max} \; -f^*(-A^T y) - y^T b $$
 
-由于这是个 maximize 的问题，所以可以用 gradient ascent 来解决，为此需要求得
+由于这是个 maximize 问题，所以可以用 gradient ascent 来解决，为此需要求得
 
 $$
 \begin{align}
@@ -68,7 +68,7 @@ $$
 * $x^{k+1} \in \underset{x}{\arg\min} L(x, y^{k})$
 * $y^{k+1} = y^{k} + \alpha^k (A x^{k+1} - b)$, $\alpha^k$ is the step length
 
-##### Dual Decomposition
+#### Dual Decomposition
 
 如果 primal function $f(x)$ 是一个可拆分的函数，即
 
@@ -92,7 +92,7 @@ $$
 
 第一部分可以由 N 个 process 同时执行，这样每步迭代就涉及一个 broadcast 和一个 gather 操作，在执行第二部分前先 gather 所有 N 个 process 的结果，然后更新 $y$，然后再将新的 $y$ broadcast 到 N 个 process
 
-#### Method of Multipliers
+### Method of Multipliers
 
 Method of Multipliers 与 Dual Ascent 基本一样，不同的是在迭代的第一部分优化的是一个 augmented lagrangian function，即
 
@@ -137,7 +137,7 @@ $$
 
 注意 Method of Multipliers 虽然相对于 Dual Ascent 有更好的 convergence property，但它不一定能做 dual decomposition，因为即便 $f(x)$ 是可拆分的，$\frac{\rho}{2} \Vert Ax - b \Vert^2\_2$ 很可能是不能拆分的，只有在某些特定的条件下比如 $A = I$ 的情况，它才是可拆分的
 
-#### ADMM (Alternating Direction Method of Multipliers)
+### ADMM (Alternating Direction Method of Multipliers)
 
 ADMM 在 Method of Multipliers 基础上做了点修改。考虑如下问题
 
@@ -165,7 +165,7 @@ ADMM 较 Method of Multipliers 不同的地方就是它将上述第一部分进�
 
 这种一步拆成两步使得 $x^{k+1}, z^{k+1}$ 的计算在更多的时候可以被拆分成独立的 process 来解决，由于先算 $x$ 再算 $z$，所以有了 alternating direction 一说
 
-##### Optimality Condition
+#### Optimality Condition
 
 根据 KKT condition，如果 $(x^\*, z^\*, y^\*)$ 为问题最优解，则有
 
@@ -206,13 +206,13 @@ ADMM 较 Method of Multipliers 不同的地方就是它将上述第一部分进�
 
 * 另 $r^{k+1} = A x^{k+1} + B z^{k+1} - c$，$r^{k+1}$ 被成为 primal residual，下面的 convergence proof 可以证明 $r^{k+1} \rightarrow 0 \; \text{as} \; k \rightarrow \infty$，也就是 $k \rightarrow \infty$，最后一个条件也会满足
 
-##### Stopping Criteria
+#### Stopping Criteria
 
 根据上面对 Optimality Condition 的讨论可知，但 $s^k$ 和 $r^k$ 趋于 0 时，迭代达到最优解，因此可以如下条件作为 stopping criteria
 
 $$ \Vert r^k \Vert\_2 \leq \epsilon^{prime} \; \text{and} \; \Vert s^k \Vert\_2 \leq \epsilon^{dual} $$
 
-##### Convergence Proof
+#### Convergence Proof
 
 证明做两个假设
 
@@ -226,7 +226,7 @@ $$ \Vert r^k \Vert\_2 \leq \epsilon^{prime} \; \text{and} \; \Vert s^k \Vert\_2 
 
 具体证明过程参考 appendix of [admm_distr_stats](https://web.stanford.edu/~boyd/papers/pdf/admm_distr_stats.pdf)
 
-#### Global Consensus Problem
+### Global Consensus Problem
 
 考虑实践中经常遇到的如下优化形式
 
@@ -307,11 +307,11 @@ $$
 
 ----------
 
-综合上面的论述，global consensus problem 对应的 ADMM 迭代可以表示为
+综上所述，global consensus problem 对应的 ADMM 迭代可以表示为
 
 * $x\_i \in \arg\min f(x\_i) + \frac{\rho}{2} \Vert x\_i - (z^k - \frac{1}{\rho}y\_i^k) \Vert\_2^2 \;\; \forall i = 1, \cdots, N$
 
-* $z^{k+1} \in \underset{z}{\arg\min} \; g(z) + \frac{N\rho}{2} \Vert z - (\frac{1}{\rho}\bar{y}^k + \bar{x}^{k+1}) \Vert\_2^2, \;\;\;\; (\bar{y}^k = \frac{1}{N}\sum\_{i=1}^{N} y\_i^k, \; \bar{x}^{k+1} = \frac{1}{N}\sum\_{i=1}^{N} x\_i^{k+1})$
+* $z^{k+1} \in \underset{z}{\arg\min} \; g(z) + \frac{N\rho}{2} \Vert z - (\frac{1}{\rho}\bar{y}^k + \bar{x}^{k+1}) \Vert\_2^2 \; (\bar{y}^k = \frac{1}{N}\sum\_{i=1}^{N} y\_i^k, \; \bar{x}^{k+1} = \frac{1}{N}\sum\_{i=1}^{N} x\_i^{k+1})$
 
 * $y\_i^{k+1} = y\_i^k + \rho (x\_i^{k+1} - z^{k+1})\;\; \forall i = 1, \cdots, N$
 
@@ -319,7 +319,7 @@ $$
 
 $$z^{k+1} \in \text{prox}\_{(1/N\rho)g} (\frac{1}{\rho}\bar{y}^k + \bar{x}^{k+1})$$
 
-#### Sparse Logistic Regression
+### Sparse Logistic Regression
 
 下面我们看看 ADMM 在 Sparse Logistic Regression (下面简称 SLR) 优化中的应用，SLR 的 loss function 可以表示为
 
@@ -328,10 +328,10 @@ $$ \min \sum\_{i=1}^m \log(1 + \exp(-b\_i(a\_i^T w + v))) + \lambda \Vert w \Ver
 其中 $m$ 表示训练样本个数，$b\_i \in \\{-1, 1\\}$ 为样本类别，$a\_i \in \mathbb{R}^n$ 为样本对应的 feature vector，$w \in \mathbb{R}^n$ 为 feature weight，$v \in \mathbb{R}$。将其转化为等式约束问题，如下
 
 $$
-\begin{align*}
+\begin{align\*}
 \min & \; \sum\_{i=1}^N l\_i(w\_i, v\_i) + \lambda \Vert w \Vert\_1 \\\\
 s.t. & \; w\_i = w, v\_i = v
-\end{align*}
+\end{align\*}
 $$
 
 其中 $l\_i(w\_i, v\_i) = \sum\_{j=1}^{m\_i} \log(1 + \exp(-b\_j(a\_j^T w\_i + v\_i)))$，$\sum\_{i=1}^{N} m\_i = m$，$N$ 表示数据的 partition 数，$(w\_i, v\_i)$ 可以理解为每个 partition 对应的 local model，$l\_i(w\_i, v\_i)$ 为每个 partition 对应的 loss
@@ -346,7 +346,7 @@ $$
 * $\mu\_i^{k+1} = \mu\_i^k + \rho(w\_i^{k+1} - w^{k+1})$ <br/>
   $\eta\_i^{k+1} = \eta\_i^k + \rho(v\_i^{k+1} - v^{k+1})$
 
-其中第一部分可以用任意一个经典的优化算法解决，如 L-BFGS, gradient descent 等
+其中第一部分可以用任意经典的优化算法解决，如 L-BFGS, gradient descent 等
 
 训练流程可以用下面的流程图表示
 
@@ -354,7 +354,7 @@ $$
 
 首先数据被分成 N 份，然后分别独立训练得到 N 份 model，之后做 consensus 计算，包括迭代中的后面两部分
 
-#### 几个有用的概念和定理
+### 几个有用的概念和定理
 
 <blockquote>
 A convex function is proper if its effective domain is nonempty and it never attains $-\infty$. Effective domain is defined by $\text{dom} f = \{ x \in X : f(x) < +\infty\}$ for function $f: X \rightarrow \mathbb{R} \cup \{\pm \infty\}$
@@ -435,7 +435,7 @@ $$ \text{prox}(x)_i = \left \{ \begin{array}{ll} x_i - \lambda & x_i > \lambda \
 $\text{prox}(x)_i$ 表示 $x$ 每一维对应的 proximal operator
 </blockquote>
 
-* 推导
+* Proof
 
     由于 $\Vert u \Vert\_1 + \frac{1}{2\lambda} \Vert u - x \Vert\_2^2$ 可以拆成独立的项，所以对它的优化可以独立得每维解决，考虑
     

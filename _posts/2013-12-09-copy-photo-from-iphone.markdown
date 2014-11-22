@@ -11,17 +11,17 @@ tags: arch, linux, gphoto2, iphone, photo
 
         gphoto2 --port=usb -R -T
 
-2. 拷了所有 thumbnail 后，找到你要的照片，记下文件名，然后运行下面命令：
+2. 拷了所有 thumbnail 后，找到你要的照片，记下文件名，然后运行：
 
         gphoto2 --port=usb -R -L
 
     根据这个命令的输出找到你要的文件对应的 id。
 
-3. 假设你要的照片 id 是 123 到 126 以及 200 到 205，那运行下面命令拷入这些照片：
+3. 假设你要的照片 id 是 123 到 126，200 到 205，则运行下面命令拷入照片：
 
         gphoto2 --port=usb -R -p 123-126 -p 200-205
 
-最后，如果你想拷所有照片，运行下面命令：
+    如果你想拷所有照片，运行下面命令：
 
-    gphoto2 --port=usb -R -P
+        gphoto2 --port=usb -R -P
 

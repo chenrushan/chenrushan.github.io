@@ -7,7 +7,7 @@ tags: pattern recognition, machine learning, entropy, cross entropy, KL Divergen
 
 这篇笔记中列出常见的 3 种 entropy。
 
-#### Entropy
+### Entropy
   
   $$
   H(x) = -\sum\_{i=1}^{n} p(x\_i)\log p(x\_i)
@@ -15,7 +15,7 @@ tags: pattern recognition, machine learning, entropy, cross entropy, KL Divergen
 
   Entropy 越大，表示信息量越大。
 
-  关于为什么 Entropy 的公式长这样，下面我从 [mathoverflow](http://mathoverflow.net/questions/146463/what-is-entropy-really) 拷来一个很好的解释：
+  关于为什么 Entropy 公式长这样，下面我从 [mathoverflow](http://mathoverflow.net/questions/146463/what-is-entropy-really) 拷来一个很好的解释：
 
   <blockquote>
   <p>Here is a simple story one can tell about the entropy</p>
@@ -35,7 +35,7 @@ tags: pattern recognition, machine learning, entropy, cross entropy, KL Divergen
 
   所以 Entropy 是个期望值，表示对于一个分布 $p$，平均需要多少个 bit 来 encode 一个事件。
 
-#### Cross Entropy
+### Cross Entropy
 
   $$
   H(p, q) = -\sum\_{i=1}^{n} p(x\_i)\log q(x\_i)
@@ -55,7 +55,7 @@ tags: pattern recognition, machine learning, entropy, cross entropy, KL Divergen
   <p>But if we have the same probability $P$, but we encode it according to distribution where all letters are equally probably $Q=(1/4,1/4,1/4,1/4)$, then we get two bits per letter (for example, we encode A as 00, B as 01, C as 10 and D as 11).</p>
   </blockquote>
 
-#### Reletive Entropy (a.k.a. KL Divergence)
+### Reletive Entropy (a.k.a. KL Divergence)
 
   $$
   D\_{KL}(p \Vert q) = \sum\_{i=1}^{n} p(x\_i)\log \frac{p(x\_i)}{q(x\_i)}
@@ -63,7 +63,7 @@ tags: pattern recognition, machine learning, entropy, cross entropy, KL Divergen
 
   表示两个分布间的差异。
 
-#### Relationship between each other
+### Relationship between each other
 
 3 个 Entropy 间的关系可以用下面的公式表示：
 

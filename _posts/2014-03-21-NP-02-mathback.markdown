@@ -134,7 +134,7 @@ Property 2 can be easily proved by contradiction.
 **Dimension of Vector Space**
 
 <blockquote>
-The dimension of the vector space $S$ is the cardinality of a basis of $S$.
+The dimension of vector space $S$ is the cardinality of a basis of $S$.
 </blockquote>
 
 The dimension of $\mathbb{R}^n$ is $n$.

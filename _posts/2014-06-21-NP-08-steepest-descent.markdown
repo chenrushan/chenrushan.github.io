@@ -7,9 +7,9 @@ tags: NPTEL, numerical optimization
 
 从前面几节中我们知道，各个优化算法的主要区别是如何构造 descent direction，这一节我们看看 steepest descent 如何构造 descent direction.
 
-<p style="background-color:#afa">这一节画了很多 contour 的图，是通过这个<a href="../../../../resource/NNP/08-steepest/examples.py">脚本</a></p>
+<blockquote>这一节画了很多 contour 的图，是通过这个<a href="../../../../resource/NNP/08-steepest/examples.py">脚本</a>实现的</blockquote>
 
-#### Steepest Descent Algorithm
+### Steepest Descent Algorithm
 
 Steepest Descent Algorithm 在每一轮迭代的过程中对函数做 affine approximation，也就是用一阶 taylor series 去近似 $f(\boldsymbol{x})$
 
@@ -42,17 +42,21 @@ $$
 
 上节中提到 $\boldsymbol{d}^k$ 都可以表示成 $-A^k \boldsymbol{g}^k$，对于 steepest descent，$A^k = I$。
 
-#### Examples
+### Examples
 
 现在让我们通过几个例子来看看 steepest descent 在不同情况下的表现
 
-##### $f(\boldsymbol{x}) = (\boldsymbol{x}\_1 - 7)^2 + (\boldsymbol{x}\_2 - 2)^2$
+----------
+
+#### $f(\boldsymbol{x}) = (\boldsymbol{x}\_1 - 7)^2 + (\boldsymbol{x}\_2 - 2)^2$
 
 这个函数最优值在 (7, 2)，利用 steepest descent algorithm + exact line search，不论初始点选择在哪儿都是一步就能到最优点，如下图所示
 
 <img style="width:80%" src="/resource/NNP/08-steepest/circular.png" />
 
-##### $f(\boldsymbol{x}) = 4\boldsymbol{x}\_1^2 + \boldsymbol{x}\_2^2 -2\boldsymbol{x}\_1\boldsymbol{x}\_2$
+----------
+
+#### $f(\boldsymbol{x}) = 4\boldsymbol{x}\_1^2 + \boldsymbol{x}\_2^2 -2\boldsymbol{x}\_1\boldsymbol{x}\_2$
 
 这个函数的最优值点在 (0, 0)，同样我们用 steepest descent + exact line search
 
@@ -66,7 +70,9 @@ $$
 
 这个例子我们可以看出初始点的不同对收敛速度是有影响的
 
-##### $f(\boldsymbol{x}) = 100(\boldsymbol{x}\_2 - \boldsymbol{x}\_1^2)^2 + (1 - \boldsymbol{x}\_1)^2$
+----------
+
+#### $f(\boldsymbol{x}) = 100(\boldsymbol{x}\_2 - \boldsymbol{x}\_1^2)^2 + (1 - \boldsymbol{x}\_1)^2$
 
 这个是著名的 Rosenbrock function，其最优值出现在 (1, 1) 点，利用 steepest descent + backtrack line search ($\hat{\alpha} = 0.5, \lambda = 0.3, c\_1 = 1\times 10^{-4}$)
 
@@ -82,7 +88,7 @@ $$
 
 上面的几个例子中，收敛的过程有快有慢，下面我们从理论的角度看看是什么导致了这种区别
 
-#### Convergence Rate of Steepest Descent Algorithm
+### Convergence Rate of Steepest Descent Algorithm
 
 这里以 quadratic function $f(\boldsymbol{x}) = \frac{1}{2}\boldsymbol{x}^T H \boldsymbol{x} - \boldsymbol{c}^T \boldsymbol{x}$ 为例推导 steepest descent 的 convergence rate，其中 $H$ 是 symmetric positive definite matrix
 
@@ -164,21 +170,21 @@ $$\frac{(\boldsymbol{x}^T \boldsymbol{x})^2}{(\boldsymbol{x}^T H \boldsymbol{x})
 
 根据 Kantorovich inequality，我们有
 
-$$ \frac{E(\boldsymbol{x}^k) - E(\boldsymbol{x}^{k+1})}{E(\boldsymbol{x}^k)} \geq \frac{4\lambda_1 \lambda_n}{(\lambda_1 + \lambda_n)^2} $$
+$$ \frac{E(\boldsymbol{x}^k) - E(\boldsymbol{x}^{k+1})}{E(\boldsymbol{x}^k)} \geq \frac{4\lambda\_1 \lambda\_n}{(\lambda\_1 + \lambda\_n)^2} $$
 
 等价于
 
-$$ E(\boldsymbol{x}^{k+1}) \leq (\frac{\lambda_n - \lambda_1}{\lambda_n + \lambda_1})^2 E(\boldsymbol{x}^k)$$
+$$ E(\boldsymbol{x}^{k+1}) \leq (\frac{\lambda\_n - \lambda\_1}{\lambda\_n + \lambda\_1})^2 E(\boldsymbol{x}^k)$$
 
-因此根据我们定义的 $E(\boldsymbol{x})$，steepest descent 是一个 convergence rate $\leq (\frac{\lambda_n - \lambda_1}{\lambda_n + \lambda_1})^2$ 的 linear convergence algorithm.
+因此根据我们定义的 $E(\boldsymbol{x})$，steepest descent 是一个 convergence rate $\leq (\frac{\lambda\_n - \lambda\_1}{\lambda\_n + \lambda\_1})^2$ 的 linear convergence algorithm.
 
 对 convergence rate 做个简单的变形
 
-$$(\frac{\lambda_n - \lambda_1}{\lambda_n + \lambda_1})^2 = (1 - \frac{2}{\frac{\lambda\_n}{\lambda\_1} - 1})^2$$
+$$(\frac{\lambda\_n - \lambda\_1}{\lambda\_n + \lambda\_1})^2 = (1 - \frac{2}{\frac{\lambda\_n}{\lambda\_1} - 1})^2$$
 
 其中 $\frac{\lambda\_n}{\lambda\_1}$ 表示一个 matrix 的 condition number，可以看出 condition number 越大，convergence rate 越大，算法收敛得越慢。当 $\lambda\_1 = \lambda\_n$ 时，收敛是最快的，对应上面例子中 circular contour 的情况，condition number 越大，contour 越扁，越小 contour 越圆。
 
-#### 结论
+### 结论
 
 从上面的例子和理论分析中，可以得出如下结论
 
@@ -188,7 +194,7 @@ $$(\frac{\lambda_n - \lambda_1}{\lambda_n + \lambda_1})^2 = (1 - \frac{2}{\frac{
 
 * 对于 nonquadratic function，上面的结论也是可用的，前面已经讲过，在接近 local minimum 的地方，任何函数的表现都可以用 quadratic function 近似，因此 nonquadratic function 的 convergence rate 取决于 $H(\boldsymbol{x}^\*)$ 的 condition number，其中 $\boldsymbol{x}^\*$ 是 local minimum
 
-#### 改进 Steepest Descent
+### 改进 Steepest Descent
 
 假设要优化的函数是 quadratic function $f(\boldsymbol{x}) = \frac{1}{2} \boldsymbol{x}^T H \boldsymbol{x} - \boldsymbol{c}^T \boldsymbol{x}$，其中 $H$ 是 symmetric positive definite matrix。
 

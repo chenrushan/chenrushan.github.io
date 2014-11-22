@@ -66,13 +66,9 @@ Take the following route table as example (run `route -n` to get such output).
 The meaning of each field is:
 
 * **Destination**: the destination network.
-
 * **Gateway**: the defined gateway for the specified network. 0.0.0.0 is specified if no gateway is needed for the network
-
 * **Genmask**: the netmask for the destination network
-
 * **Iface**: the network interface
-
 * **Flags**
     - `U` means the route is up.
     - `G` means that specified gateway should be used for this route

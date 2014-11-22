@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Git 简介及常见使用样例
+title: Common Git Use Cases
 categories: prog
 tags: git, svn
 ---
