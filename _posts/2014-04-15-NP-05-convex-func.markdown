@@ -5,7 +5,7 @@ categories: nnumop
 tags: NPTEL, numerical optimization
 ---
 
-#### Convex Function
+### Convex Function
 
 <blockquote>
 令 $C \in \mathbb{R}^n$ 为非空 convex set，函数 $f: C \rightarrow \mathbb{R}$，如果 $f$ 满足如下条件
@@ -25,7 +25,7 @@ Convex function 用下面的图表示最直观了
 
 Convex function 和 Concave function 是两个相对的概念，$f$ 如果是 concave function，$-f$ 就是 convex function；如果 $f$ 是 strictly concave function，$-f$ 就是 strictly convex function。
 
-#### Convex Programming Problem
+### Convex Programming Problem
 
 所谓的 convex programming problem，就是指如下问题
 
@@ -37,8 +37,6 @@ s.t. \boldsymbol{x} \in C
 $$
 
 其中 $C$ 是 convex set，$f: C \rightarrow \mathbb{R}$ 为 convex function
-
-----------
 
 <blockquote>
 Convex programming 中每个 local minimum 都是 global minimum
@@ -62,8 +60,6 @@ Convex programming 中每个 local minimum 都是 global minimum
 
     这也就推出 $f(\boldsymbol{x}^\*) \leq f(\boldsymbol{z})$
 
-----------
-
 <blockquote>
 Convex programming 的所有 global minimum 构成一个 convex set
 </blockquote>
@@ -84,7 +80,7 @@ Convex programming 的所有 global minimum 构成一个 convex set
 
     这里不等号不能成立，所以 $\forall \lambda \in [0, 1] \; \lambda \boldsymbol{x}\_1 + (1 - \lambda) \boldsymbol{x}\_2$ 也都是 local minimum
 
-#### Epigraph
+### Epigraph
 
 给定 $f: X \rightarrow \mathbb{R}$，其对应的 epigraph 是集合 $\\{ (\boldsymbol{x}, y) : \boldsymbol{x} \in X, y \geq f(\boldsymbol{x})\\}$，所以 epigraph 属于 $\mathbb{R}^{n+1}$，参考下图，其中填充的部分就是 epigraph，当然 epigraph 是无限延伸的，这里只给出了其中的一部分而已。
 
@@ -106,7 +102,7 @@ Convex programming 的所有 global minimum 构成一个 convex set
 
 与 epigraph 相对的一个概念是 hypograph，hypograph 是这样的集合 $\\{ (\boldsymbol{x}, y) : \boldsymbol{x} \in X, y \leq f(\boldsymbol{x})\\}$
 
-#### Level Set
+### Level Set
 
 Level set 是这么一个集合 $C\_{\alpha} = \\{ \boldsymbol{x} \in C : f(\boldsymbol{x}) \leq \alpha, \alpha \in \mathbb{R} \\}$
 
@@ -122,9 +118,9 @@ s.t. & h\_i(\boldsymbol{x}) \leq 0 \;\; i = 1 \rightarrow m \\\\
 \end{align}
 $$
 
-其中 $f$ 和 $h\_i$ 都是 convex function。这里每个约束都是一个 level set，根据前面的性质可知，这些 level set 都是 convex set，而所有 convex set 的交集也是 convex set。
+其中 $f$ 和 $h\_i$ 都是 convex function。这里每个约束都是一个 level set，根据前面性质可知，这些 level set 都是 convex set，而 convex set 的交集也是 convex set。
 
-#### Convexity and Gradient
+### Convexity and Gradient
 
 <blockquote>
 假设 $C \subset \mathbb{R}^n$ 是 convex set，函数 $f: C \rightarrow \mathbb{R}$ 一阶连续可导，令 $g(\boldsymbol{x}) = \nabla f(\boldsymbol{x})$，则 $f$ 是 convex function 当且仅当
@@ -175,7 +171,7 @@ $$f(\boldsymbol{x}_2) \geq f(\boldsymbol{x}_1) + g^T(\boldsymbol{x}_1)(\boldsymb
 
 根据这个定理，如果存在 $\boldsymbol{x}^\* \in C$ 使得 $g(\boldsymbol{x}^\*) = 0$，则有 $f(\boldsymbol{x}) \geq f(\boldsymbol{x}^\*) \; \forall \boldsymbol{x} \in C$，也就是 $\boldsymbol{x}^\*$ 就是 minimum。
 
-#### Convexity and Hessian Matrix
+### Convexity and Hessian Matrix
 
 <blockquote>
 假设 $C \subset \mathbb{R}^n$ 是 open convex set，函数 $f: C \rightarrow \mathbb{R}$ 二阶连续可导，则 $f$ 是 convex function 当且仅当 $f$ 对应的 Hessian matrix 是 positive semi-definite matrix
@@ -213,7 +209,7 @@ $$f(\boldsymbol{x}_2) \geq f(\boldsymbol{x}_1) + g^T(\boldsymbol{x}_1)(\boldsymb
 
         两边同除以 $\lambda^2$ 并对左边取极限 $\lambda \rightarrow 0$，则有 $\boldsymbol{d}^T H(\boldsymbol{x}) \boldsymbol{d} \geq 0$，也就是 $H(\boldsymbol{x})$ 是 PSD。
 
-#### Jensen's Inequality
+### Jensen's Inequality
 
 <blockquote>
 如果 $C \subseteq \mathbb{R}^n$ 是 convex set，$f: C \rightarrow \mathbb{R}$，则 $f$ 是 convex function 当且仅当
@@ -244,14 +240,14 @@ $$f(\sum_{i=1}^{k} \lambda_i \boldsymbol{x}_i) \leq \sum_{i=1}^{k} \lambda_if(\b
 
         后面的推导简单就不写了
 
-#### Operations Preserving Convexity
+### Operations Preserving Convexity
 
 假设 $f$ 是 convex function，则下面的操作依然能得到 convex function
 
 1. $\alpha f \;\;\; \alpha > 0$
 2. $\sum\_i \alpha\_i f\_i \;\;\; \alpha\_i > 0$
 
-#### Function Maximum 
+### Function Maximum 
 
 <blockquote>
 令 $C \subset \mathbb{R}^n$ 为一个 compact convex set，$f: C \rightarrow \mathbb{R}$ 为 convex function，则 $f$ 的最大值一定是出现在 C 的某一 boundary point
