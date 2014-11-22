@@ -17,7 +17,7 @@ html {
 
 body {
     background-color: #fff;
-    font: 15px Arial, verdana, Helvetica, sans-serif;
+    font: 15px verdana, Helvetica, sans-serif;
     text-align: center;
 
     width: 700px;
@@ -105,7 +105,7 @@ a:visited { color: #777; }
 .posts a {
     text-decoration: none;
     font-family: verdana, Helvetica, Arial, sans-serif;
-    border-bottom: 1px #1e94d1 dashed;
+    /* border-bottom: 1px #1e94d1; */
 }
 
 .posts span {
@@ -197,13 +197,17 @@ a:visited { color: #777; }
     color: #27272b;
 }
 
-.post h1, h2, h3, h4, h5, h6 {
+.post h3 {
     color: #111;
     padding-bottom: .1em;
 }
 
 .post h4 {
-    color: #363;
+    color: #333;
+}
+
+.post h5 {
+    color: #333;
 }
 
 /* for block code */
