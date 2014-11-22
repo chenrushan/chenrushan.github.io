@@ -7,7 +7,7 @@ tags: NPTEL, numerical optimization
 
 这一节回答上一节最后提出的几个问题
 
-#### Stopping Conditions
+### Stopping Conditions
 
 前面提到利用 $g(\boldsymbol{x}^k) = 0$ 只能确定 $\boldsymbol{x}^k$ 是个 stationary point，必须再根据 $H(\boldsymbol{x}^k)$ 的性质才能确定 $\boldsymbol{x}^k$ 是否为真的 local minimum，但在实际中由于计算和判断 $H(\boldsymbol{x}^k)$ 涉及的计算资源较多，所以通常只利用 $g(\boldsymbol{x}^k)$ 来作为 stopping condition，并且也不是判断 $g(\boldsymbol{x}^k)$ 是否等于 $0$，由于计算机的精度问题，通常这个判断是很难成立的。
 
@@ -19,10 +19,10 @@ tags: NPTEL, numerical optimization
 
 其中 $\varepsilon$ 是一个用户指定的很小的数，第一个条件就是 $g(\boldsymbol{x}^k) = 0$ 的一个近似，第二个条件表示当前轮的迭代是否能使 $f(\boldsymbol{x}^k)$ 有显著下降，如果没有，则停止迭代
 
-#### Speed of Convergence
+### Speed of Convergence
 
 <blockquote>
-假设优化过程对应 sequence $\{\boldsymbol{x}^k\}_{k \geq 0}$，且 $\boldsymbol{x}^*$ 为 local minimum，如果下式成立
+假设优化过程对应 sequence $\{\boldsymbol{x}^k\}_{k \geq 0}$，$\boldsymbol{x}^*$ 为 local minimum，如果下式成立
 
 $$\lim_{k\rightarrow \infty} \frac{\Vert \boldsymbol{x}^{k+1} - \boldsymbol{x}^*\Vert }{\Vert \boldsymbol{x}^k - \boldsymbol{x}^*\Vert^p} = \beta \;\; \beta < \infty$$
 
@@ -57,7 +57,7 @@ $$\lim_{k\rightarrow \infty} \frac{\Vert \boldsymbol{x}^{k+1} - \boldsymbol{x}^*
 
     $$\lim\_{k\rightarrow \infty} \frac{\Vert \boldsymbol{x}^{k+1} - \boldsymbol{x}^\* \Vert}{\Vert \boldsymbol{x}^k - \boldsymbol{x}^\* \Vert} = 0, \lim\_{k\rightarrow \infty} \frac{\Vert \boldsymbol{x}^{k+1} - \boldsymbol{x}^\* \Vert}{\Vert \boldsymbol{x}^k - \boldsymbol{x}^\* \Vert^2} = \infty$$
 
-    这被称为 superlinear convergence，它的收敛速度介于 linear 和 quadratic 之间
+    这被称为 superlinear convergence，收敛速度介于 linear 和 quadratic 之间
   
 由于 linear convergence 收敛得慢，而 quadratic convergence 虽然收敛快但是需要的资源太多，所以大多数算法都是属于 superlinear convergence
 
@@ -69,11 +69,11 @@ $$\lim\_{k\rightarrow \infty} \frac{E(\boldsymbol{x}^{k}) - E(\boldsymbol{x}^{k+
 
 通常情况下，使不使用 Error function 并不影响 convergence rate，一个 linear convergence 的算法不会因为用 Error function 计算 convergence rate 而变成 quadratic convergence 算法。
 
-#### Step Length
+### Step Length
 
 假设 $\boldsymbol{d}^k$ 已经确定，求解 step length $\alpha^k$ 的方法分为两种，分别是 Exact line search 和 Inexact line search。
 
-##### Exact line search
+#### Exact line search
 
 把 $\alpha^k$ 的求解当成是另一个优化问题，即在每一步迭代过程中再求解
 
@@ -81,7 +81,7 @@ $$\alpha^k = \min\_{\alpha} f(\boldsymbol{x}^k + \alpha \boldsymbol{d}^k)$$
 
 由于 $\alpha$ 是个 scalar，所以这是一个一维优化问题。
 
-##### Inexact line search
+#### Inexact line search
 
 Exact line search 有时会带来性能上的问题，这时就需要使用近似的方法，不过在使用近似的方法时需要注意以下几点
 
@@ -134,7 +134,7 @@ Exact line search 有时会带来性能上的问题，这时就需要使用近�
 
     同样 Wolfe's condition 也通常和 Armijo's condition 一起使用
 
-##### Backtrack line search
+#### Backtrack line search
 
 Backtrack line search 虽然独立一小节出来，但它本质也是一种 inexact line search，它是 inexact line search 在具体实现上的一种 trick，它通过 Armijo condition 来保证 rate of decrease，然后以 backtract 的方式来保证 step length 不会太小，参考如下伪代码
 
@@ -150,7 +150,7 @@ OUTPUT: $\alpha^k$
 
 可以看到，代码其实是非常简单的，每一轮迭代都按固定的比例缩减 step length，直到满足 Armijo condition 为止，所以等于说它找到了一个尽可能最大的满足 Armijo condition 的 step length。
 
-#### Proof of Convergence
+### Proof of Convergence
 
 在证明前先做几个假设，令 $f^k = f(\boldsymbol{x}^k), g^k = f'(\boldsymbol{x}^k)$，假设
 
@@ -212,7 +212,7 @@ OUTPUT: $\alpha^k$
 
 因此在上述假设成立的情况下，算法是收敛的，当然上述假设不是必要条件了，这里只是给出一个证明的例子
 
-#### Descent Direction
+### Descent Direction
 
 所有的 descent direction 都可以表示为 $\boldsymbol{d}^k = -A^k g^k$，因为 $\boldsymbol{d}^k$ 和 $g^k$ 是一个空间内的向量，给定一个，另一个总可以通过旋转伸缩来得到，也就是矩阵乘的方式 (不要纠结于那个负号)。
 
