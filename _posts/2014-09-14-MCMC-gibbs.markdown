@@ -19,7 +19,7 @@ $$ E(f) \approx \frac{1}{N} \sum\_{i=1}^{N} f(x\_i) $$
 
 $$ E(f) = \sum\_{x} f(x)p(x) $$
 
-我们可能由于 $x$ 的空间太大而无法穷举所有可能的 $x$，这时候同样也需要做 sampling
+我们可能由于 $x$ 的空间太大而无法穷举所有的 $x$，这时同样也需要 sampling
 
 ### How to Sample
 
@@ -64,7 +64,7 @@ $$ E(f) = \sum\_{x} f(x)p(x) $$
 
 * BN 中某些变量为 observed variable 的情况下的分布
 
-    针对上面的 Bayesian Netwrok，假设我们要预测是个条件概率，如 $P(B = b | A = a)$，等价于限定 $A$ 为 observed variable，针对这种情况，一种做法是还按 Forward Sampling 的方式 sample 出 N 个样本，然后丢弃掉其中不包含 $A = a$ 的样本 (这样的 sampling 也被称为 Rejection Sampling)，然后计算
+    针对上面的 BN，假设我们要预测条件概率，如 $P(B = b | A = a)$，等价于限定 $A$ 为 observed variable，针对这种情况，一种做法是还按 Forward Sampling 的方式 sample 出 N 个样本，然后丢弃掉其中不包含 $A = a$ 的样本 (这样的 sampling 也被称为 Rejection Sampling)，然后计算
 
     $$ P(B = b | A = a) = \frac{N\_{B = b, A = a}}{N\_{A = a}} $$
 
