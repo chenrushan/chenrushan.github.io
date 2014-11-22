@@ -5,6 +5,8 @@ categories: ml
 tags: admm
 ---
 
+### Introduction
+
 ADMM 适合解决 equality constrained convex programming problem，其问题的标准形式可以被表示为
 
 $$
@@ -107,7 +109,7 @@ s.t. & \; Ax = b
 \end{align}
 $$
 
-这个 primal problem 显然与 Dual Ascent 一节中给出的问题有相同的最优解，因为在最优解处 $x$ 满足 $Ax = b$，所以 $\frac{\rho}{2} \Vert Ax - b \Vert^2\_2 = 0$，也就是说多出来的一项对最优解没有任何影响，但多出来的这么一项却给优化问题带来了更好的 convergence property
+这个 primal problem 显然与 Dual Ascent 一节中给出的问题有相同的最优解，因为在最优解处 $x$ 满足 $Ax = b$，所以 $\frac{\rho}{2} \Vert Ax - b \Vert^2\_2 = 0$，也就是说多出来的一项对最优解没有何影响，但它却给优化问题带来了更好的 convergence property
 
 Method of Multipliers 的迭代包含如下两个部分
 
@@ -236,7 +238,7 @@ $$
 
 其中 $x \in \mathbb{R}^n, f: \mathbb{R}^n\rightarrow \mathbb{R}, g: \mathbb{R}^n \rightarrow \mathbb{R}$，$f$ 和 $g$ 都是 convex function，N 表示数据集样本或分片个数
 
-这个问题可以转化为一个 equality constrained convex programming problem，如下
+这个问题可以转化为 equality constrained convex programming problem，如下
 
 $$
 \begin{align}
@@ -297,7 +299,7 @@ $$
 
     $$ z^{k+1} \in \underset{z}{\arg\min} \; g(z) + \frac{N\rho}{2} \Vert z - (\frac{1}{\rho}\bar{y}^k + \bar{x}^{k+1}) \Vert\_2^2$$
 
-    其中 $\bar{y}^k = \frac{1}{N}\sum\_{i=1}^{N} y\_i^k, \; \bar{x}^{k+1} = \frac{1}{N}\sum\_{i=1}^{N} x\_i^{k+1}$，因此 $z^{k+1}$ 依赖与所有的 $y\_i^k$ 和 $x\_i^{k+1}$
+    其中 $\bar{y}^k = \frac{1}{N}\sum\_{i=1}^{N} y\_i^k, \; \bar{x}^{k+1} = \frac{1}{N}\sum\_{i=1}^{N} x\_i^{k+1}$，因此 $z^{k+1}$ 依赖于 $y\_i^k$ 和 $x\_i^{k+1}$
 
 * <p class="info">对于迭代的第三部分</p>
 
@@ -325,7 +327,7 @@ $$z^{k+1} \in \text{prox}\_{(1/N\rho)g} (\frac{1}{\rho}\bar{y}^k + \bar{x}^{k+1}
 
 $$ \min \sum\_{i=1}^m \log(1 + \exp(-b\_i(a\_i^T w + v))) + \lambda \Vert w \Vert\_1$$
 
-其中 $m$ 表示训练样本个数，$b\_i \in \\{-1, 1\\}$ 为样本类别，$a\_i \in \mathbb{R}^n$ 为样本对应的 feature vector，$w \in \mathbb{R}^n$ 为 feature weight，$v \in \mathbb{R}$。将其转化为等式约束问题，如下
+其中 $m$ 表示训练样本个数，$b\_i \in \\{-1, 1\\}$ 为样本类别，$a\_i \in \mathbb{R}^n$ 为样本对应的 feature vector，$w \in \mathbb{R}^n$ 为 feature weight，$v \in \mathbb{R}$。将其转化为等式约束问题
 
 $$
 \begin{align\*}
