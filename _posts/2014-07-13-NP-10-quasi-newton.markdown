@@ -5,7 +5,7 @@ categories: nnumop
 tags: NPTEL, numerical optimization, quasi newton
 ---
 
-#### Quasi Newton Method
+### Quasi Newton Method
 
 前一篇文章中提到了 Classical Newton 的诸多问题，针对这些问题有了 Quasi Newton Method，其基本思想是在每步迭代计算 descent direction 时不用公式 $\boldsymbol{d}^k = -(H^k)^{-1} \boldsymbol{g}^k$，而是用 $\boldsymbol{d}^k = -B^k \boldsymbol{g}^k$，也就是找到一个矩阵 $B^k$ 去近似 $(H^k)^{-1}$，相当于在 $\boldsymbol{x}^k$ 处选择下面的近似函数
 
@@ -13,7 +13,7 @@ $$f(\boldsymbol{x}) \approx y^k(\boldsymbol{x}) = f(\boldsymbol{x}^k) + {\boldsy
 
 利用这一近似我们就将求解 linear system ($H^k \boldsymbol{d}^k = -\boldsymbol{g}^k$) 的操作转变为 matrix vector multiplication ($-B^k \boldsymbol{g}^k$) 操作，计算量从 $O(N^3)$ 降到了 $O(N^2)$
 
-那如何得到一个比较好的对 $(H^k)^{-1}$ 近似的矩阵呢？Quasi Newton 对 $B^k$ 做了如下约束
+那如何得到一个好的对 $(H^k)^{-1}$ 的近似矩阵呢？Quasi Newton 对 $B^k$ 做了如下约束
 
 ----------
 
@@ -56,11 +56,13 @@ $B^k$ 是一个 symmetric matrix，因此共包含 $\frac{n(n+1)}{2}$ 个变量�
 * DFP algorithm (<b>D</b>avidon, <b>F</b>letcher, <b>P</b>owell)
 * BFGS algorithm (<b>B</b>royden, <b>F</b>letcher, <b>G</b>oldfarb, <b>S</b>hanno)
 
-三种算法的核心区别就是如何得到 $B^k$，计算 descent direction 用的都是 $\boldsymbol{d}^k = -B^k \boldsymbol{g}^k$，其余部分包括 line search 什么的也都一样，下面分别介绍这三种算法
+三种算法的核心区别就是如何得到 $B^k$，计算 descent direction 用的都是 $\boldsymbol{d}^k = -B^k \boldsymbol{g}^k$，其余包括 line search 什么的也都一样，下面分别介绍这三种算法
 
-<p style="background-color: #9f9">下面的介绍中我计算的是 $B^{k+1}$ 而不是 $B^k$，其本质没有任何区别，就是为了公式看上去能干净一些，如果用的是 $B^k$，则等号左边通常是一堆的 $k-1$ 上标，看上去有点乱</p>
+<blockquote>
+下面的介绍中我计算的是 $B^{k+1}$ 而不是 $B^k$，其本质没有任何区别，就是为了公式看上去能干净一些，如果用的是 $B^k$，则等号左边通常是一堆的 $k-1$ 上标，看上去有点乱
+</blockquote>
 
-#### Rank One Correction
+### Rank One Correction
 
 这种算法使用下面的公式求得 $B^{k+1}$
 
@@ -78,7 +80,7 @@ $$
 \end{align}
 $$
 
-最后一个 equation 怎么解呢？Rank one correction 是这么做的，令 $a \boldsymbol{u}^T \gamma^{k} = 1$，则有
+为了解最后一个 equation，Rank one correction 这么做，令 $a \boldsymbol{u}^T \gamma^{k} = 1$，则有
 
 $$
 \begin{align}
@@ -119,7 +121,7 @@ $$B^{k+1} = B^k + \frac{(\delta^k - B^k\gamma^k)(\delta^k - B^k\gamma^k)^T}{(\de
 
 * 如果 $(\delta^k - B^k\gamma^k)^T \gamma^k$ 接近于 $0$，则实际在计算 $B^{k+1}$ 可能会遇到问题
 
-#### DFP Algorithm (Rank Two Correction)
+### DFP Algorithm (Rank Two Correction)
 
 DFP 是一个 rank two 的算法，最早由 Davidon 在 1959 年提出，后来 Fletcher 和 Powell 在 1963 年先后做了修改，所以算法取名为 DFP。DFP 计算 $B^{k+1}$ 的公式是
 
@@ -210,13 +212,13 @@ $$B^{k+1} = B^k + \frac{ \delta^k {\delta^k}^T }{ {\delta^k}^T \gamma^k} - \frac
 
         所以 $(\Vert \boldsymbol{\eta} \Vert \Vert \boldsymbol{\rho} \Vert)^2 - (\boldsymbol{\eta}^T \boldsymbol{\rho})^2$ 和 ${(\boldsymbol{v}^T \delta^k)^2}$ 不能同时为 0，因此 $B^{k+1}$ 是 positive definite matrix
 
-#### BFGS Algorithm
+### BFGS Algorithm
 
 BFGS 分别由 Broyden, Fletcher, Goldfarb, Shanno 四人于 1970 年独立提出，它也用到了 rank two correction，但不是用在 $B^{k+1}$ 上，而是用在 $(B^{k+1})^{-1}$ 上，令 $G^{k+1} = (B^{k+1})^{-1}$，则有
 
 $$G^{k+1} = G^{k} + a \boldsymbol{u}\boldsymbol{u}^T + b \boldsymbol{v}\boldsymbol{v}^T\;\; a,b \in \mathbb{R}, \boldsymbol{u},\boldsymbol{v} \in \mathbb{R}^n$$
 
-由于 $B^{k+1} \gamma^{k} = \delta^{k}$，所以有 $G^{k+1} \delta^{k} = \gamma^{k}$，运用在 DFP 一节中给出的解题步骤，可得
+由于 $B^{k+1} \gamma^{k} = \delta^{k}$，因此 $G^{k+1} \delta^{k} = \gamma^{k}$，运用在 DFP 一节中给出的解题步骤，可得
 
 $$G^{k+1} = G^k + \frac{\gamma^k {\gamma^k}^T}{ {\gamma^k}^T \delta^k} - \frac{G^k \delta^k {\delta^k}^T G^k}{ {\delta^k}^T G^k \delta^k}$$
 
@@ -247,7 +249,7 @@ $$
 
 根据与 DFP 一节中给出的证明相同的证明，可以得出 $G^{k+1}$ 在 exact line search 的情况下一定是 positive definite matrix，因此 $B^{k+1}$ 也一定是 positive definite matrix。Powell 在 Some global convergence properties of a variable metric algorithm for minimization without exact line searches 这篇文章中进一步证明了对于 convex function，BFGS + Wolfe line search 可以达到 global convergence
 
-##### limited-memory BFGS (lBFGS)
+#### limited-memory BFGS (lBFGS)
 
 BFGS 虽然是个高效的算法，但其每步迭代要存储一个矩阵 $B^k$，对于参数规模较大的函数，这个空间上的消耗显然是不可接受的，也因此有了所谓的 limited-memory BFGS，其与 BFGS 的区别主要是以下两点
 
@@ -370,7 +372,7 @@ output $\zeta_1$
 
 关于 $B\_0^k$ 选择，一种被证明比较有效的方法是令 $B\_0^k = \frac{ {\delta^{k-1}}^T \gamma^{k-1}}{ {\gamma^{k-1}}^T \gamma^{k-1}} I$
 
-#### 总结
+### 总结
 
 一些关于 Quasi-Newton method 的理论分析这篇文章中并没有给出，下面给出一些有用的结论
 
