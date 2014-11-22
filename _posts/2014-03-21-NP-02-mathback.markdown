@@ -5,8 +5,6 @@ categories: nnumop
 tags: NPTEL, numerical optimization, mathmatical background
 ---
 
-------------------------
-
 **Set**
 
 Difference between two sets A and B: $A \setminus B = \\{x: x \in A \;\; and \;\; x \notin B\\}$
@@ -29,7 +27,6 @@ For example:
 $A = \\{x: 1 \leq x \lt 3\\}$
 
 * $\sup\\{x : x \in A\\} = 3 (\notin A)$
-
 * $\inf\\{x : x \in A\\} = 1 (\in A)$
 
 ------------------------
@@ -82,7 +79,7 @@ Elements in S are called **vector**.
 **Vector Subspace**:
 
 <blockquote>
-If $S$ and $T$ are vector spaces such that $S \subseteq T$, then $S$ is called a subspace of $T$.
+If $S$ and $T$ are vector spaces so that $S \subseteq T$, then $S$ is called a subspace of $T$.
 </blockquote>
 
 All possible subspaces of $\mathbb{R}^2$ are $\mathbb{R}^2$, $\\{(0, 0)\\}$, and $\\{(x\_1, x\_2): a x\_1 + b x\_2 = 0, a \in \mathbb{R}, b \in \mathbb{R}, a^2 + b^2 \neq 0\\}$ (which means all lines going through $(0, 0)$).
