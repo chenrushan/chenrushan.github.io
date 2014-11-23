@@ -1,7 +1,8 @@
 ---
 layout: post
 title: The Importance of Curvature (a.k.a Hessian) in Numerical Optimization
-categories: ml
+categories: numop
+tags: curvature, hessian, numeriacl optimization
 ---
 
 ### Why Curvature Is Important

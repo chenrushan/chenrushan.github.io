@@ -1,7 +1,7 @@
 ---
 layout: post
 title: ADMM (Alternating Direction Method of Multipliers)
-categories: ml
+categories: numop
 tags: admm
 ---
 

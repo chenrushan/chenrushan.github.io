@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Gradient for Neural Network
-categories: ml
+categories: numop
 tags: backpropagation, neural network
 ---
 

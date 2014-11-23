@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Convexity of Logistic Regression Loss Function
-categories: ml
+categories: numop
 tags: lr, logistic regression, convexity
 ---
 

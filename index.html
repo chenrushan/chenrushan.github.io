@@ -13,6 +13,14 @@ title: Categories
       </ul>
     </li>
 
+    <li><span class="catname">Numerical Optimization</span>
+      <ul class="posts">
+        {% for post in site.categories.numop %}
+          <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </li>
+
     <li><span class="catname">Machine Learning</span>
       <ul class="posts">
         {% for post in site.categories.ml %}
