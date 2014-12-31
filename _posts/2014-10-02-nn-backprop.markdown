@@ -54,7 +54,7 @@ $$ \frac{\partial C}{\partial w^l} = a^{l-1} {\delta^l}^T \tag{BP4} $$
 
     首先 $C$ 是 $z^{l+1}$ 的函数 $C = f(\cdots, z\_{j}^{l+1}, \cdots)$，而 $z^{l+1}$ 又是 $a^l$ 的函数 $z\_j^{l+1} = g(\cdots, a\_k^{l}, \cdots)$，因此
 
-    $$ \frac{\partial C}{\partial z\_k^l} = \frac{\partial C}{\partial a\_k^l} \frac{\partial a\_k^l}{\partial z\_k^l} = (\sum\_j \frac{\partial C}{\partial z\_j^{l+1}} \frac{\partial z\_j^{l+1}}{\partial z\_k^{l}}) \sigma'(z\_k^l) = (\sum\_j \delta^{l+1}\_j w^{l+1}\_{kj}) \sigma'(z\_k^l) $$
+    $$ \frac{\partial C}{\partial z\_k^l} = \frac{\partial C}{\partial a\_k^l} \frac{\partial a\_k^l}{\partial z\_k^l} = (\sum\_j \frac{\partial C}{\partial z\_j^{l+1}} \frac{\partial z\_j^{l+1}}{\partial a\_k^{l}}) \sigma'(z\_k^l) = (\sum\_j \delta^{l+1}\_j w^{l+1}\_{kj}) \sigma'(z\_k^l) $$
 
     如果你按矩阵的形式组织一下这个式子就是上面的 BP2 了
 
