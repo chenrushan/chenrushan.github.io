@@ -42,12 +42,12 @@ $$f(\boldsymbol{x}) \approx y^k(\boldsymbol{x}) = f(\boldsymbol{x}^k) + {\boldsy
 综合上述三个约束，生成 $B^k$ 的问题可以表示成
 
 $$
-\begin{align}
+\begin{align\*}
 & \text{find } B^k \\\\
 \text{s.t. } & B = B^T \\\\
 & \det(\text{leading principal minors of } B) > 0 \\\\
 & B^k \gamma^{k-1} = \delta^{k-1}
-\end{align}
+\end{align\*}
 $$
  
 $B^k$ 是一个 symmetric matrix，因此共包含 $\frac{n(n+1)}{2}$ 个变量，第二个对 leading principal minors 的约束对应 n 个不等式，最后一个约束对应 n 个等式，由于变量的个数多于等式和不等式的个数，所以上面的问题不止有一个解。根据对上述问题不同的解法，也就有了不同的 Quasi Newton Method，常见的包括如下 3 种
@@ -73,20 +73,20 @@ $$B^{k+1} = B^{k} + a \boldsymbol{u}\boldsymbol{u}^T \;\; a \in \mathbb{R}, \bol
 根据 secant equation
 
 $$
-\begin{align}
+\begin{align\*}
 & (B^{k} + a \boldsymbol{u}\boldsymbol{u}^T) \gamma^{k} = \delta^{k} \\\\
 \Longleftrightarrow & \; a \boldsymbol{u}\boldsymbol{u}^T \gamma^{k} = \delta^{k} - B^{k} \gamma^{k} \\\\
 \Longleftrightarrow & \; a \boldsymbol{u}^T \gamma^{k} \boldsymbol{u} = \delta^{k} - B^{k} \gamma^{k} \;\; (\because \boldsymbol{u}^T \gamma^{k} \in \mathbb{R}) \\\\
-\end{align}
+\end{align\*}
 $$
 
 为了解最后一个 equation，Rank one correction 这么做，令 $a \boldsymbol{u}^T \gamma^{k} = 1$，则有
 
 $$
-\begin{align}
+\begin{align\*}
 \boldsymbol{u} = & \delta^{k} - B^{k} \gamma^{k} \\\\
 a = & \frac{1}{\boldsymbol{u}^T \gamma^{k}}
-\end{align}
+\end{align\*}
 $$
 
 这样计算 $B^{k+1}$ 的公式就是
@@ -132,22 +132,22 @@ $$B^{k+1} = B^{k} + a \boldsymbol{u}\boldsymbol{u}^T + b \boldsymbol{v}\boldsymb
 根据 secant equation
 
 $$
-\begin{align}
+\begin{align\*}
 & (B^{k} + a \boldsymbol{u}\boldsymbol{u}^T + b \boldsymbol{v}\boldsymbol{v}^T) \gamma^{k} = \delta^{k} \\\\
 \Longleftrightarrow & \; a \boldsymbol{u}\boldsymbol{u}^T \gamma^{k} + b \boldsymbol{v}\boldsymbol{v}^T \gamma^{k} = \delta^{k} - B^{k} \gamma^{k} \\\\
 \Longleftrightarrow & \; a \boldsymbol{u}^T \gamma^{k} \boldsymbol{u} + b \boldsymbol{v}^T \gamma^{k} \boldsymbol{v} = \delta^{k} - B^{k} \gamma^{k} \;\; (\because \boldsymbol{u}^T \gamma^{k}, \boldsymbol{v}^T \gamma^{k} \in \mathbb{R}) \\\\
-\end{align}
+\end{align\*}
 $$
 
 显然最后一个 equation 是有很多解的，DFP 是这么解的，令
 
 $$
-\begin{align}
+\begin{align\*}
 \boldsymbol{u} = & \delta^{k} \\\\
 \boldsymbol{v} = & - B^{k} \gamma^{k} \\\\
 a \boldsymbol{u}^T \gamma^{k} = & 1 \\\\
 b \boldsymbol{v}^T \gamma^{k} = & 1
-\end{align}
+\end{align\*}
 $$
 
 这样进一步可以求得 $a = \frac{1}{ {\delta^k}^T \gamma^k}, b = -\frac{1}{ {\gamma^k}^T B^k \gamma^k}$
@@ -171,28 +171,28 @@ $$B^{k+1} = B^k + \frac{ \delta^k {\delta^k}^T }{ {\delta^k}^T \gamma^k} - \frac
         给定任意 $\boldsymbol{v} \in \mathbb{R}^n \neq 0$
 
         $$
-        \begin{align}
+        \begin{align\*}
         \boldsymbol{v}^T B^{k+1} \boldsymbol{v} = & \boldsymbol{v}^T B^k \boldsymbol{v} + \frac{\boldsymbol{v}^T \delta^k {\delta^k}^T \boldsymbol{v}}{ {\delta^k}^T \gamma^k} - \frac{ \boldsymbol{v}^T B^k \gamma^k {\gamma^k}^T B^k \boldsymbol{v}}{ {\gamma^k}^T B^k \gamma^k} \\\\
         = & \boldsymbol{v}^T B^k \boldsymbol{v} + \frac{(\boldsymbol{v}^T \delta^k)^2}{ {\delta^k}^T \gamma^k} - \frac{ (\boldsymbol{v}^T B^k \gamma^k)^2}{ {\gamma^k}^T B^k \gamma^k}
-        \end{align}
+        \end{align\*}
         $$
 
         由于 $B^k$ 是 symmetric positive definite matrix，所以可以另 $B^k = {B^k}^{1/2}{B^k}^{1/2}$，定义
 
         $$
-        \begin{align}
+        \begin{align\*}
         \boldsymbol{\eta} = & {B^k}^{1/2} \boldsymbol{v} \\\\
         \boldsymbol{\rho} = & {B^k}^{1/2} \gamma^k
-        \end{align}
+        \end{align\*}
         $$
 
         则有
 
         $$
-        \begin{align}
+        \begin{align\*}
         \boldsymbol{v}^T B^{k+1} \boldsymbol{v} = & \boldsymbol{\eta}^T \boldsymbol{\eta} + \frac{(\boldsymbol{v}^T \delta^k)^2}{ {\delta^k}^T \gamma^k} - \frac{(\boldsymbol{\eta}^T \boldsymbol{\rho})^2}{\boldsymbol{\rho}^T \boldsymbol{\rho}} \\\\
         = & \frac{(\Vert \boldsymbol{\eta} \Vert \Vert \boldsymbol{\rho} \Vert)^2 - (\boldsymbol{\eta}^T \boldsymbol{\rho})^2}{\boldsymbol{\rho}^T \boldsymbol{\rho}} + \frac{(\boldsymbol{v}^T \delta^k)^2}{ {\delta^k}^T \gamma^k}
-        \end{align}
+        \end{align\*}
         $$
 
         * 根据 Cauchy-Schwarz inequality $(\Vert \boldsymbol{\eta} \Vert \Vert \boldsymbol{\rho} \Vert)^2 - (\boldsymbol{\eta}^T \boldsymbol{\rho})^2 \geq 0$
@@ -241,10 +241,10 @@ $$ B^{k+1} = B + (1 + \frac{\gamma^T B \gamma}{\delta^T \gamma}) \frac{\delta \d
 这个公式可以写成更简洁的形式
 
 $$ 
-\begin{align}
+\begin{align\*}
 B^{k+1} = & \; {V^k}^T B^k V^k + \frac{\delta^k {\delta^k}^T}{ {\gamma^k}^T \delta^k} \\\\
 \text{where} & \;\; V^k = I - \frac{\gamma^k {\delta^k}^T}{ {\gamma^k}^T \delta^k}
-\end{align}
+\end{align\*}
 $$
 
 根据与 DFP 一节中给出的证明相同的证明，可以得出 $G^{k+1}$ 在 exact line search 的情况下一定是 positive definite matrix，因此 $B^{k+1}$ 也一定是 positive definite matrix。Powell 在 Some global convergence properties of a variable metric algorithm for minimization without exact line searches 这篇文章中进一步证明了对于 convex function，BFGS + Wolfe line search 可以达到 global convergence
@@ -264,7 +264,7 @@ $$B^{k} = {V^{k-1}}^T B^{k-1} V^{k-1} + \frac{\delta^{k-1} {\delta^{k-1}}^T}{ {\
 这是个递归公式，展开 $m$ 步可得 (方便起见，定义 $\rho^k = \frac{1}{ {\gamma^{k}}^T \delta^{k}}, \rho^k \in \mathbb{R}$)
 
 $$
-\begin{align}
+\begin{align\*}
 B^{k} = & {V^{k-1}}^T B^{k-1} V^{k-1} + \rho^{k-1} {\delta^{k-1} {\delta^{k-1}}^T} \\\\
 = & {V^{k-1}}^T {V^{k-2}}^T B^{k-2} V^{k-2} V^{k-1} + \rho^{k-2} {V^{k-1}}^T \delta^{k-2} {\delta^{k-2}}^T V^{k-1} + \rho^{k-1} {\delta^{k-1} {\delta^{k-1}}^T} \\\\
 = & \cdots \\\\
@@ -272,19 +272,19 @@ B^{k} = & {V^{k-1}}^T B^{k-1} V^{k-1} + \rho^{k-1} {\delta^{k-1} {\delta^{k-1}}^
   & \rho^{k-m} ({V^{k-1}}^T \cdots {V^{k-m+1}}^T) \delta^{k-m} {\delta^{k-m}}^T (V^{k-m+1} \cdots V^{k-1}) + \\\\
   & \cdots \;+ \\\\
   & \rho^{k-1} {\delta^{k-1} {\delta^{k-1}}^T}
-\end{align}
+\end{align\*}
 $$
 
 最后一个式子中除了 $B^{k-m}$ 以外，其余的所有变量都能以 $\gamma$ 和 $\delta$ 表示。为了让 $B^k$ 能完全由前 $m$ 步的 $\gamma$ 和 $\delta$ 计算出来，lBFGS 在每一步迭代都选择一个矩阵去替换 $B^{k-m}$，这个矩阵每步都可以是不同的，但通常都是形式相对简单的矩阵，比如 diagonal matrix。令第 k 步选择的矩阵为 $B\_0^k$，这样每步迭代中 lBFGS 计算
 
 $$
-\begin{align}
+\begin{align\*}
 B^{k}\boldsymbol{g}^k = & ({V^{k-1}}^T \cdots {V^{k-m}}^T) B\_0^k ({V^{k-m}} \cdots V^{k-1})\boldsymbol{g}^k + \\\\
   & \rho^{k-m} ({V^{k-1}}^T \cdots {V^{k-m+1}}^T) \delta^{k-m} {\delta^{k-m}}^T (V^{k-m+1} \cdots V^{k-1}) \boldsymbol{g}^k + \\\\
   & \rho^{k-m+1} ({V^{k-1}}^T \cdots {V^{k-m+2}}^T) \delta^{k-m+1} {\delta^{k-m+1}}^T (V^{k-m+2} \cdots V^{k-1}) \boldsymbol{g}^k + \\\\
   & \cdots \;+ \\\\
   & \rho^{k-1} {\delta^{k-1} {\delta^{k-1}}^T}\boldsymbol{g}^k
-\end{align}
+\end{align\*}
 $$
 
 ----------
@@ -294,19 +294,19 @@ $$
 * 首先定义两个变量
 
     $$
-    \begin{align}
+    \begin{align\*}
     \eta\_i = & (V^{k-i} V^{k-i+1} \cdots V^{k-1}) \boldsymbol{g}^k\\\\
     \xi\_i = & \rho^{k-i} {\delta^{k-i}}^T (V^{k-i+1} \cdots V^{k-1}) \boldsymbol{g}^k \\\\
-    \end{align}
+    \end{align\*}
     $$
     
     其中 $\eta\_i \in \mathbb{R}^n, \xi\_i \in \mathbb{R}$ 由此可得
     
     $$
-    \begin{align}
+    \begin{align\*}
     \xi\_i = & \rho^{k-i} {\delta^{k-i}}^T \eta\_{i-1} \\\\
     \eta\_i = & V^{k-i} \eta\_{i-1} = (I - \rho^{k-i} \gamma^{k-i} {\delta^{k-i}}^T) \eta\_{i-1} = \eta\_{i-1} - \xi\_{i} \gamma^{k-i}
-    \end{align}
+    \end{align\*}
     $$
     
     可以看出 $\xi\_i$ 和 $\eta\_i$ 的计算都只涉及 vector operation
@@ -314,21 +314,21 @@ $$
 * 有了上面两个变量 $B^k\boldsymbol{g}^k$ 可以表示为
 
     $$
-    \begin{align}
+    \begin{align\*}
     B^{k}\boldsymbol{g}^k = & ({V^{k-1}}^T \cdots {V^{k-m}}^T) B\_0^k \eta\_m + \\\\
       & ({V^{k-1}}^T \cdots {V^{k-m+1}}^T) \delta^{k-m} \xi\_m + \\\\
       & ({V^{k-1}}^T \cdots {V^{k-m+2}}^T) \delta^{k-m+1} \xi\_{m-1} + \\\\
       & \cdots \;+ \\\\
       & \delta^{k-1} \xi\_1
-    \end{align}
+    \end{align\*}
     $$
     
     这个公式可以进一步以递归的形式表示，举个例子，假设 $m = 3$，则有
     
     $$
-    \begin{align}
+    \begin{align\*}
     B^{k}\boldsymbol{g}^k = & {V^{k-1}}^T ({V^{k-2}}^T ({V^{k-3}}^T B\_0^k \eta\_3 + \delta^{k-3} \xi\_3) + \delta^{k-2} \xi\_2) + \delta^{k-1} \xi\_1
-    \end{align}
+    \end{align\*}
     $$
     
     根据这个观察定义如下变量
@@ -342,11 +342,11 @@ $$
     * 对于 $i \in [1, m]$ 部分，展开可得
     
         $$
-        \begin{align}
+        \begin{align\*}
         \zeta\_i = & {V^{k-i}}^T \zeta\_{i+1} + \delta^{k-i} \xi\_i \\\\
         = & (I - \rho^{k-i}\delta^{k-i} {\gamma^{k-i}}^T) \zeta\_{i+1} + \delta^{k-i} \xi\_i \\\\
         = & \zeta\_{i+1} + \delta^{k-i} (\xi\_i - \rho^{k-i}({\gamma^{k-i}}^T\zeta\_{i+1})) \\\\
-        \end{align}
+        \end{align\*}
         $$
     
         这里面涉及的 vector operation 包括 inner product, subtraction 等

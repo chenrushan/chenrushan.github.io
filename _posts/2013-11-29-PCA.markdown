@@ -27,13 +27,13 @@ $$\\left\\{x\_1, x\_2, ..., x\_n\\right\\} \\rightarrow \\left\\{y\_1, y\_2, ...
 假设原始输入记为随机向量 $X = \\left\\{X\_1, X\_2, ..., X\_n\\right\\}$，其中每一维特征都是一个随机变量，project 后变为 $Y$ (由于只剩一维，所以 $Y$ 是个随机变量，不是随机向量)，则 $Y = v^{T}X$。project 后的数据的 variance 可以表示为
 
 $$
-\\begin{align}
+\\begin{align\*}
 & Var(Y) = Var(v^{T}X) \\\\
 = & E((v^{T}X)(v^{T}X)^{T}) - E(v^{T}X)E((v^{T}X)^{T}) \\\\
 = & v^{T}E(XX^{T})v - v^{T}E(X)E(X^{T})v \\\\
 = & v^{T}(E(XX^{T}) - E(X)E(X^T))v \\\\
 = & v^{T}\\sum v \\\\
-\\end{align}
+\\end{align\*}
 $$
 
 其中 $\\sum$ 为原始输入各维度特征的协方差矩阵。其中 $E(v^{T}X) = v^{T}E(X)$ 是根据期望的基本性质得到的，即 $E(X + Y) = E(X) + E(Y)$ 和 $E(aX) = aE(X)$。
@@ -45,13 +45,13 @@ $$\\underset{\\left\\Vert v \\right\\Vert = 1}{\arg\max}\\;\\; v^T\\sum v$$
 令 $L(v)=v^T \\sum v - \\lambda(\\left\\Vert v \\right\\Vert - 1)$，则有：
 
 $$
-\\begin{align}
+\\begin{align\*}
 & L(v)=v^T \\sum v - \\lambda(\\left\\Vert v \\right\\Vert - 1) \\\\
 \\Rightarrow & L(v)=v^T \\sum v - \\lambda(v^Tv - 1) \\\\
 \\Rightarrow & \\frac{\\partial L(v)}{\\partial v} = 2\\sum v - 2\\lambda v = 0 \\\\
 \\Rightarrow & \\sum v = \\lambda v \\\\
 \\Rightarrow & v^T\\sum v = v^T\\lambda v = v
-\\end{align}
+\\end{align\*}
 $$
 
 上面的倒数第二个式子告诉我们，能最大化 $v^T \\sum v$ 的 $v$ 必是 $\\sum$ 的特征向量，最后一个式子告诉我们这个最大值是 $\\sum$ 最大的那个特征值，同时 $v$ 是这个特征值对应的特征向量。

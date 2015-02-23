@@ -24,10 +24,10 @@ $$ \underset{\boldsymbol{d}^k}{\arg\min} \;\; f(\boldsymbol{x}^k) + {\boldsymbol
 这里 $f(\boldsymbol{x}^k)$ 是个 constant，可以从式子中去掉，另外，如果 $\boldsymbol{d}^k$ 不做任何限制的话，它可以是一个无穷小的向量，这个近似函数就变成没有 lower bound，这样优化就没有意义了，所以我们限制 $\Vert \boldsymbol{d}^k \Vert = 1$，这样最小化问题就变成了
 
 $$
-\begin{align}
+\begin{align\*}
 \underset{\boldsymbol{d}^k}{\arg\min} \;\; {\boldsymbol{g}^k}^T \boldsymbol{d}^k \\\\
 s.t. \Vert \boldsymbol{d}^k \Vert = 1
-\end{align}
+\end{align\*}
 $$
 
 这个优化问题很好解
@@ -111,12 +111,12 @@ $$\frac{E(\boldsymbol{x}^k) - E(\boldsymbol{x}^{k+1})}{E(\boldsymbol{x}^k)}$$
 表示 convergence rate，注意到
 
 $$
-\begin{align}
+\begin{align\*}
 E(\boldsymbol{x}^k) = & \frac{1}{2}(\boldsymbol{x}^k - \boldsymbol{x}^\*)^T H (\boldsymbol{x}^k - \boldsymbol{x}^\*) \\\\
 = & \frac{1}{2}(\boldsymbol{x}^k H \boldsymbol{x}^k - 2\boldsymbol{x}^\* H \boldsymbol{x}^k + \boldsymbol{x}^\* H \boldsymbol{x}^\*) \\\\
 = & \frac{1}{2} \boldsymbol{x}^k H \boldsymbol{x}^k - \boldsymbol{c} \boldsymbol{x}^k + \frac{1}{2}\boldsymbol{x}^\* H \boldsymbol{x}^\* \;\; (\because \boldsymbol{x}^\* = H^{-1}\boldsymbol{c})\\\\
 = & f(\boldsymbol{x}^k) + \frac{1}{2}\boldsymbol{x}^\* H \boldsymbol{x}^\*
-\end{align}
+\end{align\*}
 $$
 
 其中 $\frac{1}{2} \boldsymbol{x}^\* H \boldsymbol{x}^\*$ 是个常量，所以 $E(\boldsymbol{x})$ 和 $f(\boldsymbol{x})$ 本质上是一样的。
@@ -128,22 +128,22 @@ $$
 * 分子代入 $\boldsymbol{x}^{k+1} = \boldsymbol{x}^k - \alpha^k \boldsymbol{g}^k$ 有
 
     $$
-    \begin{align}
+    \begin{align\*}
     E(\boldsymbol{x}^k) - E(\boldsymbol{x}^{k+1}) = & \frac{1}{2} \boldsymbol{x}^k H \boldsymbol{x}^k - \boldsymbol{c} \boldsymbol{x}^k - \frac{1}{2} \boldsymbol{x}^{k+1} H \boldsymbol{x}^{k+1} + \boldsymbol{c} \boldsymbol{x}^{k+1} \\\\
     = & {\alpha^k ({\boldsymbol{x}^k} - {\boldsymbol{x}^\*})^T H \boldsymbol{g}^k - \frac{1}{2}{\alpha^k}^2 {\boldsymbol{g}^k}^T H \boldsymbol{g}^k} \\\\
     = & {\alpha^k (H \boldsymbol{x}^k - c)^T \boldsymbol{g}^k - \frac{1}{2}{\alpha^k}^2 {\boldsymbol{g}^k}^T H \boldsymbol{g}^k} \\\\
     = & {\alpha^k {\boldsymbol{g}^k}^T \boldsymbol{g}^k - \frac{1}{2}{\alpha^k}^2 {\boldsymbol{g}^k}^T H \boldsymbol{g}^k} \\\\
-    \end{align}
+    \end{align\*}
     $$
 
 * 对于分母，由于 $H(\boldsymbol{x}^k - \boldsymbol{x}^\*) = H\boldsymbol{x}^k - c = \boldsymbol{g}^k$ 有
 
     $$
-    \begin{align}
+    \begin{align\*}
     E(\boldsymbol{x}^k) = & \frac{1}{2}(\boldsymbol{x}^k - \boldsymbol{x}^\*)^T H (\boldsymbol{x}^k - \boldsymbol{x}^\*) \\\\
     = & \frac{1}{2} {(H^{-1}\boldsymbol{g}^k)}^T H (H^{-1}\boldsymbol{g}^k) \\\\
     = & \frac{1}{2} {\boldsymbol{g}^k}^T H^{-1} \boldsymbol{g}^k
-    \end{align}
+    \end{align\*}
     $$
 
 这样 convergence rate 就变为
@@ -230,12 +230,12 @@ $$\boldsymbol{x}^{k+1} = L^{-T}L^{-1} \boldsymbol{c} = H^{-1}\boldsymbol{c}$$
 如果我们将 y-space 的迭代步骤映射到 x-space 的话是这样
 
 $$
-\begin{align}
+\begin{align\*}
 & \boldsymbol{y}^{k+1} = \boldsymbol{y}^k - \nabla\_{\boldsymbol{y}^k} h(\boldsymbol{y}^k) \\\\
 \Longleftrightarrow & L^{-T}\boldsymbol{y}^{k+1} = L^{-T}\boldsymbol{y}^k - L^{-T}\nabla\_{\boldsymbol{y}^k} f(L^{-T} \boldsymbol{y}^k) \\\\
 \Longleftrightarrow & \boldsymbol{x}^{k+1} = \boldsymbol{x}^k - L^{-T} L^{-1} \nabla f(\boldsymbol{x}^k) \\\\
 \Longleftrightarrow & \boldsymbol{x}^{k+1} = \boldsymbol{x}^k - H^{-1} \nabla f(\boldsymbol{x}^k) \\\\
-\end{align}
+\end{align\*}
 $$
 
 这最后一步实际上是 Classical Newton 的迭代步骤。但要注意 Classical Newton 并不是由 Steepest Descent 演化过来的，实际上，二者的发明并没有什么联系，并且 Classical Newton 出现比 Steepest Descent 还要早得多，下一片文章我们将看到 Classical Newton 是基于什么思想得到的。

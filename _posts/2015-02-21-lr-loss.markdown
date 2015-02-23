@@ -27,20 +27,20 @@ loss function。以 $\b{x}$ 表示样本，$f = \b{wx} + b$，$p = \frac{1}{1 + 
 * 当 $y = 1$ 时
 
     $$
-    \begin{align}
+    \begin{align\*}
     CE(1, p) = & -\log(p) = -\log\frac{1}{1 + exp(-f)} \\\\
       = & \log(1 + exp(-f)) = LL(1, f)
-    \end{align}
+    \end{align\*}
     $$
 
 * 当 $y = 0$ 时
 
     $$
-    \begin{align}
+    \begin{align\*}
     CE(0, p) = & -\log(1-p) = -\log\frac{exp(-f)}{1 + exp(-f)} \\\\
       = & -\log\frac{1}{1 + exp(f)} = \log(1 + exp(f)) \\\\
       = & LL(-1, f)
-    \end{align}
+    \end{align\*}
     $$
 
 在大多数任务中，$y$ 的取值就是 $0$ 或 $1$，对于这些任务，Logistic Loss 和
