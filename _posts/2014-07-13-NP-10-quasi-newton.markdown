@@ -355,18 +355,16 @@ $$
 
 根据前面定义的 $\eta, \xi, \zeta$ 可以得出如下计算 $B^k \boldsymbol{g}^k$ 的伪代码
 
-<blockquote class="blkcode">
-$\eta_0 = \boldsymbol{g}^k$<br/>
-for $i$ from $1$ to $m$<br/>
-&nbsp;&nbsp; $\xi_i = \rho^{k-i} {\delta^{k-i}}^T \eta_{i-1}$<br/>
-&nbsp;&nbsp; $\eta_i = \eta_{i-1} - \xi_{i} \gamma^{k-i}$<br/>
-<br/>
-$\zeta_{m+1} = B_0^k\eta_m$<br/>
-for $i$ from $m$ to $1$<br/>
-&nbsp;&nbsp; $\zeta_{i} = \zeta_{i+1} + \delta^{k-i} (\xi_i - \rho^{k-i}({\gamma^{k-i}}^T\zeta_{i+1}))$<br/>
-<br/>
-output $\zeta_1$
-</blockquote>
+    $\eta_0 = \boldsymbol{g}^k$
+    for $i$ from $1$ to $m$
+      $\xi_i = \rho^{k-i} {\delta^{k-i}}^T \eta_{i-1}$
+      $\eta_i = \eta_{i-1} - \xi_{i} \gamma^{k-i}$
+
+    $\zeta_{m+1} = B_0^k\eta_m$
+    for $i$ from $m$ to $1$
+      $\zeta_{i} = \zeta_{i+1} + \delta^{k-i} (\xi_i - \rho^{k-i}({\gamma^{k-i}}^T\zeta_{i+1}))$
+
+    output $\zeta_1$
 
 这是一个 $O(mn)$ 的算法。lBFGS 每轮迭代都运行上述代码得到 descent direction，并且如果 $k > m$ 还需要 update 保存 $\gamma, \delta$ 的队列，去掉最后一个，加入最新的一个，然后继续下一轮迭代，直至算法收敛
 
