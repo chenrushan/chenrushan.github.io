@@ -1,0 +1,48 @@
+---
+layout: post
+title: Relationship Between Logistic Loss and Cross Entropy Loss
+categories: ml
+tags: machine learning, logistic loss, cross entropy, logistic regression
+---
+
+Logistic Loss 和 Cross Entropy Loss 是 Binary Classification 中常用的
+loss function。以 $\b{x}$ 表示样本，$f = \b{wx} + b$，$p = \frac{1}{1 + exp(-f)}$
+
+* Logistic Loss
+
+    $$LL(s, f) = \log(1 + \exp(-s f))$$
+
+    其中 $s$ 表示 true label，$s \in \\{1, -1\\}$
+
+* Cross Entropy Loss
+
+    $$CE(y, p) = -y\log(p) - (1-y)\log(1 - p)$$
+
+    $y$ 和 $p$ 表示 $\b{x}$ 属于类别 $1$ 的概率，$1-y$ 和 $1-p$
+    表示属于 $-1$ 的概率
+
+上面两个 loss function 表面看上去差异很大，其实二者在 $y = 1$ 和 $y = 0$
+的情况下是等价的
+
+* 当 $y = 1$ 时
+
+    $$
+    \begin{align}
+    CE(1, p) = & -\log(p) = -\log\frac{1}{1 + exp(-f)} \\\\
+      = & \log(1 + exp(-f)) = LL(1, f)
+    \end{align}
+    $$
+
+* 当 $y = 0$ 时
+
+    $$
+    \begin{align}
+    CE(0, p) = & -\log(1-p) = -\log\frac{exp(-f)}{1 + exp(-f)} \\\\
+      = & -\log\frac{1}{1 + exp(f)} = \log(1 + exp(f)) \\\\
+      = & LL(-1, f)
+    \end{align}
+    $$
+
+在大多数任务中，$y$ 的取值就是 $0$ 或 $1$，对于这些任务，Logistic Loss 和
+Cross Entropy Loss 是完全等价的
+
