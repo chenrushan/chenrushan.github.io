@@ -183,16 +183,13 @@ Gibbs Sampling 这么定义 Markov Chain
 
 实际使用的时候，通常不定义分布 $q(i)$，而是按照一个固定的顺序去选择每次 update 的 node，比如每次都从 $X\_1$ 按顺序 update 到 $X\_N$，sample 一个样本包含 N 次状态转换，比如我们要 sample k 个样本，可以这么做
 
-<blockquote class="blkcode">
-initialize $\boldsymbol{x}^{(0)}$<br/>
-
-for t = 0 to k-1:<br/>
-&nbsp;&nbsp;sample $\boldsymbol{x}^{(t+1)}_1$ according to $\pi(x_1|x^{(t)}_2, \cdots, x^{(t)}_N)$<br/>
-&nbsp;&nbsp;sample $\boldsymbol{x}^{(t+1)}_2$ according to $\pi(x_2|x^{(t+1)}_1, x^{(t)}_3, \cdots, x^{(t)}_N)$<br/>
-&nbsp;&nbsp;... ...<br/>
-&nbsp;&nbsp;sample $\boldsymbol{x}^{(t+1)}_N$ according to $\pi(x_N|x^{(t+1)}_1, x^{(t+1)}_2, \cdots, x^{(t+1)}_{N-1})$<br/>
-&nbsp;&nbsp;collect new sample $\boldsymbol{x}^{(t+1)}$
-</blockquote>
+    initialize $\boldsymbol{x}^{(0)}$
+    for t = 0 to k-1:
+      sample $\boldsymbol{x}^{(t+1)}_1$ according to $\pi(x_1|x^{(t)}_2, \cdots, x^{(t)}_N)$
+      sample $\boldsymbol{x}^{(t+1)}_2$ according to $\pi(x_2|x^{(t+1)}_1, x^{(t)}_3, \cdots, x^{(t)}_N)$
+      ... ...
+      sample $\boldsymbol{x}^{(t+1)}_N$ according to $\pi(x_N|x^{(t+1)}_1, x^{(t+1)}_2, \cdots, x^{(t+1)}_{N-1})$
+      collect new sample $\boldsymbol{x}^{(t+1)}$
 
 可以看到，Gibbs Sampling 每次迭代根据条件概率做 sample，因此这个条件概率肯定不能是 intractable distribution
 
