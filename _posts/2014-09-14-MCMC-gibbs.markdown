@@ -133,13 +133,11 @@ $$ \pi(x\_i)P\_{ij} = \pi(x\_j)P\_{ji} $$
 
 假设我们现在有了一个收敛到 target distribution 的 Markov Chain，做 sampling 的过程是这样，以 $S^{(t)}$ 表示第 t 步得到的样本，$S^{(t)} \in \\{x\_1, x\_2, \cdots, x\_n\\}$
 
-<blockquote class="blkcode">
-Sample $S^{(1)}$ according to $u^{(1)}$<br/>
-Sample $S^{(2)}$ according to $P(\cdot | S^{(1)})$<br/>
-... ...<br/>
-Sample $S^{(t)}$ according to $P(\cdot | S^{(t - 1)})$<br/>
-... ...<br/>
-</blockquote>
+    Sample $S^{(1)}$ according to $u^{(1)}$
+    Sample $S^{(2)}$ according to $P(\cdot | S^{(1)})$
+    ... ...
+    Sample $S^{(t)}$ according to $P(\cdot | S^{(t - 1)})$
+    ... ...
 
 但不是所有得到的样本都是可用的，因为一开始样本服从的分布与 target distribution 通常相差较大，因此只有迭代了一段时间后得到的样本才是可用的，下面的小节介绍怎样判断当前样本是否可用
 

@@ -82,14 +82,12 @@ Descent direction 在 multi-dimensional optimization 中是一个非常重要的
 
 上面的理论给出了 Iterative Optimization 的理论基础，一个迭代优化算法会产生一个 sequence $\\{\boldsymbol{x}^k\\}_{k \geq 0}$，这个 sequence 会最后收敛到一个 local minimum，这样的迭代算法可以用下面的框架表示
 
-<blockquote class="blkcode">
-Initialize $\boldsymbol{x}^0, k = 0$<br/>
-while stopping condition is not satisfied<br/>
-&nbsp;&nbsp; Find $\boldsymbol{x}^{k+1}$ such that $f(\boldsymbol{x}^{k+1}) < f(\boldsymbol{x}^k)$<br/>
-&nbsp;&nbsp; Set $k = k+1$<br/>
-end while<br/>
-output $\boldsymbol{x}^* = \boldsymbol{x}^k$<br/>
-</blockquote>
+    Initialize $\boldsymbol{x}^0, k = 0$
+    while stopping condition is not satisfied
+      Find $\boldsymbol{x}^{k+1}$ such that $f(\boldsymbol{x}^{k+1}) < f(\boldsymbol{x}^k)$
+      Set $k = k+1$
+    end while
+    output $\boldsymbol{x}^* = \boldsymbol{x}^k$
 
 这个迭代算法中有这个几个点需要注意
 
