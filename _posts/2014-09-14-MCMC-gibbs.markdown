@@ -133,13 +133,11 @@ $$ \pi(x\_i)P\_{ij} = \pi(x\_j)P\_{ji} $$
 
 假设我们现在有了一个收敛到 target distribution 的 Markov Chain，做 sampling 的过程是这样，以 $S^{(t)}$ 表示第 t 步得到的样本，$S^{(t)} \in \\{x\_1, x\_2, \cdots, x\_n\\}$
 
-<blockquote class="blkcode">
-Sample $S^{(1)}$ according to $u^{(1)}$<br/>
-Sample $S^{(2)}$ according to $P(\cdot | S^{(1)})$<br/>
-... ...<br/>
-Sample $S^{(t)}$ according to $P(\cdot | S^{(t - 1)})$<br/>
-... ...<br/>
-</blockquote>
+    Sample $S^{(1)}$ according to $u^{(1)}$
+    Sample $S^{(2)}$ according to $P(\cdot | S^{(1)})$
+    ... ...
+    Sample $S^{(t)}$ according to $P(\cdot | S^{(t - 1)})$
+    ... ...
 
 但不是所有得到的样本都是可用的，因为一开始样本服从的分布与 target distribution 通常相差较大，因此只有迭代了一段时间后得到的样本才是可用的，下面的小节介绍怎样判断当前样本是否可用
 
@@ -185,16 +183,13 @@ Gibbs Sampling 这么定义 Markov Chain
 
 实际使用的时候，通常不定义分布 $q(i)$，而是按照一个固定的顺序去选择每次 update 的 node，比如每次都从 $X\_1$ 按顺序 update 到 $X\_N$，sample 一个样本包含 N 次状态转换，比如我们要 sample k 个样本，可以这么做
 
-<blockquote class="blkcode">
-initialize $\boldsymbol{x}^{(0)}$<br/>
-
-for t = 0 to k-1:<br/>
-&nbsp;&nbsp;sample $\boldsymbol{x}^{(t+1)}_1$ according to $\pi(x_1|x^{(t)}_2, \cdots, x^{(t)}_N)$<br/>
-&nbsp;&nbsp;sample $\boldsymbol{x}^{(t+1)}_2$ according to $\pi(x_2|x^{(t+1)}_1, x^{(t)}_3, \cdots, x^{(t)}_N)$<br/>
-&nbsp;&nbsp;... ...<br/>
-&nbsp;&nbsp;sample $\boldsymbol{x}^{(t+1)}_N$ according to $\pi(x_N|x^{(t+1)}_1, x^{(t+1)}_2, \cdots, x^{(t+1)}_{N-1})$<br/>
-&nbsp;&nbsp;collect new sample $\boldsymbol{x}^{(t+1)}$
-</blockquote>
+    initialize $\boldsymbol{x}^{(0)}$
+    for t = 0 to k-1:
+      sample $\boldsymbol{x}^{(t+1)}_1$ according to $\pi(x_1|x^{(t)}_2, \cdots, x^{(t)}_N)$
+      sample $\boldsymbol{x}^{(t+1)}_2$ according to $\pi(x_2|x^{(t+1)}_1, x^{(t)}_3, \cdots, x^{(t)}_N)$
+      ... ...
+      sample $\boldsymbol{x}^{(t+1)}_N$ according to $\pi(x_N|x^{(t+1)}_1, x^{(t+1)}_2, \cdots, x^{(t+1)}_{N-1})$
+      collect new sample $\boldsymbol{x}^{(t+1)}$
 
 可以看到，Gibbs Sampling 每次迭代根据条件概率做 sample，因此这个条件概率肯定不能是 intractable distribution
 

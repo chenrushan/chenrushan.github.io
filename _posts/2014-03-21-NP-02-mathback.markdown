@@ -293,12 +293,12 @@ $$\det(I) = 1$$
     Take $2\times 2$ matrix as example, $A = [\boldsymbol{a}\_1, \boldsymbol{a}\_2], B = [\boldsymbol{b}\_1, \boldsymbol{b}\_2]$. ($a\_{ij}$ means element at **column i, row j**, not row i column j as usual).
 
     $$
-    \begin{align}
+    \begin{align\*}
     \det(AB) = & \det[\boldsymbol{a}\_1, \boldsymbol{a}\_2]\times [\boldsymbol{b}\_1, \boldsymbol{b}\_2] \\\\
     = & \det[b\_{11}\boldsymbol{a}\_1 + b\_{12}\boldsymbol{a}\_2, b\_{21}\boldsymbol{a}\_1 + b\_{22}\boldsymbol{a}\_2] \\\\
     = & b\_{11}\det[\boldsymbol{a}\_1, b\_{21}\boldsymbol{a}\_1 + b\_{22}\boldsymbol{a}\_2] + b\_{12}\det[\boldsymbol{a}\_2, b\_{21}\boldsymbol{a}\_1 + b\_{22}\boldsymbol{a}\_2] \\\\
     = & c\_1\det[\boldsymbol{a}\_1, \boldsymbol{a}\_1] + c\_2\det[\boldsymbol{a}\_1, \boldsymbol{a}\_2] + c\_3\det[\boldsymbol{a}\_2, \boldsymbol{a}\_1] + c\_4\det[\boldsymbol{a}\_2, \boldsymbol{a}\_2]
-    \end{align}
+    \end{align\*}
     $$
 
     Here, the exact form of $c\_{i}$ doesn't matter, anyway they are some function of $b\_{ij}$.
@@ -401,11 +401,11 @@ Let $A \in \mathbb{R}^{n\times n}$ be symmetric, then
     * eigenvectors of different eigenvalues are orthogonal
 
         $$
-        \begin{align}
+        \begin{align\*}
         & (A \boldsymbol{x}\_i)^T \boldsymbol{x}\_j = \boldsymbol{x}\_i^T A^T \boldsymbol{x}\_j = \boldsymbol{x}\_i^T A \boldsymbol{x}\_j \\\\
         \Rightarrow & \lambda\_i \boldsymbol{x}\_i^T \boldsymbol{x}\_j = \boldsymbol{x}\_i^T \lambda\_j \boldsymbol{x}\_j = \lambda\_j \boldsymbol{x}\_i^T \boldsymbol{x}\_j \\\\
         \Rightarrow & \boldsymbol{x}\_i^T \boldsymbol{x}\_j = 0
-        \end{align}
+        \end{align\*}
         $$
 
 * $S = ( \boldsymbol{x}\_1, \boldsymbol{x}\_2, \cdots, \boldsymbol{x}\_n )$ is an orthogonal matrix $(S^{-1} = S^T)$
@@ -439,11 +439,11 @@ $A$ is positive definite iff all its eigenvalues are positive.
 * eigenvalues are positive $\Rightarrow$ $A$ is positive definite
 
     $$
-    \begin{align}
+    \begin{align\*}
     \boldsymbol{x}^T A \boldsymbol{x} = & \boldsymbol{x}^T S \Lambda S^T \boldsymbol{x} \\\\
     = & \boldsymbol{y}^T \Lambda \boldsymbol{y} \\\\
     = & \sum\_i \lambda\_i y\_i^2
-    \end{align}
+    \end{align\*}
     $$
 
     So if $\lambda\_i \gt 0 \;\; \forall i$, $\boldsymbol{x}^T A \boldsymbol{x} \gt 0$.
@@ -453,12 +453,12 @@ $A$ is positive definite iff all its eigenvalues are positive.
     Let $\boldsymbol{x}\_i$ be eigenvector
 
     $$
-    \begin{align}
+    \begin{align\*}
     & A \text{ is positive definite} \\\\
     \Rightarrow & \boldsymbol{x}\_i^T A \boldsymbol{x}\_i \gt 0 \\\\
     \Rightarrow & \boldsymbol{x}\_i^T \lambda\_i \boldsymbol{x}\_i \gt 0 \\\\
     \Rightarrow & \lambda\_i \gt 0
-    \end{align}
+    \end{align\*}
     $$
 
 <blockquote>
@@ -657,13 +657,13 @@ exists and equals $\nabla f(\boldsymbol{x})^T \boldsymbol{d}$.
 </blockquote>
 
 $$
-\begin{align}
+\begin{align\*}
 \frac{\partial f}{\partial \boldsymbol{d}}(\boldsymbol{x}) = & \lim\_{\varepsilon \rightarrow 0} \frac{f(\boldsymbol{x} + \varepsilon \boldsymbol{d}) - f(\boldsymbol{x})}{\varepsilon} \\\\
 = & \lim\_{\varepsilon \rightarrow 0} \frac{f(\boldsymbol{x} + (0 + \varepsilon) \boldsymbol{d}) - f(\boldsymbol{x} + 0 \boldsymbol{d})}{(0 + \varepsilon) - 0} \\\\
 = & \frac{df(x+t\boldsymbol{d})}{dt}\bigg|\_{t=0} \\\\
 = & \nabla f(x+t\boldsymbol{d})^T \boldsymbol{d}\bigg|\_{t=0} \\\\
 = & \nabla f(x)^T \boldsymbol{d}
-\end{align}
+\end{align\*}
 $$
 
 For any unit direction $\boldsymbol{d}$, the rate of change is $\nabla f(x)^T \boldsymbol{d} = \Vert \nabla f(x)\Vert \Vert d \Vert \cos\theta = \Vert \nabla f(x) \Vert \cos\theta$, where $\theta$ is the angle between $\boldsymbol{d}$ and $\nabla f(x)$. When $\theta = 0$ the rate of change is maximized. This is why the gradient is the direction of steepest descent/ascent.
@@ -743,10 +743,10 @@ $$f(x) \approx f(x^0) + f'(x^0)(x - x^0) + \frac{1}{2} f''(x^0)(x - x^0)^2$$
     上面两个式子中最后一项被称为 Lagrange remainder。因为我们处理的都是多变量的情况，上面我们用矩阵乘法的形式表示，但是到了更高阶的近似就不好再用矩阵表示了，以 3 阶为例，展开的 taylor series 是这样的
 
     $$
-    \begin{align}
+    \begin{align\*}
     f(\boldsymbol{x}) = & f(\boldsymbol{x}^0) + \sum\_{i=1}^{n} \frac{\partial f(\boldsymbol{x})}{\partial x\_i} (x\_i - x^0\_i) + \frac{1}{2!} \sum\_{i=1}^n \sum\_{j=1}^n \frac{\partial f(\boldsymbol{x})}{\partial x\_i \partial x\_j} (x\_i - x^0\_i)(x\_j - x^0\_j) + \\\\
     & \frac{1}{3!} \sum\_{i=1}^n \sum\_{j=1}^n \sum\_{k=1}^n \frac{\partial f(\bar{\boldsymbol{x}})}{\partial x\_i \partial x\_j \partial x\_k} (x\_i - x^0\_i)(x\_j - x^0\_j)(x\_k - x^0\_k)
-    \end{align}
+    \end{align\*}
     $$
 
 -----------------------
@@ -788,18 +788,18 @@ the columns of a matrix $A \in \mathbb{R}^{m\times n}$ are $a_1$ through $a_n$, 
     By the chain rule, we have
 
     $$
-    \begin{align}
+    \begin{align\*}
     \frac{\partial f(A\boldsymbol{x})}{\partial x\_j} = & \sum\_{k=1}^{n} \frac{\partial f(A\boldsymbol{x})}{\partial (A\boldsymbol{x})\_k} \frac{\partial (A\boldsymbol{x})\_k}{\partial x\_j} \\\\
     = & \sum\_{k=1}^{n} \frac{\partial f(A\boldsymbol{x})}{\partial (A\boldsymbol{x})\_k} \frac{\partial \tilde{a}\_k^T \boldsymbol{x}}{\partial x\_j} \\\\
     = & \sum\_{k=1}^{n} \frac{\partial f(A\boldsymbol{x})}{\partial (A\boldsymbol{x})\_k} a\_{kj} \\\\
     = & a\_j^T \nabla f(A\boldsymbol{x})
-    \end{align}
+    \end{align\*}
     $$
 
     so 
 
     $$
-    \begin{align}
+    \begin{align\*}
     \nabla\_{\boldsymbol{x}} f(A\boldsymbol{x}) = 
     \begin{pmatrix}
       \frac{\partial f(A\boldsymbol{x})}{\partial x\_1} \\\\
@@ -812,7 +812,7 @@ the columns of a matrix $A \in \mathbb{R}^{m\times n}$ are $a_1$ through $a_n$, 
       \vdots \\\\
       a\_n^T
     \end{pmatrix} \nabla f(A\boldsymbol{x}) = A^T \nabla f(A \boldsymbol{x})
-    \end{align}
+    \end{align\*}
     $$
 
 Reference: [berkeley.edu](http://www.eecs.berkeley.edu/~jduchi/projects/matrix_prop.pdf), [okstate.edu](https://www.math.okstate.edu/~atovstolis/lecture_notes/LN14_6.pdf)

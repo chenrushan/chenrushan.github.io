@@ -133,12 +133,12 @@ $$ \frac{\partial C}{\partial w^l} = \frac{1}{m}\boldsymbol{a^{l-1}} {\boldsymbo
 综合上述两个公式有
 
 $$
-\begin{align}
+\begin{align\*}
 \frac{\partial C}{\partial z^L\_i} = & \sum\_{j = 1}^n \frac{\partial C}{\partial a^L\_j} \frac{\partial a^L\_j}{\partial z^L\_i} \\\\
 = & \sum\_{j = 1}^n \frac{t\_j}{a^L\_j} a^L\_j(I\_{ji} - a^L\_i) \\\\
 = & \sum\_{j = 1}^n t\_j (I\_{ji} - a^L\_i) \\\\
 = & a^L\_i - t\_i
-\end{align}
+\end{align\*}
 $$
 
 最后一个式子是因为对于所有的 $I\_{ij}$ 只有 $i = j$ 时 $I\_{ij} = 1$，所以 $\sum\_j t\_j I\_{ji} = t\_i$，而对于另一部分 $\sum\_j t\_j a^L\_i = a^L\_i \sum\_j t\_j = a^L\_i$

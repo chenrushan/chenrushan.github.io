@@ -42,12 +42,12 @@ Line segment 也被记为 $LS[\boldsymbol{x}_1, \boldsymbol{x}_2]$
 * 证明
 
     $$
-    \begin{align}
+    \begin{align\*}
     & \boldsymbol{x}\_1, \boldsymbol{x}\_2, \boldsymbol{x}\_3 \in A \\\\
     \Rightarrow & (1-\alpha) \boldsymbol{x}\_1 + \alpha \boldsymbol{x}\_2,\; (1-\beta)\boldsymbol{x}\_2 + \beta \boldsymbol{x}\_3 \in A \\\\
     \Rightarrow & (1-\gamma)((1-\alpha) \boldsymbol{x}\_1 + \alpha \boldsymbol{x}\_2) + \gamma ((1-\beta)\boldsymbol{x}\_2 + \beta \boldsymbol{x}\_3) \in A \\\\
     \equiv & (1-\gamma)(1-\alpha) \boldsymbol{x}\_1 + (\alpha - \alpha \gamma + \gamma) \boldsymbol{x}\_2 - \beta\gamma (\boldsymbol{x}\_2 - \boldsymbol{x}\_3) \in A
-    \end{align}
+    \end{align\*}
     $$
 
     特别的，令 $(\alpha - \alpha \gamma + \gamma) = 0$，即 $\alpha = \frac{\gamma}{\gamma - 1}$，上面最后一个式子就简化为 $\boldsymbol{x}\_1 - \beta\gamma (\boldsymbol{x}\_2 - \boldsymbol{x}\_3) \in A$，令 $\lambda = -\beta\gamma$，即 $\boldsymbol{x}\_1 + \lambda(\boldsymbol{x}\_2 - \boldsymbol{x}\_3) \in A$。
@@ -63,11 +63,11 @@ Line segment 也被记为 $LS[\boldsymbol{x}_1, \boldsymbol{x}_2]$
     * 假设当 $n = k - 1$ 是，上述结论成立，当 $n = k$ 时有
 
         $$
-        \begin{align}
+        \begin{align\*}
         \sum\_{i = 1}^{k} \lambda\_i \boldsymbol{x}\_i = & \lambda\_1 \boldsymbol{x}\_1 + \lambda\_2 \boldsymbol{x}\_2 + \cdots + (1 - \sum\_{i = 1}^{k - 1} \lambda\_i) \boldsymbol{x}\_k \;\; (\because \sum\_{i=1}^{k} \lambda\_i = 1) \\\\
         = & (\lambda\_1 \boldsymbol{x}\_1 + \lambda\_2 \boldsymbol{x}\_2 + \cdots + \lambda\_{k-2} \boldsymbol{x}\_{k-2} + (1 - \sum\_{i = 1}^{k - 2} \lambda\_i) \boldsymbol{x}\_k) + \lambda\_{k-1}(\boldsymbol{x}\_{k-1} - \boldsymbol{x}\_{k}) \\\\
         = & \boldsymbol{y} + \lambda\_{k-1}(\boldsymbol{x}\_{k-1} - \boldsymbol{x}\_{k}) \;\; (\boldsymbol{y} \in A) \\\\
-        \end{align}
+        \end{align\*}
         $$
 
         根据上面的推论 $\boldsymbol{y} + \lambda\_{k-1}(\boldsymbol{x}\_{k-1} - \boldsymbol{x}\_{k}) \in A$，所以对于 $n = k$ 结论也成立
@@ -85,11 +85,11 @@ Line segment 也被记为 $LS[\boldsymbol{x}_1, \boldsymbol{x}_2]$
     令 $V = \\{\boldsymbol{x} - \boldsymbol{x}\_0: \boldsymbol{x} \in A\\}, \;\; \boldsymbol{x}\_1, \boldsymbol{x}\_2 \in A$，则 $\boldsymbol{x}\_1 - \boldsymbol{x}\_0, \boldsymbol{x}\_2 - \boldsymbol{x}\_0 \in V$
 
     $$
-    \begin{align}
+    \begin{align\*}
     & \alpha(\boldsymbol{x}\_1 - \boldsymbol{x}\_0) + \beta(\boldsymbol{x}\_2 - \boldsymbol{x}\_0) \;\; (\forall \alpha, \beta \in \mathbb{R})\\\\
     = & \alpha \boldsymbol{x}\_1 + \beta \boldsymbol{x}\_2 + (1 - \alpha - \beta) \boldsymbol{x}\_0 - \boldsymbol{x}\_0 \\\\
     = & \boldsymbol{y} - \boldsymbol{x}\_0
-    \end{align}
+    \end{align\*}
     $$
 
     根据前面定理可知，$\boldsymbol{y} \in A$，所以 $\boldsymbol{y} - \boldsymbol{x}\_0 \in V$，因此 $V$ 是一个 vector space。
@@ -198,10 +198,10 @@ $\boldsymbol{x}_0 = \arg\min_{\boldsymbol{x} \in S} \Vert \boldsymbol{y} - \bold
         由于 $\boldsymbol{x}\_0$ 是最小值点，所以 $\forall \boldsymbol{x} \in S$，我们都有 $\Vert \boldsymbol{y} - \boldsymbol{x}\_0 \Vert^2 \leq \Vert \boldsymbol{y} - (\boldsymbol{x}\_0 + \lambda(\boldsymbol{x} - \boldsymbol{x}\_0))\Vert^2\;\; \lambda \in [0, 1]$，把左边式子展开有
 
         $$
-        \begin{align}
+        \begin{align\*}
         \Vert \boldsymbol{y} - \boldsymbol{x}\_0 \Vert^2 & \leq \Vert \boldsymbol{y} - (\boldsymbol{x}\_0 + \lambda(\boldsymbol{x} - \boldsymbol{x}\_0))\Vert^2 \\\\
         & = \Vert \boldsymbol{y} - \boldsymbol{x}\_0 \Vert^2 - 2 \lambda \Vert  \boldsymbol{y} - \boldsymbol{x}\_0 \Vert \Vert \boldsymbol{x} - \boldsymbol{x}\_0\Vert + \lambda^2 \Vert \boldsymbol{x} - \boldsymbol{x}\_0\Vert \\\\
-        \end{align}
+        \end{align\*}
         $$
 
         由此推出 $2 \Vert  \boldsymbol{y} - \boldsymbol{x}\_0 \Vert \Vert \boldsymbol{x} - \boldsymbol{x}\_0\Vert \leq \lambda \Vert \boldsymbol{x} - \boldsymbol{x}\_0\Vert$，不等式两边对 $\lambda$ 取极限 $\lambda \rightarrow 0^+$，有 $(\boldsymbol{y} - \boldsymbol{x}\_0)^T(\boldsymbol{x} - \boldsymbol{x}\_0) \leq 0$
@@ -209,10 +209,10 @@ $\boldsymbol{x}_0 = \arg\min_{\boldsymbol{x} \in S} \Vert \boldsymbol{y} - \bold
     * $(\boldsymbol{y} - \boldsymbol{x}\_0)^T(\boldsymbol{x} - \boldsymbol{x}\_0) \leq 0 \;\; \forall \boldsymbol{x} \in S \Rightarrow \boldsymbol{x}\_0 = \arg\min\_{\boldsymbol{x} \in S} \Vert \boldsymbol{y} - \boldsymbol{x} \Vert$
 
         $$
-        \begin{align}
+        \begin{align\*}
         \Vert \boldsymbol{y} - \boldsymbol{x} \Vert^2 = & \Vert (\boldsymbol{y} - \boldsymbol{x}\_0) - (\boldsymbol{x} - \boldsymbol{x}\_0) \Vert^2 \\\\
         = & \Vert \boldsymbol{y} - \boldsymbol{x}\_0 \Vert^2 - 2 \Vert \boldsymbol{y} - \boldsymbol{x}\_0 \Vert\Vert \boldsymbol{x} - \boldsymbol{x}\_0 \Vert + \Vert \boldsymbol{x} - \boldsymbol{x}\_0 \Vert^2
-        \end{align}
+        \end{align\*}
         $$
 
         所以如果 $(\boldsymbol{y} - \boldsymbol{x}\_0)^T(\boldsymbol{x} - \boldsymbol{x}\_0) \leq 0$ 则 $\Vert \boldsymbol{y} - \boldsymbol{x} \Vert^2 \geq \Vert \boldsymbol{y} - \boldsymbol{x}\_0 \Vert^2\;\; \forall \boldsymbol{x} \in S$

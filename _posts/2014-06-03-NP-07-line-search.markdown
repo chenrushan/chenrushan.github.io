@@ -166,10 +166,10 @@ OUTPUT: $\alpha^k$
     * <p style="background-color: #9f9">首先每一步迭代符合 Armijo condition 所以有</p>
 
         $$
-        \begin{align}
+        \begin{align\*}
         f^k < & f^{k-1} + c\_1 \alpha^{k-1} g^{k-1} \boldsymbol{d}^{k-1} \;\; c\_1 \in (0, 1) \\\\
         < & f^0 + \sum\_{i=0}^{k-1} c\_1 \alpha^i g^i \boldsymbol{d}^i \\\\
-        \end{align}
+        \end{align\*}
         $$
 
         上式等价于 $ - \sum\_{i=0}^{k-1} c\_1 \alpha^i g^i \boldsymbol{d}^i < f^0 - f^k$，由于 $f$ bounded below，所以有 $f^0 - f^\infty < \infty$，因此有

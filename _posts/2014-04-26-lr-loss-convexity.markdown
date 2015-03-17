@@ -28,10 +28,10 @@ $$\frac{\partial g(z)}{\partial z} = g(z)(1 - g(z))$$
 根据这个式子，我们可以求得 $L(w)$ 相对于每一维的偏导数
 
 $$
-\begin{align}
+\begin{align\*}
 \frac{\partial L(w)}{\partial w\_j} = & -\sum\_{i=1}^m (y\_i(1 - h\_w(x\_i)) x\_{ij} - (1 - y\_i) h\_w(x\_i) x\_{ij}) \\\\
 = & \sum\_{i=1}^m (h\_w(x\_i) - y\_i) x\_{ij}
-\end{align}
+\end{align\*}
 $$
 
 再求二阶偏导有
@@ -41,14 +41,14 @@ $$ \frac{\partial L(w)}{\partial w\_j \partial w\_k} = \sum\_{i=1}^m x\_{ij} h\_
 假设 Hessian matrix 为 $H$，给定任意 $v \in \mathbb{R}^n$
 
 $$
-\begin{align}
+\begin{align\*}
 v^T H v = & \sum\_{j=1}^n \sum\_{k=1}^n v\_j v\_k H\_{jk} \\\\
 = & \sum\_{j=1}^n \sum\_{k=1}^n v\_j v\_k \sum\_{i=1}^m x\_{ij} h\_w(x\_i) (1 - h\_w(x\_i)) x\_{ik} \\\\
 = & \sum\_{i=1}^m (\sum\_{j=1}^n \sum\_{k=1}^n v\_j v\_k x\_{ij} x\_{ik} h\_w(x\_i) (1 - h\_w(x\_i))) \\\\
 = & \sum\_{i=1}^m h\_w(x\_i) (1 - h\_w(x\_i)) (\sum\_{j=1}^n \sum\_{k=1}^n v\_j v\_k x\_{ij} x\_{ik}) \\\\
 = & \sum\_{i=1}^m h\_w(x\_i) (1 - h\_w(x\_i)) (\sum\_{j=1}^n v\_j x\_{ij} \sum\_{k=1}^n v\_k x\_{ik}) \\\\
 = & \sum\_{i=1}^m h\_w(x\_i) (1 - h\_w(x\_i)) (\sum\_{j=1}^n v\_j x\_{ij})^2 \\\\
-\end{align}
+\end{align\*}
 $$
 
 最后一个式子中每一项都是 $\geq 0$ 的，所以 $v^T Hv \geq 0$，也就是 $H$ 是 PSD matrix，这样到此也就证明了 LR loss 是个 convex function

@@ -110,10 +110,10 @@ An iterative optimization algorithm is said to be locally convergent if for each
     如果能满足下面两个条件，则 Classical Newton 就是一个 order-two convergent algorithm
 
     $$
-    \begin{align}
+    \begin{align\*}
     |\frac{f'''(\bar{x}^k)}{2 f''(x^k)}| \leq \alpha < \infty \\\\
     |\frac{f'''(\bar{x}^k)}{2 f''(x^k)} (x^k - x^\*)| < 1
-    \end{align}
+    \end{align\*}
     $$
 
     第二个条件意味着 $|x^{k+1} - x^\*| < |x^k - x^\*|$，如果这个不等式不能成立，则无法保证算法收敛
@@ -127,10 +127,10 @@ An iterative optimization algorithm is said to be locally convergent if for each
         令 $x^k \in (x^\* - \eta, x^\* + \eta)$，同时定义
         
         $$
-        \begin{align}
+        \begin{align\*}
         \beta\_1 = & \min\_{x \in (x^\* - \eta, x^\* + \eta)} f''(x) \\\\
         \beta\_2 = & \max\_{x \in (x^\* - \eta, x^\* + \eta)}|f'''(x)|
-        \end{align}
+        \end{align\*}
         $$
         
         (<span style="background-color:#faa">注意</span>虽然 $f''(x) > 0$，但其实不用这么强的要求，只要能保证 $f''(x) \neq 0$ 就行了，因为它处在分母的位置，然后定义 $\beta\_1 = \min\_{x \in (x^* - \eta, x^* + \eta)} |f''(x)|$)
@@ -148,12 +148,12 @@ An iterative optimization algorithm is said to be locally convergent if for each
     在这两个条件都满足的情况下，我们有
 
     $$
-    \begin{align}
+    \begin{align\*}
     & |x^{k+1} - x^\*| \leq \alpha |x^k - x^\*|^2 \\\\
     \Longleftrightarrow & \alpha |x^{k+1} - x^\*| \leq (\alpha |x^0 - x^\*|)^{2^k} \\\\
     \Longleftrightarrow & |x^{k+1} - x^\*| \leq \frac{1}{\alpha} (\alpha |x^0 - x^\*|)^{2^k} \\\\
     \Longleftrightarrow & \underset{k\rightarrow \infty}{\lim} |x^{k+1} - x^\*| = 0 \;\; (\because \alpha |x^0 - x^\*| < 1) \\\\
-    \end{align}
+    \end{align\*}
     $$
 
     由此我们得到如下结论

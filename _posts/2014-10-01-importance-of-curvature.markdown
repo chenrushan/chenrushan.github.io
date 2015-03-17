@@ -123,10 +123,10 @@ $$\boldsymbol{A} = \boldsymbol{Q\Lambda Q}^{-1}$$
 $\boldsymbol{\Lambda}$ 是一个 diagonal matrix，对角线上每一项都表示 $\boldsymbol{A}$ 的 eigenvalue，也就是 $f$ 沿 curvature axis 的 curvature。有了这个 decomposition 结果，我们可以对上述迭代做如下变换
 
 $$
-\begin{align}
+\begin{align\*}
 & \boldsymbol{x}^{k+1} = \boldsymbol{x}^k - \boldsymbol{Q\Lambda}^{-1}\boldsymbol{Q}^{-1} \boldsymbol{g}^k \\\\
 \Longleftrightarrow & \boldsymbol{Q}^{-1} \boldsymbol{x}^{k+1} = \boldsymbol{Q}^{-1} \boldsymbol{x}^k - \boldsymbol{\Lambda}^{-1} (\boldsymbol{Q}^{-1} \boldsymbol{g}^k)
-\end{align}
+\end{align\*}
 $$
 
 $\boldsymbol{Q}$ 的列向量构成 eigenspace，对于原空间中的任何一个变量 $\boldsymbol{v}$，$\boldsymbol{Q}^{-1}\boldsymbol{v}$ 表示 $\boldsymbol{v}$ 在 eigenspace 中的新坐标，因此如果把 Newton Method 的迭代映射到 eigenspace 中理解，它的效果就跟上个例子中的迭代一样，其实对于上一个例子，$\boldsymbol{Q} = \boldsymbol{I}$，eigenspace 和原空间是同一个空间
