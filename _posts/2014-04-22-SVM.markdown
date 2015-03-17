@@ -24,7 +24,7 @@ SVM 使用的 loss function 是 hinge loss，hinge loss 的好处包括
 
 ### Loss Funtion 的进化
 
-这一节我们看一下我们通常看见的 SVM 的 loss function 的形式是怎么一步一步演化得到的
+这一节我们看一下通常看见的 SVM loss function 的形式是怎么一步一步演化得到的
 
 * 首先 SVM 用的是 hinge loss，hinge function 是 $\max(0, m - x)$，其中 $m$ 表示 margin，所以 SVM 的 objective 可以表示为
 
