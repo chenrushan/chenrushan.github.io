@@ -330,10 +330,10 @@ $$ \min \sum\_{i=1}^m \log(1 + \exp(-b\_i(a\_i^T w + v))) + \lambda \Vert w \Ver
 其中 $m$ 表示训练样本个数，$b\_i \in \\{-1, 1\\}$ 为样本类别，$a\_i \in \mathbb{R}^n$ 为样本对应的 feature vector，$w \in \mathbb{R}^n$ 为 feature weight，$v \in \mathbb{R}$。将其转化为等式约束问题
 
 $$
-\begin{align\*\*}
+\begin{align\*}
 \min & \; \sum\_{i=1}^N l\_i(w\_i, v\_i) + \lambda \Vert w \Vert\_1 \\\\
 s.t. & \; w\_i = w, v\_i = v
-\end{align\*\*}
+\end{align\*}
 $$
 
 其中 $l\_i(w\_i, v\_i) = \sum\_{j=1}^{m\_i} \log(1 + \exp(-b\_j(a\_j^T w\_i + v\_i)))$，$\sum\_{i=1}^{N} m\_i = m$，$N$ 表示数据的 partition 数，$(w\_i, v\_i)$ 可以理解为每个 partition 对应的 local model，$l\_i(w\_i, v\_i)$ 为每个 partition 对应的 loss
