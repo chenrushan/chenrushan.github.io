@@ -10,16 +10,20 @@ img {
     display: block;
     margin-left: auto;
     margin-right: auto;
+    /*
     -webkit-box-shadow: 3px 2px 5px 1px rgba(0,0,0,0.43);
     -moz-box-shadow: 3px 2px 5px 1px rgba(0,0,0,0.43);
     box-shadow: 3px 2px 5px 1px rgba(0,0,0,0.43);
+    */
 }
 
+/*
 object {
     -webkit-box-shadow: 3px 2px 5px 1px rgba(0,0,0,0.43);
     -moz-box-shadow: 3px 2px 5px 1px rgba(0,0,0,0.43);
     box-shadow: 3px 2px 5px 1px rgba(0,0,0,0.43);
 }
+*/
 
 .blkcenter {
     display: block;
@@ -48,7 +52,7 @@ pre code {
 }
 
 hr {
-    border-top: 1px solid #ccc;
+    border-top: 0px solid #ccc;
     border-bottom: 1px solid #ccc;
 }
 
@@ -62,4 +66,14 @@ hr {
         padding-right: 1rem;
         padding-left: 1.25rem;
     }
+}
+
+.content {
+  padding-top:    2rem;
+  padding-bottom: 2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  border: 1px solid #8AC007;
+  margin-left: auto;
+  margin-right: auto;
 }
