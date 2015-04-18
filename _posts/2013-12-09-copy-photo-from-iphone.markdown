@@ -15,7 +15,7 @@ tags: arch, linux, gphoto2, iphone, photo
 
         gphoto2 --port=usb -R -T
 
-        如果之前已经拷过一部分，可以用 `--skip-existing` 选项
+    如果之前已经拷过一部分，可以用 `--skip-existing` 选项
 
 2. 拷了所有 thumbnail 后，找到你要的照片，记下文件名，然后运行：
 
