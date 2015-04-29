@@ -352,7 +352,8 @@ A square matrix $A$ is said to be invertible if there exists a matrix $B$ such t
 
 * If $\det(A) \neq 0$, then $A$ is invertible. ($\det(A)$ denotes the determinant of matrix $A$)
 
-* The matrix $Q$ is orthogonal if $Q^{-1} = Q^T$.
+* A matrix $A$ is called an orthogonal matrix if $A^{-1} = A^T$. So the column(row)
+  vectors form orthonormal basis
 
 -----------------------
 
