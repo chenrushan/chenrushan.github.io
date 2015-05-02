@@ -37,6 +37,16 @@
         processEscapes: true,
         skipTags: ['script', 'noscript', 'style', 'textarea']
       },
+      TeX: {
+        Macros: {
+          b: ["\\boldsymbol{#1}", 1],
+          a: ["\\alpha"],
+          v: ["\\varphi"],
+          bb: ["\\mathbb{#1}", 1],
+          Ra: ["\\Rightarrow"],
+          Lra: ["\\Longrightarrow"]
+        }
+      },
       "HTML-CSS": { scale: 85 },
     });
   </script>
@@ -53,8 +63,5 @@
   
     ga('create', 'UA-46117040-1', 'juscodit.github.io');
     ga('send', 'pageview');
-  
   </script>
-
-  $$\def\b#1{\boldsymbol{#1}}$$
 </head>
