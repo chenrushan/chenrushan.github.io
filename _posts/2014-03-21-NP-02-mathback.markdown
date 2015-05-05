@@ -37,24 +37,24 @@ $A = \\{x: 1 \leq x \lt 3\\}$
 A nonempty set $S$ is called a vector space if
 
 <ul>
-<li>For any $\boldsymbol{x}, \boldsymbol{y} \in S$, $\boldsymbol{x} + \boldsymbol{y}$ is defined and is in $S$. Further,</li>
+<li>For any $\b{x}, \b{y} \in S$, $\b{x} + \b{y}$ is defined and is in $S$. Further,</li>
 
-$$\boldsymbol{x} + \boldsymbol{y} = \boldsymbol{y} + \boldsymbol{x} \;\; \text{(commutativity)}$$
-$$\boldsymbol{x} + (\boldsymbol{y} + \boldsymbol{z}) = (\boldsymbol{x} + \boldsymbol{y}) + \boldsymbol{z} \;\; \text{(associativity)}$$
+$$\b{x} + \b{y} = \b{y} + \b{x} \;\; \text{(commutativity)}$$
+$$\b{x} + (\b{y} + \b{z}) = (\b{x} + \b{y}) + \b{z} \;\; \text{(associativity)}$$
 
-<li>There exists an element in $S$, $\boldsymbol{0}$, such that $\boldsymbol{x} + \boldsymbol{0} = \boldsymbol{0} + \boldsymbol{x}$ for all $\boldsymbol{x}$.</li>
+<li>There exists an element in $S$, $\b{0}$, such that $\b{x} + \b{0} = \b{0} + \b{x}$ for all $\b{x}$.</li>
 
-<li>For any $\boldsymbol{x} \in S$, there exists $\boldsymbol{y} \in S$, such that $\boldsymbol{x} + \boldsymbol{y} = \boldsymbol{0}$.</li>
+<li>For any $\b{x} \in S$, there exists $\b{y} \in S$, such that $\b{x} + \b{y} = \b{0}$.</li>
 
-<li>For any $\boldsymbol{x} \in S$ and $\alpha \in \mathbb{R}$, $\alpha \boldsymbol{x}$ is defined and is in $S$, Further,</li>
+<li>For any $\b{x} \in S$ and $\alpha \in \mathbb{R}$, $\alpha \b{x}$ is defined and is in $S$, Further,</li>
 
-$$\boldsymbol{1}\boldsymbol{x} = \boldsymbol{x} \;\; \forall \boldsymbol{x}$$
+$$\b{1}\b{x} = \b{x} \;\; \forall \b{x}$$
 
-<li>For any $\boldsymbol{x}, \boldsymbol{y} \in S$ and $\alpha, \beta \in \mathbb{R}$,</li>
+<li>For any $\b{x}, \b{y} \in S$ and $\alpha, \beta \in \mathbb{R}$,</li>
 
-$$\alpha(\boldsymbol{x} + \boldsymbol{y}) = \alpha \boldsymbol{x} + \alpha \boldsymbol{y}$$
-$$(\alpha + \beta)\boldsymbol{x} = \alpha \boldsymbol{x} + \beta \boldsymbol{x}$$
-$$\alpha(\beta \boldsymbol{x}) = \alpha \beta \boldsymbol{x}$$
+$$\alpha(\b{x} + \b{y}) = \alpha \b{x} + \alpha \b{y}$$
+$$(\alpha + \beta)\b{x} = \alpha \b{x} + \beta \b{x}$$
+$$\alpha(\beta \b{x}) = \alpha \beta \b{x}$$
 </ul>
 </blockquote>
 
@@ -67,11 +67,11 @@ Elements in S are called **vector**.
 <blockquote>
 <li> $\mathbb{R}$: vector space of real numbers</li>
 <li> $\mathbb{R}^n$: vector space of real $n \times 1$ vectors</li>
-<li> n-vector $\boldsymbol{x}$ is an array of n scalars, $x_1, x_2, ..., x_n$</li>
-<li> $\boldsymbol{x} = \begin{pmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{pmatrix}$</li>
-<li> $\boldsymbol{x}^T = (x_1, x_2, ..., x_n)$</li>
-<li> $\boldsymbol{0}^T = (0, 0, ..., 0)$</li>
-<li> $\boldsymbol{1}^T = (1, 1, ..., 1)$ (We also use $\boldsymbol{e}$ to denote this vector)</li>
+<li> n-vector $\b{x}$ is an array of n scalars, $x_1, x_2, ..., x_n$</li>
+<li> $\b{x} = \begin{pmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{pmatrix}$</li>
+<li> $\b{x}^T = (x_1, x_2, ..., x_n)$</li>
+<li> $\b{0}^T = (0, 0, ..., 0)$</li>
+<li> $\b{1}^T = (1, 1, ..., 1)$ (We also use $\b{e}$ to denote this vector)</li>
 </blockquote>
 
 -----------------------
@@ -91,8 +91,8 @@ $\\{(x\_1, x\_2): a x\_1 + b x\_2 = c, a \in \mathbb{R}, b \in \mathbb{R}, a^2 +
 **Spanning Set**:
 
 <blockquote>
-A set of vectors $\boldsymbol{x}_1, \boldsymbol{x}_2, ..., \boldsymbol{x}_k$ is said to span the vector space $S$ if any vector $\boldsymbol{x} \in S$ can be represented as:
-$$\boldsymbol{x} = \sum_{i=1}^{k}\alpha_i \boldsymbol{x}_i \;\; \alpha_i \in \mathbb{R}$$
+A set of vectors $\b{x}_1, \b{x}_2, ..., \b{x}_k$ is said to span the vector space $S$ if any vector $\b{x} \in S$ can be represented as:
+$$\b{x} = \sum_{i=1}^{k}\alpha_i \b{x}_i \;\; \alpha_i \in \mathbb{R}$$
 </blockquote>
 
 -----------------------
@@ -100,8 +100,8 @@ $$\boldsymbol{x} = \sum_{i=1}^{k}\alpha_i \boldsymbol{x}_i \;\; \alpha_i \in \ma
 **Linear Independence**:
 
 <blockquote>
-A set of vectors $\boldsymbol{x}_1, \boldsymbol{x}_2, ..., \boldsymbol{x}_k$ is said to linearly independent if
-$$\sum_{i=1}^{k} \alpha_i \boldsymbol{x}_i = 0 \Rightarrow \alpha_i = 0 \;\; \forall i$$
+A set of vectors $\b{x}_1, \b{x}_2, ..., \b{x}_k$ is said to linearly independent if
+$$\sum_{i=1}^{k} \alpha_i \b{x}_i = 0 \Rightarrow \alpha_i = 0 \;\; \forall i$$
 Otherwise, they are linearly dependent, and one of them is linear combination of the others.
 </blockquote>
 
@@ -120,9 +120,9 @@ For example, $\\{(1, 0), (1, 1)\\}$ spans $\mathbb{R}^2$.
 Properties of basis:
 
 1. A vector space does not have a unique basis.
-2. If $\boldsymbol{x}\_1, \boldsymbol{x}\_2, ..., \boldsymbol{x}\_k$ is a basis for $S$, then any $\boldsymbol{x} \in S$ can be uniquely represented using $\boldsymbol{x}\_1, \boldsymbol{x}\_2, ..., \boldsymbol{x}\_k$.
+2. If $\b{x}\_1, \b{x}\_2, ..., \b{x}\_k$ is a basis for $S$, then any $\b{x} \in S$ can be uniquely represented using $\b{x}\_1, \b{x}\_2, ..., \b{x}\_k$.
 3. Any two basis of a vector space have the same cardinality.
-4. Let $\boldsymbol{e}\_i$ denote an n-dimensional vector whose i-th element is 1 and the remaining elements are 0's. Then, the set $\boldsymbol{e}\_1, \boldsymbol{e}\_2, ..., \boldsymbol{e}\_n$ forms a standard basis for $\mathbb{R}^n$.
+4. Let $\b{e}\_i$ denote an n-dimensional vector whose i-th element is 1 and the remaining elements are 0's. Then, the set $\b{e}\_1, \b{e}\_2, ..., \b{e}\_n$ forms a standard basis for $\mathbb{R}^n$.
 5. A basis for the vector space $S$ is a maximal independent set of vectors which spans the space $S$.
 6. A basis for the vector space $S$ is a minimum spanning set of vectors which spans the space $S$.
 
@@ -158,36 +158,36 @@ Note:
 <blockquote>
 A norm on $\mathbb{R}^n$ is real-value function $\Vert \cdot \Vert: \mathbb{R}^n \rightarrow \mathbb{R}$ which obeys
 <ul>
-<li>$\Vert \boldsymbol{x} \Vert \geq 0$ for every $\boldsymbol{x} \in \mathbb{R}^n$, and $\Vert \boldsymbol{x} \Vert = 0$ iff $\boldsymbol{x} = 0$.</li>
-<li>$\Vert \alpha \boldsymbol{x} \Vert = |\alpha|\Vert \boldsymbol{x} \Vert$ for every $\boldsymbol{x} \in \mathbb{R}^n$ and $\alpha \in \mathbb{R}$.</li>
-<li>$\Vert \boldsymbol{x} + \boldsymbol{y}\Vert \leq \Vert \boldsymbol{x} \Vert + \Vert \boldsymbol{y} \Vert$ for every $\boldsymbol{x} \in \mathbb{R}^n$ and $\boldsymbol{y} \in \mathbb{R}^n$.</li>
+<li>$\Vert \b{x} \Vert \geq 0$ for every $\b{x} \in \mathbb{R}^n$, and $\Vert \b{x} \Vert = 0$ iff $\b{x} = 0$.</li>
+<li>$\Vert \alpha \b{x} \Vert = |\alpha|\Vert \b{x} \Vert$ for every $\b{x} \in \mathbb{R}^n$ and $\alpha \in \mathbb{R}$.</li>
+<li>$\Vert \b{x} + \b{y}\Vert \leq \Vert \b{x} \Vert + \Vert \b{y} \Vert$ for every $\b{x} \in \mathbb{R}^n$ and $\b{y} \in \mathbb{R}^n$.</li>
 </ul>
 </blockquote>
 
 <object data="/resource/NNP/norm.svg" type="image/svg+xml" class="blkcenter"></object>
 
-Let $\boldsymbol{x} \in \mathbb{R}^n$. Some popular norms:
+Let $\b{x} \in \mathbb{R}^n$. Some popular norms:
 
-* $L\_2$ or Euclidean norm: $\Vert \boldsymbol{x} \Vert\_2 = (\sum\_{i=1}^{n} (x\_i)^2)^{\frac{1}{2}}$
+* $L\_2$ or Euclidean norm: $\Vert \b{x} \Vert\_2 = (\sum\_{i=1}^{n} (x\_i)^2)^{\frac{1}{2}}$
 
     <object data="/resource/NNP/l2norm.svg" type="image/svg+xml" class="blkcenter"></object>
 
-* $L\_1$ norm: $\Vert \boldsymbol{x} \Vert\_1 = \sum\_{i=1}^{n} |x\_i|$
+* $L\_1$ norm: $\Vert \b{x} \Vert\_1 = \sum\_{i=1}^{n} |x\_i|$
 
     <object data="/resource/NNP/l1norm.svg" type="image/svg+xml" class="blkcenter"></object>
 
-* $L\_{\infty}$ norm: $\Vert \boldsymbol{x} \Vert\_{\infty} = \underset{i=1,\cdots,n}{\max} |x\_i|$
+* $L\_{\infty}$ norm: $\Vert \b{x} \Vert\_{\infty} = \underset{i=1,\cdots,n}{\max} |x\_i|$
 
     <object data="/resource/NNP/linfnorm.svg" type="image/svg+xml" class="blkcenter"></object>
 
-In general, $L\_p$ norm is defined as $\Vert \boldsymbol{x} \Vert\_{p} = (\sum\_{i=1}^{n} |x\_i|^p)^{\frac{1}{p}}$.
+In general, $L\_p$ norm is defined as $\Vert \b{x} \Vert\_{p} = (\sum\_{i=1}^{n} |x\_i|^p)^{\frac{1}{p}}$.
 
 <blockquote>
 If $\Vert \cdot \Vert_p$ and $\Vert \cdot \Vert_q$ are any two norms on $\mathbb{R}^n$, then there exist positive constants $\alpha$ and $\beta$ such that
 
-$$\alpha \Vert \boldsymbol{x} \Vert_p \leq \Vert \boldsymbol{x} \Vert_q \leq \beta \Vert \boldsymbol{x} \Vert_p$$
+$$\alpha \Vert \b{x} \Vert_p \leq \Vert \b{x} \Vert_q \leq \beta \Vert \b{x} \Vert_p$$
 
-for any $\boldsymbol{x} \in \mathbb{R}^n$
+for any $\b{x} \in \mathbb{R}^n$
 </blockquote>
 
 So the convergece of an optimization algorithm does not depend on what norm its stopping criterion used.
@@ -197,27 +197,27 @@ So the convergece of an optimization algorithm does not depend on what norm its 
 **Inner Product**
 
 <blockquote>
-Let $\boldsymbol{x}, \boldsymbol{y} \in \mathbb{R}^n$ and $\boldsymbol{x} \neq \boldsymbol{0} \neq \boldsymbol{y}$. The inner or dot product is defined as
+Let $\b{x}, \b{y} \in \mathbb{R}^n$ and $\b{x} \neq \b{0} \neq \b{y}$. The inner or dot product is defined as
 
-$$\boldsymbol{x} \cdot \boldsymbol{y} \equiv \boldsymbol{x}^T \boldsymbol{y} = \sum_{i=1}^{n} x_i \cdot y_i = \Vert \boldsymbol{x} \Vert \cdot \Vert \boldsymbol{y} \Vert \cos \theta$$
+$$\b{x} \cdot \b{y} \equiv \b{x}^T \b{y} = \sum_{i=1}^{n} x_i \cdot y_i = \Vert \b{x} \Vert \cdot \Vert \b{y} \Vert \cos \theta$$
 
-where $\theta$ is the angle between $\boldsymbol{x}$ and $\boldsymbol{y}$.
+where $\theta$ is the angle between $\b{x}$ and $\b{y}$.
 </blockquote>
 
 Note:
 
-* $\boldsymbol{x}^T \boldsymbol{x} = \Vert \boldsymbol{x} \Vert ^2$
-* $\boldsymbol{x}^T \boldsymbol{y} = \boldsymbol{y}^T \boldsymbol{x}$
-* $|\boldsymbol{x} \cdot \boldsymbol{y}| \leq \Vert \boldsymbol{x}\Vert  \cdot \Vert \boldsymbol{y}\Vert$ (Cauthy-Schwartz inequality)
+* $\b{x}^T \b{x} = \Vert \b{x} \Vert ^2$
+* $\b{x}^T \b{y} = \b{y}^T \b{x}$
+* $|\b{x} \cdot \b{y}| \leq \Vert \b{x}\Vert  \cdot \Vert \b{y}\Vert$ (Cauthy-Schwartz inequality)
 
 -----------------------
 
 **Orthogonality**
 
 <blockquote>
-Let $\boldsymbol{x} \in \mathbb{R}^n$ and $\boldsymbol{y} \in \mathbb{R}^n$. $\boldsymbol{x}$ and $\boldsymbol{y}$ are said to perpendicular or orthogonal to each other if $\boldsymbol{x}^T \boldsymbol{y} = 0$.
+Let $\b{x} \in \mathbb{R}^n$ and $\b{y} \in \mathbb{R}^n$. $\b{x}$ and $\b{y}$ are said to perpendicular or orthogonal to each other if $\b{x}^T \b{y} = 0$.
 
-Two subspaces $S$ and $T$ of the same vector space $\mathbb{R}^n$ are orthogonal if every vector $\boldsymbol{x} \in S$ is orthogonal to every vector $\boldsymbol{y} \in T$, i.e. $\boldsymbol{x}^T \boldsymbol{y} = 0 \;\; \forall \boldsymbol{x} \in S, \boldsymbol{y} \in T$.
+Two subspaces $S$ and $T$ of the same vector space $\mathbb{R}^n$ are orthogonal if every vector $\b{x} \in S$ is orthogonal to every vector $\b{y} \in T$, i.e. $\b{x}^T \b{y} = 0 \;\; \forall \b{x} \in S, \b{y} \in T$.
 </blockquote>
 
 -----------------------
@@ -225,37 +225,37 @@ Two subspaces $S$ and $T$ of the same vector space $\mathbb{R}^n$ are orthogonal
 **Mutual Orthogonality**
 
 <blockquote>
-Vectors $\boldsymbol{x}_1, \boldsymbol{x}_2, \cdots, \boldsymbol{x}_k \in \mathbb{R}^n$ are said to be mutually orthogonal if $\boldsymbol{x}_i \cdot \boldsymbol{x}_j = 0$ for all $i \neq j$.
-If, in addition, $\Vert \boldsymbol{x}_i \Vert = 1$ for every $i$, the set $\{ \boldsymbol{x}_1, \cdots, \boldsymbol{x}_k\}$ is said to be orthonormal.
+Vectors $\b{x}_1, \b{x}_2, \cdots, \b{x}_k \in \mathbb{R}^n$ are said to be mutually orthogonal if $\b{x}_i \cdot \b{x}_j = 0$ for all $i \neq j$.
+If, in addition, $\Vert \b{x}_i \Vert = 1$ for every $i$, the set $\{ \b{x}_1, \cdots, \b{x}_k\}$ is said to be orthonormal.
 </blockquote>
 
-It's easy to show that if $\boldsymbol{x}\_1, \cdots, \boldsymbol{x}\_k$ are mutually orthogonal nonzero vectors, then they are linearly independent.
+It's easy to show that if $\b{x}\_1, \cdots, \b{x}\_k$ are mutually orthogonal nonzero vectors, then they are linearly independent.
 
 -----------------------
 
 **Gram-Schmidt Procedure**
 
-To produce an orthonormal basis with a given basis $\boldsymbol{x}\_1, \boldsymbol{x}\_2, \cdots, \boldsymbol{x}\_k \in \mathbb{R}^n$, we use Gram-Schmidt Procedure.
+To produce an orthonormal basis with a given basis $\b{x}\_1, \b{x}\_2, \cdots, \b{x}\_k \in \mathbb{R}^n$, we use Gram-Schmidt Procedure.
 
-Given $\boldsymbol{x}\_1, \boldsymbol{x}\_2, \boldsymbol{x}\_3 \in \mathbb{R}^3$, to produce an orthonormal basis $\boldsymbol{y}\_1, \boldsymbol{y}\_2, \boldsymbol{y}\_3$.
+Given $\b{x}\_1, \b{x}\_2, \b{x}\_3 \in \mathbb{R}^3$, to produce an orthonormal basis $\b{y}\_1, \b{y}\_2, \b{y}\_3$.
 
-* set $\boldsymbol{y}\_1 = \frac{\boldsymbol{x}\_1}{\Vert \boldsymbol{x}\_1 \Vert}$
+* set $\b{y}\_1 = \frac{\b{x}\_1}{\Vert \b{x}\_1 \Vert}$
 
-* remove $\boldsymbol{x}\_2$'s component in the $\boldsymbol{y}\_1$ direction
+* remove $\b{x}\_2$'s component in the $\b{y}\_1$ direction
 
-    $$\boldsymbol{z}\_2 = \boldsymbol{x}\_2 - (\boldsymbol{x}\_2^T \boldsymbol{y}\_1)\boldsymbol{y}\_1$$
+    $$\b{z}\_2 = \b{x}\_2 - (\b{x}\_2^T \b{y}\_1)\b{y}\_1$$
 
-    now $\boldsymbol{z}\_2$ is orthogonal to $\boldsymbol{x}\_1$.
+    now $\b{z}\_2$ is orthogonal to $\b{x}\_1$.
 
-    set $\boldsymbol{y}\_2 = \frac{\boldsymbol{z}\_2}{\Vert \boldsymbol{z}\_2 \Vert}$
+    set $\b{y}\_2 = \frac{\b{z}\_2}{\Vert \b{z}\_2 \Vert}$
 
-* remove $\boldsymbol{x}\_3$'s component in the $\boldsymbol{y}\_1$ and $\boldsymbol{y}\_2$ direction
+* remove $\b{x}\_3$'s component in the $\b{y}\_1$ and $\b{y}\_2$ direction
 
-    $$\boldsymbol{z}\_3 = \boldsymbol{x}\_3 - (\boldsymbol{x}\_3^T \boldsymbol{y}\_2)\boldsymbol{y}\_2 - (\boldsymbol{x}\_3^T \boldsymbol{y}\_1)\boldsymbol{y}\_1$$
+    $$\b{z}\_3 = \b{x}\_3 - (\b{x}\_3^T \b{y}\_2)\b{y}\_2 - (\b{x}\_3^T \b{y}\_1)\b{y}\_1$$
 
-    now $\boldsymbol{z}\_3$ is orthogonal to $\boldsymbol{x}\_1$ and $\boldsymbol{x}\_2$.
+    now $\b{z}\_3$ is orthogonal to $\b{x}\_1$ and $\b{x}\_2$.
 
-    set $\boldsymbol{y}\_3 = \frac{\boldsymbol{z}\_3}{\Vert \boldsymbol{z}\_3 \Vert}$
+    set $\b{y}\_3 = \frac{\b{z}\_3}{\Vert \b{z}\_3 \Vert}$
 
 It's easy to extend this procedure to $\mathbb{R}^n$.
 
@@ -275,12 +275,12 @@ From wikipedia:
 <blockquote>
 Let $A$ be $n\times n$ matrix. There are various way to define the determinant of a square matrix. Perhaps the most natrual way is expressed in terms of the columns of the matrix. If we write an $n\times n$ matrix in terms of its column vectors 
 
-$$A = [\boldsymbol{a}_1, \boldsymbol{a}_2, \cdots, \boldsymbol{a}_n]$$
+$$A = [\b{a}_1, \b{a}_2, \cdots, \b{a}_n]$$
 
-where $\boldsymbol{a}_i$ are vectors of size n, then the determinant of $A$ is defined so that 
+where $\b{a}_i$ are vectors of size n, then the determinant of $A$ is defined so that 
 
-$$\det[\boldsymbol{a}_1, \cdots, b \boldsymbol{a}_j + c \boldsymbol{v}, \cdots, \boldsymbol{a}_n] = b \det(A) + c \det[\boldsymbol{a}_1, \cdots, \boldsymbol{v}, \cdots, \boldsymbol{a}_n]$$
-$$\det[\boldsymbol{a}_1, \cdots, \boldsymbol{a}_j, \boldsymbol{a}_{j+1}, \cdots, \boldsymbol{a}_n] = -\det[\boldsymbol{a}_1, \cdots, \boldsymbol{a}_{j+1}, \boldsymbol{a}_j, \cdots, \boldsymbol{a}_n]$$
+$$\det[\b{a}_1, \cdots, b \b{a}_j + c \b{v}, \cdots, \b{a}_n] = b \det(A) + c \det[\b{a}_1, \cdots, \b{v}, \cdots, \b{a}_n]$$
+$$\det[\b{a}_1, \cdots, \b{a}_j, \b{a}_{j+1}, \cdots, \b{a}_n] = -\det[\b{a}_1, \cdots, \b{a}_{j+1}, \b{a}_j, \cdots, \b{a}_n]$$
 $$\det(I) = 1$$
 </blockquote>
 
@@ -290,20 +290,20 @@ $$\det(I) = 1$$
 
     **Proof**
 
-    Take $2\times 2$ matrix as example, $A = [\boldsymbol{a}\_1, \boldsymbol{a}\_2], B = [\boldsymbol{b}\_1, \boldsymbol{b}\_2]$. ($a\_{ij}$ means element at **column i, row j**, not row i column j as usual).
+    Take $2\times 2$ matrix as example, $A = [\b{a}\_1, \b{a}\_2], B = [\b{b}\_1, \b{b}\_2]$. ($a\_{ij}$ means element at **column i, row j**, not row i column j as usual).
 
     $$
     \begin{align\*}
-    \det(AB) = & \det[\boldsymbol{a}\_1, \boldsymbol{a}\_2]\times [\boldsymbol{b}\_1, \boldsymbol{b}\_2] \\\\
-    = & \det[b\_{11}\boldsymbol{a}\_1 + b\_{12}\boldsymbol{a}\_2, b\_{21}\boldsymbol{a}\_1 + b\_{22}\boldsymbol{a}\_2] \\\\
-    = & b\_{11}\det[\boldsymbol{a}\_1, b\_{21}\boldsymbol{a}\_1 + b\_{22}\boldsymbol{a}\_2] + b\_{12}\det[\boldsymbol{a}\_2, b\_{21}\boldsymbol{a}\_1 + b\_{22}\boldsymbol{a}\_2] \\\\
-    = & c\_1\det[\boldsymbol{a}\_1, \boldsymbol{a}\_1] + c\_2\det[\boldsymbol{a}\_1, \boldsymbol{a}\_2] + c\_3\det[\boldsymbol{a}\_2, \boldsymbol{a}\_1] + c\_4\det[\boldsymbol{a}\_2, \boldsymbol{a}\_2]
+    \det(AB) = & \det[\b{a}\_1, \b{a}\_2]\times [\b{b}\_1, \b{b}\_2] \\\\
+    = & \det[b\_{11}\b{a}\_1 + b\_{12}\b{a}\_2, b\_{21}\b{a}\_1 + b\_{22}\b{a}\_2] \\\\
+    = & b\_{11}\det[\b{a}\_1, b\_{21}\b{a}\_1 + b\_{22}\b{a}\_2] + b\_{12}\det[\b{a}\_2, b\_{21}\b{a}\_1 + b\_{22}\b{a}\_2] \\\\
+    = & c\_1\det[\b{a}\_1, \b{a}\_1] + c\_2\det[\b{a}\_1, \b{a}\_2] + c\_3\det[\b{a}\_2, \b{a}\_1] + c\_4\det[\b{a}\_2, \b{a}\_2]
     \end{align\*}
     $$
 
     Here, the exact form of $c\_{i}$ doesn't matter, anyway they are some function of $b\_{ij}$.
     
-    There are 4 terms in the last formula, among them, $\det[\boldsymbol{a}\_1, \boldsymbol{a}\_1], \det[\boldsymbol{a}\_2, \boldsymbol{a}\_2]$ are equal to 0, $\det[\boldsymbol{a}\_2, \boldsymbol{a}\_1] = -\det[\boldsymbol{a}\_1, \boldsymbol{a}\_2]$, so $\det(AB)$ can be further reduced to
+    There are 4 terms in the last formula, among them, $\det[\b{a}\_1, \b{a}\_1], \det[\b{a}\_2, \b{a}\_2]$ are equal to 0, $\det[\b{a}\_2, \b{a}\_1] = -\det[\b{a}\_1, \b{a}\_2]$, so $\det(AB)$ can be further reduced to
 
     $$\det(AB) = c\det(A)$$
 
@@ -335,10 +335,10 @@ The column rank of a matrix equals its row rank, and its common value is called 
 
     $$
     \begin{pmatrix} 3 & 1 & -1 \\\\ -3 & -1 & 1 \\\\ 6 & 2 & -2 \\\\ \end{pmatrix} =
-    \begin{pmatrix} 1 \\\\ -1 \\\\ 2 \end{pmatrix} \begin{pmatrix} 3 & 1 & -1 \end{pmatrix} = \boldsymbol{u}\boldsymbol{v}^T
+    \begin{pmatrix} 1 \\\\ -1 \\\\ 2 \end{pmatrix} \begin{pmatrix} 3 & 1 & -1 \end{pmatrix} = \b{u}\b{v}^T
     $$
 
-    Every matrix of rank one has the simplest form $A = \boldsymbol{u}\boldsymbol{v}^T$.
+    Every matrix of rank one has the simplest form $A = \b{u}\b{v}^T$.
 
 -----------------------
 
@@ -368,16 +368,16 @@ Sometimes matrix-vector multiplication only scales the vector without changing t
 **Eigenvalues and Eigenvectors**
 
 <blockquote>
-Let $A \in \mathbb{R}^{n\times n}$. The eigenvalues and eigenvectors of $A$ are the real or complex scalars $\lambda$ and n-dimensional vectors $\boldsymbol{x}$ such that
+Let $A \in \mathbb{R}^{n\times n}$. The eigenvalues and eigenvectors of $A$ are the real or complex scalars $\lambda$ and n-dimensional vectors $\b{x}$ such that
 
-$$A\boldsymbol{x} = \lambda \boldsymbol{x} \;\; \boldsymbol{x} \neq \boldsymbol{0}$$
+$$A\b{x} = \lambda \b{x} \;\; \b{x} \neq \b{0}$$
 </blockquote>
 
-* $A\boldsymbol{x} = \lambda \boldsymbol{x} \Rightarrow (A - \lambda I)\boldsymbol{x} = 0$
+* $A\b{x} = \lambda \b{x} \Rightarrow (A - \lambda I)\b{x} = 0$
 
     This implies that $A - \lambda I$ is not full-rank, so $\det(A - \lambda I) = 0$. This is called the characteristic equation of $A$. This equation is a polynomial of degree n, so it has n roots and are called the eigenvalues of $A$. All the n roots need not be real roots, some of them could be complex root.
 
-* If the eigenvalue $\lambda$ equals 0 then $A\boldsymbol{x} = 0\boldsymbol{x} = 0$. Vectors with eigenvalue 0 make up the nullspace of $A$
+* If the eigenvalue $\lambda$ equals 0 then $A\b{x} = 0\b{x} = 0$. Vectors with eigenvalue 0 make up the nullspace of $A$
 
     $A$ is singular iff $\lambda = 0$ is an eigenvalue of $A$.
 
@@ -397,19 +397,17 @@ Let $A \in \mathbb{R}^{n\times n}$ be symmetric, then
 
 * $A$ has n real eigenvalues $\lambda\_1, \lambda\_2, \cdots, \lambda\_n$
 
-* a corresponding set of eigenvectors $\{ \boldsymbol{x}\_1, \boldsymbol{x}\_2, \cdots, \boldsymbol{x}\_n\}$ can be chosen to be orthonormal
+* a corresponding set of eigenvectors $\{ \b{x}\_1, \b{x}\_2, \cdots, \b{x}\_n\}$ can be chosen to be orthonormal. Let $S = (\b{x}\_1, \b{x}\_2, \cdots, \b{x}\_n)$, $S$ is an orthogonal matrix
 
     * eigenvectors of different eigenvalues are orthogonal
 
         $$
         \begin{align\*}
-        & (A \boldsymbol{x}\_i)^T \boldsymbol{x}\_j = \boldsymbol{x}\_i^T A^T \boldsymbol{x}\_j = \boldsymbol{x}\_i^T A \boldsymbol{x}\_j \\\\
-        \Rightarrow & \lambda\_i \boldsymbol{x}\_i^T \boldsymbol{x}\_j = \boldsymbol{x}\_i^T \lambda\_j \boldsymbol{x}\_j = \lambda\_j \boldsymbol{x}\_i^T \boldsymbol{x}\_j \\\\
-        \Rightarrow & \boldsymbol{x}\_i^T \boldsymbol{x}\_j = 0
+        & (A \b{x}\_i)^T \b{x}\_j = \b{x}\_i^T A^T \b{x}\_j = \b{x}\_i^T A \b{x}\_j \\\\
+        \Rightarrow & \lambda\_i \b{x}\_i^T \b{x}\_j = \b{x}\_i^T \lambda\_j \b{x}\_j = \lambda\_j \b{x}\_i^T \b{x}\_j \\\\
+        \Rightarrow & \b{x}\_i^T \b{x}\_j = 0
         \end{align\*}
         $$
-
-* $S = ( \boldsymbol{x}\_1, \boldsymbol{x}\_2, \cdots, \boldsymbol{x}\_n )$ is an orthogonal matrix $(S^{-1} = S^T)$
 
 * $S^T A S = \begin{pmatrix} \lambda\_1 & 0 & \cdots & 0 \\\\ 0 & \lambda\_2 & \cdots & 0 \\\\ \vdots & \vdots & \ddots & \vdots \\\\ 0 & 0 & \cdots & \lambda\_n \end{pmatrix} = \Lambda$
 
@@ -434,14 +432,14 @@ $$
 
 **Quadratic Form**
 
-Let $A \in \mathbb{R}^{n\times n}$ be a symmetric matrix, consider $f(x) = \boldsymbol{x}^T A \boldsymbol{x}$, a pure quadratic form. (Note that $\boldsymbol{x}^T A \boldsymbol{x} = \sum\_i \sum\_j x\_i A\_{ij} x\_j$, so all quadratic functions can be expressed as $\boldsymbol{x}^T A \boldsymbol{x}$)
+Let $A \in \mathbb{R}^{n\times n}$ be a symmetric matrix, consider $f(x) = \b{x}^T A \b{x}$, a pure quadratic form. (Note that $\b{x}^T A \b{x} = \sum\_i \sum\_j x\_i A\_{ij} x\_j$, so all quadratic functions can be expressed as $\b{x}^T A \b{x}$)
 
 | $A$ is said to be | if |
 |:--|:--|
-| positive definite | $\boldsymbol{x}^T A \boldsymbol{x} \gt 0$ for every nonzero $\boldsymbol{x} \in \mathbb{R}^n$ |
-| positive semi-definite | $\boldsymbol{x}^T A \boldsymbol{x} \geq 0$ for every $\boldsymbol{x} \in \mathbb{R}^n$ |
-| negative definite | $\boldsymbol{x}^T A \boldsymbol{x} \lt 0$ for every nonzero $\boldsymbol{x} \in \mathbb{R}^n$ |
-| negative semi-definite | $\boldsymbol{x}^T A \boldsymbol{x} \leq 0$ for every $\boldsymbol{x} \in \mathbb{R}^n$ |
+| positive definite | $\b{x}^T A \b{x} \gt 0$ for every nonzero $\b{x} \in \mathbb{R}^n$ |
+| positive semi-definite | $\b{x}^T A \b{x} \geq 0$ for every $\b{x} \in \mathbb{R}^n$ |
+| negative definite | $\b{x}^T A \b{x} \lt 0$ for every nonzero $\b{x} \in \mathbb{R}^n$ |
+| negative semi-definite | $\b{x}^T A \b{x} \leq 0$ for every $\b{x} \in \mathbb{R}^n$ |
 | indefinite | $A$ is neither positive definite nor negative definite |
 
 <blockquote>
@@ -454,23 +452,23 @@ $A$ is positive definite iff all its eigenvalues are positive.
 
     $$
     \begin{align\*}
-    \boldsymbol{x}^T A \boldsymbol{x} = & \boldsymbol{x}^T S \Lambda S^T \boldsymbol{x} \\\\
-    = & \boldsymbol{y}^T \Lambda \boldsymbol{y} \\\\
+    \b{x}^T A \b{x} = & \b{x}^T S \Lambda S^T \b{x} \\\\
+    = & \b{y}^T \Lambda \b{y} \\\\
     = & \sum\_i \lambda\_i y\_i^2
     \end{align\*}
     $$
 
-    So if $\lambda\_i \gt 0 \;\; \forall i$, $\boldsymbol{x}^T A \boldsymbol{x} \gt 0$.
+    So if $\lambda\_i \gt 0 \;\; \forall i$, $\b{x}^T A \b{x} \gt 0$.
 
 * $A$ is positive definite $\Rightarrow$ eigenvalues are positive
 
-    Let $\boldsymbol{x}\_i$ be eigenvector
+    Let $\b{x}\_i$ be eigenvector
 
     $$
     \begin{align\*}
     & A \text{ is positive definite} \\\\
-    \Rightarrow & \boldsymbol{x}\_i^T A \boldsymbol{x}\_i \gt 0 \\\\
-    \Rightarrow & \boldsymbol{x}\_i^T \lambda\_i \boldsymbol{x}\_i \gt 0 \\\\
+    \Rightarrow & \b{x}\_i^T A \b{x}\_i \gt 0 \\\\
+    \Rightarrow & \b{x}\_i^T \lambda\_i \b{x}\_i \gt 0 \\\\
     \Rightarrow & \lambda\_i \gt 0
     \end{align\*}
     $$
@@ -498,7 +496,7 @@ then $A = A^{1/2}A^{1/2}$ which is easy to prove.
 
 Let $A \in \mathbb{R}^{n\times n}$, symmetric and positive definite
 
-* Solution of $A\boldsymbol{x}=\boldsymbol{b}$ is $\boldsymbol{x}^{\*} = A^{-1} \boldsymbol{b}$
+* Solution of $A\b{x}=\b{b}$ is $\b{x}^{\*} = A^{-1} \b{b}$
 
     * since $A$ is symmetric and positive definite
 
@@ -510,11 +508,11 @@ Let $A \in \mathbb{R}^{n\times n}$, symmetric and positive definite
 
 * Instead, use Cholesky decomposition $A = L L^T$
 
-    * The given system of equations is $L L^T \boldsymbol{x} = \boldsymbol{b}$
+    * The given system of equations is $L L^T \b{x} = \b{b}$
 
-    * Solve the triangular system. $L\boldsymbol{y} = \boldsymbol{b}$ using forward substitution to get $\boldsymbol{y}$.
+    * Solve the triangular system. $L\b{y} = \b{b}$ using forward substitution to get $\b{y}$.
 
-    * Solve the triangular $L^T \boldsymbol{x} = \boldsymbol{y}$ using backward substitution to get $\boldsymbol{x}^{\*}$.
+    * Solve the triangular $L^T \b{x} = \b{y}$ using backward substitution to get $\b{x}^{\*}$.
 
     Cholesky decomposition is numerically stable.
 
@@ -534,21 +532,21 @@ Let $a, b \in \mathbb{R}$. The closed interval $[a, b]$ denotes the set, $\{ x \
 **Norm ball**
 
 <blockquote>
-Let $\boldsymbol{x}_0 \in \mathbb{R}^n$. A norm ball of radius $r > 0$ and centre $\boldsymbol{x}_0$ is given by $\{\boldsymbol{x} \in \mathbb{R}^n: \Vert \boldsymbol{x} - \boldsymbol{x}_0 \Vert\ \leq r \}$ and will be denoted by $B[\boldsymbol{x}_0, r]$.
+Let $\b{x}_0 \in \mathbb{R}^n$. A norm ball of radius $r > 0$ and centre $\b{x}_0$ is given by $\{\b{x} \in \mathbb{R}^n: \Vert \b{x} - \b{x}_0 \Vert\ \leq r \}$ and will be denoted by $B[\b{x}_0, r]$.
 </blockquote>
 
-We will use $B(\boldsymbol{x}\_0, r)$ to denote $\\{\boldsymbol{x} \in \mathbb{R}^n: \Vert \boldsymbol{x} - \boldsymbol{x}\_0 \Vert\ \lt r \\}$
+We will use $B(\b{x}\_0, r)$ to denote $\\{\b{x} \in \mathbb{R}^n: \Vert \b{x} - \b{x}\_0 \Vert\ \lt r \\}$
 
 -----------------------
 
 **Open/Close set**
 
 <blockquote>
-Let $\boldsymbol{x} \in S \subseteq \mathbb{R}^n$. $\boldsymbol{x}$ is called an interior point of $S$ if there exists $r \gt 0$ such that $B[\boldsymbol{x}, r] \subseteq S$. The set of all such points interior to $S$ is called the interior of $S$ and is denoted by $int(S)$.
+Let $\b{x} \in S \subseteq \mathbb{R}^n$. $\b{x}$ is called an interior point of $S$ if there exists $r \gt 0$ such that $B[\b{x}, r] \subseteq S$. The set of all such points interior to $S$ is called the interior of $S$ and is denoted by $int(S)$.
 </blockquote>
 
 <blockquote>
-Let $S \subset \mathbb{R}^n$. $\boldsymbol{x} \in \mathbb{R}^n$ belongs to the closure of $S$, $cl(S)$ if for each $\varepsilon \gt 0$, $S \cap B[\boldsymbol{x}, \varepsilon] \neq \emptyset$
+Let $S \subset \mathbb{R}^n$. $\b{x} \in \mathbb{R}^n$ belongs to the closure of $S$, $cl(S)$ if for each $\varepsilon \gt 0$, $S \cap B[\b{x}, \varepsilon] \neq \emptyset$
 </blockquote>
 
 Example:
@@ -574,7 +572,7 @@ The boundary of a set S is defined as $bd(S) = cl(S)\setminus int(S)$.
 </blockquote>
 
 <blockquote>
-A set $S \subset \mathbb{R}^n$ is said to be bounded if there exist $R \; (0 \lt R \lt \infty)$ and $\boldsymbol{x} \in \mathbb{R}^n$, such that $S \subset B(\boldsymbol{x}, R)$.
+A set $S \subset \mathbb{R}^n$ is said to be bounded if there exist $R \; (0 \lt R \lt \infty)$ and $\b{x} \in \mathbb{R}^n$, such that $S \subset B(\b{x}, R)$.
 </blockquote>
 
 Example:
@@ -594,14 +592,14 @@ Example:
 
 **Sequences**
 
-Let $S \subseteq \mathbb{R}^n$ and $\{ \boldsymbol{x}^k \}$ be a sequence of points belonging to $S$.
+Let $S \subseteq \mathbb{R}^n$ and $\{ \b{x}^k \}$ be a sequence of points belonging to $S$.
 
 <blockquote>
-A sequence $\{ \boldsymbol{x}^k \}$ converges to $\boldsymbol{x}^{*}$, if for any given $\varepsilon \gt 0$, there is a positive integer $K$ such that
+A sequence $\{ \b{x}^k \}$ converges to $\b{x}^{*}$, if for any given $\varepsilon \gt 0$, there is a positive integer $K$ such that
 
-$$ \Vert \boldsymbol{x}^k - \boldsymbol{x}^* \Vert \leq \varepsilon \;\; \forall k \geq K$$
+$$ \Vert \b{x}^k - \b{x}^* \Vert \leq \varepsilon \;\; \forall k \geq K$$
 
-We write this as $\boldsymbol{x}^k \rightarrow \boldsymbol{x}^*$ or $\lim_{k \rightarrow \infty} \boldsymbol{x}^k = \boldsymbol{x}^*$.
+We write this as $\b{x}^k \rightarrow \b{x}^*$ or $\lim_{k \rightarrow \infty} \b{x}^k = \b{x}^*$.
 </blockquote>
 
 -----------------------
@@ -609,7 +607,7 @@ We write this as $\boldsymbol{x}^k \rightarrow \boldsymbol{x}^*$ or $\lim_{k \ri
 **Continuous Function**
 
 <blockquote>
-Let $S \subseteq \mathbb{R}^n$. A function $f: S\rightarrow \mathbb{R}$ is said to be continuous at $\bar{\boldsymbol{x}} \in S$ if for any given $\varepsilon \gt 0$ there exists a $\delta \gt 0$ such that $\boldsymbol{x} \in S$ and $\Vert \boldsymbol{x} - \bar{\boldsymbol{x}} \Vert \lt \delta$ implies that $|f(\boldsymbol{x}) - f(\bar{\boldsymbol{x}})| \lt \varepsilon$.
+Let $S \subseteq \mathbb{R}^n$. A function $f: S\rightarrow \mathbb{R}$ is said to be continuous at $\bar{\b{x}} \in S$ if for any given $\varepsilon \gt 0$ there exists a $\delta \gt 0$ such that $\b{x} \in S$ and $\Vert \b{x} - \bar{\b{x}} \Vert \lt \delta$ implies that $|f(\b{x}) - f(\bar{\b{x}})| \lt \varepsilon$.
 </blockquote>
 
 * $f$ is said to be continuous on $A \subset \mathbb{R}^n$ if it's continuous at each point of $A$
@@ -629,7 +627,7 @@ Example:
 <blockquote>
 Let $S \subseteq \mathbb{R}^n$. A function $f: S \rightarrow \mathbb{R}^m$ is said to be lipschitz continuous if
 
-$$ \Vert f(\boldsymbol{x}_1) - f(\boldsymbol{x}_2) \Vert \leq L \Vert \boldsymbol{x}_1 - \boldsymbol{x}_2 \Vert \;\; \forall \boldsymbol{x}_1, \boldsymbol{x}_2 \in S$$
+$$ \Vert f(\b{x}_1) - f(\b{x}_2) \Vert \leq L \Vert \b{x}_1 - \b{x}_2 \Vert \;\; \forall \b{x}_1, \b{x}_2 \in S$$
 
 where $L$ is a positive constant
 </blockquote>
@@ -641,7 +639,7 @@ where $L$ is a positive constant
 **Gradient**
 
 <blockquote>
-A continuous function, $f: \mathbb{R}^n \rightarrow \mathbb{R}$, is said to be continuously differentiable at $\boldsymbol{x} \in \mathbb{R}^n$, if $\frac{\partial f}{\partial x_i}(\boldsymbol{x})$ exists and is continuous, $i = 1, 2, \cdots, n$.
+A continuous function, $f: \mathbb{R}^n \rightarrow \mathbb{R}$, is said to be continuously differentiable at $\b{x} \in \mathbb{R}^n$, if $\frac{\partial f}{\partial x_i}(\b{x})$ exists and is continuous, $i = 1, 2, \cdots, n$.
 </blockquote>
 
   <object data="/resource/NNP/fdiffexp.svg" type="image/svg+xml" class="blkcenter"></object>
@@ -651,9 +649,9 @@ A continuous function, $f: \mathbb{R}^n \rightarrow \mathbb{R}$, is said to be c
 * Assumption: $f \in \mathcal{C}^1$
 
 <blockquote>
-We define the gradient of $f$ at $\boldsymbol{x}$ to be the vector
+We define the gradient of $f$ at $\b{x}$ to be the vector
 
-$$g(\boldsymbol{x}) = \nabla f(\boldsymbol{x}) = (\frac{\partial f(\boldsymbol{x})}{\partial x_1}, \frac{\partial f(\boldsymbol{x})}{\partial x_2}, \cdots, \frac{\partial f(\boldsymbol{x})}{\partial x_n})^T$$
+$$g(\b{x}) = \nabla f(\b{x}) = (\frac{\partial f(\b{x})}{\partial x_1}, \frac{\partial f(\b{x})}{\partial x_2}, \cdots, \frac{\partial f(\b{x})}{\partial x_n})^T$$
 </blockquote>
 
   <object data="/resource/NNP/gradient.svg" type="image/svg+xml" class="blkcenter"></object>
@@ -663,39 +661,39 @@ $$g(\boldsymbol{x}) = \nabla f(\boldsymbol{x}) = (\frac{\partial f(\boldsymbol{x
 **Directional Derivatives**
 
 <blockquote>
-Let $S \subset \mathbb{R}^n$ be an open set and $f: S \rightarrow \mathbb{R}$, $f$ continuously differentiable in $S$. Then, for any $\boldsymbol{x} \in S$ and any nonzero $\boldsymbol{d} \in \mathbb{R}^n$, the directional derivative of $f$ at $\boldsymbol{x}$ in the direction of $\boldsymbol{d}$, defined by
+Let $S \subset \mathbb{R}^n$ be an open set and $f: S \rightarrow \mathbb{R}$, $f$ continuously differentiable in $S$. Then, for any $\b{x} \in S$ and any nonzero $\b{d} \in \mathbb{R}^n$, the directional derivative of $f$ at $\b{x}$ in the direction of $\b{d}$, defined by
 
-$$\frac{\partial f}{\partial \boldsymbol{d}}(\boldsymbol{x}) = \lim_{\varepsilon \rightarrow 0} \frac{f(\boldsymbol{x} + \varepsilon \boldsymbol{d}) - f(\boldsymbol{x})}{\varepsilon}$$
+$$\frac{\partial f}{\partial \b{d}}(\b{x}) = \lim_{\varepsilon \rightarrow 0} \frac{f(\b{x} + \varepsilon \b{d}) - f(\b{x})}{\varepsilon}$$
 
-exists and equals $\nabla f(\boldsymbol{x})^T \boldsymbol{d}$.
+exists and equals $\nabla f(\b{x})^T \b{d}$.
 </blockquote>
 
 $$
 \begin{align\*}
-\frac{\partial f}{\partial \boldsymbol{d}}(\boldsymbol{x}) = & \lim\_{\varepsilon \rightarrow 0} \frac{f(\boldsymbol{x} + \varepsilon \boldsymbol{d}) - f(\boldsymbol{x})}{\varepsilon} \\\\
-= & \lim\_{\varepsilon \rightarrow 0} \frac{f(\boldsymbol{x} + (0 + \varepsilon) \boldsymbol{d}) - f(\boldsymbol{x} + 0 \boldsymbol{d})}{(0 + \varepsilon) - 0} \\\\
-= & \frac{df(x+t\boldsymbol{d})}{dt}\bigg|\_{t=0} \\\\
-= & \nabla f(x+t\boldsymbol{d})^T \boldsymbol{d}\bigg|\_{t=0} \\\\
-= & \nabla f(x)^T \boldsymbol{d}
+\frac{\partial f}{\partial \b{d}}(\b{x}) = & \lim\_{\varepsilon \rightarrow 0} \frac{f(\b{x} + \varepsilon \b{d}) - f(\b{x})}{\varepsilon} \\\\
+= & \lim\_{\varepsilon \rightarrow 0} \frac{f(\b{x} + (0 + \varepsilon) \b{d}) - f(\b{x} + 0 \b{d})}{(0 + \varepsilon) - 0} \\\\
+= & \frac{df(x+t\b{d})}{dt}\bigg|\_{t=0} \\\\
+= & \nabla f(x+t\b{d})^T \b{d}\bigg|\_{t=0} \\\\
+= & \nabla f(x)^T \b{d}
 \end{align\*}
 $$
 
-For any unit direction $\boldsymbol{d}$, the rate of change is $\nabla f(x)^T \boldsymbol{d} = \Vert \nabla f(x)\Vert \Vert d \Vert \cos\theta = \Vert \nabla f(x) \Vert \cos\theta$, where $\theta$ is the angle between $\boldsymbol{d}$ and $\nabla f(x)$. When $\theta = 0$ the rate of change is maximized. This is why the gradient is the direction of steepest descent/ascent.
+For any unit direction $\b{d}$, the rate of change is $\nabla f(x)^T \b{d} = \Vert \nabla f(x)\Vert \Vert d \Vert \cos\theta = \Vert \nabla f(x) \Vert \cos\theta$, where $\theta$ is the angle between $\b{d}$ and $\nabla f(x)$. When $\theta = 0$ the rate of change is maximized. This is why the gradient is the direction of steepest descent/ascent.
 
 -----------------------
 
 **Hessian**
 
 <blockquote>
-A continuously differentiable function $f: \mathbb{R}^n \rightarrow \mathbb{R}$ is said to be twice continuously differentiable at $\boldsymbol{x} \in \mathbb{R}^n$, if $\frac{\partial^2 f}{\partial x_i \partial x_j} (\boldsymbol{x})$ exists and is continuous.
+A continuously differentiable function $f: \mathbb{R}^n \rightarrow \mathbb{R}$ is said to be twice continuously differentiable at $\b{x} \in \mathbb{R}^n$, if $\frac{\partial^2 f}{\partial x_i \partial x_j} (\b{x})$ exists and is continuous.
 </blockquote>
 
 * $\mathcal{C}^2$: Class of twice continuously differentiable functions
 
 <blockquote>
-Let $f \in \mathcal{C}^2$. We denote the Hessian of $f$ at $\boldsymbol{x}$ to be the matrix
+Let $f \in \mathcal{C}^2$. We denote the Hessian of $f$ at $\b{x}$ to be the matrix
 $$
-H(x) = \nabla^2 f(\boldsymbol{x}) = \begin{pmatrix}
+H(x) = \nabla^2 f(\b{x}) = \begin{pmatrix}
 \frac{\partial^2 f}{\partial x_1^2} & \frac{\partial^2 f}{\partial x_1 \partial x_2} & \cdots & \frac{\partial^2 f}{\partial x_1 \partial x_n} \\\\
 \frac{\partial^2 f}{\partial x_2 \partial x_1} & \frac{\partial^2 f}{\partial x_2^2} & \cdots & \frac{\partial^2 f}{\partial x_2 \partial x_n} \\\\
 \vdots & \vdots & \ddots & \vdots \\\\
@@ -707,7 +705,7 @@ $$
 * Hessian matrix is symmetric
 
 <blockquote>
-Let $S \subset \mathbb{R}^n$ be an open set and $f: S \rightarrow \mathbb{R}$, $f$ twice continuously differentiable in $S$. Then, for any $\boldsymbol{x} \in S$ and any nonzero $\boldsymbol{d} \in \mathbb{R}^n$, the second directional derivative of $f$ at $\boldsymbol{x}$ in the direction of $\boldsymbol{d}$ equals $\boldsymbol{d}^T \nabla^2 f(\boldsymbol{x}) \boldsymbol{d}$.
+Let $S \subset \mathbb{R}^n$ be an open set and $f: S \rightarrow \mathbb{R}$, $f$ twice continuously differentiable in $S$. Then, for any $\b{x} \in S$ and any nonzero $\b{d} \in \mathbb{R}^n$, the second directional derivative of $f$ at $\b{x}$ in the direction of $\b{d}$ equals $\b{d}^T \nabla^2 f(\b{x}) \b{d}$.
 </blockquote>
 
 -----------------------
@@ -736,30 +734,30 @@ $$f(x) \approx f(x^0) + f'(x^0)(x - x^0) + \frac{1}{2} f''(x^0)(x - x^0)^2$$
 
 * first order
 
-    Let $f: \mathbb{R}^n \rightarrow \mathbb{R}, f \in \mathcal{C}^1, \boldsymbol{x}^0 \in \mathbb{R}^n$.
+    Let $f: \mathbb{R}^n \rightarrow \mathbb{R}, f \in \mathcal{C}^1, \b{x}^0 \in \mathbb{R}^n$.
 
-    Then, for every $\boldsymbol{x} \in \mathbb{R}^n$,
+    Then, for every $\b{x} \in \mathbb{R}^n$,
 
-    $$f(\boldsymbol{x}) = f(\boldsymbol{x}^0) + \nabla f(\bar{\boldsymbol{x}}) \dot (\boldsymbol{x} - \boldsymbol{x}^0)$$
+    $$f(\b{x}) = f(\b{x}^0) + \nabla f(\bar{\b{x}}) \dot (\b{x} - \b{x}^0)$$
 
-    where $\bar{\boldsymbol{x}}$ is some point that lies on the line segment joining $\boldsymbol{x}$ and $\boldsymbol{x}^0$: $\bar{\boldsymbol{x}}$ depends on $\boldsymbol{x}, \boldsymbol{x}^0$ and $f$.
+    where $\bar{\b{x}}$ is some point that lies on the line segment joining $\b{x}$ and $\b{x}^0$: $\bar{\b{x}}$ depends on $\b{x}, \b{x}^0$ and $f$.
 
 * second order
 
-    Let $f: \mathbb{R}^n \rightarrow \mathbb{R}, f \in \mathcal{C}^2, \boldsymbol{x}^0 \in \mathbb{R}^n$.
+    Let $f: \mathbb{R}^n \rightarrow \mathbb{R}, f \in \mathcal{C}^2, \b{x}^0 \in \mathbb{R}^n$.
 
-    Then, for every $\boldsymbol{x} \in \mathbb{R}^n$,
+    Then, for every $\b{x} \in \mathbb{R}^n$,
 
-    $$f(\boldsymbol{x}) = f(\boldsymbol{x}^0) + \nabla f(\boldsymbol{x}) \dot (\boldsymbol{x} - \boldsymbol{x}^0) + \frac{1}{2}(\boldsymbol{x} - \boldsymbol{x}^0)^T \nabla^2 f(\bar{\boldsymbol{x}}) (\boldsymbol{x} - \boldsymbol{x}^0)$$
+    $$f(\b{x}) = f(\b{x}^0) + \nabla f(\b{x}) \dot (\b{x} - \b{x}^0) + \frac{1}{2}(\b{x} - \b{x}^0)^T \nabla^2 f(\bar{\b{x}}) (\b{x} - \b{x}^0)$$
 
-    where $\bar{\boldsymbol{x}}$ is some point that lies on the line segment joining $\boldsymbol{x}$ and $\boldsymbol{x}^0$: $\bar{\boldsymbol{x}}$ depends on $\boldsymbol{x}, \boldsymbol{x}^0$ and $f$.
+    where $\bar{\b{x}}$ is some point that lies on the line segment joining $\b{x}$ and $\b{x}^0$: $\bar{\b{x}}$ depends on $\b{x}, \b{x}^0$ and $f$.
 
     上面两个式子中最后一项被称为 Lagrange remainder。因为我们处理的都是多变量的情况，上面我们用矩阵乘法的形式表示，但是到了更高阶的近似就不好再用矩阵表示了，以 3 阶为例，展开的 taylor series 是这样的
 
     $$
     \begin{align\*}
-    f(\boldsymbol{x}) = & f(\boldsymbol{x}^0) + \sum\_{i=1}^{n} \frac{\partial f(\boldsymbol{x})}{\partial x\_i} (x\_i - x^0\_i) + \frac{1}{2!} \sum\_{i=1}^n \sum\_{j=1}^n \frac{\partial f(\boldsymbol{x})}{\partial x\_i \partial x\_j} (x\_i - x^0\_i)(x\_j - x^0\_j) + \\\\
-    & \frac{1}{3!} \sum\_{i=1}^n \sum\_{j=1}^n \sum\_{k=1}^n \frac{\partial f(\bar{\boldsymbol{x}})}{\partial x\_i \partial x\_j \partial x\_k} (x\_i - x^0\_i)(x\_j - x^0\_j)(x\_k - x^0\_k)
+    f(\b{x}) = & f(\b{x}^0) + \sum\_{i=1}^{n} \frac{\partial f(\b{x})}{\partial x\_i} (x\_i - x^0\_i) + \frac{1}{2!} \sum\_{i=1}^n \sum\_{j=1}^n \frac{\partial f(\b{x})}{\partial x\_i \partial x\_j} (x\_i - x^0\_i)(x\_j - x^0\_j) + \\\\
+    & \frac{1}{3!} \sum\_{i=1}^n \sum\_{j=1}^n \sum\_{k=1}^n \frac{\partial f(\bar{\b{x}})}{\partial x\_i \partial x\_j \partial x\_k} (x\_i - x^0\_i)(x\_j - x^0\_j)(x\_k - x^0\_k)
     \end{align\*}
     $$
 
@@ -772,15 +770,15 @@ $$f(x) \approx f(x^0) + f'(x^0)(x - x^0) + \frac{1}{2} f''(x^0)(x - x^0)^2$$
 the columns of a matrix $A \in \mathbb{R}^{m\times n}$ are $a_1$ through $a_n$, while the rows are $\tilde{a}\_1^T$ through $\tilde{a}\_n^T$.
 </blockquote>
 
-* Derivative of $A\boldsymbol{x}$, where $A \in \mathbb{R}^{m\times n}$ and $\boldsymbol{x} \in \mathbb{R}^n$
+* Derivative of $A\b{x}$, where $A \in \mathbb{R}^{m\times n}$ and $\b{x} \in \mathbb{R}^n$
 
     $$
-    \nabla\_{\boldsymbol{x}}A\boldsymbol{x} =
+    \nabla\_{\b{x}}A\b{x} =
       \begin{pmatrix}
-        \nabla\_{\boldsymbol{x}} \tilde{a}\_1^T \boldsymbol{x} \\\\
-        \nabla\_{\boldsymbol{x}} \tilde{a}\_2^T \boldsymbol{x} \\\\
+        \nabla\_{\b{x}} \tilde{a}\_1^T \b{x} \\\\
+        \nabla\_{\b{x}} \tilde{a}\_2^T \b{x} \\\\
         \vdots \\\\
-        \nabla\_{\boldsymbol{x}} \tilde{a}\_n^T \boldsymbol{x} \\\\
+        \nabla\_{\b{x}} \tilde{a}\_n^T \b{x} \\\\
       \end{pmatrix} = 
       \begin{pmatrix}
         \tilde{a}\_1 & \tilde{a}\_2 & \cdots & \tilde{a}\_n
@@ -789,9 +787,9 @@ the columns of a matrix $A \in \mathbb{R}^{m\times n}$ are $a_1$ through $a_n$, 
 
 * Derivative of linear transformed input to function
 
-    Consider a function $f: \mathbb{R}^n \rightarrow \mathbb{R}$. Suppose we have a matrix $A \in \mathbb{R}^{n\times m}$ and a vector $\boldsymbol{x} \in \mathbb{R}^m$. We wish to compute $\nabla\_{\boldsymbol{x}} f(A\boldsymbol{x})$.
+    Consider a function $f: \mathbb{R}^n \rightarrow \mathbb{R}$. Suppose we have a matrix $A \in \mathbb{R}^{n\times m}$ and a vector $\b{x} \in \mathbb{R}^m$. We wish to compute $\nabla\_{\b{x}} f(A\b{x})$.
 
-    Note that $f(A\boldsymbol{x})$ is a composition of multivariate functions, so we can apply the following chain rule to calculate derivate
+    Note that $f(A\b{x})$ is a composition of multivariate functions, so we can apply the following chain rule to calculate derivate
 
     <blockquote>
     Suppose $u = f(x_1, x_2, \cdots, x_n)$ is a differentiable function of variables $x_1, x_2, \cdots, x_n$, and all functions $g_j(t_1, t_2, \cdots, t_m), j = 1, \cdots, m$ are also differentiable, then their composition $u = f(g_1, g_2, \cdots, g_n)$ as a function of $t_1, t_2, \cdots, t_m$ is also differentiable, and
@@ -803,10 +801,10 @@ the columns of a matrix $A \in \mathbb{R}^{m\times n}$ are $a_1$ through $a_n$, 
 
     $$
     \begin{align\*}
-    \frac{\partial f(A\boldsymbol{x})}{\partial x\_j} = & \sum\_{k=1}^{n} \frac{\partial f(A\boldsymbol{x})}{\partial (A\boldsymbol{x})\_k} \frac{\partial (A\boldsymbol{x})\_k}{\partial x\_j} \\\\
-    = & \sum\_{k=1}^{n} \frac{\partial f(A\boldsymbol{x})}{\partial (A\boldsymbol{x})\_k} \frac{\partial \tilde{a}\_k^T \boldsymbol{x}}{\partial x\_j} \\\\
-    = & \sum\_{k=1}^{n} \frac{\partial f(A\boldsymbol{x})}{\partial (A\boldsymbol{x})\_k} a\_{kj} \\\\
-    = & a\_j^T \nabla f(A\boldsymbol{x})
+    \frac{\partial f(A\b{x})}{\partial x\_j} = & \sum\_{k=1}^{n} \frac{\partial f(A\b{x})}{\partial (A\b{x})\_k} \frac{\partial (A\b{x})\_k}{\partial x\_j} \\\\
+    = & \sum\_{k=1}^{n} \frac{\partial f(A\b{x})}{\partial (A\b{x})\_k} \frac{\partial \tilde{a}\_k^T \b{x}}{\partial x\_j} \\\\
+    = & \sum\_{k=1}^{n} \frac{\partial f(A\b{x})}{\partial (A\b{x})\_k} a\_{kj} \\\\
+    = & a\_j^T \nabla f(A\b{x})
     \end{align\*}
     $$
 
@@ -814,18 +812,18 @@ the columns of a matrix $A \in \mathbb{R}^{m\times n}$ are $a_1$ through $a_n$, 
 
     $$
     \begin{align\*}
-    \nabla\_{\boldsymbol{x}} f(A\boldsymbol{x}) = 
+    \nabla\_{\b{x}} f(A\b{x}) = 
     \begin{pmatrix}
-      \frac{\partial f(A\boldsymbol{x})}{\partial x\_1} \\\\
+      \frac{\partial f(A\b{x})}{\partial x\_1} \\\\
       \vdots \\\\
-      \frac{\partial f(A\boldsymbol{x})}{\partial x\_n} \\\\
+      \frac{\partial f(A\b{x})}{\partial x\_n} \\\\
     \end{pmatrix} = 
     \begin{pmatrix}
       a\_1^T \\\\
       a\_2^T \\\\
       \vdots \\\\
       a\_n^T
-    \end{pmatrix} \nabla f(A\boldsymbol{x}) = A^T \nabla f(A \boldsymbol{x})
+    \end{pmatrix} \nabla f(A\b{x}) = A^T \nabla f(A \b{x})
     \end{align\*}
     $$
 
