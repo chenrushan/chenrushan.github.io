@@ -411,22 +411,15 @@ Let $A \in \mathbb{R}^{n\times n}$ be symmetric, then
 
 * $S^T A S = \begin{pmatrix} \lambda\_1 & 0 & \cdots & 0 \\\\ 0 & \lambda\_2 & \cdots & 0 \\\\ \vdots & \vdots & \ddots & \vdots \\\\ 0 & 0 & \cdots & \lambda\_n \end{pmatrix} = \Lambda$
 
-P.S.
-
-$$
-\begin{align\*}
-S^T A S =
-& \begin{pmatrix} \b{x}\_1^T \\\\ \b{x}\_2^T \\\\ \vdots \\\\ \b{x}\_n^T \end{pmatrix} A
-  \begin{pmatrix} \b{x}\_1 \b{x}\_2 \cdots & \b{x}\_n \end{pmatrix} =
-  \begin{pmatrix} \b{x}\_1^T A \\\\ \b{x}\_2^T A \\\\ \vdots \\\\ \b{x}\_n^T A \end{pmatrix}
-  \begin{pmatrix} \b{x}\_1 \b{x}\_2 \cdots & \b{x}\_n \end{pmatrix} = \\\\
-& \begin{pmatrix}
-  \b{x}\_1^T A \b{x}\_1 & \b{x}\_1^T A \b{x}\_2 & \cdots & \b{x}\_1^T A \b{x}\_n \\\\
-  \vdots & \vdots & \ddots & \vdots \\\\
-  \b{x}\_n^T A \b{x}\_1 & \b{x}\_n^T A \b{x}\_2 & \cdots & \b{x}\_n^T A \b{x}\_n
-  \end{pmatrix}
-\end{align\*}
-$$
+    $$
+    S^T A S =
+    \begin{pmatrix} \b{x}\_1^T \\\\ \b{x}\_2^T \\\\ \vdots \\\\ \b{x}\_n^T \end{pmatrix} A
+    \begin{pmatrix} \b{x}\_1 \b{x}\_2 \cdots & \b{x}\_n \end{pmatrix} =
+    \begin{pmatrix} \b{x}\_1^T A \b{x}\_1 & \b{x}\_1^T A \b{x}\_2 & \cdots & \b{x}\_1^T A \b{x}\_n \\\\
+      \vdots & \vdots & \ddots & \vdots \\\\
+      \b{x}\_n^T A \b{x}\_1 & \b{x}\_n^T A \b{x}\_2 & \cdots & \b{x}\_n^T A \b{x}\_n
+    \end{pmatrix}
+    $$
 
 -----------------------
 
