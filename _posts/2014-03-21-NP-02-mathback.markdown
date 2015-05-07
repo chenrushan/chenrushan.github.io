@@ -731,7 +731,7 @@ $$f(x) \approx f(x^0) + f'(x^0)(x - x^0) + \frac{1}{2} f''(x^0)(x - x^0)^2$$
 
     Then, for every $\b{x} \in \mathbb{R}^n$,
 
-    $$f(\b{x}) = f(\b{x}^0) + \nabla f(\bar{\b{x}}) \dot (\b{x} - \b{x}^0)$$
+    $$f(\b{x}) = f(\b{x}^0) + \nabla f(\bar{\b{x}}) \cdot (\b{x} - \b{x}^0)$$
 
     where $\bar{\b{x}}$ is some point that lies on the line segment joining $\b{x}$ and $\b{x}^0$: $\bar{\b{x}}$ depends on $\b{x}, \b{x}^0$ and $f$.
 
@@ -741,7 +741,7 @@ $$f(x) \approx f(x^0) + f'(x^0)(x - x^0) + \frac{1}{2} f''(x^0)(x - x^0)^2$$
 
     Then, for every $\b{x} \in \mathbb{R}^n$,
 
-    $$f(\b{x}) = f(\b{x}^0) + \nabla f(\b{x}) \dot (\b{x} - \b{x}^0) + \frac{1}{2}(\b{x} - \b{x}^0)^T \nabla^2 f(\bar{\b{x}}) (\b{x} - \b{x}^0)$$
+    $$f(\b{x}) = f(\b{x}^0) + \nabla f(\b{x}) \cdot (\b{x} - \b{x}^0) + \frac{1}{2}(\b{x} - \b{x}^0)^T \nabla^2 f(\bar{\b{x}}) (\b{x} - \b{x}^0)$$
 
     where $\bar{\b{x}}$ is some point that lies on the line segment joining $\b{x}$ and $\b{x}^0$: $\bar{\b{x}}$ depends on $\b{x}, \b{x}^0$ and $f$.
 
