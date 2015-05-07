@@ -34,11 +34,11 @@ $$
 
 下面我用 $\varepsilon$ 表示针对一个样本，粗体的 $\boldsymbol{\varepsilon}$ 表示针对所有样本，所以是个 nx1 的向量。
 
-(2.26) 下面的 $\hat{y}\_0 = x\_0^T \hat{\beta}$ 等价于 $\hat{y}\_0 = x\_0^T \beta + \sum\_{i=1}^{N} l\_i(x\_0) \boldsymbol{\varepsilon}\_i$ where $l\_i(x\_0)$ is the ith element of $\boldsymbol{X}(\boldsymbol{X}^T\boldsymbol{X})^{-1}x\_0$
+(2.26) 下面的 $\hat{y}\_0 = x\_0^T \hat{\beta}$ 等价于 $\hat{y}\_0 = x\_0^T \beta + \sum\_{i=1}^{N} l\_i(x\_0) \boldsymbol{\varepsilon}\_i$ where $l\_i(x\_0)$ is the ith element of $\b{X}(\b{X}^T\b{X})^{-1}x\_0$
 
-后面那个 $\hat{y}\_0$ 用 matrix 表示就是 $\hat{y}\_0 = x\_0^T \beta + (\boldsymbol{X}(\boldsymbol{X}^T\boldsymbol{X})^{-1}x\_0)^T \boldsymbol{\varepsilon}$
+后面那个 $\hat{y}\_0$ 用 matrix 表示就是 $\hat{y}\_0 = x\_0^T \beta + (\b{X}(\b{X}^T\b{X})^{-1}x\_0)^T \boldsymbol{\varepsilon}$
 
-对 $Y = X^T \beta + \varepsilon$ 应用 least square 即 $(\boldsymbol{X}\hat{\beta} - \boldsymbol{X}\beta - \boldsymbol{\varepsilon})^T(\boldsymbol{X}\hat{\beta} - \boldsymbol{X}\beta - \boldsymbol{\varepsilon})$，展开求偏导，可得 $(\hat{\beta} - \beta) = (\boldsymbol{X}^T \boldsymbol{X})^{-1} \boldsymbol{X}^T \boldsymbol{\varepsilon}$，注意到 $\boldsymbol{X}^T\boldsymbol{X}$ 是 symmetric matrix，所以 $(\boldsymbol{X}^T\boldsymbol{X})^{-1} = ((\boldsymbol{X}^T\boldsymbol{X})^{-1})^T$，则有 $(\hat{\beta} - \beta) = (\boldsymbol{X}(\boldsymbol{X}^T\boldsymbol{X})^{-1})^T \boldsymbol{\varepsilon}$，等式两边同时于 $x\_0$ 做内积，很容易就推出上面的式子。
+对 $Y = X^T \beta + \varepsilon$ 应用 least square 即 $(\b{X}\hat{\beta} - \b{X}\beta - \boldsymbol{\varepsilon})^T(\b{X}\hat{\beta} - \b{X}\beta - \boldsymbol{\varepsilon})$，展开求偏导，可得 $(\hat{\beta} - \beta) = (\b{X}^T \b{X})^{-1} \b{X}^T \boldsymbol{\varepsilon}$，注意到 $\b{X}^T\b{X}$ 是 symmetric matrix，所以 $(\b{X}^T\b{X})^{-1} = ((\b{X}^T\b{X})^{-1})^T$，则有 $(\hat{\beta} - \beta) = (\b{X}(\b{X}^T\b{X})^{-1})^T \boldsymbol{\varepsilon}$，等式两边同时于 $x\_0$ 做内积，很容易就推出上面的式子。
 
 #### (2.25) and (2.27)
 
@@ -71,23 +71,23 @@ $$
 
     根据上面一小节关于 (2.26) 中给出的 $\hat{y}\_0$ 的公式可知 $E(\hat{y}\_0) = x\_0^T \beta$，所以 $Bias(\hat{y}\_0) = 0$。
 
-    $Var(\hat{y}\_0) = \delta^2 E(x\_0^T(\boldsymbol{X}^T \boldsymbol{X})^{-1}x\_0)$ 是这么推导的
+    $Var(\hat{y}\_0) = \delta^2 E(x\_0^T(\b{X}^T \b{X})^{-1}x\_0)$ 是这么推导的
 
-    令 $\boldsymbol{v} = (\boldsymbol{X}(\boldsymbol{X}^T\boldsymbol{X})^{-1}x\_0)$
+    令 $\b{v} = (\b{X}(\b{X}^T\b{X})^{-1}x\_0)$
 
     $$
     \begin{align\*}
-    Var(\hat{y}\_0) = & Var(x\_0^T \beta + \boldsymbol{v}^T \boldsymbol{\varepsilon}) \\\\
-    = & E((\boldsymbol{v}^T \boldsymbol{\varepsilon})^2) \\\\
+    Var(\hat{y}\_0) = & Var(x\_0^T \beta + \b{v}^T \boldsymbol{\varepsilon}) \\\\
+    = & E((\b{v}^T \boldsymbol{\varepsilon})^2) \\\\
     = & E((\sum\_i v\_i \varepsilon\_i)^2) \\\\
     = & E(\sum\_i v\_i^2 \varepsilon\_i^2) (\text{if} \; i \neq j \; \varepsilon\_i \; \text{and} \; \varepsilon\_j \; \text{are iid, so} \; E(\varepsilon\_i \varepsilon\_j) = 0) \\\\
     = & \delta^2 E(\sum\_i v\_i^2) \\\\
-    = & \delta^2 E(\boldsymbol{v}^T \boldsymbol{v}) \\\\
-    = & \delta^2 E(x\_0^T(\boldsymbol{X}^T \boldsymbol{X})^{-1}x\_0)
+    = & \delta^2 E(\b{v}^T \b{v}) \\\\
+    = & \delta^2 E(x\_0^T(\b{X}^T \b{X})^{-1}x\_0)
     \end{align\*}
     $$
 
-    另外意外想到的一个公式是 $tr(\boldsymbol{v}\boldsymbol{v}^T) = \boldsymbol{v}^T\boldsymbol{v}$
+    另外意外想到的一个公式是 $tr(\b{v}\b{v}^T) = \b{v}^T\b{v}$
 
 #### (2.28)
 
@@ -116,14 +116,14 @@ $$
 
 (3.4) 中给出了 Hessian matrix，目的是为了说明 RSS 是个 strictly convex function，因为对于 strictly convex function 其对应的 hessian matrix 是 pd 的。这样通过一阶导求出的结果就是 global mininum。
 
-关于 $\boldsymbol{X}^T\boldsymbol{X}$ 的正定性很容易证明，$x^T\boldsymbol{X}^T\boldsymbol{X}x = (\boldsymbol{X}x)^T (\boldsymbol{X}x) \geq 0$，所以 $\boldsymbol{X}^T\boldsymbol{X}$ 一定是 psd 的，如果 $\boldsymbol{X}$ 是 full column rank 的，那对于所有非 0 的 $x$，$\boldsymbol{X}x$ 就不可能是 0 (因为 $\boldsymbol{X}x = \sum\_{i} \boldsymbol{X}\_i x\_i$，其中 $\boldsymbol{X}\_i$ 表示第 $i$ 列)，则 $\boldsymbol{X}^T\boldsymbol{X}$ 就是 pd 的。
+关于 $\b{X}^T\b{X}$ 的正定性很容易证明，$x^T\b{X}^T\b{X}x = (\b{X}x)^T (\b{X}x) \geq 0$，所以 $\b{X}^T\b{X}$ 一定是 psd 的，如果 $\b{X}$ 是 full column rank 的，那对于所有非 0 的 $x$，$\b{X}x$ 就不可能是 0 (因为 $\b{X}x = \sum\_{i} \b{X}\_i x\_i$，其中 $\b{X}\_i$ 表示第 $i$ 列)，则 $\b{X}^T\b{X}$ 就是 pd 的。
 
 #### (3.8)
 
 首先先对 (3.6) 做个变形
 
 $$
-\hat{\beta} = (\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T y = (\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T (\boldsymbol{X}\beta + \varepsilon) = \beta + (\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T \varepsilon
+\hat{\beta} = (\b{X}^T\b{X})^{-1} \b{X}^T y = (\b{X}^T\b{X})^{-1} \b{X}^T (\b{X}\beta + \varepsilon) = \beta + (\b{X}^T\b{X})^{-1} \b{X}^T \varepsilon
 $$
 
 基于这个的 $\hat{\beta}$ 表示，covariance matrix 可以表示为
@@ -131,10 +131,10 @@ $$
 $$
 \begin{align\*}
 Var(\hat{\beta}) = & E((\hat{\beta} - \beta)(\hat{\beta} - \beta)^T) \\\\
-= & E((\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T \varepsilon \varepsilon^T \boldsymbol{X} ((\boldsymbol{X}^T\boldsymbol{X})^{-1})) \\\\
-= & (\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T E(\varepsilon \varepsilon^T) \boldsymbol{X} (\boldsymbol{X}^T\boldsymbol{X})^{-1} \\\\
-= & (\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T \delta^2\boldsymbol{I} \boldsymbol{X} (\boldsymbol{X}^T\boldsymbol{X})^{-1} \\\\
-= & \boldsymbol{X}^T\boldsymbol{X}^{-1}\delta^2
+= & E((\b{X}^T\b{X})^{-1} \b{X}^T \varepsilon \varepsilon^T \b{X} ((\b{X}^T\b{X})^{-1})) \\\\
+= & (\b{X}^T\b{X})^{-1} \b{X}^T E(\varepsilon \varepsilon^T) \b{X} (\b{X}^T\b{X})^{-1} \\\\
+= & (\b{X}^T\b{X})^{-1} \b{X}^T \delta^2\b{I} \b{X} (\b{X}^T\b{X})^{-1} \\\\
+= & \b{X}^T\b{X}^{-1}\delta^2
 \end{align\*}
 $$
 
@@ -150,9 +150,9 @@ $$
 
 * 首先根据 [Mutually independent normal random variables are jointly normal](http://www.statlect.com/mcdnrm1.htm#mutual)，$y$ 是 multivariate normal random vector
 
-* 由于 $\hat{\beta} = (\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T y$，所以 $\hat{\beta}$ 可以看成是 $y$ 的一个 linear transformation (可以把 $(\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T)$ 整体看成一个 matrix)，根据[这篇文章](http://www.statlect.com/normal_distribution_linear_combinations.htm)中给出的定理，$\hat{\beta}$ 服从 multivariate normal distribution，同时
+* 由于 $\hat{\beta} = (\b{X}^T\b{X})^{-1} \b{X}^T y$，所以 $\hat{\beta}$ 可以看成是 $y$ 的一个 linear transformation (可以把 $(\b{X}^T\b{X})^{-1} \b{X}^T)$ 整体看成一个 matrix)，根据[这篇文章](http://www.statlect.com/normal_distribution_linear_combinations.htm)中给出的定理，$\hat{\beta}$ 服从 multivariate normal distribution，同时
 
-    $$var(\hat{\beta}) = (\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T \delta^2 I ((\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T)^T = (\boldsymbol{X}^T\boldsymbol{X})^{-1}\delta^2$$
+    $$var(\hat{\beta}) = (\b{X}^T\b{X})^{-1} \b{X}^T \delta^2 I ((\b{X}^T\b{X})^{-1} \b{X}^T)^T = (\b{X}^T\b{X})^{-1}\delta^2$$
 
 #### (3.11)
 
@@ -172,11 +172,11 @@ $$
 
 #### (3.44)
 
-(3.44) 下面的一段话中说加了 $\lambda \boldsymbol{I}$ 使得这个问题变得 nonsingular，原因是这样的，对于任意矩阵 $M$ (假设它的所有 eigenvalue 都是实数，复数的我也不懂，正好在我们这里 $\boldsymbol{A}^T\boldsymbol{A}$ 是 symmetric matrix，因此它的 eigenvalue 必然是实数)，假设 $\alpha$ 是它的 eigenvalue，则有 $\boldsymbol{M}x = \alpha x$，则对于 $\boldsymbol{M} + \lambda \boldsymbol{I}$ 有
+(3.44) 下面的一段话中说加了 $\lambda \b{I}$ 使得这个问题变得 nonsingular，原因是这样的，对于任意矩阵 $M$ (假设它的所有 eigenvalue 都是实数，复数的我也不懂，正好在我们这里 $\b{A}^T\b{A}$ 是 symmetric matrix，因此它的 eigenvalue 必然是实数)，假设 $\alpha$ 是它的 eigenvalue，则有 $\b{M}x = \alpha x$，则对于 $\b{M} + \lambda \b{I}$ 有
 
-$$(\boldsymbol{M} + \lambda \boldsymbol{I})x = (\alpha + \lambda) x$$
+$$(\b{M} + \lambda \b{I})x = (\alpha + \lambda) x$$
 
-也就是说如果 $\alpha$ 是 $\boldsymbol{M}$ 的 eigenvalue，则 $\alpha + \lambda$ 就是 $\boldsymbol{M} + \lambda \boldsymbol{I}$ 的 eigenvalue，这样就好办了，我总可以选出 $\lambda$ 使得我对于所有的 $\alpha\_i$ 满足 $\alpha\_i + \lambda \neq 0$，比如令 $\lambda > \max\_i |\alpha\_i|$，这样也就使得问题变得 nonsingular。
+也就是说如果 $\alpha$ 是 $\b{M}$ 的 eigenvalue，则 $\alpha + \lambda$ 就是 $\b{M} + \lambda \b{I}$ 的 eigenvalue，这样就好办了，我总可以选出 $\lambda$ 使得我对于所有的 $\alpha\_i$ 满足 $\alpha\_i + \lambda \neq 0$，比如令 $\lambda > \max\_i |\alpha\_i|$，这样也就使得问题变得 nonsingular。
 
 #### Gauss-Markov Therom
 
@@ -184,13 +184,13 @@ Gauss-Markov Therom 总体的意思是就是 least square estimator (LSE) of $\b
 
 * **linear estimator**
 
-    如果 $\hat{\beta}$ 的每个分量都可以表示为 $c^T y, \; c \in \mathbb{R}^n$，$y$ 就是所有的 responce，也就是 $\hat{\beta}\_i$ 是所有 responce 的 linear combination，则 $\hat{\beta}$ 就被称为 linear estimator。对于 LSE，$\hat{\beta} = (\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T y$，显然 LSE 是 linear estimator
+    如果 $\hat{\beta}$ 的每个分量都可以表示为 $c^T y, \; c \in \mathbb{R}^n$，$y$ 就是所有的 responce，也就是 $\hat{\beta}\_i$ 是所有 responce 的 linear combination，则 $\hat{\beta}$ 就被称为 linear estimator。对于 LSE，$\hat{\beta} = (\b{X}^T\b{X})^{-1} \b{X}^T y$，显然 LSE 是 linear estimator
 
 * **unbiased estimator**
 
     如果 $E(\hat{\beta}) = \beta$ 则 $\hat{\beta}$ 就是 unbiased estimator。对于 LSE
 
-    $$E(\hat{\beta}) = E((\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T y) = (\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T E(y) = (\boldsymbol{X}^T\boldsymbol{X})^{-1} \boldsymbol{X}^T \boldsymbol{X} \beta = \beta$$
+    $$E(\hat{\beta}) = E((\b{X}^T\b{X})^{-1} \b{X}^T y) = (\b{X}^T\b{X})^{-1} \b{X}^T E(y) = (\b{X}^T\b{X})^{-1} \b{X}^T \b{X} \beta = \beta$$
 
     所以 LSE 是 unbiased estimator
 
@@ -219,29 +219,29 @@ Gauss-Markov Therom 总体的意思是就是 least square estimator (LSE) of $\b
 
 #### (3.46)
 
-$\boldsymbol{U}^T y$ 表示 $\hat{y}$ 在以 $\boldsymbol{U}$ 的列向量为 basis 的空间内的坐标，所以 $\hat{y} = \boldsymbol{U}\boldsymbol{U}^T y$。
+$\b{U}^T y$ 表示 $\hat{y}$ 在以 $\b{U}$ 的列向量为 basis 的空间内的坐标，所以 $\hat{y} = \b{U}\b{U}^T y$。
 
 这个可以这么理解的，考虑正常的 3d space 中的坐标，比如 $v = (3, 4, 5)^T$，它实际上是等于
 
-$$3 \begin{pmatrix} 1 \\\\ 0\\\\ 0 \end{pmatrix} + 4 \begin{pmatrix} 0 \\\\ 1 \\\\ 0 \end{pmatrix} + 5 \begin{pmatrix} 0 \\\\ 0 \\\\ 1 \end{pmatrix} = \boldsymbol{I} v$$
+$$3 \begin{pmatrix} 1 \\\\ 0\\\\ 0 \end{pmatrix} + 4 \begin{pmatrix} 0 \\\\ 1 \\\\ 0 \end{pmatrix} + 5 \begin{pmatrix} 0 \\\\ 0 \\\\ 1 \end{pmatrix} = \b{I} v$$
 
-其中 $I$ 为 basis，同理 $y$ 在 $\boldsymbol{U}$ 中的坐标 $\boldsymbol{U}^T y$，其 basis 为 $\boldsymbol{U}$，所以 $\hat{y} = \boldsymbol{U}\boldsymbol{U}^T y$。
+其中 $I$ 为 basis，同理 $y$ 在 $\b{U}$ 中的坐标 $\b{U}^T y$，其 basis 为 $\b{U}$，所以 $\hat{y} = \b{U}\b{U}^T y$。
 
 #### (3.49)
 
-首先注意这个公式里的 $Var(\boldsymbol{z}\_1)$ 不是个 covariance matrix，这里的向量 $\boldsymbol{z}\_1$ 表示的是一个 random variable 的 n 个取值，而不是 n 个 random variable 分别的取值，搞清楚这个非常重要。情况是这样，$\boldsymbol{X}$ 是原始空间中的样本，原始空间中每个样本有 p 个 feature，也就是 p 个 random variable，而 $\boldsymbol{X}$ 的每一列分别表示这 p 个 feature 的 n 个取值，而 $\boldsymbol{X}v\_1$ 将 p 个 feature project 到一个新的空间中，变成一个 feature，$\boldsymbol{z}\_1$ 就是 n 个样本对这个 feature 的取值，所以说它是一个 random variable 的 n 个取值。
+首先注意这个公式里的 $Var(\b{z}\_1)$ 不是个 covariance matrix，这里的向量 $\b{z}\_1$ 表示的是一个 random variable 的 n 个取值，而不是 n 个 random variable 分别的取值，搞清楚这个非常重要。情况是这样，$\b{X}$ 是原始空间中的样本，原始空间中每个样本有 p 个 feature，也就是 p 个 random variable，而 $\b{X}$ 的每一列分别表示这 p 个 feature 的 n 个取值，而 $\b{X}v\_1$ 将 p 个 feature project 到一个新的空间中，变成一个 feature，$\b{z}\_1$ 就是 n 个样本对这个 feature 的取值，所以说它是一个 random variable 的 n 个取值。
 
-令 $\boldsymbol{X}\_i$ 表示 $\boldsymbol{X}$ 的第 i 列，由于 $\boldsymbol{X}$ 是 centered，所以 $\sum\_{j=1}^{n} \boldsymbol{X}\_{ij} = 0$，由此
+令 $\b{X}\_i$ 表示 $\b{X}$ 的第 i 列，由于 $\b{X}$ 是 centered，所以 $\sum\_{j=1}^{n} \b{X}\_{ij} = 0$，由此
 
-$$ Mean(\boldsymbol{X}v\_1) = \frac{\sum\_{i = 1}^{p} \sum\_{j = 1}^{n} \boldsymbol{X}\_{ij}v\_{1i}}{N} = 0$$
+$$ Mean(\b{X}v\_1) = \frac{\sum\_{i = 1}^{p} \sum\_{j = 1}^{n} \b{X}\_{ij}v\_{1i}}{N} = 0$$
 
-所以 $\boldsymbol{X}v\_1$ 的 sample variance 就是
+所以 $\b{X}v\_1$ 的 sample variance 就是
 
-$$\frac{(\boldsymbol{X}v\_1)^T\boldsymbol{X}v\_1}{N} = \frac{v\_1^T\boldsymbol{X}^T \boldsymbol{X}v\_1}{N} = \frac{v\_1^T {d\_1}^2 v\_1}{N} = \frac{d\_1^2}{N}$$
+$$\frac{(\b{X}v\_1)^T\b{X}v\_1}{N} = \frac{v\_1^T\b{X}^T \b{X}v\_1}{N} = \frac{v\_1^T {d\_1}^2 v\_1}{N} = \frac{d\_1^2}{N}$$
 
 #### (3.49) 下面的公式
 
-$\boldsymbol{z}\_1 = \boldsymbol{X} v\_1 = \boldsymbol{u}\_1 d\_1$ 的推导很简单，只要把 $\boldsymbol{X}$ 对应的 SVD 分解代入即可。
+$\b{z}\_1 = \b{X} v\_1 = \b{u}\_1 d\_1$ 的推导很简单，只要把 $\b{X}$ 对应的 SVD 分解代入即可。
 
 ### 注意点
 
@@ -249,7 +249,7 @@ $\boldsymbol{z}\_1 = \boldsymbol{X} v\_1 = \boldsymbol{u}\_1 d\_1$ 的推导很�
 
     也就是说 KNN 在用的时候是这么用的，给你一个样本，然后去算离哪个 neighborhood 的 mean 比较近，那就将这个样本分到那个 neighborhood 中，所以如果定义 k 个 neighborhood，就需要 N/k 个参数
 
-* **(page 66)** 注意区分 principal component 和 principal component direction，principal component direction 是 $\boldsymbol{X}^T \boldsymbol{X}$ 的 eigenvector，假设为 $v$，$\boldsymbol{X}v$ 才是 principal component，如 Figure 3.9 所示。
+* **(page 66)** 注意区分 principal component 和 principal component direction，principal component direction 是 $\b{X}^T \b{X}$ 的 eigenvector，假设为 $v$，$\b{X}v$ 才是 principal component，如 Figure 3.9 所示。
 
 * **(page 72)** figure 3.12 可以看到 q 从 0.1 到 4 的过程中，contour 的图形变化从窄到越来越方。
 
