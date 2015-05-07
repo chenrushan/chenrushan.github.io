@@ -164,21 +164,21 @@ A norm on $\mathbb{R}^n$ is real-value function $\Vert \cdot \Vert: \mathbb{R}^n
 </ul>
 </blockquote>
 
-<object data="/resource/NNP/norm.svg" type="image/svg+xml" class="blkcenter"></object>
+<object data="/resource/NNP/02-math-back/norm.svg" type="image/svg+xml" class="blkcenter"></object>
 
 Let $\b{x} \in \mathbb{R}^n$. Some popular norms:
 
 * $L\_2$ or Euclidean norm: $\Vert \b{x} \Vert\_2 = (\sum\_{i=1}^{n} (x\_i)^2)^{\frac{1}{2}}$
 
-    <object data="/resource/NNP/l2norm.svg" type="image/svg+xml" class="blkcenter"></object>
+    <object data="/resource/NNP/02-math-back/l2norm.svg" type="image/svg+xml" class="blkcenter"></object>
 
 * $L\_1$ norm: $\Vert \b{x} \Vert\_1 = \sum\_{i=1}^{n} |x\_i|$
 
-    <object data="/resource/NNP/l1norm.svg" type="image/svg+xml" class="blkcenter"></object>
+    <object data="/resource/NNP/02-math-back/l1norm.svg" type="image/svg+xml" class="blkcenter"></object>
 
 * $L\_{\infty}$ norm: $\Vert \b{x} \Vert\_{\infty} = \underset{i=1,\cdots,n}{\max} |x\_i|$
 
-    <object data="/resource/NNP/linfnorm.svg" type="image/svg+xml" class="blkcenter"></object>
+    <object data="/resource/NNP/02-math-back/linfnorm.svg" type="image/svg+xml" class="blkcenter"></object>
 
 In general, $L\_p$ norm is defined as $\Vert \b{x} \Vert\_{p} = (\sum\_{i=1}^{n} |x\_i|^p)^{\frac{1}{p}}$.
 
@@ -611,7 +611,7 @@ Let $S \subseteq \mathbb{R}^n$. A function $f: S\rightarrow \mathbb{R}$ is said 
 
 Example:
 
-  <object data="/resource/NNP/fcontexp.svg" type="image/svg+xml" class="blkcenter"></object>
+  <object data="/resource/NNP/02-math-back/fcontexp.svg" type="image/svg+xml" class="blkcenter"></object>
 
 -----------------------
 
@@ -635,7 +635,7 @@ where $L$ is a positive constant
 A continuous function, $f: \mathbb{R}^n \rightarrow \mathbb{R}$, is said to be continuously differentiable at $\b{x} \in \mathbb{R}^n$, if $\frac{\partial f}{\partial x_i}(\b{x})$ exists and is continuous, $i = 1, 2, \cdots, n$.
 </blockquote>
 
-  <object data="/resource/NNP/fdiffexp.svg" type="image/svg+xml" class="blkcenter"></object>
+  <object data="/resource/NNP/02-math-back/fdiffexp.svg" type="image/svg+xml" class="blkcenter"></object>
 
 * $\mathcal{C}^1$: Class of functions whose first partial derivatives are continuous
 
@@ -647,7 +647,7 @@ We define the gradient of $f$ at $\b{x}$ to be the vector
 $$g(\b{x}) = \nabla f(\b{x}) = (\frac{\partial f(\b{x})}{\partial x_1}, \frac{\partial f(\b{x})}{\partial x_2}, \cdots, \frac{\partial f(\b{x})}{\partial x_n})^T$$
 </blockquote>
 
-  <object data="/resource/NNP/gradient.svg" type="image/svg+xml" class="blkcenter"></object>
+  <object data="/resource/NNP/02-math-back/gradient.svg" type="image/svg+xml" class="blkcenter"></object>
 
 -----------------------
 
