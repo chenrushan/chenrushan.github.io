@@ -30,10 +30,10 @@ Convex function 和 Concave function 是两个相对的概念，$f$ 如果是 co
 所谓的 convex programming problem，就是指如下问题
 
 $$
-\begin{align}
+\begin{align\*}
 \min f(\boldsymbol{x}) \\\\
 s.t. \boldsymbol{x} \in C
-\end{align}
+\end{align\*}
 $$
 
 其中 $C$ 是 convex set，$f: C \rightarrow \mathbb{R}$ 为 convex function
@@ -111,11 +111,11 @@ Level set 是这么一个集合 $C\_{\alpha} = \\{ \boldsymbol{x} \in C : f(\bol
 有了 level set 的定义，就可以进一步细化 convex programming problem 的定义，通常 convex programming problem 都有如下形式
 
 $$
-\begin{align}
+\begin{align\*}
 & \min \; f(\boldsymbol{x}) \\\\
 s.t. & h\_i(\boldsymbol{x}) \leq 0 \;\; i = 1 \rightarrow m \\\\
 & \boldsymbol{a}^T\_j \boldsymbol{x} + b\_j = 0 \;\; j = 1 \rightarrow l \\\\
-\end{align}
+\end{align\*}
 $$
 
 其中 $f$ 和 $h\_i$ 都是 convex function。这里每个约束都是一个 level set，根据前面性质可知，这些 level set 都是 convex set，而 convex set 的交集也是 convex set。
@@ -137,10 +137,10 @@ $$f(\boldsymbol{x}_2) \geq f(\boldsymbol{x}_1) + g^T(\boldsymbol{x}_1)(\boldsymb
         Convexity 意味着 $f(\lambda \boldsymbol{x}\_2 + (1 - \lambda)\boldsymbol{x}\_1) \leq \lambda f(\boldsymbol{x}\_2) + (1 - \lambda)f(\boldsymbol{x}\_1) \; \lambda \in [0, 1]$，这个不等式等价于
 
         $$
-        \begin{align}
+        \begin{align\*}
         & f(\boldsymbol{x}\_1 + \lambda (\boldsymbol{x}\_2 - \boldsymbol{x}\_1)) \leq f(\boldsymbol{x}\_1) + \lambda(f(\boldsymbol{x}\_2) - f(\boldsymbol{x}\_1)) \\\\
         \Rightarrow & \frac{f(\boldsymbol{x}\_1 + \lambda (\boldsymbol{x}\_2 - \boldsymbol{x}\_1)) - f(\boldsymbol{x}\_1)}{\lambda} \leq f(\boldsymbol{x}\_2) - f(\boldsymbol{x}\_1)
-        \end{align}
+        \end{align\*}
         $$
 
         取极限 $\lambda \rightarrow 0^+$，左边就是方向导数等于 $g^T(\boldsymbol{x}\_1) (\boldsymbol{x}\_2 - \boldsymbol{x}\_1)$
@@ -150,21 +150,21 @@ $$f(\boldsymbol{x}_2) \geq f(\boldsymbol{x}_1) + g^T(\boldsymbol{x}_1)(\boldsymb
         令 $\boldsymbol{x} = \lambda \boldsymbol{x}\_1 + (1 - \lambda)\boldsymbol{x}\_2 \; \lambda \in [0, 1]$，不等式成立意味着
 
         $$
-        \begin{align}
+        \begin{align\*}
         f(\boldsymbol{x}\_1) \geq f(\boldsymbol{x}) + g^T(\boldsymbol{x})(\boldsymbol{x}\_1 - \boldsymbol{x}) \\\\
         f(\boldsymbol{x}\_2) \geq f(\boldsymbol{x}) + g^T(\boldsymbol{x})(\boldsymbol{x}\_2 - \boldsymbol{x})
-        \end{align}
+        \end{align\*}
         $$
 
         则有
 
         $$
-        \begin{align}
+        \begin{align\*}
         & \lambda f(\boldsymbol{x}\_1) + (1 - \lambda) f(\boldsymbol{x}\_2) \\\\
         \geq & f(\boldsymbol{x}) + \lambda g^T(\boldsymbol{x})(\boldsymbol{x}\_1 - \boldsymbol{x}) + (1 - \lambda) g^T(\boldsymbol{x})(\boldsymbol{x}\_2 - \boldsymbol{x}) \\\\
         = & f(\boldsymbol{x}) + \lambda g^T(\boldsymbol{x})(\boldsymbol{x}\_1 - \boldsymbol{x}\_2) + g^T(\boldsymbol{x})(\boldsymbol{x}\_2 - \boldsymbol{x}) \\\\
         = & f(\boldsymbol{x}) + g^T(\boldsymbol{x})(\lambda \boldsymbol{x}\_1 + (1 - \lambda)\boldsymbol{x}\_2 - \boldsymbol{x}) \\\\
-        \end{align}
+        \end{align\*}
         $$
 
         由于 $\boldsymbol{x} = \lambda \boldsymbol{x}\_1 + (1 - \lambda)\boldsymbol{x}\_2$，所以最后一个式子就是 $f(\lambda \boldsymbol{x}\_1 + (1 - \lambda)\boldsymbol{x}\_2)$
@@ -230,12 +230,12 @@ $$f(\sum_{i=1}^{k} \lambda_i \boldsymbol{x}_i) \leq \sum_{i=1}^{k} \lambda_if(\b
         $k \leq 2$ 时显然成立，就是 convex function 的定义，假设对于 $k - 1$ 的情况成立，对于 $k$ 的情况
 
         $$
-        \begin{align}
+        \begin{align\*}
         & f(\sum\_{i = 1}^k \lambda\_i \boldsymbol{x}\_i) \\\\
         = & f(\sum\_{i = 1}^{k-1} \lambda\_i \boldsymbol{x}\_i + \lambda\_k \boldsymbol{x}\_k) \\\\
         = & f((1 - \lambda\_k)\sum\_{i = 1}^{k-1} \frac{\lambda\_i}{1 - \lambda\_k} \boldsymbol{x}\_i + \lambda\_k \boldsymbol{x}\_k) \\\\
         \leq & (1 - \lambda\_k)f(\sum\_{i = 1}^{k-1} \frac{\lambda\_i}{1 - \lambda\_k} \boldsymbol{x}\_i) + \lambda\_k f(\boldsymbol{x}\_k)
-        \end{align}
+        \end{align\*}
         $$
 
         后面的推导简单就不写了
