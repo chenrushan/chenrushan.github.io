@@ -124,15 +124,15 @@ $$
 \begin{align\*}
 \underset{w, v, \xi}{\min} L(w, v, \xi, \alpha, \beta) = & -\frac{1}{2} (\sum\_{i=1}^n \beta\_i y\_i x\_i)^T (\sum\_{j=1}^n \beta\_j y\_j x\_j) + \sum\_{i=1}^n \beta\_i \\\\
 = & -\frac{1}{2} \sum\_{i=1}^n \sum\_{j=1}^n \beta\_i \beta\_j y\_i y\_j x\_i^T x\_j + \sum\_{i=1}^n \beta\_i \\\\
-= & -\frac{1}{2} \beta^T Y K Y \beta + \beta^T \boldsymbol{1}
+= & -\frac{1}{2} \beta^T Y K Y \beta + \beta^T \b{1}
 \end{align\*}
 $$
 
-最后一个式子中 $Y$ 是 diagonal matrix 且 $Y\_{ii} = y\_i$，$K$ 表示 kernel matrix，$K\_{ij} = x\_i^T x\_j$，$\boldsymbol{1}$ 表示元素全为 1 的 vector。这里已经不包含 $\alpha$，由于 $\alpha\_i + \beta\_i = C, \alpha\_i \geq 0, \beta\_i \geq 0$，所以 $0 \leq \beta\_i \leq C$，同时 $\sum\_{i=1}^n \beta\_i y\_i = 0$，因此最后我们得到如下 dual problem
+最后一个式子中 $Y$ 是 diagonal matrix 且 $Y\_{ii} = y\_i$，$K$ 表示 kernel matrix，$K\_{ij} = x\_i^T x\_j$，$\b{1}$ 表示元素全为 1 的 vector。这里已经不包含 $\alpha$，由于 $\alpha\_i + \beta\_i = C, \alpha\_i \geq 0, \beta\_i \geq 0$，所以 $0 \leq \beta\_i \leq C$，同时 $\sum\_{i=1}^n \beta\_i y\_i = 0$，因此最后我们得到如下 dual problem
 
 $$
 \begin{align\*}
-\underset{\beta}{\arg\min} & \; \frac{1}{2} \beta^T Y K Y \beta - \beta^T \boldsymbol{1} \\\\
+\underset{\beta}{\arg\min} & \; \frac{1}{2} \beta^T Y K Y \beta - \beta^T \b{1} \\\\
 s.t. & \; 0 \leq \beta\_i \leq C \\\\
 & \; \sum\_{i=1}^n \beta\_i y\_i = 0
 \end{align\*}
