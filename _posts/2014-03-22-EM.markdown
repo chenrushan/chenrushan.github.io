@@ -39,19 +39,19 @@ If $f(x)$ is a concave function, $\forall \sum_i a_i = 1 \;\; f(\sum_{i}a_i x_i)
 
 #### 得到下界
 
-假设 $X = \\{\boldsymbol{x}\_1, \boldsymbol{x}\_2, ..., \boldsymbol{x}\_n\\}$
+假设 $X = \\{\b{x}\_1, \b{x}\_2, ..., \b{x}\_n\\}$
 
 $$
 \begin{align\*}
-L(\theta) = & \sum\_i \log p(\boldsymbol{x}^{(i)}|\theta) \\\\
-= & \sum\_i \log \sum\_\boldsymbol{z} p(\boldsymbol{x}^{(i)}, \boldsymbol{z}|\theta) \\\\
-= & \sum\_i \log \sum\_\boldsymbol{z} p(\boldsymbol{x}^{(i)}, \boldsymbol{z}|\theta) \frac{p(\boldsymbol{z}|\boldsymbol{x}^{(i)}, \theta\_n)}{p(\boldsymbol{z}|\boldsymbol{x}^{(i)}, \theta\_n)} \\\\
-\geq & \sum\_i \sum\_\boldsymbol{z} p(\boldsymbol{z}|\boldsymbol{x}^{(i)}, \theta\_n) \log \frac{p(\boldsymbol{x}^{(i)}, \boldsymbol{z}|\theta)}{p(\boldsymbol{z}|\boldsymbol{x}^{(i)}, \theta\_n)} \\\\
+L(\theta) = & \sum\_i \log p(\b{x}^{(i)}|\theta) \\\\
+= & \sum\_i \log \sum\_\b{z} p(\b{x}^{(i)}, \b{z}|\theta) \\\\
+= & \sum\_i \log \sum\_\b{z} p(\b{x}^{(i)}, \b{z}|\theta) \frac{p(\b{z}|\b{x}^{(i)}, \theta\_n)}{p(\b{z}|\b{x}^{(i)}, \theta\_n)} \\\\
+\geq & \sum\_i \sum\_\b{z} p(\b{z}|\b{x}^{(i)}, \theta\_n) \log \frac{p(\b{x}^{(i)}, \b{z}|\theta)}{p(\b{z}|\b{x}^{(i)}, \theta\_n)} \\\\
 = & l(\theta)
 \end{align\*}
 $$
 
-这样我们就得到了 $L(\theta)$ 的下界 $l(\theta)$。推导的核心的是 **第三个等式引入了 hidden variable distribution $p(\boldsymbol{z}|\boldsymbol{x}^{(i)}, \theta\_n)$**。
+这样我们就得到了 $L(\theta)$ 的下界 $l(\theta)$。推导的核心的是 **第三个等式引入了 hidden variable distribution $p(\b{z}|\b{x}^{(i)}, \theta\_n)$**。
 
 #### 证明优化下界提升 likelihood
 
@@ -59,9 +59,9 @@ $$
 
 $$
 \begin{align\*}
-l(\theta\_n) = & \sum\_i \sum\_\boldsymbol{z} p(\boldsymbol{z}|\boldsymbol{x}^{(i)}, \theta\_n) \log \frac{p(\boldsymbol{x}^{(i)}, \boldsymbol{z}|\theta\_n)}{p(\boldsymbol{z}|\boldsymbol{x}^{(i)}, \theta\_n)} \\\\
-= & \sum\_i \sum\_\boldsymbol{z} p(\boldsymbol{z}|\boldsymbol{x}^{(i)}, \theta\_n) \log {p(\boldsymbol{x}^{(i)}|\theta\_n)} \\\\
-= & \sum\_i \log {p(\boldsymbol{x}^{(i)}|\theta\_n)} \\\\
+l(\theta\_n) = & \sum\_i \sum\_\b{z} p(\b{z}|\b{x}^{(i)}, \theta\_n) \log \frac{p(\b{x}^{(i)}, \b{z}|\theta\_n)}{p(\b{z}|\b{x}^{(i)}, \theta\_n)} \\\\
+= & \sum\_i \sum\_\b{z} p(\b{z}|\b{x}^{(i)}, \theta\_n) \log {p(\b{x}^{(i)}|\theta\_n)} \\\\
+= & \sum\_i \log {p(\b{x}^{(i)}|\theta\_n)} \\\\
 = & L(\theta\_n)
 \end{align\*}
 $$
@@ -75,8 +75,8 @@ $$
 $$
 \begin{align\*}
 \theta\_{n+1} = & \underset{\theta}{\arg\max}\; l(\theta) \\\\
-= & \underset{\theta}{\arg\max}\; \sum\_i \sum\_\boldsymbol{z} p(\boldsymbol{z}|\boldsymbol{x}^{(i)}, \theta\_n) \log \frac{p(\boldsymbol{x}^{(i)}, \boldsymbol{z}|\theta)}{p(\boldsymbol{z}|\boldsymbol{x}^{(i)}, \theta\_n)} \\\\
-= & \underset{\theta}{\arg\max}\; \sum\_i \sum\_\boldsymbol{z} p(\boldsymbol{z}|\boldsymbol{x}^{(i)}, \theta\_n) \log p(\boldsymbol{x}^{(i)}, \boldsymbol{z}|\theta) \\\\
+= & \underset{\theta}{\arg\max}\; \sum\_i \sum\_\b{z} p(\b{z}|\b{x}^{(i)}, \theta\_n) \log \frac{p(\b{x}^{(i)}, \b{z}|\theta)}{p(\b{z}|\b{x}^{(i)}, \theta\_n)} \\\\
+= & \underset{\theta}{\arg\max}\; \sum\_i \sum\_\b{z} p(\b{z}|\b{x}^{(i)}, \theta\_n) \log p(\b{x}^{(i)}, \b{z}|\theta) \\\\
 \end{align\*}
 $$
 
@@ -84,7 +84,7 @@ $$
 
 这样就可以得到 E-step 和 M-step:
 
-* E-step: get distribution of $\boldsymbol{z}: p(\boldsymbol{z}|\boldsymbol{x}^{(i)}, \theta\_n)$
+* E-step: get distribution of $\b{z}: p(\b{z}|\b{x}^{(i)}, \theta\_n)$
 * M-step: get updated $\theta$: $\theta\_{n+1} = \arg\max\; l(\theta)$
 
 下面给出两个具体的例子，分别是 Hidden Markov Model (HMM) 和 Probabilistic Latent Semantic Analysis (PLSA) 的训练过程。
