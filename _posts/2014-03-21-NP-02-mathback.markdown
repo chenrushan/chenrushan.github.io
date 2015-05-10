@@ -5,11 +5,17 @@ categories: nnumop
 tags: NPTEL, numerical optimization, mathmatical background
 ---
 
+这篇笔记中给出了学习 Numerical Optimization 必备的一些数学概念和结论，关于一些
+重要结论的证明单独在 [Mathematical Background in Detail](/numop/2015/05/07/mathback-detail/)
+中给出，具体的每个结论的证明会在结论后给出链接
+
+-----------------------
+
 **Set**
 
 Difference between two sets A and B: $A \setminus B = \\{x: x \in A \;\; and \;\; x \notin B\\}$
 
-------------------------
+-----------------------
 
 **Supremum**
 
@@ -29,7 +35,7 @@ $A = \\{x: 1 \leq x \lt 3\\}$
 * $\sup\\{x : x \in A\\} = 3 (\notin A)$
 * $\inf\\{x : x \in A\\} = 1 (\in A)$
 
-------------------------
+-----------------------
 
 **Vector Space**:
 
@@ -231,6 +237,11 @@ If, in addition, $\Vert \b{x}_i \Vert = 1$ for every $i$, the set $\{ \b{x}_1, \
 
 It's easy to show that if $\b{x}\_1, \cdots, \b{x}\_k$ are mutually orthogonal nonzero vectors, then they are linearly independent.
 
+对于一个 squre matrix $Q$ [[proof]](/numop/2015/05/07/mathback-detail/#orthcolumn)
+
+* $Q$ 的 column vector 是 orthogonal 不能推出 $Q$ 的 row vector 是 orthogonal
+* $Q$ 的 column vector 是 orthonormal 等价于 $Q$ 的 row vetor 是 orthonormal
+
 -----------------------
 
 **Gram-Schmidt Procedure**
@@ -285,31 +296,7 @@ $$\det(I) = 1$$
 </blockquote>
 
 * if $A$ contains two identical columns, $\det(A) = 0$
-
-* $\det(AB) = \det(A)\det(B)$
-
-    **Proof**
-
-    Take $2\times 2$ matrix as example, $A = [\b{a}\_1, \b{a}\_2], B = [\b{b}\_1, \b{b}\_2]$. ($a\_{ij}$ means element at **column i, row j**, not row i column j as usual).
-
-    $$
-    \begin{align\*}
-    \det(AB) = & \det[\b{a}\_1, \b{a}\_2]\times [\b{b}\_1, \b{b}\_2] \\\\
-    = & \det[b\_{11}\b{a}\_1 + b\_{12}\b{a}\_2, b\_{21}\b{a}\_1 + b\_{22}\b{a}\_2] \\\\
-    = & b\_{11}\det[\b{a}\_1, b\_{21}\b{a}\_1 + b\_{22}\b{a}\_2] + b\_{12}\det[\b{a}\_2, b\_{21}\b{a}\_1 + b\_{22}\b{a}\_2] \\\\
-    = & c\_1\det[\b{a}\_1, \b{a}\_1] + c\_2\det[\b{a}\_1, \b{a}\_2] + c\_3\det[\b{a}\_2, \b{a}\_1] + c\_4\det[\b{a}\_2, \b{a}\_2]
-    \end{align\*}
-    $$
-
-    Here, the exact form of $c\_{i}$ doesn't matter, anyway they are some function of $b\_{ij}$.
-    
-    There are 4 terms in the last formula, among them, $\det[\b{a}\_1, \b{a}\_1], \det[\b{a}\_2, \b{a}\_2]$ are equal to 0, $\det[\b{a}\_2, \b{a}\_1] = -\det[\b{a}\_1, \b{a}\_2]$, so $\det(AB)$ can be further reduced to
-
-    $$\det(AB) = c\det(A)$$
-
-    Let $A = I$, we have $\det(B) = c\det(I) = c$, so $\det(AB) = \det(A)\det(B)$.
-
-    The above reasoning can be easily extended to $n\times n$ matrix.
+* $\det(AB) = \det(A)\det(B)$ [[proof]](/numop/2015/05/07/mathback-detail/#detAB)
 
 -----------------------
 
@@ -324,11 +311,11 @@ The subspace of $\mathbb{R}^m$, spanned by the column vectors of $A$ is called t
 <blockquote>
 Column Rank: The dimension of the column space.<br/>
 Row Rank: The dimension of the row space.<br/>
-The column rank of a matrix equals its row rank, and its common value is called the rank of $A$.
 </blockquote>
 
+* The column rank of a matrix equals its row rank, and its common value is
+  called the rank of $A$. [[proof]](/numop/2015/05/07/mathback-detail/#creqrr)
 * The rank of a matrix is 0 iff it's a zero matrix.
-
 * Matrices with the smallest rank - rank one matrices
 
     Example:
@@ -348,10 +335,10 @@ The column rank of a matrix equals its row rank, and its common value is called 
 A square matrix $A$ is said to be invertible if there exists a matrix $B$ such that $AB = BA = I$. There's at most one such $B$ and is denoted by $A^{-1}$.
 </blockquote>
 
+* If $A, B$ are square matrices, then $AB = I \Ra BA = I$
+  [[proof]](/numop/2015/05/07/mathback-detail/#ABBA)
 * A product of invertible matrices is invertible and $(AB)^{-1} = B^{-1}A^{-1}$
-
-* If $\det(A) \neq 0$, then $A$ is invertible. ($\det(A)$ denotes the determinant of matrix $A$)
-
+* If $\det(A) \neq 0$, $A$ is invertible. ($\det(A)$ is the determinant of $A$)
 * A matrix $A$ is called an orthogonal matrix if $A^{-1} = A^T$. So the column(row)
   vectors of an orthogonal matrix form orthonormal basis
 
@@ -396,30 +383,36 @@ Let $A \in \mathbb{R}^{n\times n}$. The matrix $A$ is said to be symmetric if $A
 Let $A \in \mathbb{R}^{n\times n}$ be symmetric, then
 
 * $A$ has n real eigenvalues $\lambda\_1, \lambda\_2, \cdots, \lambda\_n$
-
-* a corresponding set of eigenvectors $\{ \b{x}\_1, \b{x}\_2, \cdots, \b{x}\_n\}$ can be chosen to be orthonormal. Let $S = (\b{x}\_1, \b{x}\_2, \cdots, \b{x}\_n)$, $S$ is an orthogonal matrix
-
-    * eigenvectors of different eigenvalues are orthogonal
-
-        $$
-        \begin{align\*}
-        & (A \b{x}\_i)^T \b{x}\_j = \b{x}\_i^T A^T \b{x}\_j = \b{x}\_i^T A \b{x}\_j \\\\
-        \Rightarrow & \lambda\_i \b{x}\_i^T \b{x}\_j = \b{x}\_i^T \lambda\_j \b{x}\_j = \lambda\_j \b{x}\_i^T \b{x}\_j \\\\
-        \Rightarrow & \b{x}\_i^T \b{x}\_j = 0
-        \end{align\*}
-        $$
-
-* $S^T A S = \begin{pmatrix} \lambda\_1 & 0 & \cdots & 0 \\\\ 0 & \lambda\_2 & \cdots & 0 \\\\ \vdots & \vdots & \ddots & \vdots \\\\ 0 & 0 & \cdots & \lambda\_n \end{pmatrix} = \Lambda$
+  [[proof]](/numop/2015/05/07/mathback-detail/#symreal)
+* eigenvectors of different eigenvalues are orthogonal
+  [[proof]](/numop/2015/05/07/mathback-detail/#symorth)
+* If $\lambda\_i$ is a repeated root with multiplicity m >= 2, then there exist
+  m orthonormal eigenvectors corresponding to $\lambda\_i$
+  [[proof]](/numop/2015/05/07/mathback-detail/#symmulti)
+* a corresponding set of eigenvectors $\{ \b{x}\_1, \b{x}\_2, \cdots, \b{x}\_n\}$
+  can be chosen to be orthonormal. Let $S = (\b{x}\_1, \b{x}\_2, \cdots, \b{x}\_n)$,
+  $S$ is an orthogonal matrix
 
     $$
-    S^T A S =
+    \begin{align\*}
+    S^T A S = &
     \begin{pmatrix} \b{x}\_1^T \\\\ \b{x}\_2^T \\\\ \vdots \\\\ \b{x}\_n^T \end{pmatrix} A
     \begin{pmatrix} \b{x}\_1 \b{x}\_2 \cdots & \b{x}\_n \end{pmatrix} =
     \begin{pmatrix} \b{x}\_1^T A \b{x}\_1 & \b{x}\_1^T A \b{x}\_2 & \cdots & \b{x}\_1^T A \b{x}\_n \\\\
       \vdots & \vdots & \ddots & \vdots \\\\
       \b{x}\_n^T A \b{x}\_1 & \b{x}\_n^T A \b{x}\_2 & \cdots & \b{x}\_n^T A \b{x}\_n
-    \end{pmatrix}
+    \end{pmatrix} \\\\
+    = & \begin{pmatrix} \lambda\_1 & 0 & \cdots & 0 \\\\ 0 & \lambda\_2 & \cdots & 0 \\\\
+          \vdots & \vdots & \ddots & \vdots \\\\ 0 & 0 & \cdots & \lambda\_n
+        \end{pmatrix}
+    \end{align\*}
     $$
+
+<blockquote>
+Note that a matrix is diagonalizable is not the same as a matrix is invertible,
+for example, $\bigl(\begin{smallmatrix} 0 & 0 \\\\ 0 & 0 \end{smallmatrix}\bigr)$
+is diagonalizable (it's already diagonalized), but it's apparently not invertible
+</blockquote>
 
 -----------------------
 
@@ -435,53 +428,21 @@ Let $A \in \mathbb{R}^{n\times n}$ be a symmetric matrix, consider $f(x) = \b{x}
 | negative semi-definite | $\b{x}^T A \b{x} \leq 0$ for every $\b{x} \in \mathbb{R}^n$ |
 | indefinite | $A$ is neither positive definite nor negative definite |
 
-<blockquote>
-$A$ is positive definite iff all its eigenvalues are positive.
-</blockquote>
-
-**Proof**
-
-* eigenvalues are positive $\Rightarrow$ $A$ is positive definite
+* $A$ is positive definite iff all its eigenvalues are positive
+  [[proof]](/numop/2015/05/07/mathback-detail/#posdefeigen)
+* $A$ is indefinite iff it has both positive and negative eigenvalues
+* For a symmetric positive definite matrix $A$, we can define its square root as $A^{1/2} = S \Lambda^{1/2} S^T$, in which
 
     $$
-    \begin{align\*}
-    \b{x}^T A \b{x} = & \b{x}^T S \Lambda S^T \b{x} \\\\
-    = & \b{y}^T \Lambda \b{y} \\\\
-    = & \sum\_i \lambda\_i y\_i^2
-    \end{align\*}
+    \Lambda^{1/2} = \begin{pmatrix}
+    \lambda\_1^{1/2} & 0 & \cdots & 0 \\\\
+    0 & \lambda\_2^{1/2} & \cdots & 0 \\\\
+    \vdots & \vdots & \ddots & \vdots \\\\
+    0 & 0 & \cdots & \lambda\_n^{1/2}
+    \end{pmatrix}
     $$
 
-    So if $\lambda\_i \gt 0 \;\; \forall i$, $\b{x}^T A \b{x} \gt 0$.
-
-* $A$ is positive definite $\Rightarrow$ eigenvalues are positive
-
-    Let $\b{x}\_i$ be eigenvector
-
-    $$
-    \begin{align\*}
-    & A \text{ is positive definite} \\\\
-    \Rightarrow & \b{x}\_i^T A \b{x}\_i \gt 0 \\\\
-    \Rightarrow & \b{x}\_i^T \lambda\_i \b{x}\_i \gt 0 \\\\
-    \Rightarrow & \lambda\_i \gt 0
-    \end{align\*}
-    $$
-
-<blockquote>
-$A$ is indefinite iff it has both positive and negative eigenvalues.
-</blockquote>
-
-For a symmetric positive definite matrix $A$, we can define its square root as $A^{1/2} = S \Lambda^{1/2} S^T$, in which
-
-$$
-\Lambda^{1/2} = \begin{pmatrix}
-\lambda\_1^{1/2} & 0 & \cdots & 0 \\\\
-0 & \lambda\_2^{1/2} & \cdots & 0 \\\\
-\vdots & \vdots & \ddots & \vdots \\\\
-0 & 0 & \cdots & \lambda\_n^{1/2}
-\end{pmatrix}
-$$
-
-then $A = A^{1/2}A^{1/2}$ which is easy to prove.
+    then $A = A^{1/2}A^{1/2}$ which is easy to prove.
 
 -----------------------
 
@@ -511,7 +472,6 @@ Let $A \in \mathbb{R}^{n\times n}$, symmetric and positive definite
 
     Every Hermitian positive-definite matrix (and thus also every real-valued symmetric positive-definite matrix) has a unique Cholesky decomposition, and $L$ is a lower triangular matrix with real and positive diagonal entries.
 
------------------------
 -----------------------
 
 **Interval**
@@ -604,9 +564,7 @@ Let $S \subseteq \mathbb{R}^n$. A function $f: S\rightarrow \mathbb{R}$ is said 
 </blockquote>
 
 * $f$ is said to be continuous on $A \subset \mathbb{R}^n$ if it's continuous at each point of $A$
-
 * When we say $f$ is continuous, we mean that it's continuous on its domain
-
 * $\mathcal{C}$: Class of all continuous functions
 
 Example:
@@ -638,7 +596,6 @@ A continuous function, $f: \mathbb{R}^n \rightarrow \mathbb{R}$, is said to be c
   <object data="/resource/NNP/02-math-back/fdiffexp.svg" type="image/svg+xml" class="blkcenter"></object>
 
 * $\mathcal{C}^1$: Class of functions whose first partial derivatives are continuous
-
 * Assumption: $f \in \mathcal{C}^1$
 
 <blockquote>
@@ -646,6 +603,9 @@ We define the gradient of $f$ at $\b{x}$ to be the vector
 
 $$g(\b{x}) = \nabla f(\b{x}) = (\frac{\partial f(\b{x})}{\partial x_1}, \frac{\partial f(\b{x})}{\partial x_2}, \cdots, \frac{\partial f(\b{x})}{\partial x_n})^T$$
 </blockquote>
+
+* Gradient is perpenticular to level surface (contour line)
+  [[proof]](/numop/2015/05/07/mathback-detail/#gradper)
 
   <object data="/resource/NNP/02-math-back/gradient.svg" type="image/svg+xml" class="blkcenter"></object>
 
@@ -758,9 +718,60 @@ $$f(x) \approx f(x^0) + f'(x^0)(x - x^0) + \frac{1}{2} f''(x^0)(x - x^0)^2$$
 
 **Matrix Derivate**
 
-**Notations**
+下面以小写字符 $x$ 表示 scalar，粗体的小写字符 $\b{x}$ 表示 vector, 以大写字符
+$X$ 表示 matrix
+
+基于 matrix 或 vector 的 derivative 结果可以有不同的表示方式，比如一个 vector
+$\b{y} \in \mathbb{R}^m$ 对另一个 vector $\b{x} \in \mathbb{R}^n$ 求导，其结果
+可以是个 $m\times n$ matrix，也可以是个 $n\times m$ matrix，前者被称为
+Numerator-layout，后者被称为 Denominator-layout，下面我们看看这两种不同的 layout
+的主要区别
+
+<table style="width:90%; margin-left: auto; margin-right: auto">
+  <tr>
+    <td></td>
+    <td>Numerator-layout</td>
+    <td>Denominator-layout</td>
+  </tr>
+  <tr>
+    <td>$\frac{\p y}{\p \b{x}}$<br/> scalar<br/> by<br/> vector</td>
+    <td>$\begin{pmatrix} \frac{\p y}{\p x_1} & \frac{\p y}{\p x_2} &
+        \cdots & \frac{\p y}{\p x_n} \end{pmatrix}$</td>
+    <td>$\begin{pmatrix} \frac{\p y}{\p x_1} \\\\[-1em] \frac{\p y}{\p x_2} \\\\[-1em]
+        \vdots \\\\[-1em] \frac{\p y}{\p x_n} \end{pmatrix}$</td>
+  </tr>
+  <tr>
+    <td>$\frac{\p \b{y}}{\p x}$<br/> vector<br/> by<br/> scalar</td>
+    <td>$\begin{pmatrix} \frac{\p y_1}{\p x} \\\\[-1em] \frac{\p y_2}{\p x} \\\\[-1em]
+        \vdots \\\\[-1em] \frac{\p y_n}{\p x} \end{pmatrix}$</td>
+    <td>$\begin{pmatrix} \frac{\p y_1}{\p x} & \frac{\p y_2}{\p x} &
+        \cdots & \frac{\p y_n}{\p x} \end{pmatrix}$</td>
+  </tr>
+  <tr>
+    <td>$\frac{\p \b{y}}{\p \b{x}}$<br/> vector<br/> by<br/> vector</td>
+    <td>$\begin{pmatrix}
+        \frac{\p y_1}{\p x_1} & \frac{\p y_1}{\p x_2} & \cdots & \frac{\p y_1}{\p x_n} \\\\[-1em]
+        \frac{\p y_2}{\p x_1} & \frac{\p y_2}{\p x_2} & \cdots & \frac{\p y_2}{\p x_n} \\\\[-1em]
+        \vdots & \vdots & \ddots & \vdots \\\\[-1em]
+        \frac{\p y_m}{\p x_1} & \frac{\p y_m}{\p x_2} & \cdots & \frac{\p y_m}{\p x_n}
+        \end{pmatrix}$</td>
+    <td>$\begin{pmatrix}
+        \frac{\p y_1}{\p x_1} & \frac{\p y_2}{\p x_1} & \cdots & \frac{\p y_m}{\p x_1} \\\\[-1em]
+        \frac{\p y_1}{\p x_2} & \frac{\p y_2}{\p x_2} & \cdots & \frac{\p y_m}{\p x_2} \\\\[-1em]
+        \vdots & \vdots & \ddots & \vdots \\\\[-1em]
+        \frac{\p y_1}{\p x_n} & \frac{\p y_2}{\p x_n} & \cdots & \frac{\p y_m}{\p x_n}
+        \end{pmatrix}$</td>
+  </tr>
+</table>
+
+所以二者的区别就是对于 Numerator-layout，其行号由 Numerator 决定，而对于
+Denominator-layout，其行号由 Denominator 决定
+
+目前我比较常遇到的是 Denominator-layout，所以就以 Denominator-layout
+的方式来表示 matrix derivative
+
 <blockquote>
-the columns of a matrix $A \in \mathbb{R}^{m\times n}$ are $a_1$ through $a_n$, while the rows are $\tilde{a}\_1^T$ through $\tilde{a}\_n^T$.
+the columns of a matrix $A \in \mathbb{R}^{m\times n}$ are $a_1$ through $a_n$, while the rows are $\tilde{a}_1^T$ through $\tilde{a}_n^T$.
 </blockquote>
 
 * Derivative of $A\b{x}$, where $A \in \mathbb{R}^{m\times n}$ and $\b{x} \in \mathbb{R}^n$

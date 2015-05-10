@@ -42,19 +42,22 @@
           b: ["\\mathbf{#1}", 1],
           a: ["\\alpha"],
           v: ["\\varphi"],
+          p: ["\\partial"],
           bb: ["\\mathbb{#1}", 1],
-          bs: ["\\boldsymbol{#1}", 1],
           Ra: ["\\Rightarrow"],
-          Lra: ["\\Longrightarrow"]
+          Lra: ["\\Longrightarrow"],
+          EOP: ["\\;\\square"]
+        },
+        equationNumbers: {
+          autoNumber: "AMS"
         }
       },
-      "HTML-CSS": { scale: 85 },
+      "HTML-CSS": {
+        scale: 85
+      }
     });
   </script>
   <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({ TeX: { equationNumbers: {autoNumber: "AMS"} } });
-  </script>
 
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
