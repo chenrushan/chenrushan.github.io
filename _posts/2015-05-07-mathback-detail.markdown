@@ -191,8 +191,9 @@ A symmetric matrix $A \in \mathbb{R}^{n\times n}$ has $n$ real eigenvalues
     $A$ 中每个元素都是实数，所以 $\b{x}$ 中必然存在一个或多个复数
 
     记 $\b{x}$ 的共轭为 $\bar{\b{x}}$，对 $A\b{x} = \lambda \b{x}$
-    两边取共轭，有 $A\bar{\b{x}} = \bar{\lambda}\bar{\b{x}}$，对前一个等式两边
-    统乘以 $\bar{\b{x}}^T$，后一个等式两边统乘以 $\b{x}^T$，可得
+    两边取共轭，有 $\overline{A \b{x}} = \overline{\lambda \b{x}} \Ra
+    A\bar{\b{x}} = \bar{\lambda}\bar{\b{x}}$，对前一个等式两边统乘以
+    $\bar{\b{x}}^T$，后一个等式两边统乘以 $\b{x}^T$，可得
 
     $$
     \begin{cases}
@@ -208,7 +209,8 @@ A symmetric matrix $A \in \mathbb{R}^{n\times n}$ has $n$ real eigenvalues
     (\lambda - \bar{\lambda}) \bar{\b{x}}^T \b{x}
     $$
 
-    由于 $A$ 是 symmetric matrix，所以左边两项相等，也就是
+    由于 $A$ 是 symmetric matrix，所以左边两项相等(很容易验证，对于一个
+    symmetric matrix, $\b{x}^T A\b{y} = \b{y}^T A\b{x}$)，也就是
     $(\lambda - \bar{\lambda}) \bar{\b{x}}^T \b{x} = 0$，而对于非零向量
     $\bar{\b{x}}^T \b{x}$ 不可能为 0，因此 $\lambda = \bar{\lambda}$，而满足
     这一等式的 $\lambda$ 只能是实数 $\EOP$
