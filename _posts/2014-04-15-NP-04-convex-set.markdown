@@ -270,7 +270,14 @@ $\b{y}$ 和 $S$，下面是两个这样的 hyperplane
 2. $\exists \b{y} \in \mathbb{R}^m \;\;s.t.\;\; A^T\b{y} = \b{c}, \b{y} \geq \b{0}$
 </blockquote>
 
-首先从几何的角度直观理解一下 Farkas' lemma。令 $A = \begin{pmatrix} \b{a}\_1 \\\\ \b{a}\_2 \\\\ \b{a}\_3 \end{pmatrix}$，其中 $\b{a}\_i$ 为行向量，考虑下面的两个图，左边图对应上面的结论 1，其中蓝色区域对应所有满足 $A\b{x} \leq 0$ 的 $\b{x}$。右边图对应结论 2，其中 $\b{c}^T\b{x} < 0$，但 $\b{c}$ 可以表示为 3 个 $\b{a}$ 向量的线性组合同时系数都大于 0。
+首先从几何的角度直观理解一下 Farkas' lemma。令 $A = \begin{pmatrix} \b{a}\_1
+\\\\ \b{a}\_2 \\\\ \b{a}\_3 \end{pmatrix}$，其中 $\b{a}\_i$
+为行向量，考虑下面的两个图，左边图对应上面的结论 1，其中蓝色区域对应所有满足
+$A\b{x} \leq 0$ 的 $\b{x}$，$\b{c}$ 与这些 $\b{x}$ 的内积都 $\gt 0$。
+右边图对应结论 2，其中 $\b{c}^T\b{x} < 0$，但 $\b{c}$ 可以表示为 3 个 $\b{a}$
+向量的线性组合同时系数都大于 0。很明显这两个结论是相互独立的，因为一个要求
+$\b{c}$ 处于以 $\b{a}\_1$ 和 $\b{a}\_3$ 为边界的区域之外，一个要求处于这个
+边界之内
 
 <object data="/resource/NNP/04-convex/farkas.svg" type="image/svg+xml" class="blkcenter"></object>
 
