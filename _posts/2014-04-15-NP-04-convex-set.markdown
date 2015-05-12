@@ -226,9 +226,23 @@ $\b{x}_0 = \arg\min_{\b{x} \in S} \Vert \b{y} - \b{x} \Vert$ 当且仅当 $(\b{y
 * 如果条件变为 $\b{a}^T\b{x} > b \; \forall x \in S\_1,\;\b{a}^T\b{x} < b \; \forall x \in S\_2$，则称为 strictly seperate
 * 如果条件变为 $\b{a}^T\b{x} \geq b + \varepsilon \; \forall x \in S\_1 \; \forall \varepsilon > 0,\;\b{a}^T\b{x} \leq b \; \forall x \in S\_2$，则称为 strongly seperate
 
-另外，根据上面给出的两个 convex set 定理，给定一个 closed convex set $S$ 和点 $\b{y} \notin S$，一定存在一个 hyperplane $\b{a}^T\b{x} = b$ 能 seperate $\b{y}$ 和 $S$。因为 $(\b{y} - \b{x}\_0)^T(\b{x} - \b{x}\_0) \leq 0 \;\; \forall \b{x} \in S$，所以只要令 $\b{a} = \b{y} - \b{x}\_0, b = \b{a}^T \b{x}\_0$，就能使得 $\b{a}^T\b{x} \leq b \; \forall \b{x} \in S$，而 $\b{a}^T \b{y} - b = (\b{y} - \b{x}\_0)^T(\b{y} - \b{x}\_0)$，因为 $\b{y} \neq \b{x}\_0$，所以 $\b{a}^T \b{y} > b$。
+根据上面给出的两个 convex set 定理，给定一个 closed convex set $S$ 和点
+$\b{y} \notin S$，一定存在一个 hyperplane $\b{a}^T\b{x} = b$ 能 seperate
+$\b{y}$ 和 $S$，下面是两个这样的 hyperplane
 
-另外，考虑 $\b{a} = \b{y} - \b{x}\_0$ 且经过 $\b{y}$ 的 hyperplane $H$，即 $(\b{y} - \b{x}\_0)^T(\b{x} - \b{y}) = 0$，易证 $(\b{y} - \b{x}\_0)^T(\b{x} - \b{y}) < (\b{y} - \b{x}\_0)^T(\b{x} - \b{x}\_0)$ (两边相减即可得该不等式)，而 $\forall \b{x} \in S, (\b{y} - \b{x}\_0)^T(\b{x} - \b{x}\_0) \leq 0$ 所以 $\forall \b{x} \in S$ 都有 $(\b{y} - \b{x}\_0)^T(\b{x} - \b{y}) < 0$，也就是 $S \subset H^-$。
+* 令 $\b{a} = \b{y} - \b{x}\_0, b = \b{a}^T \b{x}\_0$ (该 hyperplane 经过 $\b{x}\_0$)
+
+    因为 $(\b{y} - \b{x}\_0)^T(\b{x} - \b{x}\_0) \leq 0 \;\; \forall \b{x} \in S$，
+    所以 $\b{a}^T\b{x} \leq b \; \forall \b{x} \in S$，而 $\b{a}^T \b{y} - b =
+    (\b{y} - \b{x}\_0)^T(\b{y} - \b{x}\_0)$，因为 $\b{y} \neq \b{x}\_0$，所以
+    $\b{a}^T \b{y} > b$
+
+* 令 $\b{a} = \b{y} - \b{x}\_0, b = \b{a}^T \b{y}$ (该 hyperplane 经过 $\b{y}$)
+
+    易证 $(\b{y} - \b{x}\_0)^T(\b{x} - \b{y}) < (\b{y} - \b{x}\_0)^T(\b{x} -
+    \b{x}\_0)$ (两边相减即可得该不等式)，而 $\forall \b{x} \in S, (\b{y} -
+    \b{x}\_0)^T(\b{x} - \b{x}\_0) \leq 0$ 所以 $\forall \b{x} \in S$ 都有
+    $(\b{y} - \b{x}\_0)^T(\b{x} - \b{y}) < 0$，也就是 $S \subset H^-$
 
 <blockquote>
 如果 $S_1, S_2$ 是非空且无交集的 convex set，那必然存在一个 hyperplane 能 seperate $S_1, S_2$
