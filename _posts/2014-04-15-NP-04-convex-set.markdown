@@ -283,17 +283,26 @@ $\b{c}$ 处于以 $\b{a}\_1$ 和 $\b{a}\_3$ 为边界的区域之外，一个要
 
 * 证明
 
-    * 如果结论 2 成立，则用反证法即可很快的证明 $A\b{x} \leq \b{0}$ 和 $\b{c}^T \b{x} > 0$ 不能同时成立。
+    * 如果结论 2 成立，则用反证法即可很快的证明 $A\b{x} \leq \b{0}$ 和 $\b{c}^T
+      \b{x} > 0$ 不能同时成立
 
     * 如果结论 2 不成立
 
-        结论 2 不成立等价于存在集合 $S = \\{\b{x}: \b{x} = A^T\b{y}, \b{y} \geq 0\\}$ 且 $\b{c} \notin S$。
+        结论 2 不成立等价于存在集合 $S = \\{\b{x}: \b{x} = A^T\b{y}, \b{y} \geq
+        0\\}$ 且 $\b{c} \notin S$
         
-        根据前面 seperating hyperplane 得到的结论，必然存在一个 hyperplane 能 seperate $S$ 和 $\b{c}$，假设该 hyperplane 为 $\b{a}^T\b{x} = b$，则有 $\b{a}^T\b{x} \leq b \; \forall\b{x} \in S$ 同时 $\b{a}^T\b{c} > b$。
+        根据前面 seperating hyperplane 得到的结论，必然存在一个 hyperplane 能
+        seperate $S$ 和 $\b{c}$，假设该 hyperplane 为 $\b{a}^T\b{x} = b$，则有
+        $\b{a}^T\b{x} \leq b \; \forall\b{x} \in S$ 同时 $\b{a}^T\b{c} > b$
 
-        因为 $\b{0} \in S$ 所以 $b \geq 0$，所以 $\b{a}^T\b{c} > 0$。
+        因为 $\b{0} \in S$ 所以 $b \geq 0$，所以 $\b{a}^T\b{c} > 0$
 
-        对于 $S$ 中的 $\b{x}$，$b \geq \b{a}^T\b{x} = \b{a}^T A^T \b{y} = \b{y}^T A\b{a}$，因为 $\b{y} \geq 0$，所以如果 $A\b{a} > \b{0}$，我令 $\b{y}$ 趋于无穷大，则 $\b{y}^T A\b{a} \leq b$ 这个不等式必然不能成立，因此必有 $A\b{a} \leq 0$。
+        对于 $S$ 中的 $\b{x}$，$b \geq \b{a}^T\b{x} = \b{a}^T A^T \b{y} =
+        \b{y}^T A\b{a}$，因为 $\b{y} \geq 0$，所以如果 $A\b{a} > \b{0}$，我令
+        $\b{y}$ 趋于无穷大，则 $\b{y}^T A\b{a} \leq b$ 这个不等式必然不能成立，
+        因此必有 $A\b{a} \leq 0$
+
+        所以 $\b{a}$ 就是我们要找的满足结论 1 中两个不等式的 $\b{x}$
 
 根据 Farkas' lemma，可以得出如下推论
 
