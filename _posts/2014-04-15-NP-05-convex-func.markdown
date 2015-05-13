@@ -195,19 +195,23 @@ $$f(\b{x}_2) \geq f(\b{x}_1) + g^T(\b{x}_1)(\b{x}_2 - \b{x}_1)$$
 
         根据前面的定理可知，$f$ 为 convex function
 
-    * $f$ is convex function $\Rightarrow$ $H(\b{x})$ PSD
+    * $H(\b{x})$ is not PSD $\Ra$ $f$ is not convex
 
-        <span style="background-color:#Faa;">这个证明我感觉视频里做的不太对，结合我在 google 搜索的结果我给出如下证明，不知道对不对</span>
+        假设 $H$ 在点 $\b{x}\_1$ 处为 negative definite，由于 $f \in \mathcal{C}^2$，
+        所以存在某个区域 $B(\b{x}\_1, \delta)$，$\forall \b{x} \in B(\b{x}\_1, \delta)$，
+        $H$ 为 negative definite，令 $\b{x}\_2 \in B(\b{x}\_1, \delta)$
 
-        这里得假设 $f(x)$ 3 阶连续可导，给定 $\b{x} \in C, \lambda \in \mathbb{R}, \b{d} \in \mathbb{R}^n$ 为任一方向，则有
+        根据 Truncated Taylor Series 有
 
-        $$f(\b{x} + \lambda \b{d}) = f(\b{x}) + f'(\b{x})\lambda\b{d} + \frac{1}{2}\lambda \b{d}^T H(\b{x}) \lambda \b{d} + \frac{1}{6} \sum\_i\sum\_j\sum\_k \frac{\partial f(\bar{\b{x}})}{\partial x\_i \partial x\_j \partial x\_k}\lambda d\_i \lambda d\_j \lambda d\_j$$
+        $$f(\b{x}\_2) = f(\b{x}\_1) + f'(\b{x}\_1)(\b{x}\_2 - \b{x}\_1) + \frac{1}{2} (\b{x}\_2 - \b{x}\_1)^T H(\b{x}) (\b{x}\_2 - \b{x}\_1)$$
 
-        其中 $\bar{\b{x}}$ 在 $\b{x}$ 和 $\b{x} + \lambda\b{d}$ 之间。由于 $f$ 是 convex function，根据前面定理有
-        
-        $$\frac{1}{2}\lambda \b{d}^T H(\b{x}) \lambda \b{d} + \frac{1}{6} \sum\_i\sum\_j\sum\_k \frac{\partial f(\bar{\b{x}})}{\partial x\_i \partial x\_j \partial x\_k}\lambda d\_i \lambda d\_j \lambda d\_j \geq 0$$
+        其中 $\b{x}$ 为 $\b{x}\_1, \b{x}\_2$ 之间的任意一点，因此 $\b{x} \in
+        B(\b{x}\_1, \delta)$，所以 $(\b{x}\_2 - \b{x}\_1)^T H(\b{x}) (\b{x}\_2 -
+        \b{x}\_1) < 0$，这样
 
-        两边同除以 $\lambda^2$ 并对左边取极限 $\lambda \rightarrow 0$，则有 $\b{d}^T H(\b{x}) \b{d} \geq 0$，也就是 $H(\b{x})$ 是 PSD。
+        $$f(\b{x}\_2) < f(\b{x}\_1) + f'(\b{x}\_1)(\b{x}\_2 - \b{x}\_1)$$
+
+        因此 $f$ 不是 convex function $\EOP$
 
 ### Jensen's Inequality
 
