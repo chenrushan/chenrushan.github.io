@@ -590,18 +590,18 @@ where $L$ is a positive constant
 **Gradient**
 
 <blockquote>
-A continuous function, $f: \mathbb{R}^n \rightarrow \mathbb{R}$, is said to be continuously differentiable at $\b{x} \in \mathbb{R}^n$, if $\frac{\partial f}{\partial x_i}(\b{x})$ exists and is continuous, $i = 1, 2, \cdots, n$.
+A continuous function, $f: \mathbb{R}^n \rightarrow \mathbb{R}$, is said to be continuously differentiable at $\b{x} \in \mathbb{R}^n$, if $\frac{\p f}{\p x_i}(\b{x})$ exists and is continuous, $i = 1, 2, \cdots, n$.
 </blockquote>
 
   <object data="/resource/NNP/02-math-back/fdiffexp.svg" type="image/svg+xml" class="blkcenter"></object>
 
-* $\mathcal{C}^1$: Class of functions whose first partial derivatives are continuous
+* $\mathcal{C}^1$: Class of functions whose first p derivatives are continuous
 * Assumption: $f \in \mathcal{C}^1$
 
 <blockquote>
 We define the gradient of $f$ at $\b{x}$ to be the vector
 
-$$g(\b{x}) = \nabla f(\b{x}) = (\frac{\partial f(\b{x})}{\partial x_1}, \frac{\partial f(\b{x})}{\partial x_2}, \cdots, \frac{\partial f(\b{x})}{\partial x_n})^T$$
+$$g(\b{x}) = \nabla f(\b{x}) = (\frac{\p f(\b{x})}{\p x_1}, \frac{\p f(\b{x})}{\p x_2}, \cdots, \frac{\p f(\b{x})}{\p x_n})^T$$
 </blockquote>
 
 * Gradient is perpenticular to level surface (contour line)
@@ -616,14 +616,14 @@ $$g(\b{x}) = \nabla f(\b{x}) = (\frac{\partial f(\b{x})}{\partial x_1}, \frac{\p
 <blockquote>
 Let $S \subset \mathbb{R}^n$ be an open set and $f: S \rightarrow \mathbb{R}$, $f$ continuously differentiable in $S$. Then, for any $\b{x} \in S$ and any nonzero $\b{d} \in \mathbb{R}^n$, the directional derivative of $f$ at $\b{x}$ in the direction of $\b{d}$, defined by
 
-$$\frac{\partial f}{\partial \b{d}}(\b{x}) = \lim_{\varepsilon \rightarrow 0} \frac{f(\b{x} + \varepsilon \b{d}) - f(\b{x})}{\varepsilon}$$
+$$\frac{\p f}{\p \b{d}}(\b{x}) = \lim_{\varepsilon \rightarrow 0} \frac{f(\b{x} + \varepsilon \b{d}) - f(\b{x})}{\varepsilon}$$
 
 exists and equals $\nabla f(\b{x})^T \b{d}$.
 </blockquote>
 
 $$
 \begin{align\*}
-\frac{\partial f}{\partial \b{d}}(\b{x}) = & \lim\_{\varepsilon \rightarrow 0} \frac{f(\b{x} + \varepsilon \b{d}) - f(\b{x})}{\varepsilon} \\\\
+\frac{\p f}{\p \b{d}}(\b{x}) = & \lim\_{\varepsilon \rightarrow 0} \frac{f(\b{x} + \varepsilon \b{d}) - f(\b{x})}{\varepsilon} \\\\
 = & \lim\_{\varepsilon \rightarrow 0} \frac{f(\b{x} + (0 + \varepsilon) \b{d}) - f(\b{x} + 0 \b{d})}{(0 + \varepsilon) - 0} \\\\
 = & \frac{df(x+t\b{d})}{dt}\bigg|\_{t=0} \\\\
 = & \nabla f(x+t\b{d})^T \b{d}\bigg|\_{t=0} \\\\
@@ -638,19 +638,22 @@ For any unit direction $\b{d}$, the rate of change is $\nabla f(x)^T \b{d} = \Ve
 **Hessian**
 
 <blockquote>
-A continuously differentiable function $f: \mathbb{R}^n \rightarrow \mathbb{R}$ is said to be twice continuously differentiable at $\b{x} \in \mathbb{R}^n$, if $\frac{\partial^2 f}{\partial x_i \partial x_j} (\b{x})$ exists and is continuous.
+A continuously differentiable function $f: \mathbb{R}^n \rightarrow \mathbb{R}$
+is said to be twice continuously differentiable at $\b{x} \in \mathbb{R}^n$, if
+$\frac{\p^2 f}{\p x_i \p x_j} (\b{x})$ exists and is continuous.
 </blockquote>
 
 * $\mathcal{C}^2$: Class of twice continuously differentiable functions
+* saying "hessian is continuous" is equivalent to $f \in \mathcal{C}^2$
 
 <blockquote>
 Let $f \in \mathcal{C}^2$. We denote the Hessian of $f$ at $\b{x}$ to be the matrix
 $$
 H(x) = \nabla^2 f(\b{x}) = \begin{pmatrix}
-\frac{\partial^2 f}{\partial x_1^2} & \frac{\partial^2 f}{\partial x_1 \partial x_2} & \cdots & \frac{\partial^2 f}{\partial x_1 \partial x_n} \\\\
-\frac{\partial^2 f}{\partial x_2 \partial x_1} & \frac{\partial^2 f}{\partial x_2^2} & \cdots & \frac{\partial^2 f}{\partial x_2 \partial x_n} \\\\
+\frac{\p^2 f}{\p x_1^2} & \frac{\p^2 f}{\p x_1 \p x_2} & \cdots & \frac{\p^2 f}{\p x_1 \p x_n} \\\\
+\frac{\p^2 f}{\p x_2 \p x_1} & \frac{\p^2 f}{\p x_2^2} & \cdots & \frac{\p^2 f}{\p x_2 \p x_n} \\\\
 \vdots & \vdots & \ddots & \vdots \\\\
-\frac{\partial^2 f}{\partial x_n \partial x_1} & \frac{\partial^2 f}{\partial x_n \partial x_2} & \cdots & \frac{\partial^2 f}{\partial x_n^2}
+\frac{\p^2 f}{\p x_n \p x_1} & \frac{\p^2 f}{\p x_n \p x_2} & \cdots & \frac{\p^2 f}{\p x_n^2}
 \end{pmatrix}
 $$
 </blockquote>
@@ -709,8 +712,8 @@ $$f(x) \approx f(x^0) + f'(x^0)(x - x^0) + \frac{1}{2} f''(x^0)(x - x^0)^2$$
 
     $$
     \begin{align\*}
-    f(\b{x}) = & f(\b{x}^0) + \sum\_{i=1}^{n} \frac{\partial f(\b{x})}{\partial x\_i} (x\_i - x^0\_i) + \frac{1}{2!} \sum\_{i=1}^n \sum\_{j=1}^n \frac{\partial f(\b{x})}{\partial x\_i \partial x\_j} (x\_i - x^0\_i)(x\_j - x^0\_j) + \\\\
-    & \frac{1}{3!} \sum\_{i=1}^n \sum\_{j=1}^n \sum\_{k=1}^n \frac{\partial f(\bar{\b{x}})}{\partial x\_i \partial x\_j \partial x\_k} (x\_i - x^0\_i)(x\_j - x^0\_j)(x\_k - x^0\_k)
+    f(\b{x}) = & f(\b{x}^0) + \sum\_{i=1}^{n} \frac{\p f(\b{x})}{\p x\_i} (x\_i - x^0\_i) + \frac{1}{2!} \sum\_{i=1}^n \sum\_{j=1}^n \frac{\p f(\b{x})}{\p x\_i \p x\_j} (x\_i - x^0\_i)(x\_j - x^0\_j) + \\\\
+    & \frac{1}{3!} \sum\_{i=1}^n \sum\_{j=1}^n \sum\_{k=1}^n \frac{\p f(\bar{\b{x}})}{\p x\_i \p x\_j \p x\_k} (x\_i - x^0\_i)(x\_j - x^0\_j)(x\_k - x^0\_k)
     \end{align\*}
     $$
 
@@ -798,16 +801,16 @@ the columns of a matrix $A \in \mathbb{R}^{m\times n}$ are $a_1$ through $a_n$, 
     <blockquote>
     Suppose $u = f(x_1, x_2, \cdots, x_n)$ is a differentiable function of variables $x_1, x_2, \cdots, x_n$, and all functions $g_j(t_1, t_2, \cdots, t_m), j = 1, \cdots, m$ are also differentiable, then their composition $u = f(g_1, g_2, \cdots, g_n)$ as a function of $t_1, t_2, \cdots, t_m$ is also differentiable, and
 
-    $$ \frac{\partial u}{\partial t_j} = \sum_{k=1}^{n} \frac{\partial f}{\partial x_k} \frac{\partial g_k}{\partial t_j} \;\;\; j = 1, \cdots m$$
+    $$ \frac{\p u}{\p t_j} = \sum_{k=1}^{n} \frac{\p f}{\p x_k} \frac{\p g_k}{\p t_j} \;\;\; j = 1, \cdots m$$
     </blockquote>
 
     By the chain rule, we have
 
     $$
     \begin{align\*}
-    \frac{\partial f(A\b{x})}{\partial x\_j} = & \sum\_{k=1}^{n} \frac{\partial f(A\b{x})}{\partial (A\b{x})\_k} \frac{\partial (A\b{x})\_k}{\partial x\_j} \\\\
-    = & \sum\_{k=1}^{n} \frac{\partial f(A\b{x})}{\partial (A\b{x})\_k} \frac{\partial \tilde{a}\_k^T \b{x}}{\partial x\_j} \\\\
-    = & \sum\_{k=1}^{n} \frac{\partial f(A\b{x})}{\partial (A\b{x})\_k} a\_{kj} \\\\
+    \frac{\p f(A\b{x})}{\p x\_j} = & \sum\_{k=1}^{n} \frac{\p f(A\b{x})}{\p (A\b{x})\_k} \frac{\p (A\b{x})\_k}{\p x\_j} \\\\
+    = & \sum\_{k=1}^{n} \frac{\p f(A\b{x})}{\p (A\b{x})\_k} \frac{\p \tilde{a}\_k^T \b{x}}{\p x\_j} \\\\
+    = & \sum\_{k=1}^{n} \frac{\p f(A\b{x})}{\p (A\b{x})\_k} a\_{kj} \\\\
     = & a\_j^T \nabla f(A\b{x})
     \end{align\*}
     $$
@@ -818,9 +821,9 @@ the columns of a matrix $A \in \mathbb{R}^{m\times n}$ are $a_1$ through $a_n$, 
     \begin{align\*}
     \nabla\_{\b{x}} f(A\b{x}) = 
     \begin{pmatrix}
-      \frac{\partial f(A\b{x})}{\partial x\_1} \\\\
+      \frac{\p f(A\b{x})}{\p x\_1} \\\\
       \vdots \\\\
-      \frac{\partial f(A\b{x})}{\partial x\_n} \\\\
+      \frac{\p f(A\b{x})}{\p x\_n} \\\\
     \end{pmatrix} = 
     \begin{pmatrix}
       a\_1^T \\\\
