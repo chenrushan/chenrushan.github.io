@@ -100,6 +100,8 @@ Exact line search 有时会带来性能上的问题，这时就需要使用近�
 * 横虚线的函数是 $y = f(\b{x}^k)$，即 $f(\b{x}^k + \alpha \b{d}^k)$ 在 $\alpha  = 0$ 的取值
 * 斜虚线的函数是 $y = f(\b{x}^k) + \alpha g^T(\b{x}^k)\b{d}^k$，即 $f(\b{x}^k + \alpha \b{d}^k)$ 在 $\alpha  = 0$ 处的切线
 
+$g^T(\b{x}^k)\b{d}^k < 0$ 所以 $f$ 在 $\alpha = 0$ 处一定是往下走的
+
 下面分别讨论这 3 种 condition
 
 * <p style="background-color: #9f9">Armijo's condition</p>
@@ -130,7 +132,7 @@ Exact line search 有时会带来性能上的问题，这时就需要使用近�
 
     Wolfe's condition 要求 step length $\alpha^k$ 满足 $f'(\b{x}^k + \alpha^k \b{d}^k) > c g^T(\b{x}^k) \b{d}^k$，这样符合条件的 $\alpha$ 就只能是 $(\hat{\alpha}\_1, \hat{\alpha}\_2) \cup (\hat{\alpha}\_3, +\infty)$，也就保证了 step length 不会太小
     
-    Wolfe's condition 的含义是这样的，$f'(\b{x}^k + \alpha^k \b{d}^k)$ 表示的是 $f(\b{x}^k + \alpha^k \b{d}^k)$ 在 $\alpha^k$ 处的 gradient，如果 gradient 是个很大的 negative number，则我们可以推测 $f$ 在这个 $\alpha^k$ 处还有很大的下降空间，因此我们不能满足于停留在这样的 $\alpha^k$ 上，相反，如果 gradient 是个很小的 negative number 或者是个正数，那我们的 line search 就要停止了，上面的不等式中 $c g^T(\b{x}^k) \b{d}^k$ 就是表示我们可以接受的某个比较小的 negative number
+    Wolfe's condition 的含义是这样的，$f'(\b{x}^k + \alpha^k \b{d}^k)$ 表示的是 $f(\b{x}^k + \alpha^k \b{d}^k)$ 在 $\alpha^k$ 处的 gradient，如果 gradient 是个很大的 negative number，则我们可以推测 $f$ 在这个 $\alpha^k$ 处还有很大的下降空间，因此我们不能满足于停留在这样的 $\alpha^k$ 上，可以继续扩大 $\alpha^k$。相反，如果 gradient 是个很小的 negative number 或者是个正数，那我们的 line search 就要停止了，上面的不等式中 $c g^T(\b{x}^k) \b{d}^k$ 就是表示我们可以接受的某个比较小的 negative number
 
     同样 Wolfe's condition 也通常和 Armijo's condition 一起使用
 
