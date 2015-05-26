@@ -169,16 +169,16 @@ OUTPUT: $\alpha^k$
 
     $$
     \begin{align\*}
-    f^k < & f^{k-1} + c\_1 \alpha^{k-1} g^{k-1} \b{d}^{k-1} \;\; c\_1 \in (0, 1) \\\\
-    < & f^0 + \sum\_{i=0}^{k-1} c\_1 \alpha^i g^i \b{d}^i \\\\
+    f^k < & f^{k-1} + c\_1 \alpha^{k-1} {g^{k-1}}^T \b{d}^{k-1} \;\; c\_1 \in (0, 1) \\\\
+    < & f^0 + \sum\_{i=0}^{k-1} c\_1 \alpha^i {g^i}^T \b{d}^i \\\\
     \end{align\*}
     $$
 
-    上式等价于 $ - \sum\_{i=0}^{k-1} c\_1 \alpha^i g^i \b{d}^i < f^0 - f^k$，由于 $f$ bounded below，所以有 $f^0 - f^\infty < \infty$，因此有
+    上式等价于 $ - \sum\_{i=0}^{k-1} c\_1 \alpha^i {g^i}^T \b{d}^i < f^0 - f^k$，由于 $f$ bounded below，所以有 $f^0 - f^\infty < \infty$，因此有
 
-    $$ - \sum\_{i=0}^{\infty} c\_1 \alpha^i g^i \b{d}^i < \infty$$
+    $$ - \sum\_{i=0}^{\infty} c\_1 \alpha^i {g^i}^T \b{d}^i < \infty$$
 
-    首先明确不等式左边是个正数，因为 $c\_1 > 0, \alpha\_i > 0, -g^i \b{d}^i >= 0$，所以 sum 的每个元素都大于等于 0，而无限个这样的数相加能 $< \infty$，唯一的可能就是当 $i$ 大于某个数后，$c\_1 \alpha^i g^i \b{d}^i = 0$
+    首先明确不等式左边是个正数，因为 $c\_1 > 0, \alpha\_i > 0, -{g^i}^T \b{d}^i >= 0$，所以 sum 的每个元素都大于等于 0，而无限个这样的数相加能 $< \infty$，唯一的可能就是当 $i$ 大于某个数后，$c\_1 \alpha^i g^i \b{d}^i = 0$
 
     <p style="background-color: #9f9">由于 $g^k$ lipschitz continuous，所以有</p>
 
@@ -194,17 +194,17 @@ OUTPUT: $\alpha^k$
 
     <p style="background-color: #9f9">由于每一步迭代又满足 Wolfe condition，所以有</p>
 
-    $${g^{k}}^T \b{d}^{k-1} \geq c\_2 g^{k-1} \b{d}^{k-1} \;\; c\_2 \in (c\_1, 1)$$
+    $${g^{k}}^T \b{d}^{k-1} \geq c\_2 {g^{k-1}}^T \b{d}^{k-1} \;\; c\_2 \in (c\_1, 1)$$
 
-    两边同减去 $g^{k-1}\b{d}^{k-1}$ 得 $(g^k - g^{k-1})^T \b{d}^{k-1} \geq (c\_2 - 1) g^{k-1} \b{d}^{k-1}$
+    两边同减去 ${g^{k-1}}^T\b{d}^{k-1}$ 得 $(g^k - g^{k-1})^T \b{d}^{k-1} \geq (c\_2 - 1) {g^{k-1}}^T \b{d}^{k-1}$
 
     结合第二步推导得到的不等式，有
 
-    $$\alpha^{k-1} \geq \frac{(c\_2 - 1) g^{k-1} \b{d}^{k-1}}{L {\b{d}^{k-1}}^T \b{d}^{k-1}}$$
+    $$\alpha^{k-1} \geq \frac{(c\_2 - 1) {g^{k-1}}^T \b{d}^{k-1}}{L {\b{d}^{k-1}}^T \b{d}^{k-1}}$$
 
     不等式两边同乘以 $-c\_1 {g^{k-1}}^T \b{d}^{k-1}$ 有
 
-    $$-c\_1 \alpha^{k-1} {g^{k-1}}^T \b{d}^{k-1} \geq \frac{c\_1(1 - c\_2) (g^{k-1} \b{d}^{k-1})^2}{L {\b{d}^{k-1}}^T \b{d}^{k-1}} = \frac{c\_1(1 - c\_2)}{L} \Vert g^{k-1} \Vert^2 \cos^2\theta$$
+    $$-c\_1 \alpha^{k-1} {g^{k-1}}^T \b{d}^{k-1} \geq \frac{c\_1(1 - c\_2) ({g^{k-1}}^T \b{d}^{k-1})^2}{L {\b{d}^{k-1}}^T \b{d}^{k-1}} = \frac{c\_1(1 - c\_2)}{L} \Vert g^{k-1} \Vert^2 \cos^2\theta$$
 
     结合第一步得到的不等式有
 
