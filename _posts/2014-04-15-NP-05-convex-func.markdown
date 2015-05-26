@@ -248,8 +248,8 @@ $$f(\sum_{i=1}^{k} \lambda_i \b{x}_i) \leq \sum_{i=1}^{k} \lambda_if(\b{x}_i)$$
 
 假设 $f$ 是 convex function，则下面的操作依然能得到 convex function
 
-1. $\alpha f \;\;\; \alpha > 0$
-2. $\sum\_i \alpha\_i f\_i \;\;\; \alpha\_i > 0$
+1. $\alpha f \;\;\; \forall\alpha > 0$
+2. $\sum\_i \alpha\_i f\_i \;\;\; \forall\alpha\_i > 0$
 
 ### Function Maximum 
 
