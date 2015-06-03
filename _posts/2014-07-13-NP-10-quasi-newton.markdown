@@ -166,51 +166,51 @@ $$B^{k+1} = B^k + \frac{ \delta^k {\delta^k}^T }{ {\delta^k}^T \gamma^k} - \frac
 
     如果 $B^k$ 是 symmetric matrix，则 $B^{k+1}$ 显然也是，所以下面主要证明其 positive definitness
 
-    * <p style="background-color: #9f9">首先证明 $B^{k+1}$ 是 positive semi-definite</p>
+    <p style="background-color: #9f9">首先证明 $B^{k+1}$ 是 positive semi-definite</p>
 
-        给定任意 $\b{v} \in \mathbb{R}^n \neq 0$
+    给定任意 $\b{v} \in \mathbb{R}^n \neq 0$
 
-        $$
-        \begin{align\*}
-        \b{v}^T B^{k+1} \b{v} = & \b{v}^T B^k \b{v} + \frac{\b{v}^T \delta^k {\delta^k}^T \b{v}}{ {\delta^k}^T \gamma^k} - \frac{ \b{v}^T B^k \gamma^k {\gamma^k}^T B^k \b{v}}{ {\gamma^k}^T B^k \gamma^k} \\\\
-        = & \b{v}^T B^k \b{v} + \frac{(\b{v}^T \delta^k)^2}{ {\delta^k}^T \gamma^k} - \frac{ (\b{v}^T B^k \gamma^k)^2}{ {\gamma^k}^T B^k \gamma^k}
-        \end{align\*}
-        $$
+    $$
+    \begin{align\*}
+    \b{v}^T B^{k+1} \b{v} = & \b{v}^T B^k \b{v} + \frac{\b{v}^T \delta^k {\delta^k}^T \b{v}}{ {\delta^k}^T \gamma^k} - \frac{ \b{v}^T B^k \gamma^k {\gamma^k}^T B^k \b{v}}{ {\gamma^k}^T B^k \gamma^k} \\\\
+    = & \b{v}^T B^k \b{v} + \frac{(\b{v}^T \delta^k)^2}{ {\delta^k}^T \gamma^k} - \frac{ (\b{v}^T B^k \gamma^k)^2}{ {\gamma^k}^T B^k \gamma^k}
+    \end{align\*}
+    $$
 
-        由于 $B^k$ 是 symmetric positive definite matrix，所以可以另 $B^k = {B^k}^{1/2}{B^k}^{1/2}$，定义
+    由于 $B^k$ 是 symmetric positive definite matrix，所以可以另 $B^k = {B^k}^{1/2}{B^k}^{1/2}$，定义
 
-        $$
-        \begin{align\*}
-        \boldsymbol{\eta} = & {B^k}^{1/2} \b{v} \\\\
-        \boldsymbol{\rho} = & {B^k}^{1/2} \gamma^k
-        \end{align\*}
-        $$
+    $$
+    \begin{align\*}
+    \boldsymbol{\eta} = & {B^k}^{1/2} \b{v} \\\\
+    \boldsymbol{\rho} = & {B^k}^{1/2} \gamma^k
+    \end{align\*}
+    $$
 
-        则有
+    则有
 
-        $$
-        \begin{align\*}
-        \b{v}^T B^{k+1} \b{v} = & \boldsymbol{\eta}^T \boldsymbol{\eta} + \frac{(\b{v}^T \delta^k)^2}{ {\delta^k}^T \gamma^k} - \frac{(\boldsymbol{\eta}^T \boldsymbol{\rho})^2}{\boldsymbol{\rho}^T \boldsymbol{\rho}} \\\\
-        = & \frac{(\Vert \boldsymbol{\eta} \Vert \Vert \boldsymbol{\rho} \Vert)^2 - (\boldsymbol{\eta}^T \boldsymbol{\rho})^2}{\boldsymbol{\rho}^T \boldsymbol{\rho}} + \frac{(\b{v}^T \delta^k)^2}{ {\delta^k}^T \gamma^k}
-        \end{align\*}
-        $$
+    $$
+    \begin{align\*}
+    \b{v}^T B^{k+1} \b{v} = & \boldsymbol{\eta}^T \boldsymbol{\eta} + \frac{(\b{v}^T \delta^k)^2}{ {\delta^k}^T \gamma^k} - \frac{(\boldsymbol{\eta}^T \boldsymbol{\rho})^2}{\boldsymbol{\rho}^T \boldsymbol{\rho}} \\\\
+    = & \frac{(\Vert \boldsymbol{\eta} \Vert \Vert \boldsymbol{\rho} \Vert)^2 - (\boldsymbol{\eta}^T \boldsymbol{\rho})^2}{\boldsymbol{\rho}^T \boldsymbol{\rho}} + \frac{(\b{v}^T \delta^k)^2}{ {\delta^k}^T \gamma^k}
+    \end{align\*}
+    $$
 
-        * 根据 Cauchy-Schwarz inequality $(\Vert \boldsymbol{\eta} \Vert \Vert \boldsymbol{\rho} \Vert)^2 - (\boldsymbol{\eta}^T \boldsymbol{\rho})^2 \geq 0$
-        * $\boldsymbol{\rho}^T \boldsymbol{\rho} = {\gamma^k}^T B^k \gamma^k$，由于 $B^k$ 是 positive definite matrix，所以 $\boldsymbol{\rho}^T \boldsymbol{\rho} > 0$
-        * ${(\b{v}^T \delta^k)^2} \geq 0$
-        * ${ {\delta^k}^T \gamma^k} = -(\alpha^k B^k \b{g}^k)^T (\b{g}^{k+1} - \b{g}^k)$，由于使用 exact line search，根据 $\frac{\partial f(\b{x}^k + \alpha^k \b{d}^k)}{\partial \alpha^k} = 0$ 易推出 ${\b{g}^k}^T B^k \b{g}^{k+1} = 0$，所以 ${ {\delta^k}^T \gamma^k} = \alpha^k {\b{g}^k}^T B^k \b{g}^k > 0$
+    * 根据 Cauchy-Schwarz inequality $(\Vert \boldsymbol{\eta} \Vert \Vert \boldsymbol{\rho} \Vert)^2 - (\boldsymbol{\eta}^T \boldsymbol{\rho})^2 \geq 0$
+    * $\boldsymbol{\rho}^T \boldsymbol{\rho} = {\gamma^k}^T B^k \gamma^k$，由于 $B^k$ 是 positive definite matrix，所以 $\boldsymbol{\rho}^T \boldsymbol{\rho} > 0$
+    * ${(\b{v}^T \delta^k)^2} \geq 0$
+    * ${ {\delta^k}^T \gamma^k} = -(\alpha^k B^k \b{g}^k)^T (\b{g}^{k+1} - \b{g}^k)$，由于使用 exact line search，根据 $\frac{\partial f(\b{x}^k + \alpha^k \b{d}^k)}{\partial \alpha^k} = 0$ 易推出 ${\b{g}^k}^T B^k \b{g}^{k+1} = 0$，所以 ${ {\delta^k}^T \gamma^k} = \alpha^k {\b{g}^k}^T B^k \b{g}^k > 0$
 
-        综合上述条件 $\b{v}^T B^{k+1} \b{v} \geq 0$，所以 $B^{k+1}$ 是 positive semi-definite matrix
+    综合上述条件 $\b{v}^T B^{k+1} \b{v} \geq 0$，所以 $B^{k+1}$ 是 positive semi-definite matrix
 
-    * <p style="background-color: #9f9">接下来证明 $B^{k+1}$ 是 positive definite</p>
+    <p style="background-color: #9f9">接下来证明 $B^{k+1}$ 是 positive definite</p>
 
-        这个主要是证明 $(\Vert \boldsymbol{\eta} \Vert \Vert \boldsymbol{\rho} \Vert)^2 - (\boldsymbol{\eta}^T \boldsymbol{\rho})^2$ 和 ${(\b{v}^T \delta^k)^2}$ 不能同时为 0，假设二者同时为 0，则有 
-        
-        $$\boldsymbol{\eta} = \mu \boldsymbol{\rho}, \;\; \mu \in \mathbb{R}$$
+    这个主要是证明 $(\Vert \boldsymbol{\eta} \Vert \Vert \boldsymbol{\rho} \Vert)^2 - (\boldsymbol{\eta}^T \boldsymbol{\rho})^2$ 和 ${(\b{v}^T \delta^k)^2}$ 不能同时为 0，假设二者同时为 0，则有 
+    
+    $$\boldsymbol{\eta} = \mu \boldsymbol{\rho}, \;\; \mu \in \mathbb{R}$$
 
-        这个等价于 $\b{v} = \mu \gamma^k$，又 $\b{v}^T \delta^k = \mu {\gamma^k}^T \delta^k = 0$，这与前面 ${\gamma^k}^T \delta^k > 0$ 的结论矛盾
+    这个等价于 $\b{v} = \mu \gamma^k$，又 $\b{v}^T \delta^k = \mu {\gamma^k}^T \delta^k = 0$，这与前面 ${\gamma^k}^T \delta^k > 0$ 的结论矛盾
 
-        所以 $(\Vert \boldsymbol{\eta} \Vert \Vert \boldsymbol{\rho} \Vert)^2 - (\boldsymbol{\eta}^T \boldsymbol{\rho})^2$ 和 ${(\b{v}^T \delta^k)^2}$ 不能同时为 0，因此 $B^{k+1}$ 是 positive definite matrix
+    所以 $(\Vert \boldsymbol{\eta} \Vert \Vert \boldsymbol{\rho} \Vert)^2 - (\boldsymbol{\eta}^T \boldsymbol{\rho})^2$ 和 ${(\b{v}^T \delta^k)^2}$ 不能同时为 0，因此 $B^{k+1}$ 是 positive definite matrix
 
 ### BFGS Algorithm
 
