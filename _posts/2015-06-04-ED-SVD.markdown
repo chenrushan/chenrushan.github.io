@@ -1,0 +1,386 @@
+---
+layout: post
+title: Eigendecomposition and Singular Value Decomposition
+categories: numop
+tags: Eigendecomposition, SVD, Singular Value Decomposition
+---
+
+Eigendecomposition (下面简称 EVD) 和 Singular Value Decomposition (下面简称 SVD)
+是两种非常重要的 Matrix Decomposition 的方法，这篇文章分别对二者做了介绍，
+包括定义，基本性质，几何解释等，其中 SVD 是本篇的重点
+
+## 1. Eigendecomposition (EVD)
+
+### 1.1 Definition
+
+<blockquote>
+所谓的 EVD 就是把一个 matrix 分解成如下形式
+
+$$ A = X \Lambda X^{-1} \tag{1}$$
+
+其中 $A \in \bb{R}^{n\times n}$ 为 square matrix，$X$ 的每一列为 $A$ 的一个
+eigenvector，$\Lambda$ 是一个 diagonal matrix，对角线上每个元素为 $A$ 的一个
+eigenvalue
+</blockquote>
+
+可以看出，不是所有的 matrix 都可以做 EVD，必须满足两个条件
+
+1. 该 matrix 是一个 square matrix
+2. eigenvector 构成的 matrix 可逆，也就是要有 n 个 linear independent 的 eigenvector
+
+### 1.2 构建 Eigendecomposition
+
+假设 $\b{x}\_i$ 是 $A$ 的 eigenvector，其对应的 eigenvalue 为 $\lambda\_i$，则
+
+$$A\b{x}\_i = \lambda\_i\b{x}\_i$$
+
+令 $X = (\b{x}\_1, \b{x}\_2, \cdots, \b{x}\_n), \Lambda = \diag(\lambda\_1,
+\lambda\_2, \cdots, \lambda\_n)$，则有
+
+$$AX = X\Lambda$$
+
+如果 $X$ 可逆，两边统乘以 $X^{-1}$ 可得
+
+$$A = X \Lambda X^{-1}$$
+
+当 $A$ 为 symmetric matrix 时，有 $X^{-1} = X^T$ (关于原因参考 [mathmatical
+background](/nnumop/2014/03/21/NP-02-mathback/) 中的 symmetric matrix 一节)，
+这样公式 1 可以进一步展开为
+
+$$ A = X\Lambda X^{-1} = X\Lambda X^T = \sum\_i \lambda\_i \b{x}\_i \b{x}\_i^T$$
+
+通常在对 symmetric matrix 做 EVD 时会把 $X$ 变成 orthogonal matrix
+
+## 2. Singular Value Decomposition (SVD)
+
+### 2.1 Definition
+
+<blockquote>
+所谓的 SVD 就是把一个 matrix 分解成如下形式
+
+$$ A = U\Sigma V^T \tag{2} $$
+
+其中 $A \in \bb{R}^{m\times n}$，假设 $m \geq n$，则
+
+<ul style="margin-bottom: -0.01rem">
+<li>
+$U = (\b{u}_1, \cdots, \b{u}_m) \in \bb{R}^{m \times m}$ 且 $U$ 为 orthogonal matrix
+</li>
+<li>
+$\Sigma = \begin{pmatrix} \Sigma' \\ \Large 0 \end{pmatrix} \in \bb{R}^{m\times
+n}$，其中 $\Sigma' = \diag(\sigma_1, \cdots, \sigma_n)$ 且 $\sigma_1 \geq
+\sigma_2 \geq \cdots \geq \sigma_n \geq 0$
+</li>
+<li>
+$V = (\b{v}_1, \cdots, \b{v}_n)^T \in \bb{R}^{n \times n}$ 且 $V$ 为 orthogonal
+matrix
+</li>
+</ul>
+
+$\sigma_i$ 被称为 singular value，$\b{u}_i, \b{v}_i$ 分别被称为 left singular
+vector 和 right singular vector
+</blockquote>
+
+SVD 对所有的 matrix 都成立，而不像 EVD 那样只局限于 square matrix
+
+### 2.2 Some Important Theorem
+
+在讲如何构建 SVD 之前，我们先看两个非常重要的定理
+
+<blockquote>
+令 $A \in \bb{R}^{m\times n}$，$A^TA$ 和 $AA^T$ 为 positive semi-definite matrix
+</blockquote>
+
+* Proof:
+
+    给定 $\b{x} \neq 0$，$\b{x}^T (A^T A) \b{x} = (A\b{x})^T (A\b{x}) \geq 0$，
+    当 $A\b{x} = 0$ 时，等号成立，所以 $A^TA$ 为 positive semi-definite matrix，
+    $AA^T$ 同理可证 $\EOP$
+
+这个定理告诉我们，所有 $A^TA$ 和 $AA^T$ 的 eigenvalue 都 $\geq 0$
+
+<blockquote>
+给定 $\lambda \neq 0, A \in \bb{R}^{m\times n}$，下面两个 statement 是等价的
+
+<ul style="margin-bottom: -0.01rem">
+<li> $\lambda$ 是 $A^TA$ 的 eigenvalue，$\b{x}$ 是其对应的 eigenvector </li>
+<li> $\lambda$ 是 $AA^T$ 的 eigenvalue，$A\b{x}$ 是其对应的 eigenvector </li>
+</ul>
+</blockquote>
+
+* Proof:
+
+    $$
+    A^TA\b{x} = \lambda\b{x} \Longleftrightarrow AA^TA\b{x} = \lambda A\b{x}
+    \Longleftrightarrow AA^T(A\b{x}) = \lambda (A\b{x})
+    $$
+
+    为什么要 $\lambda \neq 0$ 呢？因为 $\lambda = 0$ 的话，有 $A^TA\b{x} = 0$，
+    而 $\b{x} \neq 0, A \neq 0$，所以必有 $A\b{x} = 0$，而一个 0 向量是不能作为
+    eigenvector 的，那上面的推导过程就不成立，因此要求 $\lambda \neq 0$ $\EOP$
+
+这个定理告诉我们 (假设 $m > n$)：
+
+* $A^TA$ 和 $AA^T$ 共享所有非零 eigenvalue
+* 如果 0 是 $A^TA$ 的 eigenvalue，则 0 也是 $AA^T$ eigenvalue，但 $A\b{x}$
+  不再是 0 对应的 eigenvector
+* $A^TA \in \bb{R}^{n\times n}, AA^T \in \bb{R}^{m\times m}$ 意味着 $A^TA$ 有
+  n 个 eigenvalue，$AA^T$ 有 m 个 eigenvalue，因此 $AA^T$ 必至少有 $m - n$ 个
+  eigenvalue 为 0
+
+### 2.3 构建 Singular Value Decomposition
+
+如下方法可以得到如公式 2 的分解形式 (还是假设 $m > n$)
+
+1. $A^TA$ 的 eigenvector 按列构成 $V$
+2. $AA^T$ 的 eigenvector 按列构成 $U$
+3. 如果 $A^TA$ 的 eigenvalue 按降序排列为 $\lambda\_1, \cdots,
+   \lambda\_n$，则 $\sigma\_i = \sqrt{\lambda\_i}$
+
+当然 $V, U$ 的列需要与 eigenvalue 一一对应
+
+下面我们看看为什么这么做可以得到公式 2 的分解
+
+从 2.2 的定理可知 $\lambda\_i \geq 0$，假设 $\lambda\_i$ 对应的 $A^TA$ 的
+eigenvector 为 $\b{v}\_i$，对应的 $AA^T$ 的 eigenvector 为 $\b{u}\_i$
+
+* 如果 $\lambda\_i \neq 0$
+
+    从 2.2 第二个定理我们知道
+    $$
+    \begin{align\*}
+    \b{u}\_i = \alpha A\b{v}\_i \tag{3} \\\\
+    \b{v}\_i = \beta A^T \b{u}\_i \tag{4}
+    \end{align\*}
+    $$
+
+    其中 $\alpha, \beta \in \bb{R} \neq 0$，把公式 3 带入 4，有
+
+    $$\b{v}\_i = \alpha\beta A^TA \b{v}\_i \Rightarrow \alpha\beta = \frac{1}{\lambda\_i}$$
+
+    令 $\alpha = \beta$，则 $\alpha = \beta = \frac{1}{\sqrt{\lambda\_i}}$，再令
+    $\sigma\_i = \sqrt{\lambda\_i}$，则有
+
+    $$ A\b{v}\_i = \sigma\_i \b{u}\_i \tag{5} $$
+
+* 如果 $\lambda\_i = 0$，则有
+
+    $$ A\b{v}\_i = 0 $$
+
+    可以把这两个公式看成
+
+    $$ A\b{v}\_i = 0 \b{u}\_i \tag{6} $$
+
+另外，$AA^T$ 会比 $A^TA$ 多出 $m-n$ 个 eigenvector，对于这部分 eigenvector
+不用管，他们对应着 $\Sigma$ 中的那个 $\Large 0$，所以在矩阵乘中相当于不起任何
+作用。这样把公式 5, 6 合并以矩阵形式表示就是
+
+$$ AV = U\Sigma \tag{7} $$
+
+另外由于 $A^TA, AA^T$ 都是 symmetric matrix，所以 $V, U$ 都是 orthogonal
+matrix，因此 $V^{-1} = V^T$，这样也就有了公式 2 的分解形式
+
+### 2.4 Full SVD, Reduced SVD
+
+上面定义的 SVD 又被称为 Full SVD，从之前的讨论中我们知道 $U$ 中至少有 $m - n$
+列是不起任何作用的，我们可以把它们去掉，这样就有了 Reduced SVD，即
+
+$$A = U'\Sigma'V^T$$
+
+其中 $U' \in \bb{R}^{m\times n}$ 由 $U$ 的前 n 列构成
+
+<!-- TODO: add image if possible -->
+
+### 2.5 SVD 的一些重要性质
+
+#### 2.5.1 Rank of $A$ equals Rank of $\Sigma$
+
+对于任何一个 matrix，左乘或者右乘一个 invertible matrix 不会改变它的 rank，因为
+任何一个 invertible matrix 都可以转化为一堆 row elementary operation 或者
+column elementary operation 的乘积，而这些 operation 都不改变 rank
+
+从公式 2 我们知道 $A$ 的 rank 等于 $U\Sigma V^T$ 的 rank，而 $U, V^T$ 都是
+invertible matrix，所以它们都不改变 $\Sigma$ 的 rank，因此 $U\Sigma V^T$ 的
+rank 等于 $\Sigma$ 的 rank，也就是 $A$ 的 rank 等于 $\Sigma$ 的 rank
+
+#### 2.5.2 Low Rank Approximation
+
+给定 $A \in \bb{R}^{m\times n}$ (还是假设 $m < n$)，所谓的 Low Rank
+Approximation (下面简称 LRA) 就是找到最优化如下 objective function 的 $A\_r$
+
+$$
+\begin{align\*}
+& \Vert A - A\_r \Vert\_F \\\\
+\text{s.t.} \;\; & \rank(A\_r) = r, r \leq n
+\end{align\*} \tag{8}
+$$
+
+其中 $\Vert A \Vert\_F^2 = \sum\_{ij}A\_{ij}^2 = \tr(A^TA)$，$A\_r$ 表示 rank
+为 $r$ 的近似矩阵
+
+LRA 可以通过 SVD 实现，记 $\Sigma'\_r = \diag(\sigma\_1, \cdots, \sigma\_r, 0,
+\cdots, 0)$，其中 $r \leq n$，所以共有 $n-r$ 个 $0$，可以证明 $U'\Sigma'\_r
+V^T$ 是可以最小化公式 8 的最优的 $A\_r$
+
+证明中需要用到关于 Frobenius norm 的一个性质那就是
+
+<blockquote>
+If $U, V$ are an orthogonal matrix, $\Vert A \Vert_F = \Vert UAV \Vert_F$
+</blockquote>
+
+* Proof
+
+    $$
+    \begin{align\*}
+    \Vert UAV \Vert\_F^2 = & \tr((UAV)^T UAV) \\\\
+    = & \tr(V^T A^T U^T UAV) \\\\
+    = & \tr(V^T A^T A V) (\because U^T U = I) \\\\
+    = & \tr((V^T A^T A)V) = \tr(V (V^T A^T A)) (\because \tr(XY) = \tr(YX)) \\\\
+    = & \tr(A^T A) \\\\
+    = & \Vert A \Vert\_F^2 \EOP
+    \end{align\*}
+    $$
+
+下面证明 $U'\Sigma'\_r V^T$ 可以最小化公式 8
+
+* Proof
+
+    $$
+    \begin{align\*}
+    \Vert A - A\_r \Vert\_F = & \Vert U\Sigma V^T - A\_r \Vert\_F \\\\
+    = & \Vert U^T (U\Sigma V^T - A\_r) V \Vert\_F \\\\
+    = & \Vert \Sigma - U^T A\_r V \Vert\_F
+    \end{align\*}
+    $$
+
+    令 $B = U^T A\_r V$，则
+
+
+    $$
+    \begin{align\*}
+    \Vert A - A\_r \Vert\_F = & \Vert \Sigma - B \Vert\_F \\\\
+    = & \sum\_{i} (\sigma\_i - B\_{ii})^2 + \sum\_{i\neq j} B\_{ij}^2
+    \end{align\*}
+    $$
+
+    容易发现，要想 $\rank(B) = r$ 同时最小化上述式子，必有 $B\_{ij} = 0$，且
+    $B\_{11} = \sigma\_1, B\_{22} = \sigma\_2, \cdots, B\_{rr} = \sigma\_r, 
+    B\_{r+1,r+1} = 0, \cdots, B\_{nn} = 0$，也就是
+    $B = \begin{pmatrix} \Sigma'\_r \\\\ \Large 0 \end{pmatrix}$，所以
+    $A\_r = UBV^T = U'\Sigma'\_rV^T$ $\EOP$
+
+由此可知，$\min \Vert A - A\_r \Vert\_F = \sqrt{\sigma\_{r + 1}^2 + \cdots +
+\sigma\_n^2}$
+
+另外，把 objective function 改成 $\Vert A - A\_r \Vert\_2$ 上述结论也是成立的
+
+### 2.6 SVD Applications
+
+LRA 在很多方面都有应用，比如
+
+* 矩阵压缩，对于一个 matrix，rank 越低，需要的存储空间就越小，比如一个
+  $m\times n$ matrix，如果能用 rank 为 1 的方式表示，即 $pq^T$，那就不需要
+  $O(mn)$ 的空间，而只需要 $O(m+n)$ 的空间即可
+
+    例子可以参考 [1] 中的图像压缩，对代表一副图的 matrix 进行 SVD，留下
+    top-r singular value 对应的部分，会发现当 r 大到一定程度时，压缩的图片
+    和原始图片已经基本看不出区别了，通俗得说，top-r singular value
+    对应的部分保留了原始图片尽可能多的重要信息，从优化的角度讲，这是因为 top-r
+    singular value 对应的 matrix 实际上是能最小化 $\Vert A - A\_r \Vert\_F$ 的
+    matrix，当 error 越小，压缩的图片的每个像素值和原始图片就越接近
+
+* Principle Component Analysis (PCA)
+    
+    关于 PCA 参考另一篇[笔记](/ml/2013/11/29/PCA/)
+
+## 3. Geometrical Interpretation
+
+我们知道，任何一个 matrix 乘上一个 vector 都是一个坐标变换的过程，假设 matrix
+为 $A \in \bb{R}^{m\times n}$，vector 为 $\b{x} \in \bb{R}^n$，$A\b{x}$
+就对应原空间中的另一个 vector，如果对 $A$ 做 SVD，$A\b{x} = U\Sigma V^T
+\b{x}$，我们就可以把一个坐标变换看成是 3 次连续的坐标变换过程
+
+下面我们依次探究一下这一坐标变换过程，以 2d space 为例
+
+* $\b{x}' = V^T\b{x}$
+
+    $V = \begin{pmatrix} \b{v}\_1^T \\\\ \b{v}\_2^T \end{pmatrix}$，所以
+    $V^T\b{x} = \begin{pmatrix} \b{v}\_1^T\b{x} \\\\ \b{v}\_2^T\b{x} \end{pmatrix}$
+
+    因为 $\Vert \b{v}\_1 \Vert = \Vert \b{v}\_2 \Vert = 1$，所以 $\b{v}\_1^T\b{x}$
+    就等于 $\b{x}$ 在 $\b{v}\_1$ 上的投影长度，$\b{v}\_2^T\b{x}$ 等于
+    $\b{v}\_2$ 上的投影长度，要注意 $\begin{pmatrix} \b{v}\_1^T\b{x} \\\\
+    \b{v}\_2^T\b{x} \end{pmatrix}$ 仍是原空间中的坐标，不是以 $\b{v}\_1, \b{v}\_2$
+    为 basis 的空间中的坐标。如下所示
+
+    <object data="/resource/SVD/vtx.svg" type="image/svg+xml" class="blkcenter"></object>
+
+    其实你还可以从另一个角度来看这个变换，就是把 $\b{x}$ 看成是 $\b{v}\_1, \b{v}\_2$
+    空间内的点，然后对 $\b{v}\_1, \b{v}\_2$ 做旋转使其与原空间坐标轴对齐，这样
+    $\b{x}$ 就变成了 $\b{x}'$
+
+* $\b{x}'' = \Sigma\b{x}'$
+
+    $\Sigma$ 是个 diagonal matrix，所以它的作用很明显就是分别对 $x'\_1, x'\_2$
+    起放大或缩小的作用，取决于对角线上元素是大于 1 还是小于 1
+
+    <object data="/resource/SVD/sigmax.svg" type="image/svg+xml" class="blkcenter"></object>
+
+    上图中 $\Sigma$ 对 $x\_2$ 起放大作用，而对 $x\_1$ 则是起缩小作用
+
+* $\b{x}''' = U\b{x}''$
+
+    $U = (\b{u}\_1, \b{u}\_2)$，所以 $U\b{x}'' = x''\_1\b{u}\_1 + x''\_2\b{u}\_2$，
+    这相当于什么呢？相当于把原空间中的坐标转移到了以 $\b{u}\_1, \b{u}\_2$ 为
+    basis 的空间中。任何一个空间中的坐标都可以表示成类似的加和的形式，对于原空间就是
+    $x''\_1\b{e}\_1 + x''\_2\b{e}\_2$，其中 $\b{e}\_1 = (1, 0)^T$，$\b{e}\_2 = (0, 1)^T$
+
+    <object data="/resource/SVD/ux.svg" type="image/svg+xml" class="blkcenter"></object>
+
+以上就是一个点的变换过程，[1], [6], [7] 中给出了一些关于图形的变换例子，
+由于任何一个图形都是由点构成的，因此理解了点的变换过程，图形的变换也就很好理解了
+
+上面讲的都是 SVD，关于 EVD，EVD 只有在 $A$ 是 symmetric matrix 时才比较好解释，
+因为这时候 eigenmatrix 是个 orthogonal matrix，$A$ 可以被表示为 $X\Lambda X^T$，
+可以发现这个形式和 $U\Sigma V^T$ 是类似的，区别就在于，SVD 中涉及到了两个
+basis $U, V$，而 EVD 中只涉及到一个 basis $X$，所以其实是差不多的
+
+## 4. The Meaning of Matrix Decomposition
+
+下面 quote 了一段 Yoshua Bengio 的话来说明 Matrix Decomposition 的意义
+
+<blockquote>
+Many mathematical objects can be understood better by breaking them into
+constituent parts, or ﬁnding some properties of them that are universal, not
+caused by the way we choose to represent them.
+
+For example, integers can be decomposed into prime factors. The way we
+represent the number 12 will change depending on whether we write it in base
+ten or in binary, but it will always be true that 12 = 2 × 2 × 3. 
+From this representation we can conclude useful properties, such as that 12 is
+not divisible by 5, or that any integer multiple of 12 will be divisible by 3.
+
+Much as we can discover something about the true nature of an integer by
+decomposing it into prime factors, we can also decompose matrices in ways
+that show us information about their functional properties that is not obvious
+from the representation of the matrix as an array of elements.
+One of the most widely used kinds of matrix decomposition is called
+eigen-decomposition, in which we decompose a matrix into a set of eigenvectors
+and eigenvalues.
+</blockquote>
+
+## 5. Reference
+
+1. [We Recommend a Singular Value Decomposition]
+   (http://www.ams.org/samplings/feature-column/fcarc-svd)
+2. [Eigenvalues and Singular Values](https://www.mathworks.com/moler/eigs.pdf)
+3. [Low Rank Approximation]
+   (https://inst.eecs.berkeley.edu/~ee127a/book/login/l_svd_low_rank.html)
+4. [Low Rank Approximation (Stanford NLP)]
+   (http://nlp.stanford.edu/IR-book/html/htmledition/low-rank-approximations-1.html)
+5. [Low Rank Approximation in the Frobenius Norm]
+   (http://www.usna.edu/Users/math/raghupat/teaching/12f/361/lowrank.pdf)
+6. [Singular Value Decomposition And Applications]
+   (http://www.cs.cornell.edu/courses/cs3220/2010sp/notes/svd.pdf)
+7. [A Geometrical Interpretation of the SVD]
+   (https://www.youtube.com/watch?v=NsNNI\_-JPUY)
