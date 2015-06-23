@@ -13,15 +13,13 @@ Eigendecomposition (下面简称 EVD) 和 Singular Value Decomposition (下面�
 
 ### 1.1 Definition
 
-<blockquote>
-所谓的 EVD 就是把一个 matrix 分解成如下形式
-
-$$ A = X \Lambda X^{-1} \tag{1}$$
-
-其中 $A \in \bb{R}^{n\times n}$ 为 square matrix，$X$ 的每一列为 $A$ 的一个
-eigenvector，$\Lambda$ 是一个 diagonal matrix，对角线上每个元素为 $A$ 的一个
-eigenvalue
-</blockquote>
+> 所谓的 EVD 就是把一个 matrix 分解成如下形式
+> 
+> $$ A = X \Lambda X^{-1} \tag{1}$$
+> 
+> 其中 $A \in \bb{R}^{n\times n}$ 为 square matrix，$X$ 的每一列为 $A$ 的一个
+> eigenvector，$\Lambda$ 是一个 diagonal matrix，对角线上每个元素为 $A$ 的一个
+> eigenvalue
 
 可以看出，不是所有的 matrix 都可以做 EVD，必须满足两个条件
 
@@ -55,31 +53,21 @@ $$ A = X\Lambda X^{-1} = X\Lambda X^T = \sum\_i \lambda\_i \b{x}\_i \b{x}\_i^T$$
 
 ### 2.1 Definition
 
-<blockquote>
-所谓的 SVD 就是把一个 matrix 分解成如下形式
-
-$$ A = U\Sigma V^T \tag{2} $$
-
-其中 $A \in \bb{R}^{m\times n}$，假设 $m \geq n$，则
-
-<ul style="margin-bottom: -0.01rem">
-<li>
-$U = (\b{u}_1, \cdots, \b{u}_m) \in \bb{R}^{m \times m}$ 且 $U$ 为 orthogonal matrix
-</li>
-<li>
-$\Sigma = \begin{pmatrix} \Sigma' \\ \Large 0 \end{pmatrix} \in \bb{R}^{m\times
-n}$，其中 $\Sigma' = \diag(\sigma_1, \cdots, \sigma_n)$ 且 $\sigma_1 \geq
-\sigma_2 \geq \cdots \geq \sigma_n \geq 0$
-</li>
-<li>
-$V = (\b{v}_1, \cdots, \b{v}_n)^T \in \bb{R}^{n \times n}$ 且 $V$ 为 orthogonal
-matrix
-</li>
-</ul>
-
-$\sigma_i$ 被称为 singular value，$\b{u}_i, \b{v}_i$ 分别被称为 left singular
-vector 和 right singular vector
-</blockquote>
+> 所谓的 SVD 就是把一个 matrix 分解成如下形式
+> 
+> $$ A = U\Sigma V^T \tag{2} $$
+> 
+> 其中 $A \in \bb{R}^{m\times n}$，假设 $m \geq n$，则
+> 
+> * $U = (\b{u}\_1, \cdots, \b{u}\_m) \in \bb{R}^{m \times m}$ 且 $U$ 为 orthogonal matrix
+> * $\Sigma = \begin{pmatrix} \Sigma' \\\\ \Large 0 \end{pmatrix} \in \bb{R}^{m\times
+>   n}$，其中 $\Sigma' = \diag(\sigma\_1, \cdots, \sigma\_n)$ 且 $\sigma\_1 \geq
+>   \sigma\_2 \geq \cdots \geq \sigma\_n \geq 0$
+> * $V = (\b{v}\_1, \cdots, \b{v}\_n)^T \in \bb{R}^{n \times n}$ 且 $V$ 为
+>   orthogonal matrix
+> 
+> $\sigma_i$ 被称为 singular value，$\b{u}_i, \b{v}_i$ 分别被称为 left singular
+> vector 和 right singular vector
 
 SVD 对所有的 matrix 都成立，而不像 EVD 那样只局限于 square matrix
 
@@ -87,9 +75,7 @@ SVD 对所有的 matrix 都成立，而不像 EVD 那样只局限于 square matr
 
 在讲如何构建 SVD 之前，我们先看两个非常重要的定理
 
-<blockquote>
-令 $A \in \bb{R}^{m\times n}$，$A^TA$ 和 $AA^T$ 为 positive semi-definite matrix
-</blockquote>
+> 令 $A \in \bb{R}^{m\times n}$，$A^TA$ 和 $AA^T$ 为 positive semi-definite matrix
 
 * Proof:
 
@@ -99,14 +85,10 @@ SVD 对所有的 matrix 都成立，而不像 EVD 那样只局限于 square matr
 
 这个定理告诉我们，所有 $A^TA$ 和 $AA^T$ 的 eigenvalue 都 $\geq 0$
 
-<blockquote>
-给定 $\lambda \neq 0, A \in \bb{R}^{m\times n}$，下面两个 statement 是等价的
-
-<ul style="margin-bottom: -0.01rem">
-<li> $\lambda$ 是 $A^TA$ 的 eigenvalue，$\b{x}$ 是其对应的 eigenvector </li>
-<li> $\lambda$ 是 $AA^T$ 的 eigenvalue，$A\b{x}$ 是其对应的 eigenvector </li>
-</ul>
-</blockquote>
+> 给定 $\lambda \neq 0, A \in \bb{R}^{m\times n}$，下面两个 statement 是等价的
+> 
+> * $\lambda$ 是 $A^TA$ 的 eigenvalue，$\b{x}$ 是其对应的 eigenvector
+> * $\lambda$ 是 $AA^T$ 的 eigenvalue，$A\b{x}$ 是其对应的 eigenvector
 
 * Proof:
 
@@ -224,9 +206,7 @@ V^T$ 是可以最小化公式 8 的最优的 $A\_r$
 
 证明中需要用到关于 Frobenius norm 的一个性质那就是
 
-<blockquote>
-If $U, V$ are an orthogonal matrix, $\Vert A \Vert_F = \Vert UAV \Vert_F$
-</blockquote>
+> If $U, V$ are an orthogonal matrix, $\Vert A \Vert\_F = \Vert UAV \Vert\_F$
 
 * Proof
 
@@ -349,25 +329,23 @@ basis $U, V$，而 EVD 中只涉及到一个 basis $X$，所以其实是差不�
 
 下面 quote 了一段 Yoshua Bengio 的话来说明 Matrix Decomposition 的意义
 
-<blockquote>
-Many mathematical objects can be understood better by breaking them into
-constituent parts, or ﬁnding some properties of them that are universal, not
-caused by the way we choose to represent them.
-
-For example, integers can be decomposed into prime factors. The way we
-represent the number 12 will change depending on whether we write it in base
-ten or in binary, but it will always be true that 12 = 2 × 2 × 3. 
-From this representation we can conclude useful properties, such as that 12 is
-not divisible by 5, or that any integer multiple of 12 will be divisible by 3.
-
-Much as we can discover something about the true nature of an integer by
-decomposing it into prime factors, we can also decompose matrices in ways
-that show us information about their functional properties that is not obvious
-from the representation of the matrix as an array of elements.
-One of the most widely used kinds of matrix decomposition is called
-eigen-decomposition, in which we decompose a matrix into a set of eigenvectors
-and eigenvalues.
-</blockquote>
+> Many mathematical objects can be understood better by breaking them into
+> constituent parts, or ﬁnding some properties of them that are universal, not
+> caused by the way we choose to represent them.
+> 
+> For example, integers can be decomposed into prime factors. The way we
+> represent the number 12 will change depending on whether we write it in base
+> ten or in binary, but it will always be true that 12 = 2 × 2 × 3. 
+> From this representation we can conclude useful properties, such as that 12 is
+> not divisible by 5, or that any integer multiple of 12 will be divisible by 3.
+> 
+> Much as we can discover something about the true nature of an integer by
+> decomposing it into prime factors, we can also decompose matrices in ways
+> that show us information about their functional properties that is not obvious
+> from the representation of the matrix as an array of elements.
+> One of the most widely used kinds of matrix decomposition is called
+> eigen-decomposition, in which we decompose a matrix into a set of eigenvectors
+> and eigenvalues.
 
 ## 5. Reference
 
