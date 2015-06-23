@@ -45,6 +45,11 @@ blockquote {
     background-color: #f5f5f5;
 }
 
+blockquote ul {
+    margin-bottom: -0.01rem;
+    margin-top: -1em;
+}
+
 pre {
     font-size: .9rem;
 }
