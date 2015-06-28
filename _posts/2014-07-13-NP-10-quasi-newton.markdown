@@ -236,7 +236,7 @@ $$ (A + \b{u}\b{v}^T)^{-1} = A^{-1} - \frac{(A^{-1} \b{u})(\b{v}^T A^{-1})}{1 + 
 
 $$ B^{k+1} = B + (1 + \frac{\gamma^T B \gamma}{\delta^T \gamma}) \frac{\delta \delta^T}{\delta^T \gamma} - (\frac{\delta \gamma^T B + (\delta \gamma^T B)^T}{\delta^T \gamma}) $$
 
-为了公式看上去简洁，对符合做了省略，其中 $B$ 就是 $B^k$，$\delta$ 就是 $\delta^k$，$\gamma$ 就是 $\gamma^k$
+为了公式看上去简洁，对符号做了省略，其中 $B$ 就是 $B^k$，$\delta$ 就是 $\delta^k$，$\gamma$ 就是 $\gamma^k$
 
 这个公式可以写成更简洁的形式
 
