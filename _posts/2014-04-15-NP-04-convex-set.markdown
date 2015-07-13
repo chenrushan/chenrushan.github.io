@@ -266,8 +266,8 @@ $\b{y}$ 和 $S$，下面是两个这样的 hyperplane
 
 <blockquote>
 令 $A \in \mathbb{R}^{m\times n}, \b{c} \in \mathbb{R}^n$，则下面两个结论有且只有一个是成立的 <br/>
-1. $\exists \b{x} \in \mathbb{R}^n \;\;s.t.\;\; A\b{x} \leq \b{0}, \b{c}^T \b{x} > 0$<br/>
-2. $\exists \b{y} \in \mathbb{R}^m \;\;s.t.\;\; A^T\b{y} = \b{c}, \b{y} \geq \b{0}$
+1. $\exists \b{x} \in \mathbb{R}^n \;\;\st\;\; A\b{x} \leq \b{0}, \b{c}^T \b{x} > 0$<br/>
+2. $\exists \b{y} \in \mathbb{R}^m \;\;\st\;\; A^T\b{y} = \b{c}, \b{y} \geq \b{0}$
 </blockquote>
 
 首先从几何的角度直观理解一下 Farkas' lemma。令 $A = \begin{pmatrix} \b{a}\_1
@@ -308,11 +308,13 @@ $\b{c}$ 处于以 $\b{a}\_1$ 和 $\b{a}\_3$ 为边界的区域之外，一个要
 
 <blockquote>
 令 $A \in \mathbb{R}^{m\times n}$，则下面两个结论有且只有一个是成立的 <br/>
-1. $\exists \b{x} \in \mathbb{R}^n \;\;s.t.\;\; A\b{x} < \b{0}$<br/>
-2. $\exists \b{y} \in \mathbb{R}^m \;\;s.t.\;\; A^T\b{y} = \b{0}, \b{y} \geq \b{0}$
+1. $\exists \b{x} \in \mathbb{R}^n \;\;\st\;\; A\b{x} < \b{0}$<br/>
+2. $\exists \b{y} \in \mathbb{R}^m \;\;\st\;\; A^T\b{y} = \b{0}, \b{y} \geq \b{0}$
 </blockquote>
 
-乍一看感觉只要令 $\b{c} = \b{0}$ 就得出这个推论，其实不然，因为推论里结论 1 是 $A^T\b{x} < 0$ 而不是 $A^T\b{x} \leq 0$，为了证明这个推论我们需要人为构造一个 $\b{c}$。
+乍一看好像令 $\b{c} = \b{0}$ 就能得出这个推论，其实不然，首先推论里结论 1 是
+$A^T\b{x} < 0$ 而不是 $A^T\b{x} \leq 0$，另外 $\b{c} = \b{0}$ 是不符合 Farkas'
+Lemma 的，因为 Farkas' Lemma 要求 $\b{c}^T\b{x} > 0$
 
 * 证明
 
