@@ -10,7 +10,7 @@ tags: NPTEL, numerical optimization, constrained optimization
 * 首先介绍了什么是 Constrained Optimization
 * 然后给出 Constrained Optimization 条件下 global 和 local minimum 的概念
 * 之后为了计算 local minimum，引入 feasible direction 和 descent direction
-* 之后介绍了对应于 inequality constrain 的 first order KKT condition
+* 之后介绍了对应于 inequality constraint 的 first order KKT condition
 * 最后介绍了 Convex Programming 的概念
 
 ### Constrained Optimization
@@ -36,8 +36,8 @@ $$
 \end{align\*} \tag{2}
 $$
 
-其中 $h\_j(\b{x})$ 表示 inequality constrain，$e\_i(\b{x})$ 表示 equality
-constrain，$S \in \bb{R}^n$
+其中 $h\_j(\b{x})$ 表示 inequality constraint，$e\_i(\b{x})$ 表示 equality
+constraint，$S \in \bb{R}^n$
 
 ### Global and Local Minimum
 
@@ -137,7 +137,7 @@ $0$），那我们如何能从数学上对 constrained optimization 中的 local
 
 ### Feasible Direction For Inequality Constrain
 
-我们首先看一下 inequality constrain 情况下 feasible direction 的表示。考虑下图
+我们首先看一下 inequality constraint 情况下 feasible direction 的表示。考虑下图
 
 <object data="/resource/NNP/12-consopt-1/feasibledir.svg" type="image/svg+xml" class="blkcenter"></object>
 
@@ -145,10 +145,10 @@ $0$），那我们如何能从数学上对 constrained optimization 中的 local
 $\c{X}$，边界分别对应 $h\_j(\b{x}) = 0, j = 1, 2, 3$，$\c{X}$ 即为 $h\_j(\b{x})
 \leq 0$ 的交集，图中给出了三个点，其中点 A 处于两个边界的交点，在这个点有
 $h\_1(\b{x}) = 0, h\_2(\b{x}) = 0$，这时我们称 $h\_1, h\_2$ 为点 A 的 active
-constrain，记为 $\c{A}(\b{x}) = \\{1, 2\\}$，对于点 C，$\c{A}(\b{x}) =
+constraint，记为 $\c{A}(\b{x}) = \\{1, 2\\}$，对于点 C，$\c{A}(\b{x}) =
 \\{3\\}$，对于点 B，$\c{A}(\b{x}) = \emptyset$
 
-通过观察，我们发现 feasible direction 和 active constrain 之间存在密切联系
+通过观察，我们发现 feasible direction 和 active constraint 之间存在密切联系
 
 * 对于点 A
 
