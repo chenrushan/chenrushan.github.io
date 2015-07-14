@@ -221,6 +221,17 @@ $\left\\{\nabla h\_j(\b{x}^\*) \; j \in \left\\{ j: h\_j(\b{x}^\*) =
 0\right\\}\right\\} \cup \left\\{ \nabla e\_i(\b{x}^\*) \; i \in \left\\{ 1,
 \cdots, m\right\\} \right\\}$ linear independent
 
+满足上述条件的点 $(\b{x}^\*, \bs{\l}^\*, \bs{\mu}^\*)$ 被称为 KKT point
+
+如果定义 Lagrange function $\c{L}(\b{x}, \bs{\l}, \bs{\mu}) = f(\b{x}) +
+\sum\_{j=1}^l \l\_j h\_j(\b{x}) + \sum\_{i=1}^m \mu\_i e\_i(\b{x})$，则有
+$\nabla\_{\b{x}} \c{L}(\b{x}^\*, \bs{\l}^\*, \bs{\mu}^\*) = 0$
+
+另外对于 Convex Programming，first order KKT condition 是 $\b{x}^\*$ 为 global
+minimum 的 necessary and sufficient condition，证明与上一篇文章最后一节中给出的类似
+
+---
+
 其实我没太理解为什么可以直接合并两种 KKT condition 得到上面的
 KKT condition，下面给出一种帮助理解的思路，但不是证明，我觉得这个还是需要
 证明一下的，不是那么显而易见的，但我没想出怎么证
