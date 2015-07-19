@@ -42,9 +42,9 @@ $$\b{z}\_k = (-\sqrt{2 - 1/k^2}, -1/k)^T, t\_k = \Vert \b{z}\_k - \b{x} \Vert$$
 
 易算出 $\b{d} = (0, -1)^T$ 为 $\b{x}$ 处的 tagent，如下图所示
 
-<!-- add image -->
+<object data="/resource/NNP/13-consopt-2/tangent.svg" type="image/svg+xml" class="blkcenter"></object>
 
-下面我们给 $\c{T}(\b{x})$ 代数化的表示
+其中绿色虚线表示序列 $\b{z}\_k$。下面我们给 $\c{T}(\b{x})$ 代数化的表示
 
 > 如果 $\b{x}$ 是一个 regular point，即 $\nabla e\_i(\b{x}), i = 1,
 > \cdots, m$ linear independent，则
