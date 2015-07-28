@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Duality
-categories: numop
+categories: nnumop
 tags: NPTEL, numerical optimization, duality
 ---
 
