@@ -1,0 +1,608 @@
+---
+layout: post
+title: Duality
+categories: numop
+tags: NPTEL, numerical optimization, duality
+---
+
+这篇文章介绍 duality（对偶问题），主要包含以下几个方面的内容
+
+* 定义 primal problem 和 dual problem
+* 给出 primal 和 dual problem 有相同最优函数值的条件，即 saddle point
+* 定义 Constrained Optimization 对应的 dual problem
+* 给出 Constrained Optimization 对偶问题的几何解释
+* 给出 Constrained Optimization 情况下 primal 和 dual 有相同最优值的条件
+* 介绍在 Convex Programming 的情况下如何找到 saddle point
+
+在没有歧异的情况下，我用 primal 表示 primal problem，dual 表示 dual
+problem；为方便起见，很多地方我直接忽略掉定义域，比如 $\min\_{x\in\c{X}}$ 写成
+$\min\_x$，尤其是在写 inline 的公式时；另外，我用“最优解”表示 $\argmin\_x
+f(x)$，用“最优值”表示 $\min\_x f(x)$
+
+关于 duality 的讨论，感觉视频某些地方说的不对或不严谨，这里做了更正
+
+### Primal Problem and Dual Problem
+
+给定函数 $\v(x, y)$，我们称如下问题为 primal problem
+
+$$ \min\_{x \in \c{X}} \; \max\_{y \in \c{Y}} \v(x, y) \tag{1} $$
+
+其中 $\max\_{y \in \c{Y}} \v(x, y)$ 被称为 primal function，$x$ 被称为 primal
+variable
+
+与 primal problem 相对应的是 dual problem，即
+
+$$ \max\_{y \in \c{Y}} \; \min\_{x \in \c{X}} \v(x, y) \tag{2} $$
+
+其中 $\min\_{x \in \c{X}} \v(x, y)$ 被称为 dual function，$y$ 被称为 dual
+vairable
+
+可见 primal problem 是最小化问题，而 dual problem 是最大化问题
+
+值得注意的是，primal 和 dual 并不一定有相同的最优值，
+比如这个简单的函数，$\c{X} = \c{Y} = \\{1, 2\\}$
+
+$$\v(x, y) = \begin{pmatrix} -2 & 1 \\\\ 2 & -3 \end{pmatrix}$$
+
+意思是 $\v(1, 1) = -2$ 等，容易算出 $\min\_x \max\_y = 1$，而 $\max\_y \min\_x
+= -2$，也就是 primal 和 dual 的最优值是不同的
+
+而对于下面这个函数
+
+$$\v(x, y) = \begin{pmatrix} -2 & 1 \\\\ 2 & 3 \end{pmatrix}$$
+
+容易算出 $\min\_x \max\_y = \max\_y \min\_x = 1$
+
+因此 primal 和 dual 有相同最优值是有条件的
+
+### Weak Duality
+
+所谓的 weak duality 是指
+
+> 给定任意 $\v(x, y)$，都有 $$\min\_{x\in\c{X}}\;\max\_{y\in\c{Y}} \v(x, y)
+> \geq \max\_{y \in \c{Y}} \; \min\_{x \in \c{X}} \v(x, y)$$
+
+* Proof
+
+    易知 $\max\_y \v(x, y) \geq \v(x, y), \v(x, y) \geq \min\_x \v(x, y)$，因此
+
+    $$ \min\_x \v(x, y) \leq \max\_y \v(x, y)$$
+
+    也就是说，dual function 的函数值是永远小于等于 primal function 的，因此
+    dual function 的最大值也必然小于等于 primal function 的最小值，即
+
+    $$
+    \max\_{y \in \c{Y}} \; \min\_{x \in \c{X}} \v(x, y) \leq
+    \min\_{x\in\c{X}}\;\max\_{y\in\c{Y}} \v(x, y)
+    $$
+
+Weak Duality 告诉我们不论在什么情况 primal 的最优值都不会小于 dual
+的最优值，而要二者的最优值相等是需要条件的，即 saddle point 的存在
+
+### Saddle Point
+
+> 令 $x^\* \in \c{X}, y^\* \in \c{Y}$，如果 $(x^\*, y^\*)$ 满足
+> $$\v(x^\*, y) \leq \v(x^\*, y^\*) \leq \v(x, y^\*)$$
+> 则点 $(x^\*, y^\*)$ 被称为 saddle point
+
+可以看出，如果点 $(x^\*, y^\*)$ 为 saddle point 则
+
+* $x^\* = \argmin\_{x \in \c{X}} \v(x, y^\*)$
+* $y^\* = \argmax\_{y \in \c{Y}} \v(x^\*, y)$
+
+> 等式 $\min\_{x\in\c{X}}\;\max\_{y\in\c{Y}} \v(x, y) = \max\_{y \in \c{Y}}
+> \; \min\_{x \in \c{X}} \v(x, y) $ 成立当且仅当 saddle point 存在
+
+* Proof:
+
+    <p style="background-color: #9f9">首先证明 saddle point 存在则等式成立</p>
+
+    令 $(x^\*, y^\*)$ 为 saddle point，则有
+
+    $$
+    \begin{align\*}
+    & \v(x^\*, y) \leq \v(x^\*, y^\*) \leq \v(x, y^\*) \\\\
+    \Lra \; & \max\_{y\in\c{Y}} \v(x^\*, y) \leq \v(x^\*, y^\*) \leq
+              \min\_{x\in\c{X}} \v(x, y^\*) \\\\
+    \Lra \; & \min\_{x\in\c{X}}\max\_{y\in\c{Y}} \v(x, y) \leq \v(x^\*, y^\*)
+              \leq \max\_{y\in\c{Y}}\min\_{x\in\c{X}} \v(x, y) \tag{3}
+    \end{align\*}
+    $$
+
+    最后一步推导是这样，考虑左边的不等式，如果令 $f(x) = \max\_y \v(x,
+    y)$，则易知 $\min\_x f(x) \leq f(x^\*)$，展开即得 $\min\_{x} \max\_{y}
+    \v(x, y) \leq \max\_{y} \v(x^\*, y)$，右边不等式同理，
+    这样就得到了最后一个不等式
+
+    从 weak duality 我们知道 $\max\_{y}\min\_{x} \v(x, y) \leq
+    \min\_{x}\max\_{y} \v(x, y)$，下面证明
+
+    $$
+    \max\_{y\in\c{Y}}\min\_{x\in\c{X}} \v(x, y) \leq \v(x^\*, y^\*)
+    \leq \min\_{x\in\c{X}}\max\_{y\in\c{Y}} \v(x, y) \tag{4}
+    $$
+
+    考虑左边部分
+
+    $$
+    \begin{align\*}
+    & \min\_{x \in \mathcal{X}} \v(x, y) \leq \v(x^\*, y) \\\\
+    \Lra \; & \max\_{y \in \mathcal{Y}} \min\_{x \in \mathcal{X}} \v(x, y)
+              \leq \max\_{y \in \mathcal{Y}} \v(x^\*, y) \\\\
+    & \v(x^\*, y) \leq \v(x^\*, y^\*) \\\\
+    \Lra \; & \max\_{y \in \mathcal{Y}} \v(x^\*, y) \leq \v(x^\*, y^\*) \\\\
+    \Lra \; & \max\_{y \in \mathcal{Y}} \min\_{x \in \mathcal{X}} \v(x, y)
+              \leq \v(x^\*, y^\*)
+    \end{align\*}
+    $$
+
+    同理可证明右边部分，这样不等式 4 就成立了，3 和 4 综合一下就有
+
+    $$
+    \max\_{y\in\c{Y}}\min\_{x\in\c{X}} \v(x, y) = \v(x^\*, y^\*)
+    = \min\_{x\in\c{X}}\max\_{y\in\c{Y}} \v(x, y) \tag{5}
+    $$
+
+    <p style="background-color: #9f9">接着证明等式 5 成立则 saddle point 存在</p>
+
+    定义 $d(y) = \min\_x \v(x, y)$，从等式 5 可知 $d(y)$ 的最大值出现在
+    $y = y^\*$ 处，即 $\max\_y d(y) = d(y^\*) = \min\_x \v(x, y^\*)$，由此可得
+    $\v(x^\*, y^\*) = \min\_x \v(x, y^\*)$，同理有 $\v(x^\*, y^\*) = \max\_y
+    \v(x^\*, y)$
+
+    又由于 $\min\_x \v(x, y^\*) \leq \v(x, y^\*), \v(x^\*, y) \leq \max\_y
+    \v(x^\*, y)$，因此
+
+    $$ \v(x^\*, y) \leq \v(x^\*, y^\*) \leq \v(x, y^\*)$$
+
+    即 $(x^\*, y^\*)$ 是 saddle point $\EOP$
+
+从上面的定理证明过程还可看出，如果 saddle point 存在，则 primal 和 dual
+的最优值相等且等于 $\v(x^\*, y^\*)$
+
+### Duality for Constrained Optimization
+
+从前面的讨论中，我们知道，primal problem 解决的是 $\min\max$ 问题，而 dual
+problem 解决的是 $\max\min$ 问题，下面我们看看 constrained optimization
+怎么能以 primal 和 dual 的形式表示出来
+
+给定下面的 constrained optimization 问题
+
+$$
+\begin{align\*}
+\min \;& f(\b{x}) \\\\
+\st \;& h\_j(\b{x}) \leq 0 \; j = 1, \cdots, l\\\\
+& e\_i(\b{x}) = 0 \; i = 1, \cdots m \\\\
+& \b{x} \in S
+\end{align\*} \tag{6}
+$$
+
+定义 Lagrange function $\c{L}(\b{x}, \bs{\l}, \bs{\mu}) = f(\b{x}) +
+\sum\_{j=1}^l \l\_j h\_j(\b{x}) + \sum\_{i=1}^m \mu\_i e\_i(\b{x})$，其中
+$\l\_j \geq 0, \mu\_i \in \bb{R}$，可以验证以下问题与 6 等价
+
+$$
+\min\_{\b{x}\in S}\max\_{\bs{\l}\geq 0, \bs{\mu}} \c{L}(\b{x}, \bs{\l}, \bs{\mu}) \tag{7}
+$$
+
+首先我们先研究一下 primal function $\max\_{\bs{\l}\geq 0, \bs{\mu}} \c{L}(\b{x}, \bs{\l},
+\bs{\mu})$
+
+* 如果 $h\_j(\b{x}) \leq 0$ 且 $e\_i(\b{x}) = 0$
+
+    这种情况下，最优的 $\l\_j$ 取值就是 $0$，取其他任何正数都会导致 $\c{L}$
+    值下降，而 $\mu\_i$ 取什么值都无所谓，因为 $e\_i(\b{x}) = 0$，所以它对
+    $\c{L}$ 没有影响，因此这种情况下 $\max\_{\bs{\l}\geq 0, \bs{\mu}} \c{L} = f(\b{x})$
+
+* 对于其他任何情况
+
+    * 如果 $e\_i(\b{x}) < 0$，则可令 $\mu\_i \ra -\infty$ 使得 $\c{L} \ra +\infty$
+    * 如果 $e\_i(\b{x}) > 0$，则可令 $\mu\_i \ra +\infty$ 使得 $\c{L} \ra +\infty$
+    * 如果 $h\_j(\b{x}) > 0$，则可令 $\l\_j \ra +\infty$ 使得 $\c{L} \ra +\infty$
+
+    因此只要不满足 $h\_j(\b{x}) \leq 0$ 且 $e\_i(\b{x}) = 0$，就有 $\max\_{\bs{\l}
+    \geq 0, \bs{\mu}} \c{L}(\b{x}, \bs{\l}, \bs{\mu}) = +\infty$
+
+总结以上讨论，就有
+
+$$
+\max\_{\bs{\l}\geq 0, \bs{\mu}} \c{L}(\b{x}, \bs{\l}, \bs{\mu}) = \begin{cases}
+f(\b{x}), \;\; \text{if}\; h\_j(\b{x}) \leq 0, e\_i(\b{x}) = 0 \; \forall i, j \\\\
++\infty, \;\; \text{otherwise}
+\end{cases}
+$$
+
+由于 primal problem 是个求 $\min$ 的问题，$+\infty$ 显然不可能是 $\min$，因此，
+这里第二个部分就可以忽略掉了，只考虑 $h\_j(\b{x}) \leq 0, e\_i(\b{x}) = 0 \;
+\forall i, j$ 的情况，而这就是问题 6，因此解问题 7 就等价于解问题 6
+
+有了这样的 primal 形式，问题 6 对应的 dual problem 就可以表示为
+
+$$ \max\_{\bs{\l}\geq 0, \bs{\mu}}\min\_{\b{x} \in S} \c{L}(\b{x}, \bs{\l}, \bs{\mu}) \tag{8}$$
+
+如果定义 $\theta(\bs{\l}, \bs{\mu}) = \min\_{\b{x} \in S} \c{L}(\b{x}, \bs{\l},
+\bs{\mu})$，即 $\theta$ 为 dual function，则 dual problem 可以表示为
+
+$$
+\begin{align\*}
+\max\_{\bs{\l}, \bs{\mu}} \; & \theta(\bs{\l}, \bs{\mu}) \\\\
+\st \; & \bs{\l} \geq 0
+\end{align\*} \tag{9}
+$$
+
+### Geometry Interpretation of Constrained Optimization Duality
+
+这一节我们从几何角度研究研究 constrained optimization 对应的对偶问题。
+考虑如下优化问题
+
+$$
+\begin{align\*}
+\min\_x \; & f(x) \\\\
+\st \; & h(x) \leq 0 \\\\
+& x \in S
+\end{align\*}
+$$
+
+令 $y = h(x), z = f(x)$，我们就得到了一个 $x$ 到 $(y, z)$ space 的映射。有了
+$y, z$ 的定义，Lagrange function 可表示为 $\c{L}(x, \l) = z + \l
+y$，下面我们看看不同 $(y, z)$ space 的情况下 primal 和 dual 的最优值的关系
+
+以下图中红色圈代表 $x$ 取值范围，黑色圈代表映射到 $(y, z)$ space 后的取值范围，
+其中 $p^\*$ 表示 primal 最优值，$d^\*$ 表示 dual 最优值
+
+* case 1
+
+    假设映射后的 $(y, z)$ space 呈如下形状
+    
+    <object data="/resource/NNP/14-duality/duality-gap-1.svg"
+     type="image/svg+xml" class="blkcenter"></object>
+
+    如果从 primal 的角度解决这个问题，由于限制 $y \leq 0$，
+    所以只有绿色阴影部分是可接受的 $(y, z)$ space，而其中的最优的 $z$
+    显然就是 $p^\*$
+
+    如果从 dual 的角度解决这个问题，对于任意给定的 $\l \geq 0$，$z + \l y = c$
+    （$c$ 是某一常数）都对应一条直线，$c$ 就是直线在 $z$ 轴的截距，而 $\min\_{
+    x} c$ 就表示最小的截距，下图中给出了三个 $\l$ 值在截距为 $\min\_{x} c$
+    情况下对应的直线，对所有可能的截距取 $\max$，我们发现最大的截距是 $\l\_3$
+    那条直线对应的截距
+
+    <object data="/resource/NNP/14-duality/duality-gap-1-dual.svg"
+     type="image/svg+xml" class="blkcenter"></object>
+
+    这种情况下 $d^\* = p^\*$
+
+* case 2
+
+    对于如下 $(y, z)$ space 同样有 $d^\* = p^\*$，且有无数个不同的 $\l$
+    值都对应 $d^\*$
+
+    <object data="/resource/NNP/14-duality/duality-gap-2.svg"
+     type="image/svg+xml" class="blkcenter"></object>
+
+* case 3
+
+    对于下面这样的 $(y, z)$ space，我们发现无论怎么选 $\l$，dual
+    的最优值都不能达到 $p^\*$，最优的 $d^\*$ 为 $\l\_2$ 对应的直线的截距
+
+    <object data="/resource/NNP/14-duality/duality-gap-3.svg"
+     type="image/svg+xml" class="blkcenter"></object>
+
+上面我们看了三种不同的 primal 和 dual 的情况，如果 $p^\* = d^\*$，我们称
+primal 和 dual 不存在 duality gap，否则，我们称 primal 和 dual 之间存在
+duality gap
+
+### Saddle Point for Constrained Optimization Duality
+
+上一节中我们对 constrained optimization 什么时候与 dual problem
+有相同最优值有了初步认识，这一节我们给出更严谨的讨论
+
+> Constrained optimization 的 primal 和 dual 有相同最优值当且仅当存在
+> $\b{x}^\* \in S, \bs{\l}^\* \geq 0, \bs{\mu}^\*$ 使得
+> $$\c{L}(\b{x}^\*, \bs{\l}, \bs{\mu}) \leq \c{L}(\b{x}^\*, \bs{\l}^\*,
+> \bs{\mu}^\*) \leq \c{L}(\b{x}, \bs{\l}^\*, \bs{\mu}^\*) \tag{10}$$
+
+点 $(\b{x}^\*, \bs{\l}^\*, \bs{\mu}^\*)$ 被称为 Lagrangian saddle point
+
+* Proof
+
+    <p style="background-color: #9f9">首先证明 saddle point 存在则最优值相同</p>
+
+    由于定理中只说了 $\b{x}^\* \in S$，这并不能保证其为 feasible
+    point，所以我们首先要证明 $\b{x}^\*$ 为 primal feasible point
+
+    将不等式 10 的前半部分展开有
+
+    $$
+    f(\b{x}^\*) + \sum\_{j=1}^l \l\_j h\_j(\b{x}^\*) + \sum\_{i=1}^m
+    \mu\_i e\_i(\b{x}^\*) \leq 
+    f(\b{x}^\*) + \sum\_{j=1}^l \l\_j^\* h\_j(\b{x}^\*) + \sum\_{i=1}^m
+    \mu\_i^\* e\_i(\b{x}^\*)
+    $$
+
+    该不等式右边是个 constant，要使不等式对于所有的 $\bs{\l} \geq 0, \bs{\mu}$
+    都成立，必须有 $h\_j(\b{x}^\*) \leq 0, e\_i(\b{x}^\*) = 0$。用反证法可证，
+    假如 $h\_j(\b{x}^\*) > 0$，则令 $\l\_j \ra +\infty$ 上面不等式就不能成立了，
+    同理 $e\_i(\b{x}^\*) \neq 0$ 的情况
+
+    因此 $\b{x}^\*$ 是一个 primal feasible point，这样上面不等式可以简化为
+
+    $$\sum\_{j=1}^l \l\_j h\_j(\b{x}^\*) \leq \sum\_{j=1}^l \l\_j^\* h\_j(\b{x}^\*)$$
+
+    令 $\l\_j = 0$ 可得 $0 \leq \sum\_{j=1}^l \l\_j^\* h\_j(\b{x}^\*)$，由于
+    $\sum\_{j=1}^l \l\_j^\* h\_j(\b{x}^\*) \leq 0$，所以 $\sum\_{j=1}^l \l\_j^\*
+    h\_j(\b{x}^\*) = 0$，由于 $\l\_j^\*h\_j(\b{x}^\*) \leq 0 \; \forall j = 1,
+    \cdots, l$，所以
+    
+    $$\l\_j^\*h\_j(\b{x}^\*) = 0 \; \forall j = 1, \cdots, l$$
+
+    不等式 10 的后半部分展开有
+
+    $$
+    \begin{align\*}
+    f(\b{x}^\*) + \sum\_{j=1}^l \l\_j^\* h\_j(\b{x}^\*) + \sum\_{i=1}^m
+    \mu\_i^\* e\_i(\b{x}^\*) \leq
+    f(\b{x}) + \sum\_{j=1}^l \l\_j^\* h\_j(\b{x}) + \sum\_{i=1}^m
+    \mu\_i^\* e\_i(\b{x}) \\\\
+    \Lra f(\b{x}^\*) \leq f(\b{x}) + \sum\_{j=1}^l \l\_j^\* h\_j(\b{x}) +
+    \sum\_{i=1}^m \mu\_i^\* e\_i(\b{x})
+    \end{align\*}
+    $$
+
+    对于所有的 primal feasible point 都有
+    
+    $$
+    f(\b{x}) + \sum\_{j=1}^l \l\_j^\* h\_j(\b{x}) + \sum\_{i=1}^m \mu\_i^\*
+    e\_i(\b{x}) \leq f(\b{x})
+    $$
+
+    结合两个不等式就得到了 $f(\b{x}^\*) \leq f(\b{x})$，也就是 $\b{x}^\*$ 是
+    primal 的最优解
+
+    知道了 $f(\b{x}^\*)$ 是 primal 的最优值，我们可以基于此得到 dual 的最优值
+
+    $$
+    \begin{align\*}
+    f(\b{x}^\*) = & f(\b{x}^\*) + \sum\_{j=1}^l \l\_j^\* h\_j(\b{x}^\*) +
+                    \sum\_{i=1}^m \mu\_i^\* e\_i(\b{x}^\*) \\\\
+                = & \c{L}(\b{x}^\*, \bs{\l}^\*, \bs{\mu}^\*) \\\\
+                = & \min\_{x\in S} \c{L}(\b{x}, \bs{\l}^\*, \bs{\mu}^\*) \;
+                    (\because \c{L}(\b{x}^\*, \bs{\l}^\*, \bs{\mu}^\*) \leq
+                              \c{L}(\b{x}, \bs{\l}^\*, \bs{\mu}^\*)) \\\\
+                = & \theta(\bs{\l}^\*, \bs{\mu}^\*)
+    \end{align\*}
+    $$
+
+    这最后一项就是 dual function 在 $(\bs{\l}^\*, \bs{\mu}^\*)$
+    的取值，我们知道，dual problem 的最优值永远小于等于 primal problem
+    的最优值，现在找到了一个 primal problem 最优值相等的值，那它必然就是
+    dual problem 的最优值了
+
+    到此，也就证明了 dual 和 primal 的最优值相同，且等于 $f(\b{x}^\*)$
+
+    <p style="background-color: #9f9">接着证明最优值相同则 saddle point 存在</p>
+
+    “最优值相同则 saddle point 存在”这句话有必要展开说一下，完整的应该说，如果
+    $\b{x}^\*$ 为 primal 最优解，$(\bs{\l}^\*, \bs{\mu}^\*)$ 为 dual
+    最优解且 $f(\b{x}^\*) = \theta(\bs{\l}^\*, \bs{\mu}^\*)$，则 $(\b{x}^\*,
+    \bs{\l}^\*, \bs{\mu}^\*)$ 为 saddle point。证明如下
+
+    既然 $\b{x}^\*$ 为 primal 最优解，那自然它一定是 primal feasible
+    point，因此有 $h\_j(\b{x}^\*) \leq 0, e\_i(\b{x}^\*) = 0$
+
+    $$
+    \begin{align\*}
+    \theta(\bs{\l}^\*, \bs{\mu}^\*) = & \min\_{\b{x}\in S} f(\b{x}) + \sum\_{j=1}^l
+        \l\_j^\* h\_j(\b{x}) + \sum\_{i=1}^m \mu\_i^\* e\_i(\b{x}) \\\\
+        \leq & f(\b{x}^\*) + \sum\_{j=1}^l \l\_j^\* h\_j(\b{x}^\*) +
+               \sum\_{i=1}^m \mu\_i^\* e\_i(\b{x}^\*) \\\\
+        \leq & f(\b{x}^\*)
+    \end{align\*}
+    $$
+
+    而 $\theta(\bs{\l}^\*, \bs{\mu}^\*) = f(\b{x}^\*)$，所以
+
+    $$
+    f(\b{x}^\*) \leq f(\b{x}^\*) + \sum\_{j=1}^l \l\_j^\* h\_j(\b{x}^\*) +
+    \sum\_{i=1}^m \mu\_i^\* e\_i(\b{x}^\*) \leq f(\b{x}^\*)
+    $$
+
+    因此有 $\l\_j h\_j(\b{x}^\*) = 0$
+
+    $$
+    \begin{align\*}
+    \c{L}(\b{x}^\*, \bs{\l}^\*, \bs{\mu}^\*) = & f(\b{x}^\*) + \sum\_{j=1}^l
+        \l\_j^\* h\_j(\b{x}^\*) + \sum\_{i=1}^m \mu\_i^\* e\_i(\b{x}^\*) \\\\
+    = & f(\b{x}^\*) \\\\
+    = & \theta(\bs{\l}^\*, \bs{\mu}^\*) \\\\
+    = & \min\_{x\in S} \c{L}(\b{x}, \bs{\l}^\*, \bs{\mu}^\*) \\\\
+    \leq & \c{L}(\b{x}, \bs{\l}^\*, \bs{\mu}^\*)
+    \end{align\*}
+    $$
+
+    这就是不等式 10 的后半部分，对于前半部分
+
+    $$
+    \begin{align\*}
+    \c{L}(\b{x}^\*, \bs{\l}^\*, \bs{\mu}^\*) = & f(\b{x}^\*) \\\\
+    \geq & f(\b{x}^\*) + \sum\_{j=1}^l \l\_j h\_j(\b{x}^\*) +
+           \sum\_{i=1}^m \mu\_i e\_i(\b{x}^\*) \\\\
+    = & \c{L}(\b{x}^\*, \bs{\l}, \bs{\mu})
+    \end{align\*}
+    $$
+
+    综上所述就有了不等式 10 $\EOP$
+
+### Find Saddle Point For Convex Programming
+
+上一节中我们论证了存在 saddle point 等价于 primal 和 dual 之间没有 duality
+gap，这一节中我们讨论如何找到这样的 saddle point，但是仅限于讨论 convex
+programming 的情况，即问题 6 中 $f(\b{x}), h\_j(\b{x})$ 为 continuously
+differentiable convex function，同时 $e\_i(\b{x}) = \b{a}\_i^T \b{x} -
+b\_i$，且 $S$ 是 convex set
+
+> 对于 Convex Programming，假设 Slater's Condition 成立
+>
+> * 如果 $(\b{x}^\*, \bs{\l}^\*, \bs{\mu}^\*)$ 是 KKT Point，则 $(\b{x}^\*,
+>   \bs{\l}^\*, \bs{\mu}^\*)$ 是 saddle point
+> * 如果 $(\b{x}^\*, \bs{\l}^\*, \bs{\mu}^\*)$ 是 saddle point 且
+>   $\b{x}^\* \in \text{int}(S), \bs{\l}^\* \geq 0$，则 $(\b{x}^\*, \bs{\l}^\*,
+>   \bs{\mu}^\*)$ 是 KKT Point
+
+所谓的 Slater's Condition 其实没什么，就是要求 $\c{X}$ 非空，仅此而已
+
+* Proof
+
+    <p style="background-color: #9f9">对于第一个结论</p>
+
+    我们知道，如果 $(\b{x}^\*, \bs{\l}^\*, \bs{\mu}^\*)$ 是 KKT Point，则
+
+    $$
+    \begin{align\*}
+    \nabla f(\b{x}^\*) + \sum\_{j=1}^l \l\_j^\* \nabla h\_j(\b{x}^\*) +
+        \sum\_{i=1}^m \mu\_i^\* \nabla e\_i(\b{x}^\*) = 0 \\\\
+    \l\_j^\* h(\b{x}^\*) = 0, \; j = 1, \cdots, l \\\\
+    \l\_j^\* \geq 0, \; j = 1, \cdots, l \\\\
+    \end{align\*}
+    $$
+
+    由于 $f(\b{x}^\*), h\_j(\b{x}^\*)$ 是 convex function，$e\_i(\b{x}^\*)$
+    是 affine function，所以有
+
+    $$
+    f(\b{x}) \geq f(\b{x}^\*) + \nabla f(\b{x}^\*)(\b{x} - \b{x}^\*) \\\\
+    h\_j(\b{x}) \geq h\_j(\b{x}^\*) + \nabla h\_j(\b{x}^\*)(\b{x} - \b{x}^\*) \\\\
+    e\_i(\b{x}) = e\_i(\b{x}^\*) + \nabla e\_i(\b{x}^\*)(\b{x} - \b{x}^\*)
+    $$
+
+    第二个式子乘以 $\l\_j^\*$，第三个式子乘以 $\mu\_i^\*$ 然后三个式子累加有
+
+    $$
+    f(\b{x}) + \sum\_{j=1}^l \l\_j^\* h\_j(\b{x}) + \sum\_{i=1}^m \mu\_i^\*
+    e\_i(\b{x}) \geq f(\b{x}^\*) + \sum\_{j=1}^l \l\_j^\* h\_j(\b{x}^\*) +
+    \sum\_{i=1}^m \mu\_i^\* e\_i(\b{x}^\*)
+    $$
+
+    即 $\c{L}(\b{x}^\*, \bs{\l}^\*, \bs{\mu}^\*) \leq \c{L}(\b{x}, \bs{\l}^\*,
+    \bs{\mu}^\*)$
+
+    $$
+    \begin{align\*}
+    & f(\b{x}^\*) + \sum\_{j=1}^l \l\_j^\* h\_j(\b{x}^\*) + \sum\_{i=1}^m
+    \mu\_i^\* e\_i(\b{x}^\*) \\\\
+    = & f(\b{x}^\*) \\\\
+    \geq & f(\b{x}^\*) + \sum\_{j=1}^l \l\_j h\_j(\b{x}^\*) + \sum\_{i=1}^m
+           \mu\_i e\_i(\b{x}^\*)
+    \end{align\*}
+    $$
+
+    所以 $\c{L}(\b{x}^\*, \bs{\l}, \bs{\mu}) \leq \c{L}(\b{x}^\*, \bs{\l}^\*,
+    \bs{\mu}^\*)$
+
+    <p style="background-color: #9f9">对于第二个结论</p>
+
+    $$
+    \begin{align\*}
+    & \c{L}(\b{x}^\*, \bs{\l}, \bs{\mu}) \leq \c{L}(\b{x}^\*, \bs{\l}^\*, \bs{\mu}^\*) \\\\
+    \Ra \;& \sum\_{j=1}^l \l\_j h\_j(\b{x}^\*) + \sum\_{i=1}^m \mu\_i e\_i(\b{x}^\*) \leq 
+            \sum\_{j=1}^l \l\_j^\* h\_j(\b{x}^\*) + \sum\_{i=1}^m \mu\_i^\* e\_i(\b{x}^\*) \\\\
+    \Ra \;& \l\_i^\* h\_j(\b{x}^\*) = 0 \; \forall j = 1, \cdots, l
+    \end{align\*}
+    $$
+
+    这就有了 KKT condition 的其中一个条件
+
+    而由于 $\c{L}(\b{x}^\*, \bs{\l}^\*, \bs{\mu}^\*) \leq \c{L}(\b{x},
+    \bs{\l}^\*, \bs{\mu}^\*)$，所以 $\c{L}(\b{x}, \bs{\l}^\*, \bs{\mu}^\*) =
+    \min\_{\b{x}}\c{L}(\b{x}, \bs{\l}^\*, \bs{\mu}^\*) $，又 $\b{x}^\* \in
+    \text{int}(S)$，所以 $\nabla\_{\b{x}}\c{L}(\b{x}^\*, \bs{\l}^\*,
+    \bs{\mu}^\*) = \b{0}$，即
+
+    $$
+    \nabla f(\b{x}^\*) + \sum\_{j=1}^l \l\_j^\* \nabla h\_j(\b{x}^\*) +
+    \sum\_{i=1}^m \mu\_i^\* \nabla e\_i(\b{x}^\*) = 0
+    $$
+
+    加上 $\bs{\l} \geq 0$，KKT condition 的 3 个部分都具备了 $\EOP$
+
+根据上述结论，对于 Convex Programming，如果 Slater's Condition 成立，则问题 8
+又可以表示为
+
+$$
+\begin{align\*}
+\max\_{\b{x}, \bs{\l}, \bs{\mu}} \; & \c{L}(\b{x}, \bs{\l}, \bs{\mu}) \\\\
+\st \; & \nabla\_{\b{x}} \c{L}(\b{x}, \bs{\l}, \bs{\mu}) = \bs{0} \\\\
+& \bs{\l} \geq \bs{0}
+\end{align\*}
+$$
+
+这个 dual problem 的表示形式又被称为 wolfe dual，当然从上面的结论中也可以看出
+这个形式的一个缺陷就是只能发现 $\in \text{in}(S)$ 的 $\b{x}^\*$，如果最优点在
+$S$ 的边界则这个 dual problem 是无法找到的
+
+下面简单看一个例子
+
+$$
+\begin{align\*}
+\min\_{\b{x}\in\bb{R}^n}\; & \b{x}^T\b{x} \\\\
+\st\; & \b{x}^T\b{1} = 1
+\end{align\*}
+$$
+
+其中 $\b{1}$ 表示所有元素都是 1 的 vector
+
+这个问题的最优解是 $x\_1 = \cdots = x\_n = 1/n$，这里我们主要看看从 wolfe dual
+的角度如何解决，其 wolfe dual 长这样
+
+$$
+\begin{align\*}
+\max\_{u} \; & \b{x}^T\b{x} + u(\b{x}^T\b{1} - 1) \\\\
+\st \; & 2\b{x} + u\b{1} = 0
+\end{align\*}
+$$
+
+可进一步转变为
+
+$$
+\max\_{u} \; -\frac{n}{4}\mu^2 - \mu
+$$
+
+由此很容易求出 $\mu^\* = -1/n \Ra x\_i^\* = 1/n \forall i$
+
+这个例子中 primal 是个包含 $n$ 个变量的问题，而 dual 是个仅包含一个变量的问题，
+因此，将问题转变为 dual 简单了很多，这就是将 primal 转化为 dual 的意义所在。
+当然从 primal 转变为 dual 后问题并不总是变简单的，也有可能变复杂
+
+### Convexity of Dual Problem
+
+最后一小节我们看看 dual problem 的一个非常 NB
+的性质，在了解这个性质前，我们先了解一下 pointwise maximization (minimization)
+
+> 所谓的 pointwise maximization 指，如果 $f\_{\b{x}}(\b{u})$ 是 convex function
+> $\forall \b{x} \in \c{X}$，那 $f(\b{u}) = \max\_{\b{x}\in\c{X}} f\_{\b{x}}(\b{u})$
+> 也是 convex function
+
+证明不难，一个函数是 convex function 等价于其 epigraph 是 convex set，而 $\max$
+的 epigraph 是所有 $f\_{\b{x}}$ 的 epigraph 的交集，所以 $\max$ 的 epigraph
+也是 convex set，即 $\max$ 是 convex function
+
+Pointwise minimization 是相对于 concave function 而言的
+
+> 所谓的 pointwise minimization 指，如果 $f\_{\b{x}}(\b{u})$ 是 concave function
+> $\forall \b{x} \in \c{X}$，那 $f(\b{u}) = \min\_{\b{x}\in\c{X}} f\_{\b{x}}(\b{u})$
+> 也是 concave function
+
+现在我们来看看 dual problem 的性质
+
+给定任意 $\b{x} \in S$，$\c{L}(\b{x}, \bs{\l}, \bs{\mu})$ 都是相对于 $\bs{\l},
+\bs{\mu}$ 的 affine function，affine function 是 concave function（当然也是
+convex function），根据 pointwise minimization 的定义，$\min\_{\b{x} \in S}
+\c{L}(\b{x}, \bs{\l}, \bs{\mu})$ 即 $\theta(\bs{\l}, \bs{\mu})$ 也是一个
+concave function，这就意味着问题 9 是 convex programming 问题（怎么又变成
+convex 了呢？因为 max 一个 concave function 等价于 min 一个 convex
+function，所以是 convex programming）
+
+这就是 dual problem NB 的地方，无论 primal problem 是个什么问题，dual
+problem 一定是个 convex programming 问题，当然啦，虽然这个性质很好，但你不能保证
+dual 和 primal 有相同的最优值
+
