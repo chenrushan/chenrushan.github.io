@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 14 - Duality
+title: 14 - Duality and Its Application on Constrained Optimization
 categories: nnumop
 tags: NPTEL, numerical optimization, duality
 ---
