@@ -69,7 +69,7 @@ categories: arch
 
             iw dev wlp2s0 scan | less
 
-        注意如果你是在一台同时有有线和无线的机子上，默认是开启有线的接口，这种情况下，你要先运行 `iw dev set wlp2s0 up` 来开启无线接口，然后才能运行 scan，否则会提示 network is down。
+        注意如果你是在一台同时有有线和无线的机子上，默认是开启有线的接口，这种情况下，你要先运行 `iw dev set wlp2s0 up` 或 `ip link set wlp2s0 up`（不知道为什么 iw 那个命令可能会挂掉）来开启无线接口，然后才能运行 scan，否则会提示 network is down。
 
         可以参考 [arch wiki](https://wiki.archlinux.org/index.php/Wireless_Setup) 确定每个字段都是什么意思。
 
