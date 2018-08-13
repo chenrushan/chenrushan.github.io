@@ -48,7 +48,7 @@ $$
 
 ----------
 
-#### $f(\b{x}) = (\b{x}\_1 - 7)^2 + (\b{x}\_2 - 2)^2$
+#### $f(\b{x}) = (\b{x}_1 - 7)^2 + (\b{x}_2 - 2)^2$
 
 这个函数最优值在 (7, 2)，利用 steepest descent algorithm + exact line search，不论初始点选择在哪儿都是一步就能到最优点，如下图所示
 
@@ -56,7 +56,7 @@ $$
 
 ----------
 
-#### $f(\b{x}) = 4\b{x}\_1^2 + \b{x}\_2^2 -2\b{x}\_1\b{x}\_2$
+#### $f(\b{x}) = 4\b{x}_1^2 + \b{x}_2^2 -2\b{x}_1\b{x}_2$
 
 这个函数的最优值点在 (0, 0)，同样我们用 steepest descent + exact line search
 
@@ -72,9 +72,9 @@ $$
 
 ----------
 
-#### $f(\b{x}) = 100(\b{x}\_2 - \b{x}\_1^2)^2 + (1 - \b{x}\_1)^2$
+#### $f(\b{x}) = 100(\b{x}_2 - \b{x}_1^2)^2 + (1 - \b{x}_1)^2$
 
-这个是著名的 Rosenbrock function，其最优值出现在 (1, 1) 点，利用 steepest descent + backtrack line search ($\hat{\alpha} = 0.5, \lambda = 0.3, c\_1 = 1\times 10^{-4}$)
+这个是著名的 Rosenbrock function，其最优值出现在 (1, 1) 点，利用 steepest descent + backtrack line search ($\hat{\alpha} = 0.5, \lambda = 0.3, c_1 = 1\times 10^{-4}$)
 
 * 初始点为 (0.6, 0.6)，收敛过程如下图所示，以 0.001 为 gradient norm 的阈值，共迭代 2029 步
 
@@ -170,19 +170,19 @@ $$\frac{(\b{x}^T \b{x})^2}{(\b{x}^T H \b{x})(\b{x}^T H^{-1} \b{x})} \geq \frac{4
 
 根据 Kantorovich inequality，我们有
 
-$$ \frac{E(\b{x}^k) - E(\b{x}^{k+1})}{E(\b{x}^k)} \geq \frac{4\lambda\_1 \lambda\_n}{(\lambda\_1 + \lambda\_n)^2} $$
+$$ \frac{E(\b{x}^k) - E(\b{x}^{k+1})}{E(\b{x}^k)} \geq \frac{4\lambda_1 \lambda_n}{(\lambda_1 + \lambda_n)^2} $$
 
 等价于
 
-$$ E(\b{x}^{k+1}) \leq (\frac{\lambda\_n - \lambda\_1}{\lambda\_n + \lambda\_1})^2 E(\b{x}^k)$$
+$$ E(\b{x}^{k+1}) \leq (\frac{\lambda_n - \lambda_1}{\lambda_n + \lambda_1})^2 E(\b{x}^k)$$
 
-因此根据我们定义的 $E(\b{x})$，steepest descent 是一个 convergence rate $\leq (\frac{\lambda\_n - \lambda\_1}{\lambda\_n + \lambda\_1})^2$ 的 linear convergence algorithm.
+因此根据我们定义的 $E(\b{x})$，steepest descent 是一个 convergence rate $\leq (\frac{\lambda_n - \lambda_1}{\lambda_n + \lambda_1})^2$ 的 linear convergence algorithm.
 
 对 convergence rate 做个简单的变形
 
-$$(\frac{\lambda\_n - \lambda\_1}{\lambda\_n + \lambda\_1})^2 = (1 - \frac{2}{\frac{\lambda\_n}{\lambda\_1} - 1})^2$$
+$$(\frac{\lambda_n - \lambda_1}{\lambda_n + \lambda_1})^2 = (1 - \frac{2}{\frac{\lambda_n}{\lambda_1} - 1})^2$$
 
-其中 $\frac{\lambda\_n}{\lambda\_1}$ 表示一个 matrix 的 condition number，可以看出 condition number 越大，convergence rate 越大，算法收敛得越慢。当 $\lambda\_1 = \lambda\_n$ 时，收敛是最快的，对应上面例子中 circular contour 的情况，condition number 越大，contour 越扁，越小 contour 越圆。
+其中 $\frac{\lambda_n}{\lambda_1}$ 表示一个 matrix 的 condition number，可以看出 condition number 越大，convergence rate 越大，算法收敛得越慢。当 $\lambda_1 = \lambda_n$ 时，收敛是最快的，对应上面例子中 circular contour 的情况，condition number 越大，contour 越扁，越小 contour 越圆。
 
 ### 结论
 
@@ -202,7 +202,7 @@ $$(\frac{\lambda\_n - \lambda\_1}{\lambda\_n + \lambda\_1})^2 = (1 - \frac{2}{\f
 
 假设原始空间为 x-space，新空间为 y-space，则我们试图找到的变换是
 
-$$ f(\b{x}) = \frac{1}{2} \b{x}^T H \b{x} - \b{c}^T \b{x} \; \Rightarrow \; h(\b{y}) = \frac{1}{2} \b{y}^T \b{y} - \b{c}\_y^T \b{y} $$
+$$ f(\b{x}) = \frac{1}{2} \b{x}^T H \b{x} - \b{c}^T \b{x} \; \Rightarrow \; h(\b{y}) = \frac{1}{2} \b{y}^T \b{y} - \b{c}_y^T \b{y} $$
 
 参考下图
 
@@ -231,8 +231,8 @@ $$\b{x}^{k+1} = L^{-T}L^{-1} \b{c} = H^{-1}\b{c}$$
 
 $$
 \begin{align*}
-& \b{y}^{k+1} = \b{y}^k - \nabla\_{\b{y}^k} h(\b{y}^k) \\\\
-\Longleftrightarrow & L^{-T}\b{y}^{k+1} = L^{-T}\b{y}^k - L^{-T}\nabla\_{\b{y}^k} f(L^{-T} \b{y}^k) \\\\
+& \b{y}^{k+1} = \b{y}^k - \nabla_{\b{y}^k} h(\b{y}^k) \\\\
+\Longleftrightarrow & L^{-T}\b{y}^{k+1} = L^{-T}\b{y}^k - L^{-T}\nabla_{\b{y}^k} f(L^{-T} \b{y}^k) \\\\
 \Longleftrightarrow & \b{x}^{k+1} = \b{x}^k - L^{-T} L^{-1} \nabla f(\b{x}^k) \\\\
 \Longleftrightarrow & \b{x}^{k+1} = \b{x}^k - H^{-1} \nabla f(\b{x}^k) \\\\
 \end{align*}
