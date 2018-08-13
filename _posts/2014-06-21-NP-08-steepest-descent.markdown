@@ -104,7 +104,7 @@ $$f(x) = f(x^*) + f'(x^*)(x - x^*) + \frac{1}{2}(x - x^*)^T H(x^*) (x - x^*) + O
 
 $$\b{x}^* = H^{-1}\b{c}$$
 
-为了计算 convergence rate，这里定义 Error function $E(\b{x}^k) = \frac{1}{2}(\b{x}^k - \b{x}^*)^T H (\b{x}^k - \b{x}^*)$，并以
+为了计算 convergence rate，这里定义 Error function $$E(\b{x}^k) = \frac{1}{2}(\b{x}^k - \b{x}^*)^T H (\b{x}^k - \b{x}^*)$$，并以
 
 $$\frac{E(\b{x}^k) - E(\b{x}^{k+1})}{E(\b{x}^k)}$$
 
