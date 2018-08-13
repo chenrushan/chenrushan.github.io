@@ -24,10 +24,10 @@ $$ \underset{\b{d}^k}{\arg\min} \;\; f(\b{x}^k) + {\b{g}^k}^T \b{d}^k$$
 这里 $f(\b{x}^k)$ 是个 constant，可以从式子中去掉，另外，如果 $\b{d}^k$ 不做任何限制的话，它可以是一个无穷小的向量，这个近似函数就变成没有 lower bound，这样优化就没有意义了，所以我们限制 $\Vert \b{d}^k \Vert = 1$，这样最小化问题就变成了
 
 $$
-\begin{align\*}
+\begin{align*}
 \underset{\b{d}^k}{\arg\min} \;\; {\b{g}^k}^T \b{d}^k \\\\
 s.t. \Vert \b{d}^k \Vert = 1
-\end{align\*}
+\end{align*}
 $$
 
 这个优化问题很好解
@@ -102,24 +102,24 @@ $$f(x) = f(x^*) + f'(x^*)(x - x^*) + \frac{1}{2}(x - x^*)^T H(x^*) (x - x^*) + O
 
 由于 $H$ 是 symmetric positive definite matrix，所以我们可以直接得到这个函数的 close-form solution，只需令 gradient 等于 0 即 $\b{g} = H\b{x} - \b{c} = 0$ 可得
 
-$$\b{x}^\* = H^{-1}\b{c}$$
+$$\b{x}^* = H^{-1}\b{c}$$
 
-为了计算 convergence rate，这里定义 Error function $E(\b{x}^k) = \frac{1}{2}(\b{x}^k - \b{x}^\*)^T H (\b{x}^k - \b{x}^\*)$，并以
+为了计算 convergence rate，这里定义 Error function $E(\b{x}^k) = \frac{1}{2}(\b{x}^k - \b{x}^*)^T H (\b{x}^k - \b{x}^*)$，并以
 
 $$\frac{E(\b{x}^k) - E(\b{x}^{k+1})}{E(\b{x}^k)}$$
 
 表示 convergence rate，注意到
 
 $$
-\begin{align\*}
-E(\b{x}^k) = & \frac{1}{2}(\b{x}^k - \b{x}^\*)^T H (\b{x}^k - \b{x}^\*) \\\\
-= & \frac{1}{2}(\b{x}^k H \b{x}^k - 2\b{x}^\* H \b{x}^k + \b{x}^\* H \b{x}^\*) \\\\
-= & \frac{1}{2} \b{x}^k H \b{x}^k - \b{c} \b{x}^k + \frac{1}{2}\b{x}^\* H \b{x}^\* \;\; (\because \b{x}^\* = H^{-1}\b{c})\\\\
-= & f(\b{x}^k) + \frac{1}{2}\b{x}^\* H \b{x}^\*
-\end{align\*}
+\begin{align*}
+E(\b{x}^k) = & \frac{1}{2}(\b{x}^k - \b{x}^*)^T H (\b{x}^k - \b{x}^*) \\\\
+= & \frac{1}{2}(\b{x}^k H \b{x}^k - 2\b{x}^* H \b{x}^k + \b{x}^* H \b{x}^*) \\\\
+= & \frac{1}{2} \b{x}^k H \b{x}^k - \b{c} \b{x}^k + \frac{1}{2}\b{x}^* H \b{x}^* \;\; (\because \b{x}^* = H^{-1}\b{c})\\\\
+= & f(\b{x}^k) + \frac{1}{2}\b{x}^* H \b{x}^*
+\end{align*}
 $$
 
-其中 $\frac{1}{2} \b{x}^\* H \b{x}^\*$ 是个常量，所以 $E(\b{x})$ 和 $f(\b{x})$ 本质上是一样的。
+其中 $\frac{1}{2} \b{x}^* H \b{x}^*$ 是个常量，所以 $E(\b{x})$ 和 $f(\b{x})$ 本质上是一样的。
 
 --------------------
 
@@ -128,22 +128,22 @@ $$
 * 分子代入 $\b{x}^{k+1} = \b{x}^k - \alpha^k \b{g}^k$ 有
 
     $$
-    \begin{align\*}
+    \begin{align*}
     E(\b{x}^k) - E(\b{x}^{k+1}) = & \frac{1}{2} \b{x}^k H \b{x}^k - \b{c} \b{x}^k - \frac{1}{2} \b{x}^{k+1} H \b{x}^{k+1} + \b{c} \b{x}^{k+1} \\\\
-    = & {\alpha^k ({\b{x}^k} - {\b{x}^\*})^T H \b{g}^k - \frac{1}{2}{\alpha^k}^2 {\b{g}^k}^T H \b{g}^k} \\\\
+    = & {\alpha^k ({\b{x}^k} - {\b{x}^*})^T H \b{g}^k - \frac{1}{2}{\alpha^k}^2 {\b{g}^k}^T H \b{g}^k} \\\\
     = & {\alpha^k (H \b{x}^k - c)^T \b{g}^k - \frac{1}{2}{\alpha^k}^2 {\b{g}^k}^T H \b{g}^k} \\\\
     = & {\alpha^k {\b{g}^k}^T \b{g}^k - \frac{1}{2}{\alpha^k}^2 {\b{g}^k}^T H \b{g}^k} \\\\
-    \end{align\*}
+    \end{align*}
     $$
 
-* 对于分母，由于 $H(\b{x}^k - \b{x}^\*) = H\b{x}^k - c = \b{g}^k$ 有
+* 对于分母，由于 $H(\b{x}^k - \b{x}^*) = H\b{x}^k - c = \b{g}^k$ 有
 
     $$
-    \begin{align\*}
-    E(\b{x}^k) = & \frac{1}{2}(\b{x}^k - \b{x}^\*)^T H (\b{x}^k - \b{x}^\*) \\\\
+    \begin{align*}
+    E(\b{x}^k) = & \frac{1}{2}(\b{x}^k - \b{x}^*)^T H (\b{x}^k - \b{x}^*) \\\\
     = & \frac{1}{2} {(H^{-1}\b{g}^k)}^T H (H^{-1}\b{g}^k) \\\\
     = & \frac{1}{2} {\b{g}^k}^T H^{-1} \b{g}^k
-    \end{align\*}
+    \end{align*}
     $$
 
 这样 convergence rate 就变为
@@ -192,7 +192,7 @@ $$(\frac{\lambda\_n - \lambda\_1}{\lambda\_n + \lambda\_1})^2 = (1 - \frac{2}{\f
 
 * Steepest descent 是一个 linear convergence algorithm，并且收敛速度取决于 Hessian matrix 的 condition number，condition number 越大收敛越慢
 
-* 对于 nonquadratic function，上面的结论也是可用的，前面已经讲过，在接近 local minimum 的地方，任何函数的表现都可以用 quadratic function 近似，因此 nonquadratic function 的 convergence rate 取决于 $H(\b{x}^\*)$ 的 condition number，其中 $\b{x}^\*$ 是 local minimum
+* 对于 nonquadratic function，上面的结论也是可用的，前面已经讲过，在接近 local minimum 的地方，任何函数的表现都可以用 quadratic function 近似，因此 nonquadratic function 的 convergence rate 取决于 $H(\b{x}^*)$ 的 condition number，其中 $\b{x}^*$ 是 local minimum
 
 ### 改进 Steepest Descent
 
@@ -230,12 +230,12 @@ $$\b{x}^{k+1} = L^{-T}L^{-1} \b{c} = H^{-1}\b{c}$$
 如果我们将 y-space 的迭代步骤映射到 x-space 的话是这样
 
 $$
-\begin{align\*}
+\begin{align*}
 & \b{y}^{k+1} = \b{y}^k - \nabla\_{\b{y}^k} h(\b{y}^k) \\\\
 \Longleftrightarrow & L^{-T}\b{y}^{k+1} = L^{-T}\b{y}^k - L^{-T}\nabla\_{\b{y}^k} f(L^{-T} \b{y}^k) \\\\
 \Longleftrightarrow & \b{x}^{k+1} = \b{x}^k - L^{-T} L^{-1} \nabla f(\b{x}^k) \\\\
 \Longleftrightarrow & \b{x}^{k+1} = \b{x}^k - H^{-1} \nabla f(\b{x}^k) \\\\
-\end{align\*}
+\end{align*}
 $$
 
 这最后一步实际上是 Classical Newton 的迭代步骤。但要注意 Classical Newton 并不是由 Steepest Descent 演化过来的，实际上，二者的发明并没有什么联系，并且 Classical Newton 出现比 Steepest Descent 还要早得多，下一片文章我们将看到 Classical Newton 是基于什么思想得到的。
