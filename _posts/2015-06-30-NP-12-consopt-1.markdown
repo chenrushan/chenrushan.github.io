@@ -30,13 +30,13 @@ $$
 $$
 \begin{align*}
 \min \;& f(\b{x}) \\\\
-\st \; & h\_j(\b{x}) \leq 0 \; j = 1\cdots l \\\\
-& e\_i(\b{x}) = 0 \; i = 1\cdots m \\\\
+\st \; & h_j(\b{x}) \leq 0 \; j = 1\cdots l \\\\
+& e_i(\b{x}) = 0 \; i = 1\cdots m \\\\
 & \b{x} \in S
 \end{align*} \tag{2}
 $$
 
-其中 $h\_j(\b{x})$ 表示 inequality constraint，$e\_i(\b{x})$ 表示 equality
+其中 $h_j(\b{x})$ 表示 inequality constraint，$e_i(\b{x})$ 表示 equality
 constraint，$S \in \bb{R}^n$
 
 ### Global and Local Minimum
@@ -63,7 +63,7 @@ constraint，$S \in \bb{R}^n$
 
 <object data="/resource/NNP/12-consopt-1/function.svg" type="image/svg+xml" class="blkcenter"></object>
 
-$\c{X} = [a, b]$，其中 $a, x\_1, x\_2, x\_3$ 都是 local minimum，$x\_1$ 是 
+$\c{X} = [a, b]$，其中 $a, x_1, x_2, x_3$ 都是 local minimum，$x_1$ 是 
 global minimum。从中可以看出 unconstrained optimization 中关于 local minimum
 必然有 $f'(\b{x}) = 0$ 的 necessary condition 不再成立（$f'(a)$ 显然不等于
 $0$），那我们如何能从数学上对 constrained optimization 中的 local minimum
@@ -73,19 +73,19 @@ $0$），那我们如何能从数学上对 constrained optimization 中的 local
 
 首先我们来看两个概念：feasible direction 和 descent direction
 
-> 令 $\b{x} \in \c{X}, \b{d} \in \bb{R}^n \neq \b{0}$，如果存在 $\delta\_1 > 0$
+> 令 $\b{x} \in \c{X}, \b{d} \in \bb{R}^n \neq \b{0}$，如果存在 $\delta_1 > 0$
 > 使得 $\b{d}$ 满足
 >
-> $$ \b{x} + \a\b{d} \in \c{X} \;\; \forall \a \in (0, \delta\_1) \tag{5} $$
+> $$ \b{x} + \a\b{d} \in \c{X} \;\; \forall \a \in (0, \delta_1) \tag{5} $$
 >
 > 则 $\b{d}$ 被称为为 feasible direction
 
 * 令 $\c{F}(\b{x})$ 表示在 $\b{x}$ 点的所有 feasible direction 的集合
 
-> 令 $\b{x} \in \c{X}, \b{d} \in \bb{R}^n \neq \b{0}$，如果存在 $\delta\_2 > 0$
+> 令 $\b{x} \in \c{X}, \b{d} \in \bb{R}^n \neq \b{0}$，如果存在 $\delta_2 > 0$
 > 使得 $\b{d}$ 满足
 >
-> $$ f(\b{x} + \a\b{d}) < f(\b{x}) \;\; \forall \a \in (0, \delta\_2) \tag{6} $$
+> $$ f(\b{x} + \a\b{d}) < f(\b{x}) \;\; \forall \a \in (0, \delta_2) \tag{6} $$
 >
 > 则 $\b{d}$ 被称为 descent direction
 
@@ -101,10 +101,10 @@ $0$），那我们如何能从数学上对 constrained optimization 中的 local
     假设 $\c{F}(\b{x}^*) \cap \c{D}(\b{x}^\*) \neq \emptyset$，则存在
     $ \b{d} \in \c{F}(\b{x}^*) \cap \c{D}(\b{x}^\*)$，也就是
 
-    * $\exists \delta\_1 > 0, \forall \a \in (0, \delta\_1), \b{x}^* + \a\b{d} \in \c{X}$
-    * $\exists \delta\_2 > 0, \forall \a \in (0, \delta\_2), f(\b{x}^* + \a\b{d}) < f(\b{x}^\*)$
+    * $\exists \delta_1 > 0, \forall \a \in (0, \delta_1), \b{x}^* + \a\b{d} \in \c{X}$
+    * $\exists \delta_2 > 0, \forall \a \in (0, \delta_2), f(\b{x}^* + \a\b{d}) < f(\b{x}^\*)$
 
-    令 $\delta = \min(\delta\_1, \delta\_2), \a \in (0, \delta), \b{y} =
+    令 $\delta = \min(\delta_1, \delta_2), \a \in (0, \delta), \b{y} =
     \b{x}^* + \a\b{d}$，则有 $f(\b{y}) < f(\b{x}^\*), \b{y} \in
     \c{X}$，也就是在 $\c{X}$ 中找到了比 $f(\b{x}\^*)$ 更小的 $f(\b{y})$
 
@@ -142,9 +142,9 @@ $0$），那我们如何能从数学上对 constrained optimization 中的 local
 <object data="/resource/NNP/12-consopt-1/feasibledir.svg" type="image/svg+xml" class="blkcenter"></object>
 
 后面的圆圈线表示 $f(\b{x})$ 的 contour line，绿色阴影部分表示
-$\c{X}$，边界分别对应 $h\_j(\b{x}) = 0, j = 1, 2, 3$，$\c{X}$ 即为 $h\_j(\b{x})
+$\c{X}$，边界分别对应 $h_j(\b{x}) = 0, j = 1, 2, 3$，$\c{X}$ 即为 $h_j(\b{x})
 \leq 0$ 的交集，图中给出了三个点，其中点 A 处于两个边界的交点，在这个点有
-$h\_1(\b{x}) = 0, h\_2(\b{x}) = 0$，这时我们称 $h\_1, h\_2$ 为点 A 的 active
+$h_1(\b{x}) = 0, h_2(\b{x}) = 0$，这时我们称 $h_1, h_2$ 为点 A 的 active
 constraint，记为 $\c{A}(\b{x}) = \\{1, 2\\}$，对于点 C，$\c{A}(\b{x}) =
 \\{3\\}$，对于点 B，$\c{A}(\b{x}) = \emptyset$
 
@@ -152,43 +152,43 @@ constraint，记为 $\c{A}(\b{x}) = \\{1, 2\\}$，对于点 C，$\c{A}(\b{x}) =
 
 * 对于点 A
 
-    $\c{F}(\b{x})$ 包含 $\b{d}\_1, \b{d}\_2$ 之间的向量，其中
-    $\nabla h\_1(\b{x})^T \b{d}\_1 = 0$，$\nabla h\_2(\b{x})^T \b{d}\_2 = 0$，对于
-    $\b{d}\_1, \b{d}\_2$ 之间的向量都有 $\nabla h\_1(\b{x})^T \b{d}\_1 <
-    0$，$\nabla h\_2(\b{x})^T \b{d}\_2 < 0$，因此 $\c{F}(\b{x})$ 可以表示为
-    $\\{\b{d}: \nabla h\_j(\b{x})^T \b{d} < 0, j \in \c{A}(\b{x}) = \\{1, 3\\} \\}$
+    $\c{F}(\b{x})$ 包含 $\b{d}_1, \b{d}_2$ 之间的向量，其中
+    $\nabla h_1(\b{x})^T \b{d}_1 = 0$，$\nabla h_2(\b{x})^T \b{d}_2 = 0$，对于
+    $\b{d}_1, \b{d}_2$ 之间的向量都有 $\nabla h_1(\b{x})^T \b{d}_1 <
+    0$，$\nabla h_2(\b{x})^T \b{d}_2 < 0$，因此 $\c{F}(\b{x})$ 可以表示为
+    $\\{\b{d}: \nabla h_j(\b{x})^T \b{d} < 0, j \in \c{A}(\b{x}) = \\{1, 3\\} \\}$
 
 * 对于点 C
 
-    $\c{F}(\b{x})$ 包含 $\b{d}\_3, \b{d}\_4$ 之间向量，同上可知
-    $ = \\{\b{d}: \nabla h\_j(\b{x})^T \b{d} < 0, j \in \c{A}(\b{x}) =
+    $\c{F}(\b{x})$ 包含 $\b{d}_3, \b{d}_4$ 之间向量，同上可知
+    $ = \\{\b{d}: \nabla h_j(\b{x})^T \b{d} < 0, j \in \c{A}(\b{x}) =
     \\{3\\} \\}$
 
 * 对于点 B
 
     所有向量都是 feasible direction，因此 $\c{F}(\b{x}) = \bb{R}^n$
 
-> 定理 3：定义 $\tilde{\c{F}}(\b{x}) = \\{ \b{d}: \nabla h\_j(\b{x})^T \b{d} < 0,
+> 定理 3：定义 $\tilde{\c{F}}(\b{x}) = \\{ \b{d}: \nabla h_j(\b{x})^T \b{d} < 0,
 > j \in \c{A}(\b{x})\\}$，则有 $\tilde{\c{F}}(\b{x}) \subseteq \c{F}(\b{x})$
 
 * Proof:
 
     给定 $\b{x} \in \c{X}$，如果 $\b{d} \in \tilde{\c{F}}(\b{x})$，则
 
-    * 对于 $j \in \c{A}(\b{x})$ 的 $h\_j(\b{x})$
+    * 对于 $j \in \c{A}(\b{x})$ 的 $h_j(\b{x})$
 
-        因为 $\nabla h\_j(\b{x})^T \b{d} < 0$，所以 $\b{d}$ 对于 $h\_j(\b{x})$
-        为 descent direction，则 $\exists \delta\_1 > 0, h\_j(\b{x} + \a\b{d})
-        < h\_j(\b{x}), \; \forall \a \in (0, \delta\_1)$，即 $h\_j(\b{x} +
+        因为 $\nabla h_j(\b{x})^T \b{d} < 0$，所以 $\b{d}$ 对于 $h_j(\b{x})$
+        为 descent direction，则 $\exists \delta_1 > 0, h_j(\b{x} + \a\b{d})
+        < h_j(\b{x}), \; \forall \a \in (0, \delta_1)$，即 $h_j(\b{x} +
         \a\b{d}) < 0$，所以 $\b{x} + \a\b{d} \in \c{X}$
 
-    * 对于 $j \notin \c{A}(\b{x})$ 的 $h\_j(\b{x})$
+    * 对于 $j \notin \c{A}(\b{x})$ 的 $h_j(\b{x})$
 
-        因为 $h\_j(\b{x}) \in \c{C}^0$ 且 $h\_j(\b{x}) < 0$，所以 $\exists
-        \delta\_2 > 0, h\_j(\b{x} + \a\b{d}) < 0, \; \forall \a \in (0,
-        \delta\_2)$，即 $\b{x} + \a\b{d} \in \c{X}$
+        因为 $h_j(\b{x}) \in \c{C}^0$ 且 $h_j(\b{x}) < 0$，所以 $\exists
+        \delta_2 > 0, h_j(\b{x} + \a\b{d}) < 0, \; \forall \a \in (0,
+        \delta_2)$，即 $\b{x} + \a\b{d} \in \c{X}$
 
-    综上所述，如果定义 $\delta = \min(\delta\_1, \delta\_2)$，则 $\b{x} +
+    综上所述，如果定义 $\delta = \min(\delta_1, \delta_2)$，则 $\b{x} +
     \a\b{d} \in \c{X}, \; \forall \a \in (0, \delta)$，所以 $\b{d}$ 为
     feasible direction，所以 $\tilde{\c{F}}(\b{x}) \subseteq \c{F}(\b{x})$ $\EOP$
 
@@ -206,11 +206,11 @@ constraint，记为 $\c{A}(\b{x}) = \\{1, 2\\}$，对于点 C，$\c{A}(\b{x}) =
 把定理 4 展开有
 
 $$
-\\{\b{d}: \nabla h\_j(\b{x}^*)^T \b{d} < 0, j \in \c{A}(\b{x}^\*) \\} \cap
+\\{\b{d}: \nabla h_j(\b{x}^*)^T \b{d} < 0, j \in \c{A}(\b{x}^\*) \\} \cap
 \\{\b{d}: \nabla f(\b{x}^*)^T \b{d} < 0 \\} = \emptyset \tag{7}
 $$
 
-如果记 $A = \begin{pmatrix} \nabla f(\b{x}^*)^T \\\\ \cdots \\\\ h\_j(\b{x}^\*)^T 
+如果记 $A = \begin{pmatrix} \nabla f(\b{x}^*)^T \\\\ \cdots \\\\ h_j(\b{x}^\*)^T 
 \\\\ \cdots \end{pmatrix}$，其中 $j \in \c{A}(\b{x}^*)$，$A \in \bb{R}^{(1 +
 |\c{A}(\b{x}^*)|) \times n}$，那公式 7 等价于
 
@@ -219,52 +219,52 @@ $$ \\{\b{d}: A\b{d} < 0\\} = \emptyset$$
 换句话说就是 $A\b{d} < 0$ 无解。根据 [Convex Set](/nnumop/2014/04/15/NP-04-convex-set/)
 这篇文章中 Farka's Lemma 的推论，我们有 
 
-> $\exists \l\_0, \l\_j \geq 0, j \in \c{A}(\b{x}^*)$ 且 $\l$
+> $\exists \l_0, \l_j \geq 0, j \in \c{A}(\b{x}^*)$ 且 $\l$
 > 不同时为 $0$，使得
-> $$ \l\_0 \nabla f(\b{x}^*) + \sum\_{j\in \c{A}(\b{x}^\*)}
-> \l\_j \nabla h\_j(\b{x}^*) = \b{0} \tag{8}$$
+> $$ \l_0 \nabla f(\b{x}^*) + \sum_{j\in \c{A}(\b{x}^\*)}
+> \l_j \nabla h_j(\b{x}^*) = \b{0} \tag{8}$$
 
-公式 8 存在这么个问题，如果存在非 $\b{0}$ $(\l\_1, \cdots, \l\_l)^T \geq 0$
-使得 $\sum\_j \l\_j \nabla h\_j(\b{x}^*) = 0$，那 $\l\_0$ 直接设置成 $0$
+公式 8 存在这么个问题，如果存在非 $\b{0}$ $(\l_1, \cdots, \l_l)^T \geq 0$
+使得 $\sum_j \l_j \nabla h_j(\b{x}^*) = 0$，那 $\l_0$ 直接设置成 $0$
 就好了，这时候无论 $\nabla f(\b{x}^*)$ 取什么值都不影响等式 8 成立，也就是
 $f(\b{x})$ 已经不再重要了，这是我们希望避免的。为此，我们要求 $\nabla
-h\_j(\b{x}^*)$ 之间 linear independent，这样就避免掉了 $\l\_0 = 0$
-的情况，因为如果 $\l\_0 = 0$，则必有 $\l\_j = 0$ 才能使等式 8 成立，而这跟等式
+h_j(\b{x}^*)$ 之间 linear independent，这样就避免掉了 $\l_0 = 0$
+的情况，因为如果 $\l_0 = 0$，则必有 $\l_j = 0$ 才能使等式 8 成立，而这跟等式
 8 成立的前提相违背
 
-> 给定点 $\b{x}$，如果 $\nabla h\_j(\b{x}), j \in \c{A}(\b{x})$ 之间 linear
+> 给定点 $\b{x}$，如果 $\nabla h_j(\b{x}), j \in \c{A}(\b{x})$ 之间 linear
 > independent，则点 $\b{x}$ 被称为 regular point
 
 所以我们要求 $\b{x}^*$ 是 regular point
 
-那现在既然 $\l\_0 \neq 0$，等式 8 两边统除以 $\l\_0$，并定义 $\l\_j^* = \l\_j
-/ \l\_0, j \in \c{A}(\b{x})$，则有 $ \nabla f(\b{x}^*) + \sum\_{j\in
-\c{A}(\b{x}^*)} \l\_j^\* \nabla h(\b{x}^\*) = 0 $，更进一步，如果令 $\l\_j^\*
-= 0, \; \forall j \notin \c{A}(\b{x}^*)$，则有 $ \nabla f(\b{x}^\*) + \sum\_j
-\l\_j^* \nabla h(\b{x}^\*) = 0, \; j = 1, \cdots, l$，这样我们就有了 First
+那现在既然 $\l_0 \neq 0$，等式 8 两边统除以 $\l_0$，并定义 $\l_j^* = \l_j
+/ \l_0, j \in \c{A}(\b{x})$，则有 $ \nabla f(\b{x}^*) + \sum_{j\in
+\c{A}(\b{x}^*)} \l_j^\* \nabla h(\b{x}^\*) = 0 $，更进一步，如果令 $\l_j^\*
+= 0, \; \forall j \notin \c{A}(\b{x}^*)$，则有 $ \nabla f(\b{x}^\*) + \sum_j
+\l_j^* \nabla h(\b{x}^\*) = 0, \; j = 1, \cdots, l$，这样我们就有了 First
 Order KKT Condition
 
 > 如果 regular point $\b{x}^*$ 是 local minimum，则存在
-> $\bs{\l}^* = \\{\l\_1^\*, \cdots, \l\_l^\* \\}$ 使得
+> $\bs{\l}^* = \\{\l_1^\*, \cdots, \l_l^\* \\}$ 使得
 > $$
 > \begin{align*}
-> \nabla f(\b{x}^*) + \sum\_{j=1}^l \l\_j^\* \nabla h(\b{x}^\*) = 0 \\\\
-> \l\_j^* h\_j(\b{x}^\*) = 0, \; j = 1, \cdots, l \\\\
-> \l\_j^* \geq 0 \; j = 1, \cdots, l
+> \nabla f(\b{x}^*) + \sum_{j=1}^l \l_j^\* \nabla h(\b{x}^\*) = 0 \\\\
+> \l_j^* h_j(\b{x}^\*) = 0, \; j = 1, \cdots, l \\\\
+> \l_j^* \geq 0 \; j = 1, \cdots, l
 > \end{align*}
 > $$
 
-这里的第二个等式是这样，如果 $j \in \c{A}(\b{x}^*)$，则 $h\_j(\b{x}^\*) =
-0$，因此 $\l\_j^* h\_j(\b{x}^\*) = 0$，如果 $j \notin
-\c{A}(\b{x}^*)$，$\l\_j^\* h\_j(\b{x}^\*) = 0$ 就相当于要求
-$\l\_j^* = 0$
+这里的第二个等式是这样，如果 $j \in \c{A}(\b{x}^*)$，则 $h_j(\b{x}^\*) =
+0$，因此 $\l_j^* h_j(\b{x}^\*) = 0$，如果 $j \notin
+\c{A}(\b{x}^*)$，$\l_j^\* h_j(\b{x}^\*) = 0$ 就相当于要求
+$\l_j^* = 0$
 
 * 点 $(\b{x}^*, \bs{\l}^\*)$ 被称为 KKT point
-* $\c{L}(\b{x}, \bs{\l}) = f(\b{x}) + \sum\_{j=1}^l \l\_j h\_j(\b{x})$
-  被称为 Lagrangian function，$\l\_j$ 被称为 Lagrange
-  multiplier。上面第一个等式就等价于 $\nabla\_{\b{x}} \c{L}(\b{x},
-  \bs{\l}^*)|\_{\b{x} = \b{x}^\*} = 0$
-* $\l\_j^* h\_j(\b{x}^\*) = 0$ 被称为 Complementary Slackness Condition
+* $\c{L}(\b{x}, \bs{\l}) = f(\b{x}) + \sum_{j=1}^l \l_j h_j(\b{x})$
+  被称为 Lagrangian function，$\l_j$ 被称为 Lagrange
+  multiplier。上面第一个等式就等价于 $\nabla_{\b{x}} \c{L}(\b{x},
+  \bs{\l}^*)|_{\b{x} = \b{x}^\*} = 0$
+* $\l_j^* h_j(\b{x}^\*) = 0$ 被称为 Complementary Slackness Condition
 
 另外注意，这个 condition 只是 necessary condition，不符合上述 condition
 的点也可能是 local minimum
@@ -275,30 +275,30 @@ $\l\_j^* = 0$
 
 $$
 \begin{align*}
-\min \; & x\_1^2 + x\_2^2 \\\\
-\st \; & x\_1 + x\_2 \geq 1 \\\\
-& x\_2 \leq 0
+\min \; & x_1^2 + x_2^2 \\\\
+\st \; & x_1 + x_2 \geq 1 \\\\
+& x_2 \leq 0
 \end{align*}
 $$
 
 * Solution:
 
-    定义 Lagrangian function $\c{L}(\b{x}, \bs{\l}) = x\_1^2 + x\_2^2 + \l\_1
-    (1 - x\_1 - x\_2) + \l\_2 x\_2$
+    定义 Lagrangian function $\c{L}(\b{x}, \bs{\l}) = x_1^2 + x_2^2 + \l_1
+    (1 - x_1 - x_2) + \l_2 x_2$
 
     \begin{align*}
-    & \frac{\p \c{L}}{\p x\_1} = 2x\_1 - \l\_1 = 0 \\\\
-    & \frac{\p \c{L}}{\p x\_2} = 2x\_2 - \l\_1 + \l\_2 = 0 \\\\
-    & \l\_1(1 - x\_1 - x\_2) = 0 \\\\
-    & \l\_2 x\_2 = 0
+    & \frac{\p \c{L}}{\p x_1} = 2x_1 - \l_1 = 0 \\\\
+    & \frac{\p \c{L}}{\p x_2} = 2x_2 - \l_1 + \l_2 = 0 \\\\
+    & \l_1(1 - x_1 - x_2) = 0 \\\\
+    & \l_2 x_2 = 0
     \end{align*}
 
-    从最后一个等式我们知道，要么 $\l\_2 = 0$ 要么 $x\_2 = 0$
+    从最后一个等式我们知道，要么 $\l_2 = 0$ 要么 $x_2 = 0$
 
-    * 如果 $x\_2 = 0$，则有 $x\_1 = 1, \l\_1 = 2, \l\_2 = -2$
-    * 如果 $\l\_2 = 0$，则有 $x\_1 = x\_2 = \frac{1}{2}, \l\_1 = 1$
+    * 如果 $x_2 = 0$，则有 $x_1 = 1, \l_1 = 2, \l_2 = -2$
+    * 如果 $\l_2 = 0$，则有 $x_1 = x_2 = \frac{1}{2}, \l_1 = 1$
 
-    其中第一种情况由于 $\l\_2 < 0$ 所以不可行，第二种情况符合条件，
+    其中第一种情况由于 $\l_2 < 0$ 所以不可行，第二种情况符合条件，
     也就是这个问题的解
 
 ### Convex Programming Problem
@@ -306,8 +306,8 @@ $$
 如果公式 2 满足如下条件
 
 * $f(\b{x})$ 是 convex function
-* $h\_j(\b{x})$ 是 convex function
-* $e\_i(\b{x})$ 是 affine function，即 $e\_i(\b{x}) = \b{a}\_i \b{x} + b\_i$
+* $h_j(\b{x})$ 是 convex function
+* $e_i(\b{x})$ 是 affine function，即 $e_i(\b{x}) = \b{a}_i \b{x} + b_i$
 * $S$ 是 convex set
 
 则 2 又被称为 Convex Programming Problem，根据 convex function
@@ -323,16 +323,16 @@ $$
 
     $$ f(\b{x}) \geq f(\b{x}^*) + \nabla f(\b{x}^\*)^T (\b{x} - \b{x}^\*) $$
 
-    由于 $\l\_j^* \geq 0, h\_j(\b{x}) \leq 0$，同时 $h\_j(\b{x})$ 也是 convex
+    由于 $\l_j^* \geq 0, h_j(\b{x}) \leq 0$，同时 $h_j(\b{x})$ 也是 convex
     function 所以有
 
     $$
     \begin{align*}
-    f(\b{x}) \geq & f(\b{x}) + \sum\_j \l\_j^* h\_j(\b{x}) \\\\
+    f(\b{x}) \geq & f(\b{x}) + \sum_j \l_j^* h_j(\b{x}) \\\\
     \geq & f(\b{x}^*) + \nabla f(\b{x}^\*)^T (\b{x} - \b{x}^\*) + 
-           \sum\_j \l\_j^* (h(\b{x}^\*) + \nabla h(\b{x}^\*)^T (\b{x} - \b{x}^\*)) \\\\
-    = & f(\b{x}^*) + \sum\_j \l\_j^\* h(\b{x}^\*) +
-        (\nabla f(\b{x}^*) + \sum\_j \l\_j^\* \nabla h(\b{x}^\*))^T (\b{x} - \b{x}^\*) \\\\
+           \sum_j \l_j^* (h(\b{x}^\*) + \nabla h(\b{x}^\*)^T (\b{x} - \b{x}^\*)) \\\\
+    = & f(\b{x}^*) + \sum_j \l_j^\* h(\b{x}^\*) +
+        (\nabla f(\b{x}^*) + \sum_j \l_j^\* \nabla h(\b{x}^\*))^T (\b{x} - \b{x}^\*) \\\\
     = & f(\b{x}^*)
     \end{align*}
     $$

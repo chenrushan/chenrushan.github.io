@@ -23,7 +23,7 @@ $$\b{x}^{k+1} = \b{x}^k - {H^{k}}^{-1} \b{g}^k$$
 
 之前已经说过每步迭代的 descent direction 可以表示为 $\b{d}^k = -A^k \b{g}^k$，对于 Classical Newton，$A^k = {H^{k}}^{-1}$，另外注意到，传统的 Classical Newton 并不设 step length，也就是 step length 统一设为 1，当然你也可以在每步做 line search。
 
-下图给出 Rosenbrock function $f(\b{x}) = 100(\b{x}\_2 - \b{x}\_1^2)^2 + (1 - \b{x}\_1)^2$ 在点 $(-0.5, 0)$ 处的 quadratic approximation，其中红点表示 $(-0.5, 0)$，绿色的 contour 就是 quadratic approximation 对应的 contour
+下图给出 Rosenbrock function $f(\b{x}) = 100(\b{x}_2 - \b{x}_1^2)^2 + (1 - \b{x}_1)^2$ 在点 $(-0.5, 0)$ 处的 quadratic approximation，其中红点表示 $(-0.5, 0)$，绿色的 contour 就是 quadratic approximation 对应的 contour
 
   <img style="width:80%" src="/resource/NNP/09-newton/rosen3.png" />
 
@@ -35,13 +35,13 @@ $$\b{x}^1 = \b{x}^0 - H^{-1} (H\b{x}^0 - \b{c}) = H^{-1}\b{c}$$
 
 还用 steepest descent 中给出的例子
 
-#### $f(\b{x}) = (\b{x}\_1 - 7)^2 + (\b{x}\_2 - 2)^2$ 和 $f(\b{x}) = 4\b{x}\_1^2 + \b{x}\_2^2 -2\b{x}\_1\b{x}\_2$
+#### $f(\b{x}) = (\b{x}_1 - 7)^2 + (\b{x}_2 - 2)^2$ 和 $f(\b{x}) = 4\b{x}_1^2 + \b{x}_2^2 -2\b{x}_1\b{x}_2$
 
 对于这两个 case，无论你初始点设在哪里，Classical Newton 都是一步即可收敛
 
-#### $f(\b{x}) = 100(\b{x}\_2 - \b{x}\_1^2)^2 + (1 - \b{x}\_1)^2$
+#### $f(\b{x}) = 100(\b{x}_2 - \b{x}_1^2)^2 + (1 - \b{x}_1)^2$
 
-其最优值出现在 (1, 1) 点，利用 Classical Newton + backtrack line search ($\hat{\alpha} = 1, \lambda = 0.3, c\_1 = 1\times 10^{-4}$)
+其最优值出现在 (1, 1) 点，利用 Classical Newton + backtrack line search ($\hat{\alpha} = 1, \lambda = 0.3, c_1 = 1\times 10^{-4}$)
 
 * 初始点为 (0.6, 0.6)，收敛过程如下图所示，以 0.001 为 gradient norm 的阈值，共迭代 10 步
 
@@ -128,14 +128,14 @@ An iterative optimization algorithm is said to be locally convergent if for each
         
         $$
         \begin{align*}
-        \beta\_1 = & \min\_{x \in (x^* - \eta, x^\* + \eta)} f''(x) \\\\
-        \beta\_2 = & \max\_{x \in (x^* - \eta, x^\* + \eta)}|f'''(x)|
+        \beta_1 = & \min_{x \in (x^* - \eta, x^\* + \eta)} f''(x) \\\\
+        \beta_2 = & \max_{x \in (x^* - \eta, x^\* + \eta)}|f'''(x)|
         \end{align*}
         $$
         
-        (<span style="background-color:#faa">注意</span>虽然 $f''(x) > 0$，但其实不用这么强的要求，只要能保证 $f''(x) \neq 0$ 就行了，因为它处在分母的位置，然后定义 $\beta\_1 = \min\_{x \in (x^* - \eta, x^* + \eta)} |f''(x)|$)
+        (<span style="background-color:#faa">注意</span>虽然 $f''(x) > 0$，但其实不用这么强的要求，只要能保证 $f''(x) \neq 0$ 就行了，因为它处在分母的位置，然后定义 $\beta_1 = \min_{x \in (x^* - \eta, x^* + \eta)} |f''(x)|$)
 
-        根据上述定义，$|\frac{f'''(\bar{x}^k)}{2 f''(x^k)}| < \frac{\beta\_2}{2 \beta\_1}$，这样我们就找到了第一个条件中定义的 $\alpha = \frac{\beta\_2}{2 \beta\_1}$
+        根据上述定义，$|\frac{f'''(\bar{x}^k)}{2 f''(x^k)}| < \frac{\beta_2}{2 \beta_1}$，这样我们就找到了第一个条件中定义的 $\alpha = \frac{\beta_2}{2 \beta_1}$
 
     * <p style="background-color: #9f9">对于第二个条件</p>
 

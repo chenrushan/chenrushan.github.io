@@ -31,12 +31,12 @@ Coordinate Descent（以下简称 CD）原理非常简单，就是每次固定 $
       return $\b{x}^k$
 
 给定 convex, differentiable function $f(\b{x})$，CD 可以保证得到 global
-minimum，因为如果在每个维度上都能得到最小值，则有 $\frac{\p f(\b{x})}{\p x\_i}
+minimum，因为如果在每个维度上都能得到最小值，则有 $\frac{\p f(\b{x})}{\p x_i}
 = 0$，也就是
 
 $$
-\Vert \b{g} \Vert = \Vert (\frac{\p f(\b{x})}{\p x\_1}, \cdots,
-\frac{\p f(\b{x})}{\p x\_n}) \Vert = 0
+\Vert \b{g} \Vert = \Vert (\frac{\p f(\b{x})}{\p x_1}, \cdots,
+\frac{\p f(\b{x})}{\p x_n}) \Vert = 0
 $$
 
 但对于 non-differentiable function，CD 就可能有问题，比如下图的情况（[图片来源]
@@ -48,11 +48,11 @@ $$
 下面我们观察两个 quadratic function 的例子看看 CD 在不同情况下的收敛速度，其中
 $x^0 = (-1, -1)^T, \epsilon = 0.01$
 
-* $f(\b{x}) = 4x\_1^2 + x\_2^2$ 
+* $f(\b{x}) = 4x_1^2 + x_2^2$ 
 
     <img style="width:80%" src="/resource/conjgrad/cd1.png" />
 
-* $f(\b{x}) = 4x\_1^2 + x\_2^2 - 2x\_1x\_2$
+* $f(\b{x}) = 4x_1^2 + x_2^2 - 2x_1x_2$
 
     <img style="width:80%" src="/resource/conjgrad/cd2.png" />
 
@@ -80,7 +80,7 @@ n 步之内达到最优解，下面我们将 Conjugate Gradient Method 简称为
 假设 $\b{d}^0, \b{d}^1, \cdots, \b{d}^{n-1}$ 为已知的 $n$ 个 linear independent
 vector，$\b{x}^0$ 为优化的初始点，则任意一个 $\b{x}$ 都可以表示为
 
-$$ \b{x} = \b{x}^0 + \sum\_{i=0}^{n-1} \a^i \b{d}^i \tag{1}$$
+$$ \b{x} = \b{x}^0 + \sum_{i=0}^{n-1} \a^i \b{d}^i \tag{1}$$
 
 其中 $\a^i \in \bb{R}$（把 $\b{x}^0$ 移到左边这个等式就好理解了），记
 $D = (\b{d}^0, \b{d}^1, \cdots, \b{d}^{n-1})$，$\b{a} = (\a^0, \a^1, \cdots,
@@ -96,7 +96,7 @@ f(\b{x}) = & \frac{1}{2} (\b{x}^0 + D\b{a})^T H (\b{x}^0 + D\b{a}) +
 $$
 
 我们可以把最后的式子看成是一个以 $\b{a}$ 为变量的 quadratic function，其
-Hessian 为 $D^THD$，$(D^THD)\_{ij} = {\b{d}^i}^T H\b{d}^j$，如果当 $i\neq j$
+Hessian 为 $D^THD$，$(D^THD)_{ij} = {\b{d}^i}^T H\b{d}^j$，如果当 $i\neq j$
 时有 ${\b{d}^i}^TH\b{d}^j = 0$，也就是 $D^THD$ 为 diagonal matrix，那我们在这个以
 $\b{a}$ 为变量的式子上应用 CD 就可以在 n 步之内得到最优解，其中第 i
 步就得到 $\alpha^{i-1}$ 的最优值。如果我们把 $\b{d}^i$ 看成是 descent
@@ -135,9 +135,9 @@ Conjugate direction 是存在的，可以验证以 $H$ 的 eigenvector 作为 $\
 
     $$
     \begin{align*}
-    & \b{g}^i = H\b{x}^i + \b{c} = H(\b{x}^0 + \sum\_{j=0}^{i-1} \a\_j\b{d}^j) + \b{c}
-      = \sum\_{j=0}^{i-1} \a\_j H \b{d}^j + \b{g}^0 \\\\
-    \Lra \; & {\b{g}^i}^T\b{d}^i = \sum\_{j=0}^{i-1} \a\_j {\b{d}^j}^T H \b{d}^i + {\b{g}^0}^T\b{d}^i \\\\
+    & \b{g}^i = H\b{x}^i + \b{c} = H(\b{x}^0 + \sum_{j=0}^{i-1} \a_j\b{d}^j) + \b{c}
+      = \sum_{j=0}^{i-1} \a_j H \b{d}^j + \b{g}^0 \\\\
+    \Lra \; & {\b{g}^i}^T\b{d}^i = \sum_{j=0}^{i-1} \a_j {\b{d}^j}^T H \b{d}^i + {\b{g}^0}^T\b{d}^i \\\\
     \Lra \; & {\b{g}^i}^T\b{d}^i = {\b{g}^0}^T\b{d}^i (\because {\b{d}^j}^T H \b{d}^i = 0 \; \forall i \neq j)
     \end{align*}
     $$
@@ -146,7 +146,7 @@ Conjugate direction 是存在的，可以验证以 $H$ 的 eigenvector 作为 $\
 
 $$
 \begin{align*}
-& \nabla\_{\a^i} f(\b{x}^i + \a^i \b{d}^i) = 0 \\\\
+& \nabla_{\a^i} f(\b{x}^i + \a^i \b{d}^i) = 0 \\\\
 \Lra \; & (H(\b{x}^i + \a^i \b{d}^i) + \b{c})^T \b{d}^i = 0 \\\\
 \Lra \; & \a^i = -\frac{ {\b{g}^i}^T \b{d}^i}{ {\b{d}^i}^T H \b{d}^i} =
           -\frac{ {\b{g}^0}^T \b{d}^i}{ {\b{d}^i}^T H \b{d}^i} \tag{3}
@@ -160,7 +160,7 @@ $$
     $$
     \begin{align*}
     {\b{g}^i}^T \b{d}^j = & (H\b{x}^i + \b{c})^T \b{d}^j \\\\
-    = & \sum\_{k=0}^{i-1} \a^k {\b{d}^k}^T H \b{d}^j + (H\b{x}^0 + \b{c})^T \b{d}^j \\\\
+    = & \sum_{k=0}^{i-1} \a^k {\b{d}^k}^T H \b{d}^j + (H\b{x}^0 + \b{c})^T \b{d}^j \\\\
     = & \a^j{\b{d}^j}^T H \b{d}^j + (H\b{x}^0 + \b{c})^T \b{d}^j
     \end{align*}
     $$
@@ -173,39 +173,39 @@ $$
 
     $$
     \begin{align*}
-    \sum\_{i=0}^{n-1} a^i \b{d}^i = 0 \; \Lra \; &
-    \sum\_{i=0}^{n-1} a^i {\b{d}^j}^T H \b{d}^i = 0 \;\; \forall j = 0, \cdots, n-1\\\\
+    \sum_{i=0}^{n-1} a^i \b{d}^i = 0 \; \Lra \; &
+    \sum_{i=0}^{n-1} a^i {\b{d}^j}^T H \b{d}^i = 0 \;\; \forall j = 0, \cdots, n-1\\\\
     \Lra \; & a^j {\b{d}^j}^T H \b{d}^j = 0 \\\\
     \Lra \; & a^j = 0 \;\; \forall j = 0, \cdots, n-1
     \end{align*}
     $$
 
 > 性质 4：令 $\c{B}^k = \span\\{ \b{d}^0, \b{d}^1, \cdots, \b{d}^{k-1} \\},
-> \b{x}^k = \b{x}^0 + \sum\_{i=0}^{k-1} \a^i \b{d}^i \;\; (k \leq n)$，则
-> $$\b{x}^k = \argmin\_{\b{x} \in \b{x}^0 + \c{B}^k} f(\b{x})$$
+> \b{x}^k = \b{x}^0 + \sum_{i=0}^{k-1} \a^i \b{d}^i \;\; (k \leq n)$，则
+> $$\b{x}^k = \argmin_{\b{x} \in \b{x}^0 + \c{B}^k} f(\b{x})$$
 
 * Proof:
 
-    任何一个 $\b{x}^0 + \c{B}^k$ 中的点都可以表示为 $\b{x}^0 + \sum\_{i=0}^{k-1}
+    任何一个 $\b{x}^0 + \c{B}^k$ 中的点都可以表示为 $\b{x}^0 + \sum_{i=0}^{k-1}
     u^i \b{d}^i, u \in \bb{R}$，所以这个性质等价于
 
     $$
     \begin{align*}
-    & f(\b{x}^0 + \sum\_{i=0}^{k-1} \a^i \b{d}^i) \leq f(\b{x}^0 + \sum\_{i=0}^{k-1} u^i \b{d}^i) \\\\
-    \Llra & \frac{1}{2} (\b{x}^0 + \sum\_{i=0}^{k-1} \a^i \b{d}^i)^T H (\b{x}^0 +
-            \sum\_{i=0}^{k-1} \a^i \b{d}^i) + \b{c}^T(\b{x}^0 +
-            \sum\_{i=0}^{k-1} \a^i \b{d}^i) \leq \\\\
-          & \frac{1}{2} (\b{x}^0 + \sum\_{i=0}^{k-1} u^i \b{d}^i)^T H (\b{x}^0 +
-            \sum\_{i=0}^{k-1} u^i \b{d}^i) + \b{c}^T(\b{x}^0 +
-            \sum\_{i=0}^{k-1} u^i \b{d}^i) \\\\
-    \Llra & \frac{1}{2}(\sum\_{i=0}^{k-1} \a^i \b{d}^i)^T H (\sum\_{i=0}^{k-1} \a^i \b{d}^i) + 
-            (H\b{x}^0 + \b{c})^T \sum\_{i=0}^{k-1} \a^i \b{d}^i \leq \\\\
-          & \frac{1}{2}(\sum\_{i=0}^{k-1} u^i \b{d}^i)^T H (\sum\_{i=0}^{k-1} u^i \b{d}^i) + 
-            (H\b{x}^0 + \b{c})^T \sum\_{i=0}^{k-1} u^i \b{d}^i \\\\
-    \Llra & \sum\_{i=0}^{k-1} (\frac{1}{2} {\a^i}^2 {\b{d}^i}^T H \b{d}^i + \a^i {\b{g}^0}^T \b{d}^i) \leq
-            \sum\_{i=0}^{k-1} (\frac{1}{2} {u^i}^2 {\b{d}^i}^T H \b{d}^i + u^i {\b{g}^0}^T \b{d}^i) \\\\
-    \Llra & \sum\_{i=0}^{k-1} (\frac{1}{2} {\a^i}^2 {\b{d}^i}^T H \b{d}^i + \a^i {\b{g}^i}^T \b{d}^i) \leq
-            \sum\_{i=0}^{k-1} (\frac{1}{2} {u^i}^2 {\b{d}^i}^T H \b{d}^i + u^i {\b{g}^i}^T \b{d}^i) \tag{4}
+    & f(\b{x}^0 + \sum_{i=0}^{k-1} \a^i \b{d}^i) \leq f(\b{x}^0 + \sum_{i=0}^{k-1} u^i \b{d}^i) \\\\
+    \Llra & \frac{1}{2} (\b{x}^0 + \sum_{i=0}^{k-1} \a^i \b{d}^i)^T H (\b{x}^0 +
+            \sum_{i=0}^{k-1} \a^i \b{d}^i) + \b{c}^T(\b{x}^0 +
+            \sum_{i=0}^{k-1} \a^i \b{d}^i) \leq \\\\
+          & \frac{1}{2} (\b{x}^0 + \sum_{i=0}^{k-1} u^i \b{d}^i)^T H (\b{x}^0 +
+            \sum_{i=0}^{k-1} u^i \b{d}^i) + \b{c}^T(\b{x}^0 +
+            \sum_{i=0}^{k-1} u^i \b{d}^i) \\\\
+    \Llra & \frac{1}{2}(\sum_{i=0}^{k-1} \a^i \b{d}^i)^T H (\sum_{i=0}^{k-1} \a^i \b{d}^i) + 
+            (H\b{x}^0 + \b{c})^T \sum_{i=0}^{k-1} \a^i \b{d}^i \leq \\\\
+          & \frac{1}{2}(\sum_{i=0}^{k-1} u^i \b{d}^i)^T H (\sum_{i=0}^{k-1} u^i \b{d}^i) + 
+            (H\b{x}^0 + \b{c})^T \sum_{i=0}^{k-1} u^i \b{d}^i \\\\
+    \Llra & \sum_{i=0}^{k-1} (\frac{1}{2} {\a^i}^2 {\b{d}^i}^T H \b{d}^i + \a^i {\b{g}^0}^T \b{d}^i) \leq
+            \sum_{i=0}^{k-1} (\frac{1}{2} {u^i}^2 {\b{d}^i}^T H \b{d}^i + u^i {\b{g}^0}^T \b{d}^i) \\\\
+    \Llra & \sum_{i=0}^{k-1} (\frac{1}{2} {\a^i}^2 {\b{d}^i}^T H \b{d}^i + \a^i {\b{g}^i}^T \b{d}^i) \leq
+            \sum_{i=0}^{k-1} (\frac{1}{2} {u^i}^2 {\b{d}^i}^T H \b{d}^i + u^i {\b{g}^i}^T \b{d}^i) \tag{4}
     \end{align*}
     $$
 
@@ -238,13 +238,13 @@ $\bb{R}^n$ 中的最优点
 我们可以按以下方法构建出 H-conjugate vector $\b{d}^0, \cdots, \b{d}^{n-1}$
 
 * $\b{d}^0 = \b{v}^0$
-* $\b{d}^i = \b{v}^i + \sum\_{k=0}^{i-1} \beta^k \b{d}^k$
+* $\b{d}^i = \b{v}^i + \sum_{k=0}^{i-1} \beta^k \b{d}^k$
 
 对于系数 $\beta$，根据 ${\b{d}^i}^T H\b{d}^j = 0 \; \forall i \neq j$，有
 
 $$
 \begin{align*}
-& {\b{d}^j}^T H \b{d}^i = {\b{d}^j}^T H \b{v}^i + \sum\_{k=0}^{i-1} \beta^k
+& {\b{d}^j}^T H \b{d}^i = {\b{d}^j}^T H \b{v}^i + \sum_{k=0}^{i-1} \beta^k
   {\b{d}^j}^T H \b{d}^k \\\\
 \Lra \; & 0 = {\b{d}^j}^T H \b{v}^i + \beta^j {\b{d}^j}^T H \b{d}^j \\\\
 \Lra \; & \beta^j = -\frac{ {\b{d}^j}^T H \b{v}^i}{ {\b{d}^j}^T H \b{d}^j}
@@ -264,7 +264,7 @@ ${\b{g}^1}^T \b{g}^0 = 0$，所以 $\b{g}^1$ 和 $\b{g}^0$ linear independent，
 因为遇到这种情况优化可以停止了，你已经到最优点了）这样就有
 
 $$
-\b{d}^i = -\b{g}^i + \sum\_{k=0}^{i-1}
+\b{d}^i = -\b{g}^i + \sum_{k=0}^{i-1}
 \frac{ {\b{d}^k}^T H \b{g}^i}{ {\b{d}^k}^T H \b{d}^k} \b{d}^k \tag{5}
 $$
 
@@ -276,7 +276,7 @@ $$H\b{d}^i = \frac{\b{g}^{i+1} - \b{g}^i}{\a^i}$$
 代入公式 4 有
 
 $$
-\b{d}^i = -\b{g}^i + \sum\_{k=0}^{i-1}
+\b{d}^i = -\b{g}^i + \sum_{k=0}^{i-1}
 \frac{ {\b{g}^i}^T (\b{g}^{k+1} - \b{g}^k) }{ {\b{d}^k}^T (\b{g}^{k+1} -
 \b{g}^k)} \b{d}^k \tag{6}
 $$
@@ -314,7 +314,7 @@ $$
       $k = k + 1$
     Output: $\b{x}^k$
 
-下面看看 CG 在 $f(\b{x}) = 4x\_1^2 + x\_2^2 - 2x\_1x\_2$ 上的应用效果
+下面看看 CG 在 $f(\b{x}) = 4x_1^2 + x_2^2 - 2x_1x_2$ 上的应用效果
 
 <img style="width:80%" src="/resource/conjgrad/cg.png" />
 
@@ -355,16 +355,16 @@ $$
     做近似，常用的方法有 3 种
 
     * Fletcher-Reeves method
-      $$\beta^k\_{FR} = \frac{ {\b{g}^k}^T \b{g}^k}{ {\b{g}^{k-1}}^T \b{g}^{k-1}}$$
+      $$\beta^k_{FR} = \frac{ {\b{g}^k}^T \b{g}^k}{ {\b{g}^{k-1}}^T \b{g}^{k-1}}$$
     * Polak-Ribiere method
-      $$\beta^k\_{PR} = \frac{ {\b{g}^k}^T (\b{g}^k - \b{g}^{k-1})}{ {\b{g}^{k-1}}^T \b{g}^{k-1}}$$
+      $$\beta^k_{PR} = \frac{ {\b{g}^k}^T (\b{g}^k - \b{g}^{k-1})}{ {\b{g}^{k-1}}^T \b{g}^{k-1}}$$
     * Hestenes-Steifel method
-      $$\beta^k\_{HS} = \frac{ {\b{g}^k}^T (\b{g}^k - \b{g}^{k-1})}{ (\b{g}^k - \b{g}^{k-1})^T \b{d}^{k-1}}$$
+      $$\beta^k_{HS} = \frac{ {\b{g}^k}^T (\b{g}^k - \b{g}^{k-1})}{ (\b{g}^k - \b{g}^{k-1})^T \b{d}^{k-1}}$$
 
-    对比公式 6，可以发现这 3 种方法都是不同程度的近似，其中 $\beta^k\_{FR}$
+    对比公式 6，可以发现这 3 种方法都是不同程度的近似，其中 $\beta^k_{FR}$
     其实就是 quadratic function 中使用的 $\beta^k$
 
-    关于 $\beta^k\_{HS}$，它还有一点比较有意思，就是它跟 lBFGS 还能攀上点关系，
+    关于 $\beta^k_{HS}$，它还有一点比较有意思，就是它跟 lBFGS 还能攀上点关系，
     从 [Quasi Newton Method](/nnumop/2014/07/13/NP-10-quasi-newton/)
     这篇笔记中我们知道
 
@@ -378,12 +378,12 @@ $$
     如果同时使用 exact line search，则 ${\delta^{k-1}}^T\b{g}^k = 0$，则有
 
     $$
-    \b{d}^k\_{lBFGS} = -B^k\b{g}^k = -\b{g}^k + \frac{\delta \gamma^T \b{g}^k}
+    \b{d}^k_{lBFGS} = -B^k\b{g}^k = -\b{g}^k + \frac{\delta \gamma^T \b{g}^k}
     {\delta^T \gamma} = -\b{g}^k + \frac{ {\b{g}^k}^T (\b{g}^k - \b{g}^{k-1})}
     { (\b{g}^k - \b{g}^{k-1})^T \b{d}^{k-1}} \b{d}^{k-1}
     $$
 
-    可以发现 $\b{d}^{k-1}$ 前面的系数就是 $\beta^k\_{HS}$
+    可以发现 $\b{d}^{k-1}$ 前面的系数就是 $\beta^k_{HS}$
 
 * $\b{d}$ 的重新初始化
 

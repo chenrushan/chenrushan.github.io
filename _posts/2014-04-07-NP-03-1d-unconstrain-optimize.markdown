@@ -9,7 +9,7 @@ tags: NPTEL, numerical optimization
 
 这门课程的重点是 multi-dimensional function 的 constrained optimization，但它用到的很多技术都来自于 unconstrained optimization，而无论是 1-dimensional 还是 multi-dimensional 它们优化的思想都是相通的，因此这篇文章就首先介绍 optimization 中最简单的 1-dimensional(1d) unconstrained optimization。这个问题可以表示为
 
-$$ \min\_{x\in X} \; f(x) $$
+$$ \min_{x\in X} \; f(x) $$
 
 其中 $X \subseteq R, f: X \rightarrow \mathbb{R}$，举个例子，如函数 $f(x) = (x - a)^2 + b$
 
@@ -29,7 +29,7 @@ $$ \min\_{x\in X} \; f(x) $$
 
 <object data="/resource/NNP/03-1d-uncon-op/function.svg" type="image/svg+xml" class="blkcenter"></object>
 
-从图里我们很容易看出 global minimum 是 $x\_2$，但是我们很难设计出一种算法直接得到这么一个解，因此在大多数情况下，我们是去求解 local minimum，而不是 global minimum。
+从图里我们很容易看出 global minimum 是 $x_2$，但是我们很难设计出一种算法直接得到这么一个解，因此在大多数情况下，我们是去求解 local minimum，而不是 global minimum。
 
 ### Local Minimum
 
@@ -37,7 +37,7 @@ $$ \min\_{x\in X} \; f(x) $$
 给定 $x^*\in X$ 如果存在 $\delta > 0$，使得 $f(x^*) \leq f(x) \; \forall x \in X \cap B(x^*, \delta)$，则 $x^*$ 被称为 local minimum
 </blockquote>
 
-根据这个定义，上图中的 $x\_1$ 到 $x\_5$ 都是 local minimum，其中 $x\_4$ 有点特别，其周围存在一个水平线段，在这个区域内都有 $f(x) = f(x\_4)$。
+根据这个定义，上图中的 $x_1$ 到 $x_5$ 都是 local minimum，其中 $x_4$ 有点特别，其周围存在一个水平线段，在这个区域内都有 $f(x) = f(x_4)$。
 
 也许有人认为，如果我们有办法遍历所有的 local minimum，我们就可以得到 global minimum，其实不然，以下面这个函数为例
 
@@ -127,7 +127,7 @@ $f(x)$ 在 $a$ 点的 $f'(a) = 0, f''(a) = 0$ 但是 $a$ 并不是 local minimum
 
 ----------
 
-考虑 $\min\_{x \in \mathbb{R}} (x^2 - 1)^3$
+考虑 $\min_{x \in \mathbb{R}} (x^2 - 1)^3$
 
 首先根据一阶导得到所有的 stationary point
 
@@ -149,16 +149,16 @@ $$ f'(x) = 6x(x^2 - 1)^2 = 0 \Rightarrow f'(0) = f'(1) = f'(-1) = 0$$
 
 Newton method 通过迭代的方式去求一个函数的 root，也就是所有令 $f(x) = 0$ 的 $x$。通俗的说，迭代步骤是这样
 
-* 首先选取一个初始点 $x\_0$
-* 根据 $f(x)$ 在点 $(x\_0, f(x\_0))$ 的切线与 $x$ 轴的交点得到 $x\_1$，如下图左边
-* 再根据 $f(x)$ 在点 $(x\_1, f(x\_1))$ 的切线与 $x$ 轴的交点得到 $x\_2$，如下图右边
+* 首先选取一个初始点 $x_0$
+* 根据 $f(x)$ 在点 $(x_0, f(x_0))$ 的切线与 $x$ 轴的交点得到 $x_1$，如下图左边
+* 再根据 $f(x)$ 在点 $(x_1, f(x_1))$ 的切线与 $x$ 轴的交点得到 $x_2$，如下图右边
 * 如此循环，不断逼近 $f(x)$ 的 root，并最终求得这个 root
 
 <object data="/resource/NNP/03-1d-uncon-op/newton.svg" type="image/svg+xml" class="blkcenter"></object>
 
 从图中可以看到，根据初始点的不同，你最后得到的 root 也会不同，比如你初始点选择 $(0, 0)$，那你就会得到左边的 root。
 
-给定 $f(x)$ 上的一个点 $(x\_k, f(x\_k))$，他对应的切线可以表示为 $\frac{y - f(x\_k)}{x - x\_k} = f'(x\_k)$，该切线与 $x$ 轴的交点是 $x = x\_k - \frac{f(x\_k)}{f'(x\_k)}$，所以上面的步骤可以转换为如下算法
+给定 $f(x)$ 上的一个点 $(x_k, f(x_k))$，他对应的切线可以表示为 $\frac{y - f(x_k)}{x - x_k} = f'(x_k)$，该切线与 $x$ 轴的交点是 $x = x_k - \frac{f(x_k)}{f'(x_k)}$，所以上面的步骤可以转换为如下算法
 
 <blockquote>
 Newton($f$, $\varepsilon$, $x_0$) <br/>
@@ -175,18 +175,18 @@ Newton($f$, $\varepsilon$, $x_0$) <br/>
 
 <object data="/resource/NNP/03-1d-uncon-op/notconverge.svg" type="image/svg+xml" class="blkcenter"></object>
 
-如果 $x\_0$ 选在如图所示的位置，则 Newton 迭代会使你不断远离 root $0$。通常情况下，初始点越靠近 root 收敛的机会也会越大。
+如果 $x_0$ 选在如图所示的位置，则 Newton 迭代会使你不断远离 root $0$。通常情况下，初始点越靠近 root 收敛的机会也会越大。
 
 ### Newton Method for Optimization
 
 在求 local minimum 时，我们需要将 Newton method 应用于 $f'(x)$，而不是直接应用到 $f(x)$，因为我们要的是 $f'(x)$ 的 root，而不是 $f(x)$ 的 root。
 
-将 Newton method 应用于 $f'(x)$ 其实等价于每次迭代的时候对 $f(x)$ 在 $x\_k$ 处做一个二阶近似，即构建了一个函数 $q$
+将 Newton method 应用于 $f'(x)$ 其实等价于每次迭代的时候对 $f(x)$ 在 $x_k$ 处做一个二阶近似，即构建了一个函数 $q$
 
-$$q(x) = f(x\_k) + f'(x\_k)(x - x\_k) + \frac{1}{2} f''(x\_k)(x - x\_k)^2$$
+$$q(x) = f(x_k) + f'(x_k)(x - x_k) + \frac{1}{2} f''(x_k)(x - x_k)^2$$
 
-如果我们优化 $q$ 的话，即令 $q'(x\_k) = 0$ 我们得到
+如果我们优化 $q$ 的话，即令 $q'(x_k) = 0$ 我们得到
 
-$$ x\_{k + 1} = x\_k - \frac{f'(x\_k)}{f''(x\_k)} $$
+$$ x_{k + 1} = x_k - \frac{f'(x_k)}{f''(x_k)} $$
 
 这与将 Newton method 应用于 $f'(x)$ 的迭代步骤是完全一样的。

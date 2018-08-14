@@ -15,7 +15,7 @@ $$ f(\lambda \b{x}_1 + (1 - \lambda) \b{x}_2) \leq \lambda f(\b{x}_1) + (1 - \la
 则函数 $f$ 称为 convex function
 </blockquote>
 
-注意 $C$ 是个 convex set，否则不能保证所有的 $\lambda \b{x}\_1 + (1 - \lambda)\b{x}\_2$ 都在 $C$ 内。
+注意 $C$ 是个 convex set，否则不能保证所有的 $\lambda \b{x}_1 + (1 - \lambda)\b{x}_2$ 都在 $C$ 内。
 
 如果条件中 $\leq$ 变成 $<$，同时 $\lambda \in (0, 1)$ 则函数 $f$ 称为 strictly convex function。
 
@@ -72,13 +72,13 @@ Convex programming 的所有 global minimum 构成一个 convex set
 
 * 证明
 
-    假设 $\b{x}\_1, \b{x}\_2$ 为 local minimum
+    假设 $\b{x}_1, \b{x}_2$ 为 local minimum
 
     $$
-    f(\lambda \b{x}\_1 + (1 - \lambda) \b{x}\_2) \leq \lambda f(\b{x}\_1) + (1 - \lambda) f(\b{x}\_2) = f(\b{x}\_1)
+    f(\lambda \b{x}_1 + (1 - \lambda) \b{x}_2) \leq \lambda f(\b{x}_1) + (1 - \lambda) f(\b{x}_2) = f(\b{x}_1)
     $$
 
-    这里不等号不能成立，所以 $\forall \lambda \in [0, 1] \; \lambda \b{x}\_1 + (1 - \lambda) \b{x}\_2$ 也都是 local minimum
+    这里不等号不能成立，所以 $\forall \lambda \in [0, 1] \; \lambda \b{x}_1 + (1 - \lambda) \b{x}_2$ 也都是 local minimum
 
 ### Epigraph
 
@@ -98,27 +98,27 @@ Convex programming 的所有 global minimum 构成一个 convex set
 
     * epigraph 为 convex set $\Rightarrow$ convex function
 
-        利用 $(\b{x}\_1, f(\b{x}\_1)), (\b{x}\_2, f(\b{x}\_2)) \in$ epigraph 的性质即可证得
+        利用 $(\b{x}_1, f(\b{x}_1)), (\b{x}_2, f(\b{x}_2)) \in$ epigraph 的性质即可证得
 
 与 epigraph 相对的一个概念是 hypograph，hypograph 是这样的集合 $\\{ (\b{x}, y) : \b{x} \in X, y \leq f(\b{x})\\}$
 
 ### Level Set
 
-Level set 是这么一个集合 $C\_{\alpha} = \\{ \b{x} \in C : f(\b{x}) \leq \alpha, \alpha \in \mathbb{R} \\}$
+Level set 是这么一个集合 $C_{\alpha} = \\{ \b{x} \in C : f(\b{x}) \leq \alpha, \alpha \in \mathbb{R} \\}$
 
-如果 $f(\b{x})$ 是 convex function 则 $C\_{\alpha}$ 是一个 convex set (证明简单)，反之不成立，比如对于 $f(x) = x^3$，它的 level set 就是 convex set，但是函数并不是 convex function。
+如果 $f(\b{x})$ 是 convex function 则 $C_{\alpha}$ 是一个 convex set (证明简单)，反之不成立，比如对于 $f(x) = x^3$，它的 level set 就是 convex set，但是函数并不是 convex function。
 
 有了 level set 的定义，就可以进一步细化 convex programming problem 的定义，通常 convex programming problem 都有如下形式
 
 $$
 \begin{align*}
 & \min \; f(\b{x}) \\\\
-s.t. & h\_i(\b{x}) \leq 0 \;\; i = 1 \rightarrow m \\\\
-& \b{a}^T\_j \b{x} + b\_j = 0 \;\; j = 1 \rightarrow l \\\\
+s.t. & h_i(\b{x}) \leq 0 \;\; i = 1 \rightarrow m \\\\
+& \b{a}^T_j \b{x} + b_j = 0 \;\; j = 1 \rightarrow l \\\\
 \end{align*}
 $$
 
-其中 $f$ 和 $h\_i$ 都是 convex function。这里每个约束都是一个 level set，根据前面性质可知，这些 level set 都是 convex set，而 convex set 的交集也是 convex set。
+其中 $f$ 和 $h_i$ 都是 convex function。这里每个约束都是一个 level set，根据前面性质可知，这些 level set 都是 convex set，而 convex set 的交集也是 convex set。
 
 ### Convexity and Gradient
 
@@ -134,25 +134,25 @@ $$f(\b{x}_2) \geq f(\b{x}_1) + g^T(\b{x}_1)(\b{x}_2 - \b{x}_1)$$
 
     * Convexity $\Rightarrow$ 不等式成立
 
-        Convexity 意味着 $f(\lambda \b{x}\_2 + (1 - \lambda)\b{x}\_1) \leq \lambda f(\b{x}\_2) + (1 - \lambda)f(\b{x}\_1) \; \lambda \in [0, 1]$，这个不等式等价于
+        Convexity 意味着 $f(\lambda \b{x}_2 + (1 - \lambda)\b{x}_1) \leq \lambda f(\b{x}_2) + (1 - \lambda)f(\b{x}_1) \; \lambda \in [0, 1]$，这个不等式等价于
 
         $$
         \begin{align*}
-        & f(\b{x}\_1 + \lambda (\b{x}\_2 - \b{x}\_1)) \leq f(\b{x}\_1) + \lambda(f(\b{x}\_2) - f(\b{x}\_1)) \\\\
-        \Rightarrow & \frac{f(\b{x}\_1 + \lambda (\b{x}\_2 - \b{x}\_1)) - f(\b{x}\_1)}{\lambda} \leq f(\b{x}\_2) - f(\b{x}\_1)
+        & f(\b{x}_1 + \lambda (\b{x}_2 - \b{x}_1)) \leq f(\b{x}_1) + \lambda(f(\b{x}_2) - f(\b{x}_1)) \\\\
+        \Rightarrow & \frac{f(\b{x}_1 + \lambda (\b{x}_2 - \b{x}_1)) - f(\b{x}_1)}{\lambda} \leq f(\b{x}_2) - f(\b{x}_1)
         \end{align*}
         $$
 
-        取极限 $\lambda \rightarrow 0^+$，左边就是方向导数等于 $g^T(\b{x}\_1) (\b{x}\_2 - \b{x}\_1)$
+        取极限 $\lambda \rightarrow 0^+$，左边就是方向导数等于 $g^T(\b{x}_1) (\b{x}_2 - \b{x}_1)$
 
     * 不等式成立 $\Rightarrow$ Convexity
 
-        令 $\b{x} = \lambda \b{x}\_1 + (1 - \lambda)\b{x}\_2 \; \lambda \in [0, 1]$，不等式成立意味着
+        令 $\b{x} = \lambda \b{x}_1 + (1 - \lambda)\b{x}_2 \; \lambda \in [0, 1]$，不等式成立意味着
 
         $$
         \begin{align*}
-        f(\b{x}\_1) \geq f(\b{x}) + g^T(\b{x})(\b{x}\_1 - \b{x}) \\\\
-        f(\b{x}\_2) \geq f(\b{x}) + g^T(\b{x})(\b{x}\_2 - \b{x})
+        f(\b{x}_1) \geq f(\b{x}) + g^T(\b{x})(\b{x}_1 - \b{x}) \\\\
+        f(\b{x}_2) \geq f(\b{x}) + g^T(\b{x})(\b{x}_2 - \b{x})
         \end{align*}
         $$
 
@@ -160,14 +160,14 @@ $$f(\b{x}_2) \geq f(\b{x}_1) + g^T(\b{x}_1)(\b{x}_2 - \b{x}_1)$$
 
         $$
         \begin{align*}
-        & \lambda f(\b{x}\_1) + (1 - \lambda) f(\b{x}\_2) \\\\
-        \geq & f(\b{x}) + \lambda g^T(\b{x})(\b{x}\_1 - \b{x}) + (1 - \lambda) g^T(\b{x})(\b{x}\_2 - \b{x}) \\\\
-        = & f(\b{x}) + \lambda g^T(\b{x})(\b{x}\_1 - \b{x}\_2) + g^T(\b{x})(\b{x}\_2 - \b{x}) \\\\
-        = & f(\b{x}) + g^T(\b{x})(\lambda \b{x}\_1 + (1 - \lambda)\b{x}\_2 - \b{x}) \\\\
+        & \lambda f(\b{x}_1) + (1 - \lambda) f(\b{x}_2) \\\\
+        \geq & f(\b{x}) + \lambda g^T(\b{x})(\b{x}_1 - \b{x}) + (1 - \lambda) g^T(\b{x})(\b{x}_2 - \b{x}) \\\\
+        = & f(\b{x}) + \lambda g^T(\b{x})(\b{x}_1 - \b{x}_2) + g^T(\b{x})(\b{x}_2 - \b{x}) \\\\
+        = & f(\b{x}) + g^T(\b{x})(\lambda \b{x}_1 + (1 - \lambda)\b{x}_2 - \b{x}) \\\\
         \end{align*}
         $$
 
-        由于 $\b{x} = \lambda \b{x}\_1 + (1 - \lambda)\b{x}\_2$，所以最后一个式子就是 $f(\lambda \b{x}\_1 + (1 - \lambda)\b{x}\_2)$
+        由于 $\b{x} = \lambda \b{x}_1 + (1 - \lambda)\b{x}_2$，所以最后一个式子就是 $f(\lambda \b{x}_1 + (1 - \lambda)\b{x}_2)$
 
 根据这个定理，如果存在 $\b{x}^* \in C$ 使得 $g(\b{x}^\*) = 0$，则有 $f(\b{x}) \geq f(\b{x}^\*) \; \forall \b{x} \in C$，也就是 $\b{x}^\*$ 就是 minimum。
 
@@ -183,33 +183,33 @@ $$f(\b{x}_2) \geq f(\b{x}_1) + g^T(\b{x}_1)(\b{x}_2 - \b{x}_1)$$
 
     * $H(\b{x})$ PSD $\Rightarrow$ $f$ is convex function 
 
-        给定 $\b{x}\_1, \b{x}\_2 \in C$，根据 Truncated Taylor Series 有
+        给定 $\b{x}_1, \b{x}_2 \in C$，根据 Truncated Taylor Series 有
 
-        $$f(\b{x}\_2) = f(\b{x}\_1) + f'(\b{x}\_1)(\b{x}\_2 - \b{x}\_1) + \frac{1}{2} (\b{x}\_2 - \b{x}\_1)^T H(\b{x}) (\b{x}\_2 - \b{x}\_1)$$
+        $$f(\b{x}_2) = f(\b{x}_1) + f'(\b{x}_1)(\b{x}_2 - \b{x}_1) + \frac{1}{2} (\b{x}_2 - \b{x}_1)^T H(\b{x}) (\b{x}_2 - \b{x}_1)$$
 
-        其中 $\b{x}$ 为 $\b{x}\_1, \b{x}\_2$ 之间的任意一点
+        其中 $\b{x}$ 为 $\b{x}_1, \b{x}_2$ 之间的任意一点
 
-        由于 $H(\b{x})$ PSD，所以 $(\b{x}\_2 - \b{x}\_1)^T H(\b{x}) (\b{x}\_2 - \b{x}\_1) \geq 0$，所以
+        由于 $H(\b{x})$ PSD，所以 $(\b{x}_2 - \b{x}_1)^T H(\b{x}) (\b{x}_2 - \b{x}_1) \geq 0$，所以
 
-        $$f(\b{x}\_2) \geq f(\b{x}\_1) + f'(\b{x}\_1)(\b{x}\_2 - \b{x}\_1)$$
+        $$f(\b{x}_2) \geq f(\b{x}_1) + f'(\b{x}_1)(\b{x}_2 - \b{x}_1)$$
 
         根据前面的定理可知，$f$ 为 convex function
 
     * $H(\b{x})$ is not PSD $\Ra$ $f$ is not convex
 
-        假设 $H$ 在点 $\b{x}\_1$ 处为 negative definite，由于 $f \in \mathcal{C}^2$，
-        所以存在某个区域 $B(\b{x}\_1, \delta)$，$\forall \b{x} \in B(\b{x}\_1, \delta)$，
-        $H$ 为 negative definite，令 $\b{x}\_2 \in B(\b{x}\_1, \delta)$
+        假设 $H$ 在点 $\b{x}_1$ 处为 negative definite，由于 $f \in \mathcal{C}^2$，
+        所以存在某个区域 $B(\b{x}_1, \delta)$，$\forall \b{x} \in B(\b{x}_1, \delta)$，
+        $H$ 为 negative definite，令 $\b{x}_2 \in B(\b{x}_1, \delta)$
 
         根据 Truncated Taylor Series 有
 
-        $$f(\b{x}\_2) = f(\b{x}\_1) + f'(\b{x}\_1)(\b{x}\_2 - \b{x}\_1) + \frac{1}{2} (\b{x}\_2 - \b{x}\_1)^T H(\b{x}) (\b{x}\_2 - \b{x}\_1)$$
+        $$f(\b{x}_2) = f(\b{x}_1) + f'(\b{x}_1)(\b{x}_2 - \b{x}_1) + \frac{1}{2} (\b{x}_2 - \b{x}_1)^T H(\b{x}) (\b{x}_2 - \b{x}_1)$$
 
-        其中 $\b{x}$ 为 $\b{x}\_1, \b{x}\_2$ 之间的任意一点，因此 $\b{x} \in
-        B(\b{x}\_1, \delta)$，所以 $(\b{x}\_2 - \b{x}\_1)^T H(\b{x}) (\b{x}\_2 -
-        \b{x}\_1) < 0$，这样
+        其中 $\b{x}$ 为 $\b{x}_1, \b{x}_2$ 之间的任意一点，因此 $\b{x} \in
+        B(\b{x}_1, \delta)$，所以 $(\b{x}_2 - \b{x}_1)^T H(\b{x}) (\b{x}_2 -
+        \b{x}_1) < 0$，这样
 
-        $$f(\b{x}\_2) < f(\b{x}\_1) + f'(\b{x}\_1)(\b{x}\_2 - \b{x}\_1)$$
+        $$f(\b{x}_2) < f(\b{x}_1) + f'(\b{x}_1)(\b{x}_2 - \b{x}_1)$$
 
         因此 $f$ 不是 convex function $\EOP$
 
@@ -235,10 +235,10 @@ $$f(\sum_{i=1}^{k} \lambda_i \b{x}_i) \leq \sum_{i=1}^{k} \lambda_if(\b{x}_i)$$
 
         $$
         \begin{align*}
-        & f(\sum\_{i = 1}^k \lambda\_i \b{x}\_i) \\\\
-        = & f(\sum\_{i = 1}^{k-1} \lambda\_i \b{x}\_i + \lambda\_k \b{x}\_k) \\\\
-        = & f((1 - \lambda\_k)\sum\_{i = 1}^{k-1} \frac{\lambda\_i}{1 - \lambda\_k} \b{x}\_i + \lambda\_k \b{x}\_k) \\\\
-        \leq & (1 - \lambda\_k)f(\sum\_{i = 1}^{k-1} \frac{\lambda\_i}{1 - \lambda\_k} \b{x}\_i) + \lambda\_k f(\b{x}\_k)
+        & f(\sum_{i = 1}^k \lambda_i \b{x}_i) \\\\
+        = & f(\sum_{i = 1}^{k-1} \lambda_i \b{x}_i + \lambda_k \b{x}_k) \\\\
+        = & f((1 - \lambda_k)\sum_{i = 1}^{k-1} \frac{\lambda_i}{1 - \lambda_k} \b{x}_i + \lambda_k \b{x}_k) \\\\
+        \leq & (1 - \lambda_k)f(\sum_{i = 1}^{k-1} \frac{\lambda_i}{1 - \lambda_k} \b{x}_i) + \lambda_k f(\b{x}_k)
         \end{align*}
         $$
 
@@ -249,7 +249,7 @@ $$f(\sum_{i=1}^{k} \lambda_i \b{x}_i) \leq \sum_{i=1}^{k} \lambda_if(\b{x}_i)$$
 假设 $f$ 是 convex function，则下面的操作依然能得到 convex function
 
 1. $\alpha f \;\;\; \forall\alpha > 0$
-2. $\sum\_i \alpha\_i f\_i \;\;\; \forall\alpha\_i > 0$
+2. $\sum_i \alpha_i f_i \;\;\; \forall\alpha_i > 0$
 
 ### Function Maximum 
 

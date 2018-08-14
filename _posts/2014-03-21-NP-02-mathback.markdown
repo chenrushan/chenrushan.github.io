@@ -88,9 +88,9 @@ Elements in S are called **vector**.
 If $S$ and $T$ are vector spaces so that $S \subseteq T$, then $S$ is called a subspace of $T$.
 </blockquote>
 
-All possible subspaces of $\mathbb{R}^2$ are $\mathbb{R}^2$, $\\{(0, 0)\\}$, and $\\{(x\_1, x\_2): a x\_1 + b x\_2 = 0, a \in \mathbb{R}, b \in \mathbb{R}, a^2 + b^2 \neq 0\\}$ (which means all lines going through $(0, 0)$).
+All possible subspaces of $\mathbb{R}^2$ are $\mathbb{R}^2$, $\\{(0, 0)\\}$, and $\\{(x_1, x_2): a x_1 + b x_2 = 0, a \in \mathbb{R}, b \in \mathbb{R}, a^2 + b^2 \neq 0\\}$ (which means all lines going through $(0, 0)$).
 
-$\\{(x\_1, x\_2): a x\_1 + b x\_2 = c, a \in \mathbb{R}, b \in \mathbb{R}, a^2 + b^2 \neq 0, c \neq 0\\}$ is called affine space.
+$\\{(x_1, x_2): a x_1 + b x_2 = c, a \in \mathbb{R}, b \in \mathbb{R}, a^2 + b^2 \neq 0, c \neq 0\\}$ is called affine space.
 
 -----------------------
 
@@ -126,9 +126,9 @@ For example, $\\{(1, 0), (1, 1)\\}$ spans $\mathbb{R}^2$.
 Properties of basis:
 
 1. A vector space does not have a unique basis.
-2. If $\b{x}\_1, \b{x}\_2, ..., \b{x}\_k$ is a basis for $S$, then any $\b{x} \in S$ can be uniquely represented using $\b{x}\_1, \b{x}\_2, ..., \b{x}\_k$.
+2. If $\b{x}_1, \b{x}_2, ..., \b{x}_k$ is a basis for $S$, then any $\b{x} \in S$ can be uniquely represented using $\b{x}_1, \b{x}_2, ..., \b{x}_k$.
 3. Any two basis of a vector space have the same cardinality.
-4. Let $\b{e}\_i$ denote an n-dimensional vector whose i-th element is 1 and the remaining elements are 0's. Then, the set $\b{e}\_1, \b{e}\_2, ..., \b{e}\_n$ forms a standard basis for $\mathbb{R}^n$.
+4. Let $\b{e}_i$ denote an n-dimensional vector whose i-th element is 1 and the remaining elements are 0's. Then, the set $\b{e}_1, \b{e}_2, ..., \b{e}_n$ forms a standard basis for $\mathbb{R}^n$.
 5. A basis for the vector space $S$ is a maximal independent set of vectors which spans the space $S$.
 6. A basis for the vector space $S$ is a minimum spanning set of vectors which spans the space $S$.
 
@@ -174,19 +174,19 @@ A norm on $\mathbb{R}^n$ is real-value function $\Vert \cdot \Vert: \mathbb{R}^n
 
 Let $\b{x} \in \mathbb{R}^n$. Some popular norms:
 
-* $L\_2$ or Euclidean norm: $\Vert \b{x} \Vert\_2 = (\sum\_{i=1}^{n} (x\_i)^2)^{\frac{1}{2}}$
+* $L_2$ or Euclidean norm: $\Vert \b{x} \Vert_2 = (\sum_{i=1}^{n} (x_i)^2)^{\frac{1}{2}}$
 
     <object data="/resource/NNP/02-math-back/l2norm.svg" type="image/svg+xml" class="blkcenter"></object>
 
-* $L\_1$ norm: $\Vert \b{x} \Vert\_1 = \sum\_{i=1}^{n} |x\_i|$
+* $L_1$ norm: $\Vert \b{x} \Vert_1 = \sum_{i=1}^{n} |x_i|$
 
     <object data="/resource/NNP/02-math-back/l1norm.svg" type="image/svg+xml" class="blkcenter"></object>
 
-* $L\_{\infty}$ norm: $\Vert \b{x} \Vert\_{\infty} = \underset{i=1,\cdots,n}{\max} |x\_i|$
+* $L_{\infty}$ norm: $\Vert \b{x} \Vert_{\infty} = \underset{i=1,\cdots,n}{\max} |x_i|$
 
     <object data="/resource/NNP/02-math-back/linfnorm.svg" type="image/svg+xml" class="blkcenter"></object>
 
-In general, $L\_p$ norm is defined as $\Vert \b{x} \Vert\_{p} = (\sum\_{i=1}^{n} |x\_i|^p)^{\frac{1}{p}}$.
+In general, $L_p$ norm is defined as $\Vert \b{x} \Vert_{p} = (\sum_{i=1}^{n} |x_i|^p)^{\frac{1}{p}}$.
 
 <blockquote>
 If $\Vert \cdot \Vert_p$ and $\Vert \cdot \Vert_q$ are any two norms on $\mathbb{R}^n$, then there exist positive constants $\alpha$ and $\beta$ such that
@@ -235,7 +235,7 @@ Vectors $\b{x}_1, \b{x}_2, \cdots, \b{x}_k \in \mathbb{R}^n$ are said to be mutu
 If, in addition, $\Vert \b{x}_i \Vert = 1$ for every $i$, the set $\{ \b{x}_1, \cdots, \b{x}_k\}$ is said to be orthonormal.
 </blockquote>
 
-It's easy to show that if $\b{x}\_1, \cdots, \b{x}\_k$ are mutually orthogonal nonzero vectors, then they are linearly independent.
+It's easy to show that if $\b{x}_1, \cdots, \b{x}_k$ are mutually orthogonal nonzero vectors, then they are linearly independent.
 
 对于一个 squre matrix $Q$ [[proof]](/numop/2015/05/07/mathback-detail/#orthcolumn)
 
@@ -246,27 +246,27 @@ It's easy to show that if $\b{x}\_1, \cdots, \b{x}\_k$ are mutually orthogonal n
 
 **Gram-Schmidt Procedure**
 
-To produce an orthonormal basis with a given basis $\b{x}\_1, \b{x}\_2, \cdots, \b{x}\_k \in \mathbb{R}^n$, we use Gram-Schmidt Procedure.
+To produce an orthonormal basis with a given basis $\b{x}_1, \b{x}_2, \cdots, \b{x}_k \in \mathbb{R}^n$, we use Gram-Schmidt Procedure.
 
-Given $\b{x}\_1, \b{x}\_2, \b{x}\_3 \in \mathbb{R}^3$, to produce an orthonormal basis $\b{y}\_1, \b{y}\_2, \b{y}\_3$.
+Given $\b{x}_1, \b{x}_2, \b{x}_3 \in \mathbb{R}^3$, to produce an orthonormal basis $\b{y}_1, \b{y}_2, \b{y}_3$.
 
-* set $\b{y}\_1 = \frac{\b{x}\_1}{\Vert \b{x}\_1 \Vert}$
+* set $\b{y}_1 = \frac{\b{x}_1}{\Vert \b{x}_1 \Vert}$
 
-* remove $\b{x}\_2$'s component in the $\b{y}\_1$ direction
+* remove $\b{x}_2$'s component in the $\b{y}_1$ direction
 
-    $$\b{z}\_2 = \b{x}\_2 - (\b{x}\_2^T \b{y}\_1)\b{y}\_1$$
+    $$\b{z}_2 = \b{x}_2 - (\b{x}_2^T \b{y}_1)\b{y}_1$$
 
-    now $\b{z}\_2$ is orthogonal to $\b{x}\_1$.
+    now $\b{z}_2$ is orthogonal to $\b{x}_1$.
 
-    set $\b{y}\_2 = \frac{\b{z}\_2}{\Vert \b{z}\_2 \Vert}$
+    set $\b{y}_2 = \frac{\b{z}_2}{\Vert \b{z}_2 \Vert}$
 
-* remove $\b{x}\_3$'s component in the $\b{y}\_1$ and $\b{y}\_2$ direction
+* remove $\b{x}_3$'s component in the $\b{y}_1$ and $\b{y}_2$ direction
 
-    $$\b{z}\_3 = \b{x}\_3 - (\b{x}\_3^T \b{y}\_2)\b{y}\_2 - (\b{x}\_3^T \b{y}\_1)\b{y}\_1$$
+    $$\b{z}_3 = \b{x}_3 - (\b{x}_3^T \b{y}_2)\b{y}_2 - (\b{x}_3^T \b{y}_1)\b{y}_1$$
 
-    now $\b{z}\_3$ is orthogonal to $\b{x}\_1$ and $\b{x}\_2$.
+    now $\b{z}_3$ is orthogonal to $\b{x}_1$ and $\b{x}_2$.
 
-    set $\b{y}\_3 = \frac{\b{z}\_3}{\Vert \b{z}\_3 \Vert}$
+    set $\b{y}_3 = \frac{\b{z}_3}{\Vert \b{z}_3 \Vert}$
 
 It's easy to extend this procedure to $\mathbb{R}^n$.
 
@@ -274,8 +274,8 @@ It's easy to extend this procedure to $\mathbb{R}^n$.
 
 **Matrix**
 
-* Diagonal Matrix: A square matrix $\Lambda$ such that $\Lambda\_{ij} = 0 \;\; i \neq j$.
-* Identity Matrix: A diagonal matrix $I$ such that $I\_{ii} = 1 \;\; \forall i$.
+* Diagonal Matrix: A square matrix $\Lambda$ such that $\Lambda_{ij} = 0 \;\; i \neq j$.
+* Identity Matrix: A diagonal matrix $I$ such that $I_{ii} = 1 \;\; \forall i$.
 
 -----------------------
 
@@ -368,9 +368,9 @@ $$A\b{x} = \lambda \b{x} \;\; \b{x} \neq \b{0}$$
 
     $A$ is singular iff $\lambda = 0$ is an eigenvalue of $A$.
 
-* $\det(A) = \prod\_{i = 1}^{n} \lambda\_i$
+* $\det(A) = \prod_{i = 1}^{n} \lambda_i$
 
-    The matrix $A$ is invertible if and only if all the eigenvalues $\lambda\_i$ are nonzero.
+    The matrix $A$ is invertible if and only if all the eigenvalues $\lambda_i$ are nonzero.
 
 -----------------------
 
@@ -382,28 +382,28 @@ Let $A \in \mathbb{R}^{n\times n}$. The matrix $A$ is said to be symmetric if $A
 
 Let $A \in \mathbb{R}^{n\times n}$ be symmetric, then
 
-* $A$ has n real eigenvalues $\lambda\_1, \lambda\_2, \cdots, \lambda\_n$
+* $A$ has n real eigenvalues $\lambda_1, \lambda_2, \cdots, \lambda_n$
   [[proof]](/numop/2015/05/07/mathback-detail/#symreal)
 * eigenvectors of different eigenvalues are orthogonal
   [[proof]](/numop/2015/05/07/mathback-detail/#symorth)
-* If $\lambda\_i$ is a repeated root with multiplicity m >= 2, then there exist
-  m orthonormal eigenvectors corresponding to $\lambda\_i$
+* If $\lambda_i$ is a repeated root with multiplicity m >= 2, then there exist
+  m orthonormal eigenvectors corresponding to $\lambda_i$
   [[proof]](/numop/2015/05/07/mathback-detail/#symmulti)
-* a corresponding set of eigenvectors $\{ \b{x}\_1, \b{x}\_2, \cdots, \b{x}\_n\}$
-  can be chosen to be orthonormal. Let $S = (\b{x}\_1, \b{x}\_2, \cdots, \b{x}\_n)$,
+* a corresponding set of eigenvectors $\{ \b{x}_1, \b{x}_2, \cdots, \b{x}_n\}$
+  can be chosen to be orthonormal. Let $S = (\b{x}_1, \b{x}_2, \cdots, \b{x}_n)$,
   $S$ is an orthogonal matrix
 
     $$
     \begin{align*}
     S^T A S = &
-    \begin{pmatrix} \b{x}\_1^T \\\\ \b{x}\_2^T \\\\ \vdots \\\\ \b{x}\_n^T \end{pmatrix} A
-    \begin{pmatrix} \b{x}\_1 \b{x}\_2 \cdots & \b{x}\_n \end{pmatrix} =
-    \begin{pmatrix} \b{x}\_1^T A \b{x}\_1 & \b{x}\_1^T A \b{x}\_2 & \cdots & \b{x}\_1^T A \b{x}\_n \\\\
+    \begin{pmatrix} \b{x}_1^T \\\\ \b{x}_2^T \\\\ \vdots \\\\ \b{x}_n^T \end{pmatrix} A
+    \begin{pmatrix} \b{x}_1 \b{x}_2 \cdots & \b{x}_n \end{pmatrix} =
+    \begin{pmatrix} \b{x}_1^T A \b{x}_1 & \b{x}_1^T A \b{x}_2 & \cdots & \b{x}_1^T A \b{x}_n \\\\
       \vdots & \vdots & \ddots & \vdots \\\\
-      \b{x}\_n^T A \b{x}\_1 & \b{x}\_n^T A \b{x}\_2 & \cdots & \b{x}\_n^T A \b{x}\_n
+      \b{x}_n^T A \b{x}_1 & \b{x}_n^T A \b{x}_2 & \cdots & \b{x}_n^T A \b{x}_n
     \end{pmatrix} \\\\
-    = & \begin{pmatrix} \lambda\_1 & 0 & \cdots & 0 \\\\ 0 & \lambda\_2 & \cdots & 0 \\\\
-          \vdots & \vdots & \ddots & \vdots \\\\ 0 & 0 & \cdots & \lambda\_n
+    = & \begin{pmatrix} \lambda_1 & 0 & \cdots & 0 \\\\ 0 & \lambda_2 & \cdots & 0 \\\\
+          \vdots & \vdots & \ddots & \vdots \\\\ 0 & 0 & \cdots & \lambda_n
         \end{pmatrix}
     \end{align*}
     $$
@@ -418,7 +418,7 @@ is diagonalizable (it's already diagonalized), but it's apparently not invertibl
 
 **Quadratic Form**
 
-Let $A \in \mathbb{R}^{n\times n}$ be a symmetric matrix, consider $f(x) = \b{x}^T A \b{x}$, a pure quadratic form. (Note that $\b{x}^T A \b{x} = \sum\_i \sum\_j x\_i A\_{ij} x\_j$, so all quadratic functions can be expressed as $\b{x}^T A \b{x}$)
+Let $A \in \mathbb{R}^{n\times n}$ be a symmetric matrix, consider $f(x) = \b{x}^T A \b{x}$, a pure quadratic form. (Note that $\b{x}^T A \b{x} = \sum_i \sum_j x_i A_{ij} x_j$, so all quadratic functions can be expressed as $\b{x}^T A \b{x}$)
 
 | $A$ is said to be | if |
 |:--|:--|
@@ -435,10 +435,10 @@ Let $A \in \mathbb{R}^{n\times n}$ be a symmetric matrix, consider $f(x) = \b{x}
 
     $$
     \Lambda^{1/2} = \begin{pmatrix}
-    \lambda\_1^{1/2} & 0 & \cdots & 0 \\\\
-    0 & \lambda\_2^{1/2} & \cdots & 0 \\\\
+    \lambda_1^{1/2} & 0 & \cdots & 0 \\\\
+    0 & \lambda_2^{1/2} & \cdots & 0 \\\\
     \vdots & \vdots & \ddots & \vdots \\\\
-    0 & 0 & \cdots & \lambda\_n^{1/2}
+    0 & 0 & \cdots & \lambda_n^{1/2}
     \end{pmatrix}
     $$
 
@@ -488,7 +488,7 @@ Let $a, b \in \mathbb{R}$. The closed interval $[a, b]$ denotes the set, $\{ x \
 Let $\b{x}_0 \in \mathbb{R}^n$. A norm ball of radius $r > 0$ and centre $\b{x}_0$ is given by $\{\b{x} \in \mathbb{R}^n: \Vert \b{x} - \b{x}_0 \Vert\ \leq r \}$ and will be denoted by $B[\b{x}_0, r]$.
 </blockquote>
 
-We will use $B(\b{x}\_0, r)$ to denote $\\{\b{x} \in \mathbb{R}^n: \Vert \b{x} - \b{x}\_0 \Vert\ \lt r \\}$
+We will use $B(\b{x}_0, r)$ to denote $\\{\b{x} \in \mathbb{R}^n: \Vert \b{x} - \b{x}_0 \Vert\ \lt r \\}$
 
 -----------------------
 
@@ -623,10 +623,10 @@ exists and equals $\nabla f(\b{x})^T \b{d}$.
 
 $$
 \begin{align*}
-\frac{\p f}{\p \b{d}}(\b{x}) = & \lim\_{\varepsilon \rightarrow 0} \frac{f(\b{x} + \varepsilon \b{d}) - f(\b{x})}{\varepsilon} \\\\
-= & \lim\_{\varepsilon \rightarrow 0} \frac{f(\b{x} + (0 + \varepsilon) \b{d}) - f(\b{x} + 0 \b{d})}{(0 + \varepsilon) - 0} \\\\
-= & \frac{df(x+t\b{d})}{dt}\bigg|\_{t=0} \\\\
-= & \nabla f(x+t\b{d})^T \b{d}\bigg|\_{t=0} \\\\
+\frac{\p f}{\p \b{d}}(\b{x}) = & \lim_{\varepsilon \rightarrow 0} \frac{f(\b{x} + \varepsilon \b{d}) - f(\b{x})}{\varepsilon} \\\\
+= & \lim_{\varepsilon \rightarrow 0} \frac{f(\b{x} + (0 + \varepsilon) \b{d}) - f(\b{x} + 0 \b{d})}{(0 + \varepsilon) - 0} \\\\
+= & \frac{df(x+t\b{d})}{dt}\bigg|_{t=0} \\\\
+= & \nabla f(x+t\b{d})^T \b{d}\bigg|_{t=0} \\\\
 = & \nabla f(x)^T \b{d}
 \end{align*}
 $$
@@ -712,8 +712,8 @@ $$f(x) \approx f(x^0) + f'(x^0)(x - x^0) + \frac{1}{2} f''(x^0)(x - x^0)^2$$
 
     $$
     \begin{align*}
-    f(\b{x}) = & f(\b{x}^0) + \sum\_{i=1}^{n} \frac{\p f(\b{x})}{\p x\_i} (x\_i - x^0\_i) + \frac{1}{2!} \sum\_{i=1}^n \sum\_{j=1}^n \frac{\p f(\b{x})}{\p x\_i \p x\_j} (x\_i - x^0\_i)(x\_j - x^0\_j) + \\\\
-    & \frac{1}{3!} \sum\_{i=1}^n \sum\_{j=1}^n \sum\_{k=1}^n \frac{\p f(\bar{\b{x}})}{\p x\_i \p x\_j \p x\_k} (x\_i - x^0\_i)(x\_j - x^0\_j)(x\_k - x^0\_k)
+    f(\b{x}) = & f(\b{x}^0) + \sum_{i=1}^{n} \frac{\p f(\b{x})}{\p x_i} (x_i - x^0_i) + \frac{1}{2!} \sum_{i=1}^n \sum_{j=1}^n \frac{\p f(\b{x})}{\p x_i \p x_j} (x_i - x^0_i)(x_j - x^0_j) + \\\\
+    & \frac{1}{3!} \sum_{i=1}^n \sum_{j=1}^n \sum_{k=1}^n \frac{\p f(\bar{\b{x}})}{\p x_i \p x_j \p x_k} (x_i - x^0_i)(x_j - x^0_j)(x_k - x^0_k)
     \end{align*}
     $$
 
@@ -780,21 +780,21 @@ the columns of a matrix $A \in \mathbb{R}^{m\times n}$ are $a_1$ through $a_n$, 
 * Derivative of $A\b{x}$, where $A \in \mathbb{R}^{m\times n}$ and $\b{x} \in \mathbb{R}^n$
 
     $$
-    \nabla\_{\b{x}}A\b{x} =
+    \nabla_{\b{x}}A\b{x} =
       \begin{pmatrix}
-        \nabla\_{\b{x}} \tilde{a}\_1^T \b{x} \\\\
-        \nabla\_{\b{x}} \tilde{a}\_2^T \b{x} \\\\
+        \nabla_{\b{x}} \tilde{a}_1^T \b{x} \\\\
+        \nabla_{\b{x}} \tilde{a}_2^T \b{x} \\\\
         \vdots \\\\
-        \nabla\_{\b{x}} \tilde{a}\_n^T \b{x} \\\\
+        \nabla_{\b{x}} \tilde{a}_n^T \b{x} \\\\
       \end{pmatrix} = 
       \begin{pmatrix}
-        \tilde{a}\_1 & \tilde{a}\_2 & \cdots & \tilde{a}\_n
+        \tilde{a}_1 & \tilde{a}_2 & \cdots & \tilde{a}_n
       \end{pmatrix} = A^T
     $$
 
 * Derivative of linear transformed input to function
 
-    Consider a function $f: \mathbb{R}^n \rightarrow \mathbb{R}$. Suppose we have a matrix $A \in \mathbb{R}^{n\times m}$ and a vector $\b{x} \in \mathbb{R}^m$. We wish to compute $\nabla\_{\b{x}} f(A\b{x})$.
+    Consider a function $f: \mathbb{R}^n \rightarrow \mathbb{R}$. Suppose we have a matrix $A \in \mathbb{R}^{n\times m}$ and a vector $\b{x} \in \mathbb{R}^m$. We wish to compute $\nabla_{\b{x}} f(A\b{x})$.
 
     Note that $f(A\b{x})$ is a composition of multivariate functions, so we can apply the following chain rule to calculate derivate
 
@@ -808,10 +808,10 @@ the columns of a matrix $A \in \mathbb{R}^{m\times n}$ are $a_1$ through $a_n$, 
 
     $$
     \begin{align*}
-    \frac{\p f(A\b{x})}{\p x\_j} = & \sum\_{k=1}^{n} \frac{\p f(A\b{x})}{\p (A\b{x})\_k} \frac{\p (A\b{x})\_k}{\p x\_j} \\\\
-    = & \sum\_{k=1}^{n} \frac{\p f(A\b{x})}{\p (A\b{x})\_k} \frac{\p \tilde{a}\_k^T \b{x}}{\p x\_j} \\\\
-    = & \sum\_{k=1}^{n} \frac{\p f(A\b{x})}{\p (A\b{x})\_k} a\_{kj} \\\\
-    = & a\_j^T \nabla f(A\b{x})
+    \frac{\p f(A\b{x})}{\p x_j} = & \sum_{k=1}^{n} \frac{\p f(A\b{x})}{\p (A\b{x})_k} \frac{\p (A\b{x})_k}{\p x_j} \\\\
+    = & \sum_{k=1}^{n} \frac{\p f(A\b{x})}{\p (A\b{x})_k} \frac{\p \tilde{a}_k^T \b{x}}{\p x_j} \\\\
+    = & \sum_{k=1}^{n} \frac{\p f(A\b{x})}{\p (A\b{x})_k} a_{kj} \\\\
+    = & a_j^T \nabla f(A\b{x})
     \end{align*}
     $$
 
@@ -819,17 +819,17 @@ the columns of a matrix $A \in \mathbb{R}^{m\times n}$ are $a_1$ through $a_n$, 
 
     $$
     \begin{align*}
-    \nabla\_{\b{x}} f(A\b{x}) = 
+    \nabla_{\b{x}} f(A\b{x}) = 
     \begin{pmatrix}
-      \frac{\p f(A\b{x})}{\p x\_1} \\\\
+      \frac{\p f(A\b{x})}{\p x_1} \\\\
       \vdots \\\\
-      \frac{\p f(A\b{x})}{\p x\_n} \\\\
+      \frac{\p f(A\b{x})}{\p x_n} \\\\
     \end{pmatrix} = 
     \begin{pmatrix}
-      a\_1^T \\\\
-      a\_2^T \\\\
+      a_1^T \\\\
+      a_2^T \\\\
       \vdots \\\\
-      a\_n^T
+      a_n^T
     \end{pmatrix} \nabla f(A\b{x}) = A^T \nabla f(A \b{x})
     \end{align*}
     $$

@@ -103,7 +103,7 @@ $$B^{k+1} = B^k + \frac{(\delta^k - B^k\gamma^k)(\delta^k - B^k\gamma^k)^T}{(\de
 
 * $B^{k+1}$ 不一定 positive definite，易知如果 $B^k$ positive definite 且分母 $(\delta^k - B^k\gamma^k)^T \gamma^k > 0$，则 $B^{k+1}$ 也是 positive definite matrix (根据 positive definite 的定义即可证明)，但问题是 $(\delta^k - B^k\gamma^k)^T \gamma^k$ 没法保证 $> 0$，举个例子，考虑函数
 
-    $$f(\b{x}) = \frac{x\_1^4}{4} + \frac{x\_2^2}{2} - x\_1 x\_2 + x\_1 - x\_2$$
+    $$f(\b{x}) = \frac{x_1^4}{4} + \frac{x_2^2}{2} - x_1 x_2 + x_1 - x_2$$
 
     给定初始点 $\b{x}^0 = [0.59607, 0.59607]^T$，则
 
@@ -275,11 +275,11 @@ B^{k} = & {V^{k-1}}^T B^{k-1} V^{k-1} + \rho^{k-1} {\delta^{k-1} {\delta^{k-1}}^
 \end{align*}
 $$
 
-最后一个式子中除了 $B^{k-m}$ 以外，其余的所有变量都能以 $\gamma$ 和 $\delta$ 表示。为了让 $B^k$ 能完全由前 $m$ 步的 $\gamma$ 和 $\delta$ 计算出来，lBFGS 在每一步迭代都选择一个矩阵去替换 $B^{k-m}$，这个矩阵每步都可以是不同的，但通常都是形式相对简单的矩阵，比如 diagonal matrix。令第 k 步选择的矩阵为 $B\_0^k$，这样每步迭代中 lBFGS 计算
+最后一个式子中除了 $B^{k-m}$ 以外，其余的所有变量都能以 $\gamma$ 和 $\delta$ 表示。为了让 $B^k$ 能完全由前 $m$ 步的 $\gamma$ 和 $\delta$ 计算出来，lBFGS 在每一步迭代都选择一个矩阵去替换 $B^{k-m}$，这个矩阵每步都可以是不同的，但通常都是形式相对简单的矩阵，比如 diagonal matrix。令第 k 步选择的矩阵为 $B_0^k$，这样每步迭代中 lBFGS 计算
 
 $$
 \begin{align*}
-B^{k}\b{g}^k = & ({V^{k-1}}^T \cdots {V^{k-m}}^T) B\_0^k ({V^{k-m}} \cdots V^{k-1})\b{g}^k + \\\\
+B^{k}\b{g}^k = & ({V^{k-1}}^T \cdots {V^{k-m}}^T) B_0^k ({V^{k-m}} \cdots V^{k-1})\b{g}^k + \\\\
   & \rho^{k-m} ({V^{k-1}}^T \cdots {V^{k-m+1}}^T) \delta^{k-m} {\delta^{k-m}}^T (V^{k-m+1} \cdots V^{k-1}) \b{g}^k + \\\\
   & \rho^{k-m+1} ({V^{k-1}}^T \cdots {V^{k-m+2}}^T) \delta^{k-m+1} {\delta^{k-m+1}}^T (V^{k-m+2} \cdots V^{k-1}) \b{g}^k + \\\\
   & \cdots \;+ \\\\
@@ -295,31 +295,31 @@ $$
 
     $$
     \begin{align*}
-    \eta\_i = & (V^{k-i} V^{k-i+1} \cdots V^{k-1}) \b{g}^k\\\\
-    \xi\_i = & \rho^{k-i} {\delta^{k-i}}^T (V^{k-i+1} \cdots V^{k-1}) \b{g}^k \\\\
+    \eta_i = & (V^{k-i} V^{k-i+1} \cdots V^{k-1}) \b{g}^k\\\\
+    \xi_i = & \rho^{k-i} {\delta^{k-i}}^T (V^{k-i+1} \cdots V^{k-1}) \b{g}^k \\\\
     \end{align*}
     $$
     
-    其中 $\eta\_i \in \mathbb{R}^n, \xi\_i \in \mathbb{R}$ 由此可得
+    其中 $\eta_i \in \mathbb{R}^n, \xi_i \in \mathbb{R}$ 由此可得
     
     $$
     \begin{align*}
-    \xi\_i = & \rho^{k-i} {\delta^{k-i}}^T \eta\_{i-1} \\\\
-    \eta\_i = & V^{k-i} \eta\_{i-1} = (I - \rho^{k-i} \gamma^{k-i} {\delta^{k-i}}^T) \eta\_{i-1} = \eta\_{i-1} - \xi\_{i} \gamma^{k-i}
+    \xi_i = & \rho^{k-i} {\delta^{k-i}}^T \eta_{i-1} \\\\
+    \eta_i = & V^{k-i} \eta_{i-1} = (I - \rho^{k-i} \gamma^{k-i} {\delta^{k-i}}^T) \eta_{i-1} = \eta_{i-1} - \xi_{i} \gamma^{k-i}
     \end{align*}
     $$
     
-    可以看出 $\xi\_i$ 和 $\eta\_i$ 的计算都只涉及 vector operation
+    可以看出 $\xi_i$ 和 $\eta_i$ 的计算都只涉及 vector operation
   
 * 有了上面两个变量 $B^k\b{g}^k$ 可以表示为
 
     $$
     \begin{align*}
-    B^{k}\b{g}^k = & ({V^{k-1}}^T \cdots {V^{k-m}}^T) B\_0^k \eta\_m + \\\\
-      & ({V^{k-1}}^T \cdots {V^{k-m+1}}^T) \delta^{k-m} \xi\_m + \\\\
-      & ({V^{k-1}}^T \cdots {V^{k-m+2}}^T) \delta^{k-m+1} \xi\_{m-1} + \\\\
+    B^{k}\b{g}^k = & ({V^{k-1}}^T \cdots {V^{k-m}}^T) B_0^k \eta_m + \\\\
+      & ({V^{k-1}}^T \cdots {V^{k-m+1}}^T) \delta^{k-m} \xi_m + \\\\
+      & ({V^{k-1}}^T \cdots {V^{k-m+2}}^T) \delta^{k-m+1} \xi_{m-1} + \\\\
       & \cdots \;+ \\\\
-      & \delta^{k-1} \xi\_1
+      & \delta^{k-1} \xi_1
     \end{align*}
     $$
     
@@ -327,25 +327,25 @@ $$
     
     $$
     \begin{align*}
-    B^{k}\b{g}^k = & {V^{k-1}}^T ({V^{k-2}}^T ({V^{k-3}}^T B\_0^k \eta\_3 + \delta^{k-3} \xi\_3) + \delta^{k-2} \xi\_2) + \delta^{k-1} \xi\_1
+    B^{k}\b{g}^k = & {V^{k-1}}^T ({V^{k-2}}^T ({V^{k-3}}^T B_0^k \eta_3 + \delta^{k-3} \xi_3) + \delta^{k-2} \xi_2) + \delta^{k-1} \xi_1
     \end{align*}
     $$
     
     根据这个观察定义如下变量
     
-    $$ \zeta\_i = \left\\{ \begin{array}{ll} B\_0^k\eta\_m & i = m + 1 \\\\ {V^{k-i}}^T \zeta\_{i+1} + \delta^{k-i} \xi\_i & i \in [1, m] \end{array} \right.$$
+    $$ \zeta_i = \left\\{ \begin{array}{ll} B_0^k\eta_m & i = m + 1 \\\\ {V^{k-i}}^T \zeta_{i+1} + \delta^{k-i} \xi_i & i \in [1, m] \end{array} \right.$$
     
-    $\zeta\_i \in \mathbb{R}^n$，可以看出 $\zeta\_1$ 就是我们要的 $B^k \b{g}^k$，具体分析一下这个分段函数
+    $\zeta_i \in \mathbb{R}^n$，可以看出 $\zeta_1$ 就是我们要的 $B^k \b{g}^k$，具体分析一下这个分段函数
     
-    * $i = m + 1$ 部分涉及一个 matrix vector multiplication，但由于通常 $B\_0^k$ 是形式较为简单的 matrix，比如 diagonal matrix，所以 $B\_0^k \b{g}^k$ 的计算量比较小，对于 diagonal matrix，这里计算量为 $O(n)$
+    * $i = m + 1$ 部分涉及一个 matrix vector multiplication，但由于通常 $B_0^k$ 是形式较为简单的 matrix，比如 diagonal matrix，所以 $B_0^k \b{g}^k$ 的计算量比较小，对于 diagonal matrix，这里计算量为 $O(n)$
     
     * 对于 $i \in [1, m]$ 部分，展开可得
     
         $$
         \begin{align*}
-        \zeta\_i = & {V^{k-i}}^T \zeta\_{i+1} + \delta^{k-i} \xi\_i \\\\
-        = & (I - \rho^{k-i}\delta^{k-i} {\gamma^{k-i}}^T) \zeta\_{i+1} + \delta^{k-i} \xi\_i \\\\
-        = & \zeta\_{i+1} + \delta^{k-i} (\xi\_i - \rho^{k-i}({\gamma^{k-i}}^T\zeta\_{i+1})) \\\\
+        \zeta_i = & {V^{k-i}}^T \zeta_{i+1} + \delta^{k-i} \xi_i \\\\
+        = & (I - \rho^{k-i}\delta^{k-i} {\gamma^{k-i}}^T) \zeta_{i+1} + \delta^{k-i} \xi_i \\\\
+        = & \zeta_{i+1} + \delta^{k-i} (\xi_i - \rho^{k-i}({\gamma^{k-i}}^T\zeta_{i+1})) \\\\
         \end{align*}
         $$
     
@@ -368,7 +368,7 @@ $$
 
 这是一个 $O(mn)$ 的算法。lBFGS 每轮迭代都运行上述代码得到 descent direction，并且如果 $k > m$ 还需要 update 保存 $\gamma, \delta$ 的队列，去掉最后一个，加入最新的一个，然后继续下一轮迭代，直至算法收敛
 
-关于 $B\_0^k$ 选择，一种被证明比较有效的方法是令 $B\_0^k = \frac{ {\delta^{k-1}}^T \gamma^{k-1}}{ {\gamma^{k-1}}^T \gamma^{k-1}} I$
+关于 $B_0^k$ 选择，一种被证明比较有效的方法是令 $B_0^k = \frac{ {\delta^{k-1}}^T \gamma^{k-1}}{ {\gamma^{k-1}}^T \gamma^{k-1}} I$
 
 ### 总结
 
