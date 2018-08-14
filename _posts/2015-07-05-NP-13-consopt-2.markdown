@@ -61,61 +61,61 @@ $$\b{z}\_k = (-\sqrt{2 - 1/k^2}, -1/k)^T, t\_k = \Vert \b{z}\_k - \b{x} \Vert$$
 或者其他数。$o$ 可以读作 "smaller than"，即 $f(x)$ smaller than $g(x)$，$o(g(x))$
 就用来表示所有 $x\ra a$ 情况下小于 $g(x)$ 的函数
 
-> 如果 $\b{x}^\*$ 是 local minimum 且是 regular point，则
-> $$\nabla f(\b{x}^\*)^T \b{d} \geq 0 \; \forall \b{d} \in \c{T}(\b{x}^\*) \tag{3}$$
+> 如果 $\b{x}^*$ 是 local minimum 且是 regular point，则
+> $$\nabla f(\b{x}^*)^T \b{d} \geq 0 \; \forall \b{d} \in \c{T}(\b{x}^\*) \tag{3}$$
 
 * Proof
 
     根据公式 1，我们知道，存在 $\\{\b{z}\_k\\}, \\{t\_k\\}$ 使得 $\b{d}$ 满足
 
-    $$\b{z}\_k = \b{x}^\* + t\_k\b{d} + o(t\_k)$$
+    $$\b{z}\_k = \b{x}^* + t\_k\b{d} + o(t\_k)$$
 
     注意 $o(t\_k)$ 根据上下文不同可以理解为一个 scalar 也可以是一个 vector，根据
     Taylor series
 
     $$
-    \begin{align\*}
-    f(\b{z}\_k) = & f(\b{x}^\*) + (\b{z}\_k - \b{x^\*})^T \nabla f(\b{x}^\*) +
-                    o(\Vert \b{z}\_k - \b{x}^\* \Vert^2) \\\\
-                = & f(\b{x}^\*) + (t\_k\b{d} + o(t\_k))^T \nabla f(\b{x}^\*) +
-                    o(\Vert \b{z}\_k - \b{x}^\* \Vert^2)
-    \end{align\*}
+    \begin{align*}
+    f(\b{z}\_k) = & f(\b{x}^*) + (\b{z}\_k - \b{x^\*})^T \nabla f(\b{x}^\*) +
+                    o(\Vert \b{z}\_k - \b{x}^* \Vert^2) \\\\
+                = & f(\b{x}^*) + (t\_k\b{d} + o(t\_k))^T \nabla f(\b{x}^\*) +
+                    o(\Vert \b{z}\_k - \b{x}^* \Vert^2)
+    \end{align*}
     $$
 
-    当 $k$ 足够大时，$\b{z}\_k$ 无限接近于 $\b{x}^\*$，$o(\Vert \b{z}\_k -
-    \b{x}^\* \Vert^2)$ 相比一次项就可以忽略不计了，同时 $o(t\_k)$ 相比 $t\_k$
+    当 $k$ 足够大时，$\b{z}\_k$ 无限接近于 $\b{x}^*$，$o(\Vert \b{z}\_k -
+    \b{x}^* \Vert^2)$ 相比一次项就可以忽略不计了，同时 $o(t\_k)$ 相比 $t\_k$
     也越来越小了。也就是我总能找到一个足够大的 $k$，使得 $ (t\_k\b{d} +
-    o(t\_k))^T \nabla f(\b{x}^\*) + o(\Vert \b{z}\_k - \b{x}^\*
-    \Vert^2) $ 的大小由 $t\_k\b{d}^T \nabla f(\b{x}^\*)$ 决定
+    o(t\_k))^T \nabla f(\b{x}^*) + o(\Vert \b{z}\_k - \b{x}^\*
+    \Vert^2) $ 的大小由 $t\_k\b{d}^T \nabla f(\b{x}^*)$ 决定
     
-    因此如果 $\b{d}^T \nabla f(\b{x}^\*) < 0$，我总能找到一个足够大的 $k$ 使得
-    $ (t\_k\b{d} + o(t\_k))^T \nabla f(\b{x}^\*) + o(\Vert \b{z}\_k - \b{x}^\*
-    \Vert^2) < 0$，即 $f(\b{z}\_k) < f(\b{x}^\*)$，这样我们就找到了一个比
-    $\b{x}^\*$ 更小的 local minimum，与前提矛盾，因此如果 $\b{x}^\*$ 是 local
-    minimum，则必有 $\nabla f(\b{x}^\*)^T \b{d} \geq 0$ $\EOP$
+    因此如果 $\b{d}^T \nabla f(\b{x}^*) < 0$，我总能找到一个足够大的 $k$ 使得
+    $ (t\_k\b{d} + o(t\_k))^T \nabla f(\b{x}^*) + o(\Vert \b{z}\_k - \b{x}^\*
+    \Vert^2) < 0$，即 $f(\b{z}\_k) < f(\b{x}^*)$，这样我们就找到了一个比
+    $\b{x}^*$ 更小的 local minimum，与前提矛盾，因此如果 $\b{x}^\*$ 是 local
+    minimum，则必有 $\nabla f(\b{x}^*)^T \b{d} \geq 0$ $\EOP$
 
 ### First Order KKT Condition for Equality Constrain
 
 结合公式 2 和 3，我们得到如下结论
 
-> 如果 $\b{x}^\*$ 是 local minimum 同时是 regular point，则
+> 如果 $\b{x}^*$ 是 local minimum 同时是 regular point，则
 > $$
-> \left\\{\b{d} \left| \nabla f(\b{x}^\*)^T \b{d} < 0, \nabla e\_i(\b{x}^\*)^T
+> \left\\{\b{d} \left| \nabla f(\b{x}^*)^T \b{d} < 0, \nabla e\_i(\b{x}^\*)^T
 > \b{d} = 0, i = 1, \cdots, m\right.\right\\} = \emptyset \tag{4}
 > $$
 
-看到这里，你似乎可以把 $\\{\nabla e\_i(\b{x}^\*)^T \b{d} = 0\\}$ 理解为 feasible
+看到这里，你似乎可以把 $\\{\nabla e\_i(\b{x}^*)^T \b{d} = 0\\}$ 理解为 feasible
 direction，但我觉得这么做不严谨，比如对于 $x\_1^2 + x\_2^2 = 2$ 这个 equality
 constraint，这么定义出来的 $\b{d}$ 显然不是 feasible direction，[2]
 中把这个集合叫做 linearized feasible direction，这个就严谨了很多
 
 根据 4，我们可以得到如下 equality constraint 对应的 KKT condition
 
-> 如果 $\b{x}^\*$ 是 local minimum 且是 regular point，则存在 $\bs{\mu}^\* =
-> (\mu\_1^\*, \cdots, \mu\_m^\*)^T \in \bb{R}^m$ 使得
-> $$\nabla f(\b{x}^\*) + \sum\_{i=1}^m \mu\_i^\* \nabla e\_i(\b{x}^\*) = \b{0} \tag{5}$$
+> 如果 $\b{x}^*$ 是 local minimum 且是 regular point，则存在 $\bs{\mu}^\* =
+> (\mu\_1^*, \cdots, \mu\_m^\*)^T \in \bb{R}^m$ 使得
+> $$\nabla f(\b{x}^*) + \sum\_{i=1}^m \mu\_i^\* \nabla e\_i(\b{x}^\*) = \b{0} \tag{5}$$
 
-注意到和 inequality constraint 的不同，$\mu\_i^\*$ 这里可以是任意实数，而不用
+注意到和 inequality constraint 的不同，$\mu\_i^*$ 这里可以是任意实数，而不用
 $\geq 0$
 
 下面给出定理证明，这里的证明采用的是 NPTEL 视频中的做法。证明前简单回顾一些关于
@@ -135,12 +135,12 @@ $a$ 肯定不能 $< 0$，因为一旦 $a < 0$，我总能找到足够小的 $b$ 
     首先定义两个集合，令
     
     $$
-    \begin{align\*}
-    C\_1 = & \left\\{(y\_1, \b{y}\_2) \left| y\_1 = \nabla f(\b{x}^\*)^T \b{d}, \b{y}\_2
-    = (\nabla e\_1(\b{x}^\*)^T \b{d}, \cdots, \nabla e\_m(\b{x}^\*)^T\b{d}) \; \forall \b{d}
+    \begin{align*}
+    C\_1 = & \left\\{(y\_1, \b{y}\_2) \left| y\_1 = \nabla f(\b{x}^*)^T \b{d}, \b{y}\_2
+    = (\nabla e\_1(\b{x}^*)^T \b{d}, \cdots, \nabla e\_m(\b{x}^\*)^T\b{d}) \; \forall \b{d}
     \in \bb{R}^n\right. \right\\} \\\\
     C\_2 = & \left\\{(y\_1, \b{y}\_2) \left| y\_1 < 0, \b{y}\_2 = \b{0} \right.\right\\}
-    \end{align\*}
+    \end{align*}
     $$
 
     则等式 4 等价于
@@ -153,7 +153,7 @@ $a$ 肯定不能 $< 0$，因为一旦 $a < 0$，我总能找到足够小的 $b$ 
     能 seperate 这两个集合，也就是存在 $(u\_0, \b{u}) \in \bb{R}^{m+1}$ 使得
 
     $$
-    u\_0 \nabla f(\b{x}^\*)^T\b{d} + \sum\_{i=1}^m u\_i \nabla e\_i(\b{x}^\*)^T
+    u\_0 \nabla f(\b{x}^*)^T\b{d} + \sum\_{i=1}^m u\_i \nabla e\_i(\b{x}^\*)^T
     \b{d} \geq u\_0 y\_1 + \b{u}^T\b{y\_2} = u\_0 y\_1 \;\; \forall \b{d} \in \bb{R}^n
     $$
 
@@ -167,28 +167,28 @@ $a$ 肯定不能 $< 0$，因为一旦 $a < 0$，我总能找到足够小的 $b$ 
     由于 $\lim\_{y\_1 \ra 0^-} u\_0 y\_1 = 0$，所以
 
     $$
-    u\_0 \nabla f(\b{x}^\*)^T\b{d} + \sum\_{i=1}^m u\_i \nabla e\_i(\b{x}^\*)^T
+    u\_0 \nabla f(\b{x}^*)^T\b{d} + \sum\_{i=1}^m u\_i \nabla e\_i(\b{x}^\*)^T
     \b{d} \geq 0 \;\; \forall \b{d} \in \bb{R}^n
     $$
 
-    令 $\b{d} = -(u\_0 \nabla f(\b{x}^\*) + \sum\_{i=1}^m u\_i \nabla
-    e\_i(\b{x}^\*))$，则
+    令 $\b{d} = -(u\_0 \nabla f(\b{x}^*) + \sum\_{i=1}^m u\_i \nabla
+    e\_i(\b{x}^*))$，则
 
     $$
-    -\left\Vert u\_0 \nabla f(\b{x}^\*)^T + \sum\_{i=1}^m u\_i \nabla
-    e\_i(\b{x}^\*) \right\Vert^2 \geq 0
+    -\left\Vert u\_0 \nabla f(\b{x}^*)^T + \sum\_{i=1}^m u\_i \nabla
+    e\_i(\b{x}^*) \right\Vert^2 \geq 0
     $$
 
     我们知道 norm 必然是 $\geq 0$ 的，所以必有
 
-    $$u\_0 \nabla f(\b{x}^\*)^T + \sum\_{i=1}^m u\_i \nabla e\_i(\b{x}^\*) = \b{0}$$
+    $$u\_0 \nabla f(\b{x}^*)^T + \sum\_{i=1}^m u\_i \nabla e\_i(\b{x}^\*) = \b{0}$$
 
-    由于 $\b{x}^\*$ 是 regular point，也就是 $\nabla e\_i(\b{x}^\*)$ linear
+    由于 $\b{x}^*$ 是 regular point，也就是 $\nabla e\_i(\b{x}^\*)$ linear
     independent，所以如果 $u\_0 = 0$，则必有 $\b{u} = \b{0}$，而 $u\_0$ 和
     $\b{u}$ 不能同时为 $0$，因此 $u\_0 \neq 0$，这样等式两边统除以 $u\_0$，并令
-    $\bs{\mu}^\* = \b{u} / u\_0$，有
+    $\bs{\mu}^* = \b{u} / u\_0$，有
 
-    $$\nabla f(\b{x}^\*)^T + \sum\_{i=1}^m \mu\_i^\* \nabla e\_i(\b{x}^\*) = \b{0}$$
+    $$\nabla f(\b{x}^*)^T + \sum\_{i=1}^m \mu\_i^\* \nabla e\_i(\b{x}^\*) = \b{0}$$
 
     到此也就得到了上面的 KKT condition $\EOP$
 
@@ -199,35 +199,35 @@ Constrained Optimization 的 first order KKT condition。General Constrained
 Optimization 的形式如下
 
 $$
-\begin{align\*}
+\begin{align*}
 \min \;& f(\b{x}) \\\\
 \st \; & h\_j(\b{x}) \leq 0 \; j = 1\cdots l \\\\
 & e\_i(\b{x}) = 0 \; i = 1\cdots m
-\end{align\*}
+\end{align*}
 $$
 
-> 如果 $\b{x}^\*$ 是 local minimum 且是 regular point，则
+> 如果 $\b{x}^*$ 是 local minimum 且是 regular point，则
 > $$
-> \begin{align\*}
-> \nabla f(\b{x}^\*) + \sum\_{j=1}^l \l\_j^\* \nabla h\_j(\b{x}^\*) +
-> \sum\_{i=1}^m \mu\_i^\* \nabla e\_i(\b{x}^\*) = 0 \\\\
-> \l\_j^\* h(\b{x}^\*) = 0, \; j = 1, \cdots, l \\\\
-> \l\_j^\* \geq 0, \; j = 1, \cdots, l \\\\
-> \end{align\*}
+> \begin{align*}
+> \nabla f(\b{x}^*) + \sum\_{j=1}^l \l\_j^\* \nabla h\_j(\b{x}^\*) +
+> \sum\_{i=1}^m \mu\_i^* \nabla e\_i(\b{x}^\*) = 0 \\\\
+> \l\_j^* h(\b{x}^\*) = 0, \; j = 1, \cdots, l \\\\
+> \l\_j^* \geq 0, \; j = 1, \cdots, l \\\\
+> \end{align*}
 > $$
 
 这里的 regular point 要同时考虑 equality 和 inequality constraint，即
-$\left\\{\nabla h\_j(\b{x}^\*) \; j \in \left\\{ j: h\_j(\b{x}^\*) =
-0\right\\}\right\\} \cup \left\\{ \nabla e\_i(\b{x}^\*) \; i \in \left\\{ 1,
+$\left\\{\nabla h\_j(\b{x}^*) \; j \in \left\\{ j: h\_j(\b{x}^\*) =
+0\right\\}\right\\} \cup \left\\{ \nabla e\_i(\b{x}^*) \; i \in \left\\{ 1,
 \cdots, m\right\\} \right\\}$ linear independent
 
-满足上述条件的点 $(\b{x}^\*, \bs{\l}^\*, \bs{\mu}^\*)$ 被称为 KKT point
+满足上述条件的点 $(\b{x}^*, \bs{\l}^\*, \bs{\mu}^\*)$ 被称为 KKT point
 
 如果定义 Lagrange function $\c{L}(\b{x}, \bs{\l}, \bs{\mu}) = f(\b{x}) +
 \sum\_{j=1}^l \l\_j h\_j(\b{x}) + \sum\_{i=1}^m \mu\_i e\_i(\b{x})$，则有
-$\nabla\_{\b{x}} \c{L}(\b{x}^\*, \bs{\l}^\*, \bs{\mu}^\*) = 0$
+$\nabla\_{\b{x}} \c{L}(\b{x}^*, \bs{\l}^\*, \bs{\mu}^\*) = 0$
 
-另外对于 Convex Programming，first order KKT condition 是 $\b{x}^\*$ 为 global
+另外对于 Convex Programming，first order KKT condition 是 $\b{x}^*$ 为 global
 minimum 的 necessary and sufficient condition，证明与上一篇文章最后一节中给出的类似
 
 ---
@@ -240,12 +240,12 @@ KKT condition，下面给出一种帮助理解的思路，但不是证明，我�
 constraint 对应的 KKT condition 的推导过程核心就是如下两个部分
 
 $$
-\begin{align\*}
+\begin{align*}
 \left\\{\b{d} \left| \b{g}^T\b{d} < 0, \b{c}\_i^T \b{d} < 0 \right.\right\\} = \emptyset
 & \Lra \b{g} + \sum\_i \l\_i \b{c}\_i = 0, \; \l\_i \geq 0 \tag{6}\\\\
 \left\\{\b{d} \left| \b{g}^T\b{d} < 0, \b{c}\_i^T \b{d} = 0 \right.\right\\} = \emptyset
 & \Lra \b{g} + \sum\_i \l\_i \b{c}\_i = 0, \; \l\_i \in \bb{R} \tag{7}
-\end{align\*}
+\end{align*}
 $$
 
 上面的推导对任意的 $\b{g}, \b{c}\_i, \b{d} \in \bb{R}^n$
@@ -253,11 +253,11 @@ $$
 的问题就相当于
 
 $$
-\left\\{\b{d} \left| \begin{align\*}
+\left\\{\b{d} \left| \begin{align*}
 & \b{g}^T\b{d} < 0 \\\\
 & \b{c}\_i^T \b{d} < 0 \; \forall i \in \c{I} \\\\
 & \b{c}\_i^T \b{d} = 0 \; \forall i \in \c{E}
-\end{align\*}
+\end{align*}
 \right.\right\\} = \emptyset \Lra
 \b{g} + \sum\_i \l\_i \b{c}\_i = 0, \; \l\_i \geq 0 \; \forall i \in \c{I} \tag{8}
 $$
@@ -278,34 +278,34 @@ $$
 
     $$
     \c{T}(\b{x}) = \left \\{\b{d} \left|
-    \begin{align\*}
+    \begin{align*}
     & \b{d}^T \nabla c\_i(\b{x}) = 0, \; \forall i \in \c{E} \\\\
     & \b{d}^T \nabla c\_j(\b{x}) \geq 0, \; j \in \c{A}(\b{x}) \cap \c{I}
-    \end{align\*} \right.
+    \end{align*} \right.
     \right \\}
     $$
 
     其中 $\c{E}$ 表示所有 equality constraint 的下标集合，$\c{I}$
     表示所有 inequality constraint 的下标集合
 
-2. 然后证明如果 $\b{x}^\*$ 是 local minimum，则 $\b{d}^T \nabla f(\b{x}^\*)
+2. 然后证明如果 $\b{x}^*$ 是 local minimum，则 $\b{d}^T \nabla f(\b{x}^\*)
    \geq 0, \; \forall \b{d} \in \c{T}(\b{x})$
 
-3. 根据上面 2 个结论可以推出，对于 local minimum $\b{x}^\*$
+3. 根据上面 2 个结论可以推出，对于 local minimum $\b{x}^*$
 
     $$
     \left \\{\b{d} \left|
-    \begin{align\*}
-    & \b{d}^T \nabla f(\b{x}^\*) < 0 \\\\
+    \begin{align*}
+    & \b{d}^T \nabla f(\b{x}^*) < 0 \\\\
     & \b{d}^T \nabla c\_i(\b{x}) = 0, \; \forall i \in \c{E} \\\\
     & \b{d}^T \nabla c\_j(\b{x}) \geq 0, \; j \in \c{A}(\b{x}) \cap \c{I}
-    \end{align\*} \right.
+    \end{align*} \right.
     \right \\} = \emptyset
     $$
 
 4. 然后利用 Farka's Lemma 推出
 
-    $$ \nabla f(\b{x}^\*) - \sum\_{i\in\c{E}\cup\c{I}} \l\_i \nabla c\_i(\b{x}) = 0 $$
+    $$ \nabla f(\b{x}^*) - \sum\_{i\in\c{E}\cup\c{I}} \l\_i \nabla c\_i(\b{x}) = 0 $$
 
     [2] 中提到的 Farka's Lemma 跟我在 [Convex Set](/nnumop/2014/04/15/NP-04-convex-set/)
     中记录的 Farka's Lemma 不太一样，我写的那个可以认为是 [2] 的一个 special

@@ -44,14 +44,14 @@ $\det(AB) = \det(A)\det(B)$
     ($a\_{ij}$ means element at **column i, row j**, not row i column j as usual).
 
     $$
-    \begin{align\*}
+    \begin{align*}
     \det(AB) = & \det[\b{a}\_1, \b{a}\_2]\times [\b{b}\_1, \b{b}\_2] \\\\
     = & \det[b\_{11}\b{a}\_1 + b\_{12}\b{a}\_2, b\_{21}\b{a}\_1 + b\_{22}\b{a}\_2] \\\\
     = & b\_{11}\det[\b{a}\_1, b\_{21}\b{a}\_1 + b\_{22}\b{a}\_2] + b\_{12}
         \det[\b{a}\_2, b\_{21}\b{a}\_1 + b\_{22}\b{a}\_2] \\\\
     = & c\_1\det[\b{a}\_1, \b{a}\_1] + c\_2\det[\b{a}\_1, \b{a}\_2] + c\_3
         \det[\b{a}\_2, \b{a}\_1] + c\_4\det[\b{a}\_2, \b{a}\_2]
-    \end{align\*}
+    \end{align*}
     $$
 
     Here, the exact form of $c\_{i}$ doesn't matter, anyway they are some function
@@ -223,12 +223,12 @@ For symmetric matrix, the eigenvectors of different eigenvalues are orthogonal
 * Proof
 
     $$
-    \begin{align\*}
+    \begin{align*}
     & (A \b{x}\_i)^T \b{x}\_j = \b{x}\_i^T A^T \b{x}\_j = \b{x}\_i^T A \b{x}\_j \\\\
     \Rightarrow & \lambda\_i \b{x}\_i^T \b{x}\_j = \b{x}\_i^T \lambda\_j \b{x}\_j =
                   \lambda\_j \b{x}\_i^T \b{x}\_j \\\\
     \Rightarrow & \b{x}\_i^T \b{x}\_j = 0
-    \end{align\*}
+    \end{align*}
     $$
 
 <a name="symmulti"></a>
@@ -254,13 +254,13 @@ m orthonormal eigenvectors corresponding to $\lambda_i$
     记 $U = (\b{u}\_1, \cdots, \b{u}\_{n-1}), P = (\b{x}\_i, U)$，则
 
     $$
-    \begin{align\*}
+    \begin{align*}
     P^T AP = & \begin{pmatrix} \b{x}\_i^T \\\\ U^T \end{pmatrix} A (\b{x}\_i, U)
     = \begin{pmatrix} \b{x}\_i^T A \b{x}\_i & \b{x}\_i^T A U \\\\
       U^T A \b{x}\_i & U^T AU \end{pmatrix} \\\\
     = & \begin{pmatrix} \b{x}\_i^T A \b{x}\_i & \b{0} \\\\ \b{0} & U^T AU \end{pmatrix}
     = \begin{pmatrix} \lambda\_i & \b{0} \\\\ \b{0} & U^T AU \end{pmatrix}
-    \end{align\*}
+    \end{align*}
     $$
 
     记 $Q = U^T AU$，$Q$ 为 $(n-1)\times(n-1)$ matrix，基于上面的等式有
@@ -316,11 +316,11 @@ $A$ is positive definite iff all its eigenvalues are positive
     * eigenvalues are positive $\Rightarrow$ $A$ is positive definite
 
         $$
-        \begin{align\*}
+        \begin{align*}
         \b{x}^T A \b{x} = & \b{x}^T S \Lambda S^T \b{x} \\\\
         = & \b{y}^T \Lambda \b{y} \\\\
         = & \sum\_i \lambda\_i y\_i^2
-        \end{align\*}
+        \end{align*}
         $$
 
         So if $\lambda\_i \gt 0 \;\; \forall i$, $\b{x}^T A \b{x} \gt 0$.
@@ -330,12 +330,12 @@ $A$ is positive definite iff all its eigenvalues are positive
         Let $\b{x}\_i$ be eigenvector
 
         $$
-        \begin{align\*}
+        \begin{align*}
         & A \text{ is positive definite} \\\\
         \Rightarrow & \b{x}\_i^T A \b{x}\_i \gt 0 \\\\
         \Rightarrow & \b{x}\_i^T \lambda\_i \b{x}\_i \gt 0 \\\\
         \Rightarrow & \lambda\_i \gt 0\EOP
-        \end{align\*}
+        \end{align*}
         $$
 
 <a name="gradper"></a>

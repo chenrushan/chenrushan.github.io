@@ -33,11 +33,11 @@ $$\lim_{k\rightarrow \infty} \frac{\Vert \b{x}^{k+1} - \b{x}^*\Vert }{\Vert \b{x
 
 * $p = 1, 0 < \beta < 1$ (linear convergence)
 
-    * $\beta = 0.1, \Vert \b{x}^0 - \b{x}^\* \Vert = 0.1$
+    * $\beta = 0.1, \Vert \b{x}^0 - \b{x}^* \Vert = 0.1$
 
         收敛过程是 $10^{-1}, 10^{-2}, 10^{-3}, 10^{-4}, ...$
 
-    * $\beta = 0.9, \Vert \b{x}^0 - \b{x}^\* \Vert = 0.1$
+    * $\beta = 0.9, \Vert \b{x}^0 - \b{x}^* \Vert = 0.1$
 
         收敛过程是 $10^{-1}, 0.09, 0.081, 0.0729, ...$
 
@@ -45,7 +45,7 @@ $$\lim_{k\rightarrow \infty} \frac{\Vert \b{x}^{k+1} - \b{x}^*\Vert }{\Vert \b{x
 
 * $p = 2, \beta > 0$ (quadratic convergence)
 
-    * $\beta = 1, \Vert \b{x}^0 - \b{x}^\* \Vert = 0.1$
+    * $\beta = 1, \Vert \b{x}^0 - \b{x}^* \Vert = 0.1$
 
         收敛过程是 $10^{-1}, 10^{-2}, 10^{-4}, ...$
 
@@ -55,7 +55,7 @@ $$\lim_{k\rightarrow \infty} \frac{\Vert \b{x}^{k+1} - \b{x}^*\Vert }{\Vert \b{x
 
     如果收敛过程符合如下条件
 
-    $$\lim\_{k\rightarrow \infty} \frac{\Vert \b{x}^{k+1} - \b{x}^\* \Vert}{\Vert \b{x}^k - \b{x}^\* \Vert} = 0, \lim\_{k\rightarrow \infty} \frac{\Vert \b{x}^{k+1} - \b{x}^\* \Vert}{\Vert \b{x}^k - \b{x}^\* \Vert^2} = \infty$$
+    $$\lim\_{k\rightarrow \infty} \frac{\Vert \b{x}^{k+1} - \b{x}^* \Vert}{\Vert \b{x}^k - \b{x}^\* \Vert} = 0, \lim\_{k\rightarrow \infty} \frac{\Vert \b{x}^{k+1} - \b{x}^\* \Vert}{\Vert \b{x}^k - \b{x}^\* \Vert^2} = \infty$$
 
     这被称为 superlinear convergence，收敛速度介于 linear 和 quadratic 之间
   
@@ -63,7 +63,7 @@ $$\lim_{k\rightarrow \infty} \frac{\Vert \b{x}^{k+1} - \b{x}^*\Vert }{\Vert \b{x
 
 另一种表示 convergence rate 的方法是使用 Error function $E: \mathbb{R}^n \rightarrow \mathbb{R}$，然后计算
 
-$$\lim\_{k\rightarrow \infty} \frac{E(\b{x}^{k+1}) - E(\b{x}^\*)}{(E(\b{x}^k) - E(\b{x}^\*))^p}$$
+$$\lim\_{k\rightarrow \infty} \frac{E(\b{x}^{k+1}) - E(\b{x}^*)}{(E(\b{x}^k) - E(\b{x}^\*))^p}$$
 或者
 $$\lim\_{k\rightarrow \infty} \frac{E(\b{x}^{k}) - E(\b{x}^{k+1})}{E(\b{x}^k)^p}$$
 
@@ -168,10 +168,10 @@ OUTPUT: $\alpha^k$
     <p style="background-color: #9f9">首先每一步迭代符合 Armijo condition 所以有</p>
 
     $$
-    \begin{align\*}
+    \begin{align*}
     f^k < & f^{k-1} + c\_1 \alpha^{k-1} {g^{k-1}}^T \b{d}^{k-1} \;\; c\_1 \in (0, 1) \\\\
     < & f^0 + \sum\_{i=0}^{k-1} c\_1 \alpha^i {g^i}^T \b{d}^i \\\\
-    \end{align\*}
+    \end{align*}
     $$
 
     上式等价于 $ - \sum\_{i=0}^{k-1} c\_1 \alpha^i {g^i}^T \b{d}^i < f^0 - f^k$，由于 $f$ bounded below，所以有 $f^0 - f^\infty < \infty$，因此有

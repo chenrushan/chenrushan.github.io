@@ -62,25 +62,25 @@ $$ \min\_{x\in X} \; f(x) $$
 
 ----------
 
-假设存在 $x^\*$ 为 local minimum 且 $f'(x^\*) \neq 0$，暂且令 $f'(x^\*) > 0$，$< 0$ 的情况同理。
+假设存在 $x^*$ 为 local minimum 且 $f'(x^\*) \neq 0$，暂且令 $f'(x^\*) > 0$，$< 0$ 的情况同理。
 
-$f \in \mathcal{C}^1 \Rightarrow f' \in \mathcal{C}^0$，由于 $f'(x^\*) > 0$，所以存在 $\delta$ 使得 $f'(x) > 0 \;\; \forall x \in B(x^\*, \delta)$。根据 Truncated Taylor series，我们有
+$f \in \mathcal{C}^1 \Rightarrow f' \in \mathcal{C}^0$，由于 $f'(x^*) > 0$，所以存在 $\delta$ 使得 $f'(x) > 0 \;\; \forall x \in B(x^\*, \delta)$。根据 Truncated Taylor series，我们有
 
-$$f(x) = f(x^\*) + f'(\bar{x})(x - x^\*) \;\; \bar{x} \in (x^\*, x)$$
+$$f(x) = f(x^*) + f'(\bar{x})(x - x^\*) \;\; \bar{x} \in (x^\*, x)$$
 
-如果 $x \in B(x^\*, \delta)$，则 $\bar{x} \in B(x^\*, \delta)$，则 $f'(\bar{x}) > 0$。取 $x \in (x^\* - \delta, x^\*)$，在这段区间内 $x - x^\* < 0$，这样就有 $f'(\bar{x})(x - x^\*) < 0$，也就是 $f(x) < f(x^\*) \; \forall x \in (x^\* - \delta, x^\*)$，这与 $x^\*$ 是 local minimum 相矛盾。
+如果 $x \in B(x^*, \delta)$，则 $\bar{x} \in B(x^\*, \delta)$，则 $f'(\bar{x}) > 0$。取 $x \in (x^\* - \delta, x^\*)$，在这段区间内 $x - x^\* < 0$，这样就有 $f'(\bar{x})(x - x^\*) < 0$，也就是 $f(x) < f(x^\*) \; \forall x \in (x^\* - \delta, x^\*)$，这与 $x^\*$ 是 local minimum 相矛盾。
 
-因此如果 $x^\*$ 是 local minimum，则有 $f'(x^\*) = 0$。
+因此如果 $x^*$ 是 local minimum，则有 $f'(x^\*) = 0$。
 
 ----------
 
-但是 $f'(x^\*) = 0$ 并不是 sufficient condition，对于如下两个函数
+但是 $f'(x^*) = 0$ 并不是 sufficient condition，对于如下两个函数
 
 <object data="/resource/NNP/03-1d-uncon-op/f'(x)=0.svg" type="image/svg+xml" class="blkcenter"></object>
 
 都有 $f'(a) = 0$，但只有左边的函数在 $a$ 处是最小值。也因此满足 $f'(x) = 0$ 的 $x$ 并不被称为 minimum point，而是被称作 stationary point 或者 saddle point。
 
-注意到，对于左边函数，我们有 $f''(a) \geq 0$，而这其实是 $x^\*$ 为 local minimum 的第二个 necessary condition。
+注意到，对于左边函数，我们有 $f''(a) \geq 0$，而这其实是 $x^*$ 为 local minimum 的第二个 necessary condition。
 
 ### Second order necessary condition
 
@@ -92,19 +92,19 @@ $$f(x) = f(x^\*) + f'(\bar{x})(x - x^\*) \;\; \bar{x} \in (x^\*, x)$$
 
 ----------
 
-假设存在 $x^\*$ 是 local minimum 同时 $f''(x^\*) < 0$。
+假设存在 $x^*$ 是 local minimum 同时 $f''(x^\*) < 0$。
 
-$f \in \mathcal{C}^2 \rightarrow f'' \in \mathcal{C}^0$，由于 $f''(x^\*) < 0$，所以存在 $\delta$ 使得 $f''(x) < 0 \; \forall x \in B(x^\*, \delta)$。根据 Truncated Taylor series，我们有
+$f \in \mathcal{C}^2 \rightarrow f'' \in \mathcal{C}^0$，由于 $f''(x^*) < 0$，所以存在 $\delta$ 使得 $f''(x) < 0 \; \forall x \in B(x^\*, \delta)$。根据 Truncated Taylor series，我们有
 
-$$f(x) = f(x^\*) + f'(x^\*)(x - x^\*) + \frac{1}{2} f''(\bar{x})(x - x^\*)^2 \;\; \bar{x} \in (x^\*, x)$$
+$$f(x) = f(x^*) + f'(x^\*)(x - x^\*) + \frac{1}{2} f''(\bar{x})(x - x^\*)^2 \;\; \bar{x} \in (x^\*, x)$$
 
-如果 $x \in B(x^\*, \delta)$，则 $\bar{x} \in B(x^\*, \delta)$，则 $f''(\bar{x}) < 0$，而 $(x - x^\*)^2 \geq 0$，所以有 $f''(\bar{x})(x - x^\*)^2 \leq 0$，另外根据前面的 first order necessary condition，$f'(x^\*) = 0$，这样就有 $f(x) < f(x^\*)$，这与 $x^\*$ 是 local minimum 相矛盾。
+如果 $x \in B(x^*, \delta)$，则 $\bar{x} \in B(x^\*, \delta)$，则 $f''(\bar{x}) < 0$，而 $(x - x^\*)^2 \geq 0$，所以有 $f''(\bar{x})(x - x^\*)^2 \leq 0$，另外根据前面的 first order necessary condition，$f'(x^\*) = 0$，这样就有 $f(x) < f(x^\*)$，这与 $x^\*$ 是 local minimum 相矛盾。
 
-因此如果 $x^\*$ 是 local minimum，则有 $f''(x^\*) \geq 0$。
+因此如果 $x^*$ 是 local minimum，则有 $f''(x^\*) \geq 0$。
 
 ----------
 
-但是 $f''(x^\*) \geq 0$ 同样不是 sufficient condition，比如函数 $f(x) = (x - a)^3 + b$。
+但是 $f''(x^*) \geq 0$ 同样不是 sufficient condition，比如函数 $f(x) = (x - a)^3 + b$。
 
 <object data="/resource/NNP/03-1d-uncon-op/x^3.svg" type="image/svg+xml" class="blkcenter"></object>
 

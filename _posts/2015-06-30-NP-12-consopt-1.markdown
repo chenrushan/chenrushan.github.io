@@ -18,22 +18,22 @@ tags: NPTEL, numerical optimization, constrained optimization
 Constrained Optimization 可以表示为
 
 $$
-\begin{align\*}
+\begin{align*}
 \min \; f(\b{x}) \\\\
 \st \; \b{x} \in \c{X}
-\end{align\*} \tag{1}
+\end{align*} \tag{1}
 $$
 
 其中 $\c{X} \subseteq \bb{R}^n$ 表示 $\b{x}$ 允许的取值。可以将 $\c{X}$
 进一步细化成如下一般形式
 
 $$
-\begin{align\*}
+\begin{align*}
 \min \;& f(\b{x}) \\\\
 \st \; & h\_j(\b{x}) \leq 0 \; j = 1\cdots l \\\\
 & e\_i(\b{x}) = 0 \; i = 1\cdots m \\\\
 & \b{x} \in S
-\end{align\*} \tag{2}
+\end{align*} \tag{2}
 $$
 
 其中 $h\_j(\b{x})$ 表示 inequality constraint，$e\_i(\b{x})$ 表示 equality
@@ -43,20 +43,20 @@ constraint，$S \in \bb{R}^n$
 
 下面是 constrained optimization 情况下 global 和 local minimum 的定义
 
-> 如果 $\b{x}^\*$ 满足
+> 如果 $\b{x}^*$ 满足
 >
-> $$ f(\b{x}^\*) \leq f(\b{x}) \; \forall \b{x} \in \c{X} \tag{3}$$
+> $$ f(\b{x}^*) \leq f(\b{x}) \; \forall \b{x} \in \c{X} \tag{3}$$
 >
-> 则 $\b{x}^\*$ 为 global minimum，如果不等号严格成立，则 $\b{x}^\*$ 为 strict
+> 则 $\b{x}^*$ 为 global minimum，如果不等号严格成立，则 $\b{x}^\*$ 为 strict
 > global minimum
 
 <p></p>
 
-> 如果存在 $\epsilon > 0$ 使得 $\b{x}^\*$ 满足
+> 如果存在 $\epsilon > 0$ 使得 $\b{x}^*$ 满足
 >
-> $$ f(\b{x}^\*) \leq f(\b{x}) \; \forall \b{x} \in B(\b{x}^\*, \epsilon) \cap \c{X} \tag{4}$$
+> $$ f(\b{x}^*) \leq f(\b{x}) \; \forall \b{x} \in B(\b{x}^\*, \epsilon) \cap \c{X} \tag{4}$$
 >
-> 则 $\b{x}^\*$ 为 local minimum，如果不等式严格成立，则 $\b{x}^\*$ 为 strict
+> 则 $\b{x}^*$ 为 local minimum，如果不等式严格成立，则 $\b{x}^\*$ 为 strict
 > local minimum
 
 下图给出了 local 和 global minimum 的例子
@@ -93,23 +93,23 @@ $0$），那我们如何能从数学上对 constrained optimization 中的 local
 
 下面我们从 $\c{F}(\b{x})$ 和 $\c{D}(\b{x})$ 出发对 local minimum 做初步刻画
 
-> 定理 1：如果 $\b{x}^\* \in \c{X}$ 为 local minimum，则有 $\c{F}(\b{x}^\*) \cap
-> \c{D}(\b{x}^\*) = \emptyset$
+> 定理 1：如果 $\b{x}^* \in \c{X}$ 为 local minimum，则有 $\c{F}(\b{x}^\*) \cap
+> \c{D}(\b{x}^*) = \emptyset$
 
 * Proof:
 
-    假设 $\c{F}(\b{x}^\*) \cap \c{D}(\b{x}^\*) \neq \emptyset$，则存在
-    $ \b{d} \in \c{F}(\b{x}^\*) \cap \c{D}(\b{x}^\*)$，也就是
+    假设 $\c{F}(\b{x}^*) \cap \c{D}(\b{x}^\*) \neq \emptyset$，则存在
+    $ \b{d} \in \c{F}(\b{x}^*) \cap \c{D}(\b{x}^\*)$，也就是
 
-    * $\exists \delta\_1 > 0, \forall \a \in (0, \delta\_1), \b{x}^\* + \a\b{d} \in \c{X}$
-    * $\exists \delta\_2 > 0, \forall \a \in (0, \delta\_2), f(\b{x}^\* + \a\b{d}) < f(\b{x}^\*)$
+    * $\exists \delta\_1 > 0, \forall \a \in (0, \delta\_1), \b{x}^* + \a\b{d} \in \c{X}$
+    * $\exists \delta\_2 > 0, \forall \a \in (0, \delta\_2), f(\b{x}^* + \a\b{d}) < f(\b{x}^\*)$
 
     令 $\delta = \min(\delta\_1, \delta\_2), \a \in (0, \delta), \b{y} =
-    \b{x}^\* + \a\b{d}$，则有 $f(\b{y}) < f(\b{x}^\*), \b{y} \in
+    \b{x}^* + \a\b{d}$，则有 $f(\b{y}) < f(\b{x}^\*), \b{y} \in
     \c{X}$，也就是在 $\c{X}$ 中找到了比 $f(\b{x}\^*)$ 更小的 $f(\b{y})$
 
-    因此，如果 $\b{x}^\*$ 为 local minimum，则必有 $\c{F}(\b{x}^\*) \cap
-    \c{D}(\b{x}^\*) = \emptyset$ $\EOP$
+    因此，如果 $\b{x}^*$ 为 local minimum，则必有 $\c{F}(\b{x}^\*) \cap
+    \c{D}(\b{x}^*) = \emptyset$ $\EOP$
 
 下面我们将从这个定理出发找到一种 local minimum 的代数表示方法（只有找到了
 代数表示法我们才能计算出 local minimum）
@@ -132,7 +132,7 @@ $0$），那我们如何能从数学上对 constrained optimization 中的 local
     $f(\b{x} + \a\b{d}) < f(\b{x})$，即 $\b{d} \in \c{D}(\b{x})$，所以
     $\tilde{\c{D}}(\b{x}) \subseteq \c{D}(\b{x})$ $\EOP$
 
-根据定理 1 和定理 2，如果 $\b{x}^\*$ 是 local minimum，则有 $\c{F}(\b{x}) \cap
+根据定理 1 和定理 2，如果 $\b{x}^*$ 是 local minimum，则有 $\c{F}(\b{x}) \cap
 \tilde{\c{D}}(\b{x}) = \emptyset$
 
 ### Feasible Direction For Inequality Constrain
@@ -194,7 +194,7 @@ constraint，记为 $\c{A}(\b{x}) = \\{1, 2\\}$，对于点 C，$\c{A}(\b{x}) =
 
 根据定理 1，2 和 3，我们可以得到如下推论
 
-> 定理 4：如果 $\b{x}^\*$ 为 local minimum，则 $\tilde{\c{F}}(\b{x}) \cap
+> 定理 4：如果 $\b{x}^*$ 为 local minimum，则 $\tilde{\c{F}}(\b{x}) \cap
 > \tilde{\c{D}}(\b{x}) = \emptyset$
 
 由于 $\tilde{\c{F}}(\b{x})$ 和 $\tilde{\c{D}} (\b{x})$
@@ -206,65 +206,65 @@ constraint，记为 $\c{A}(\b{x}) = \\{1, 2\\}$，对于点 C，$\c{A}(\b{x}) =
 把定理 4 展开有
 
 $$
-\\{\b{d}: \nabla h\_j(\b{x}^\*)^T \b{d} < 0, j \in \c{A}(\b{x}^\*) \\} \cap
-\\{\b{d}: \nabla f(\b{x}^\*)^T \b{d} < 0 \\} = \emptyset \tag{7}
+\\{\b{d}: \nabla h\_j(\b{x}^*)^T \b{d} < 0, j \in \c{A}(\b{x}^\*) \\} \cap
+\\{\b{d}: \nabla f(\b{x}^*)^T \b{d} < 0 \\} = \emptyset \tag{7}
 $$
 
-如果记 $A = \begin{pmatrix} \nabla f(\b{x}^\*)^T \\\\ \cdots \\\\ h\_j(\b{x}^\*)^T 
-\\\\ \cdots \end{pmatrix}$，其中 $j \in \c{A}(\b{x}^\*)$，$A \in \bb{R}^{(1 +
-|\c{A}(\b{x}^\*)|) \times n}$，那公式 7 等价于
+如果记 $A = \begin{pmatrix} \nabla f(\b{x}^*)^T \\\\ \cdots \\\\ h\_j(\b{x}^\*)^T 
+\\\\ \cdots \end{pmatrix}$，其中 $j \in \c{A}(\b{x}^*)$，$A \in \bb{R}^{(1 +
+|\c{A}(\b{x}^*)|) \times n}$，那公式 7 等价于
 
 $$ \\{\b{d}: A\b{d} < 0\\} = \emptyset$$
 
 换句话说就是 $A\b{d} < 0$ 无解。根据 [Convex Set](/nnumop/2014/04/15/NP-04-convex-set/)
 这篇文章中 Farka's Lemma 的推论，我们有 
 
-> $\exists \l\_0, \l\_j \geq 0, j \in \c{A}(\b{x}^\*)$ 且 $\l$
+> $\exists \l\_0, \l\_j \geq 0, j \in \c{A}(\b{x}^*)$ 且 $\l$
 > 不同时为 $0$，使得
-> $$ \l\_0 \nabla f(\b{x}^\*) + \sum\_{j\in \c{A}(\b{x}^\*)}
-> \l\_j \nabla h\_j(\b{x}^\*) = \b{0} \tag{8}$$
+> $$ \l\_0 \nabla f(\b{x}^*) + \sum\_{j\in \c{A}(\b{x}^\*)}
+> \l\_j \nabla h\_j(\b{x}^*) = \b{0} \tag{8}$$
 
 公式 8 存在这么个问题，如果存在非 $\b{0}$ $(\l\_1, \cdots, \l\_l)^T \geq 0$
-使得 $\sum\_j \l\_j \nabla h\_j(\b{x}^\*) = 0$，那 $\l\_0$ 直接设置成 $0$
-就好了，这时候无论 $\nabla f(\b{x}^\*)$ 取什么值都不影响等式 8 成立，也就是
+使得 $\sum\_j \l\_j \nabla h\_j(\b{x}^*) = 0$，那 $\l\_0$ 直接设置成 $0$
+就好了，这时候无论 $\nabla f(\b{x}^*)$ 取什么值都不影响等式 8 成立，也就是
 $f(\b{x})$ 已经不再重要了，这是我们希望避免的。为此，我们要求 $\nabla
-h\_j(\b{x}^\*)$ 之间 linear independent，这样就避免掉了 $\l\_0 = 0$
+h\_j(\b{x}^*)$ 之间 linear independent，这样就避免掉了 $\l\_0 = 0$
 的情况，因为如果 $\l\_0 = 0$，则必有 $\l\_j = 0$ 才能使等式 8 成立，而这跟等式
 8 成立的前提相违背
 
 > 给定点 $\b{x}$，如果 $\nabla h\_j(\b{x}), j \in \c{A}(\b{x})$ 之间 linear
 > independent，则点 $\b{x}$ 被称为 regular point
 
-所以我们要求 $\b{x}^\*$ 是 regular point
+所以我们要求 $\b{x}^*$ 是 regular point
 
-那现在既然 $\l\_0 \neq 0$，等式 8 两边统除以 $\l\_0$，并定义 $\l\_j^\* = \l\_j
-/ \l\_0, j \in \c{A}(\b{x})$，则有 $ \nabla f(\b{x}^\*) + \sum\_{j\in
-\c{A}(\b{x}^\*)} \l\_j^\* \nabla h(\b{x}^\*) = 0 $，更进一步，如果令 $\l\_j^\*
-= 0, \; \forall j \notin \c{A}(\b{x}^\*)$，则有 $ \nabla f(\b{x}^\*) + \sum\_j
-\l\_j^\* \nabla h(\b{x}^\*) = 0, \; j = 1, \cdots, l$，这样我们就有了 First
+那现在既然 $\l\_0 \neq 0$，等式 8 两边统除以 $\l\_0$，并定义 $\l\_j^* = \l\_j
+/ \l\_0, j \in \c{A}(\b{x})$，则有 $ \nabla f(\b{x}^*) + \sum\_{j\in
+\c{A}(\b{x}^*)} \l\_j^\* \nabla h(\b{x}^\*) = 0 $，更进一步，如果令 $\l\_j^\*
+= 0, \; \forall j \notin \c{A}(\b{x}^*)$，则有 $ \nabla f(\b{x}^\*) + \sum\_j
+\l\_j^* \nabla h(\b{x}^\*) = 0, \; j = 1, \cdots, l$，这样我们就有了 First
 Order KKT Condition
 
-> 如果 regular point $\b{x}^\*$ 是 local minimum，则存在
-> $\bs{\l}^\* = \\{\l\_1^\*, \cdots, \l\_l^\* \\}$ 使得
+> 如果 regular point $\b{x}^*$ 是 local minimum，则存在
+> $\bs{\l}^* = \\{\l\_1^\*, \cdots, \l\_l^\* \\}$ 使得
 > $$
-> \begin{align\*}
-> \nabla f(\b{x}^\*) + \sum\_{j=1}^l \l\_j^\* \nabla h(\b{x}^\*) = 0 \\\\
-> \l\_j^\* h\_j(\b{x}^\*) = 0, \; j = 1, \cdots, l \\\\
-> \l\_j^\* \geq 0 \; j = 1, \cdots, l
-> \end{align\*}
+> \begin{align*}
+> \nabla f(\b{x}^*) + \sum\_{j=1}^l \l\_j^\* \nabla h(\b{x}^\*) = 0 \\\\
+> \l\_j^* h\_j(\b{x}^\*) = 0, \; j = 1, \cdots, l \\\\
+> \l\_j^* \geq 0 \; j = 1, \cdots, l
+> \end{align*}
 > $$
 
-这里的第二个等式是这样，如果 $j \in \c{A}(\b{x}^\*)$，则 $h\_j(\b{x}^\*) =
-0$，因此 $\l\_j^\* h\_j(\b{x}^\*) = 0$，如果 $j \notin
-\c{A}(\b{x}^\*)$，$\l\_j^\* h\_j(\b{x}^\*) = 0$ 就相当于要求
-$\l\_j^\* = 0$
+这里的第二个等式是这样，如果 $j \in \c{A}(\b{x}^*)$，则 $h\_j(\b{x}^\*) =
+0$，因此 $\l\_j^* h\_j(\b{x}^\*) = 0$，如果 $j \notin
+\c{A}(\b{x}^*)$，$\l\_j^\* h\_j(\b{x}^\*) = 0$ 就相当于要求
+$\l\_j^* = 0$
 
-* 点 $(\b{x}^\*, \bs{\l}^\*)$ 被称为 KKT point
+* 点 $(\b{x}^*, \bs{\l}^\*)$ 被称为 KKT point
 * $\c{L}(\b{x}, \bs{\l}) = f(\b{x}) + \sum\_{j=1}^l \l\_j h\_j(\b{x})$
   被称为 Lagrangian function，$\l\_j$ 被称为 Lagrange
   multiplier。上面第一个等式就等价于 $\nabla\_{\b{x}} \c{L}(\b{x},
-  \bs{\l}^\*)|\_{\b{x} = \b{x}^\*} = 0$
-* $\l\_j^\* h\_j(\b{x}^\*) = 0$ 被称为 Complementary Slackness Condition
+  \bs{\l}^*)|\_{\b{x} = \b{x}^\*} = 0$
+* $\l\_j^* h\_j(\b{x}^\*) = 0$ 被称为 Complementary Slackness Condition
 
 另外注意，这个 condition 只是 necessary condition，不符合上述 condition
 的点也可能是 local minimum
@@ -274,11 +274,11 @@ $\l\_j^\* = 0$
 举个例子
 
 $$
-\begin{align\*}
+\begin{align*}
 \min \; & x\_1^2 + x\_2^2 \\\\
 \st \; & x\_1 + x\_2 \geq 1 \\\\
 & x\_2 \leq 0
-\end{align\*}
+\end{align*}
 $$
 
 * Solution:
@@ -286,12 +286,12 @@ $$
     定义 Lagrangian function $\c{L}(\b{x}, \bs{\l}) = x\_1^2 + x\_2^2 + \l\_1
     (1 - x\_1 - x\_2) + \l\_2 x\_2$
 
-    \begin{align\*}
+    \begin{align*}
     & \frac{\p \c{L}}{\p x\_1} = 2x\_1 - \l\_1 = 0 \\\\
     & \frac{\p \c{L}}{\p x\_2} = 2x\_2 - \l\_1 + \l\_2 = 0 \\\\
     & \l\_1(1 - x\_1 - x\_2) = 0 \\\\
     & \l\_2 x\_2 = 0
-    \end{align\*}
+    \end{align*}
 
     从最后一个等式我们知道，要么 $\l\_2 = 0$ 要么 $x\_2 = 0$
 
@@ -313,32 +313,32 @@ $$
 则 2 又被称为 Convex Programming Problem，根据 convex function
 的性质可知 $\c{X}$ 是个 convex set
 
-> 对于 Convex Programming Problem，如果 $\b{x}^\*$ 为 regular point, 则 First
-> Order KKT Condition 是 $\b{x}^\*$ 为 global minimum 的 nessesary and
+> 对于 Convex Programming Problem，如果 $\b{x}^*$ 为 regular point, 则 First
+> Order KKT Condition 是 $\b{x}^*$ 为 global minimum 的 nessesary and
 > sufficient condition
 
 * Proof:
 
     由于 $f(\b{x})$ 是 convex function，所以
 
-    $$ f(\b{x}) \geq f(\b{x}^\*) + \nabla f(\b{x}^\*)^T (\b{x} - \b{x}^\*) $$
+    $$ f(\b{x}) \geq f(\b{x}^*) + \nabla f(\b{x}^\*)^T (\b{x} - \b{x}^\*) $$
 
-    由于 $\l\_j^\* \geq 0, h\_j(\b{x}) \leq 0$，同时 $h\_j(\b{x})$ 也是 convex
+    由于 $\l\_j^* \geq 0, h\_j(\b{x}) \leq 0$，同时 $h\_j(\b{x})$ 也是 convex
     function 所以有
 
     $$
-    \begin{align\*}
-    f(\b{x}) \geq & f(\b{x}) + \sum\_j \l\_j^\* h\_j(\b{x}) \\\\
-    \geq & f(\b{x}^\*) + \nabla f(\b{x}^\*)^T (\b{x} - \b{x}^\*) + 
-           \sum\_j \l\_j^\* (h(\b{x}^\*) + \nabla h(\b{x}^\*)^T (\b{x} - \b{x}^\*)) \\\\
-    = & f(\b{x}^\*) + \sum\_j \l\_j^\* h(\b{x}^\*) +
-        (\nabla f(\b{x}^\*) + \sum\_j \l\_j^\* \nabla h(\b{x}^\*))^T (\b{x} - \b{x}^\*) \\\\
-    = & f(\b{x}^\*)
-    \end{align\*}
+    \begin{align*}
+    f(\b{x}) \geq & f(\b{x}) + \sum\_j \l\_j^* h\_j(\b{x}) \\\\
+    \geq & f(\b{x}^*) + \nabla f(\b{x}^\*)^T (\b{x} - \b{x}^\*) + 
+           \sum\_j \l\_j^* (h(\b{x}^\*) + \nabla h(\b{x}^\*)^T (\b{x} - \b{x}^\*)) \\\\
+    = & f(\b{x}^*) + \sum\_j \l\_j^\* h(\b{x}^\*) +
+        (\nabla f(\b{x}^*) + \sum\_j \l\_j^\* \nabla h(\b{x}^\*))^T (\b{x} - \b{x}^\*) \\\\
+    = & f(\b{x}^*)
+    \end{align*}
     $$
 
-    也就是 $f(\b{x}) \geq f(\b{x}^\*), \;\forall \b{x} \in \c{X}$，所以
-    $\b{x}^\*$ 为 global minimum $\EOP$
+    也就是 $f(\b{x}) \geq f(\b{x}^*), \;\forall \b{x} \in \c{X}$，所以
+    $\b{x}^*$ 为 global minimum $\EOP$
 
 
 

@@ -44,13 +44,13 @@ $\b{v}$ 后所有数据都被 project 到一个点上(比如所有原始数据�
 后的数据的 variance 可以表示为
 
 $$
-\begin{align\*}
+\begin{align*}
 & \Var(Y) = \Var(\b{v}^{T}X) \\\\
 = & \E((\b{v}^{T}X)(\b{v}^{T}X)^{T}) - \E(\b{v}^{T}X)\E((\b{v}^{T}X)^{T}) \\\\
 = & \b{v}^{T}\E(XX^{T})\b{v} - \b{v}^{T}\E(X)\E(X^{T})\b{v} \\\\
 = & \b{v}^{T}(\E(XX^{T}) - \E(X)\E(X^T))\b{v} \\\\
 = & \b{v}^{T}\Sigma \b{v} \\\\
-\end{align\*}
+\end{align*}
 $$
 
 其中 $\Sigma$ 为原始输入各维度特征的协方差矩阵。其中 $\E(\b{v}^{T}X) = \b{v}^{T}\E(X)$
@@ -63,13 +63,13 @@ $$\underset{\left\Vert \b{v} \right\Vert = 1}{\argmax}\;\; \b{v}^T\Sigma \b{v}$$
 令 $L(\b{v})=\b{v}^T \Sigma \b{v} - \lambda(\left\Vert \b{v} \right\Vert - 1)$，则有
 
 $$
-\begin{align\*}
+\begin{align*}
 & L(\b{v})=\b{v}^T \Sigma \b{v} - \lambda(\left\Vert \b{v} \right\Vert - 1) \\\\
 \Rightarrow & L(\b{v})=\b{v}^T\Sigma \b{v}- \lambda(\b{v}^T\b{v} - 1) \\\\
 \Rightarrow & \frac{\partial L(\b{v})}{\partial \b{v}} = 2\Sigma \b{v} - 2\lambda \b{v} = 0 \\\\
 \Rightarrow & \Sigma \b{v}= \lambda \b{v} \\\\
 \Rightarrow & \b{v}^T\Sigma \b{v} = \b{v}^T\lambda \b{v} = \lambda
-\end{align\*}
+\end{align*}
 $$
 
 上面的倒数第二个式子告诉我们，能最大化 $\b{v}^T \Sigma \b{v}$ 的 $\b{v}$ 是 $\Sigma$
@@ -137,13 +137,13 @@ $\b{v}(\b{v}^T\b{X})$ 就表示 $\b{v}^T\b{X}$ 在原空间 (与 $\b{X}$ 同空�
 看看为什么两个 objective function 是等价的
 
 $$
-\begin{align\*}
+\begin{align*}
 \Vert \b{X} - \b{v}\b{v}^T\b{X} \Vert\_F = & \tr((\b{X} - \b{vv}^T\b{X})^T(\b{X} - \b{vv}^T\b{X})) \\\\
 = & \tr(\b{X}^T\b{X}) - 2\tr(\b{X}^T\b{vv}^T\b{X}) + \tr(\b{X}^T\b{vv}^T\b{vv}^T\b{X}) \\\\
 = & \tr(\b{X}^T\b{X}) - \tr(\b{X}^T\b{vv}^T\b{X}) \\\\
 = & \tr(\b{X}^T\b{X}) - \tr(\b{v}^T\b{X}\b{X}^T\b{v}) \;
     (\because \tr(\b{y}^T\b{z}) = \tr(\b{y}\b{z}^T) \forall \b{y}, \b{z} \in \bb{R}^n)
-\end{align\*}
+\end{align*}
 $$
 
 对于最后一个式子，第一项是个 constant，第二项和 $\b{v}^T\Sigma\b{v}$ 就差个

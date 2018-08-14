@@ -30,10 +30,10 @@ Convex function 和 Concave function 是两个相对的概念，$f$ 如果是 co
 所谓的 convex programming problem，就是指如下问题
 
 $$
-\begin{align\*}
+\begin{align*}
 \min f(\b{x}) \\\\
 s.t. \b{x} \in C
-\end{align\*}
+\end{align*}
 $$
 
 其中 $C$ 是 convex set，$f: C \rightarrow \mathbb{R}$ 为 convex function
@@ -44,21 +44,21 @@ Convex programming 中每个 local minimum 都是 global minimum
 
 * 证明
 
-    假设 local minimum 为 $\b{x}^\*$，根据 local minimum 的定义我们知道
+    假设 local minimum 为 $\b{x}^*$，根据 local minimum 的定义我们知道
 
-    $$\b{x}^\* = \underset{\b{x} \in C \cap B(\b{x}^\*, \delta)}{\arg\min} f(\b{x}) $$
+    $$\b{x}^* = \underset{\b{x} \in C \cap B(\b{x}^\*, \delta)}{\arg\min} f(\b{x}) $$
 
-    参考下图，其中绿色的圈表示 $C \cap B(\b{x}^\*, \delta)$
+    参考下图，其中绿色的圈表示 $C \cap B(\b{x}^*, \delta)$
 
     <object data="/resource/NNP/05-convex-func/localisglobal.svg" type="image/svg+xml" class="blkcenter"></object>
 
-    假设 $\b{y} \in C \cap B(\b{x}^\*, \delta)$，$\b{z}$ 为 $LS(\b{x}^\*, \b{y})$ 延长线上任意一点且在 $C$ 内，则 $\b{y}$ 可以表示为 $\lambda \b{x} + (1 - \lambda) \b{z} \; \lambda \in (0, 1)$，则有
+    假设 $\b{y} \in C \cap B(\b{x}^*, \delta)$，$\b{z}$ 为 $LS(\b{x}^\*, \b{y})$ 延长线上任意一点且在 $C$ 内，则 $\b{y}$ 可以表示为 $\lambda \b{x} + (1 - \lambda) \b{z} \; \lambda \in (0, 1)$，则有
 
     $$
-    f(\b{x}^\*) \leq f(\b{y}) = f(\lambda \b{x}^\* + (1 - \lambda) \b{z}) \leq \lambda f(\b{x}^\*) + (1 - \lambda) f(\b{z})
+    f(\b{x}^*) \leq f(\b{y}) = f(\lambda \b{x}^\* + (1 - \lambda) \b{z}) \leq \lambda f(\b{x}^\*) + (1 - \lambda) f(\b{z})
     $$
 
-    这也就推出 $f(\b{x}^\*) \leq f(\b{z})$
+    这也就推出 $f(\b{x}^*) \leq f(\b{z})$
 
 <blockquote>
 Convex programming 的所有 global minimum 构成一个 convex set
@@ -111,11 +111,11 @@ Level set 是这么一个集合 $C\_{\alpha} = \\{ \b{x} \in C : f(\b{x}) \leq \
 有了 level set 的定义，就可以进一步细化 convex programming problem 的定义，通常 convex programming problem 都有如下形式
 
 $$
-\begin{align\*}
+\begin{align*}
 & \min \; f(\b{x}) \\\\
 s.t. & h\_i(\b{x}) \leq 0 \;\; i = 1 \rightarrow m \\\\
 & \b{a}^T\_j \b{x} + b\_j = 0 \;\; j = 1 \rightarrow l \\\\
-\end{align\*}
+\end{align*}
 $$
 
 其中 $f$ 和 $h\_i$ 都是 convex function。这里每个约束都是一个 level set，根据前面性质可知，这些 level set 都是 convex set，而 convex set 的交集也是 convex set。
@@ -137,10 +137,10 @@ $$f(\b{x}_2) \geq f(\b{x}_1) + g^T(\b{x}_1)(\b{x}_2 - \b{x}_1)$$
         Convexity 意味着 $f(\lambda \b{x}\_2 + (1 - \lambda)\b{x}\_1) \leq \lambda f(\b{x}\_2) + (1 - \lambda)f(\b{x}\_1) \; \lambda \in [0, 1]$，这个不等式等价于
 
         $$
-        \begin{align\*}
+        \begin{align*}
         & f(\b{x}\_1 + \lambda (\b{x}\_2 - \b{x}\_1)) \leq f(\b{x}\_1) + \lambda(f(\b{x}\_2) - f(\b{x}\_1)) \\\\
         \Rightarrow & \frac{f(\b{x}\_1 + \lambda (\b{x}\_2 - \b{x}\_1)) - f(\b{x}\_1)}{\lambda} \leq f(\b{x}\_2) - f(\b{x}\_1)
-        \end{align\*}
+        \end{align*}
         $$
 
         取极限 $\lambda \rightarrow 0^+$，左边就是方向导数等于 $g^T(\b{x}\_1) (\b{x}\_2 - \b{x}\_1)$
@@ -150,26 +150,26 @@ $$f(\b{x}_2) \geq f(\b{x}_1) + g^T(\b{x}_1)(\b{x}_2 - \b{x}_1)$$
         令 $\b{x} = \lambda \b{x}\_1 + (1 - \lambda)\b{x}\_2 \; \lambda \in [0, 1]$，不等式成立意味着
 
         $$
-        \begin{align\*}
+        \begin{align*}
         f(\b{x}\_1) \geq f(\b{x}) + g^T(\b{x})(\b{x}\_1 - \b{x}) \\\\
         f(\b{x}\_2) \geq f(\b{x}) + g^T(\b{x})(\b{x}\_2 - \b{x})
-        \end{align\*}
+        \end{align*}
         $$
 
         则有
 
         $$
-        \begin{align\*}
+        \begin{align*}
         & \lambda f(\b{x}\_1) + (1 - \lambda) f(\b{x}\_2) \\\\
         \geq & f(\b{x}) + \lambda g^T(\b{x})(\b{x}\_1 - \b{x}) + (1 - \lambda) g^T(\b{x})(\b{x}\_2 - \b{x}) \\\\
         = & f(\b{x}) + \lambda g^T(\b{x})(\b{x}\_1 - \b{x}\_2) + g^T(\b{x})(\b{x}\_2 - \b{x}) \\\\
         = & f(\b{x}) + g^T(\b{x})(\lambda \b{x}\_1 + (1 - \lambda)\b{x}\_2 - \b{x}) \\\\
-        \end{align\*}
+        \end{align*}
         $$
 
         由于 $\b{x} = \lambda \b{x}\_1 + (1 - \lambda)\b{x}\_2$，所以最后一个式子就是 $f(\lambda \b{x}\_1 + (1 - \lambda)\b{x}\_2)$
 
-根据这个定理，如果存在 $\b{x}^\* \in C$ 使得 $g(\b{x}^\*) = 0$，则有 $f(\b{x}) \geq f(\b{x}^\*) \; \forall \b{x} \in C$，也就是 $\b{x}^\*$ 就是 minimum。
+根据这个定理，如果存在 $\b{x}^* \in C$ 使得 $g(\b{x}^\*) = 0$，则有 $f(\b{x}) \geq f(\b{x}^\*) \; \forall \b{x} \in C$，也就是 $\b{x}^\*$ 就是 minimum。
 
 ### Convexity and Hessian Matrix
 
@@ -234,12 +234,12 @@ $$f(\sum_{i=1}^{k} \lambda_i \b{x}_i) \leq \sum_{i=1}^{k} \lambda_if(\b{x}_i)$$
         $k \leq 2$ 时显然成立，就是 convex function 的定义，假设对于 $k - 1$ 的情况成立，对于 $k$ 的情况
 
         $$
-        \begin{align\*}
+        \begin{align*}
         & f(\sum\_{i = 1}^k \lambda\_i \b{x}\_i) \\\\
         = & f(\sum\_{i = 1}^{k-1} \lambda\_i \b{x}\_i + \lambda\_k \b{x}\_k) \\\\
         = & f((1 - \lambda\_k)\sum\_{i = 1}^{k-1} \frac{\lambda\_i}{1 - \lambda\_k} \b{x}\_i + \lambda\_k \b{x}\_k) \\\\
         \leq & (1 - \lambda\_k)f(\sum\_{i = 1}^{k-1} \frac{\lambda\_i}{1 - \lambda\_k} \b{x}\_i) + \lambda\_k f(\b{x}\_k)
-        \end{align\*}
+        \end{align*}
         $$
 
         后面的推导简单就不写了

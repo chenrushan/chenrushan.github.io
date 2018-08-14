@@ -42,13 +42,13 @@ If $f(x)$ is a concave function, $\forall \sum_i a_i = 1 \;\; f(\sum_{i}a_i x_i)
 假设 $X = \\{\b{x}\_1, \b{x}\_2, ..., \b{x}\_n\\}$
 
 $$
-\begin{align\*}
+\begin{align*}
 L(\theta) = & \sum\_i \log p(\b{x}^{(i)}|\theta) \\\\
 = & \sum\_i \log \sum\_\b{z} p(\b{x}^{(i)}, \b{z}|\theta) \\\\
 = & \sum\_i \log \sum\_\b{z} p(\b{x}^{(i)}, \b{z}|\theta) \frac{p(\b{z}|\b{x}^{(i)}, \theta\_n)}{p(\b{z}|\b{x}^{(i)}, \theta\_n)} \\\\
 \geq & \sum\_i \sum\_\b{z} p(\b{z}|\b{x}^{(i)}, \theta\_n) \log \frac{p(\b{x}^{(i)}, \b{z}|\theta)}{p(\b{z}|\b{x}^{(i)}, \theta\_n)} \\\\
 = & l(\theta)
-\end{align\*}
+\end{align*}
 $$
 
 这样我们就得到了 $L(\theta)$ 的下界 $l(\theta)$。推导的核心的是 **第三个等式引入了 hidden variable distribution $p(\b{z}|\b{x}^{(i)}, \theta\_n)$**。
@@ -58,12 +58,12 @@ $$
 当 $\theta = \theta\_n$ 时，我们有：
 
 $$
-\begin{align\*}
+\begin{align*}
 l(\theta\_n) = & \sum\_i \sum\_\b{z} p(\b{z}|\b{x}^{(i)}, \theta\_n) \log \frac{p(\b{x}^{(i)}, \b{z}|\theta\_n)}{p(\b{z}|\b{x}^{(i)}, \theta\_n)} \\\\
 = & \sum\_i \sum\_\b{z} p(\b{z}|\b{x}^{(i)}, \theta\_n) \log {p(\b{x}^{(i)}|\theta\_n)} \\\\
 = & \sum\_i \log {p(\b{x}^{(i)}|\theta\_n)} \\\\
 = & L(\theta\_n)
-\end{align\*}
+\end{align*}
 $$
 
 因此，如果 $\theta\_{n+1} = \underset{\theta}{\arg\max}\; l(\theta)$ 则有 $L(\theta\_{n+1}) \geq l(\theta\_{n+1}) \geq l(\theta\_{n}) = L(\theta\_n)$，也就是通过优化下界我们可以得到一个 likelihood 更高的 $\theta$。
@@ -73,11 +73,11 @@ $$
 下面进一步精简 $\arg\max$：
 
 $$
-\begin{align\*}
+\begin{align*}
 \theta\_{n+1} = & \underset{\theta}{\arg\max}\; l(\theta) \\\\
 = & \underset{\theta}{\arg\max}\; \sum\_i \sum\_\b{z} p(\b{z}|\b{x}^{(i)}, \theta\_n) \log \frac{p(\b{x}^{(i)}, \b{z}|\theta)}{p(\b{z}|\b{x}^{(i)}, \theta\_n)} \\\\
 = & \underset{\theta}{\arg\max}\; \sum\_i \sum\_\b{z} p(\b{z}|\b{x}^{(i)}, \theta\_n) \log p(\b{x}^{(i)}, \b{z}|\theta) \\\\
-\end{align\*}
+\end{align*}
 $$
 
 分母相对于 $\theta$ 是个常数，所以可以直接去掉而不影响 $\arg\max$ 的结果。
@@ -100,10 +100,10 @@ $$L(\theta) = \sum\_{d} \sum\_{w} n(w, d) \log p(d, w)$$
 引入 $z$ 后，likelihood 表示为
 
 $$
-\begin{align\*}
+\begin{align*}
 L(\theta) = & \sum\_{d} \sum\_{w} n(w, d) \log \sum\_{z} p(d, w, z) \\\\
 = & \sum\_{d} \sum\_{w} n(w, d) \log \sum\_{z} p(z)p(w|z)p(d|z)
-\end{align\*}
+\end{align*}
 $$
 
 所以对于 PLSA，$\theta$ 包括 3 个部分，$p(z), p(w|z), p(d|z)$
@@ -113,11 +113,11 @@ $$
 假设 EM 第 n 轮迭代得到的参数为 $\theta\_n$，则有
 
 $$
-\begin{align\*}
+\begin{align*}
 L(\theta) = & \sum\_{d} \sum\_{w} n(w, d) \log \sum\_{z} p(z)p(w|z)p(d|z) \frac{p(z|w, d, \theta\_n)}{p(z|w, d, \theta\_n)} \\\\
 \geq & \sum\_{d} \sum\_{w} n(w, d) \sum\_{z} p(z|w, d, \theta\_n) \log p(z)p(w|z)p(d|z) \frac{1}{p(z|w, d, \theta\_n)} \\\\
 = & l(\theta)
-\end{align\*}
+\end{align*}
 $$
 
 其中 $p(z|w, d, \theta\_n)$ 表示由 $\theta\_n$ 得到的 hidden variable distribution，在 E-step 计算。
@@ -127,27 +127,27 @@ $$
 M-step 最大化 $l(\theta)$
 
 $$
-\begin{align\*}
+\begin{align*}
 \underset{\theta}{\arg\max} \;\; l(\theta) = & \underset{\theta}{\arg\max} \sum\_{d} \sum\_{w} n(w, d) \sum\_{z} p(z|w, d, \theta\_n) \log p(z)p(w|z)p(d|z) \\\\
 s.t. & \sum\_z p(z) = 1, \; \sum\_d p(d|z) = 1, \; \sum\_w p(w|z) = 1
-\end{align\*}
+\end{align*}
 $$
 
 令
 
 $$
-\begin{align\*}
+\begin{align*}
 f(x) = & \sum\_{d} \sum\_{w} n(w, d) \sum\_{z} p(z|w, d, \theta\_n) (\log p(z) + \log p(w|z) + \log p(d|z)) \\\\ & - \alpha(\sum\_z p(z) - 1) - \beta(\sum\_d p(d|z) - 1) - \gamma(\sum\_w p(w|z) - 1)
-\end{align\*}
+\end{align*}
 $$
 
 根据 $\frac{\partial f(x)}{\partial p(z)} = 0, \frac{\partial f(x)}{\partial p(d|z)} = 0, \frac{\partial f(x)}{\partial p(w|z)} = 0$ 计算出 $p(z), p(d|z), p(w|z)$。以 $p(z)$ 为例
 
 $$
-\begin{align\*}
+\begin{align*}
 & \frac{\partial f(x)}{\partial p(z)} = \sum\_{d} \sum\_{w} n(w, d) p(z|w, d, \theta\_n) \frac{1}{p(z)} - \alpha = 0 \\\\
 \Rightarrow & p(z) = \frac{\sum\_{d} \sum\_{w} n(w, d) p(z|w, d, \theta\_n)}{\alpha}
-\end{align\*}
+\end{align*}
 $$
 
 根据 $\sum\_z p(z) = 1$ 推出 $\alpha = \sum\_{z} \sum\_{d} \sum\_{w} n(w, d) p(z|w, d, \theta\_n)$，因此
@@ -199,11 +199,11 @@ $$P(O, S|\theta) = \pi\_{S\_1} \prod\_{t=1}^{l-1} a\_{S\_{t}S\_{t+1}} \prod\_{t=
 假设 EM 第 n 轮迭代得到的参数为 $\theta\_n$，则有
 
 $$
-\begin{align\*}
+\begin{align*}
 L(\theta) = & \sum\_{i=1}^n \log \sum\_{S} P(O\_i, S|\theta) \frac{P(S|O\_i, \theta\_n)}{P(S|O\_i, \theta\_n)} \\\\
 \geq & \sum\_{i=1}^n \sum\_{S} P(S|O\_i, \theta\_n) \log P(O\_i, S|\theta) \frac{1}{P(S|O\_i, \theta\_n)} \\\\
 = & l(\theta)
-\end{align\*}
+\end{align*}
 $$
 
 -----------------
@@ -211,33 +211,33 @@ $$
 M-step 最大化 $l(\theta)$
 
 $$
-\begin{align\*}
+\begin{align*}
 \underset{\theta}{\arg\max} \; l(\theta) = & \underset{\theta}{\arg\max} \sum\_{i=1}^n \sum\_{S} P(S|O\_i, \theta\_n) \log P(O\_i, S|\theta) \\\\
 = & \underset{\theta}{\arg\max} \sum\_{i=1}^n \sum\_{S} P(S|O\_i, \theta\_n) \log \pi\_{S\_1} \prod\_{t=1}^{l-1} a\_{S\_{t}S\_{t+1}} \prod\_{t=1}^{l} b\_{S\_t}(O\_{it}) \\\\
-\end{align\*}
+\end{align*}
 $$
 $$s.t. \sum\_k \pi\_k = 1, \;\; \sum\_l a\_{kl} = 1, \;\; \sum\_u b\_k(u) = 1$$
 
 令
 
 $$
-\begin{align\*}
+\begin{align*}
 f(x) = & \sum\_{i=1}^n \sum\_{S} P(S|O\_i, \theta\_n) \log \pi\_{S\_1} \prod\_{t=1}^{l-1} a\_{S\_{t}S\_{t+1}} \prod\_{t=1}^{l} b\_{S\_t}(O\_{it}) + \\\\
 & \alpha(\sum\_k \pi\_k - 1) + \beta(\sum\_l a\_{kl} - 1) + \gamma(\sum\_u b\_k(u) - 1)
-\end{align\*}
+\end{align*}
 $$
 
 根据 $\frac{\partial f(x)}{\partial \pi\_k} = 0, \frac{\partial f(x)}{\partial a\_{kl}} = 0, \frac{\partial f(x)}{\partial b\_k(u)} = 0$ 计算出 $\pi\_k, a\_{kl}, b\_k(u)$。以 $\pi\_k$ 为例
 
 $$
-\begin{align\*}
+\begin{align*}
 \frac{\partial f(x)}{\partial \pi\_k} = & \frac{\partial \sum\_{i=1}^n \sum\_{S} P(S|O\_i, \theta\_n) \log \pi\_{S\_1}}{\partial \pi\_k} - \alpha \\\\
 = & \frac{\partial \sum\_{i=1}^n \sum\_{S} P(S|O\_i, \theta\_n) \sum\_k I(S\_1 = k) \log \pi\_{k}}{\partial \pi\_k} - \alpha \\\\
 = & \frac{\partial \sum\_{i=1}^n \sum\_k \log \pi\_{k} \sum\_{S} P(S|O\_i, \theta\_n) I(S\_1 = k)}{\partial \pi\_k} - \alpha \\\\
 = & \frac{\partial \sum\_k \log \pi\_{k} \sum\_{i=1}^n P(S\_1 = k|O\_i, \theta\_n)}{\partial \pi\_k} - \alpha \\\\
 = & \frac{1}{\pi\_k} \sum\_{i=1}^n P(S\_1 = k|O\_i, \theta\_n) - \alpha \\\\
 = & 0
-\end{align\*}
+\end{align*}
 $$
 
 由此推出

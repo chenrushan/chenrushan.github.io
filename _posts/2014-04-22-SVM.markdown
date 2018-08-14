@@ -44,43 +44,43 @@ SVM 使用的 loss function 是 hinge loss，hinge loss 的好处包括
     由于 $\xi\_i = \max(0, m - y\_i (w^T x\_i + v))$，所以
 
     $$
-    \begin{align\*}
+    \begin{align*}
     \xi\_i \geq & 0 \\\\
     \xi\_i \geq & m - y\_i (w^T x\_i + v)
-    \end{align\*}
+    \end{align*}
     $$
 
     这样 objective 又进一步变为
 
     $$
-    \begin{align\*}
+    \begin{align*}
     \underset{w,v,\xi}{\arg\min} & \; \sum\_{i=1}^{n} \xi\_i \\\\
     s.t. & \; \xi\_i \geq 0 \\\\
     & \; y\_i (w^T x\_i + v) \geq m - \xi\_i \\\\
     & \; \Vert w \Vert\_2^2 = 1
-    \end{align\*}
+    \end{align*}
     $$
 
 * 由于 $\Vert w \Vert\_2^2 = 1$ 不是一个 convex set，为了问题是一个 convex programming problem，我们对这个限制做一点放松，变为 $\Vert w \Vert\_2^2 \leq 1$，这样问题变为
 
     $$
-    \begin{align\*}
+    \begin{align*}
     \underset{w,v,\xi}{\arg\min} & \; \sum\_{i=1}^{n} \xi\_i \\\\
     s.t. & \; \xi\_i \geq 0 \\\\
     & \; y\_i (w^T x\_i + v) \geq m - \xi\_i \\\\
     & \; \Vert w \Vert\_2^2 \leq 1
-    \end{align\*}
+    \end{align*}
     $$
 
 * 进一步我们令 $\xi\_i^{new} = \frac{\xi\_i^{old}}{m}, w^{new} = \frac{w^{old}}{m}, v^{new} = \frac{v^{old}}{m}$，则问题变为
 
     $$
-    \begin{align\*}
+    \begin{align*}
     \underset{w,v,\xi}{\arg\min} & \; \sum\_{i=1}^{n} \xi\_i \\\\
     s.t. & \; \xi\_i \geq 0 \\\\
     & \; y\_i (w^T x\_i + v) \geq 1 - \xi\_i \\\\
     & \; \Vert w \Vert\_2^2 \leq \frac{1}{m}
-    \end{align\*}
+    \end{align*}
     $$
 
 * 这个 objective 只考虑了 empirical loss，为了防止 overfit，我们需要在上述 objective 的基础上加点约束。有人证明了 margin 越大，模型越不容易 overfit，因此扩大 margin 可以防止模型 overfit
@@ -88,11 +88,11 @@ SVM 使用的 loss function 是 hinge loss，hinge loss 的好处包括
     看看上面的 objective，我们可以发现与 margin 相关的就一项，那就是 $\Vert w \Vert\_2^2 \leq \frac{1}{m}$，也就是扩大 margin 的结果是 $\Vert w \Vert\_2^2$ 变小，那其实我们可以直接将 $\underset{w}{\arg\min} \Vert w \Vert\_2^2$ 加到 objective 中，如下
 
     $$
-    \begin{align\*}
+    \begin{align*}
     \underset{w,v,\xi}{\arg\min} & \; \frac{1}{2}\Vert w \Vert^2\_2 + C \sum\_{i=1}^{n} \xi\_i \\\\
     s.t. & \; \xi\_i \geq 0 \\\\
     & \; y\_i (w^T x\_i + v) \geq 1 - \xi\_i
-    \end{align\*}
+    \end{align*}
     $$
 
     这里的 $C$ 用于调节 empirical loss 和 model overfit 程度之间的权重，$\frac{1}{2}$ 是为了计算方便，另外由于在 objective 中加入了 $\Vert w \Vert\_2^2$，因此也就不需要
@@ -111,31 +111,31 @@ $$\underset{\alpha, \beta}{\arg\max} \\{\underset{w, v, \xi}{\min} L(w, v, \xi, 
 其中 $\underset{w, v, \xi}{\min} L(w, v, \xi, \alpha, \beta)$ 为 dual function，首先我们先求解一下这个 dual function，分别对 $w, v, \xi$ 求 partial derivative
 
 $$
-\begin{align\*}
+\begin{align*}
 \frac{\partial L}{\partial w} = & w - \sum\_{i=1}^n \beta\_i y\_i x\_i = 0 \\\\
 \frac{\partial L}{\partial v} = & -\sum\_{i=1}^n \beta\_i y\_i = 0 \\\\
 \frac{\partial L}{\partial \xi} = & \alpha + \beta - C = 0
-\end{align\*}
+\end{align*}
 $$
 
 最后一个式子其实包含了 $n$ 个等式，即 $\alpha\_i + \beta\_i = C, \;\; \forall i = 1, \cdots, n$，将这里得到的变量间的关系带入 lagrangian function 有 (目测一下，就可以发现很多项都可以消掉)
 
 $$
-\begin{align\*}
+\begin{align*}
 \underset{w, v, \xi}{\min} L(w, v, \xi, \alpha, \beta) = & -\frac{1}{2} (\sum\_{i=1}^n \beta\_i y\_i x\_i)^T (\sum\_{j=1}^n \beta\_j y\_j x\_j) + \sum\_{i=1}^n \beta\_i \\\\
 = & -\frac{1}{2} \sum\_{i=1}^n \sum\_{j=1}^n \beta\_i \beta\_j y\_i y\_j x\_i^T x\_j + \sum\_{i=1}^n \beta\_i \\\\
 = & -\frac{1}{2} \beta^T Y K Y \beta + \beta^T \b{1}
-\end{align\*}
+\end{align*}
 $$
 
 最后一个式子中 $Y$ 是 diagonal matrix 且 $Y\_{ii} = y\_i$，$K$ 表示 kernel matrix，$K\_{ij} = x\_i^T x\_j$，$\b{1}$ 表示元素全为 1 的 vector。这里已经不包含 $\alpha$，由于 $\alpha\_i + \beta\_i = C, \alpha\_i \geq 0, \beta\_i \geq 0$，所以 $0 \leq \beta\_i \leq C$，同时 $\sum\_{i=1}^n \beta\_i y\_i = 0$，因此最后我们得到如下 dual problem
 
 $$
-\begin{align\*}
+\begin{align*}
 \underset{\beta}{\arg\min} & \; \frac{1}{2} \beta^T Y K Y \beta - \beta^T \b{1} \\\\
 s.t. & \; 0 \leq \beta\_i \leq C \\\\
 & \; \sum\_{i=1}^n \beta\_i y\_i = 0
-\end{align\*}
+\end{align*}
 $$
 
 有了这样的问题形式，我们就可以应用所谓的 kernel trick，即用其他的函数计算 $K\_{ij}$，比如非常常用的 RBF kernel

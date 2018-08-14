@@ -13,17 +13,17 @@ categories: ml
 #### (2.12) -> (2.13)
 
 $$
-\begin{align\*}
+\begin{align*}
 & E\_{Y|X}([Y-c]^2 | X=x)  \\\\
 = & E\_{Y|X}(Y^2 - 2cY + c^2 | x)  \\\\
 = & E\_{Y|X}(Y^2 | x) - E\_{Y|X}(2cY | x) + c^2  \\\\
-\end{align\*}
+\end{align*}
 $$
 
 $$
-\begin{align\*}
+\begin{align*}
 \frac{\partial E\_{Y|X}([Y-c]^2 | X=x)}{\partial c} = 2c - 2E\_{Y|X}(Y|X = x) = 0
-\end{align\*}
+\end{align*}
 $$
 
 $$
@@ -53,11 +53,11 @@ $$
 * (2.27) 的 trick 要多一点，为了方便，我用 $E$ 代替 $E\_{y\_0 | x\_0}E\_{\mathcal{T}}$
 
     $$
-    \begin{align\*}
+    \begin{align*}
     EPE(x\_0) = & E(y\_0 - \hat{y}\_0)^2 \\\\
     = & E((y\_0 - f(x\_0)) + (f(x\_0) - \hat{y}\_0))^2 \\\\
     = & E(y\_0 - f(x\_0))^2 + E(f(x\_0) - \hat{y}\_0))^2 + 2E((y\_0 - f(x\_0))(f(x\_0) - \hat{y}\_0))
-    \end{align\*}
+    \end{align*}
     $$
     
     因为 $f(x\_0)$ 是 determinstic 的，所以
@@ -76,7 +76,7 @@ $$
     令 $\b{v} = (\b{X}(\b{X}^T\b{X})^{-1}x\_0)$
 
     $$
-    \begin{align\*}
+    \begin{align*}
     Var(\hat{y}\_0) = & Var(x\_0^T \beta + \b{v}^T \boldsymbol{\varepsilon}) \\\\
     = & E((\b{v}^T \boldsymbol{\varepsilon})^2) \\\\
     = & E((\sum\_i v\_i \varepsilon\_i)^2) \\\\
@@ -84,7 +84,7 @@ $$
     = & \delta^2 E(\sum\_i v\_i^2) \\\\
     = & \delta^2 E(\b{v}^T \b{v}) \\\\
     = & \delta^2 E(x\_0^T(\b{X}^T \b{X})^{-1}x\_0)
-    \end{align\*}
+    \end{align*}
     $$
 
     另外意外想到的一个公式是 $tr(\b{v}\b{v}^T) = \b{v}^T\b{v}$
@@ -101,7 +101,7 @@ $$\sum\_{i}\sum\_{j} A\_{ij} B\_{ji} = trace(AB) = trace(BA)$$
 为了方便，下面的公式里就不用 $x\_0$ 了，直接用 $x$
 
 $$
-\begin{align\*}
+\begin{align*}
 & E\_x (x^T Cov(X)^{-1} x) \\\\
 = & E\_x (\sum\_{i}\sum\_{j} Cov(X)^{-1}\_{ij} x\_i x\_j) \\\\
 = & \sum\_{i}\sum\_{j} Cov(X)^{-1}\_{ij} E\_x (x\_i x\_j) \\\\
@@ -109,7 +109,7 @@ $$
 = & trace(Cov(X)^{-1} Cov(x)) \\\\
 = & trace(I) \\\\
 = & p
-\end{align\*}
+\end{align*}
 $$
 
 #### (3.4)
@@ -129,13 +129,13 @@ $$
 基于这个的 $\hat{\beta}$ 表示，covariance matrix 可以表示为
 
 $$
-\begin{align\*}
+\begin{align*}
 Var(\hat{\beta}) = & E((\hat{\beta} - \beta)(\hat{\beta} - \beta)^T) \\\\
 = & E((\b{X}^T\b{X})^{-1} \b{X}^T \varepsilon \varepsilon^T \b{X} ((\b{X}^T\b{X})^{-1})) \\\\
 = & (\b{X}^T\b{X})^{-1} \b{X}^T E(\varepsilon \varepsilon^T) \b{X} (\b{X}^T\b{X})^{-1} \\\\
 = & (\b{X}^T\b{X})^{-1} \b{X}^T \delta^2\b{I} \b{X} (\b{X}^T\b{X})^{-1} \\\\
 = & \b{X}^T\b{X}^{-1}\delta^2
-\end{align\*}
+\end{align*}
 $$
 
 注意 $Var(\hat{\beta})$ 是一个 matrix，而不是一个 scalar，所以是等于 $E((\hat{\beta} - \beta)(\hat{\beta} - \beta)^T)$，而不是 $E((\hat{\beta} - \beta)^T(\hat{\beta} - \beta))$
@@ -203,14 +203,14 @@ Gauss-Markov Therom 总体的意思是就是 least square estimator (LSE) of $\b
     假设 LSE estimator 是 $\hat{\beta}$，任意其他 linear unbiased estimator 是 $\tilde{\beta}$，$\tilde{\theta} = a^T \tilde{\beta}, \hat{\theta} = a^T \hat{\beta}$，因为它们都是 unbiased estimator，所以它们的 MSE 就是 variance
 
     $$
-    \begin{align\*}
+    \begin{align*}
     & E((\tilde{\theta} - \theta)^2) - E((\hat{\theta} - \theta)^2) \\\\
     = & (E(\tilde{\theta}^2) - \theta^2) - (E(\hat{\theta}^2) - \theta^2) \\\\
     = & E(\tilde{\theta}^2) - E(\hat{\theta}^2) \\\\
     = & E(a^T \tilde{\beta} \tilde{\beta}^T a) - E(a^T \hat{\beta} \hat{\beta}^T a) \\\\
     = & a^T (E(\tilde{\beta} \tilde{\beta}^T) - E(\hat{\beta} \hat{\beta}^T))a \\\\
     = & a^T (Var(\tilde{\beta}) - Var(\hat{\beta})) a \\\\
-    \end{align\*}
+    \end{align*}
     $$
 
     如果 $\hat{\beta}$ 是 best estimator，则 $Var(\tilde{\beta}) - Var(\hat{\beta})$ 必须是 PSD matrix，这个证明参考 [Gauss–Markov theorem wiki](http://en.wikipedia.org/wiki/Gauss–Markov_theorem)。

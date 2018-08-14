@@ -74,13 +74,13 @@ tags: pattern recognition, machine learning, entropy, cross entropy, KL Divergen
 从 Frequentist 的角度说，我们常说 MLE (Maximum Likelihood Estimation) 做的其实就是 Minimize KL Divergence with the **TRUE** distribution。
 
 $$
-\begin{align\*}
+\begin{align*}
 \hat{\theta} & = \underset{\theta}{argmax} \prod\_{i=1}^{N} p(x\_i|\theta) \\\\
  & = \underset{\theta}{argmax} \sum\_{i=1}^{N} \log p(x\_i|\theta) \\\\
  & = \underset{\theta}{argmax} \frac{1}{N}\sum\_{i=1}^{N} \log p(x\_i|\theta) - \frac{1}{N}\sum\_{i=1}^{N} \log p(x\_i|\theta\_0) \\\\
  & = \underset{\theta}{argmin} \frac{1}{N}\sum\_{i=1}^{N} \log \frac{p(x\_i|\theta\_0)}{p(x\_i|\theta)} \\\\
  & \rightarrow \underset{\theta}{argmin} \int \log \frac{p(x\_i|\theta\_0)}{p(x\_i|\theta)} p(x\_i|\theta\_0) dx
-\end{align\*}
+\end{align*}
 $$
 
 这里的 $\theta\_0$ 表示真实分布的参数。

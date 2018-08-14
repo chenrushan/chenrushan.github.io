@@ -394,7 +394,7 @@ Let $A \in \mathbb{R}^{n\times n}$ be symmetric, then
   $S$ is an orthogonal matrix
 
     $$
-    \begin{align\*}
+    \begin{align*}
     S^T A S = &
     \begin{pmatrix} \b{x}\_1^T \\\\ \b{x}\_2^T \\\\ \vdots \\\\ \b{x}\_n^T \end{pmatrix} A
     \begin{pmatrix} \b{x}\_1 \b{x}\_2 \cdots & \b{x}\_n \end{pmatrix} =
@@ -405,7 +405,7 @@ Let $A \in \mathbb{R}^{n\times n}$ be symmetric, then
     = & \begin{pmatrix} \lambda\_1 & 0 & \cdots & 0 \\\\ 0 & \lambda\_2 & \cdots & 0 \\\\
           \vdots & \vdots & \ddots & \vdots \\\\ 0 & 0 & \cdots & \lambda\_n
         \end{pmatrix}
-    \end{align\*}
+    \end{align*}
     $$
 
 <blockquote>
@@ -450,7 +450,7 @@ Let $A \in \mathbb{R}^{n\times n}$ be a symmetric matrix, consider $f(x) = \b{x}
 
 Let $A \in \mathbb{R}^{n\times n}$, symmetric and positive definite
 
-* Solution of $A\b{x}=\b{b}$ is $\b{x}^{\*} = A^{-1} \b{b}$
+* Solution of $A\b{x}=\b{b}$ is $\b{x}^{*} = A^{-1} \b{b}$
 
     * since $A$ is symmetric and positive definite
 
@@ -466,7 +466,7 @@ Let $A \in \mathbb{R}^{n\times n}$, symmetric and positive definite
 
     * Solve the triangular system. $L\b{y} = \b{b}$ using forward substitution to get $\b{y}$.
 
-    * Solve the triangular $L^T \b{x} = \b{y}$ using backward substitution to get $\b{x}^{\*}$.
+    * Solve the triangular $L^T \b{x} = \b{y}$ using backward substitution to get $\b{x}^{*}$.
 
     Cholesky decomposition is numerically stable.
 
@@ -622,13 +622,13 @@ exists and equals $\nabla f(\b{x})^T \b{d}$.
 </blockquote>
 
 $$
-\begin{align\*}
+\begin{align*}
 \frac{\p f}{\p \b{d}}(\b{x}) = & \lim\_{\varepsilon \rightarrow 0} \frac{f(\b{x} + \varepsilon \b{d}) - f(\b{x})}{\varepsilon} \\\\
 = & \lim\_{\varepsilon \rightarrow 0} \frac{f(\b{x} + (0 + \varepsilon) \b{d}) - f(\b{x} + 0 \b{d})}{(0 + \varepsilon) - 0} \\\\
 = & \frac{df(x+t\b{d})}{dt}\bigg|\_{t=0} \\\\
 = & \nabla f(x+t\b{d})^T \b{d}\bigg|\_{t=0} \\\\
 = & \nabla f(x)^T \b{d}
-\end{align\*}
+\end{align*}
 $$
 
 For any unit direction $\b{d}$, the rate of change is $\nabla f(x)^T \b{d} = \Vert \nabla f(x)\Vert \Vert d \Vert \cos\theta = \Vert \nabla f(x) \Vert \cos\theta$, where $\theta$ is the angle between $\b{d}$ and $\nabla f(x)$. When $\theta = 0$ the rate of change is maximized. This is why the gradient is the direction of steepest descent/ascent.
@@ -711,10 +711,10 @@ $$f(x) \approx f(x^0) + f'(x^0)(x - x^0) + \frac{1}{2} f''(x^0)(x - x^0)^2$$
     上面两个式子中最后一项被称为 Lagrange remainder。因为我们处理的都是多变量的情况，上面我们用矩阵乘法的形式表示，但是到了更高阶的近似就不好再用矩阵表示了，以 3 阶为例，展开的 taylor series 是这样的
 
     $$
-    \begin{align\*}
+    \begin{align*}
     f(\b{x}) = & f(\b{x}^0) + \sum\_{i=1}^{n} \frac{\p f(\b{x})}{\p x\_i} (x\_i - x^0\_i) + \frac{1}{2!} \sum\_{i=1}^n \sum\_{j=1}^n \frac{\p f(\b{x})}{\p x\_i \p x\_j} (x\_i - x^0\_i)(x\_j - x^0\_j) + \\\\
     & \frac{1}{3!} \sum\_{i=1}^n \sum\_{j=1}^n \sum\_{k=1}^n \frac{\p f(\bar{\b{x}})}{\p x\_i \p x\_j \p x\_k} (x\_i - x^0\_i)(x\_j - x^0\_j)(x\_k - x^0\_k)
-    \end{align\*}
+    \end{align*}
     $$
 
 -----------------------
@@ -807,18 +807,18 @@ the columns of a matrix $A \in \mathbb{R}^{m\times n}$ are $a_1$ through $a_n$, 
     By the chain rule, we have
 
     $$
-    \begin{align\*}
+    \begin{align*}
     \frac{\p f(A\b{x})}{\p x\_j} = & \sum\_{k=1}^{n} \frac{\p f(A\b{x})}{\p (A\b{x})\_k} \frac{\p (A\b{x})\_k}{\p x\_j} \\\\
     = & \sum\_{k=1}^{n} \frac{\p f(A\b{x})}{\p (A\b{x})\_k} \frac{\p \tilde{a}\_k^T \b{x}}{\p x\_j} \\\\
     = & \sum\_{k=1}^{n} \frac{\p f(A\b{x})}{\p (A\b{x})\_k} a\_{kj} \\\\
     = & a\_j^T \nabla f(A\b{x})
-    \end{align\*}
+    \end{align*}
     $$
 
     so 
 
     $$
-    \begin{align\*}
+    \begin{align*}
     \nabla\_{\b{x}} f(A\b{x}) = 
     \begin{pmatrix}
       \frac{\p f(A\b{x})}{\p x\_1} \\\\
@@ -831,7 +831,7 @@ the columns of a matrix $A \in \mathbb{R}^{m\times n}$ are $a_1$ through $a_n$, 
       \vdots \\\\
       a\_n^T
     \end{pmatrix} \nabla f(A\b{x}) = A^T \nabla f(A \b{x})
-    \end{align\*}
+    \end{align*}
     $$
 
 Reference: [berkeley.edu](http://www.eecs.berkeley.edu/~jduchi/projects/matrix_prop.pdf), [okstate.edu](https://www.math.okstate.edu/~atovstolis/lecture_notes/LN14_6.pdf)

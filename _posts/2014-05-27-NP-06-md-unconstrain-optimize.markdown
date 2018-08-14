@@ -47,9 +47,9 @@ Descent direction 在 multi-dimensional optimization 中是一个非常重要的
 
 * 证明
 
-    假设 $\b{x}^\*$ 是 local minimum 且 $g(\b{x}^\*) \neq 0$，令 $\b{d} = -g(\b{x}^\*)$，则 $g^T(\b{x}^\*)d < 0$，也就是 $\b{d}$ 是 descent direction，这与 $\b{x}^\*$ 是 local minimum 的事实不符，因此 $g(\b{x}^\*) = 0$
+    假设 $\b{x}^*$ 是 local minimum 且 $g(\b{x}^\*) \neq 0$，令 $\b{d} = -g(\b{x}^\*)$，则 $g^T(\b{x}^\*)d < 0$，也就是 $\b{d}$ 是 descent direction，这与 $\b{x}^\*$ 是 local minimum 的事实不符，因此 $g(\b{x}^\*) = 0$
 
-这个定理为优化算法提供了一个算法停止的条件，满足 $g(\b{x}^\*) = 0$ 的点被称为 stationary point，stationary point 有 3 种可能，分别是 local maximum, local minimum, saddle point，因此单纯 $g(\b{x}^\*) = 0$ 还是不够的。
+这个定理为优化算法提供了一个算法停止的条件，满足 $g(\b{x}^*) = 0$ 的点被称为 stationary point，stationary point 有 3 种可能，分别是 local maximum, local minimum, saddle point，因此单纯 $g(\b{x}^\*) = 0$ 还是不够的。
 
 ### 2nd Order Necessary Condition
 
@@ -59,16 +59,16 @@ Descent direction 在 multi-dimensional optimization 中是一个非常重要的
 
 * 证明
 
-    假设存在 $\b{d}$ 使得 $\b{d}^T H(\b{x}^\*)\b{d} < 0$，由于 $f \in \mathcal{C}^2$，所以 $H \in \mathcal{C}$，因此存在 $\delta > 0$，使得
-    $$\b{d}^T H(\b{x}^\* + \alpha \b{d})\b{d} < 0 \; \forall \alpha \in (0, \delta)$$
+    假设存在 $\b{d}$ 使得 $\b{d}^T H(\b{x}^*)\b{d} < 0$，由于 $f \in \mathcal{C}^2$，所以 $H \in \mathcal{C}$，因此存在 $\delta > 0$，使得
+    $$\b{d}^T H(\b{x}^* + \alpha \b{d})\b{d} < 0 \; \forall \alpha \in (0, \delta)$$
     
     根据 Truncated taylor series
 
     $$
-    f(\b{x}^\* + \alpha \b{d}) = f(\b{x}^\*) + g(\b{x}^\*)\alpha \b{d} + \alpha \b{d}^T H(\bar{\b{x}}) \alpha \b{d}
+    f(\b{x}^* + \alpha \b{d}) = f(\b{x}^\*) + g(\b{x}^\*)\alpha \b{d} + \alpha \b{d}^T H(\bar{\b{x}}) \alpha \b{d}
     $$
 
-    其中 $\bar{\b{x}} \in LS(\b{x}^\*, \b{x}^\* + \alpha \b{d})$，根据前面定理，$g(\b{x}^\*) = 0$，这样就有 $f(\b{x}^\* + \alpha \b{d}) < f(\b{x}^\*)$，这与 $\b{x}^\*$ 是 local minimum 相违背。 **证毕**
+    其中 $\bar{\b{x}} \in LS(\b{x}^*, \b{x}^\* + \alpha \b{d})$，根据前面定理，$g(\b{x}^\*) = 0$，这样就有 $f(\b{x}^\* + \alpha \b{d}) < f(\b{x}^\*)$，这与 $\b{x}^\*$ 是 local minimum 相违背。 **证毕**
 
 ### 2nd Order Sufficient Condition
 

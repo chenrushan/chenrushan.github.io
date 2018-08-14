@@ -130,10 +130,10 @@ eigenvector 为 $\b{v}\_i$，对应的 $AA^T$ 的 eigenvector 为 $\b{u}\_i$
 
     从 2.2 第二个定理我们知道
     $$
-    \begin{align\*}
+    \begin{align*}
     \b{u}\_i = \alpha A\b{v}\_i \tag{3} \\\\
     \b{v}\_i = \beta A^T \b{u}\_i \tag{4}
-    \end{align\*}
+    \end{align*}
     $$
 
     其中 $\alpha, \beta \in \bb{R} \neq 0$，把公式 3 带入 4，有
@@ -191,10 +191,10 @@ rank 等于 $\Sigma$ 的 rank，也就是 $A$ 的 rank 等于 $\Sigma$ 的 rank
 Approximation (下面简称 LRA) 就是找到最优化如下 objective function 的 $A\_r$
 
 $$
-\begin{align\*}
+\begin{align*}
 & \Vert A - A\_r \Vert\_F \\\\
 \text{s.t.} \;\; & \rank(A\_r) = r, r \leq n
-\end{align\*} \tag{8}
+\end{align*} \tag{8}
 $$
 
 其中 $\Vert A \Vert\_F^2 = \sum\_{ij}A\_{ij}^2 = \tr(A^TA)$，$A\_r$ 表示 rank
@@ -211,14 +211,14 @@ V^T$ 是可以最小化公式 8 的最优的 $A\_r$
 * Proof
 
     $$
-    \begin{align\*}
+    \begin{align*}
     \Vert UAV \Vert\_F^2 = & \tr((UAV)^T UAV) \\\\
     = & \tr(V^T A^T U^T UAV) \\\\
     = & \tr(V^T A^T A V) (\because U^T U = I) \\\\
     = & \tr((V^T A^T A)V) = \tr(V (V^T A^T A)) (\because \tr(XY) = \tr(YX)) \\\\
     = & \tr(A^T A) \\\\
     = & \Vert A \Vert\_F^2 \EOP
-    \end{align\*}
+    \end{align*}
     $$
 
 下面证明 $U'\Sigma'\_r V^T$ 可以最小化公式 8
@@ -226,21 +226,21 @@ V^T$ 是可以最小化公式 8 的最优的 $A\_r$
 * Proof
 
     $$
-    \begin{align\*}
+    \begin{align*}
     \Vert A - A\_r \Vert\_F = & \Vert U\Sigma V^T - A\_r \Vert\_F \\\\
     = & \Vert U^T (U\Sigma V^T - A\_r) V \Vert\_F \\\\
     = & \Vert \Sigma - U^T A\_r V \Vert\_F
-    \end{align\*}
+    \end{align*}
     $$
 
     令 $B = U^T A\_r V$，则
 
 
     $$
-    \begin{align\*}
+    \begin{align*}
     \Vert A - A\_r \Vert\_F = & \Vert \Sigma - B \Vert\_F \\\\
     = & \sum\_{i} (\sigma\_i - B\_{ii})^2 + \sum\_{i\neq j} B\_{ij}^2
-    \end{align\*}
+    \end{align*}
     $$
 
     容易发现，要想 $\rank(B) = r$ 同时最小化上述式子，必有 $B\_{ij} = 0$，且

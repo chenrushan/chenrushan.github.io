@@ -87,12 +87,12 @@ $D = (\b{d}^0, \b{d}^1, \cdots, \b{d}^{n-1})$，$\b{a} = (\a^0, \a^1, \cdots,
 \a^{n-1})$，则 quadratic function 可以表示为
 
 $$
-\begin{align\*}
+\begin{align*}
 f(\b{x}) = & \frac{1}{2} (\b{x}^0 + D\b{a})^T H (\b{x}^0 + D\b{a}) +
 \b{c}^T(\b{x}^0 + D\b{a}) \\\\
 = & \frac{1}{2} \b{a}^TD^T H D\b{a} + (H\b{x}^0 + \b{c})^T D\b{a} +
 (\frac{1}{2}{\b{x}^0}^T H\b{x}^0 + \b{c}^T\b{x}^0)
-\end{align\*}
+\end{align*}
 $$
 
 我们可以把最后的式子看成是一个以 $\b{a}$ 为变量的 quadratic function，其
@@ -105,11 +105,11 @@ direction，根据公式 1，我们就相当于在 n 步之内能得到了 $\b{x
 实际上，对于上面的式子，我们可以直接求解出 $\a^i$ 的具体形式
 
 $$
-\begin{align\*}
+\begin{align*}
 & \frac{\p f(\b{x})}{\p \a^i} = 0 \\\\
 \Lra \; & {\b{d}^i}^T H\b{d}^i\a^i + (H\b{x}^0 + \b{c})^T\b{d}^i = 0 \\\\
 \Lra \; & \a^i = -\frac{(H\b{x}^0 + \b{c})^T\b{d}^i}{ {\b{d}^i}^T H\b{d}^i} \tag{2}
-\end{align\*}
+\end{align*}
 $$
 
 所以如果我们能找到一种方法构建 $\b{d}^0, \cdots, \b{d}^{n-1}$ 使得 ${\b{d}^i}^T
@@ -134,23 +134,23 @@ Conjugate direction 是存在的，可以验证以 $H$ 的 eigenvector 作为 $\
 * Proof:
 
     $$
-    \begin{align\*}
+    \begin{align*}
     & \b{g}^i = H\b{x}^i + \b{c} = H(\b{x}^0 + \sum\_{j=0}^{i-1} \a\_j\b{d}^j) + \b{c}
       = \sum\_{j=0}^{i-1} \a\_j H \b{d}^j + \b{g}^0 \\\\
     \Lra \; & {\b{g}^i}^T\b{d}^i = \sum\_{j=0}^{i-1} \a\_j {\b{d}^j}^T H \b{d}^i + {\b{g}^0}^T\b{d}^i \\\\
     \Lra \; & {\b{g}^i}^T\b{d}^i = {\b{g}^0}^T\b{d}^i (\because {\b{d}^j}^T H \b{d}^i = 0 \; \forall i \neq j)
-    \end{align\*}
+    \end{align*}
     $$
 
 根据这一性质，公式 2 中定义的 $\a^i$ 实际上就是 exact line search 的结果
 
 $$
-\begin{align\*}
+\begin{align*}
 & \nabla\_{\a^i} f(\b{x}^i + \a^i \b{d}^i) = 0 \\\\
 \Lra \; & (H(\b{x}^i + \a^i \b{d}^i) + \b{c})^T \b{d}^i = 0 \\\\
 \Lra \; & \a^i = -\frac{ {\b{g}^i}^T \b{d}^i}{ {\b{d}^i}^T H \b{d}^i} =
           -\frac{ {\b{g}^0}^T \b{d}^i}{ {\b{d}^i}^T H \b{d}^i} \tag{3}
-\end{align\*}
+\end{align*}
 $$
 
 > 性质 2：${\b{g}^i}^T \b{d}^j = 0 \;\; \forall i > j$
@@ -158,11 +158,11 @@ $$
 * Proof:
 
     $$
-    \begin{align\*}
+    \begin{align*}
     {\b{g}^i}^T \b{d}^j = & (H\b{x}^i + \b{c})^T \b{d}^j \\\\
     = & \sum\_{k=0}^{i-1} \a^k {\b{d}^k}^T H \b{d}^j + (H\b{x}^0 + \b{c})^T \b{d}^j \\\\
     = & \a^j{\b{d}^j}^T H \b{d}^j + (H\b{x}^0 + \b{c})^T \b{d}^j
-    \end{align\*}
+    \end{align*}
     $$
 
     代入公式 2 可得最后一个公式等于 0，因此 ${\b{g}^i}^T \b{d}^j = 0$ $\EOP$
@@ -172,12 +172,12 @@ $$
 * Proof:
 
     $$
-    \begin{align\*}
+    \begin{align*}
     \sum\_{i=0}^{n-1} a^i \b{d}^i = 0 \; \Lra \; &
     \sum\_{i=0}^{n-1} a^i {\b{d}^j}^T H \b{d}^i = 0 \;\; \forall j = 0, \cdots, n-1\\\\
     \Lra \; & a^j {\b{d}^j}^T H \b{d}^j = 0 \\\\
     \Lra \; & a^j = 0 \;\; \forall j = 0, \cdots, n-1
-    \end{align\*}
+    \end{align*}
     $$
 
 > 性质 4：令 $\c{B}^k = \span\\{ \b{d}^0, \b{d}^1, \cdots, \b{d}^{k-1} \\},
@@ -190,7 +190,7 @@ $$
     u^i \b{d}^i, u \in \bb{R}$，所以这个性质等价于
 
     $$
-    \begin{align\*}
+    \begin{align*}
     & f(\b{x}^0 + \sum\_{i=0}^{k-1} \a^i \b{d}^i) \leq f(\b{x}^0 + \sum\_{i=0}^{k-1} u^i \b{d}^i) \\\\
     \Llra & \frac{1}{2} (\b{x}^0 + \sum\_{i=0}^{k-1} \a^i \b{d}^i)^T H (\b{x}^0 +
             \sum\_{i=0}^{k-1} \a^i \b{d}^i) + \b{c}^T(\b{x}^0 +
@@ -206,7 +206,7 @@ $$
             \sum\_{i=0}^{k-1} (\frac{1}{2} {u^i}^2 {\b{d}^i}^T H \b{d}^i + u^i {\b{g}^0}^T \b{d}^i) \\\\
     \Llra & \sum\_{i=0}^{k-1} (\frac{1}{2} {\a^i}^2 {\b{d}^i}^T H \b{d}^i + \a^i {\b{g}^i}^T \b{d}^i) \leq
             \sum\_{i=0}^{k-1} (\frac{1}{2} {u^i}^2 {\b{d}^i}^T H \b{d}^i + u^i {\b{g}^i}^T \b{d}^i) \tag{4}
-    \end{align\*}
+    \end{align*}
     $$
 
     所以只要不等式 3 成立，则该性质就成立
@@ -243,12 +243,12 @@ $\bb{R}^n$ 中的最优点
 对于系数 $\beta$，根据 ${\b{d}^i}^T H\b{d}^j = 0 \; \forall i \neq j$，有
 
 $$
-\begin{align\*}
+\begin{align*}
 & {\b{d}^j}^T H \b{d}^i = {\b{d}^j}^T H \b{v}^i + \sum\_{k=0}^{i-1} \beta^k
   {\b{d}^j}^T H \b{d}^k \\\\
 \Lra \; & 0 = {\b{d}^j}^T H \b{v}^i + \beta^j {\b{d}^j}^T H \b{d}^j \\\\
 \Lra \; & \beta^j = -\frac{ {\b{d}^j}^T H \b{v}^i}{ {\b{d}^j}^T H \b{d}^j}
-\end{align\*}
+\end{align*}
 $$
 
 最后的问题就是如何得到一组 linear independent 的 $\b{v}$，答案就是用
