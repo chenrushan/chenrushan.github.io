@@ -16,8 +16,8 @@ categories: ml
 实现如下操作
 
 $$
-\left\\{x\_1, x\_2, ..., x\_n\right\\} \rightarrow \left\\{y\_1, y\_2, ...,
-y\_m\right\\} \; (m < n)
+\left\\{x_1, x_2, ..., x_n\right\\} \rightarrow \left\\{y_1, y_2, ...,
+y_m\right\\} \; (m < n)
 $$
 
 其中 $x$ 向量和 $y$ 向量可能不在同一空间，其实大多数时候不在一个空间
