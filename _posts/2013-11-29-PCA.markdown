@@ -103,18 +103,18 @@ $m\times 1$ 的向量 $\left\\{\b{v}\_1^T \b{x}, \b{v}\_2^T \b{x}, …, \b{v}\_n
 $$
 \Sigma =
 \begin{pmatrix}
-\E[(X\_1-\E(X\_1))(X\_1-\E(X\_1))] & \cdots & \E[(X\_1-\E(X\_1))(X\_n-\E(X\_n))] \\\\
-\E[(X\_2-\E(X\_2))(X\_1-\E(X\_1))] & \cdots & \E[(X\_2-\E(X\_2))(X\_n-\E(X\_n))] \\\\
+\E[(X_1-\E(X_1))(X_1-\E(X_1))] & \cdots & \E[(X_1-\E(X_1))(X_n-\E(X_n))] \\\\
+\E[(X_2-\E(X_2))(X_1-\E(X_1))] & \cdots & \E[(X_2-\E(X_2))(X_n-\E(X_n))] \\\\
 \vdots & \ddots & \vdots \\\\
-\E[(X\_n-\E(X\_n))(X\_1-\E(X\_1))] & \cdots & \E[(X\_n-\E(X\_n))(X\_n-\E(X\_n))]
+\E[(X_n-\E(X_n))(X_1-\E(X_1))] & \cdots & \E[(X_n-\E(X_n))(X_n-\E(X_n))]
 \end{pmatrix}
 $$
 
 但实际中，我们通常无法得到 $X\_i$ 的真实分布，也就无法计算每个特征的真实期望和
 方差以及两两特征之间的协方差，因此，我们就用经验(协)方差来代替，即：
 
-$$\Sigma\_{ii}=\frac{1}{m-1}\sum\_{k=1}^{m}(X\_{ki}-\bar{X\_i})^2$$
-$$\Sigma\_{ij}=\frac{1}{m-1}\sum\_{k=1}^{m}(X\_{ki}-\bar{X\_i})(X\_{kj}-\bar{X\_j})$$
+$$\Sigma_{ii}=\frac{1}{m-1}\sum_{k=1}^{m}(X_{ki}-\bar{X_i})^2$$
+$$\Sigma_{ij}=\frac{1}{m-1}\sum_{k=1}^{m}(X_{ki}-\bar{X_i})(X_{kj}-\bar{X_j})$$
 
 其中 $m$ 为训练样本个数，$X\_{ki}$ 表示第 $k$ 个样本的第 $i$ 维特征
 $\bar{X\_i}=\frac{1}{m-1}\sum\_{k=1}^{m}X\_{ki}$
@@ -138,7 +138,7 @@ $\b{v}(\b{v}^T\b{X})$ 就表示 $\b{v}^T\b{X}$ 在原空间 (与 $\b{X}$ 同空�
 
 $$
 \begin{align*}
-\Vert \b{X} - \b{v}\b{v}^T\b{X} \Vert\_F = & \tr((\b{X} - \b{vv}^T\b{X})^T(\b{X} - \b{vv}^T\b{X})) \\\\
+\Vert \b{X} - \b{v}\b{v}^T\b{X} \Vert_F = & \tr((\b{X} - \b{vv}^T\b{X})^T(\b{X} - \b{vv}^T\b{X})) \\\\
 = & \tr(\b{X}^T\b{X}) - 2\tr(\b{X}^T\b{vv}^T\b{X}) + \tr(\b{X}^T\b{vv}^T\b{vv}^T\b{X}) \\\\
 = & \tr(\b{X}^T\b{X}) - \tr(\b{X}^T\b{vv}^T\b{X}) \\\\
 = & \tr(\b{X}^T\b{X}) - \tr(\b{v}^T\b{X}\b{X}^T\b{v}) \;
