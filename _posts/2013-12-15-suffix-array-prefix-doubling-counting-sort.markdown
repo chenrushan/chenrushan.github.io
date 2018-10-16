@@ -130,12 +130,14 @@ S<sub>l</sub>[i+l] = S<sub>l:2l</sub>[i] 或者 S<sub>l</sub>[i] = S<sub>l:2l</s
 
 最简单的 counting sort 可以用如下伪代码表示。
 
-    for (i = 0; i < N; i++)
-        count[I[i]] += 1
-    for (i = 0; i < V; i++)
-        count[i] += count[i - 1]
-    for (i = 0; i < N; i++)
-        K[--count[I[i]]] = i
+```cpp
+for (i = 0; i < N; i++)
+    count[I[i]] += 1
+for (i = 1; i < V; i++)
+    count[i] += count[i - 1]
+for (i = 0; i < N; i++)
+    K[--count[I[i]]] = i
+```
 
 该算法的时间空间复杂度均为 `O(V)`。V 表示所有可能的不同的输入的个数。如果你的输入为不限大小的 int，则 V = 2<sup>32</sup>, 如果你的输入为长度 <= 10 的 ascii string，则 V = 26<sup>10</sup>，类似的输入随处可见，因此，这个算法虽然简单，但实用性不高。下面给出改进的 counting sort。
 
