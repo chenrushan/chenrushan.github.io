@@ -39,17 +39,20 @@ table, th, td {
     font-weight: normal;
 }
 
+/*
 blockquote {
     color: #4a4a4a;
     border-left: .25rem solid #e5e5e5;
     background-color: #f5f5f5;
 }
+*/
 
 blockquote ul {
     margin-bottom: -0.01rem;
     margin-top: -1em;
 }
 
+/*
 pre {
     font-size: .9rem;
 }
@@ -61,6 +64,7 @@ pre code {
     background-color: transparent;
     line-height: 1.6;
 }
+*/
 
 hr {
     border-top: 0px solid #ccc;
