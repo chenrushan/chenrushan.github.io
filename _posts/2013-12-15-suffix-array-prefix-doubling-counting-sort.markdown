@@ -215,7 +215,7 @@ for (l = 1; l < len(str); l = 2 * l):<br/>
 
 代码：
 
-{% highlight c %}
+```c
 /*
  * initialize SA_1, R_1, count_1
  */
@@ -306,6 +306,6 @@ for (l = 1; l < len; l <<= 1) {
         count[r] += count[r - 1];
     }
 }
-{% endhighlight %}
+```
 
 完整的可执行代码参考 [uva 10526 的解题代码](https://github.com/juscodit/uva/blob/master/10526_intellectual_property_SA.c)。
