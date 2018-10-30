@@ -85,13 +85,13 @@ LCS(A[1:M], B[1:N]):
 
 由此我们可以定义一个二维表 T：
 
-$$T[i, j] = LCS(A[i:M], B[j:M]) \;\; i \in [1, M+1], j \in [1, N+1]$$
+$$T[i, j] = LCS(A[i:M], B[j:N]) \;\; i \in [1, M+1], j \in [1, N+1]$$
 
 其中 M+1, N+1 对应 A = null 和 B = null 的情况。
 
 填表操作可以用如下代码表示：
 
-{% highlight c %}
+```c
 Fill (i, j): 
     if i == M + 1 or j == N + 1: 
         return 
@@ -106,11 +106,11 @@ Fill (i, j):
     cs2 = T[i+1, j] 
 
     T[i, j] = longer of (cs1, cs2) 
-{% endhighlight %}
+```
 
 在填 T[i, j] 时，我们假设 T[i+1, k+1], T[i+1, j] 已经填上。为了保证这个假设在整个过程中都成立，我们必须按一定的顺序调用 Fill 函数，从上面的代码可以看出 T[i, j] 依赖项的索引中第一维都大于 i，第二维都大于 j，这样我们只要按 i, j 从大到小遍历即可，如下代码所示。
 
-{% highlight c %}
+```c
 LCS(A[1:M], B[1:N]): 
     for i in [1, M+1]: 
         T[i][N+1] = null 
@@ -122,7 +122,7 @@ LCS(A[1:M], B[1:N]):
             Fill(i, j) 
      
     return T[1, 1] 
-{% endhighlight %}
+```
 
 到此就完成了 recursion 到 non-recursion 的转换。也就实现了用 DP 解决 LCS 的想法。视频中给出了一个性能更好的 Fill 函数，这里就不给出了。 
 
@@ -148,7 +148,7 @@ LCS(A[1:M], B[1:N]):
 
 Recursive process 可以表示为：
 
-{% highlight c %}
+```c
 /* @i denotes the index of first object */
 KS(W[1:N], V[1:N], N, C, i): 
     if C <= 0 || i > N: 
@@ -163,7 +163,7 @@ KS(W[1:N], V[1:N], N, C, i):
         v2 = V[i] + KS(W, V, N, C-W[i], i+1) 
      
     return max(v1, v2) 
-{% endhighlight %}
+```
 
 #### Non-recursive Process
 
@@ -183,7 +183,7 @@ $$T[c, i] = KS(W, V, N, c, i) \;\; c \in [0, C], i \in [1, N+1]$$
 
 填表操作可以用如下代码表示：
 
-{% highlight c %}
+```c
 Fill(W, V, c, i): 
     if c <= 0 || i > N: 
         T[c][i] = 0 
@@ -195,7 +195,7 @@ Fill(W, V, c, i):
         v2 = V[i] + T[c-W[i]][i+1] 
 
     T[c][i] = max(v1, v2) 
-{% endhighlight %}
+```
 
 同样在写上面的 Fill 函数时，我们假设某些项已经被填上。项之间的依赖关系可以由下图表示，其中曲线箭头表示依赖关系。
 
@@ -203,7 +203,7 @@ Fill(W, V, c, i):
 
 根据项与项之间的依赖关系，我们应该按 i 从大到小，C 从小到大的顺序调用 Fill 函数。
 
-{% highlight c %}
+```c
 KS(W, V, C, N): 
     for c = 0 to C: 
         T[c][N+1] = 0 
@@ -213,7 +213,7 @@ KS(W, V, C, N):
     for i = N to 1: 
         for c = 1 to C: 
             T[c][i] = Fill(W, V, c, i) 
-{% endhighlight %}
+```
 
 ### Matrix Multiplication
 
@@ -236,7 +236,7 @@ KS(W, V, C, N):
 
 Recursive process 可以表示为：
 
-{% highlight c %}
+```c
 MM(d[0:N]): 
     if N == 1: 
         return 0 
@@ -247,7 +247,7 @@ MM(d[0:N]):
         if c < m: 
             m = c 
     return m 
-{% endhighlight %}
+```
 
 #### Non-recursive Process
 
@@ -265,7 +265,7 @@ $$T[i, j] = MM(d[i:j]) \;\; i \in [0, N-1], j \in [1, N]$$
 
 填表操作可以用如下代码表示：
 
-{% highlight c %}
+```c
 Fill(d[0:N], i, j): 
     if j - i == 1: 
         T[i][j] = 0 
@@ -277,7 +277,7 @@ Fill(d[0:N], i, j):
             m = c 
 
     T[i][j] = m
-{% endhighlight %}
+```
 
 T[i][j]与表中其他项得依赖关系如下图所示。
 
@@ -285,7 +285,7 @@ T[i][j]与表中其他项得依赖关系如下图所示。
 
 其中蓝色的框表示 T[i][j]，它依赖于绿色部分的项，另外注意到这个表是 half-full 的，对角线的下方是不需要的。这样调用 Fill 函数的过程如下面伪代码所示：
 
-{% highlight c %}
+```c
 MM(d[0:N]): 
     fori = 0 to N-1: 
         T[i][i+1] = 0 
@@ -295,7 +295,7 @@ MM(d[0:N]):
             Fill(d, i, j) 
      
     return T[0][N] 
-{% endhighlight %}
+```
 
 ### 心得
 
